@@ -81,9 +81,9 @@ domain/
 | `graph/scale-catal.yaml` | the catalysis graph schema manifest: the schema's one version, the science kernel (`../../core/graph/kernel.yaml`) and the catalysis file |
 | `graph/catalysis.yaml` | the catalysis file (`domain: catalysis`): the vocabulary and the checklist |
 | `graph/frozen/` | the frozen schema versions (`scale-catal-<version>.yaml`, `v<version>/`, `SHA256SUMS`), written when a schema change moves the schema on (`scale schema bump`); none yet |
-| `competency/` | competency questions CQ-01 … CQ-11 and CQ-14 … CQ-17: graph query plans over the public examples, with their expected answers |
+| `competency/` | competency questions CQ-01 … CQ-11 and CQ-14 … CQ-22: graph query plans over the public examples, with their expected answers |
 | `examples/` | the public synthetic examples ([overview](./examples/README.md)) |
-| `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
+| `docs/` | [catalyst-state reporting](docs/reporting/catalyst-state-reporting.md), [catalyst-preparation reporting](docs/reporting/catalyst-preparation-reporting.md) and the [supporting-information index](docs/supporting-information.md) |
 | `tests/` | the catalysis tests and the invalid scale-catal fixtures (`fixtures/invalid/`, each rejected for the reason `expect.yaml` states) |
 
 Code that the catalysis domain needs goes in `tools/` ([tools/README.md](../tools/README.md)).
@@ -95,7 +95,10 @@ source's lifecycle (`source-lifecycle/`), current densities a scientific compari
 (`product-measurement-examples/`), what a test is read as showing with the evidence connected to it, a
 heating ramp and the stability of electrodes (`evidence-examples/`), and the site populations of a catalyst's states,
 the site counts its turnover frequencies are divided by, activity assignments with their evidence and operando
-observations with and without the kinetics measured while they ran (`state-site-examples/`), all public.
+observations with and without the kinetics measured while they ran (`state-site-examples/`), and preparations and
+characterizations recorded step by step: two impregnated batches of one nominal formula with their lots, activation,
+storage and transfer, two coprecipitations in opposite orders of addition, and a high-entropy alloy's nominal, bulk,
+surface and working-state compositions and three sizes (`preparation-examples/`), all public.
 
 ## Versions
 

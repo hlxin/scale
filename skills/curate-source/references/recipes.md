@@ -17,9 +17,11 @@ A value the experimenter set or the author specified is not a measurement.
 - A set point (a furnace setting, a nominal flow, a pressure the controller held): the value where it
   sits (the test's `conditions` or the property itself, an instrument's `settings`, `HEATED_BY.set_point`)
   with `origin: assumed` ("set by the author, not measured").
-- A nominal composition or loading: `HAS_COMPONENT` `fraction` or `loading` with `origin: assumed`;
-  a measured one (ICP, XRF) is a Characterization result with `origin: measured`, linked from the
-  value by `produced_by` when it sits on the catalyst record.
+- A nominal composition or loading: `HAS_COMPONENT` `fraction` or `loading` with `origin: assumed`, on the
+  formulation (the Catalyst, or the Material for an alloy's or a mixed oxide's nominal formula); a loading goes on the
+  link to the active phase (`role: active_phase`, with `loading_basis`). A measured one (ICP-OES, XRF, XPS) is a result
+  entry of the Characterization that measured it, on the specimen it measured, never on the formulation (below,
+  "Composition: nominal, bulk and surface").
 - A specification (a manufacturer's rating, a reactor's design pressure): the `specifications` map of
   the Reactor or ProcessUnit.
 - Where a temperature was measured: `temperature_measured_at` (catalyst bed, wall, furnace, inlet,
@@ -133,6 +135,9 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
   `role` ("supplier", "manufacturer").
 - The specimen used: a CatalystSample with `preparation_status: purchased` and the lot in
   `batch_identifier`. A grade is a `properties` entry (`text_value`) or the `role` text.
+- Two purchases of one product are two CatalystSamples that share their formulation (`HAS_FORMULATION`), never a
+  batch: give each the lot number the source states, none when it states none, and its own characterizations. Nothing
+  measured on one lot (a dispersion, a surface composition) is recorded for the other.
 
 ## Balances, impurities and data quality
 
@@ -155,26 +160,35 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 
 ## Characterization results
 
-Until the catalysis schema declares them (planned: domain/ROADMAP.md), characterization results go in the
-Characterization's `results` map under these keys, each value with its `definition` (the method and its
-range) and, where it is about one phase, species or element, its `target`:
+Record a characterization's results as result entries (`result_values`), each naming the Variable of what it
+measured, with its `definition` (the method and its range) and, where it is about one phase, species or element, its
+`target` (below, "Characterization recipes"). The keys below are the names to give those Variables' `quantity_kind`,
+so that one measurand has one name across documents; until the kernel declares them they are recorded as stated, and
+their units are not checked. An older document may hold the same values in the Characterization's `results` map under
+these keys; both read the same way.
 
-| key | unit as printed | definition (example) |
+| quantity_kind | unit as printed | definition (example) |
 |---|---|---|
 | `specific_surface_area` | m2/g | BET, p/p0 0.05–0.30 |
-| `external_surface_area`, `pore_volume`, `pore_diameter` | m2/g, cm3/g, nm | t-plot; BJH desorption branch |
-| `metal_surface_area`, `dispersion` | m2/g, % | N2O titration, stoichiometry Cu:O = 2 |
+| `external_surface_area`, `pore_volume`, `pore_diameter` | m2/g, cm3/g, nm | t-plot; N2 at p/p0 0.99; BJH desorption branch |
+| `metal_surface_area` | m2/g | N2O titration, stoichiometry Cu:O = 2 |
+| `site_fraction` (declared) | % | a dispersion: exposed atoms as a share of all atoms of the metal |
 | `gas_uptake` | µmol/g | H2 chemisorption at 308 K (`target`: the gas) |
 | `crystallite_size` | nm | Scherrer, (111) reflection (`target`: the phase) |
+| `microscopy_particle_size`, `microscopy_particle_size_spread`, `count` | nm, nm, 1 | a microscopy distribution's mean (or median), its standard deviation, the particles counted |
+| `hydrodynamic_size`, `polydispersity_index` | nm, 1 | DLS Z-average and PDI of a colloid |
+| `dispersion_equivalent_size` | nm | the size a dispersion gives for an assumed particle shape |
+| `coordination_number` | 1 | a fitted EXAFS coordination number (an Analysis result) |
+| `composition_fraction`, `loading` (declared) | at%, wt% | a measured metal fraction or loading (`target`: the element) |
 | `lattice_parameter` | Å | Rietveld, axis a (`target`: the phase) |
 | `phase_fraction` | wt% | Rietveld (`target`: the phase) |
 | `reduction_peak_temperature`, `desorption_peak_temperature` | °C | TPR in 5 % H2/Ar, 10 K/min (`target`: what is reduced or desorbs) |
 
-Several values of one quantity (two phases, three peaks) get a short suffix each
-(`crystallite_size_cu`, `reduction_peak_temperature_1`), and every one keeps its `target`. Name the
-technique as the source does in `technique`, and the specimen's state on `CHARACTERIZES {state}`. A count of
-sites or of exposed atoms for a state also goes on the `HAS_SITE` from that state (below), `produced_by` the
-characterization or the Analysis that turns its uptake into sites.
+Several values of one quantity (two phases, three peaks) are separate entries, each with its own `id` and `target`
+(in a `results` map, a short suffix each: `crystallite_size_cu`, `reduction_peak_temperature_1`). Name the technique as
+the source does in `technique`, and the specimen's state on `CHARACTERIZES {state}`. A count of sites or of exposed
+atoms for a state also goes on the `HAS_SITE` from that state (below), `produced_by` the characterization or the
+Analysis that turns its uptake into sites.
 
 ## Sites in a catalyst state
 
@@ -217,6 +231,216 @@ characterization or the Analysis that turns its uptake into sites.
   fitted`, `produced_by` the analysis, with their uncertainties) and its `limitations` (what it cannot tell apart,
   what was held fixed). An alternative model of the same data is another Analysis. A site assignment drawn from it is
   a Claim that cites the parameter with `premise_refs`.
+
+## Preparation recipes
+
+How a catalyst was made, activated, stored and moved, so that a second person could follow it and two preparations of
+one nominal formula stay two (scale-catal 0.6.0; the preparation examples,
+domain/examples/scale-catal/preparation-examples/, and CQ-18, CQ-19 and CQ-22 show each step). What the source does
+not state stays unstated: a value is a typed absence (`status: not_reported`, `missing_reason: not_stated_in_source`),
+a text field reads `not stated`, and nothing is filled from a typical recipe.
+
+### The batch, its lots and its steps
+
+- **The batch** is a CatalystSample (`sample_kind: batch`) with the `batch_identifier` the source gives (none when it
+  gives none), `HAS_FORMULATION` its Catalyst. Two batches of one nominal formula are two CatalystSamples sharing the
+  formulation; nothing else joins them. Record every batch the source reports; its statement that the batches agreed,
+  or that the material was made once, is a Claim (`claim_kind: data_quality`) `ABOUT` them.
+- **A purchased lot** (a precursor, a support, a reference foil) is a Sample (`preparation_status: purchased`) with its
+  lot number in `batch_identifier`, `HAS_COMPONENT` the ChemicalSpecies or Material it is a lot of (`role: precursor`
+  or `support`). The supplier and the purity as stated go on `PREPARED_FROM.supplier` and `PREPARED_FROM.grade`, from
+  the batch to the chemical, with the amount used; a catalogue number in the lot's `identifiers`; the dates it was
+  bought and opened, and any purification before use (drying, distillation), in its `note` or as a Treatment. A
+  support property the supplier gives (surface area, pore volume) is a value in the lot's `properties` whose
+  `definition` says so; one the authors measured is a characterization result.
+- **Hydration is identity:** H2PtCl6·6H2O is a ChemicalSpecies of its own, its `formula` with the water. A hydrate the
+  source gives without its water content keeps `·xH2O` and a `note`; never supply the number.
+- **The preparation** is a Preparation (`method` as the source names it) that `HAS_OUTPUT` the batch (`PREPARED_BY` is
+  the same link read the other way: record one). When the source follows a written procedure, the Preparation
+  `FOLLOWS_PROTOCOL` a Protocol, with what it changed in `FOLLOWS_PROTOCOL.deviations`.
+- **Each step** is a ProcedureStep (`action`: dissolve, impregnate, precipitate, age, filter, wash, dry, calcine,
+  reduce, …) `PART_OF` the preparation with `order` 1, 2, 3 …. What it takes in is `HAS_INPUT` with its `role`
+  (`reagent` for what is added, `material` for what it is added to or what is treated) and `amount` as printed; what
+  it gives out is `HAS_OUTPUT`.
+- **A solution** made in one step and used in another is a Sample (`sample_kind: other`) with
+  `HAS_COMPONENT.concentration` for each solute as stated (mol/L, g/L), the output of its dissolving step and an input
+  of the step that uses it.
+- **Conditions of a step:** `ProcedureStep.temperature`, `duration`, `ramp_rate` and `atmosphere` are its own
+  properties; anything else is a `conditions` entry (`ph`, `final_ph`, `addition_rate`, `stirring_rate`,
+  `incipient_volume`, `filtrate_conductivity`, `vessel_volume`), each value with its unit and a `definition` when its
+  key alone does not say what it is ("the pH of the slurry when the addition ended"). The stirrer (type, size), the
+  vessel and how it was heated go in the step's `method`; what was seen during it (a colour change, turbidity) in its
+  `note`.
+- **Sensitivities:** what the source says the synthesis is sensitive to (a precursor lot, air, the passivation rate),
+  or that it knows none, goes in the Preparation's `note`, with its evidence.
+
+### Supported-metal impregnation (incipient wetness, wet impregnation)
+
+Name the method, incipient wetness or wet impregnation, in the Preparation's `method` as the source does.
+
+1. The incipient volume: a step (`action: other`, `method` saying how) that takes in the support lot (`role:
+   material`, `amount`) and the solvent, with `conditions.incipient_volume` (mL/g). A pore volume by N2 is a
+   characterization result of its own; the two need not agree. The precursor's solubility, when the source gives
+   it, is a condition of the dissolving step.
+2. Dissolving the precursor: takes in the precursor lot (`amount`) and the solvent (`amount` in mL), gives out the
+   solution.
+3. Impregnating: takes in the solution (`role: reagent`) and the support (`role: material`, `amount`); `method` says
+   how it was added and mixed ("added dropwise with intermittent mixing"). Each portion of a successive impregnation
+   is a step of its own, with the drying between them.
+4. Drying and calcining, as steps of the preparation (`temperature`, `duration`, `ramp_rate`, `atmosphere`: "static
+   air", "flowing air, 100 mL/min"), or as Treatments when the source applies them to the made batch (below). For a
+   wet impregnation, how the support and the solution were mixed, and the drying apparatus (a rotary evaporator's
+   speed and bath temperature) in the drying step's `method` and `conditions`; the amount of powder and the crucible
+   of a calcination in its `conditions`.
+5. The nominal loading on the formulation (`HAS_COMPONENT` to the active phase, `loading`, `loading_basis`, `origin:
+   assumed`, its `definition` saying how it was set); the measured loading a result of the batch's ICP-OES or XRF.
+
+### Precipitation and coprecipitation
+
+1. Dissolving the salts and the precipitating agent: two steps, two solutions with their concentrations.
+2. Combining them: one step (`action: precipitate`) that takes in the solution added (`role: reagent`) and the one it
+   is added to (`role: material`), so the order of addition is two links. For a co-feed of both into a vessel, both
+   are `reagent` and the vessel's starting liquid is `material`. `conditions` holds the `addition_rate`, the
+   `stirring_rate`, the pH (`ph` held, or `initial_ph` and `final_ph`, each with its `definition`; a tolerance as
+   its `uncertainty`, "7.0 ± 0.1"; the pH measured besides the one targeted) and how it was held in `method` ("pH held
+   at 7.0 by the base feed"); `temperature` is the step's. For a deposition-precipitation, the pH over time is a
+   Dataset or TimeSeries the step `HAS_OUTPUT`.
+3. Aging (`temperature` and `duration`, both; in the mother liquor or not, in `method`), filtering, washing (the
+   solvent with its `amount` and temperature, the number of washes as `conditions.washes`, the criterion as a
+   condition: `filtrate_conductivity` with `bound: upper`), drying and calcining, each a step in order.
+4. The nominal metal ratio on the formulation (`HAS_COMPONENT.fraction`, `fraction_basis`, `basis` naming the set,
+   "metals only: Cu + Zn + Al", `origin: assumed`); the measured ones on the characterizations (below).
+
+### Activation, storage, transfer and reaction history
+
+- Each action applied to a made batch is a Treatment, in order: `TREATED_BY` from the batch with `TREATED_BY.order`,
+  and `PRECEDES` from the action before it (the preparation, a treatment, a test). `treatment_kind`: `calcination`,
+  `reduction`, `oxidation` for a passivation (`method: passivation`), `exposure` for storage or an air exposure.
+- `Treatment.temperature`, `duration` and `atmosphere` as stated ("10 % H2 in Ar"); a flow rate, a space velocity,
+  a ramp rate, the bed (fixed or fluidized, how much powder) or a cooling method in `conditions`. The switch from one
+  gas to another (H2 flushed with inert before the passivating gas) is a step of its own or the Treatment's
+  `method`.
+- **Storage** is a Treatment (`treatment_kind: exposure`, `method` naming the container and the place: bench,
+  desiccator, glovebox) with its duration, atmosphere and temperature as stated, and light, humidity or a glovebox's
+  O2 and H2O contents in `conditions`: "not stated" and typed absences when the source gives none. The form the
+  catalyst was stored in (passivated, as a suspension, as a dried powder) is the state before the storage.
+- **A transfer** to a measurement is the Characterization's `transfer` ("mounted in air", "in a sealed holder under
+  Ar") and `observation_mode`; the specimen's state is on `CHARACTERIZES {state}` and, when the source tells it apart,
+  a CatalystState `REACHED_BY` the action before it and `DETERMINED_BY` the measurement.
+- **The reaction history:** each test `USES_CATALYST` the batch in its state and `PRECEDES` the next action; the
+  states under reaction and after it are CatalystStates `REACHED_BY` the test (`timing: during`, `after`). A batch
+  split between cells is a CatalystSample per portion, each with the batch's `batch_identifier`.
+
+## Characterization recipes
+
+What every measurement keeps, then what each technique adds (scale-catal 0.6.0; CQ-19, CQ-20 and CQ-21 show the
+queries). A value is in the unit printed; a fitted or derived value names its producer; an uncertainty keeps its
+`uncertainty_kind`.
+
+### What every measurement keeps
+
+- **The specimen and its state:** `CHARACTERIZES {state}` the batch or portion measured; `technique` as named;
+  `observation_mode`, `information_depth` (bulk, surface, projection), `sampling` (ensemble, single_particle);
+  `temperature` and `atmosphere` during the measurement; `transfer`.
+- **Acquisition settings:** `Characterization.conditions` (edge, detection mode, accelerating voltage, scans, regions
+  imaged), the Instrument it `USES_INSTRUMENT` with its `settings`.
+- **Standards and calibration:** a reference measured with the specimen is `HAS_INPUT {role: reference_standard}`; a
+  calibration is its own Characterization (`goal: calibrate`) that takes in the standard, the Instrument is
+  `CALIBRATED_BY` it, and a value that rests on it names it in `calibration`.
+- **Raw data:** a Dataset the characterization `HAS_OUTPUT` (`data_kind`: raw, spectrum, image, table), with
+  `availability: available` and its `uri`, or `not_reported` when the source deposits none.
+- **Processing and fitting:** an Analysis that `HAS_INPUT` the data (`role: data`) and the references (`role:
+  reference_standard`), `USES_MODEL` a Model whose `assumptions` say what it assumes and holds fixed, `USES_SOFTWARE`
+  with its version, with its `method` and `limitations`; its fitted values `origin: fitted`, `produced_by` the
+  analysis.
+- **One Variable per measurand:** each result entry names a Variable whose `quantity_kind` and `definition` say what
+  was measured (the table above). A statistic is a measurand: a distribution's mean, its standard deviation and the
+  number of items counted are three entries.
+
+### XAS
+
+- The Characterization: the edge, the detection mode (transmission, fluorescence), the energy calibration ("Pt foil
+  measured downstream at the same time, first inflection set to 11564 eV") and the number of scans in `conditions`;
+  the monochromator and its crystal, the harmonic rejection, the beam size and the ion-chamber gases there or in the
+  Instrument's `settings`; the sample's form and amount (a pellet of so many mg); `temperature`, `atmosphere`,
+  `observation_mode`, and for a cell under reaction its flows and pressure; a check for beam damage in `note`; the
+  foil or reference measured with it `HAS_INPUT {role: reference_standard}`; the spectra a Dataset (in E, k and R
+  when the source deposits them).
+- The fit is an Analysis (`analysis_kind: spectral_fit`): `method` with the k-weight, the k- and R-ranges and the
+  parameters fitted; the shell model a Model (the paths included, S0^2 and where it comes from, what was held fixed);
+  the coordination number, distance, sigma^2 and E0 shift as fitted values with their uncertainties (how they were
+  derived in `definition`); the goodness of fit (the reduced chi-square when models are compared), the independent
+  points and the parameters fitted as results; a structure file the paths came from a Dataset input (`data_kind:
+  structure`); `limitations`: what the average cannot tell apart (species below about a tenth of the absorbing
+  atoms, different size distributions with one coordination number). A linear combination fit is another Analysis, its references as inputs. A claim drawn from the fit cites
+  the parameter with `premise_refs` (above, "Assignments, operando observations and fits").
+
+### Electron microscopy: particle-size distributions
+
+- The Characterization (`technique`: HAADF-STEM, TEM), `information_depth: projection`, `sampling: single_particle`;
+  in `conditions` the accelerating voltage, the regions and images measured, the magnification or pixel size, the
+  smallest size the mode resolves (`lower_size_limit`), the electron dose and dose rate, and for STEM the probe current
+  and angles; the microscope and its detectors an Instrument; how the specimen was prepared and loaded on the grid in
+  `transfer`; the images a Dataset; a gas cell's conditions as for a reactor.
+- The distribution as reported: one entry per statistic, each with its own Variable (`microscopy_particle_size` for the mean or
+  the median, its `definition` saying which and of what: "number-weighted mean of the projected-area-equivalent
+  diameters"; `microscopy_particle_size_spread` for the standard deviation; `count` for the particles counted). The standard
+  deviation of a distribution is its width, never the `uncertainty` of its mean.
+- A histogram or the list of diameters is a Dataset (`data_kind: table`) when the source deposits it; a skew, or
+  how the mean was computed (arithmetic, surface-weighted), is one more entry or the mean's `definition`; the image
+  processing an Analysis that `HAS_INPUT` the images.
+
+### Chemisorption and site titration
+
+- The Characterization (`technique`: "H2 chemisorption, volumetric, two isotherms", "N2O reactive frontal
+  chromatography"): the adsorption `temperature`, the probe's partial pressure, the adsorption and purge times and the
+  pretreatment in `conditions` (or as Treatments before it), the uptake as an entry (`gas_uptake`, its `target` the
+  gas), with its replicates and uncertainty. A blank on the bare support is a Characterization of the support lot
+  that is `CONTROL_FOR` the measurement (`control_kind: blank`); a check on a material of known dispersion or site
+  density is `CONTROL_FOR` it with `control_kind: reference`.
+- What the uptake is turned into (a dispersion, a metal surface area, exposed atoms, a size) is an Analysis that
+  `HAS_INPUT` the chemisorption and the measured metal content (`role: parameter`), `USES_MODEL` the stoichiometry
+  (its `assumptions`: one H per surface Pt; the metal content used; the particle shape for a size). The dispersion is
+  a `site_fraction` (exposed atoms as a share of all atoms of the metal), and a count of exposed atoms for a state
+  goes on the `HAS_SITE` from it (above, "Sites in a catalyst state").
+
+### Physisorption (BET)
+
+- The Characterization (`technique`: "N2 physisorption at 77 K", "Ar physisorption at 87 K"): the amount and form
+  of the sample and the degassing vacuum, temperature and time in `conditions`; the isotherm a Dataset (both branches
+  when measured).
+- The BET area is a fitted value of an Analysis (`method`: "BET, p/p0 0.05–0.30, 6 points") that `USES_MODEL` the BET
+  equation (its `assumptions`: the cross-section per molecule), with the C constant among its results when the
+  source gives it; a pore volume or a BJH size names its branch and point in `definition`, and a pore analysis its
+  thickness model or its NLDFT kernel and source in its Model. When the source gives only the number, a result entry
+  with its `definition` on the Characterization is enough.
+
+### Sizes from different techniques
+
+- A microscopy size (`microscopy_particle_size`: the projected size of the particles counted), a diffraction size
+  (`crystallite_size`: the coherent-domain size from a reflection's width), a hydrodynamic size (`hydrodynamic_size`:
+  a particle with its shell, diffusing in a liquid) and a size from a dispersion (`dispersion_equivalent_size`) are
+  four measurands. Each is a result with its own Variable; a plan that asks for one follows the entry to its Variable
+  and gets that one only (CQ-20). A microscopy size is not the `particle_size` key of a catalyst body (the size of the
+  grains in a bed, above, "Reactor, bed and catalyst-body keys").
+- XRD gives an average crystallite size, not a distribution, and small domains may give no reflection: then a value
+  `below_detection_limit` with the limit the source gives, or `not_reported` with a `note` when it gives none. Never
+  put a microscopy size in its place.
+- The hydrodynamic size is of the colloid or suspension measured, a Sample of its own, not of the supported catalyst.
+
+### Composition: nominal, bulk and surface
+
+- **Nominal:** on the formulation (above, "Set, nominal and specified values").
+- **Measured bulk** (ICP-OES, XRF) and **measured surface** (XPS, LEIS) compositions: result entries of their
+  Characterizations (`composition_fraction` or `loading`, `target` the element, `basis` naming the set: "metals
+  only"), each on the specimen and in the state it was measured, with `information_depth`; an ICP-OES digestion and
+  calibration in `conditions` and the value's `calibration`; impurities as entries of their own. Bulk and surface fractions
+  share a kind and a basis, so a plan that asks for one names its Variable or the information depth; a scientific
+  comparison keeps fractions on another basis, or on none ("4.7 %" with no "wt"), apart.
+- **Under reaction conditions:** the measurement in that atmosphere (`observation_mode` as the source says), and the
+  CatalystState it establishes (`state_kind: working`, `DETERMINED_BY` it), with the phases it shows (`HAS_PHASE`
+  with `location` and `dominance`). A high-entropy alloy or mixed oxide is recorded the same way: its nominal formula
+  on the Material, each measured composition on its measurement.
 
 ## Digitizing a figure
 

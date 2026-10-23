@@ -1,0 +1,120 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-21
+question: What does a fitted EXAFS coordination number rest on - its fitting model and what the model holds fixed, the
+  references, the spectrum, and the specimen, state and conditions it was measured in?
+description: |
+  A coordination number is a fitted value (origin fitted) of an Analysis (analysis_kind spectral_fit), never of the
+  measurement itself. The Analysis USES_MODEL the shell model (its assumptions: the paths included, S0^2 and what was
+  held fixed), HAS_INPUT the measured spectrum (role data) and the reference spectrum the amplitude came from (role
+  reference_standard), states its method (k- and R-range, the parameters fitted) and its limitations (what a
+  coordination number cannot tell apart). The spectrum is HAS_OUTPUT of the Characterization, which keeps the edge,
+  the detection mode, the energy calibration, the temperature, the atmosphere and the observation mode, and
+  CHARACTERIZES the specimen in its state. The Pt-Pt coordination number of 7.9 of batch 1 was fitted to Pt L3 spectra
+  taken in H2 at 298 K, after the batch was reduced again in the cell.
+documents:
+  - examples/scale-catal/preparation-examples/impregnation.json
+plan:
+  question: What does the Pt-Pt coordination number of batch 1 rest on?
+  match:
+    label: Analysis
+    as: fit
+    where:
+      - prop: analysis_kind
+        op: eq
+        value: spectral_fit
+  steps:
+    - from: fit
+      entries: result_values
+      as: coordination_number
+    - from: coordination_number
+      field: variable
+      to: Variable
+      as: measurand
+      where:
+        - prop: quantity_kind
+          op: eq
+          value: coordination_number
+    - from: fit
+      edge: USES_MODEL
+      to: Model
+      as: model
+    - from: fit
+      edge: HAS_INPUT
+      to: Dataset
+      as: spectrum
+      edge_where:
+        - prop: role
+          op: eq
+          value: data
+    - from: fit
+      edge: HAS_INPUT
+      to: Dataset
+      as: reference
+      edge_where:
+        - prop: role
+          op: eq
+          value: reference_standard
+    - from: spectrum
+      edge: HAS_OUTPUT
+      direction: in
+      to: Characterization
+      as: measurement
+    - from: measurement
+      edge: CHARACTERIZES
+      to: CatalystSample
+      as: specimen
+      edge_as: measured
+  return:
+    - coordination_number
+    - fit.method
+    - fit.limitations
+    - model.assumptions
+    - reference.name
+    - spectrum.availability
+    - measurement.temperature
+    - measurement.atmosphere
+    - measurement.observation_mode
+    - measurement.conditions.energy_calibration
+    - specimen.name
+    - measured.state
+  evidence: true
+expect:
+  status: answered
+  min_rows: 1
+  max_rows: 1
+  values:
+    reference.name:
+      - Pt L3 XAS of the Pt foil
+    measured.state:
+      - reactivated
+variants:
+  - description: The specimen's states, each reached by its action (a preparation, a treatment or the test), show where
+      the measured state sits in its history - calcined, reduced, passivated and stored, reduced again in the cell,
+      under reaction (during the test) and after the test.
+    plan:
+      match:
+        label: CatalystState
+        as: state
+      steps:
+        - from: state
+          edge: STATE_OF
+          to: CatalystSample
+          as: specimen
+          where:
+            - prop: id
+              op: eq
+              value: ex:pi/sample/batch-1
+        - from: state
+          edge: REACHED_BY
+          as: action
+          edge_as: reached
+      return:
+        - state.name
+        - state.state_kind
+        - action.name
+        - reached.timing
+    expect:
+      status: answered
+      min_rows: 6
+      max_rows: 6

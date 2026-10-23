@@ -298,7 +298,11 @@ infers it and counts the inferences.
 to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
 kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
 metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;
-characterization results; sites in a catalyst state; assignments, operando observations and fits; digitizing a figure.
+characterization results; sites in a catalyst state; assignments, operando observations and fits; preparation
+recipes (the batch, its lots and its steps; supported-metal impregnation; precipitation and coprecipitation;
+activation, storage, transfer and reaction history); characterization recipes (what every measurement keeps; XAS;
+electron microscopy; chemisorption and site titration; physisorption; sizes from different techniques; nominal, bulk
+and surface composition); digitizing a figure.
 
 ## Sites, assignments and operando observations
 
@@ -316,6 +320,24 @@ kinetics were measured on the same specimen while it was made (Tackett et al. 20
 et al. 2024, doi:10.1016/j.jcat.2024.115369) is what its `DURING` link states, never read from the label or from an
 overlap in time. A fit to an ensemble measurement is an Analysis (`spectral_fit`) with its fitted values and limitations, apart
 from the spectrum it fits and from the claim drawn from it. The recipes say how to record each.
+
+## Preparations and characterizations
+
+A catalyst's preparation and characterization are recorded with the structures SCALE has, so that a second person
+could repeat them and two preparations of one nominal formula stay two. A batch is a CatalystSample with the batch
+identifier the source gives; a purchased lot of a precursor or support is a Sample with its lot number; each step is a
+ProcedureStep `PART_OF` the preparation, in order, with what it takes in and gives out and its conditions; each
+treatment after it (reduction, passivation, storage) is a Treatment the batch is `TREATED_BY`, in order. A nominal
+composition is the formulation's (`origin: assumed`); a measured bulk or surface composition is a result of the
+measurement on the specimen, in its state. Each measurand is its own Variable, so a size from microscopy, one from
+diffraction and one from light scattering stay three quantities, and a distribution's mean, standard deviation and
+count stay three results. A fit keeps its model, references, software and limitations. What the source leaves
+unstated stays unstated: a typed absence for a value, "not stated" for a text field, `availability: not_reported` for
+data. The recording guidance follows the workshop report on rigor and reproducibility in heterogeneous catalysis
+(doi:10.5281/zenodo.8029159) and the papers drawn from it (Alba-Rubio et al. 2024, doi:10.1016/j.jcat.2023.115259, on
+synthesis; Meyer et al. 2024, doi:10.1016/j.jcat.2024.115480, on STEM/TEM; Meyer et al. 2024,
+doi:10.1016/j.jcat.2024.115369, on XAS; Wrasman et al. 2024, doi:10.1016/j.jcat.2024.115451, on site counting); the
+companion reporting checklist is [domain/docs/reporting/catalyst-preparation-reporting.md](../domain/docs/reporting/catalyst-preparation-reporting.md).
 
 ## Retractions, corrections and other notices
 

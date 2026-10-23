@@ -1,0 +1,4998 @@
+{
+  "nodes": [
+    {
+      "id": "ex:pi/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Two batches of Pt/gamma-Al2O3 by incipient wetness, and what their histories did to them (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:pi/species/h2ptcl6-6h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hexachloroplatinic acid hexahydrate",
+        "elemental_composition": {
+          "Cl": 6,
+          "H": 14,
+          "O": 6,
+          "Pt": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "formula": "H2PtCl6·6H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/species/pt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "platinum",
+        "elemental_composition": {
+          "Pt": 1
+        },
+        "formula": "Pt",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:pi/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/species/n2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nitrogen",
+        "elemental_composition": {
+          "N": 2
+        },
+        "formula": "N2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/species/ethylene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethylene",
+        "elemental_composition": {
+          "C": 2,
+          "H": 4
+        },
+        "formula": "C2H4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/species/ethane",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethane",
+        "elemental_composition": {
+          "C": 2,
+          "H": 6
+        },
+        "formula": "C2H6",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/material/gamma-alumina",
+      "label": "Material",
+      "props": {
+        "name": "gamma-Al2O3",
+        "formula": "Al2O3",
+        "material_family": "oxide",
+        "origin": "synthetic",
+        "polymorph": "gamma"
+      }
+    },
+    {
+      "id": "ex:pi/material/pt-fcc",
+      "label": "Material",
+      "props": {
+        "name": "fcc Pt",
+        "formula": "Pt",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:pi/catalyst/pt-alumina",
+      "label": "Catalyst",
+      "props": {
+        "name": "5 wt% Pt/gamma-Al2O3 (nominal)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "nominal_formula": "Pt/gamma-Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/lot/h2ptcl6-a",
+      "label": "Sample",
+      "props": {
+        "name": "H2PtCl6·6H2O, lot A-1172",
+        "batch_identifier": "A-1172",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:pi/lot/h2ptcl6-b",
+      "label": "Sample",
+      "props": {
+        "name": "H2PtCl6·6H2O, lot B-2090",
+        "batch_identifier": "B-2090",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:pi/lot/alumina-s31",
+      "label": "Sample",
+      "props": {
+        "name": "gamma-Al2O3 support, lot S-31",
+        "batch_identifier": "S-31",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:pi/protocol/iwi",
+      "label": "Protocol",
+      "props": {
+        "name": "Incipient-wetness impregnation of Pt on gamma-Al2O3",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "protocol_kind": "synthesis",
+        "steps": [
+          "measure the incipient volume of the support with water",
+          "dissolve the precursor in that volume",
+          "add the solution dropwise with intermittent mixing",
+          "dry at 393 K",
+          "calcine at 723 K in static air"
+        ]
+      }
+    },
+    {
+      "id": "ex:pi/sample/batch-1",
+      "label": "CatalystSample",
+      "props": {
+        "name": "5 wt% Pt/gamma-Al2O3, batch 1",
+        "batch_identifier": "1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:pi/sample/batch-2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "5 wt% Pt/gamma-Al2O3, batch 2",
+        "batch_identifier": "2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:pi/preparation/batch-1",
+      "label": "Preparation",
+      "props": {
+        "name": "Incipient-wetness impregnation, batch 1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "incipient-wetness impregnation",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/solution/batch-1",
+      "label": "Sample",
+      "props": {
+        "name": "aqueous H2PtCl6 solution, batch 1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-1-incipient-volume",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Measure the incipient volume of the support",
+        "action": "other",
+        "conditions": {
+          "incipient_volume": {
+            "status": "present",
+            "evidence_ids": [
+              "m_iv"
+            ],
+            "unit": "mL/g",
+            "value": 0.62
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_iv",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "water added dropwise to the support until it was wet without excess liquid",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-1-dissolve",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the precursor",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-1-impregnate-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Impregnate the support",
+        "action": "impregnate",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "as_reported": "room temperature",
+            "qualifier": "approximate",
+            "unit": "K",
+            "value": 298
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "solution added dropwise with intermittent mixing by hand",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-1-dry-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 393
+        }
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-1-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 4
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 723
+        }
+      }
+    },
+    {
+      "id": "ex:pi/preparation/batch-2",
+      "label": "Preparation",
+      "props": {
+        "name": "Incipient-wetness impregnation, batch 2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "incipient-wetness impregnation",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/solution/batch-2",
+      "label": "Sample",
+      "props": {
+        "name": "aqueous H2PtCl6 solution, batch 2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-incipient-volume",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Measure the incipient volume of the support",
+        "action": "other",
+        "conditions": {
+          "incipient_volume": {
+            "status": "present",
+            "evidence_ids": [
+              "m_iv"
+            ],
+            "unit": "mL/g",
+            "value": 0.62
+          }
+        },
+        "evidence": [
+          {
+            "id": "m_iv",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "water added dropwise to the support until it was wet without excess liquid",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-dissolve",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the precursor",
+        "action": "dissolve",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-impregnate-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Impregnate the support, portion 1",
+        "action": "impregnate",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "as_reported": "room temperature",
+            "qualifier": "approximate",
+            "unit": "K",
+            "value": 298
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "solution added dropwise with intermittent mixing by hand",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-dry-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry after portion 1",
+        "action": "dry",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 393
+        }
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-impregnate-2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Impregnate the support, portion 2",
+        "action": "impregnate",
+        "conditions": {
+          "temperature": {
+            "status": "present",
+            "as_reported": "room temperature",
+            "qualifier": "approximate",
+            "unit": "K",
+            "value": 298
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "solution added dropwise with intermittent mixing by hand",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-dry-2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry after portion 2",
+        "action": "dry",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 393
+        }
+      }
+    },
+    {
+      "id": "ex:pi/step/batch-2-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 4
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 723
+        }
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction of batch 1, 573 K",
+        "atmosphere": "10 % H2 in Ar",
+        "conditions": {
+          "flow_rate": {
+            "status": "present",
+            "unit": "mL/min",
+            "value": 50
+          },
+          "ramp_rate": {
+            "status": "present",
+            "unit": "K/min",
+            "value": 10
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-passivation",
+      "label": "Treatment",
+      "props": {
+        "name": "Passivation of batch 1",
+        "atmosphere": "1 % O2 in N2",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "passivation",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "as_reported": "room temperature",
+          "qualifier": "approximate",
+          "unit": "K",
+          "value": 298
+        },
+        "treatment_kind": "oxidation"
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-storage",
+      "label": "Treatment",
+      "props": {
+        "name": "Storage of batch 1, 14 days",
+        "atmosphere": "not stated",
+        "duration": {
+          "status": "present",
+          "unit": "d",
+          "value": 14
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "storage in a closed vial",
+        "note": "the paper says the vial was closed, not what gas it held",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "treatment_kind": "exposure"
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-cell-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction of batch 1 in the XAS cell, 573 K",
+        "atmosphere": "H2",
+        "conditions": {
+          "flow_rate": {
+            "status": "not_reported",
+            "missing_reason": "not_stated_in_source"
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-2-reduction",
+      "label": "Treatment",
+      "props": {
+        "name": "Reduction of batch 2, 773 K",
+        "atmosphere": "10 % H2 in Ar",
+        "conditions": {
+          "flow_rate": {
+            "status": "present",
+            "unit": "mL/min",
+            "value": 50
+          },
+          "ramp_rate": {
+            "status": "present",
+            "unit": "K/min",
+            "value": 10
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 773
+        },
+        "treatment_kind": "reduction"
+      }
+    },
+    {
+      "id": "ex:pi/treatment/batch-2-passivation",
+      "label": "Treatment",
+      "props": {
+        "name": "Passivation of batch 2",
+        "atmosphere": "1 % O2 in N2",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "method": "passivation",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "as_reported": "room temperature",
+          "qualifier": "approximate",
+          "unit": "K",
+          "value": 298
+        },
+        "treatment_kind": "oxidation"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-calcined",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 as calcined",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-reduced",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 after reduction at 573 K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "pretreated"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-stored",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 passivated and stored 14 days",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "morphology": "passivated, then stored in a closed vial",
+        "origin": "synthetic",
+        "state_kind": "other"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-re-reduced",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 reduced again in the XAS cell",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "pretreated"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-2-reduced",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 2 after reduction at 773 K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "pretreated"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-2-passivated",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 2 passivated",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "morphology": "passivated",
+        "origin": "synthetic",
+        "state_kind": "other"
+      }
+    },
+    {
+      "id": "ex:pi/institution/supplier",
+      "label": "Institution",
+      "props": {
+        "name": "An invented supplier",
+        "institution_kind": "company",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/catalyst/commercial-pt-alumina",
+      "label": "Catalyst",
+      "props": {
+        "name": "commercial 5 wt% Pt on alumina (invented product)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "nominal_formula": "Pt/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/sample/commercial-lot-0417",
+      "label": "CatalystSample",
+      "props": {
+        "name": "commercial Pt/Al2O3, lot 0417",
+        "batch_identifier": "0417",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:pi/sample/commercial-second-lot",
+      "label": "CatalystSample",
+      "props": {
+        "name": "commercial Pt/Al2O3, a second lot",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "note": "bought a year later; the paper does not give its lot number",
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:pi/variable/pt-loading-icp",
+      "label": "Variable",
+      "props": {
+        "name": "Pt loading by ICP-OES",
+        "definition": "mass of Pt per mass of catalyst, by ICP-OES after acid digestion",
+        "origin": "synthetic",
+        "quantity_kind": "loading",
+        "scale": "quantitative",
+        "unit": "wt%"
+      }
+    },
+    {
+      "id": "ex:pi/variable/h2-uptake",
+      "label": "Variable",
+      "props": {
+        "name": "irreversible H2 uptake",
+        "definition": "H2 adsorbed irreversibly at 308 K: the difference of the first and second isotherms, extrapolated to zero pressure",
+        "origin": "synthetic",
+        "quantity_kind": "gas_uptake",
+        "scale": "quantitative",
+        "unit": "µmol/g"
+      }
+    },
+    {
+      "id": "ex:pi/variable/pt-dispersion",
+      "label": "Variable",
+      "props": {
+        "name": "Pt dispersion",
+        "definition": "exposed Pt atoms as a share of all Pt atoms",
+        "origin": "synthetic",
+        "quantity_kind": "site_fraction",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pi/variable/dispersion-size",
+      "label": "Variable",
+      "props": {
+        "name": "Pt particle size from the dispersion",
+        "definition": "the diameter of hemispherical particles that would give the dispersion measured",
+        "origin": "synthetic",
+        "quantity_kind": "dispersion_equivalent_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:pi/variable/stem-mean-diameter",
+      "label": "Variable",
+      "props": {
+        "name": "mean Pt particle diameter (HAADF-STEM)",
+        "definition": "number-weighted mean of the projected-area-equivalent diameters of the particles counted",
+        "origin": "synthetic",
+        "quantity_kind": "microscopy_particle_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:pi/variable/stem-diameter-sd",
+      "label": "Variable",
+      "props": {
+        "name": "standard deviation of the Pt particle diameters (HAADF-STEM)",
+        "definition": "standard deviation of the number distribution of the diameters counted: the width of the distribution, not an uncertainty of its mean",
+        "origin": "synthetic",
+        "quantity_kind": "microscopy_particle_size_spread",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:pi/variable/particles-counted",
+      "label": "Variable",
+      "props": {
+        "name": "particles counted",
+        "definition": "number of particles whose diameters make the distribution",
+        "origin": "synthetic",
+        "quantity_kind": "count",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:pi/variable/xrd-crystallite-size",
+      "label": "Variable",
+      "props": {
+        "name": "Pt crystallite size (XRD)",
+        "definition": "volume-weighted coherent-domain size from the width of the Pt(111) reflection, Scherrer equation with K = 0.9, instrumental broadening subtracted",
+        "origin": "synthetic",
+        "quantity_kind": "crystallite_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:pi/variable/cn-pt-pt",
+      "label": "Variable",
+      "props": {
+        "name": "Pt-Pt coordination number (first shell, EXAFS)",
+        "definition": "the average number of Pt neighbours of a Pt atom in the first shell, fitted to the EXAFS",
+        "origin": "synthetic",
+        "quantity_kind": "coordination_number",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:pi/variable/bet-area",
+      "label": "Variable",
+      "props": {
+        "name": "specific surface area (BET, N2)",
+        "definition": "BET area from N2 adsorption at 77 K",
+        "origin": "synthetic",
+        "quantity_kind": "specific_surface_area",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:pi/variable/pore-volume",
+      "label": "Variable",
+      "props": {
+        "name": "pore volume (N2)",
+        "definition": "N2 adsorbed at p/p0 = 0.99, as liquid",
+        "origin": "synthetic",
+        "quantity_kind": "pore_volume",
+        "scale": "quantitative",
+        "unit": "cm3/g"
+      }
+    },
+    {
+      "id": "ex:pi/variable/ethylene-conversion",
+      "label": "Variable",
+      "props": {
+        "name": "ethylene conversion",
+        "definition": "ethylene converted per pass",
+        "origin": "synthetic",
+        "quantity_kind": "conversion",
+        "scale": "quantitative",
+        "unit": "%"
+      }
+    },
+    {
+      "id": "ex:pi/instrument/diffractometer",
+      "label": "Instrument",
+      "props": {
+        "name": "Powder diffractometer",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "instrument_kind": "X-ray diffractometer",
+        "origin": "synthetic",
+        "settings": {
+          "radiation": {
+            "status": "present",
+            "text_value": "Cu K alpha"
+          },
+          "step": {
+            "status": "present",
+            "unit": "°",
+            "value": 0.02
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:pi/sample/lab6-standard",
+      "label": "Sample",
+      "props": {
+        "name": "LaB6 line-profile standard",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/lab6-calibration",
+      "label": "Characterization",
+      "props": {
+        "name": "Instrumental broadening from LaB6",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "goal": "calibrate",
+        "origin": "synthetic",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:pi/sample/pt-foil",
+      "label": "Sample",
+      "props": {
+        "name": "Pt foil, 7.5 µm",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "purchased",
+        "sample_kind": "film"
+      }
+    },
+    {
+      "id": "ex:pi/software/fitter",
+      "label": "Software",
+      "props": {
+        "name": "EXAFS fitting program (invented)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/icp-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-OES of batch 1",
+        "evidence": [
+          {
+            "id": "t1_icp_1",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_loading",
+            "status": "present",
+            "evidence_ids": [
+              "t1_icp_1"
+            ],
+            "replicates": 3,
+            "target": "ex:pi/species/pt",
+            "uncertainty": 0.1,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "wt%",
+            "value": 3.8,
+            "variable": "ex:pi/variable/pt-loading-icp"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "ICP-OES after acid digestion"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/icp-batch-2",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-OES of batch 2",
+        "evidence": [
+          {
+            "id": "t1_icp_2",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_loading",
+            "status": "present",
+            "evidence_ids": [
+              "t1_icp_2"
+            ],
+            "target": "ex:pi/species/pt",
+            "unit": "wt%",
+            "value": 4.6,
+            "variable": "ex:pi/variable/pt-loading-icp"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "ICP-OES after acid digestion"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/icp-commercial-0417",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-OES of commercial 0417",
+        "evidence": [
+          {
+            "id": "t1_icp_c1",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_loading",
+            "status": "present",
+            "evidence_ids": [
+              "t1_icp_c1"
+            ],
+            "target": "ex:pi/species/pt",
+            "unit": "wt%",
+            "value": 4.9,
+            "variable": "ex:pi/variable/pt-loading-icp"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "ICP-OES after acid digestion"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/icp-commercial-second",
+      "label": "Characterization",
+      "props": {
+        "name": "ICP-OES of commercial second",
+        "evidence": [
+          {
+            "id": "t1_icp_c2",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_loading",
+            "status": "present",
+            "as_reported": "4.7 % Pt",
+            "evidence_ids": [
+              "t1_icp_c2"
+            ],
+            "target": "ex:pi/species/pt",
+            "unit": "%",
+            "value": 4.7,
+            "variable": "ex:pi/variable/pt-loading-icp"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "ICP-OES after acid digestion"
+      }
+    },
+    {
+      "id": "ex:pi/model/one-h-per-surface-pt",
+      "label": "Model",
+      "props": {
+        "name": "One H atom per surface Pt atom",
+        "assumptions": [
+          "one H atom per surface Pt atom (H/Pt = 1)",
+          "the Pt content is the one measured by ICP-OES, not the nominal one",
+          "hemispherical particles, 0.0807 nm2 per surface Pt atom, for the size from the dispersion"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "model_kind": "adsorption stoichiometry",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/site/exposed-pt",
+      "label": "ActiveSite",
+      "props": {
+        "name": "exposed Pt atoms",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_kind": "metal_site"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "H2 chemisorption of batch 1",
+        "conditions": {
+          "pretreatment": {
+            "status": "present",
+            "text_value": "reduced in the cell in H2 at 573 K for 1 h, evacuated at 573 K for 1 h"
+          }
+        },
+        "evidence": [
+          {
+            "id": "t2_chem_1",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "h2_uptake",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_1"
+            ],
+            "replicates": 3,
+            "target": "ex:pi/species/h2",
+            "uncertainty": 1.5,
+            "uncertainty_kind": "standard_deviation",
+            "unit": "µmol/g",
+            "value": 40.0,
+            "variable": "ex:pi/variable/h2-uptake"
+          }
+        ],
+        "technique": "H2 chemisorption, volumetric, two isotherms",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 308
+        }
+      }
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-batch-1",
+      "label": "Analysis",
+      "props": {
+        "name": "Pt dispersion of batch 1 from the H2 uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "id": "t2_chem_1",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "dispersion from the irreversible H2 uptake and the Pt content measured by ICP-OES",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "dispersion",
+            "status": "present",
+            "basis": "of all Pt atoms",
+            "evidence_ids": [
+              "t2_chem_1"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-batch-1",
+            "target": "ex:pi/species/pt",
+            "unit": "%",
+            "value": 41,
+            "variable": "ex:pi/variable/pt-dispersion"
+          },
+          {
+            "id": "size_from_dispersion",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_1"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-batch-1",
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 2.8,
+            "variable": "ex:pi/variable/dispersion-size"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-batch-2",
+      "label": "Characterization",
+      "props": {
+        "name": "H2 chemisorption of batch 2",
+        "conditions": {
+          "pretreatment": {
+            "status": "present",
+            "text_value": "reduced in the cell in H2 at 773 K for 1 h, evacuated at 773 K for 1 h"
+          }
+        },
+        "evidence": [
+          {
+            "id": "t2_chem_2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "h2_uptake",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_2"
+            ],
+            "target": "ex:pi/species/h2",
+            "unit": "µmol/g",
+            "value": 20.0,
+            "variable": "ex:pi/variable/h2-uptake"
+          }
+        ],
+        "technique": "H2 chemisorption, volumetric, two isotherms",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 308
+        }
+      }
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-batch-2",
+      "label": "Analysis",
+      "props": {
+        "name": "Pt dispersion of batch 2 from the H2 uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "id": "t2_chem_2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "dispersion from the irreversible H2 uptake and the Pt content measured by ICP-OES",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "dispersion",
+            "status": "present",
+            "basis": "of all Pt atoms",
+            "evidence_ids": [
+              "t2_chem_2"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-batch-2",
+            "target": "ex:pi/species/pt",
+            "unit": "%",
+            "value": 17,
+            "variable": "ex:pi/variable/pt-dispersion"
+          },
+          {
+            "id": "size_from_dispersion",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_2"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-batch-2",
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 6.6,
+            "variable": "ex:pi/variable/dispersion-size"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-commercial-0417",
+      "label": "Characterization",
+      "props": {
+        "name": "H2 chemisorption of commercial 0417",
+        "conditions": {
+          "pretreatment": {
+            "status": "present",
+            "text_value": "reduced in the cell in H2 at 573 K for 1 h, evacuated at 573 K for 1 h"
+          }
+        },
+        "evidence": [
+          {
+            "id": "t2_chem_c1",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "h2_uptake",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_c1"
+            ],
+            "target": "ex:pi/species/h2",
+            "unit": "µmol/g",
+            "value": 41.4,
+            "variable": "ex:pi/variable/h2-uptake"
+          }
+        ],
+        "technique": "H2 chemisorption, volumetric, two isotherms",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 308
+        }
+      }
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-commercial-0417",
+      "label": "Analysis",
+      "props": {
+        "name": "Pt dispersion of commercial 0417 from the H2 uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "id": "t2_chem_c1",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "dispersion from the irreversible H2 uptake and the Pt content measured by ICP-OES",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "dispersion",
+            "status": "present",
+            "basis": "of all Pt atoms",
+            "evidence_ids": [
+              "t2_chem_c1"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-commercial-0417",
+            "target": "ex:pi/species/pt",
+            "unit": "%",
+            "value": 33,
+            "variable": "ex:pi/variable/pt-dispersion"
+          },
+          {
+            "id": "size_from_dispersion",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_c1"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-commercial-0417",
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 3.4,
+            "variable": "ex:pi/variable/dispersion-size"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-commercial-second",
+      "label": "Characterization",
+      "props": {
+        "name": "H2 chemisorption of commercial second",
+        "conditions": {
+          "pretreatment": {
+            "status": "present",
+            "text_value": "reduced in the cell in H2 at 573 K for 1 h, evacuated at 573 K for 1 h"
+          }
+        },
+        "evidence": [
+          {
+            "id": "t2_chem_c2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "h2_uptake",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_c2"
+            ],
+            "target": "ex:pi/species/h2",
+            "unit": "µmol/g",
+            "value": 28.9,
+            "variable": "ex:pi/variable/h2-uptake"
+          }
+        ],
+        "technique": "H2 chemisorption, volumetric, two isotherms",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 308
+        }
+      }
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-commercial-second",
+      "label": "Analysis",
+      "props": {
+        "name": "Pt dispersion of commercial second from the H2 uptake",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "id": "t2_chem_c2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "method": "dispersion from the irreversible H2 uptake and the Pt content measured by ICP-OES",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "dispersion",
+            "status": "present",
+            "basis": "of all Pt atoms",
+            "evidence_ids": [
+              "t2_chem_c2"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-commercial-second",
+            "target": "ex:pi/species/pt",
+            "unit": "%",
+            "value": 24,
+            "variable": "ex:pi/variable/pt-dispersion"
+          },
+          {
+            "id": "size_from_dispersion",
+            "status": "present",
+            "evidence_ids": [
+              "t2_chem_c2"
+            ],
+            "origin": "derived",
+            "produced_by": "ex:pi/analysis/dispersion-commercial-second",
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 4.7,
+            "variable": "ex:pi/variable/dispersion-size"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:pi/characterization/stem-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "HAADF-STEM of batch 1",
+        "conditions": {
+          "accelerating_voltage": {
+            "status": "present",
+            "unit": "kV",
+            "value": 200
+          },
+          "electron_dose": {
+            "status": "not_reported",
+            "definition": "the total electron dose on the areas imaged",
+            "missing_reason": "not_stated_in_source"
+          },
+          "images": {
+            "status": "present",
+            "unit": "1",
+            "value": 14
+          },
+          "lower_size_limit": {
+            "status": "present",
+            "definition": "the smallest particle this imaging mode and magnification resolve, as the paper gives it",
+            "unit": "nm",
+            "value": 0.5
+          },
+          "regions_imaged": {
+            "status": "present",
+            "unit": "1",
+            "value": 6
+          }
+        },
+        "evidence": [
+          {
+            "id": "f3_b1",
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "projection",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b1"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 2.1,
+            "variable": "ex:pi/variable/stem-mean-diameter"
+          },
+          {
+            "id": "diameter_sd",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b1"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 0.5,
+            "variable": "ex:pi/variable/stem-diameter-sd"
+          },
+          {
+            "id": "particles_counted",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b1"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "1",
+            "value": 312,
+            "variable": "ex:pi/variable/particles-counted"
+          }
+        ],
+        "sampling": "single_particle",
+        "technique": "HAADF-STEM",
+        "transfer": "mounted on the grid in air after storage"
+      }
+    },
+    {
+      "id": "ex:pi/dataset/stem-images-batch-1",
+      "label": "Dataset",
+      "props": {
+        "name": "HAADF-STEM images of batch 1",
+        "availability": "available",
+        "data_kind": "image",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/stem-images-batch-1"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/stem-batch-2",
+      "label": "Characterization",
+      "props": {
+        "name": "HAADF-STEM of batch 2",
+        "conditions": {
+          "accelerating_voltage": {
+            "status": "present",
+            "unit": "kV",
+            "value": 200
+          },
+          "electron_dose": {
+            "status": "not_reported",
+            "definition": "the total electron dose on the areas imaged",
+            "missing_reason": "not_stated_in_source"
+          },
+          "images": {
+            "status": "present",
+            "unit": "1",
+            "value": 14
+          },
+          "lower_size_limit": {
+            "status": "present",
+            "definition": "the smallest particle this imaging mode and magnification resolve, as the paper gives it",
+            "unit": "nm",
+            "value": 0.5
+          },
+          "regions_imaged": {
+            "status": "present",
+            "unit": "1",
+            "value": 6
+          }
+        },
+        "evidence": [
+          {
+            "id": "f3_b2",
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "projection",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b2"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 5.8,
+            "variable": "ex:pi/variable/stem-mean-diameter"
+          },
+          {
+            "id": "diameter_sd",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b2"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 1.9,
+            "variable": "ex:pi/variable/stem-diameter-sd"
+          },
+          {
+            "id": "particles_counted",
+            "status": "present",
+            "evidence_ids": [
+              "f3_b2"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "1",
+            "value": 280,
+            "variable": "ex:pi/variable/particles-counted"
+          }
+        ],
+        "sampling": "single_particle",
+        "technique": "HAADF-STEM",
+        "transfer": "mounted on the grid in air after passivation"
+      }
+    },
+    {
+      "id": "ex:pi/dataset/stem-images-batch-2",
+      "label": "Dataset",
+      "props": {
+        "name": "HAADF-STEM images of batch 2",
+        "availability": "not_reported",
+        "data_kind": "image",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/xrd-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of batch 1, passivated",
+        "evidence": [
+          {
+            "id": "f2_b1",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_crystallite_size",
+            "status": "below_detection_limit",
+            "definition": "no Pt(111) reflection above the background; the paper takes about 3 nm as the smallest Pt crystallite this measurement resolves",
+            "evidence_ids": [
+              "f2_b1"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 3,
+            "variable": "ex:pi/variable/xrd-crystallite-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/xrd-batch-2",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of batch 2, passivated",
+        "evidence": [
+          {
+            "id": "f2_b2",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_crystallite_size",
+            "status": "present",
+            "calibration": "ex:pi/characterization/lab6-calibration",
+            "evidence_ids": [
+              "f2_b2"
+            ],
+            "target": "ex:pi/material/pt-fcc",
+            "unit": "nm",
+            "value": 6.5,
+            "variable": "ex:pi/variable/xrd-crystallite-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:pi/dataset/xrd-patterns",
+      "label": "Dataset",
+      "props": {
+        "name": "XRD patterns of both batches",
+        "availability": "available",
+        "data_kind": "raw",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/xrd-patterns"
+      }
+    },
+    {
+      "id": "ex:pi/characterization/xas-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "Pt L3-edge XAS of batch 1 in H2 after reduction in the cell",
+        "atmosphere": "H2, after reduction in the cell at 573 K",
+        "conditions": {
+          "detection": {
+            "status": "present",
+            "text_value": "transmission"
+          },
+          "edge": {
+            "status": "present",
+            "text_value": "Pt L3, 11564 eV"
+          },
+          "energy_calibration": {
+            "status": "present",
+            "text_value": "Pt foil measured downstream at the same time; its first inflection set to 11564 eV"
+          },
+          "scans_averaged": {
+            "status": "present",
+            "unit": "1",
+            "value": 3
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          },
+          {
+            "kind": "figure",
+            "locator": "Figure 4",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "observation_mode": "in_situ",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "Pt L3-edge XAS",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:pi/dataset/xas-batch-1",
+      "label": "Dataset",
+      "props": {
+        "name": "Pt L3 XAS of batch 1 in H2",
+        "availability": "available",
+        "data_kind": "spectrum",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/xas-batch-1"
+      }
+    },
+    {
+      "id": "ex:pi/dataset/xas-pt-foil",
+      "label": "Dataset",
+      "props": {
+        "name": "Pt L3 XAS of the Pt foil",
+        "availability": "available",
+        "data_kind": "spectrum",
+        "origin": "synthetic",
+        "uri": "https://example.org/invented/xas-pt-foil"
+      }
+    },
+    {
+      "id": "ex:pi/model/pt-pt-shell",
+      "label": "Model",
+      "props": {
+        "name": "One Pt-Pt single-scattering path from fcc Pt",
+        "assumptions": [
+          "one Pt-Pt path from fcc Pt; no Pt-O or Pt-Cl path",
+          "S0^2 = 0.84, from the fit of the Pt foil, held fixed"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "model_kind": "EXAFS shell model",
+        "origin": "synthetic",
+        "parameters": {
+          "k_weight": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "s0_squared": {
+            "status": "present",
+            "unit": "1",
+            "value": 0.84
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:pi/analysis/exafs-batch-1",
+      "label": "Analysis",
+      "props": {
+        "name": "First-shell fit of the Pt L3 EXAFS of batch 1",
+        "analysis_kind": "spectral_fit",
+        "evidence": [
+          {
+            "id": "t3_fit",
+            "kind": "table",
+            "locator": "Table 3",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "limitations": "the coordination number averages over every Pt atom: uniform 2 nm particles and a mix of larger particles with isolated atoms can give the same value; a Pt-Cl contribution from fewer than about one Pt atom in ten would not be resolved",
+        "method": "k2-weighted EXAFS, k 3.0-12.5 1/Å, R 1.6-3.1 Å; CN, R, sigma^2 and delta E0 fitted",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "cn_pt_pt",
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/exafs-batch-1",
+            "uncertainty": 0.6,
+            "uncertainty_kind": "standard_uncertainty",
+            "unit": "1",
+            "value": 7.9,
+            "variable": "ex:pi/variable/cn-pt-pt"
+          }
+        ],
+        "results": {
+          "delta_e0": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/exafs-batch-1",
+            "uncertainty": 0.9,
+            "uncertainty_kind": "standard_uncertainty",
+            "unit": "eV",
+            "value": 6.3
+          },
+          "fitted_parameters": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "unit": "1",
+            "value": 4
+          },
+          "independent_points": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "unit": "1",
+            "value": 9.1
+          },
+          "r_factor": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "unit": "1",
+            "value": 0.009
+          },
+          "r_pt_pt": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/exafs-batch-1",
+            "uncertainty": 0.01,
+            "uncertainty_kind": "standard_uncertainty",
+            "unit": "Å",
+            "value": 2.75
+          },
+          "sigma_squared": {
+            "status": "present",
+            "evidence_ids": [
+              "t3_fit"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/exafs-batch-1",
+            "uncertainty": 0.0008,
+            "uncertainty_kind": "standard_uncertainty",
+            "unit": "Å2",
+            "value": 0.006
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:pi/characterization/n2-physisorption-batch-1",
+      "label": "Characterization",
+      "props": {
+        "name": "N2 physisorption of batch 1, calcined",
+        "conditions": {
+          "degassing_atmosphere": {
+            "status": "present",
+            "text_value": "vacuum"
+          },
+          "degassing_temperature": {
+            "status": "present",
+            "unit": "K",
+            "value": 573
+          },
+          "degassing_time": {
+            "status": "present",
+            "unit": "h",
+            "value": 3
+          }
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "technique": "N2 physisorption at 77 K",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 77
+        }
+      }
+    },
+    {
+      "id": "ex:pi/dataset/isotherm-batch-1",
+      "label": "Dataset",
+      "props": {
+        "name": "N2 isotherm of batch 1",
+        "availability": "not_reported",
+        "data_kind": "table",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/model/bet",
+      "label": "Model",
+      "props": {
+        "name": "BET equation",
+        "assumptions": [
+          "multilayer adsorption without micropore filling",
+          "0.162 nm2 per adsorbed N2 molecule"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "model_kind": "adsorption isotherm",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/analysis/bet-batch-1",
+      "label": "Analysis",
+      "props": {
+        "name": "BET analysis of batch 1",
+        "analysis_kind": "other",
+        "evidence": [
+          {
+            "id": "t1_bet",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "computational",
+        "limitations": "a C constant of 96 with no micropores: the BET range holds for this mesoporous solid",
+        "method": "BET, p/p0 0.05-0.30, 6 points",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "bet_area",
+            "status": "present",
+            "evidence_ids": [
+              "t1_bet"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/bet-batch-1",
+            "unit": "m2/g",
+            "value": 182,
+            "variable": "ex:pi/variable/bet-area"
+          },
+          {
+            "id": "pore_volume",
+            "status": "present",
+            "evidence_ids": [
+              "t1_bet"
+            ],
+            "unit": "cm3/g",
+            "value": 0.47,
+            "variable": "ex:pi/variable/pore-volume"
+          }
+        ],
+        "results": {
+          "c_constant": {
+            "status": "present",
+            "evidence_ids": [
+              "t1_bet"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:pi/analysis/bet-batch-1",
+            "unit": "1",
+            "value": 96
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:pi/reaction/ethylene-hydrogenation",
+      "label": "Reaction",
+      "props": {
+        "name": "C2H4 + H2 -> C2H6",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "C2H4 + H2 -> C2H6",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/feed/ethylene-h2",
+      "label": "Feed",
+      "props": {
+        "name": "2 % C2H4, 20 % H2 in He",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:pi/test/batch-1-ethylene-hydrogenation",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Ethylene hydrogenation over batch 1 in the XAS cell, 298 K",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "id": "t4_conv",
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "flow_rate": {
+          "status": "present",
+          "unit": "mL/min",
+          "value": 50
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "atm",
+          "value": 1
+        },
+        "result_values": [
+          {
+            "id": "ethylene_conversion",
+            "status": "present",
+            "evidence_ids": [
+              "t4_conv"
+            ],
+            "target": "ex:pi/species/ethylene",
+            "unit": "%",
+            "value": 12,
+            "variable": "ex:pi/variable/ethylene-conversion"
+          }
+        ],
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity",
+        "time_on_stream": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        }
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-working",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 under ethylene hydrogenation",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "working"
+      }
+    },
+    {
+      "id": "ex:pi/state/batch-1-after-test",
+      "label": "CatalystState",
+      "props": {
+        "name": "batch 1 after the test",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 4",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "post_reaction"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:pi/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_nominal",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "loading": {
+          "status": "present",
+          "definition": "nominal: the Pt in the precursor weighed, per mass of catalyst",
+          "evidence_ids": [
+            "m_nominal"
+          ],
+          "origin": "assumed",
+          "unit": "wt%",
+          "value": 5
+        },
+        "loading_basis": "mass",
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:pi/catalyst/pt-alumina",
+      "target": "ex:pi/material/pt-fcc"
+    },
+    {
+      "id": "ex:pi/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:pi/catalyst/pt-alumina",
+      "target": "ex:pi/material/gamma-alumina"
+    },
+    {
+      "id": "ex:pi/link/3",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:pi/lot/h2ptcl6-a",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:pi/lot/h2ptcl6-b",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:pi/lot/alumina-s31",
+      "target": "ex:pi/material/gamma-alumina"
+    },
+    {
+      "id": "ex:pi/link/6",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/catalyst/pt-alumina"
+    },
+    {
+      "id": "ex:pi/link/7",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/catalyst/pt-alumina"
+    },
+    {
+      "id": "ex:pi/link/8",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/9",
+      "type": "FOLLOWS_PROTOCOL",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-1",
+      "target": "ex:pi/protocol/iwi"
+    },
+    {
+      "id": "ex:pi/link/10",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.266
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "grade": "≥99.9 % (trace metals basis), as the supplier states",
+        "origin": "synthetic",
+        "role": "Pt precursor",
+        "supplier": "an invented supplier"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/11",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.9
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support",
+        "supplier": "an invented supplier"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/material/gamma-alumina"
+    },
+    {
+      "id": "ex:pi/link/12",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "definition": "from the precursor weighed and the volume of water",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.435
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:pi/solution/batch-1",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/13",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-incipient-volume",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/14",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.0
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:pi/step/batch-1-incipient-volume",
+      "target": "ex:pi/lot/alumina-s31"
+    },
+    {
+      "id": "ex:pi/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-1-incipient-volume",
+      "target": "ex:pi/species/water"
+    },
+    {
+      "id": "ex:pi/link/16",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-dissolve",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.266
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-1-dissolve",
+      "target": "ex:pi/lot/h2ptcl6-a"
+    },
+    {
+      "id": "ex:pi/link/18",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 1.18
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-1-dissolve",
+      "target": "ex:pi/species/water"
+    },
+    {
+      "id": "ex:pi/link/19",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-dissolve",
+      "target": "ex:pi/solution/batch-1"
+    },
+    {
+      "id": "ex:pi/link/20",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-impregnate-1",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/21",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-1-impregnate-1",
+      "target": "ex:pi/solution/batch-1"
+    },
+    {
+      "id": "ex:pi/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.9
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:pi/step/batch-1-impregnate-1",
+      "target": "ex:pi/lot/alumina-s31"
+    },
+    {
+      "id": "ex:pi/link/23",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-dry-1",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/24",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-calcine",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/25",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-2",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/26",
+      "type": "FOLLOWS_PROTOCOL",
+      "props": {
+        "deviations": "the precursor was dissolved in 1.50 mL, more than the incipient volume, so the solution was added in two portions with drying in between",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-2",
+      "target": "ex:pi/protocol/iwi"
+    },
+    {
+      "id": "ex:pi/link/27",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.266
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "grade": "≥99.9 % (trace metals basis), as the supplier states",
+        "origin": "synthetic",
+        "role": "Pt precursor",
+        "supplier": "an invented supplier"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/28",
+      "type": "PREPARED_FROM",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.9
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support",
+        "supplier": "an invented supplier"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/material/gamma-alumina"
+    },
+    {
+      "id": "ex:pi/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "concentration": {
+          "status": "present",
+          "definition": "from the precursor weighed and the volume of water",
+          "evidence_ids": [
+            "m_sol"
+          ],
+          "unit": "mol/L",
+          "value": 0.342
+        },
+        "evidence": [
+          {
+            "id": "m_sol",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:pi/solution/batch-2",
+      "target": "ex:pi/species/h2ptcl6-6h2o"
+    },
+    {
+      "id": "ex:pi/link/30",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-incipient-volume",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/31",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.0
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:pi/step/batch-2-incipient-volume",
+      "target": "ex:pi/lot/alumina-s31"
+    },
+    {
+      "id": "ex:pi/link/32",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-2-incipient-volume",
+      "target": "ex:pi/species/water"
+    },
+    {
+      "id": "ex:pi/link/33",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dissolve",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/34",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.266
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-2-dissolve",
+      "target": "ex:pi/lot/h2ptcl6-b"
+    },
+    {
+      "id": "ex:pi/link/35",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 1.5
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-2-dissolve",
+      "target": "ex:pi/species/water"
+    },
+    {
+      "id": "ex:pi/link/36",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dissolve",
+      "target": "ex:pi/solution/batch-2"
+    },
+    {
+      "id": "ex:pi/link/37",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-1",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/38",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-1",
+      "target": "ex:pi/solution/batch-2"
+    },
+    {
+      "id": "ex:pi/link/39",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.9
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-1",
+      "target": "ex:pi/lot/alumina-s31"
+    },
+    {
+      "id": "ex:pi/link/40",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dry-1",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/41",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-2",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-2",
+      "target": "ex:pi/solution/batch-2"
+    },
+    {
+      "id": "ex:pi/link/43",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.9
+        },
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-2",
+      "target": "ex:pi/lot/alumina-s31"
+    },
+    {
+      "id": "ex:pi/link/44",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dry-2",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/45",
+      "type": "PART_OF",
+      "props": {
+        "order": 7,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-calcine",
+      "target": "ex:pi/preparation/batch-2"
+    },
+    {
+      "id": "ex:pi/link/46",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/treatment/batch-1-reduction"
+    },
+    {
+      "id": "ex:pi/link/47",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-1",
+      "target": "ex:pi/treatment/batch-1-reduction"
+    },
+    {
+      "id": "ex:pi/link/48",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/treatment/batch-1-passivation"
+    },
+    {
+      "id": "ex:pi/link/49",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-reduction",
+      "target": "ex:pi/treatment/batch-1-passivation"
+    },
+    {
+      "id": "ex:pi/link/50",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/treatment/batch-1-storage"
+    },
+    {
+      "id": "ex:pi/link/51",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-passivation",
+      "target": "ex:pi/treatment/batch-1-storage"
+    },
+    {
+      "id": "ex:pi/link/52",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/treatment/batch-1-cell-reduction"
+    },
+    {
+      "id": "ex:pi/link/53",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-storage",
+      "target": "ex:pi/treatment/batch-1-cell-reduction"
+    },
+    {
+      "id": "ex:pi/link/54",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/treatment/batch-2-reduction"
+    },
+    {
+      "id": "ex:pi/link/55",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-2",
+      "target": "ex:pi/treatment/batch-2-reduction"
+    },
+    {
+      "id": "ex:pi/link/56",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/treatment/batch-2-passivation"
+    },
+    {
+      "id": "ex:pi/link/57",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-2-reduction",
+      "target": "ex:pi/treatment/batch-2-passivation"
+    },
+    {
+      "id": "ex:pi/link/58",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-calcined",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/59",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-1-calcined",
+      "target": "ex:pi/preparation/batch-1"
+    },
+    {
+      "id": "ex:pi/link/60",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-reduced",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/61",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-1-reduced",
+      "target": "ex:pi/treatment/batch-1-reduction"
+    },
+    {
+      "id": "ex:pi/link/62",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-stored",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/63",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-1-stored",
+      "target": "ex:pi/treatment/batch-1-storage"
+    },
+    {
+      "id": "ex:pi/link/64",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-re-reduced",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/65",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-1-re-reduced",
+      "target": "ex:pi/treatment/batch-1-cell-reduction"
+    },
+    {
+      "id": "ex:pi/link/66",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-reduced",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/67",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-2-reduced",
+      "target": "ex:pi/treatment/batch-2-reduction"
+    },
+    {
+      "id": "ex:pi/link/68",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-passivated",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/69",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-2-passivated",
+      "target": "ex:pi/treatment/batch-2-passivation"
+    },
+    {
+      "id": "ex:pi/link/70",
+      "type": "DEVELOPED_BY",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "supplier"
+      },
+      "source": "ex:pi/catalyst/commercial-pt-alumina",
+      "target": "ex:pi/institution/supplier"
+    },
+    {
+      "id": "ex:pi/link/71",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "m_comm",
+            "kind": "text",
+            "locator": "Methods",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "loading": {
+          "status": "present",
+          "definition": "nominal, as the supplier states",
+          "evidence_ids": [
+            "m_comm"
+          ],
+          "origin": "assumed",
+          "unit": "wt%",
+          "value": 5
+        },
+        "loading_basis": "mass",
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:pi/catalyst/commercial-pt-alumina",
+      "target": "ex:pi/material/pt-fcc"
+    },
+    {
+      "id": "ex:pi/link/72",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/commercial-lot-0417",
+      "target": "ex:pi/catalyst/commercial-pt-alumina"
+    },
+    {
+      "id": "ex:pi/link/73",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/commercial-second-lot",
+      "target": "ex:pi/catalyst/commercial-pt-alumina"
+    },
+    {
+      "id": "ex:pi/link/74",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pi/characterization/lab6-calibration",
+      "target": "ex:pi/sample/lab6-standard"
+    },
+    {
+      "id": "ex:pi/link/75",
+      "type": "CALIBRATED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/instrument/diffractometer",
+      "target": "ex:pi/characterization/lab6-calibration"
+    },
+    {
+      "id": "ex:pi/link/76",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "other",
+        "role_detail": "reference foil for the energy calibration"
+      },
+      "source": "ex:pi/sample/pt-foil",
+      "target": "ex:pi/species/pt"
+    },
+    {
+      "id": "ex:pi/link/77",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:pi/characterization/icp-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/78",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-calcined",
+      "target": "ex:pi/characterization/icp-batch-1"
+    },
+    {
+      "id": "ex:pi/link/79",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:pi/characterization/icp-batch-2",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/80",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "fresh"
+      },
+      "source": "ex:pi/characterization/icp-commercial-0417",
+      "target": "ex:pi/sample/commercial-lot-0417"
+    },
+    {
+      "id": "ex:pi/link/81",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "fresh"
+      },
+      "source": "ex:pi/characterization/icp-commercial-second",
+      "target": "ex:pi/sample/commercial-second-lot"
+    },
+    {
+      "id": "ex:pi/link/82",
+      "type": "LOCATED_ON",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/site/exposed-pt",
+      "target": "ex:pi/material/pt-fcc"
+    },
+    {
+      "id": "ex:pi/link/83",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/84",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-1",
+      "target": "ex:pi/characterization/h2-chemisorption-batch-1"
+    },
+    {
+      "id": "ex:pi/link/85",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-1",
+      "target": "ex:pi/characterization/icp-batch-1"
+    },
+    {
+      "id": "ex:pi/link/86",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-1",
+      "target": "ex:pi/model/one-h-per-surface-pt"
+    },
+    {
+      "id": "ex:pi/link/87",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t2_chem_1",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "note": "measured after the chemisorption cell's own reduction, at the batch's reduction temperature",
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of all Pt atoms",
+          "evidence_ids": [
+            "t2_chem_1"
+          ],
+          "origin": "derived",
+          "produced_by": "ex:pi/analysis/dispersion-batch-1",
+          "unit": "%",
+          "value": 41
+        }
+      },
+      "source": "ex:pi/state/batch-1-reduced",
+      "target": "ex:pi/site/exposed-pt"
+    },
+    {
+      "id": "ex:pi/link/88",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-batch-2",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/89",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-2",
+      "target": "ex:pi/characterization/h2-chemisorption-batch-2"
+    },
+    {
+      "id": "ex:pi/link/90",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-2",
+      "target": "ex:pi/characterization/icp-batch-2"
+    },
+    {
+      "id": "ex:pi/link/91",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-2",
+      "target": "ex:pi/model/one-h-per-surface-pt"
+    },
+    {
+      "id": "ex:pi/link/92",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t2_chem_2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:pi/source/paper"
+          }
+        ],
+        "note": "measured after the chemisorption cell's own reduction, at the batch's reduction temperature",
+        "origin": "synthetic",
+        "population_fraction": {
+          "status": "present",
+          "basis": "of all Pt atoms",
+          "evidence_ids": [
+            "t2_chem_2"
+          ],
+          "origin": "derived",
+          "produced_by": "ex:pi/analysis/dispersion-batch-2",
+          "unit": "%",
+          "value": 17
+        }
+      },
+      "source": "ex:pi/state/batch-2-reduced",
+      "target": "ex:pi/site/exposed-pt"
+    },
+    {
+      "id": "ex:pi/link/93",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-commercial-0417",
+      "target": "ex:pi/sample/commercial-lot-0417"
+    },
+    {
+      "id": "ex:pi/link/94",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-0417",
+      "target": "ex:pi/characterization/h2-chemisorption-commercial-0417"
+    },
+    {
+      "id": "ex:pi/link/95",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-0417",
+      "target": "ex:pi/characterization/icp-commercial-0417"
+    },
+    {
+      "id": "ex:pi/link/96",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-0417",
+      "target": "ex:pi/model/one-h-per-surface-pt"
+    },
+    {
+      "id": "ex:pi/link/97",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-commercial-second",
+      "target": "ex:pi/sample/commercial-second-lot"
+    },
+    {
+      "id": "ex:pi/link/98",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-second",
+      "target": "ex:pi/characterization/h2-chemisorption-commercial-second"
+    },
+    {
+      "id": "ex:pi/link/99",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "parameter"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-second",
+      "target": "ex:pi/characterization/icp-commercial-second"
+    },
+    {
+      "id": "ex:pi/link/100",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-second",
+      "target": "ex:pi/model/one-h-per-surface-pt"
+    },
+    {
+      "id": "ex:pi/link/101",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:pi/characterization/stem-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/102",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-stored",
+      "target": "ex:pi/characterization/stem-batch-1"
+    },
+    {
+      "id": "ex:pi/link/103",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/stem-batch-1",
+      "target": "ex:pi/dataset/stem-images-batch-1"
+    },
+    {
+      "id": "ex:pi/link/104",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:pi/characterization/stem-batch-2",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/105",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-passivated",
+      "target": "ex:pi/characterization/stem-batch-2"
+    },
+    {
+      "id": "ex:pi/link/106",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/stem-batch-2",
+      "target": "ex:pi/dataset/stem-images-batch-2"
+    },
+    {
+      "id": "ex:pi/link/107",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:pi/characterization/xrd-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/108",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "other"
+      },
+      "source": "ex:pi/characterization/xrd-batch-2",
+      "target": "ex:pi/sample/batch-2"
+    },
+    {
+      "id": "ex:pi/link/109",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-passivated",
+      "target": "ex:pi/characterization/xrd-batch-2"
+    },
+    {
+      "id": "ex:pi/link/110",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "measurement"
+      },
+      "source": "ex:pi/characterization/xrd-batch-1",
+      "target": "ex:pi/instrument/diffractometer"
+    },
+    {
+      "id": "ex:pi/link/111",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "measurement"
+      },
+      "source": "ex:pi/characterization/xrd-batch-2",
+      "target": "ex:pi/instrument/diffractometer"
+    },
+    {
+      "id": "ex:pi/link/112",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xrd-batch-1",
+      "target": "ex:pi/dataset/xrd-patterns"
+    },
+    {
+      "id": "ex:pi/link/113",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xrd-batch-2",
+      "target": "ex:pi/dataset/xrd-patterns"
+    },
+    {
+      "id": "ex:pi/link/114",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reactivated"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/115",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-re-reduced",
+      "target": "ex:pi/characterization/xas-batch-1"
+    },
+    {
+      "id": "ex:pi/link/116",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/sample/pt-foil"
+    },
+    {
+      "id": "ex:pi/link/117",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/dataset/xas-batch-1"
+    },
+    {
+      "id": "ex:pi/link/118",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/dataset/xas-pt-foil"
+    },
+    {
+      "id": "ex:pi/link/119",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/exafs-batch-1",
+      "target": "ex:pi/dataset/xas-batch-1"
+    },
+    {
+      "id": "ex:pi/link/120",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:pi/analysis/exafs-batch-1",
+      "target": "ex:pi/dataset/xas-pt-foil"
+    },
+    {
+      "id": "ex:pi/link/121",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/exafs-batch-1",
+      "target": "ex:pi/model/pt-pt-shell"
+    },
+    {
+      "id": "ex:pi/link/122",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "1.0"
+      },
+      "source": "ex:pi/analysis/exafs-batch-1",
+      "target": "ex:pi/software/fitter"
+    },
+    {
+      "id": "ex:pi/link/123",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:pi/characterization/n2-physisorption-batch-1",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/124",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/n2-physisorption-batch-1",
+      "target": "ex:pi/dataset/isotherm-batch-1"
+    },
+    {
+      "id": "ex:pi/link/125",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:pi/analysis/bet-batch-1",
+      "target": "ex:pi/characterization/n2-physisorption-batch-1"
+    },
+    {
+      "id": "ex:pi/link/126",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/bet-batch-1",
+      "target": "ex:pi/model/bet"
+    },
+    {
+      "id": "ex:pi/link/127",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pi/reaction/ethylene-hydrogenation",
+      "target": "ex:pi/species/ethylene"
+    },
+    {
+      "id": "ex:pi/link/128",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pi/reaction/ethylene-hydrogenation",
+      "target": "ex:pi/species/h2"
+    },
+    {
+      "id": "ex:pi/link/129",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "product"
+      },
+      "source": "ex:pi/reaction/ethylene-hydrogenation",
+      "target": "ex:pi/species/ethane"
+    },
+    {
+      "id": "ex:pi/link/130",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 2
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pi/feed/ethylene-h2",
+      "target": "ex:pi/species/ethylene"
+    },
+    {
+      "id": "ex:pi/link/131",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "fraction": {
+          "status": "present",
+          "unit": "mol%",
+          "value": 20
+        },
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:pi/feed/ethylene-h2",
+      "target": "ex:pi/species/h2"
+    },
+    {
+      "id": "ex:pi/link/132",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reactivated"
+      },
+      "source": "ex:pi/test/batch-1-ethylene-hydrogenation",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/133",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/test/batch-1-ethylene-hydrogenation",
+      "target": "ex:pi/feed/ethylene-h2"
+    },
+    {
+      "id": "ex:pi/link/134",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/test/batch-1-ethylene-hydrogenation",
+      "target": "ex:pi/reaction/ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:pi/link/135",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-cell-reduction",
+      "target": "ex:pi/characterization/xas-batch-1"
+    },
+    {
+      "id": "ex:pi/link/136",
+      "type": "PRECEDES",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/test/batch-1-ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:pi/link/137",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-working",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/138",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "during"
+      },
+      "source": "ex:pi/state/batch-1-working",
+      "target": "ex:pi/test/batch-1-ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:pi/link/139",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-after-test",
+      "target": "ex:pi/sample/batch-1"
+    },
+    {
+      "id": "ex:pi/link/140",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:pi/state/batch-1-after-test",
+      "target": "ex:pi/test/batch-1-ethylene-hydrogenation"
+    },
+    {
+      "id": "ex:pi/analysis/bet-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/bet-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-commercial-0417/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-0417",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/analysis/dispersion-commercial-second/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/dispersion-commercial-second",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/analysis/exafs-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/analysis/exafs-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/catalyst/commercial-pt-alumina/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/catalyst/commercial-pt-alumina",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/catalyst/pt-alumina/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/catalyst/pt-alumina",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-commercial-0417/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-commercial-0417",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/h2-chemisorption-commercial-second/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/h2-chemisorption-commercial-second",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/icp-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/icp-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/icp-batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/icp-batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/icp-commercial-0417/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/icp-commercial-0417",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/icp-commercial-second/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/icp-commercial-second",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/lab6-calibration/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/lab6-calibration",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/n2-physisorption-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/n2-physisorption-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/stem-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/stem-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/stem-batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/stem-batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/xas-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 4",
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xas-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/xrd-batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xrd-batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/characterization/xrd-batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/characterization/xrd-batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/feed/ethylene-h2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/feed/ethylene-h2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/instrument/diffractometer/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/instrument/diffractometer",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/lot/alumina-s31/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/lot/alumina-s31",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/lot/h2ptcl6-a/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/lot/h2ptcl6-a",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/lot/h2ptcl6-b/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/lot/h2ptcl6-b",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/model/bet/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/model/bet",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/model/one-h-per-surface-pt/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/model/one-h-per-surface-pt",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/model/pt-pt-shell/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/model/pt-pt-shell",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/preparation/batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/preparation/batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/preparation/batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/protocol/iwi/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/protocol/iwi",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/commercial-lot-0417/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/commercial-lot-0417",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/commercial-second-lot/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/commercial-second-lot",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/lab6-standard/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/lab6-standard",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/sample/pt-foil/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/sample/pt-foil",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/site/exposed-pt/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/site/exposed-pt",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/software/fitter/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/software/fitter",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/solution/batch-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/solution/batch-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/solution/batch-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/solution/batch-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/species/h2ptcl6-6h2o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/species/h2ptcl6-6h2o",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-after-test/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-after-test",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-calcined/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-calcined",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-re-reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-re-reduced",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-reduced",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-stored/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-stored",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-1-working/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-1-working",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-2-passivated/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-passivated",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/state/batch-2-reduced/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/state/batch-2-reduced",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-1-calcine/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-calcine",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-1-dissolve/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-dissolve",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-1-dry-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-dry-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-1-impregnate-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-impregnate-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-1-incipient-volume/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-1-incipient-volume",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-calcine/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-calcine",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-dissolve/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dissolve",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-dry-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dry-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-dry-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-dry-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-impregnate-1/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-1",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-impregnate-2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-impregnate-2",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/step/batch-2-incipient-volume/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/step/batch-2-incipient-volume",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/test/batch-1-ethylene-hydrogenation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/test/batch-1-ethylene-hydrogenation",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-cell-reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-cell-reduction",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-passivation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-passivation",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-reduction",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-1-storage/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-1-storage",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-2-passivation/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-2-passivation",
+      "target": "ex:pi/source/paper"
+    },
+    {
+      "id": "ex:pi/treatment/batch-2-reduction/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:pi/treatment/batch-2-reduction",
+      "target": "ex:pi/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:pi/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.6.0",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "Pt on gamma-alumina by incipient-wetness impregnation: two batches, their activation, storage and transfer, and their characterization (synthetic)"
+  },
+  "multigraph": true
+}
