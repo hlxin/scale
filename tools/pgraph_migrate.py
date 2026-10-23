@@ -33,6 +33,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.0": ("0.7.1", 'additive change: kinds for enzyme activity, a Michaelis constant, a turnover number, transport criteria, an effectiveness factor, a Thiele modulus and energy consumption; the enzyme unit (U) and the katal; roles ligand, solvent, cocatalyst and cofactor; catalyst families enzyme and whole_cell; species kind macromolecule; CatalyticTest.catalysis_mode'),
     "0.7.1": ("0.7.2", "what TRACE-AI asks of agentic campaigns, models and their validations; the autonomy of curation and people's checks of records"),
     "0.7.2": ("0.7.3", 'the programs that drive a test, the analyses of its responses, and the reactor treatment, interval method and identifiability of fitted constants'),
+    "0.7.3": ("0.7.4", 'Analysis kind thermal_contribution with partition_method; ThermalContributionAnalysis deprecated, still valid'),
 }
 
 
