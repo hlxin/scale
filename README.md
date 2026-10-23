@@ -29,7 +29,7 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
 **Or in the browser: [curate one publication](https://hlxin.github.io/scale/).** Upload a PDF or give a DOI or a link.
-The page curates it into a graph with the catalysis schema and the curate-source skill, shows the graph with each
+The page curates it into a graph with the catalysis schema and the curate-corpus skill, shows the graph with each
 record's evidence, and answers questions with the same query and search code as `scale graph query`. Sign-in uses
 GitHub, curation is open to allowlisted accounts, and nothing is kept on the service. The page goes live once the
 service is deployed ([`service/`](service/README.md), [`site/`](site/)).

@@ -17,8 +17,8 @@ from scale.util import load_doc, load_yaml, write_canonical
 TOOL_NAMES = {"scale_status", "scale_domains", "scale_describe", "scale_template", "scale_validate", "scale_query",
               "scale_search", "scale_migrate", "scale_example", "scale_skills", "scale_source_start", "scale_source_check",
               "scale_source_finish", "scale_trace_ai"}
-SKILLS = {"curate-source", "query-graph", "evolve-schema", "triage-feedback", "scan-conflicts", "map-coverage",
-          "curate-dataset", "export-graph"}                  # the head's skills (scale-release.yaml)
+SKILLS = {"index-sources", "fetch-corpus", "curate-corpus", "query-graph", "map-coverage", "scan-conflicts",
+          "export-graph", "evolve-schema", "triage-feedback"}                 # the head's skills (scale-release.yaml)
 
 
 @pytest.fixture()
@@ -309,13 +309,27 @@ def test_skills_are_listed_and_served(tk):
     assert "name: query-graph" in text and "scale graph query" in text
     assert "error" in tk.call("scale_skills", {"name": "assess-upgrade"})
     # a skill is its folder: the references its text points to are listed and served, and nothing else is
-    assert skills["curate-source"]["references"] == ["references/recipes.md"] and skills["query-graph"]["references"] == []
-    cs = tk.call("scale_skills", {"name": "curate-source"})
-    assert "references/recipes.md" in cs["text"] and cs["references"] == ["references/recipes.md"]
-    ref = tk.call("scale_skills", {"name": "curate-source", "reference": "references/recipes.md"})
+    refs = skills["curate-corpus"]["references"]
+    assert {"references/recipes.md", "references/runs.md", "references/batches.md", "scripts/curate_run.py"} <= set(refs)
+    assert skills["query-graph"]["references"] == []
+    cs = tk.call("scale_skills", {"name": "curate-corpus"})
+    assert "references/recipes.md" in cs["text"] and "references/runs.md" in cs["text"] and cs["references"] == refs
+    ref = tk.call("scale_skills", {"name": "curate-corpus", "reference": "references/recipes.md"})
     assert ref["reference"] == "references/recipes.md" and ref["text"].startswith("# Recording recipes")
     for bad in ("SKILL.md", "../query-graph/SKILL.md", "references/none.md"):
-        assert "error" in tk.call("scale_skills", {"name": "curate-source", "reference": bad}), bad
+        assert "error" in tk.call("scale_skills", {"name": "curate-corpus", "reference": bad}), bad
+
+
+def test_the_names_of_merged_skills_still_find_the_skill_they_went_into(tk):
+    """curate-source and curate-dataset were merged into curate-corpus: their names find it, and say so."""
+    for old in ("curate-source", "curate-dataset"):
+        got = tk.call("scale_skills", {"name": old})
+        assert got["name"] == "curate-corpus" and got["renamed_from"] == old and "name: curate-corpus" in got["text"]
+    ref = tk.call("scale_skills", {"name": "curate-source", "reference": "references/recipes.md"})
+    assert ref["name"] == "curate-corpus" and ref["text"].startswith("# Recording recipes")
+    assert "renamed_from" not in tk.call("scale_skills", {"name": "curate-corpus"})
+    listed = {s["name"] for s in tk.call("scale_skills")["skills"]}
+    assert "curate-source" not in listed and "curate-dataset" not in listed
 
 
 def test_errors_are_data_not_exceptions(tk):
@@ -341,8 +355,10 @@ def test_mcp_in_process(tk):
     assert srv.handle({"jsonrpc": "2.0", "id": 4, "method": "nope"})["error"]["code"] == -32601
     prompts = srv.handle({"jsonrpc": "2.0", "id": 5, "method": "prompts/list"})["result"]["prompts"]
     assert {p["name"] for p in prompts} == SKILLS
-    prompt = srv.handle({"jsonrpc": "2.0", "id": 6, "method": "prompts/get", "params": {"name": "curate-source"}})
-    assert "name: curate-source" in prompt["result"]["messages"][0]["content"]["text"]
+    prompt = srv.handle({"jsonrpc": "2.0", "id": 6, "method": "prompts/get", "params": {"name": "curate-corpus"}})
+    assert "name: curate-corpus" in prompt["result"]["messages"][0]["content"]["text"]
+    old = srv.handle({"jsonrpc": "2.0", "id": 7, "method": "prompts/get", "params": {"name": "curate-source"}})
+    assert "name: curate-corpus" in old["result"]["messages"][0]["content"]["text"]   # the merged skill's old name
 
 
 def test_a_malformed_message_is_answered_and_the_server_keeps_serving(tk):

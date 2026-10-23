@@ -1,8 +1,9 @@
 # Curation as evidence-preserving translation
 
-Procedure for people and agents: [`skills/curate-source/SKILL.md`](../skills/curate-source/SKILL.md),
-with its recording recipes in [`references/recipes.md`](../skills/curate-source/references/recipes.md). A data
-table or a lab file is curated with [`curate-dataset`](../skills/curate-dataset/SKILL.md).
+Procedure for people and agents: [`skills/curate-corpus/SKILL.md`](../skills/curate-corpus/SKILL.md),
+with its recording recipes in [`references/recipes.md`](../skills/curate-corpus/references/recipes.md). A data
+table or a lab file is curated by the same skill (its section **A data file**), and many sources at once by a run
+([`references/runs.md`](../skills/curate-corpus/references/runs.md)).
 
 ## Split of responsibilities
 
@@ -303,7 +304,7 @@ infers it and counts the inferences.
 
 ## Recipes
 
-[`skills/curate-source/references/recipes.md`](../skills/curate-source/references/recipes.md) says how
+[`skills/curate-corpus/references/recipes.md`](../skills/curate-corpus/references/recipes.md) says how
 to record, with what the schema already has: set, nominal and specified values; conflicts between sources; rates and
 kinetics; reaction thermochemistry; computational details; reactor, bed and catalyst-body keys; pairwise and
 metals-only ratios; commercial catalysts; balances, impurities and data quality; driving forces outside the list;

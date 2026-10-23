@@ -1,0 +1,30 @@
+# index-sources API keys — one `service: key` per line. Lines starting with # are ignored.
+# Keep this file private (chmod 600). Never paste keys into a chat; the scripts read them from here and never print them.
+# Leave a value empty (or keep the <...> placeholder) for services you do not use: those sources are skipped.
+# How to get each key: see README.md in the index-sources skill folder.
+
+# Strongly recommended (free): without it OpenAlex uses a small daily budget shared by everyone on your network
+openalex: <your OpenAlex API key>
+
+# Free, recommended
+s2: <Semantic Scholar API key>
+core: <CORE API key>
+lens: <Lens.org API token — Scholarly + Patent>
+springer: <Springer Nature API key>
+ads: <NASA ADS token>
+epo_key: <EPO Open Patent Services consumer key>
+epo_secret: <EPO Open Patent Services consumer secret>
+ieee: <IEEE Xplore API key>
+
+# Institutional (your library's subscription; use on campus or VPN)
+scopus: <Elsevier API key>
+scopus_insttoken: <optional Elsevier institutional token>
+wos: <Web of Science Starter API key>
+
+# Optional
+zenodo: <Zenodo personal token>
+ncbi: <NCBI API key>
+cinii: <CiNii appid>
+
+# Only for screening with an OpenAI-compatible API (your institution's LLM service)
+llm_api_key: <key>

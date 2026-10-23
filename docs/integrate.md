@@ -25,7 +25,7 @@ step, or a notebook cell). The agent can then discover everything else:
 ```bash
 scale call                                   # lists every tool with its JSON Schema
 scale call status                            # versions, the catalysis domain, the working directory, next steps
-scale call skills '{"name": "curate-source"}'
+scale call skills '{"name": "curate-corpus"}'
 scale call describe '{"names": ["CatalyticTest"], "domain": "catalysis"}'
 scale call query - < plan.json               # "-" reads arguments from stdin (large inputs)
 ```
@@ -62,13 +62,15 @@ The same texts are available as `scale call skills` and as MCP prompts. `AGENTS.
 rules for any agent.
 
 `skills install` copies each skill as its whole folder: the `SKILL.md` and the files it points to (for
-curate-source, its recording recipes in `references/recipes.md`), and `scale call skills` returns a reference
-file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
+curate-corpus, its recording recipes in `references/recipes.md`), and `scale call skills` returns a reference
+file too (`'{"name": "curate-corpus", "reference": "references/recipes.md"}'`). The names curate-source and
+curate-dataset, merged into curate-corpus, still find it (the answer says `renamed_from`).
 
 | skill | what it is for |
 |---|---|
-| `curate-source` | translate a declared source (an article, a patent, a report) into a scale-catal document: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes |
-| `curate-dataset` | turn a data table or a lab file into a document: the file as a Dataset with its digest and column dictionary, records citing their rows, the access its owners set |
+| `index-sources` | find and index the sources of a topic (papers, preprints, patents, theses, reports, and the datasets found with them) into an index that keeps their access and licence, and freeze the corpus a question needs |
+| `fetch-corpus` | fetch a frozen corpus's files (PDFs and supporting information; paywalled ones only through the library's proxy) and record in the corpus what was fetched and what was not |
+| `curate-corpus` | curate one publication, one data file or a frozen corpus into scale-catal documents: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes, and runs that curate many sources through subagents |
 | `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |
 | `scan-conflicts` | pair values that seem to disagree and classify each pair as genuine, apparent (with the axis) or not comparable; never rewriting a value |
@@ -76,8 +78,9 @@ file too (`'{"name": "curate-source", "reference": "references/recipes.md"}'`).
 | `evolve-schema` | turn missing-concept gaps into a schema change in one reviewable pull request |
 | `triage-feedback` | sort community feedback into topics and options for the reviewers |
 
-Release v0.1.0 carries all eight skills: curate-source, query-graph, evolve-schema, triage-feedback, scan-conflicts,
-map-coverage, curate-dataset and export-graph. On a checkout (`--repo`, or `uvx --from` a
+Releases v0.1.0 and v0.2.0 carry eight skills: curate-source, query-graph, evolve-schema, triage-feedback, scan-conflicts,
+map-coverage, curate-dataset and export-graph; the head merges curate-source and curate-dataset into curate-corpus and
+adds index-sources and fetch-corpus. On a checkout (`--repo`, or `uvx --from` a
 checkout), `scale call skills` serves the head's skills.
 
 ## The tools

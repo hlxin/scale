@@ -2,7 +2,7 @@
 
     scale corpus check MANIFEST [--included STATUS ...] [--frozen-at DATE] [--description TEXT]
 
-Before curating, a corpus is frozen (the curate-source skill, step 1): which sources were candidates, by what rule,
+Before curating, a corpus is frozen (the curate-corpus skill, step 1): which sources were candidates, by what rule,
 and what became of each. The manifest is JSON or YAML::
 
     {"corpus": "what the corpus is", "cutoff": {"date": …, "rule": "published before …"}, "frozen_at": "2026-09-01",

@@ -14,7 +14,7 @@ drafted, and how changes are decided: by an approving review of a pull request.
 | discuss an idea | **[Discussions](https://github.com/hlxin/scale/discussions)**, once they are on, or a comment issue |
 | comment on a proposed change | comment on the pull request, or on any line of it |
 | have a change drafted | open an issue saying what you want; @scale-agents take it up and open a pull request, which a person approves and merges |
-| find schema gaps in open-access sources | open a `gap-report` issue with a sample curated against the schema (the curate-source skill; short capped quotes only) |
+| find schema gaps in open-access sources | open a `gap-report` issue with a sample curated against the schema (the curate-corpus skill; short capped quotes only) |
 | report a wrong value, a missing concept or a source problem | the specific issue forms (optional; the general form works too) |
 
 From the command line, `scale suggest --record <id> --text "…"` prints the same pre-filled link.

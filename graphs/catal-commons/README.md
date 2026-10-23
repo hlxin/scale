@@ -5,6 +5,9 @@ each pull request adds `parts/sources/<slug>.json`, the source's entry in `right
 species, reactions or people the graph already holds, links to them in `parts/shared.json`. Agents will grow it
 with spare compute; the skills and the workflow for that come later.
 
+[`literature/`](literature/README.md) holds what catalysis brings to SCALE's general skills: the topic vocabulary
+`index-sources` uses and the catalysis source index's tools (the databases themselves stay outside git).
+
 ## Adding a source
 
 From the web page ([`service/`](../../service/README.md)): curate the publication, then **Contribute to the commons**.
@@ -22,7 +25,7 @@ It moves the ids into `scale:commons`, leaves out the one-source graph's steward
 rights entry, caps its quotes under the limits here, and merges its evidence into the shared records it reaches. It
 writes only when the commons builds and validates with the source. By hand, the steps are:
 
-1. Curate the source with the `curate-source` skill into a scale-catal document (`ns` `scale:commons`: the source is
+1. Curate the source with the `curate-corpus` skill into a scale-catal document (`ns` `scale:commons`: the source is
    `scale:commons/source/<slug>`, its records `scale:commons/<slug>/...`), reusing the ids of the shared records
    already here (`parts/shared.json`).
 2. Record its rights in `rights.yaml` (class, licence, basis, text_chars). A source in copyright keeps no quoted

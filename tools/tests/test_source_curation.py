@@ -65,7 +65,7 @@ def test_start_writes_a_folder_whose_graph_validates(tmp_path):
     assert curate.check(w, REPO)["ok"]                                     # the skeleton is valid as written
     assert load_yaml(w / "rights.yaml")["sources"][src["id"]]["class"] == "open"
     assert (w / f"work/texts/{slug}.txt").read_text().startswith("[page 1]\nResults.")
-    assert "curate-source" in (w / "BRIEF.md").read_text()
+    assert "curate-corpus" in (w / "BRIEF.md").read_text()
     assert "pdfs/" in (w / ".gitignore").read_text().split()
     with pytest.raises(ScaleError, match="already holds"):
         curate.start(w, doi=DOI, text=tmp_path / "paper.txt", repo=REPO, get=fake())

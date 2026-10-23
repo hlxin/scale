@@ -60,8 +60,12 @@ def test_skills_install_from_the_latest_release_or_the_head(tmp_path, capsys):
     assert main(["skills", "install", str(tmp_path / "skills")]) == 0
     out = json.loads(capsys.readouterr().out)
     assert out["release"] == (RELEASES[-1] if RELEASES else "head (no release built yet)")
-    assert (tmp_path / "skills/scale-curate-source/SKILL.md").is_file()
-    assert (tmp_path / "skills/scale-curate-source/references/recipes.md").is_file()
+    # each skill the release ships, as a whole folder (curate-source until v0.2.0, curate-corpus after)
+    manifest = release_root(REPO, RELEASES[-1]) / "RELEASE.yaml" if RELEASES else REPO / "scale-release.yaml"
+    shipped = load_yaml(manifest)["skills"]
+    assert sorted(out["files"]) == sorted(f"scale-{s.split('/')[-1]}" for s in shipped)
+    curate = next(n for n in ("scale-curate-corpus", "scale-curate-source") if n in out["files"])
+    assert (tmp_path / "skills" / curate / "references/recipes.md").is_file()
 
 
 def test_the_head_manifest_is_graph_only_and_states_the_one_version():

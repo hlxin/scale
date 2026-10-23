@@ -35,7 +35,7 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
 - **Units**: unit conversion and basis reading in queries are planned with a units change; until then a numeric
   filter compares only values in the unit it states ([docs/querying.md](../docs/querying.md)).
 - **Value and statement forms the curation guidance already plans for** (kernel; [docs/curation.md](../docs/curation.md)
-  and the curate-source skill say what to record until then):
+  and the curate-corpus skill say what to record until then):
   - a relative uncertainty (an RSD, "± 5 %" of the value) as a form of the value object's uncertainty, and an
     interquartile range as an uncertainty kind (until then: `as_reported` and `note`);
   - `statement_kind` on links (`conclusion` for interpretive links such as HAS_SITE, INHIBITED_BY, IDENTIFIED_AS
@@ -46,7 +46,7 @@ pull request that makes it is. Each item is a suggestion @scale-agents can take 
     it goes in the retracted source's `unmodeled` list).
 - **Characterization results as declared properties** (catalysis): specific and external surface area, pore
   volume and diameter and the other keys the recording recipes list
-  ([skills/curate-source/references/recipes.md](../skills/curate-source/references/recipes.md),
+  ([skills/curate-corpus/references/recipes.md](../skills/curate-corpus/references/recipes.md),
   "Characterization results"), which go in a Characterization's `results` map until then.
 
 ## Open themes of the earlier gap register

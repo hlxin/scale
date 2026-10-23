@@ -1,5 +1,5 @@
 """Reproducible recording of a catalyst's preparation and characterization with the structures SCALE has (the recording
-recipes, skills/curate-source/references/recipes.md). Two batches of one nominal formula stay two records with their
+recipes, skills/curate-corpus/references/recipes.md). Two batches of one nominal formula stay two records with their
 own lots, steps and treatments; a nominal and a measured composition stay two observations, each with its evidence; a
 size from microscopy, diffraction or light scattering is its own measurand; a fitted coordination number keeps its
 model, references and measurement conditions; what a source leaves unstated stays explicit. Exercised on the synthetic
@@ -367,7 +367,7 @@ def test_purchased_lots_of_one_product_share_neither_a_batch_nor_a_surface_state
 
 
 # ---------------------------------------------------------------- the recipes name what the schema has
-RECIPE = REPO / "skills/curate-source/references/recipes.md"
+RECIPE = REPO / "skills/curate-corpus/references/recipes.md"
 
 
 def test_the_recording_recipes_name_only_labels_links_and_properties_the_schema_declares(spec):

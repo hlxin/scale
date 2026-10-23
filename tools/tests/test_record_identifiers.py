@@ -175,6 +175,6 @@ def test_a_registry_is_read_again_when_its_file_changes(tmp_path):
 
 def test_the_recipes_name_a_chmo_term_for_xrf():
     """XRF is an exact synonym of CHMO's X-ray emission spectroscopy (CHMO:0000307, release 2026-05-28)."""
-    text = (REPO / "skills/curate-source/references/recipes.md").read_text()
+    text = (REPO / "skills/curate-corpus/references/recipes.md").read_text()
     assert "| X-ray fluorescence (XRF) | CHMO:0000307" in text
     assert "an XRF measurement" not in text

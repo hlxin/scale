@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+- **Fewer skills, named for what they act on.** `curate-source` and `curate-dataset` are merged into **`curate-corpus`**
+  (version 0.3.0): one skill curates one publication, one data file (its section *A data file*) or a frozen corpus of
+  many sources (a run through subagents with a second reading, `references/runs.md` and `scripts/curate_run.py`).
+  `scale call skills` and the MCP prompts still find it by the old names (`renamed_from`). The literature skill
+  `paper-acquisition` becomes **`index-sources`** (version 4.0.0), listed in `scale-release.yaml`; `curate-topic` is
+  replaced by the request table in `skills/README.md`. What is catalysis's, not the skills' (the topic vocabulary,
+  the CO2 reduction paper index's filter and query tool) moves to `graphs/catal-commons/literature/`; index-sources
+  reads its vocabulary from a path, `$INDEX_SOURCES_VOCAB`, the project's `.scripts/vocab.json` or that file.
+- **Sources, not papers; fetching is its own skill.** The literature skills follow SCALE's names: a *source* is a
+  paper, preprint, patent, thesis or report (SCALE's `Source`; a dataset found with them becomes a `Dataset` when
+  curated), the services that find them are *databases*, and `sources/index.db` is *the index* (it was
+  `publications/papers.db`): tables `sources`, `source_*`, `databases`, `source_databases`, `topics` and
+  `source_topics` (were `collections`), columns `source_id`, `licence*` (SCALE's spelling) and `retrieved_from`,
+  `retrieved_url`, `retrieved_on` (as SCALE's `Source` names them). A topic's PDFs are in `sources/<topic>/files/`,
+  the machine-wide keys in `~/.scale/sources/`; `database.md` maps the index's document types to `Source.kind`. A project made before is upgraded in place the first time a script opens it (`upgrade.py
+  --db` for a database that came alone, such as a shared catalog). index-sources' download mode becomes
+  **`fetch-corpus`** (version 1.0.0): it fetches the files of a frozen corpus (`--corpus`), paywalled ones only
+  through the library's EZproxy, and `settle_corpus.py` records in the manifest which files it got and why the others
+  are missing. `freeze_corpus.py` now selects a corpus by its rule before anything is fetched, so a part of a large
+  catalog is fetched without making a subtopic.
+
 - **Schema 0.7.4 (additive): one analysis kind for how much of a rate is heating, for any driving force.** Requested by
   @hlxin (ThermalContributionAnalysis was the one analysis that was a record type of its own, it covered light only,
   and its results were fields of its own). An Analysis may now be of kind thermal_contribution: it separates the
@@ -191,14 +212,14 @@
     neutral). An imbalance is a warning; the source's `balance_status` is kept as it is. Basis: Cantera's element
     balance check.
   - **Examples and questions:** a synthetic computation example (domain/examples/scale-catal/computation-examples/) and
-    CQ-23 to CQ-26; three counterexamples; recipes in skills/curate-source/references/recipes.md (Computational details).
+    CQ-23 to CQ-26; three counterexamples; recipes in skills/curate-corpus/references/recipes.md (Computational details).
   - **Migration:** the 0.6.0 -> 0.7.0 rule rewrites nothing; it stops on a value it cannot map (an activation energy in
     volts, an adsorption energy whose target is the adsorbate). Every example document moved to 0.7.0 unchanged.
   - **Also:** an `order_by` can rank a property of a link bound with `edge_as` (it returned nothing before).
 
 - **Recording recipes for preparations and characterizations, with examples and competency questions (no schema
   change; scale-catal 0.6.0).** Requested by @hlxin ("Add reproducible synthesis and characterization recipes").
-  - **Recipes** (skills/curate-source/references/recipes.md): the batch, its purchased lots and its steps; supported-
+  - **Recipes** (skills/curate-corpus/references/recipes.md): the batch, its purchased lots and its steps; supported-
     metal impregnation; precipitation and coprecipitation; activation, storage, transfer and reaction history; what
     every characterization keeps (specimen and state, settings, standards and calibration, raw data, processing and
     fitting); XAS; electron-microscopy size distributions; chemisorption and site titration; physisorption; sizes from

@@ -84,7 +84,7 @@ Use `<github-handle>/<topic>` for your own work, one topic per pull request. The
 
 These rules hold for every pull request; the agents know them from [AGENTS.md](AGENTS.md).
 
-- **Curation** follows `skills/curate-source/SKILL.md`. Documents validate with no errors, every statement
+- **Curation** follows `skills/curate-corpus/SKILL.md`. Documents validate with no errors, every statement
   cites evidence, quotes stay within the copyright cap in the folder's `rights.yaml`
   ([docs/curation.md](docs/curation.md)), and committed documents state `access: public`.
 - **A schema change** follows `skills/evolve-schema/SKILL.md`: additions rather than deletions, new concepts

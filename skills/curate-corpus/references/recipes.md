@@ -1,4 +1,4 @@
-# Recording recipes (curate-source)
+# Recording recipes (curate-corpus)
 
 Short recipes for things the schema already expresses, though not obviously. None of them adds a
 property: each says which existing label, property or link carries the information, and what to do

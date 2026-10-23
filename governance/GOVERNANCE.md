@@ -113,7 +113,7 @@ official release (a human step, release-process.md)
 
 1. **Suggest.** Anyone opens an issue or comments, in plain language (the issue forms ask the right questions). A
    gap found while curating is filed with `scale gap issue`. To find what the schema cannot express in a new
-   corpus, a curator (or an agent following the curate-source skill) curates a sample of open-access sources
+   corpus, a curator (or an agent following the curate-corpus skill) curates a sample of open-access sources
    against the current schema and files a `gap-report` issue (short capped quotes only).
 2. **The agents take it up.** `@scale-agents` start on every new issue, comment and review by a collaborator, with no tag or label; on anyone
    else's issue or comment, once a collaborator comments on it (a run spends the owner's Claude usage).

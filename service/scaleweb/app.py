@@ -211,7 +211,7 @@ class Service:
             "with new evidence in `parts/shared.json`, and the source's entry in `rights.yaml`.",
             "",
             f"**Who.** Contributed by @{user} through the SCALE web service. The model ({self.cfg.model}) curated it "
-            "by the curate-source skill until `scale source check` passed, every quote found in the source's text.",
+            "by the curate-corpus skill until `scale source check` passed, every quote found in the source's text.",
             "",
             f"**Rights.** {entry.get('class')}: {entry.get('licence')} ({entry.get('basis')}); {withheld}.",
             "",
