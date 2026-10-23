@@ -144,8 +144,8 @@ hands out the work and records what came back.
 
 ## Orchestrated mode (invoked by another skill)
 
-Inline arguments, for example `corpus=<manifest> run=<dir> curator=opus reviewer=sonnet ids=12,57 version=0.5.0
-wrapper_confirmed=true` (`reviewer=api:<model> api_base_url=<url>`, or `reviewer=skip` when the user chose it). With
+Inline arguments, for example `corpus=<manifest> run=<dir> curator=opus reviewer=sonnet ids=12,57
+wrapper_confirmed=true` (add `version=<v>` only to pin the schema of the graph the documents will join) (`reviewer=api:<model> api_base_url=<url>`, or `reviewer=skip` when the user chose it). With
 `wrapper_confirmed=true` there is no intake question: prepare, run the pilot, and still show the pilot result (a new
 decision), then continue to step 6. Without `curator` and `reviewer`, ask them (step 2) even when confirmed. Return a short summary: the sources settled per state, the gaps, the run folder,
 and the sources without a PDF.
