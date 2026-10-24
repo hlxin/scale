@@ -28,7 +28,7 @@ from . import graphparts, layout
 from .util import load_doc, load_yaml, write_canonical
 
 SITE = "site"
-PAGES = ("index.html", "publication.html", "explorer.js", "worker.js", "app.js", "config.js", "style.css")
+PAGES = ("index.html", "explorer.css", "explorer.js", "worker.js", "publication.html", "app.js", "config.js", "style.css")
 PACKAGE_ZIP = "py/scale-py.zip"
 #: The bundled items the page never reads (the real examples' parts, texts and PDFs are tens of MB; their graphs are
 #: offered as data instead).

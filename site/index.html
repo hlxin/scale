@@ -1,94 +1,181 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SCALE Graph Explorer</title>
   <meta name="description" content="Browse, search and query SCALE's evidence-backed catalysis graphs in the browser, with SCALE's own code.">
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="explorer.css">
+  <script>
+    // the reader's theme, else the system's (before the page paints)
+    try { const t = localStorage.getItem("scale-theme"); document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); } catch { /* storage off */ }
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 </head>
 <body>
-<header class="top">
-  <div>
-    <h1>SCALE <span class="muted">· graph explorer</span></h1>
-    <p class="muted small">The evidence-backed <a href="https://github.com/hlxin/scale">scale-catal</a> graphs of this
-      repository: every record with its verbatim evidence. Search, query plans and descriptions run SCALE's own code in
-      your browser, so they give the rows <code>scale graph search</code> and <code>scale graph query</code> give.</p>
+<div class="sx-page">
+  <header class="sx-toolbar">
+    <div class="sx-toolbar-row">
+      <h1 class="sx-title"><span class="sx-brand">SCALE</span><span class="sx-sep" aria-hidden="true">·</span><span class="sx-subtitle">Graph Explorer</span></h1>
+      <div class="sx-toolbar-right">
+        <a class="sx-link" href="publication.html">Curate one publication</a>
+        <button class="sx-btn sx-btn-ghost" id="theme" type="button" title="Light or dark" aria-label="Switch the theme">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.2 5.2 L6.9 6.9 M17.1 17.1 L18.8 18.8 M5.2 18.8 L6.9 17.1 M17.1 6.9 L18.8 5.2"/></svg>
+        </button>
+        <button class="sx-btn sx-btn-ghost" id="settings" type="button" title="Model and API key" aria-label="Model and API key">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12 L20 3 M17 6 L20 9 M15 8 L17 10"/></svg>
+        </button>
+      </div>
+    </div>
+    <form class="sx-search" id="search-form" role="search">
+      <div class="sx-mode" role="tablist" aria-label="Search or ask">
+        <button type="button" class="sx-mode-btn active" data-mode="search" role="tab">Search evidence</button>
+        <button type="button" class="sx-mode-btn" data-mode="ask" role="tab">Ask</button>
+      </div>
+      <input type="search" class="sx-search-input" id="search-input" placeholder="Search the evidence, e.g. copper zinc catalyst" autocomplete="off" spellcheck="false">
+      <button type="submit" class="sx-search-submit" aria-label="Go" title="Go">
+        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 L21 4 L14 21 L11 13 Z"/></svg>
+      </button>
+    </form>
+  </header>
+
+  <div class="sx-grid" id="grid">
+    <aside class="sx-rail" aria-label="Graphs">
+      <header class="sx-panel-head">
+        <h2 class="sx-panel-title">Graphs</h2>
+        <button class="sx-icon-btn" id="rail-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+        </button>
+      </header>
+      <label class="sx-open-file">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5 V19 M5 12 H19"/></svg>
+        <span>Open a graph file</span>
+        <input type="file" id="graph-file" accept=".json,application/json" hidden>
+      </label>
+      <div class="sx-graphs" id="graphs" role="list"></div>
+      <footer class="sx-rail-summary"><div id="summary">Loading…</div><div class="sx-status" id="status" aria-live="polite">Starting…</div></footer>
+    </aside>
+
+    <main class="sx-canvas" id="canvas">
+      <button class="sx-show sx-show-left" id="rail-show" type="button" title="Show panel" aria-label="Show the graphs panel" hidden>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
+      </button>
+      <button class="sx-show sx-show-right" id="inspector-show" type="button" title="Show panel" aria-label="Show the details panel" hidden>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+      </button>
+      <div class="sx-actions">
+        <div class="sx-actions-group">
+          <div class="sx-menu-wrap">
+            <button class="sx-btn" id="layout-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Change the layout">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M8 6.5 L16 7 M7 8 L11 16 M17 9 L13 16"/></svg>
+              <span id="layout-label">Force</span>
+            </button>
+            <div class="sx-menu" id="layout-menu" role="menu" hidden>
+              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="force">Force-directed<small>Clusters by connection</small></button>
+              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="hierarchical">Hierarchical<small>Layers along the link direction</small></button>
+              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="radial">Radial<small>Around the selected record, or the hubs</small></button>
+            </div>
+          </div>
+          <button class="sx-btn" id="labels-btn" type="button" aria-pressed="true" title="Show or hide link names">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 L9 6 L14 17 M6 13 H12 M16 9 H21 M16 13 H21 M16 17 H21"/></svg>
+            <span>Labels</span>
+          </button>
+          <button class="sx-btn" id="map-btn" type="button" title="The map of record types">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M10.5 7 H17 V13.5"/></svg>
+            <span>Types</span>
+          </button>
+          <button class="sx-btn" id="query-btn" type="button" title="Run a query plan">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5 L3 12 L8 19 M16 5 L21 12 L16 19"/></svg>
+            <span>Query</span>
+          </button>
+        </div>
+        <div class="sx-actions-group">
+          <button class="sx-btn sx-btn-ghost" id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14"/></svg>
+          </button>
+          <button class="sx-btn sx-btn-ghost" id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14 M11 8 V14"/></svg>
+          </button>
+          <button class="sx-btn sx-btn-ghost" id="fit" type="button" title="Fit the graph to the view" aria-label="Fit to view">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9 V4 H9 M20 9 V4 H15 M4 15 V20 H9 M20 15 V20 H15"/></svg>
+          </button>
+          <button class="sx-btn sx-btn-ghost" id="locate" type="button" title="Centre on the selected record" aria-label="Locate the selection" disabled>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.6"/><path d="M12 2 V5 M12 19 V22 M2 12 H5 M19 12 H22"/></svg>
+          </button>
+          <div class="sx-menu-wrap">
+            <button class="sx-btn sx-btn-ghost" id="export-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Export" aria-label="Export">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 V15 M7 10 L12 15 L17 10 M5 19 H19"/></svg>
+            </button>
+            <div class="sx-menu sx-menu-right" id="export-menu" role="menu" hidden>
+              <button class="sx-menu-item" type="button" data-export="png">Image of the view (PNG)</button>
+              <button class="sx-menu-item" type="button" data-export="graph">The whole graph (JSON)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sx-cy" id="cy"></div>
+      <div class="sx-empty" id="empty"><p>Loading…</p></div>
+      <div class="sx-hint" id="hint">Circle size grows with links · drag to rearrange · scroll to zoom · double-click a record to expand its neighbourhood</div>
+
+      <aside class="sx-card" id="card" hidden aria-label="Results">
+        <header class="sx-card-head">
+          <span class="sx-card-title" id="card-title">Answer</span>
+          <button class="sx-icon-btn" id="card-collapse" type="button" title="Collapse" aria-label="Collapse">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
+          </button>
+          <button class="sx-icon-btn" id="card-close" type="button" title="Dismiss" aria-label="Dismiss">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+          </button>
+        </header>
+        <div class="sx-card-body" id="card-body"></div>
+      </aside>
+    </main>
+
+    <aside class="sx-inspector" aria-label="Details">
+      <header class="sx-panel-head">
+        <button class="sx-icon-btn" id="inspector-back" type="button" title="Back to the types" aria-label="Back to the types" hidden>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+        </button>
+        <h2 class="sx-panel-title" id="inspector-title">Record types &amp; links</h2>
+        <button class="sx-icon-btn" id="inspector-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
+        </button>
+      </header>
+      <section id="legend">
+        <h3 class="sx-section-title">Record types</h3>
+        <div class="sx-pills" id="kinds"></div>
+        <h3 class="sx-section-title">Link types</h3>
+        <div class="sx-pills" id="rels"></div>
+      </section>
+      <article id="record" hidden></article>
+    </aside>
   </div>
-  <div class="small"><a href="publication.html">Curate one publication →</a></div>
-</header>
-<main class="layout">
-  <section class="panel" id="side">
-    <h2>Graph</h2>
-    <select id="graph-select" aria-label="Graph"></select>
-    <label class="small muted">or open a graph file <input type="file" id="graph-file" accept=".json,application/json"></label>
-    <div id="graph-info" class="small"></div>
-    <hr>
-    <h3>Records by type</h3>
-    <div id="labels" class="labels small"></div>
-    <div id="records" class="records small"></div>
-  </section>
+</div>
 
-  <section class="panel" id="view">
-    <div class="view-head">
-      <h2 id="view-title">Map of record types</h2>
-      <div class="row">
-        <button id="to-map" class="hidden">Map of record types</button>
-        <button id="whole" class="hidden">Whole graph</button>
-      </div>
-    </div>
-    <div id="cy" class="cy"><p class="empty muted" id="cy-empty">Loading…</p></div>
-    <p class="muted small" id="view-help">Click a record type to list its records; click a record to see what it is
-      linked to, and a linked record to move there.</p>
-    <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="search" role="tab">Search the evidence</button>
-      <button class="tab" data-tab="query" role="tab">Run a query plan</button>
-      <button class="tab" data-tab="ask" role="tab">Ask a question</button>
-    </div>
-    <div class="tabpane" data-pane="search">
-      <div class="row"><input type="text" id="search" placeholder="words or a phrase, e.g. copper zinc oxide promoter">
-        <button id="search-go" class="primary">Search</button></div>
-      <div id="hits" class="hits"></div>
-    </div>
-    <div class="tabpane hidden" data-pane="query">
-      <div class="row"><select id="plan-pick" aria-label="Example plans"></select></div>
-      <textarea id="plan" rows="10" spellcheck="false" class="mono"
-        placeholder='{"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"], "limit": 10}'></textarea>
-      <div class="row"><button id="plan-go" class="primary">Run</button>
-        <span class="muted small">A plan: <code>match</code>, <code>steps</code>, <code>where</code>,
-          <code>return</code>, <code>evidence</code>, <code>limit</code> (<a
-          href="https://github.com/hlxin/scale/blob/main/docs/querying.md">docs/querying.md</a>).</span></div>
-      <div id="rows" class="answer"></div>
-    </div>
-    <div class="tabpane hidden" data-pane="ask">
-      <p class="small muted">A model follows SCALE's query-graph skill: it searches the evidence, writes query plans,
-        runs them here and answers only from the rows they return. It uses your own Anthropic API key, which is sent
-        only to api.anthropic.com and kept in this browser.</p>
-      <div class="row">
-        <input type="password" id="api-key" placeholder="Anthropic API key (sk-ant-…)" autocomplete="off">
-        <select id="model" aria-label="Model">
-          <option value="claude-opus-5-5">Claude Opus 5.5</option>
-          <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
-          <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
-        </select>
-      </div>
-      <label class="small"><input type="checkbox" id="remember-key"> Remember the key on this device</label>
-      <textarea id="question" rows="3" placeholder="e.g. Which catalysts were tested below 250 °C, and what did they give?"></textarea>
-      <button id="ask-go" class="primary">Ask</button>
-      <div id="answer" class="answer"></div>
-    </div>
-  </section>
-
-  <section class="panel" id="inspect">
-    <h2>Record</h2>
-    <div id="details" class="details muted small">Select a record to see its properties and evidence.</div>
-  </section>
-</main>
-<footer class="foot muted small" id="status">Starting…</footer>
+<dialog class="sx-dialog" id="key-dialog">
+  <form method="dialog">
+    <h2>Asking questions</h2>
+    <p class="sx-muted">A model follows SCALE's query-graph skill: it searches the evidence, writes query plans, runs them in
+      this page and answers only from the rows they return. It uses your own Anthropic API key, sent only to
+      api.anthropic.com and kept in this browser.</p>
+    <label>API key <input type="password" id="api-key" placeholder="sk-ant-…" autocomplete="off"></label>
+    <label>Model
+      <select id="model">
+        <option value="claude-opus-5-5">Claude Opus 5.5</option>
+        <option value="claude-sonnet-5-5">Claude Sonnet 5.5</option>
+        <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
+      </select>
+    </label>
+    <label class="sx-check"><input type="checkbox" id="remember-key"> Remember the key on this device</label>
+    <menu><button class="sx-btn" value="cancel">Close</button><button class="sx-btn sx-btn-primary" id="key-save" value="save">Save</button></menu>
+  </form>
+</dialog>
 <script type="module" src="explorer.js"></script>
 </body>
 </html>
