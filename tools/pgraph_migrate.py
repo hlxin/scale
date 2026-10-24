@@ -34,6 +34,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.1": ("0.7.2", "what TRACE-AI asks of agentic campaigns, models and their validations; the autonomy of curation and people's checks of records"),
     "0.7.2": ("0.7.3", 'the programs that drive a test, the analyses of its responses, and the reactor treatment, interval method and identifiability of fitted constants'),
     "0.7.3": ("0.7.4", 'Analysis kind thermal_contribution with partition_method; ThermalContributionAnalysis deprecated, still valid'),
+    "0.7.4": ("0.7.5", "methods as records (Method, USES_METHOD) and benchmarks of a method; a failed calculation's status_reason and failure_kind; identifier schemes libxc, catalysis_hub and nomad"),
 }
 
 

@@ -815,6 +815,13 @@ nodes:
         description: Container image, environment lock file or hardware description.
       random_seed:
         type: integer
+      status_reason:
+        type: text
+        maturity: provisional
+        description: Why the experiment failed or was aborted, as the source states it (the error a calculation stopped
+          with, the observation that ended a test, the decision to stop). A later run that repeats it with a change and
+          succeeds REPLICATES it (level repeat); changed says what kind of change, and the difference of their
+          settings and the link's note say what it was.
   Procedure:
     maps_to:
     - EXPO experimental action
@@ -1617,6 +1624,61 @@ nodes:
       endpoint:
         type: string
         description: Where a service or agent can be called.
+  Method:
+    description: |
+      A named method or approximation that experiments apply, held as one record that every source's use of it can name:
+      an exchange-correlation functional or another electronic-structure method, a dispersion correction, a basis set or
+      pseudopotential set, a solvation model, a family of interatomic potentials, a statistical or fitting method. What
+      is found about it is found from every experiment that uses it (USES_METHOD): a benchmark against reference values
+      (an experiment that EVALUATES it, evaluation_kind benchmark, with its errors in its results) and a limitation a
+      source states (a Claim ABOUT it). A computation's level_of_theory keeps the name its source gives, which a
+      comparison reads; the method's name and aliases are the names it goes by, and its identifiers name it in a
+      registry (libxc, for a functional, which tells RPBE, GGA_X_RPBE, from revPBE, GGA_X_PBE_R). Benchmarks of small
+      model systems against a more accurate method or experiment are what a reader needs to judge a method (Bligaard
+      et al., ACS Catal. 2016, 6, 2590, doi:10.1021/acscatal.6b00183).
+    properties:
+      method_kind:
+        type: enum
+        values:
+        - exchange_correlation_functional
+        - wavefunction_method
+        - semiempirical_method
+        - dispersion_correction
+        - basis_set
+        - pseudopotential_set
+        - solvation_model
+        - interatomic_potential
+        - statistical_method
+        - other
+        description: What kind of method it is. interatomic_potential = a family of classical or machine-learned
+          potentials (a trained model at one checkpoint is a Model, which a computation USES_MODEL).
+      functional_class:
+        type: enum
+        values:
+        - lda
+        - gga
+        - meta_gga
+        - hybrid
+        - double_hybrid
+        - random_phase_approximation
+        - other
+        description: For an exchange-correlation functional, its rung of approximation (local density, generalized
+          gradient, meta-GGA, hybrid, double hybrid, random phase approximation). A range-separated hybrid is a hybrid;
+          a functional with a nonlocal van der Waals correlation (vdW-DF, BEEF-vdW) goes by the rung of its exchange.
+      aliases:
+        type: list
+        items:
+          type: text
+        description: Other names sources give the method (revised PBE of Hammer, Hansen and Nørskov, for RPBE), so that a
+          computation's level_of_theory can be matched to it.
+      version:
+        type: string
+        description: Its variant or parametrization when it has several (D3 with zero or Becke-Johnson damping; a
+          potential's release).
+      reference:
+        type: text
+        description: The publication that defines it, as a citation with its DOI.
+    maturity: provisional
 edges:
   ADDRESSES:
     maps_to:
@@ -1860,6 +1922,7 @@ edges:
     - Prediction
     - Experiment
     - Protocol
+    - Method
     properties:
       evaluation_kind:
         type: enum
@@ -1869,7 +1932,8 @@ edges:
         - calibration
         - benchmark
         description: verification = solved or implemented correctly; validation = agrees with the real
-          system within a stated criterion.
+          system within a stated criterion; benchmark = compared with reference values (measured, or from a more
+          accurate method) over a set of cases, its errors in the results of the experiment that made it.
       criterion:
         type: text
       outcome:
@@ -2269,6 +2333,17 @@ edges:
     properties:
       version:
         type: string
+  USES_METHOD:
+    description: An experiment applies a named method (a computation its exchange-correlation functional, its
+      dispersion correction, its basis set). The method is one record, so the benchmarks of it and the limitations
+      sources state about it are found from every experiment that uses it; a computation's level_of_theory still states
+      the name its source gives, which a comparison reads, and is reported when it is none of the names of the
+      electronic-structure method it uses (advisory).
+    from:
+    - Experiment
+    to:
+    - Method
+    maturity: provisional
   PART_OF:
     description: A step of a larger experiment or procedure. Acyclic.
     from:

@@ -94,7 +94,9 @@ ontology term.
 
 - [core/mappings/identifiers.yaml](../core/mappings/identifiers.yaml) lists the schemes SCALE checks, each with its
   pattern and where an identifier resolves: DOI, ORCID, ROR, InChIKey, PubChem, ChEBI, CAS Registry Number, EC
-  number, UniProt, COD, ICSD, Materials Project, arXiv, PubMed, PubMed Central, Wikidata and patent numbers. When a
+  number, UniProt, COD, ICSD, Materials Project, arXiv, PubMed, PubMed Central, Wikidata and patent numbers, and
+  for calculations a functional's libxc names (joined by + when it combines several), a Catalysis-Hub.org
+  publication and a NOMAD entry. When a
   document is validated, an identifier of a listed scheme that does not match its pattern as a whole (a trailing
   line break included), or a CAS Registry Number or ORCID iD whose check digit is wrong, is a warning; the record
   stays as written. A scheme the list does not hold is kept, unchecked. A patent number may keep its separators and

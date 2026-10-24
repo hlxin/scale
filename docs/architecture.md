@@ -91,7 +91,7 @@ their repositories and are referenced by `Dataset` records (`uri`, `sha256`).
 
 ## Versions and releases
 
-The schema has one version for the kernel and the catalysis domain together. The schema is at 0.7.4, kernel and
+The schema has one version for the kernel and the catalysis domain together. The schema is at 0.7.5, kernel and
 catalysis together; this repository started its numbering there on 2026-10-08 (the work it continues was numbered
 elsewhere, and those numbers name other schemas). A document pins its schema version; the catalysis domain keeps
 every earlier version frozen beside its manifest once a schema change has moved the schema on, so a document is read

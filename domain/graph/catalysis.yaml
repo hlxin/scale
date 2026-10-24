@@ -461,7 +461,9 @@ nodes:
         description: The electronic-structure method its energies come from, as a short name the source gives, in a text
           value. For DFT it is the exchange-correlation functional (RPBE, PBE, BEEF-vdW, HSE06); another method goes by its
           name (CCSD(T)), and a machine-learned model by its name and checkpoint. A comparison of computed energies reads
-          it, and energies of two methods are never compared; not_reported when the source does not say.
+          it, and energies of two methods are never compared; not_reported when the source does not say. The method's
+          record is what it USES_METHOD (its benchmarks and limitations are found there); a level_of_theory that is none
+          of the names of the electronic-structure method it uses is reported (a warning).
       dispersion:
         type: value
         maturity: provisional
@@ -519,6 +521,29 @@ nodes:
           dipole_correction, transition_state_method, initial_magnetic_moments, solvation_model, thermochemistry (how free
           energies were obtained: harmonic, ideal gas), potential_method. The full input stays in the configuration
           Dataset.'
+      failure_kind:
+        type: enum
+        maturity: provisional
+        values:
+        - electronic_not_converged
+        - geometry_not_converged
+        - saddle_point_not_found
+        - unintended_state
+        - numerical_error
+        - resource_limit
+        - input_error
+        - software_error
+        - other
+        - not_reported
+        description: For a calculation that failed or was aborted (experiment_status), what stopped it, as the source
+          describes it - electronic_not_converged = the self-consistent loop did not converge; geometry_not_converged =
+          a relaxation did not reach its force criterion; saddle_point_not_found = a transition-state search found no
+          saddle point or one with the wrong imaginary modes; unintended_state = it converged to a state it was not
+          meant to (another magnetic state, a dissociated or desorbed adsorbate, a reconstructed slab); numerical_error =
+          a failure of the algorithm (a subspace rotation, a symmetry or k-mesh error); resource_limit = time or memory
+          ran out; input_error = its input was wrong; software_error = the code failed. The words of the source stay in
+          status_reason. A rerun that succeeded REPLICATES it (level repeat), and what it changed is the difference of their
+          settings, and the source's words are in the link's note.
   Analysis:
     is_a: Experiment
     fixed:
@@ -3653,6 +3678,7 @@ checklist:
           should:
           - USES_SOFTWARE
           - USES_MODEL
+          - USES_METHOD
       - charge_treatment:
           any_of:
           - constant_potential
@@ -3701,6 +3727,19 @@ checklist:
                   any_of:
                   - validation
                   - benchmark
+      - experiment_status:
+          any_of:
+          - failed
+          - aborted
+        maturity: provisional
+        basis:
+        - Custodian documentation, materialsproject.github.io/custodian (the failures a job manager detects and corrects
+          in electronic-structure runs - a self-consistent loop or a relaxation that does not converge, a job that freezes
+          or runs out of time or memory, symmetry and k-mesh errors); Mathew et al., Atomate, Comput. Mater. Sci. 2017,
+          139, 140, doi:10.1016/j.commatsci.2017.07.030
+        should:
+        - status_reason
+        - failure_kind
     Operation:
       when:
       - operation_mode:

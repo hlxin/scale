@@ -1,0 +1,76 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-35
+question: How well does each exchange-correlation functional reproduce measured chemisorption energies, on which set,
+  and what do sources conclude about it?
+description: |
+  A method is one record (Method), so what is found about it collects there whatever the source. A benchmark is an
+  experiment that EVALUATES the method (evaluation_kind benchmark), its scope saying on which cases, the reference
+  values it HAS_INPUT, and its errors in its results, each naming the Variable whose quantity_kind says which error
+  (a mean absolute error, a mean signed error; kinds the schema records as stated, without a contract). The
+  example's benchmark puts PBE, RPBE and BEEF-vdW against twelve measured chemisorption energies, and a claim ABOUT PBE
+  says it binds too strongly. An agent choosing a functional reads the errors with their scope, never beyond it.
+documents:
+  - examples/scale-catal/method-examples/computational-methods.json
+plan:
+  question: How does each functional do against measured chemisorption energies?
+  match:
+    label: Method
+    as: method
+    where:
+      - prop: method_kind
+        op: eq
+        value: exchange_correlation_functional
+  steps:
+    - from: method
+      edge: EVALUATES
+      direction: in
+      to: Experiment
+      as: benchmark
+      edge_as: check
+      edge_where:
+        - prop: evaluation_kind
+          op: in
+          value:
+            - benchmark
+    - from: benchmark
+      entries: result_values
+      as: mae
+    - from: mae
+      field: variable
+      to: Variable
+      as: metric
+      where:
+        - prop: quantity_kind
+          op: eq
+          value: mean_absolute_error
+    - from: method
+      edge: ABOUT
+      direction: in
+      to: Claim
+      as: claim
+      optional: true
+  return:
+    - method.name
+    - method.functional_class
+    - check.scope
+    - mae
+    - claim.statement
+    - benchmark.name
+  order_by:
+    - var: mae
+      prop: value
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    method.name:
+      - PBE
+      - RPBE
+      - BEEF-vdW
+    mae:
+      - 0.52
+      - 0.24
+      - 0.2

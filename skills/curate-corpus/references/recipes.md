@@ -220,6 +220,28 @@ The fields below are scale-catal 0.7.0; a document pinning an earlier version ke
   it `HAS_INPUT` as `validation_data` or `test_data`. The validator reports a validation on data the model
   was fitted to: a fit to its own data is a calibration, not independent validation. A predicted value
   is `origin: predicted`; one that sits on another record names the computation in `produced_by`.
+- **The method as a record** (scale-catal 0.7.5 on). Each method a calculation applies is one Method record, named by
+  every calculation that applies it (`USES_METHOD`): its exchange-correlation functional, its dispersion correction,
+  its basis set (`method_kind`; a functional's rung in `functional_class`; other names it goes by in `aliases`; its
+  variant, such as D3's damping, in `version`; the paper that defines it in `reference`; a functional's libxc names in
+  `identifiers`). Reuse the record a graph has; never make one per paper. `level_of_theory` keeps the name the source
+  prints, and the validator warns when it is none of the names of the electronic-structure method the calculation
+  uses (add the source's name to `aliases` when it is another name of the same method). A D3 correction whose damping
+  the source does not state keeps `version` unstated; never read it off the citation. A limitation the source states
+  of a method is a Claim `ABOUT` it.
+- **Benchmarks of a method** (0.7.5 on). A comparison of a method with reference values over a set of cases is an
+  Experiment (a Computation with `goal: benchmark`) that `EVALUATES` the Method with `evaluation_kind: benchmark`:
+  `scope` (the cases), `criterion`, the reference values it `HAS_INPUT` (`role: reference_standard`), and its errors
+  in `result_values`, each naming a Variable whose `quantity_kind` names the statistic (`mean_absolute_error`,
+  `mean_signed_error`, `root_mean_square_error`, `maximum_absolute_error`) and, in `definition`, the sign convention.
+  A conclusion the source draws about the method ("PBE binds too strongly") is a Claim `ABOUT` it, which the benchmark
+  `SUPPORTS`.
+- **Failed calculations** (0.7.5 on), when the source reports them (an agent's own runs always do): the Computation's
+  `experiment_status` (`failed`, `aborted`), what stopped it (`failure_kind`: `electronic_not_converged`,
+  `geometry_not_converged`, `saddle_point_not_found`, `unintended_state`, `numerical_error`, `resource_limit`,
+  `input_error`, `software_error`) and the source's words (`status_reason`). The rerun that succeeded `REPLICATES`
+  it (`level: repeat`, `changed: [method]`), the change in the link's `note`; the two runs' settings show it too. A
+  model the source replaced because it disagreed with measurements did not fail: it is a validation that `fails`.
 - **Balances.** List every participant of a reaction or step with its `role` and `coefficient`, and give
   each species its `elemental_composition` (or a formula that can be read) and its `charge`. The
   validator then reports whether the participants balance in atoms and in charge, each on its own; a

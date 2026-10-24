@@ -40,7 +40,7 @@ def msgs(d, spec, kind="errors"):
 def test_kernel_declares_the_science_labels(spec):
     assert {"Question", "Hypothesis", "Prediction", "Experiment", "Procedure", "Protocol", "Design", "Variable",
             "Claim", "ObjectOfStudy", "Operation", "Instrument", "Model", "Source", "Dataset", "Person", "Institution",
-            "Project", "Software"} == set(spec["nodes"])
+            "Project", "Software", "Method"} == set(spec["nodes"])
     assert "Activity" not in spec["nodes"] and "Activity" not in (spec.get("abstract") or {})
     assert "Sample" not in spec["nodes"]                       # physical specimens belong to the domains
     assert spec["nodes"]["ObjectOfStudy"]["properties"]["object_kind"]["values"] == ["thing", "system", "phenomenon", "population"]

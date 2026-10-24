@@ -1,0 +1,1596 @@
+{
+  "nodes": [
+    {
+      "id": "ex:cm/source/dft-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (dft-paper)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Oxygen on Pt(111) and Ni(111) (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cm/source/benchmark-paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper (benchmark-paper)",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Three functionals against measured chemisorption energies (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cm/method/pbe",
+      "label": "Method",
+      "props": {
+        "name": "PBE",
+        "functional_class": "gga",
+        "identifiers": {
+          "libxc": "GGA_X_PBE+GGA_C_PBE"
+        },
+        "method_kind": "exchange_correlation_functional",
+        "origin": "synthetic",
+        "reference": "Perdew, Burke and Ernzerhof, Phys. Rev. Lett. 1996, 77, 3865, doi:10.1103/PhysRevLett.77.3865"
+      }
+    },
+    {
+      "id": "ex:cm/method/rpbe",
+      "label": "Method",
+      "props": {
+        "name": "RPBE",
+        "aliases": [
+          "revised PBE of Hammer, Hansen and Nørskov"
+        ],
+        "functional_class": "gga",
+        "identifiers": {
+          "libxc": "GGA_X_RPBE+GGA_C_PBE"
+        },
+        "method_kind": "exchange_correlation_functional",
+        "origin": "synthetic",
+        "reference": "Hammer, Hansen and Nørskov, Phys. Rev. B 1999, 59, 7413, doi:10.1103/PhysRevB.59.7413"
+      }
+    },
+    {
+      "id": "ex:cm/method/beef-vdw",
+      "label": "Method",
+      "props": {
+        "name": "BEEF-vdW",
+        "aliases": [
+          "BEEF"
+        ],
+        "functional_class": "gga",
+        "identifiers": {
+          "libxc": "GGA_XC_BEEFVDW"
+        },
+        "method_kind": "exchange_correlation_functional",
+        "note": "its nonlocal (vdW-DF2) correlation is not a libxc functional",
+        "origin": "synthetic",
+        "reference": "Wellendorff et al., Phys. Rev. B 2012, 85, 235149, doi:10.1103/PhysRevB.85.235149"
+      }
+    },
+    {
+      "id": "ex:cm/method/d3",
+      "label": "Method",
+      "props": {
+        "name": "D3",
+        "method_kind": "dispersion_correction",
+        "origin": "synthetic",
+        "reference": "Grimme, Antony, Ehrlich and Krieg, J. Chem. Phys. 2010, 132, 154104, doi:10.1063/1.3382344",
+        "version": "zero damping"
+      }
+    },
+    {
+      "id": "ex:cm/software/plane-wave-code",
+      "label": "Software",
+      "props": {
+        "name": "plane-wave DFT code (invented release)",
+        "origin": "synthetic",
+        "software_kind": "application",
+        "version": "7.1.0"
+      }
+    },
+    {
+      "id": "ex:cm/dataset/inputs",
+      "label": "Dataset",
+      "props": {
+        "name": "input files of every calculation (invented)",
+        "availability": "available",
+        "data_kind": "configuration",
+        "origin": "synthetic",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "uri": "https://example.org/invented/inputs.tar.gz",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:cm/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cm/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cm/species/o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "O (adsorbed)",
+        "charge": 0,
+        "elemental_composition": {
+          "O": 1
+        },
+        "formula": "O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cm/reaction/o-adsorption",
+      "label": "Reaction",
+      "props": {
+        "name": "H2O(g) + * -> O* + H2(g)",
+        "balance_status": "balanced",
+        "direction": "forward",
+        "equation": "H2O(g) + * -> O* + H2(g)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods, reference energies",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cm/variable/o-adsorption-energy",
+      "label": "Variable",
+      "props": {
+        "name": "O adsorption energy",
+        "origin": "synthetic",
+        "quantity_kind": "reaction_energy",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:cm/variable/chemisorption-mae",
+      "label": "Variable",
+      "props": {
+        "name": "mean absolute error of chemisorption energies",
+        "origin": "synthetic",
+        "quantity_kind": "mean_absolute_error",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:cm/variable/chemisorption-mse",
+      "label": "Variable",
+      "props": {
+        "name": "mean signed error of chemisorption energies",
+        "origin": "synthetic",
+        "quantity_kind": "mean_signed_error",
+        "scale": "quantitative",
+        "unit": "eV"
+      }
+    },
+    {
+      "id": "ex:cm/dataset/pt-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Pt(111) slab, p(3×3), 4 layers, coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "uri": "https://example.org/invented/pt-111.cif",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:cm/model/pt-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Pt(111) slab, p(3×3), 4 layers",
+        "composition": "Pt",
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.99
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(3×3)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:cm/dataset/pt-111-structure"
+      }
+    },
+    {
+      "id": "ex:cm/dataset/ni-111-structure",
+      "label": "Dataset",
+      "props": {
+        "name": "Ni(111) slab, p(3×3), 4 layers, coordinates",
+        "availability": "available",
+        "data_kind": "structure",
+        "origin": "synthetic",
+        "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+        "uri": "https://example.org/invented/ni-111.cif",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:cm/model/ni-111",
+      "label": "StructureModel",
+      "props": {
+        "name": "Ni(111) slab, p(3×3), 4 layers",
+        "composition": "Ni",
+        "facet": "111",
+        "origin": "synthetic",
+        "parameters": {
+          "fixed_layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 2
+          },
+          "lattice_constant": {
+            "status": "present",
+            "definition": "optimized for the bulk metal at this level of theory",
+            "unit": "Å",
+            "value": 3.55
+          },
+          "layers": {
+            "status": "present",
+            "unit": "1",
+            "value": 4
+          },
+          "supercell": {
+            "status": "present",
+            "text_value": "p(3×3)"
+          },
+          "vacuum": {
+            "status": "present",
+            "unit": "Å",
+            "value": 15
+          }
+        },
+        "representation": "periodic_slab",
+        "stored_in": "ex:cm/dataset/ni-111-structure"
+      }
+    },
+    {
+      "id": "ex:cm/computation/o-pt111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Pt(111), RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t1",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption",
+            "status": "present",
+            "evidence_ids": [
+              "t1"
+            ],
+            "target": "ex:cm/reaction/o-adsorption",
+            "unit": "eV",
+            "value": 1.42,
+            "variable": "ex:cm/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/computation/o-ni111",
+      "label": "Computation",
+      "props": {
+        "name": "O on Ni(111), RPBE-D3, spin-polarized",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "D3"
+        },
+        "evidence": [
+          {
+            "id": "t1",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "o_adsorption",
+            "status": "present",
+            "evidence_ids": [
+              "t1"
+            ],
+            "target": "ex:cm/reaction/o-adsorption",
+            "unit": "eV",
+            "value": 1.05,
+            "variable": "ex:cm/variable/o-adsorption-energy"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "density_mixing": {
+            "status": "present",
+            "text_value": "linear, 0.05"
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "initial_magnetic_moments": {
+            "status": "present",
+            "text_value": "0.6 μB per Ni atom"
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/computation/o-ni111-first-attempt",
+      "label": "Computation",
+      "props": {
+        "name": "O on Ni(111), first attempt, started without magnetic moments",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supporting information, section S3",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "experiment_status": "failed",
+        "failure_kind": "electronic_not_converged",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "density_mixing": {
+            "status": "present",
+            "text_value": "Pulay, the code's default"
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "initial_magnetic_moments": {
+            "status": "present",
+            "text_value": "zero on every atom"
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "spin_polarized",
+        "status_reason": "the self-consistent loop oscillated and had not converged after 200 electronic steps when started from zero magnetic moments"
+      }
+    },
+    {
+      "id": "ex:cm/computation/o-diffusion-first-attempt",
+      "label": "Computation",
+      "props": {
+        "name": "O diffusion fcc to hcp on Pt(111), first band",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supporting information, section S4",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "experiment_status": "failed",
+        "failure_kind": "saddle_point_not_found",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "neb_images": {
+            "status": "present",
+            "unit": "1",
+            "value": 5
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "transition_state_method": {
+            "status": "present",
+            "text_value": "CI-NEB"
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized",
+        "status_reason": "the climbing image had not converged after 400 steps, and two images slid into the fcc minimum"
+      }
+    },
+    {
+      "id": "ex:cm/computation/o-diffusion",
+      "label": "Computation",
+      "props": {
+        "name": "O diffusion fcc to hcp on Pt(111), CI-NEB",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Supporting information, section S4",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "neb_images": {
+            "status": "present",
+            "unit": "1",
+            "value": 9
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          },
+          "transition_state_method": {
+            "status": "present",
+            "note": "one imaginary frequency confirmed",
+            "text_value": "CI-NEB"
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/dataset/measured-chemisorption",
+      "label": "Dataset",
+      "props": {
+        "name": "twelve chemisorption energies of small adsorbates on late transition-metal surfaces, measured by single-crystal calorimetry or desorption (an invented set)",
+        "availability": "available",
+        "data_kind": "table",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+        "uri": "https://example.org/invented/chemisorption.csv",
+        "version": "1"
+      }
+    },
+    {
+      "id": "ex:cm/computation/benchmark-pbe",
+      "label": "Computation",
+      "props": {
+        "name": "Chemisorption energies of the reference set, PBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "goal": "benchmark",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "PBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": 0.52,
+            "variable": "ex:cm/variable/chemisorption-mae"
+          },
+          {
+            "id": "mse",
+            "status": "present",
+            "definition": "computed minus measured, as a binding energy; negative = binds too strongly",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": -0.48,
+            "variable": "ex:cm/variable/chemisorption-mse"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/computation/benchmark-rpbe",
+      "label": "Computation",
+      "props": {
+        "name": "Chemisorption energies of the reference set, RPBE",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "goal": "benchmark",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "RPBE"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": 0.24,
+            "variable": "ex:cm/variable/chemisorption-mae"
+          },
+          {
+            "id": "mse",
+            "status": "present",
+            "definition": "computed minus measured, as a binding energy; negative = binds too strongly",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": 0.1,
+            "variable": "ex:cm/variable/chemisorption-mse"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/computation/benchmark-beef-vdw",
+      "label": "Computation",
+      "props": {
+        "name": "Chemisorption energies of the reference set, BEEF-vdW",
+        "charge_treatment": "constant_charge",
+        "computation_kind": "electronic_structure",
+        "configuration": "ex:cm/dataset/inputs",
+        "dispersion": {
+          "status": "present",
+          "text_value": "none"
+        },
+        "evidence": [
+          {
+            "id": "t2",
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "experiment_status": "completed",
+        "goal": "benchmark",
+        "level_of_theory": {
+          "status": "present",
+          "text_value": "BEEF-vdW"
+        },
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mae",
+            "status": "present",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": 0.2,
+            "variable": "ex:cm/variable/chemisorption-mae"
+          },
+          {
+            "id": "mse",
+            "status": "present",
+            "definition": "computed minus measured, as a binding energy; negative = binds too strongly",
+            "evidence_ids": [
+              "t2"
+            ],
+            "unit": "eV",
+            "value": 0.05,
+            "variable": "ex:cm/variable/chemisorption-mse"
+          }
+        ],
+        "settings": {
+          "cutoff_energy": {
+            "status": "present",
+            "unit": "eV",
+            "value": 450
+          },
+          "dipole_correction": {
+            "status": "present",
+            "boolean_value": true,
+            "definition": "along the surface normal"
+          },
+          "force_convergence": {
+            "status": "present",
+            "unit": "eV/Å",
+            "value": 0.02
+          },
+          "kpoints": {
+            "status": "present",
+            "definition": "Monkhorst-Pack",
+            "text_value": "4×4×1"
+          },
+          "pseudopotentials": {
+            "status": "present",
+            "text_value": "projector augmented-wave set of the code (invented release)"
+          },
+          "scf_convergence": {
+            "status": "present",
+            "unit": "eV",
+            "value": 1e-06
+          },
+          "smearing": {
+            "status": "present",
+            "definition": "Methfessel-Paxton, first order",
+            "unit": "eV",
+            "value": 0.1
+          }
+        },
+        "solvation": "none",
+        "spin_treatment": "non_spin_polarized"
+      }
+    },
+    {
+      "id": "ex:cm/claim/pbe-overbinds",
+      "label": "Claim",
+      "props": {
+        "name": "PBE binds too strongly",
+        "claim_kind": "comparison",
+        "claim_status": "supported",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 3",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "inference_type": "computational",
+        "origin": "synthetic",
+        "scope": "chemisorption of small adsorbates on late transition-metal surfaces",
+        "statement": "PBE binds the adsorbates of the reference set more strongly than measured, by about 0.5 eV on average"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:cm/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:cm/reaction/o-adsorption",
+      "target": "ex:cm/species/h2o"
+    },
+    {
+      "id": "ex:cm/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "adsorbed",
+        "role": "product"
+      },
+      "source": "ex:cm/reaction/o-adsorption",
+      "target": "ex:cm/species/o"
+    },
+    {
+      "id": "ex:cm/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:cm/reaction/o-adsorption",
+      "target": "ex:cm/species/h2"
+    },
+    {
+      "id": "ex:cm/link/4",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-pt111",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/5",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/o-pt111",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/6",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-pt111",
+      "target": "ex:cm/model/pt-111"
+    },
+    {
+      "id": "ex:cm/link/7",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/8",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/method/d3"
+    },
+    {
+      "id": "ex:cm/link/9",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/10",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/model/ni-111"
+    },
+    {
+      "id": "ex:cm/link/11",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111-first-attempt",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/12",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/o-ni111-first-attempt",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/13",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111-first-attempt",
+      "target": "ex:cm/model/ni-111"
+    },
+    {
+      "id": "ex:cm/link/14",
+      "type": "REPLICATES",
+      "props": {
+        "changed": [
+          "method"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Supporting information, section S3",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "level": "repeat",
+        "note": "started from 0.6 μB per Ni atom, with linear density mixing of 0.05",
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/computation/o-ni111-first-attempt"
+    },
+    {
+      "id": "ex:cm/link/15",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion-first-attempt",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/16",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/o-diffusion-first-attempt",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/17",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion-first-attempt",
+      "target": "ex:cm/model/pt-111"
+    },
+    {
+      "id": "ex:cm/link/18",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/19",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/o-diffusion",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/20",
+      "type": "USES_MODEL",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion",
+      "target": "ex:cm/model/pt-111"
+    },
+    {
+      "id": "ex:cm/link/21",
+      "type": "REPLICATES",
+      "props": {
+        "changed": [
+          "method"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Supporting information, section S4",
+            "source": "ex:cm/source/dft-paper"
+          }
+        ],
+        "level": "repeat",
+        "note": "nine images instead of five, the initial path from an interpolation of the end states' distances, and the climbing image switched on after the band's forces fell below 0.1 eV/Å",
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion",
+      "target": "ex:cm/computation/o-diffusion-first-attempt"
+    },
+    {
+      "id": "ex:cm/link/22",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/method/pbe"
+    },
+    {
+      "id": "ex:cm/link/23",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/24",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/dataset/measured-chemisorption"
+    },
+    {
+      "id": "ex:cm/link/25",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "the errors of the computed energies against the measured ones",
+        "evaluation_kind": "benchmark",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:cm/computation/benchmark-pbe"
+          },
+          {
+            "path": "/result_values/mse",
+            "record": "ex:cm/computation/benchmark-pbe"
+          }
+        ],
+        "scope": "twelve chemisorption energies of small adsorbates on late transition-metal surfaces"
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/method/pbe"
+    },
+    {
+      "id": "ex:cm/link/26",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-rpbe",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/27",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/benchmark-rpbe",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/28",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:cm/computation/benchmark-rpbe",
+      "target": "ex:cm/dataset/measured-chemisorption"
+    },
+    {
+      "id": "ex:cm/link/29",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "the errors of the computed energies against the measured ones",
+        "evaluation_kind": "benchmark",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:cm/computation/benchmark-rpbe"
+          },
+          {
+            "path": "/result_values/mse",
+            "record": "ex:cm/computation/benchmark-rpbe"
+          }
+        ],
+        "scope": "twelve chemisorption energies of small adsorbates on late transition-metal surfaces"
+      },
+      "source": "ex:cm/computation/benchmark-rpbe",
+      "target": "ex:cm/method/rpbe"
+    },
+    {
+      "id": "ex:cm/link/30",
+      "type": "USES_METHOD",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-beef-vdw",
+      "target": "ex:cm/method/beef-vdw"
+    },
+    {
+      "id": "ex:cm/link/31",
+      "type": "USES_SOFTWARE",
+      "props": {
+        "origin": "synthetic",
+        "version": "7.1.0"
+      },
+      "source": "ex:cm/computation/benchmark-beef-vdw",
+      "target": "ex:cm/software/plane-wave-code"
+    },
+    {
+      "id": "ex:cm/link/32",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reference_standard"
+      },
+      "source": "ex:cm/computation/benchmark-beef-vdw",
+      "target": "ex:cm/dataset/measured-chemisorption"
+    },
+    {
+      "id": "ex:cm/link/33",
+      "type": "EVALUATES",
+      "props": {
+        "criterion": "the errors of the computed energies against the measured ones",
+        "evaluation_kind": "benchmark",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "result_refs": [
+          {
+            "path": "/result_values/mae",
+            "record": "ex:cm/computation/benchmark-beef-vdw"
+          },
+          {
+            "path": "/result_values/mse",
+            "record": "ex:cm/computation/benchmark-beef-vdw"
+          }
+        ],
+        "scope": "twelve chemisorption energies of small adsorbates on late transition-metal surfaces"
+      },
+      "source": "ex:cm/computation/benchmark-beef-vdw",
+      "target": "ex:cm/method/beef-vdw"
+    },
+    {
+      "id": "ex:cm/link/34",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "the method it is about"
+      },
+      "source": "ex:cm/claim/pbe-overbinds",
+      "target": "ex:cm/method/pbe"
+    },
+    {
+      "id": "ex:cm/link/35",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "source": "ex:cm/source/benchmark-paper"
+          }
+        ],
+        "origin": "synthetic",
+        "premise_refs": [
+          {
+            "path": "/result_values/mse",
+            "record": "ex:cm/computation/benchmark-pbe"
+          }
+        ]
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/claim/pbe-overbinds"
+    },
+    {
+      "id": "ex:cm/claim/pbe-overbinds/reported-in/benchmark-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/claim/pbe-overbinds",
+      "target": "ex:cm/source/benchmark-paper"
+    },
+    {
+      "id": "ex:cm/computation/benchmark-beef-vdw/reported-in/benchmark-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-beef-vdw",
+      "target": "ex:cm/source/benchmark-paper"
+    },
+    {
+      "id": "ex:cm/computation/benchmark-pbe/reported-in/benchmark-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-pbe",
+      "target": "ex:cm/source/benchmark-paper"
+    },
+    {
+      "id": "ex:cm/computation/benchmark-rpbe/reported-in/benchmark-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/benchmark-rpbe",
+      "target": "ex:cm/source/benchmark-paper"
+    },
+    {
+      "id": "ex:cm/computation/o-diffusion/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, section S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion",
+      "target": "ex:cm/source/dft-paper"
+    },
+    {
+      "id": "ex:cm/computation/o-diffusion-first-attempt/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, section S4"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-diffusion-first-attempt",
+      "target": "ex:cm/source/dft-paper"
+    },
+    {
+      "id": "ex:cm/computation/o-ni111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111",
+      "target": "ex:cm/source/dft-paper"
+    },
+    {
+      "id": "ex:cm/computation/o-ni111-first-attempt/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Supporting information, section S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-ni111-first-attempt",
+      "target": "ex:cm/source/dft-paper"
+    },
+    {
+      "id": "ex:cm/computation/o-pt111/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/computation/o-pt111",
+      "target": "ex:cm/source/dft-paper"
+    },
+    {
+      "id": "ex:cm/dataset/measured-chemisorption/reported-in/benchmark-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/dataset/measured-chemisorption",
+      "target": "ex:cm/source/benchmark-paper"
+    },
+    {
+      "id": "ex:cm/reaction/o-adsorption/reported-in/dft-paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods, reference energies"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cm/reaction/o-adsorption",
+      "target": "ex:cm/source/dft-paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:cm/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.7.5",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "The methods calculations apply, where they failed, and how well a method does against measurements (synthetic)"
+  },
+  "multigraph": true
+}

@@ -195,3 +195,18 @@ fixtures:
   - file: site-proximity-without-status.json
     error: "site_proximity: a value needs a status"
     reason: A proximity says whether it is present or why it is missing; a bare distance or level hides missingness.
+  - file: failure-kind-not-in-vocabulary.json
+    base: domain/examples/scale-catal/method-examples/computational-methods.json
+    error: "is not one of"
+    reason: What stopped a failed calculation is one of the listed kinds, so that failures of one kind are found together;
+      the source's words stay in status_reason.
+  - file: method-kind-not-in-vocabulary.json
+    base: domain/examples/scale-catal/method-examples/computational-methods.json
+    error: "is not one of"
+    reason: A method is one of the listed kinds, so that the functionals, the dispersion corrections and the basis sets
+      are each found as one.
+  - file: uses-method-of-software.json
+    base: domain/examples/scale-catal/method-examples/computational-methods.json
+    error: "USES_METHOD target must be"
+    reason: USES_METHOD names a method record; the code that ran the calculation is a Software it USES_SOFTWARE, whose
+      version is not a method's.
