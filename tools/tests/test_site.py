@@ -19,23 +19,17 @@ def built(tmp_path_factory):
     return out, site.build(REPO, out)
 
 
-def test_the_site_lists_every_graph_with_its_plans(built):
+def test_the_site_lists_the_curated_graphs(built):
     out, res = built
     entries = json.loads((out / "data/graphs.json").read_text())["graphs"]
     ids = [e["id"] for e in entries]
     assert ids == res["graphs"] and len(set(ids)) == len(ids)
-    # the curated graphs first, built from their parts; a parts folder with no source yet is left out
-    assert ids[0] == "methanol-synthesis-pre1966" and "catal-commons" not in ids and "methanol-synthesis-public" in ids
+    # the curated graphs, built from their parts; a parts folder with no source yet is left out, examples are not offered
+    assert ids == ["methanol-synthesis-pre1966"]
     for e in entries:
         doc = json.loads((out / e["path"]).read_text())
         assert (len(doc["nodes"]), len(doc["links"])) == (e["nodes"], e["links"]), e["id"]
-    # only real graphs: the catalysis domain's synthetic examples show the schema, not evidence
-    assert all(e["from"].split("/")[0] in ("graphs", "examples") for e in entries)
-    assert not any(e["data_status"] == "synthetic_example" for e in entries)
-    # the plans saved beside a graph's parts run on it, under its id
-    saved = json.loads((out / "data/questions/methanol-synthesis-public.json").read_text())
-    assert any(x["id"].startswith("q1") for x in saved) and all(x["plan"]["match"] for x in saved)
-    assert {e["id"]: e["questions"] for e in entries}["methanol-synthesis-public"] == len(saved)
+    assert all(e["from"].startswith("graphs/") for e in entries)
     assert (out / "data/query-graph.md").read_text().lstrip().startswith("#")       # the skill, without its front matter
     for page in site.PAGES:
         assert (out / page).is_file(), page
@@ -60,7 +54,7 @@ def test_the_package_runs_without_a_checkout(built, tmp_path):
         z.extractall(tmp_path / "lib")
     work = tmp_path / "work"
     work.mkdir()
-    graph = (out / "data/graphs/methanol-synthesis-public.json").read_text()
+    graph = (out / "data/graphs/methanol-synthesis-pre1966.json").read_text()
     (work / "g.json").write_text(graph)
     sources = sum(n["label"] == "Source" for n in json.loads(graph)["nodes"])
     code = ("import json; from scale.api import ScaleToolkit; from scale import layout; "
@@ -88,6 +82,7 @@ def test_the_explorer_runs_scales_own_tools_and_the_readers_key_stays_in_the_bro
     assert "py/scale-py.zip" in worker and "ScaleToolkit" in worker
     # every script comes from a pinned version
     assert "pyodide/v0.26.4/" in worker and "@anthropic-ai/sdk@0.133.0" in js and "d3/7.9.0/" in page
+    assert "plotly.js-cartesian-dist-min@2.35.2/" in page
     # the key goes only to the API, from the reader's browser, and is never written into the page's data
     assert "dangerouslyAllowBrowser: true" in js and "sessionStorage" in js
     assert "query-graph.md" in js

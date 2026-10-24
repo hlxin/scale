@@ -4,9 +4,8 @@
 
 * the pages of ``site/``: ``index.html`` (the graph explorer) and ``publication.html`` (one publication into a graph,
   which needs the web service, service/README.md);
-* ``data/graphs.json``, the graphs the explorer offers, and ``data/graphs/<id>.json``, each built from its parts
-  (``graphs/*`` and ``examples/*``, as ``scale graph build``); the catalysis domain's synthetic examples are not offered;
-* ``data/questions/<id>.json``, the query plans saved beside each graph's parts (``queries/*.yaml``);
+* ``data/graphs.json``, the graphs the explorer offers, and ``data/graphs/<id>.json``: the curated graphs
+  (``graphs/*``), each built from its parts as ``scale graph build`` does (the examples are not offered);
 * ``data/query-graph.md``, the query-graph skill, which a question asked in the page follows;
 * ``py/scale-py.zip``, the ``scale`` package with the data a wheel bundles (``layout.BUNDLE``, without the repository's
   examples), which the page runs in Pyodide: a search, a plan or a description in the page is the same code as
@@ -25,7 +24,7 @@ import zipfile
 from pathlib import Path
 
 from . import graphparts, layout
-from .util import load_yaml, write_canonical
+from .util import write_canonical
 
 SITE = "site"
 PAGES = ("index.html", "explorer.css", "explorer.js", "worker.js", "publication.html", "app.js", "config.js", "style.css")
@@ -44,25 +43,13 @@ def _entry(doc: dict, gid: str, origin: str) -> dict:
 
 
 def graphs(repo: Path) -> list[tuple[str, str, dict]]:
-    """(id, origin, document) for every graph the site offers: the curated graphs, then the real examples, each built
-    from its parts. A folder of parts with no source yet is left out, and so are the catalysis domain's synthetic
-    examples (they show the schema, not evidence)."""
+    """(id, origin, document) for every graph the site offers: the curated graphs (``graphs/*``), each built from its
+    parts. A folder of parts with no source yet is left out; the examples (``examples/``, the domain's synthetic ones)
+    are not offered."""
     out = []
-    for base in (layout.GRAPHS, layout.EXAMPLES):
-        for folder in sorted(p for p in (repo / base).glob("*") if (p / "parts" / "header.json").is_file()):
-            if not any((folder / "parts" / "sources").glob("*.json")):
-                continue
-            out.append((folder.name, f"{base}/{folder.name}", graphparts.build_folder(folder)))
-    return out
-
-
-def questions(repo: Path, origins: dict[str, str]) -> dict[str, list[dict]]:
-    """Graph id -> the query plans saved beside its parts (``queries/*.yaml``)."""
-    out: dict[str, list[dict]] = {}
-    for gid, origin in origins.items():
-        for f in sorted((repo / origin / "queries").glob("*.yaml")) if (repo / origin).is_dir() else []:
-            plan = load_yaml(f)
-            out.setdefault(gid, []).append({"id": f.stem, "question": plan.get("question") or f.stem, "plan": plan})
+    for folder in sorted(p for p in (repo / layout.GRAPHS).glob("*") if (p / "parts" / "header.json").is_file()):
+        if any((folder / "parts" / "sources").glob("*.json")):
+            out.append((folder.name, f"{layout.GRAPHS}/{folder.name}", graphparts.build_folder(folder)))
     return out
 
 
@@ -119,22 +106,15 @@ def build(repo: Path, out: Path) -> dict:
     (out / "data" / "graphs").mkdir(parents=True)
     for name in PAGES:
         shutil.copy2(repo / SITE / name, out / name)
-    entries, origins = [], {}
+    entries = []
     for gid, origin, doc in graphs(repo):
         write_canonical(out / "data" / "graphs" / f"{gid}.json", doc)
         entries.append(_entry(doc, gid, origin))
-        origins[gid] = origin
-    qs = questions(repo, origins)
-    for e in entries:
-        e["questions"] = len(qs.get(e["id"], []))
-        if e["id"] in qs:
-            write_canonical(out / "data" / "questions" / f"{e['id']}.json", qs[e["id"]])
     write_canonical(out / "data" / "graphs.json", {"graphs": entries})
     (out / "data" / "query-graph.md").write_text(_skill_body(repo, "query-graph"), encoding="utf-8")
     files = package_zip(repo, out / PACKAGE_ZIP)
     (out / ".nojekyll").write_text("")
-    return {"out": str(out), "graphs": [e["id"] for e in entries],
-            "questions": sum(len(v) for v in qs.values()), "package_files": files,
+    return {"out": str(out), "graphs": [e["id"] for e in entries], "package_files": files,
             "package_bytes": (out / PACKAGE_ZIP).stat().st_size}
 
 

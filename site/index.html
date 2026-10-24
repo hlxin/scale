@@ -15,13 +15,14 @@
     try { document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch { /* old browser */ }
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-cartesian-dist-min@2.35.2/plotly-cartesian.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 </head>
 <body>
 <div class="gx-page">
   <header class="gx-toolbar">
-    <button class="gx-viz" id="viz-btn" type="button" title="Plot what a question of this graph returns">
+    <button class="gx-viz" id="viz-btn" type="button" aria-pressed="false" title="Explore this graph's data">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 V4"/><path d="M4 20 H20"/><path d="M8 16 L12 11 L15 14 L20 8"/></svg>
       <span>Visualization</span>
     </button>
@@ -56,6 +57,12 @@
       <footer class="gx-rail-summary"><div id="summary">Displaying 0 nodes, 0 relationships.</div><div class="gx-status" id="status" aria-live="polite">Starting…</div>
         <a class="gx-foot-link" href="publication.html">Curate one publication into a graph →</a></footer>
     </aside>
+
+    <!-- Drag handles on the panel borders (keyboard: arrow keys; double-click or Home resets the width). -->
+    <div class="gx-resizer gx-rail-resizer" id="rail-resizer" role="separator" aria-orientation="vertical"
+         aria-label="Resize the graphs panel" tabindex="0"></div>
+    <div class="gx-resizer gx-inspector-resizer" id="inspector-resizer" role="separator" aria-orientation="vertical"
+         aria-label="Resize the details panel" tabindex="0"></div>
 
     <main class="gx-canvas" id="canvas">
       <button class="gx-show gx-show-left" id="rail-show" type="button" title="Show panel" aria-label="Show the graphs panel" hidden>
@@ -122,6 +129,48 @@
       </svg>
       <div class="gx-empty" id="empty"><p>Loading graph…</p></div>
       <div class="gx-hint">Circle area scales with connectivity · drag nodes to rearrange · scroll to zoom · double-click a node to expand its neighbourhood</div>
+
+      <!-- The Visualization: the graph's data explored in place of the graph (counts, degrees, numeric properties). -->
+      <div class="gx-plot-host" id="plot-host" hidden>
+        <main class="pe-page">
+          <header class="pe-head">
+            <div><h1 class="pe-title">Graph explorer</h1><p class="pe-sub" id="pe-sub">Explore quantities and graph structure.</p></div>
+          </header>
+          <div class="pe-stats" id="pe-stats" aria-label="Graph summary"></div>
+          <div class="pe-filters" aria-label="Explorer controls">
+            <label class="pe-field"><span>Explore</span><select id="pe-mode">
+              <option value="labels">Node labels</option><option value="rels">Rel types</option>
+              <option value="numeric">Numeric properties</option><option value="degree">Degree distribution</option>
+            </select></label>
+            <label class="pe-field" id="pe-class-wrap"><span>Node label</span><select id="pe-class"></select></label>
+            <label class="pe-field" id="pe-x-wrap"><span>X</span><select id="pe-x"></select></label>
+            <label class="pe-field" id="pe-y-wrap"><span>Y</span><select id="pe-y"></select></label>
+            <div class="pe-field" role="group" aria-label="Axis scale"><span>Scale</span><div class="pe-toggle-row">
+              <label class="pe-check"><input type="checkbox" id="pe-logx"> Log X</label>
+              <label class="pe-check"><input type="checkbox" id="pe-logy"> Log Y</label></div></div>
+            <div class="pe-field pe-view" role="group" aria-label="View"><span>View</span><div class="pe-seg">
+              <button type="button" data-view="chart" aria-pressed="true">Chart</button>
+              <button type="button" data-view="table" aria-pressed="false">Table</button></div></div>
+          </div>
+          <section class="pe-card" aria-labelledby="pe-plot-title">
+            <header class="pe-card-head">
+              <div><h2 class="pe-plot-title" id="pe-plot-title">…</h2><p class="pe-plot-note" id="pe-plot-note" role="status"></p></div>
+              <button type="button" class="pe-button" id="pe-reset" hidden>Reset zoom</button>
+            </header>
+            <div class="pe-legend" id="pe-legend" role="group" aria-label="Series; click to hide or show"></div>
+            <div class="pe-empty" id="pe-empty" role="status">Loading…</div>
+            <div id="pe-chart-wrap" hidden>
+              <div class="pe-chart" id="pe-chart" role="img" aria-labelledby="pe-plot-title"></div>
+              <p class="pe-help">Hover for details · Click a point for its node · Drag to zoom · Double-click to reset</p>
+            </div>
+            <div id="pe-table-wrap" hidden>
+              <div class="pe-table-tools"><label class="pe-field"><span>Find in table</span><input type="search" id="pe-search" placeholder="Filter visible rows"></label><span id="pe-table-count" role="status"></span></div>
+              <div class="pe-table-scroll"><table class="pe-table" id="pe-table"></table></div>
+              <div class="pe-pagination"><button type="button" class="pe-button" id="pe-prev">Previous</button><span id="pe-page-count"></span><button type="button" class="pe-button" id="pe-next">Next</button></div>
+            </div>
+          </section>
+        </main>
+      </div>
 
       <aside class="gx-card" id="card" hidden aria-label="Answer">
         <header class="gx-card-head">

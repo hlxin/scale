@@ -28,9 +28,9 @@ pip install git+https://github.com/hlxin/scale
 Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to give an AI agent the tools
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
-**Or in the browser: [the graph explorer](https://hlxin.github.io/scale/).** Pick one of the repository's graphs
-(or open a graph file) and see it whole, filter it by label or relationship type, open any node with its verbatim
-evidence, search the evidence, and plot what a saved question or a query plan returns. SCALE's own code runs in the browser (Pyodide), so a search or a plan gives the rows
+**Or in the browser: [the graph explorer](https://hlxin.github.io/scale/).** Pick one of the curated graphs (or
+open a graph file) and see it whole, filter it by label or relationship type, open any node with its verbatim
+evidence, search the evidence, and explore its data (counts, degrees, numeric properties plotted). SCALE's own code runs in the browser (Pyodide), so a search or a plan gives the rows
 `scale graph search` and `scale graph query` give; nothing is sent anywhere. A question in plain language is answered
 by a model following the query-graph skill, with the reader's own Anthropic API key. The page is built by `scale site
 build` and published by GitHub Pages ([`site/`](site/)). A second page, [curate one

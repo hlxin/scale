@@ -3,12 +3,13 @@
 ## Unreleased
 
 - **The graph explorer, on GitHub Pages (no schema change).** Requested by @hlxin (view and query the repository's
-  graphs outside the Alchemic platform, from the GitHub repository). `site/index.html` picks one of the repository's
-  graphs (the curated graphs and the real example, built from their parts) or a graph file and draws the whole graph
-  (circle area by connectivity, colour by label), filtered by label or relationship type; shows each node's properties
-  as reported, its verbatim evidence and its neighbours; searches the evidence ("Search by asking"); and plots what a
-  saved question or any query plan returns (Visualization: one unit per axis, rows in another unit left out and
-  counted). The search and the plans are SCALE's own
+  graphs outside the Alchemic platform, from the GitHub repository), laid out as the platform's graph view.
+  `site/index.html` picks one of the curated graphs (built from their parts) or a graph file and draws the whole graph
+  (circle area by connectivity, colour by label), filtered by label or relationship type, with resizable panels; shows
+  each node's properties as reported, its verbatim evidence and its neighbours; searches the evidence ("Search by
+  asking"); and explores the graph's data (Visualization: label and relationship counts, the degree distribution, any
+  two numeric properties of a label's nodes, each property a path and a unit so units are never mixed; chart or
+  table). The search and the plans are SCALE's own
   code, run in the browser by Pyodide from the `scale` package the site ships, so they give the rows `scale graph
   search` and `scale graph query` give, and nothing leaves the browser. A question in plain language runs the
   query-graph skill with a model, through the reader's own Anthropic API key (kept in the browser). `scale site build`

@@ -18,7 +18,7 @@ const LABELS_AUTO_MAX = 400;      // relationship names shown by default up to t
 const PROVENANCE_KIND = "Source", PROVENANCE_EDGE = "REPORTED_IN";   // hidden until asked for, as the evidence is on each node
 
 let G = null;                     // the graph: {entry, doc, byId, out, inn, labels, rels, sha, props}
-let manifest = [], questions = [];
+let manifest = [];
 const kindColour = new Map(), edgeColour = new Map();
 const S = {                       // what the canvas shows
   kind: null, rel: null, sources: false, hidden: new Set(), extra: new Set(), match: null,
@@ -59,7 +59,7 @@ async function start() {
   $("graph-file").onchange = async (e) => {
     const f = e.target.files[0];
     if (!f) return;
-    try { questions = []; await openGraph({ id: f.name.replace(/\W+/g, "-"), title: f.name.replace(/\.json$/, ""), from: "" }, await f.text()); }
+    try { await openGraph({ id: f.name.replace(/\W+/g, "-"), title: f.name.replace(/\.json$/, ""), from: "" }, await f.text()); }
     catch (err) { alert(`not a graph: ${err.message}`); }
   };
   await openFromHash();
@@ -89,7 +89,7 @@ function details() {
     ["Checksum", G.sha ? `<span class="gx-sha" title="sha256 ${esc(G.sha)}">${esc(G.sha.slice(0, 12))}…</span>` : "…"],
     ["Source", e.from ? `<a href="https://github.com/hlxin/scale/tree/main/${esc(e.from)}">${esc(e.from)}</a>` : "a file on this computer"],
     ["Schema", `<a href="https://github.com/hlxin/scale/tree/main/domain/graph">${esc(g.schema || "scale-catal")} v${esc(g.schema_version || "?")}</a><br>
-      ${G.labels.size} labels · ${G.rels.size} rel types${questions.length ? ` · ${questions.length} saved questions` : ""}`],
+      ${G.labels.size} labels · ${G.rels.size} rel types`],
   ].filter(Boolean);
   return `<div class="gx-graph-detail"><dl class="gx-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl></div>`;
 }
@@ -102,8 +102,6 @@ async function openFromHash() {
   $("empty").hidden = false;
   $("empty").innerHTML = `<p>Loading graph…</p>`;
   const text = await (await fetch(entry.path)).text();
-  questions = [];
-  if (entry.questions) try { questions = await (await fetch(`data/questions/${entry.id}.json`)).json(); } catch { /* none */ }
   await openGraph(entry, text);
 }
 
@@ -130,6 +128,7 @@ async function openGraph(entry, text) {
   renderLegend();
   showLegend();
   draw();
+  if (PE.on) { PE.mountedFor = G; peMount(); }
   sha256(text).then((h) => { if (G && G.entry === entry) { G.sha = h; renderGraphs(); } });
   const g = G;
   await rpc({ op: "put", name: G.file, text }).then(() => { g.loaded = true; })
@@ -572,93 +571,196 @@ function rowsMatch(r) {
   S.match = new Set((r.rows || []).flatMap((x) => Object.values(x.bound || {})).filter((id) => G.byId.has(id)));
   markMatches();
 }
-// The Visualization: a saved question (or any plan) run by SCALE, its rows plotted. Values are plotted as reported, one
-// unit per axis: rows in another unit are left out of the plot and counted (incompatible units are never mixed).
-function numberOf(v) {
-  if (!v || typeof v !== "object" || v.status !== "present") return null;
-  if (typeof v.value === "number") return { x: v.value, unit: v.unit || "" };
-  if (typeof v.lower === "number" && typeof v.upper === "number") return { x: (v.lower + v.upper) / 2, lo: v.lower, hi: v.upper, unit: v.unit || "" };
-  return null;
-}
-function numericColumns(rows) {
-  const cols = [...new Set(rows.flatMap((r) => Object.keys(r.values || {})))];
-  return cols.filter((c) => rows.filter((r) => numberOf(r.values?.[c])).length >= 2);
-}
-function vizCard() {
-  const opts = `<option value="">${questions.length ? "A question of this graph…" : "No saved questions for this graph: write a plan"}</option>`
-    + questions.map((q, i) => `<option value="${i}">${esc(q.id)}: ${esc(String(q.question || "").slice(0, 100))}</option>`).join("");
-  card("Visualization", `<select id="plan-pick">${opts}</select>
-    <div id="viz-out"><p class="gx-meta">Pick a question, or write a plan below and run it.</p></div>
-    <details id="plan-box"><summary>The plan</summary>
-      <textarea id="plan" rows="9" spellcheck="false" placeholder='{"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name", "t.temperature", "t.pressure"]}'></textarea>
-      <p><button class="gx-btn gx-btn-primary" id="plan-go" type="button">Run</button>
-        <span class="gx-meta">match, steps, where, return · <a href="https://github.com/hlxin/scale/blob/main/docs/querying.md">docs/querying.md</a></span></p></details>`);
-  const run = async () => {
-    let plan;
-    try { plan = JSON.parse($("plan").value); } catch (err) { $("viz-out").innerHTML = `<p class="gx-card-warn">The plan is not JSON: ${esc(err.message)}</p>`; return; }
-    $("viz-out").innerHTML = `<p class="gx-meta">Running…</p>`;
-    try { const r = await scale("query", { plan }); rowsMatch(r); plot(r); }
-    catch (err) { $("viz-out").innerHTML = `<p class="gx-card-warn">${esc(err.message)}</p>`; }
+// ------------------------------------------------------------------------------------------ the Visualization
+// The graph's data explored in place of the graph: label and relationship counts, the degree distribution, and any two
+// numeric properties of a label's nodes against each other (or one property's distribution). A property is its path
+// and its unit, so values in two units are two properties and are never put on one axis.
+const PE_COLOURS = ["#377dcc", "#dc7138", "#249780", "#a978cb", "#c65b83", "#92902e", "#3e9cae", "#847a72"];
+const PE_PAGE = 100;
+const PE = { on: false, data: null, model: null, view: "chart", hidden: new Set(), page: 0 };
+const pe = (id) => $(`pe-${id}`);
+const human = (s) => String(s || "").replace(/_/g, " ");
+const peCount = (n) => Number(n || 0).toLocaleString();
+const peFmt = (n) => (Number.isFinite(n) ? (n !== 0 && (Math.abs(n) < 0.001 || Math.abs(n) >= 1e6) ? n.toExponential(4) : Number(n.toPrecision(7)).toLocaleString(undefined, { maximumFractionDigits: 7 })) : "—");
+const peUnit = (u) => (u && u !== "1" ? ` (${u})` : "");
+// the numbers a node states: each value object with a finite value, by its path (three levels deep) and its unit
+function numericValues(props) {
+  const values = new Map();
+  const walk = (obj, path, depth) => {
+    if (!obj || typeof obj !== "object" || Array.isArray(obj) || depth > 3) return;
+    for (const [key, v] of Object.entries(obj)) {
+      if (key === "evidence") continue;
+      const next = [...path, key];
+      let number = v, units = typeof obj[`${key}_unit`] === "string" ? obj[`${key}_unit`] : "";
+      if (v && typeof v === "object" && !Array.isArray(v) && Number.isFinite(v.value)) { number = v.value; units = typeof v.unit === "string" ? v.unit : ""; }
+      else if (v && typeof v === "object") { walk(v, next, depth + 1); continue; }
+      if (typeof number !== "number" || !Number.isFinite(number)) continue;
+      if (key === "value" && !units && typeof obj.unit === "string") units = obj.unit;
+      values.set(JSON.stringify([next, units]), { value: number, label: `${next.join(".")}${peUnit(units)}` });
+    }
   };
-  $("plan-pick").onchange = (e) => { const q = questions[Number(e.target.value)]; if (q) { $("plan").value = JSON.stringify(q.plan, null, 2); run(); } };
-  $("plan-go").onclick = run;
-  if (questions.length) { $("plan-pick").value = "0"; $("plan").value = JSON.stringify(questions[0].plan, null, 2); run(); }
+  walk(props || {}, [], 0);
+  return values;
 }
-function plot(r) {
-  const rows = r.rows || [];
-  if (r.error || !rows.length) { $("viz-out").innerHTML = resultHtml(r); wireIds($("viz-out")); return; }
-  const nums = numericColumns(rows);
-  const data = `<details><summary>Data (${r.row_count ?? rows.length} rows)</summary>${resultHtml(r)}</details>`;
-  if (!nums.length) { $("viz-out").innerHTML = `<p class="gx-meta">These rows hold no numbers to plot.</p>${data}`; wireIds($("viz-out")); return; }
-  const sel = (id, chosen) => `<select id="${id}">${(id === "viz-x" ? ['<option value="">(row order)</option>'] : []).concat(nums.map((c) => `<option ${c === chosen ? "selected" : ""}>${esc(c)}</option>`)).join("")}</select>`;
-  $("viz-out").innerHTML = `<div class="gx-viz-axes"><label>Y ${sel("viz-y", nums[0])}</label><label>X ${sel("viz-x", nums[1] || "")}</label></div>
-    <svg id="viz-svg" class="gx-chart" viewBox="0 0 440 280" role="img" aria-label="Plot of the query's rows"></svg><p class="gx-meta" id="viz-note"></p>${data}`;
-  wireIds($("viz-out"));
-  const draw = () => chart(rows, $("viz-x").value, $("viz-y").value);
-  $("viz-x").onchange = draw; $("viz-y").onchange = draw;
-  draw();
+function peData() {
+  if (PE.data && PE.data.g === G) return PE.data;
+  const byId = new Map(G.doc.nodes.map((n) => [n.id, { node: n, values: numericValues(n.props), degree: 0 }]));
+  for (const e of G.doc.links) { const s = byId.get(e.source), t = byId.get(e.target); if (s) s.degree++; if (t) t.degree++; }
+  PE.data = { g: G, nodes: [...byId.values()] };
+  return PE.data;
 }
-function chart(rows, xc, yc) {
-  const pick = (c) => { // the most common unit of a column; the rows in another unit are counted, not plotted
-    const units = d3.rollup(rows.map((r) => numberOf(r.values?.[c])).filter(Boolean), (v) => v.length, (d) => d.unit);
-    return [...units].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
-  };
-  const yu = pick(yc), xu = xc ? pick(xc) : null;
-  const pts = [], skipped = { unit: 0, missing: 0 };
-  rows.forEach((r, i) => {
-    const y = numberOf(r.values?.[yc]), x = xc ? numberOf(r.values?.[xc]) : { x: i + 1, unit: null };
-    if (!y || !x) { skipped.missing += 1; return; }
-    if (y.unit !== yu || (xc && x.unit !== xu)) { skipped.unit += 1; return; }
-    const id = Object.values(r.bound || {})[0];
-    pts.push({ x: x.x, y: y.x, ylo: y.lo, yhi: y.hi, xlo: x.lo, xhi: x.hi, id, label: id && G.byId.has(id) ? name(G.byId.get(id)) : "" });
+function peFill(id, options, value) {
+  const sel = pe(id);
+  sel.innerHTML = options.map(([k, l]) => `<option value="${esc(k)}">${esc(l)}</option>`).join("");
+  if (options.some(([k]) => k === value)) sel.value = value;
+  sel.title = sel.selectedOptions[0]?.textContent || "";
+}
+const peNodes = () => peData().nodes.filter((n) => !pe("class").value || n.node.label === pe("class").value);
+function peSyncAxes(keep = {}) {
+  const nodes = peNodes(), props = new Map();
+  for (const n of nodes) for (const [id, v] of n.values) { if (!props.has(id)) props.set(id, { label: v.label, n: 0 }); props.get(id).n++; }
+  const options = [...props].sort((a, b) => b[1].n - a[1].n || a[1].label.localeCompare(b[1].label)).map(([id, v]) => [id, `${v.label} · ${peCount(v.n)}`]);
+  peFill("y", options, keep.y ?? pe("y").value);
+  const y = pe("y").value, pairs = new Map();
+  for (const n of nodes) if (n.values.has(y)) for (const id of n.values.keys()) if (id !== y) pairs.set(id, (pairs.get(id) || 0) + 1);
+  const best = [...pairs].sort((a, b) => b[1] - a[1])[0]?.[0] || "";
+  peFill("x", [["", "None · Y distribution"], ...options.filter(([id]) => id !== y)], keep.x ?? best);
+}
+function peControls() {
+  const mode = pe("mode").value, numeric = mode === "numeric", degree = mode === "degree";
+  pe("class-wrap").hidden = !numeric && !degree;
+  pe("x-wrap").hidden = !numeric; pe("y-wrap").hidden = !numeric;
+}
+function peMount() {
+  const g = G.doc.graph || {};
+  pe("sub").textContent = [g.title || G.entry.title, "Knowledge graph", g.schema_version ? `scale-catal v${g.schema_version}` : ""].filter(Boolean).join(" · ");
+  pe("stats").innerHTML = [[G.doc.nodes.length, "nodes"], [G.doc.links.length, "rels"], [G.labels.size, "node labels"], [G.rels.size, "rel types"]]
+    .map(([n, l]) => `<div class="pe-stat"><strong>${peCount(n)}</strong><span>${l}</span></div>`).join("");
+  peFill("class", [["", "All labels"], ...[...G.labels].sort((a, b) => b[1] - a[1]).map(([k, n]) => [k, `${k} · ${peCount(n)}`])], "");
+  PE.hidden.clear(); PE.page = 0;
+  peSyncAxes({});
+  peControls();
+  peBuild();
+}
+function peBuild() {
+  const mode = pe("mode").value;
+  const model = { rows: [], notes: [], columns: [], type: "bar", numericX: false, empty: "No data for this view.", revision: JSON.stringify([G.entry.id, mode, pe("class").value, pe("x").value, pe("y").value]) };
+  if (mode === "labels" || mode === "rels") {
+    const labels = mode === "labels";
+    const entries = [...(labels ? G.labels : G.rels)].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+    Object.assign(model, { title: labels ? "Node label counts" : "Rel type counts", xLabel: labels ? "Node label" : "Rel type", yLabel: labels ? "Nodes" : "Rels", columns: [labels ? "Node label" : "Rel type", labels ? "Nodes" : "Rels"] });
+    model.rows = entries.map(([l, n]) => ({ group: l, x: l, y: n, hover: `${l}\n${peCount(n)} ${labels ? "nodes" : "rels"}`, cells: [l, peCount(n)] }));
+    model.notes.push("Whole graph counts");
+  } else if (mode === "degree") {
+    const selected = peNodes(), degrees = new Map();
+    for (const n of selected) { const k = JSON.stringify([n.node.label, n.degree]); if (!degrees.has(k)) degrees.set(k, { kind: n.node.label, degree: n.degree, n: 0 }); degrees.get(k).n++; }
+    Object.assign(model, { title: "Degree distribution", xLabel: "Degree (in + out)", yLabel: "Nodes", numericX: true, columns: ["Node label", "Degree", "Nodes"] });
+    model.rows = [...degrees.values()].sort((a, b) => a.degree - b.degree).map((v) => ({ group: v.kind, x: v.degree, y: v.n, hover: `${v.kind}\nDegree: ${v.degree}\n${peCount(v.n)} nodes`, cells: [v.kind, peCount(v.degree), peCount(v.n)] }));
+    model.notes.push(`${peCount(selected.length)} nodes · in + out; self-loops count twice`);
+  } else {
+    const selected = peNodes(), x = pe("x").value, y = pe("y").value;
+    const paired = selected.filter((n) => n.values.has(y) && (!x || n.values.has(x)));
+    const xLabel = selected.find((n) => n.values.has(x))?.values.get(x).label || "Node label";
+    const yLabel = selected.find((n) => n.values.has(y))?.values.get(y).label || "Numeric value";
+    Object.assign(model, { title: x ? `${yLabel} vs ${xLabel}` : `${yLabel} distribution`, xLabel, yLabel, type: "scatter", numericX: !!x,
+      columns: ["Node", "Node label", ...(x ? [xLabel] : []), yLabel, "Node ID"],
+      empty: y ? "No node has both properties. Change X or choose None for a Y distribution." : "No numeric properties on these nodes. Explore node labels, rel types, or degree instead." });
+    model.rows = paired.map((n) => ({ group: n.node.label, id: n.node.id, x: n.values.get(x)?.value, y: n.values.get(y).value,
+      hover: `${name(n.node)}\n${n.node.label}\n${yLabel}: ${peFmt(n.values.get(y).value)}${x ? `\n${xLabel}: ${peFmt(n.values.get(x).value)}` : ""}\n${n.node.id}`,
+      cells: [name(n.node), n.node.label, ...(x ? [peFmt(n.values.get(x).value)] : []), peFmt(n.values.get(y).value), n.node.id] }));
+    model.notes.push(`${peCount(paired.length)} of ${peCount(selected.length)} nodes have ${x ? "both properties" : "this property"}`, "Numeric values only; units kept separate");
+  }
+  PE.model = model;
+  peRender();
+}
+const peVisible = () => (PE.model?.rows || []).filter((r) => !PE.hidden.has(r.group) && (!pe("logx").checked || r.x > 0) && (!pe("logy").checked || r.y > 0));
+function peRender() {
+  const m = PE.model;
+  if (!m) return;
+  pe("plot-title").textContent = m.title;
+  pe("logx").disabled = !m.numericX;
+  if (!m.numericX) pe("logx").checked = false;
+  const omitted = m.rows.filter((r) => (pe("logx").checked && !(r.x > 0)) || (pe("logy").checked && !(r.y > 0))).length;
+  const notes = [...m.notes];
+  if (omitted) notes.push(`${peCount(omitted)} nonpositive points omitted on log scales`);
+  if (PE.hidden.size) notes.push(`${peCount(PE.hidden.size)} series hidden`);
+  pe("plot-note").textContent = notes.join(" · ");
+  const groups = new Map();
+  for (const r of m.rows) groups.set(r.group, (groups.get(r.group) || 0) + 1);
+  m.groups = [...groups].sort((a, b) => a[0].localeCompare(b[0])).map(([key, n], i) => ({ key, n, colour: PE_COLOURS[i % PE_COLOURS.length] }));
+  pe("legend").innerHTML = m.groups.map((g) => `<button type="button" class="pe-legend-item" data-k="${esc(g.key)}" aria-pressed="${!PE.hidden.has(g.key)}" title="Hide or show ${esc(g.key)}">
+    <span class="pe-swatch" style="background:${g.colour}"></span><span>${esc(g.key)}</span>${m.type === "scatter" ? `<span class="pe-count">${peCount(g.n)}</span>` : ""}</button>`).join("");
+  pe("legend").querySelectorAll("button").forEach((b) => (b.onclick = () => { const k = b.dataset.k; PE.hidden.has(k) ? PE.hidden.delete(k) : PE.hidden.add(k); PE.page = 0; peRender(); }));
+  document.querySelectorAll("[data-view]").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.view === PE.view)));
+  const rows = peVisible();
+  pe("empty").hidden = !!rows.length;
+  pe("empty").textContent = !m.rows.length ? m.empty : PE.hidden.size === m.groups.length ? "All series are hidden. Click a legend entry to show it." : "No positive values for these log scales. Turn off Log X or Log Y.";
+  pe("chart-wrap").hidden = PE.view !== "chart" || !rows.length;
+  pe("table-wrap").hidden = PE.view !== "table" || !rows.length;
+  pe("reset").hidden = PE.view !== "chart" || !rows.length;
+  if (PE.view === "table") peTable(); else if (rows.length) peChart(rows);
+}
+function peChart(rows) {
+  const m = PE.model;
+  if (!window.Plotly) { pe("chart-wrap").hidden = true; pe("empty").hidden = false; pe("empty").textContent = "The chart library could not load. Use Table to explore the values."; return; }
+  const cs = getComputedStyle(document.documentElement), col = (k) => cs.getPropertyValue(k).trim();
+  const logx = pe("logx").checked, logy = pe("logy").checked;
+  const distribution = m.type === "scatter" && !m.numericX;              // a stable spread shows repeated values; Y stays exact
+  const offsets = new Map(m.rows.map((r, i) => [r, (((i * 0.61803398875) % 1) - 0.5) * 0.36]));
+  const traces = m.groups.map((g, gi) => {
+    const pts = rows.filter((r) => r.group === g.key);
+    const tr = { type: m.type, name: g.key, uid: g.key, visible: PE.hidden.has(g.key) ? "legendonly" : true,
+      x: pts.map((r) => (distribution ? gi + offsets.get(r) : r.x)), y: pts.map((r) => r.y), customdata: pts.map((r) => r.id || ""),
+      text: pts.map((r) => esc(r.hover).replace(/\n/g, "<br>")), hovertemplate: "%{text}<extra></extra>", marker: { color: g.colour } };
+    if (m.type === "scatter") { tr.mode = "markers"; tr.marker = { color: g.colour, size: 10, opacity: 0.9, line: { color: g.colour, width: 1.5 } }; }
+    return tr;
   });
-  const W = 440, H = 280, m = { l: 56, r: 12, t: 10, b: 40 };
-  const svgEl = d3.select("#viz-svg");
-  svgEl.selectAll("*").remove();
-  if (!pts.length) { $("viz-note").textContent = "No row has both values in one unit."; return; }
-  const ext = (k, lo, hi) => d3.extent(pts.flatMap((p) => [p[k], p[lo] ?? p[k], p[hi] ?? p[k]]));
-  const x = d3.scaleLinear().domain(ext("x", "xlo", "xhi")).nice().range([m.l, W - m.r]);
-  const y = d3.scaleLinear().domain(ext("y", "ylo", "yhi")).nice().range([H - m.b, m.t]);
-  const ink = "#c9cbd3";
-  const axisInk = (g) => { g.selectAll("path,line").attr("stroke", ink).attr("stroke-width", 1).attr("stroke-opacity", 0.5); g.selectAll("text").attr("fill", ink); };
-  svgEl.append("g").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6)).call(axisInk);
-  svgEl.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6)).call(axisInk);
-  svgEl.append("text").attr("x", (m.l + W - m.r) / 2).attr("y", H - 6).attr("text-anchor", "middle").attr("fill", ink).attr("font-size", 11)
-    .text(xc ? `${xc}${xu ? ` (${xu})` : ""}` : "row");
-  svgEl.append("text").attr("transform", `translate(14,${(m.t + H - m.b) / 2}) rotate(-90)`).attr("text-anchor", "middle").attr("fill", ink).attr("font-size", 11)
-    .text(`${yc}${yu ? ` (${yu})` : ""}`);
-  const g = svgEl.append("g");
-  g.selectAll("line.err").data(pts.filter((p) => p.ylo != null)).join("line").attr("class", "err")
-    .attr("x1", (p) => x(p.x)).attr("x2", (p) => x(p.x)).attr("y1", (p) => y(p.ylo)).attr("y2", (p) => y(p.yhi)).attr("stroke", "#4ab3f0").attr("stroke-opacity", 0.6);
-  g.selectAll("circle").data(pts).join("circle").attr("cx", (p) => x(p.x)).attr("cy", (p) => y(p.y)).attr("r", 4.5)
-    .attr("fill", "#4ab3f0").attr("fill-opacity", 0.85).attr("stroke", "#0f121c").style("cursor", (p) => (p.id ? "pointer" : null))
-    .on("click", (_ev, p) => p.id && goTo(p.id))
-    .append("title").text((p) => `${p.label ? `${p.label}\n` : ""}${yc}: ${p.y}${yu ? ` ${yu}` : ""}${xc ? `\n${xc}: ${p.x}${xu ? ` ${xu}` : ""}` : ""}`);
-  const notes = [`${pts.length} rows plotted`];
-  if (skipped.unit) notes.push(`${skipped.unit} in another unit left out`);
-  if (skipped.missing) notes.push(`${skipped.missing} without both values`);
-  $("viz-note").textContent = `${notes.join(" · ")}. Values as reported; a range is drawn as a bar. Click a point for its record.`;
+  const axis = { gridcolor: col("--pe-grid"), zerolinecolor: col("--pe-axis"), linecolor: col("--pe-axis"), automargin: true };
+  const layout = {
+    paper_bgcolor: col("--bg"), plot_bgcolor: col("--bg"), font: { color: col("--muted"), family: "Inter, system-ui, sans-serif", size: 12 },
+    margin: { t: 42, r: 24, b: 64, l: 70 }, autosize: true, showlegend: false, hovermode: "closest", dragmode: "zoom",
+    uirevision: `${m.revision}:${logx}:${logy}`, barmode: "stack", bargap: 0.2,
+    xaxis: { ...axis, title: { text: esc(m.xLabel), standoff: 16 }, type: logx ? "log" : m.numericX || distribution ? "linear" : "category", categoryorder: "array", categoryarray: m.rows.map((r) => r.x),
+      ...(distribution ? { tickmode: "array", tickvals: m.groups.map((_, i) => i), ticktext: m.groups.map((g) => esc(g.key)), range: [-0.5, m.groups.length - 0.5] } : {}) },
+    yaxis: { ...axis, title: { text: esc(m.yLabel), standoff: 14 }, type: logy ? "log" : "linear", rangemode: m.type === "bar" ? "tozero" : "normal" },
+    hoverlabel: { bgcolor: col("--bg"), font: { color: col("--fg") }, align: "left" },
+  };
+  const config = { responsive: true, displaylogo: false, scrollZoom: true, modeBarButtonsToRemove: ["select2d", "lasso2d"], toImageButtonOptions: { filename: `${G.entry.id}-explorer`, scale: 2 } };
+  Plotly.react(pe("chart"), traces, layout, config).then((el) => {
+    el.removeAllListeners?.("plotly_click");
+    el.on("plotly_click", (ev) => { const id = ev.points?.[0]?.customdata; if (id && G.byId.has(id)) select(id); });
+  });
 }
+function peTable() {
+  const m = PE.model, q = pe("search").value.trim().toLocaleLowerCase();
+  const rows = peVisible().filter((r) => !q || r.cells.some((v) => String(v).toLocaleLowerCase().includes(q)));
+  const pages = Math.max(1, Math.ceil(rows.length / PE_PAGE));
+  PE.page = Math.min(PE.page, pages - 1);
+  pe("table").innerHTML = `<thead><tr>${m.columns.map((c) => `<th scope="col">${esc(c)}</th>`).join("")}</tr></thead><tbody>${
+    rows.slice(PE.page * PE_PAGE, (PE.page + 1) * PE_PAGE).map((r) => `<tr${r.id ? ` data-id="${esc(r.id)}"` : ""}>${r.cells.map((v) => `<td>${esc(v)}</td>`).join("")}</tr>`).join("")
+    || `<tr><td colspan="${m.columns.length}">No rows match this search.</td></tr>`}</tbody>`;
+  pe("table").querySelectorAll("tr[data-id]").forEach((tr) => (tr.onclick = () => select(tr.dataset.id)));
+  pe("table-count").textContent = `${peCount(rows.length)} rows${q ? " matching" : ""}`;
+  pe("page-count").textContent = `Page ${PE.page + 1} of ${pages}`;
+  pe("prev").disabled = PE.page === 0; pe("next").disabled = PE.page + 1 >= pages;
+}
+function togglePlot(on) {
+  PE.on = on;
+  $("viz-btn").setAttribute("aria-pressed", String(on));
+  $("plot-host").hidden = !on;
+  $("canvas").classList.toggle("is-plotting", on);
+  if (on && G) { if (PE.mountedFor !== G) { PE.mountedFor = G; peMount(); } else peRender(); }
+}
+pe("mode").onchange = () => { peControls(); PE.hidden.clear(); PE.page = 0; peBuild(); };
+pe("class").onchange = () => { peSyncAxes({}); PE.hidden.clear(); PE.page = 0; peBuild(); };
+pe("y").onchange = () => { peSyncAxes({ y: pe("y").value }); PE.page = 0; peBuild(); };
+pe("x").onchange = () => { PE.page = 0; peBuild(); };
+pe("logx").onchange = pe("logy").onchange = () => peRender();
+document.querySelectorAll("[data-view]").forEach((b) => (b.onclick = () => { PE.view = b.dataset.view; peRender(); }));
+pe("reset").onclick = () => window.Plotly && Plotly.relayout(pe("chart"), { "xaxis.autorange": true, "yaxis.autorange": true });
+pe("search").oninput = () => { PE.page = 0; peTable(); };
+pe("prev").onclick = () => { PE.page--; peTable(); };
+pe("next").onclick = () => { PE.page++; peTable(); };
 
 // ------------------------------------------------------------------------------------------ answers in words
 // The API key stays in this browser: sessionStorage, or localStorage when the reader asks to remember it.
@@ -753,7 +855,7 @@ $("search-form").onsubmit = (e) => {
   if (!q || !G) return;
   store.get("scale-api-key") ? ask(q) : search(q);
 };
-$("viz-btn").onclick = () => G && vizCard();
+$("viz-btn").onclick = () => G && togglePlot(!PE.on);
 $("labels-btn").onclick = () => { S.linkLabels = linkLabelsShown() ? "off" : "on"; draw(); };
 $("unhide-btn").onclick = () => { S.hidden.clear(); draw(); };
 const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")]];
@@ -800,7 +902,59 @@ $("export-menu").querySelectorAll("[data-export]").forEach((b) => (b.onclick = (
 function panel(which, on) {
   $("grid").classList.toggle(`${which}-off`, !on);
   $(`${which}-show`).hidden = on;
+  relayout();
 }
+// The canvas changed width: the graph re-centres once (not on every frame of a drag) and the explorer's chart refits.
+function relayout() {
+  if (S.sim && !S.viewMoved) setTimeout(() => fit(), 50);
+  if (PE.on && window.Plotly && !pe("chart-wrap").hidden) setTimeout(() => Plotly.Plots.resize(pe("chart")), 50);
+}
+// The panels' widths are the reader's: a drag on a border (measured from the grid's edge), the arrow keys (Shift for
+// bigger steps), double-click or Home for the default. Each is kept between its minimum and half the window, and
+// remembered on this device.
+function resizer(handle, prop, side, min, def) {
+  const grid = $("grid"), key = `scale-explorer-${prop}`;
+  const max = () => Math.max(min, Math.round(window.innerWidth * 0.5));
+  let width = def;
+  try { width = Number(localStorage.getItem(key)) || def; } catch { /* storage off */ }
+  const paint = () => { const shown = Math.min(width, max()); grid.style.setProperty(`--${prop}`, `${shown}px`); handle.setAttribute("aria-valuenow", String(shown)); };
+  const apply = (px) => { width = Math.round(Math.min(Math.max(px, min), max())); paint(); };
+  const keep = () => { try { localStorage.setItem(key, String(width)); } catch { /* storage off */ } relayout(); };
+  handle.setAttribute("aria-valuemin", String(min));
+  apply(width);
+  let dragging = false;
+  handle.addEventListener("pointerdown", (e) => {
+    dragging = true; handle.dataset.dragging = "true"; document.body.dataset.resizing = "true";
+    try { handle.setPointerCapture(e.pointerId); } catch { /* unsupported */ }
+    e.preventDefault();
+  });
+  handle.addEventListener("pointermove", (e) => {
+    if (!dragging) return;
+    const r = grid.getBoundingClientRect();
+    apply(side === "left" ? e.clientX - r.left : r.right - e.clientX);
+  });
+  const end = (e) => {
+    if (!dragging) return;
+    dragging = false; delete handle.dataset.dragging; delete document.body.dataset.resizing;
+    try { handle.releasePointerCapture(e.pointerId); } catch { /* released */ }
+    keep();
+  };
+  handle.addEventListener("pointerup", end);
+  handle.addEventListener("pointercancel", end);
+  handle.addEventListener("dblclick", () => { apply(def); keep(); });
+  handle.addEventListener("keydown", (e) => {
+    const step = e.shiftKey ? 48 : 16, grow = side === "left" ? 1 : -1;
+    let next = null;
+    if (e.key === "ArrowLeft") next = width - step * grow;
+    else if (e.key === "ArrowRight") next = width + step * grow;
+    else if (e.key === "Home") next = def;
+    if (next === null) return;
+    e.preventDefault(); apply(next); keep();
+  });
+  window.addEventListener("resize", paint);                 // a narrower window shows less, the chosen width is kept
+}
+resizer($("rail-resizer"), "rail-w", "left", 200, 280);
+resizer($("inspector-resizer"), "inspector-w", "right", 240, 300);
 $("rail-collapse").onclick = () => panel("rail", false);
 $("rail-show").onclick = () => panel("rail", true);
 $("inspector-collapse").onclick = () => panel("inspector", false);
