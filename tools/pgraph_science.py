@@ -12,6 +12,7 @@ model was fitted to is read from the records, not judged).
 
 from __future__ import annotations
 
+import re
 from collections import defaultdict
 from typing import Any, Iterator
 
@@ -250,6 +251,26 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
         if e.get("type") == "REPLICATES" and p.get("level") == "reproduce" and not p.get("changed"):
             warn(e["id"], "a reproduction lists what changed (data, sample, method, team, site, …)")
 
+    # ---- a computation's level of theory is a name of the electronic-structure method it uses (advisory, for schemas
+    #      that can say so)
+    if "USES_METHOD" in edges_def:
+        used = defaultdict(list)
+        for e in links:
+            if e.get("type") == "USES_METHOD" and label.get(e.get("target")) == "Method":
+                used[e.get("source")].append(e["target"])
+        for src, methods in used.items():
+            lot = props.get(src, {}).get("level_of_theory")
+            es = [m for m in methods if props.get(m, {}).get("method_kind") in ELECTRONIC_STRUCTURE]
+            if not es or not (isinstance(lot, dict) and lot.get("status") == "present"
+                              and isinstance(lot.get("text_value"), str)):
+                continue
+            names = {_name(n) for m in es for n in [props[m].get("name"), *_list(props[m].get("aliases"))]
+                     if isinstance(n, str)}
+            if _name(lot["text_value"]) not in names:
+                warn(src, f"level_of_theory {lot['text_value']!r} is none of the names of the electronic-structure method "
+                          f"it uses ({', '.join(sorted(str(props[m].get('name') or m) for m in es))}); a comparison reads "
+                          "level_of_theory, so state the method's name there, or add the source's name to its aliases")
+
     # ---- structure: self-links, acyclic orderings, revisions
     kernel_edges = {t for t, d in edges_def.items() if d.get("module") == "kernel"}
     for e in links:
@@ -289,6 +310,19 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             warn(e.get("source"), f"inputs revised: {e['target']} was used at version {used}; version {now} is current")
 
     lifecycle_checks(doc, spec, rep, nodes, links, props, inc)
+
+
+ELECTRONIC_STRUCTURE = ("exchange_correlation_functional", "wavefunction_method", "semiempirical_method")
+
+
+def _list(v: Any) -> list:
+    """A list property's items, or none when it is not a list (the type check reports that)."""
+    return v if isinstance(v, list) else []
+
+
+def _name(s: str) -> str:
+    """A method's name as it is matched: case, spaces, hyphens and underscores ignored (BEEF-vdW, beef vdw)."""
+    return re.sub(r"[\s\-_]+", "", s.casefold())
 
 
 FIT_ROLES = ("training_data", "calibration_data")          # the inputs a calibration fits a model to

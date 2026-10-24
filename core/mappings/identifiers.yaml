@@ -93,3 +93,18 @@ schemes:
     pattern: ^[A-Z]{2} ?[A-Z]{0,2}[0-9]([0-9 ,./-]*[0-9])?( ?[A-Z][0-9]?)?$
     resolves: https://worldwide.espacenet.com/patent/search?q=pn%3D{id}
     example: US1625924A
+  libxc:               # a functional made of several libxc functionals lists their names joined by + (exchange first);
+                      # LDA_X (Slater exchange) is the one name without a suffix
+    name: Libxc functional name (Lehtola et al., SoftwareX 2018, 7, 1, doi:10.1016/j.softx.2017.11.002)
+    pattern: ^(LDA_X|(HYB_)?(LDA|GGA|MGGA)_(X|C|XC|K)(_[A-Z0-9]+)+)(\+(LDA_X|(HYB_)?(LDA|GGA|MGGA)_(X|C|XC|K)(_[A-Z0-9]+)+))*$
+    example: GGA_X_RPBE+GGA_C_PBE
+  catalysis_hub:       # a publication's id, from its first author, the first word of its title and its year
+    name: Catalysis-Hub.org publication id (Winther et al., Sci. Data 2019, 6, 75, doi:10.1038/s41597-019-0081-y)
+    pattern: ^[A-Za-z]+[0-9]{4}[A-Za-z]?$
+    resolves: https://www.catalysis-hub.org/publications/{id}
+    example: MamunHighT2019
+  nomad:               # an entry's id: 28 URL-safe characters
+    name: NOMAD entry id (Scheidgen et al., J. Open Source Softw. 2023, 8, 5388, doi:10.21105/joss.05388)
+    pattern: ^[A-Za-z0-9_-]{28}$
+    resolves: https://nomad-lab.eu/prod/v1/api/v1/entries/{id}
+    example: ----9KNOtIZc9bDFEWxgjeSRsJrC

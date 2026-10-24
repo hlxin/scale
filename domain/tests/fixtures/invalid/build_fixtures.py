@@ -37,6 +37,7 @@ VERSION = load_doc(BASE)["graph"]["schema_version"]      # the version a fixture
 AGENTIC = REPO / "domain/examples/scale-catal/agentic-examples/self-driving-campaign.json"
 TRANSIENT = REPO / "domain/examples/scale-catal/transient-examples/transient-kinetics.json"
 THERMAL = REPO / "domain/examples/scale-catal/thermal-examples/thermal-contribution.json"
+METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-methods.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -314,6 +315,19 @@ def main() -> None:
     defect("partition-method-not-in-vocabulary", "an analysis of the thermal contribution whose method is stated in other words",
            lambda d: node(d, "analysis/irradiance-dependence")["props"].__setitem__("partition_method", "dark_control"),
            base=load_doc(THERMAL))
+    methods = load_doc(METHODS)
+
+    def method_link(d: dict, typ: str, source: str) -> dict:
+        return next(e for e in d["links"] if e["type"] == typ and e["source"] == f"ex:cm/{source}")
+    defect("failure-kind-not-in-vocabulary", "a failed calculation whose failure is stated in other words",
+           lambda d: node(d, "computation/o-ni111-first-attempt")["props"].__setitem__("failure_kind", "scf_failed"),
+           base=methods)
+    defect("method-kind-not-in-vocabulary", "a method whose kind is stated in other words",
+           lambda d: node(d, "method/rpbe")["props"].__setitem__("method_kind", "functional"), base=methods)
+    defect("uses-method-of-software", "a computation that names its code as the method it applies",
+           lambda d: method_link(d, "USES_METHOD", "computation/o-pt111").__setitem__("target",
+                                                                                     "ex:cm/software/plane-wave-code"),
+           base=methods)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

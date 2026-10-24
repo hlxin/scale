@@ -259,7 +259,9 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   gives them, `not_reported` when it does not, and its dispersion, +U, spin, solvation and settings. Keep files in
   checksummed Datasets. For a machine-learned prediction, name the model, its checkpoint and the data it was fitted to.
   Never flip a sign, fill in a method or read a method text into these fields; the recipes (Computational details)
-  say where each goes.
+  say where each goes. From scale-catal 0.7.5, each method a calculation applies (its functional, its dispersion
+  correction) is a Method record it `USES_METHOD`, a benchmark of a method `EVALUATES` it, and a failed calculation
+  says what stopped it (`failure_kind`, `status_reason`) when the source reports it.
 - **Agentic campaigns and their models** (scale-catal 0.7.2 on). A campaign in which an agent chooses the next
   experiments is a Design of kind `adaptive`: record, as the source states them, its `autonomy_level` (TRACE-AI's
   A0-A5; `not_reported` when the source names none, never read off the workflow), `human_oversight`, `interventions`,

@@ -128,6 +128,12 @@ def test_an_identifier_matches_its_pattern_as_a_whole_and_a_bad_one_is_never_an_
      ["2300.00001", "2313.00001", "2301.00001v0", "hep-th/9913001"]),
     ("inchikey", ["XLYOFNOQVPJJNP-UHFFFAOYSA-N", "XLYOFNOQVPJJNP-UHFFFAOYNA-N"],
      ["XLYOFNOQVPJJNP-UHFFFAOYXA-N", "XLYOFNOQVPJJNP-UHFFFAOYSB-N"]),
+    ("libxc", ["LDA_X", "LDA_X+LDA_C_PW", "GGA_X_PBE+GGA_C_PBE", "GGA_X_RPBE+GGA_C_PBE", "GGA_X_PBE_R",
+               "GGA_X_PBE_SOL+GGA_C_PBE_SOL", "GGA_XC_BEEFVDW", "HYB_GGA_XC_HSE06", "MGGA_X_R2SCAN+MGGA_C_R2SCAN"],
+     ["GGA_X", "GGA_X_", "GGA_X__", "GGA_X_PBE_", "GGA_X_PBE__SOL", "gga_x_pbe", "GGA_X_PBE+", "GGA_X_PBE++GGA_C_PBE",
+      "GGA_X_PBE + GGA_C_PBE", "PBE", "HYB_GGA_XC_HSE06+GGA_X"]),
+    ("catalysis_hub", ["MamunHighT2019"], ["2019", "Mamun-High-2019", "MamunHighT19"]),
+    ("nomad", ["----9KNOtIZc9bDFEWxgjeSRsJrC"], ["----9KNOtIZc9bDFEWxgjeSRsJr", "----9KNOtIZc9bDFEWxgjeSRsJrC!"]),
 ])
 def test_a_scheme_takes_its_documented_forms_and_refuses_impossible_ones(scheme, good, bad):
     """A patent number keeps its separators and kind code as printed but has a number; an arXiv identifier has a month

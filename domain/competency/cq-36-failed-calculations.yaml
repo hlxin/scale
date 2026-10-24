@@ -1,0 +1,51 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-36
+question: Which calculations failed, why, and what change made a later run succeed?
+description: |
+  A calculation that failed or was aborted (experiment_status) says what stopped it (failure_kind, and the source's
+  words in status_reason). The rerun that succeeded REPLICATES it (level repeat): the link's note says what was changed,
+  and the two runs' settings show it. The example's self-consistent loop on Ni(111) converged once started from
+  magnetic moments with slower density mixing, and its nudged elastic band found the saddle point with more images.
+  An agent writing the same calculation starts from what worked.
+documents:
+  - examples/scale-catal/method-examples/computational-methods.json
+plan:
+  question: Which calculations failed, why, and what made the rerun succeed?
+  match:
+    label: Computation
+    as: failed
+    where:
+      - prop: experiment_status
+        op: in
+        value:
+          - failed
+          - aborted
+  steps:
+    - from: failed
+      edge: REPLICATES
+      direction: in
+      to: Computation
+      as: rerun
+      edge_as: retry
+      optional: true
+  return:
+    - failed.name
+    - failed.failure_kind
+    - failed.status_reason
+    - failed.settings
+    - retry.note
+    - rerun.name
+    - rerun.experiment_status
+    - rerun.settings
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    failed.failure_kind:
+      - electronic_not_converged
+      - saddle_point_not_found
+    rerun.experiment_status:
+      - completed

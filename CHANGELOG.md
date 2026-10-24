@@ -2,6 +2,30 @@
 
 ## Unreleased
 
+- **Schema 0.7.5 (additive): the methods calculations apply, benchmarks of a method, and failed calculations.**
+  Requested by @hlxin (computational records for corpora that mix in silico and physical experiments). A calculation
+  named its functional only in text (`level_of_theory`), so a benchmark of a functional or a limitation a source states
+  about it could not be found from the calculations that use it, and nothing said why a calculation failed. All new
+  terms are provisional.
+  - **Methods as records.** A Method (kernel) is a named method or approximation: an exchange-correlation functional
+    (with its rung, `functional_class`), a dispersion correction (its variant, such as D3's damping, in `version`), a
+    basis set, a pseudopotential set, a solvation model, a family of interatomic potentials or a statistical method,
+    with its `aliases` and defining `reference`. An experiment `USES_METHOD` it; `level_of_theory` keeps the name the
+    source gives, and the validator warns when it is none of the names of the electronic-structure method the
+    calculation uses. A benchmark `EVALUATES` the Method (`evaluation_kind: benchmark`), and a limitation a source states
+    is a Claim `ABOUT` it.
+  - **Failures.** An experiment that failed or was aborted states why (`status_reason`, kernel); a Computation states
+    what stopped it (`failure_kind`: electronic_not_converged, geometry_not_converged, saddle_point_not_found,
+    unintended_state, numerical_error, resource_limit, input_error, software_error). The checklist asks a failed
+    calculation for both; the rerun that succeeded `REPLICATES` it.
+  - **Identifiers.** Schemes for a functional's libxc names (`GGA_X_RPBE+GGA_C_PBE`, which tells RPBE from revPBE), a
+    Catalysis-Hub.org publication and a NOMAD entry.
+  - **Why these first.** An audit of ten open-access catalysis papers that combine DFT or microkinetics with
+    experiments found that all nine with atomistic calculations cite their functional, five benchmark it against
+    reference values and seven state its limitations; four of nine name D3 without its damping.
+  - An example (method-examples), CQ-35 and CQ-36, three counterexamples, tests. Existing documents keep 0.7.4; the
+    migration step rewrites nothing.
+
 - **Fewer skills, named for what they act on.** `curate-source` and `curate-dataset` are merged into **`curate-corpus`**
   (version 0.3.0): one skill curates one publication, one data file (its section *A data file*) or a frozen corpus of
   many sources (a run through subagents with a second reading, `references/runs.md` and `scripts/curate_run.py`).
