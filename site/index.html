@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,160 +11,160 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
   <link rel="stylesheet" href="explorer.css">
   <script>
-    // the reader's theme, else the system's (before the page paints)
-    try { const t = localStorage.getItem("scale-theme"); document.documentElement.dataset.theme = t || (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark"); } catch { /* storage off */ }
+    // the system's theme (before the page paints)
+    try { document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch { /* old browser */ }
   </script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
 </head>
 <body>
-<div class="sx-page">
-  <header class="sx-toolbar">
-    <div class="sx-toolbar-row">
-      <h1 class="sx-title"><span class="sx-brand">SCALE</span><span class="sx-sep" aria-hidden="true">·</span><span class="sx-subtitle">Graph Explorer</span></h1>
-      <div class="sx-toolbar-right">
-        <a class="sx-link" href="publication.html">Curate one publication</a>
-        <button class="sx-btn sx-btn-ghost" id="theme" type="button" title="Light or dark" aria-label="Switch the theme">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5 V5 M12 19 V21.5 M2.5 12 H5 M19 12 H21.5 M5.2 5.2 L6.9 6.9 M17.1 17.1 L18.8 18.8 M5.2 18.8 L6.9 17.1 M17.1 6.9 L18.8 5.2"/></svg>
-        </button>
-        <button class="sx-btn sx-btn-ghost" id="settings" type="button" title="Model and API key" aria-label="Model and API key">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12 L20 3 M17 6 L20 9 M15 8 L17 10"/></svg>
-        </button>
-      </div>
-    </div>
-    <form class="sx-search" id="search-form" role="search">
-      <div class="sx-mode" role="tablist" aria-label="Search or ask">
-        <button type="button" class="sx-mode-btn active" data-mode="search" role="tab">Search evidence</button>
-        <button type="button" class="sx-mode-btn" data-mode="ask" role="tab">Ask</button>
-      </div>
-      <input type="search" class="sx-search-input" id="search-input" placeholder="Search the evidence, e.g. copper zinc catalyst" autocomplete="off" spellcheck="false">
-      <button type="submit" class="sx-search-submit" aria-label="Go" title="Go">
-        <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 L21 4 L14 21 L11 13 Z"/></svg>
+<div class="gx-page">
+  <header class="gx-toolbar">
+    <button class="gx-viz" id="query-btn" type="button" title="Write and run a query plan">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 V4"/><path d="M4 20 H20"/><path d="M8 16 L12 11 L15 14 L20 8"/></svg>
+      <span>Query</span>
+    </button>
+    <form class="gx-search" id="search-form" role="search" aria-label="Search the graph">
+      <span class="gx-search-prefix" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16"/></svg>
+      </span>
+      <input type="search" class="gx-search-input" id="search-input" placeholder="Search by asking..." autocomplete="off" spellcheck="false">
+      <button type="button" class="gx-search-key" id="settings" title="Your API key, for answers in words" aria-label="API key and model">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="15" r="4"/><path d="M11 12 L20 3 M17 6 L20 9 M15 8 L17 10"/></svg>
+      </button>
+      <button type="submit" class="gx-search-submit" aria-label="Search the graph" title="Search the graph">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 L21 4 L14 21 L11 13 Z"/></svg>
       </button>
     </form>
   </header>
 
-  <div class="sx-grid" id="grid">
-    <aside class="sx-rail" aria-label="Graphs">
-      <header class="sx-panel-head">
-        <h2 class="sx-panel-title">Graphs</h2>
-        <button class="sx-icon-btn" id="rail-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+  <div class="gx-grid" id="grid">
+    <aside class="gx-rail" aria-label="Graphs">
+      <header class="gx-panel-head">
+        <h2 class="gx-panel-title">Graphs</h2>
+        <button class="gx-toggle" id="rail-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
         </button>
       </header>
-      <label class="sx-open-file">
+      <label class="gx-add-graph" title="Open a scale-catal graph file from this computer">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5 V19 M5 12 H19"/></svg>
         <span>Open a graph file</span>
         <input type="file" id="graph-file" accept=".json,application/json" hidden>
       </label>
-      <div class="sx-graphs" id="graphs" role="list"></div>
-      <footer class="sx-rail-summary"><div id="summary">Loading…</div><div class="sx-status" id="status" aria-live="polite">Starting…</div></footer>
+      <div class="gx-graphs" id="graphs" role="list" aria-label="Graphs"></div>
+      <footer class="gx-rail-summary"><div id="summary">Displaying 0 nodes, 0 relationships.</div><div class="gx-status" id="status" aria-live="polite">Starting…</div>
+        <a class="gx-foot-link" href="publication.html">Curate one publication into a graph →</a></footer>
     </aside>
 
-    <main class="sx-canvas" id="canvas">
-      <button class="sx-show sx-show-left" id="rail-show" type="button" title="Show panel" aria-label="Show the graphs panel" hidden>
+    <main class="gx-canvas" id="canvas">
+      <button class="gx-show gx-show-left" id="rail-show" type="button" title="Show panel" aria-label="Show the graphs panel" hidden>
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
       </button>
-      <button class="sx-show sx-show-right" id="inspector-show" type="button" title="Show panel" aria-label="Show the details panel" hidden>
+      <button class="gx-show gx-show-right" id="inspector-show" type="button" title="Show panel" aria-label="Show the details panel" hidden>
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
       </button>
-      <div class="sx-actions">
-        <div class="sx-actions-group">
-          <div class="sx-menu-wrap">
-            <button class="sx-btn" id="layout-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Change the layout">
+      <div class="gx-actions">
+        <div class="gx-actions-group">
+          <div class="gx-menu-wrap">
+            <button class="gx-btn" id="layout-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Change the layout">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M8 6.5 L16 7 M7 8 L11 16 M17 9 L13 16"/></svg>
               <span id="layout-label">Force</span>
             </button>
-            <div class="sx-menu" id="layout-menu" role="menu" hidden>
-              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="force">Force-directed<small>Clusters by connection</small></button>
-              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="hierarchical">Hierarchical<small>Layers along the link direction</small></button>
-              <button class="sx-menu-item" type="button" role="menuitemradio" data-layout="radial">Radial<small>Around the selected record, or the hubs</small></button>
+            <div class="gx-menu" id="layout-menu" role="menu" hidden>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="force" aria-checked="true">Force-directed<small>Clusters by connection</small></button>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="hierarchical" aria-checked="false">Hierarchical<small>Layers along relationship direction</small></button>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="radial" aria-checked="false">Radial<small>Hubs in the centre; around the selected node if one is selected</small></button>
             </div>
           </div>
-          <button class="sx-btn" id="labels-btn" type="button" aria-pressed="true" title="Show or hide link names">
+          <button class="gx-btn" id="labels-btn" type="button" aria-pressed="false" title="Show or hide relationship labels">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 L9 6 L14 17 M6 13 H12 M16 9 H21 M16 13 H21 M16 17 H21"/></svg>
             <span>Labels</span>
           </button>
-          <button class="sx-btn" id="map-btn" type="button" title="The map of record types">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/><path d="M10.5 7 H17 V13.5"/></svg>
-            <span>Types</span>
-          </button>
-          <button class="sx-btn" id="query-btn" type="button" title="Run a query plan">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 5 L3 12 L8 19 M16 5 L21 12 L16 19"/></svg>
-            <span>Query</span>
+          <button class="gx-btn" id="unhide-btn" type="button" title="Bring hidden nodes back" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 C5 6 19 6 22 12 C19 18 5 18 2 12 Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span id="unhide-label">Show hidden</span>
           </button>
         </div>
-        <div class="sx-actions-group">
-          <button class="sx-btn sx-btn-ghost" id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out">
+        <div class="gx-actions-group">
+          <button class="gx-btn gx-btn-ghost" id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14"/></svg>
           </button>
-          <button class="sx-btn sx-btn-ghost" id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in">
+          <button class="gx-btn gx-btn-ghost" id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14 M11 8 V14"/></svg>
           </button>
-          <button class="sx-btn sx-btn-ghost" id="fit" type="button" title="Fit the graph to the view" aria-label="Fit to view">
+          <button class="gx-btn gx-btn-ghost" id="fit" type="button" title="Fit graph to view" aria-label="Fit to view">
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9 V4 H9 M20 9 V4 H15 M4 15 V20 H9 M20 15 V20 H15"/></svg>
           </button>
-          <button class="sx-btn sx-btn-ghost" id="locate" type="button" title="Centre on the selected record" aria-label="Locate the selection" disabled>
+          <button class="gx-btn gx-btn-ghost" id="locate" type="button" title="Centre on the selected node" aria-label="Locate selection" disabled>
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.6"/><path d="M12 2 V5 M12 19 V22 M2 12 H5 M19 12 H22"/></svg>
           </button>
-          <div class="sx-menu-wrap">
-            <button class="sx-btn sx-btn-ghost" id="export-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Export" aria-label="Export">
+          <div class="gx-menu-wrap">
+            <button class="gx-btn gx-btn-ghost" id="export-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Export the current view" aria-label="Export">
               <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 V15 M7 10 L12 15 L17 10 M5 19 H19"/></svg>
             </button>
-            <div class="sx-menu sx-menu-right" id="export-menu" role="menu" hidden>
-              <button class="sx-menu-item" type="button" data-export="png">Image of the view (PNG)</button>
-              <button class="sx-menu-item" type="button" data-export="graph">The whole graph (JSON)</button>
+            <div class="gx-menu gx-menu-right" id="export-menu" role="menu" hidden>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="png">Image (PNG)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="svg">Vector (SVG)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="nodes-csv">Nodes (CSV)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="edges-csv">Relationships (CSV)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="graph">The graph (scale-catal JSON)</button>
             </div>
           </div>
+          <button class="gx-btn gx-btn-ghost" id="refresh" type="button" title="Lay the graph out again" aria-label="Refresh">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 A9 9 0 0 1 19.5 7"/><path d="M21 12 A9 9 0 0 1 4.5 17"/><path d="M19.5 4 V8 H15.5"/><path d="M4.5 20 V16 H8.5"/></svg>
+          </button>
         </div>
       </div>
-      <div class="sx-cy" id="cy"></div>
-      <div class="sx-empty" id="empty"><p>Loading…</p></div>
-      <div class="sx-hint" id="hint">Circle size grows with links · drag to rearrange · scroll to zoom · double-click a record to expand its neighbourhood</div>
+      <svg class="gx-svg" id="svg" role="img" aria-label="Graph visualization">
+        <defs><marker id="gx-arrow" viewBox="0 -5 10 10" refX="9" refY="0" markerWidth="10" markerHeight="10" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,-5 L10,0 L0,5" fill="context-stroke"/></marker></defs>
+        <g id="zoom-layer"><g class="gx-links" id="links"></g><g class="gx-nodes" id="nodes"></g></g>
+      </svg>
+      <div class="gx-empty" id="empty"><p>Loading graph…</p></div>
+      <div class="gx-hint">Circle area scales with connectivity · drag nodes to rearrange · scroll to zoom · double-click a node to expand its neighbourhood</div>
 
-      <aside class="sx-card" id="card" hidden aria-label="Results">
-        <header class="sx-card-head">
-          <span class="sx-card-title" id="card-title">Answer</span>
-          <button class="sx-icon-btn" id="card-collapse" type="button" title="Collapse" aria-label="Collapse">
+      <aside class="gx-card" id="card" hidden aria-label="Answer">
+        <header class="gx-card-head">
+          <span class="gx-card-title" id="card-title">Answer</span>
+          <button class="gx-icon-btn" id="card-collapse" type="button" title="Collapse" aria-label="Collapse">
             <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
           </button>
-          <button class="sx-icon-btn" id="card-close" type="button" title="Dismiss" aria-label="Dismiss">
+          <button class="gx-icon-btn" id="card-close" type="button" title="Dismiss" aria-label="Dismiss">
             <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
           </button>
         </header>
-        <div class="sx-card-body" id="card-body"></div>
+        <div class="gx-card-body" id="card-body"></div>
       </aside>
     </main>
 
-    <aside class="sx-inspector" aria-label="Details">
-      <header class="sx-panel-head">
-        <button class="sx-icon-btn" id="inspector-back" type="button" title="Back to the types" aria-label="Back to the types" hidden>
+    <aside class="gx-inspector" aria-label="Inspector">
+      <header class="gx-panel-head">
+        <button class="gx-toggle" id="inspector-back" type="button" title="Back to labels" aria-label="Back to labels, types &amp; props" hidden>
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
         </button>
-        <h2 class="sx-panel-title" id="inspector-title">Record types &amp; links</h2>
-        <button class="sx-icon-btn" id="inspector-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+        <h2 class="gx-panel-title" id="inspector-title">Labels, types &amp; props</h2>
+        <button class="gx-toggle" id="inspector-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
         </button>
       </header>
-      <section id="legend">
-        <h3 class="sx-section-title">Record types</h3>
-        <div class="sx-pills" id="kinds"></div>
-        <h3 class="sx-section-title">Link types</h3>
-        <div class="sx-pills" id="rels"></div>
+      <section class="gx-legend" id="legend">
+        <h3 class="gx-section-title">Node labels</h3>
+        <div class="gx-pill-row" id="kinds"></div>
+        <h3 class="gx-section-title">Relationship types</h3>
+        <div class="gx-pill-row" id="rels"></div>
       </section>
-      <article id="record" hidden></article>
+      <article class="gx-record" id="record" hidden></article>
     </aside>
   </div>
 </div>
 
-<dialog class="sx-dialog" id="key-dialog">
+<dialog class="gx-dialog" id="key-dialog">
   <form method="dialog">
-    <h2>Asking questions</h2>
-    <p class="sx-muted">A model follows SCALE's query-graph skill: it searches the evidence, writes query plans, runs them in
-      this page and answers only from the rows they return. It uses your own Anthropic API key, sent only to
-      api.anthropic.com and kept in this browser.</p>
-    <label>API key <input type="password" id="api-key" placeholder="sk-ant-…" autocomplete="off"></label>
+    <h2>Answers in words</h2>
+    <p class="gx-muted">With a key, “Search by asking” answers in words: a model follows SCALE's query-graph skill, searches
+      the evidence, writes query plans, runs them in this page and answers only from the rows they return. Without one it
+      lists the evidence that matches. The key is sent only to api.anthropic.com and kept in this browser.</p>
+    <label>Anthropic API key <input type="password" id="api-key" placeholder="sk-ant-…" autocomplete="off"></label>
     <label>Model
       <select id="model">
         <option value="claude-opus-5-5">Claude Opus 5.5</option>
@@ -172,8 +172,8 @@
         <option value="claude-haiku-5-5">Claude Haiku 5.5</option>
       </select>
     </label>
-    <label class="sx-check"><input type="checkbox" id="remember-key"> Remember the key on this device</label>
-    <menu><button class="sx-btn" value="cancel">Close</button><button class="sx-btn sx-btn-primary" id="key-save" value="save">Save</button></menu>
+    <label class="gx-check"><input type="checkbox" id="remember-key"> Remember the key on this device</label>
+    <menu><button class="gx-btn" value="cancel">Close</button><button class="gx-btn gx-btn-primary" id="key-save" value="save">Save</button></menu>
   </form>
 </dialog>
 <script type="module" src="explorer.js"></script>

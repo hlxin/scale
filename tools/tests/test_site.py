@@ -84,7 +84,7 @@ def test_the_explorer_runs_scales_own_tools_and_the_readers_key_stays_in_the_bro
     assert 'src="explorer.js"' in page and 'href="publication.html"' in page
     assert "py/scale-py.zip" in worker and "ScaleToolkit" in worker
     # every script comes from a pinned version
-    assert "pyodide/v0.26.4/" in worker and "@anthropic-ai/sdk@0.133.0" in js
+    assert "pyodide/v0.26.4/" in worker and "@anthropic-ai/sdk@0.133.0" in js and "d3/7.9.0/" in page
     # the key goes only to the API, from the reader's browser, and is never written into the page's data
     assert "dangerouslyAllowBrowser: true" in js and "sessionStorage" in js
     assert "query-graph.md" in js
