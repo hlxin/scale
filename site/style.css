@@ -59,3 +59,21 @@ blockquote { margin: .3rem 0; padding: .3rem .6rem; border-left: 3px solid var(-
 .answer pre { white-space: pre-wrap; background: var(--code); padding: .5rem; border-radius: 6px; font-size: .78rem; }
 .hits { font-size: .85rem; }
 .hit { border-top: 1px solid var(--line); padding: .4rem 0; cursor: pointer; }
+
+/* the graph explorer (index.html) */
+.foot { padding: .4rem 16px 1rem; }
+.warn { color: var(--warn); }
+.mono, textarea.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .8rem; }
+.labels { display: flex; flex-wrap: wrap; gap: .3rem; }
+.chip { padding: .15rem .5rem; border-radius: 999px; font-size: .8rem; border-left: 4px solid var(--c); }
+.badge { display: inline-block; padding: 0 .4rem; border-radius: 4px; font-size: .75rem; border: 1px solid var(--c); color: var(--text); }
+.records ul.list { list-style: none; padding: 0; margin: .3rem 0; max-height: 40vh; overflow: auto; }
+.records ul.list li { padding: .15rem 0; border-top: 1px solid var(--line); overflow-wrap: anywhere; }
+.answer table.grid { border-collapse: collapse; width: 100%; font-size: .8rem; display: block; overflow-x: auto; }
+.answer table.grid th, .answer table.grid td { border: 1px solid var(--line); padding: .2rem .35rem; vertical-align: top; text-align: left; }
+.tabpane { margin-top: .3rem; }
+#side, #inspect { max-height: calc(100vh - 140px); overflow: auto; }
+@media (max-width: 1100px) { #side, #inspect { max-height: none; } }
+#graph-select, #plan-pick { width: 100%; max-width: 100%; }
+.layout > * { min-width: 0; }
+.view-head h2 { overflow-wrap: anywhere; }

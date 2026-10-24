@@ -224,6 +224,10 @@ Before collaborators are invited, and again before the repository is made public
 
 Publish to PyPI only with the first release ([release-process.md](release-process.md)).
 
+**GitHub Pages** (the graph explorer, [site/](../site/)): Settings → Pages → Build and deployment → Source: GitHub
+Actions. `.github/workflows/pages.yml` then builds and publishes the site on every push to main, with a token that
+writes only to Pages; no secret is needed.
+
 ## Checklist
 
 - [ ] earlier contents of the address backed up and renamed or archived; nothing of them pushed into this
@@ -236,3 +240,4 @@ Publish to PyPI only with the first release ([release-process.md](release-proces
 - [x] `v*` tag ruleset; `pypi` environment; PyPI trusted publisher (the environment's required reviewers and
       `v*` tag policy once the repository is public: GitHub offers them free only on public repositories)
 - [x] reviewers beyond the owner added (more join as they are invited)
+- [ ] GitHub Pages source set to GitHub Actions (the graph explorer)

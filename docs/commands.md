@@ -32,6 +32,7 @@ Every command below runs the same way with `uvx scale-catal …` (no install) or
 | an issue or pull request with every comment, review and line comment (read-only; what the agents read) | `scale thread N [--format json]` |
 | readable catalogue of a document, comment links | `scale catalogue G --out FILE`, `scale suggest --record ID \| --text … [--title …]` |
 | implementation-status inventory | `scale status [--format markdown] [--out FILE]` |
+| the static site (GitHub Pages): the graph explorer, the repository's graphs and their query plans, and the `scale` package it runs in the browser | `scale site build [--out DIR]` (default `_site`, emptied first) |
 
 SCALE reads and writes one data format, scale-catal documents (node-link JSON), each pinning the schema
 version it follows.

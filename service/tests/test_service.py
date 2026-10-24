@@ -188,7 +188,7 @@ def test_links_are_fetched_only_from_public_addresses():
 
 def test_the_page_names_the_service_and_the_readme_links_the_page():
     site = REPO / "site"
-    html = (site / "index.html").read_text(encoding="utf-8")
+    html = (site / "publication.html").read_text(encoding="utf-8")
     assert "config.js" in html and "app.js" in html
     assert "SCALE_SERVICE_URL" in (site / "config.js").read_text(encoding="utf-8")
     assert "hlxin.github.io/scale" in (REPO / "README.md").read_text(encoding="utf-8")

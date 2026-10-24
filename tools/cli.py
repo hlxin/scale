@@ -1125,6 +1125,12 @@ def cmd_evidence_access(args):
 
 # ---------------------------------------------------------------- parser
 
+def cmd_site_build(args):
+    from . import site
+    print(json.dumps(site.build(_repo(args), Path(args.out)), indent=1))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="scale", description="SCALE — Shared Concepts, Attributes, and Links with Evidence")
     p.add_argument("--version", action="version", version=f"scale {__version__}")
@@ -1468,6 +1474,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--no-index", action="store_true", help="do not rebuild the evidence index of a changed document")
     sp.add_argument("--out", help="also write the report (JSON) here")
 
+    st = sub.add_parser("site", help="the static site: the graph explorer, published by GitHub Pages").add_subparsers(
+        dest="sub", required=True)
+    sp = add("build", cmd_site_build, "write the site: the pages of site/, the repository's graphs and their query plans, "
+             "and the scale package the explorer runs in the browser (Pyodide)", st)
+    sp.add_argument("--out", default="_site", help="the folder to write (emptied first; default _site)")
     sp = add("status", cmd_status, "print the implementation-status inventory")
     sp.add_argument("--format", choices=["text", "json", "markdown"], default="text"); sp.add_argument("--out")
     return p

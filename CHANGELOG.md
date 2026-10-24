@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- **The graph explorer, on GitHub Pages (no schema change).** Requested by @hlxin (view and query the repository's
+  graphs outside the Alchemic platform, from the GitHub repository). `site/index.html` picks one of the repository's
+  graphs (the curated graphs and the real example, built from their parts, and the catalysis domain's synthetic
+  examples, labelled as such) or a graph file, draws a map of its record types and the neighbourhood of a record, shows
+  each record's properties as reported and its verbatim evidence, searches the evidence and runs query plans (the
+  competency questions and saved queries that run on the graph are offered). The search and the plans are SCALE's own
+  code, run in the browser by Pyodide from the `scale` package the site ships, so they give the rows `scale graph
+  search` and `scale graph query` give, and nothing leaves the browser. A question in plain language runs the
+  query-graph skill with a model, through the reader's own Anthropic API key (kept in the browser). `scale site build`
+  writes the site; `.github/workflows/pages.yml` publishes it on every push to main (Pages must be switched to GitHub
+  Actions once, a person's step). The page that curates one publication moves to `site/publication.html`.
+  - **Fixed:** the evidence index could not be built where numpy's integers are 32 bits (WebAssembly): `bincount` is
+    given the platform's integers. Nothing changes on a 64-bit machine.
+
 - **Fewer skills, named for what they act on.** `curate-source` and `curate-dataset` are merged into **`curate-corpus`**
   (version 0.3.0): one skill curates one publication, one data file (its section *A data file*) or a frozen corpus of
   many sources (a run through subagents with a second reading, `references/runs.md` and `scripts/curate_run.py`).

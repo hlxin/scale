@@ -1,7 +1,7 @@
 # The SCALE web service
 
 One publication into a graph from a web page: a user uploads a PDF or gives a DOI or a link. The service fetches it,
-curates it into a scale-catal graph, and returns the graph for the page in [`site/`](../site/) to show and to answer
+curates it into a scale-catal graph, and returns the graph for the page [`site/publication.html`](../site/publication.html) to show and to answer
 questions from.
 
 ## What it does
@@ -107,9 +107,9 @@ These steps create accounts and hold secrets, so agents never do them:
    repository's contents and pull requests (pushes to main stay blocked by the ruleset), and set its token as
    `SCALE_WEB_GITHUB_TOKEN`.
 4. **The page.** Set `window.SCALE_SERVICE_URL` in `site/config.js` to the service's URL, by a pull request.
-5. **GitHub Pages.** Publish `site/` with Pages: Settings → Pages → Source: GitHub Actions, and a workflow that
-   uploads `site/` (`actions/upload-pages-artifact` with `path: site`, then `actions/deploy-pages`). A workflow is a
-   change a person makes.
+5. **GitHub Pages.** Settings → Pages → Source: GitHub Actions. The workflow `.github/workflows/pages.yml` builds the
+   site (`scale site build`) and publishes it on every push to main: the graph explorer at the root, this page at
+   `publication.html`.
 
 The endpoints are listed in the docstring of [`scaleweb/app.py`](scaleweb/app.py). The tests,
 `service/tests/test_service.py`, use a scripted model and never call GitHub or the API.
