@@ -572,22 +572,92 @@ function rowsMatch(r) {
   S.match = new Set((r.rows || []).flatMap((x) => Object.values(x.bound || {})).filter((id) => G.byId.has(id)));
   markMatches();
 }
-function queryCard() {
-  const opts = `<option value="">${questions.length ? "Questions that run on this graph…" : "No saved questions for this graph"}</option>`
+// The Visualization: a saved question (or any plan) run by SCALE, its rows plotted. Values are plotted as reported, one
+// unit per axis: rows in another unit are left out of the plot and counted (incompatible units are never mixed).
+function numberOf(v) {
+  if (!v || typeof v !== "object" || v.status !== "present") return null;
+  if (typeof v.value === "number") return { x: v.value, unit: v.unit || "" };
+  if (typeof v.lower === "number" && typeof v.upper === "number") return { x: (v.lower + v.upper) / 2, lo: v.lower, hi: v.upper, unit: v.unit || "" };
+  return null;
+}
+function numericColumns(rows) {
+  const cols = [...new Set(rows.flatMap((r) => Object.keys(r.values || {})))];
+  return cols.filter((c) => rows.filter((r) => numberOf(r.values?.[c])).length >= 2);
+}
+function vizCard() {
+  const opts = `<option value="">${questions.length ? "A question of this graph…" : "No saved questions for this graph: write a plan"}</option>`
     + questions.map((q, i) => `<option value="${i}">${esc(q.id)}: ${esc(String(q.question || "").slice(0, 100))}</option>`).join("");
-  card("Query plan", `<select id="plan-pick">${opts}</select>
-    <textarea id="plan" rows="9" spellcheck="false" placeholder='{"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name"], "limit": 10}'></textarea>
-    <p><button class="gx-btn gx-btn-primary" id="plan-go" type="button">Run</button>
-      <span class="gx-meta">match, steps, where, return, evidence, limit · <a href="https://github.com/hlxin/scale/blob/main/docs/querying.md">docs/querying.md</a></span></p>
-    <div id="plan-out"></div>`);
-  $("plan-pick").onchange = (e) => { const q = questions[Number(e.target.value)]; if (q) $("plan").value = JSON.stringify(q.plan, null, 2); };
-  $("plan-go").onclick = async () => {
+  card("Visualization", `<select id="plan-pick">${opts}</select>
+    <div id="viz-out"><p class="gx-meta">Pick a question, or write a plan below and run it.</p></div>
+    <details id="plan-box"><summary>The plan</summary>
+      <textarea id="plan" rows="9" spellcheck="false" placeholder='{"match": {"label": "CatalyticTest", "as": "t"}, "return": ["t.name", "t.temperature", "t.pressure"]}'></textarea>
+      <p><button class="gx-btn gx-btn-primary" id="plan-go" type="button">Run</button>
+        <span class="gx-meta">match, steps, where, return · <a href="https://github.com/hlxin/scale/blob/main/docs/querying.md">docs/querying.md</a></span></p></details>`);
+  const run = async () => {
     let plan;
-    try { plan = JSON.parse($("plan").value); } catch (err) { $("plan-out").innerHTML = `<p class="gx-card-warn">The plan is not JSON: ${esc(err.message)}</p>`; return; }
-    $("plan-out").innerHTML = `<p class="gx-meta">Running…</p>`;
-    try { const r = await scale("query", { plan }); $("plan-out").innerHTML = resultHtml(r); wireIds($("plan-out")); rowsMatch(r); }
-    catch (err) { $("plan-out").innerHTML = `<p class="gx-card-warn">${esc(err.message)}</p>`; }
+    try { plan = JSON.parse($("plan").value); } catch (err) { $("viz-out").innerHTML = `<p class="gx-card-warn">The plan is not JSON: ${esc(err.message)}</p>`; return; }
+    $("viz-out").innerHTML = `<p class="gx-meta">Running…</p>`;
+    try { const r = await scale("query", { plan }); rowsMatch(r); plot(r); }
+    catch (err) { $("viz-out").innerHTML = `<p class="gx-card-warn">${esc(err.message)}</p>`; }
   };
+  $("plan-pick").onchange = (e) => { const q = questions[Number(e.target.value)]; if (q) { $("plan").value = JSON.stringify(q.plan, null, 2); run(); } };
+  $("plan-go").onclick = run;
+  if (questions.length) { $("plan-pick").value = "0"; $("plan").value = JSON.stringify(questions[0].plan, null, 2); run(); }
+}
+function plot(r) {
+  const rows = r.rows || [];
+  if (r.error || !rows.length) { $("viz-out").innerHTML = resultHtml(r); wireIds($("viz-out")); return; }
+  const nums = numericColumns(rows);
+  const data = `<details><summary>Data (${r.row_count ?? rows.length} rows)</summary>${resultHtml(r)}</details>`;
+  if (!nums.length) { $("viz-out").innerHTML = `<p class="gx-meta">These rows hold no numbers to plot.</p>${data}`; wireIds($("viz-out")); return; }
+  const sel = (id, chosen) => `<select id="${id}">${(id === "viz-x" ? ['<option value="">(row order)</option>'] : []).concat(nums.map((c) => `<option ${c === chosen ? "selected" : ""}>${esc(c)}</option>`)).join("")}</select>`;
+  $("viz-out").innerHTML = `<div class="gx-viz-axes"><label>Y ${sel("viz-y", nums[0])}</label><label>X ${sel("viz-x", nums[1] || "")}</label></div>
+    <svg id="viz-svg" class="gx-chart" viewBox="0 0 440 280" role="img" aria-label="Plot of the query's rows"></svg><p class="gx-meta" id="viz-note"></p>${data}`;
+  wireIds($("viz-out"));
+  const draw = () => chart(rows, $("viz-x").value, $("viz-y").value);
+  $("viz-x").onchange = draw; $("viz-y").onchange = draw;
+  draw();
+}
+function chart(rows, xc, yc) {
+  const pick = (c) => { // the most common unit of a column; the rows in another unit are counted, not plotted
+    const units = d3.rollup(rows.map((r) => numberOf(r.values?.[c])).filter(Boolean), (v) => v.length, (d) => d.unit);
+    return [...units].sort((a, b) => b[1] - a[1])[0]?.[0] ?? "";
+  };
+  const yu = pick(yc), xu = xc ? pick(xc) : null;
+  const pts = [], skipped = { unit: 0, missing: 0 };
+  rows.forEach((r, i) => {
+    const y = numberOf(r.values?.[yc]), x = xc ? numberOf(r.values?.[xc]) : { x: i + 1, unit: null };
+    if (!y || !x) { skipped.missing += 1; return; }
+    if (y.unit !== yu || (xc && x.unit !== xu)) { skipped.unit += 1; return; }
+    const id = Object.values(r.bound || {})[0];
+    pts.push({ x: x.x, y: y.x, ylo: y.lo, yhi: y.hi, xlo: x.lo, xhi: x.hi, id, label: id && G.byId.has(id) ? name(G.byId.get(id)) : "" });
+  });
+  const W = 440, H = 280, m = { l: 56, r: 12, t: 10, b: 40 };
+  const svgEl = d3.select("#viz-svg");
+  svgEl.selectAll("*").remove();
+  if (!pts.length) { $("viz-note").textContent = "No row has both values in one unit."; return; }
+  const ext = (k, lo, hi) => d3.extent(pts.flatMap((p) => [p[k], p[lo] ?? p[k], p[hi] ?? p[k]]));
+  const x = d3.scaleLinear().domain(ext("x", "xlo", "xhi")).nice().range([m.l, W - m.r]);
+  const y = d3.scaleLinear().domain(ext("y", "ylo", "yhi")).nice().range([H - m.b, m.t]);
+  const ink = "#c9cbd3";
+  const axisInk = (g) => { g.selectAll("path,line").attr("stroke", ink).attr("stroke-width", 1).attr("stroke-opacity", 0.5); g.selectAll("text").attr("fill", ink); };
+  svgEl.append("g").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).ticks(6)).call(axisInk);
+  svgEl.append("g").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).ticks(6)).call(axisInk);
+  svgEl.append("text").attr("x", (m.l + W - m.r) / 2).attr("y", H - 6).attr("text-anchor", "middle").attr("fill", ink).attr("font-size", 11)
+    .text(xc ? `${xc}${xu ? ` (${xu})` : ""}` : "row");
+  svgEl.append("text").attr("transform", `translate(14,${(m.t + H - m.b) / 2}) rotate(-90)`).attr("text-anchor", "middle").attr("fill", ink).attr("font-size", 11)
+    .text(`${yc}${yu ? ` (${yu})` : ""}`);
+  const g = svgEl.append("g");
+  g.selectAll("line.err").data(pts.filter((p) => p.ylo != null)).join("line").attr("class", "err")
+    .attr("x1", (p) => x(p.x)).attr("x2", (p) => x(p.x)).attr("y1", (p) => y(p.ylo)).attr("y2", (p) => y(p.yhi)).attr("stroke", "#4ab3f0").attr("stroke-opacity", 0.6);
+  g.selectAll("circle").data(pts).join("circle").attr("cx", (p) => x(p.x)).attr("cy", (p) => y(p.y)).attr("r", 4.5)
+    .attr("fill", "#4ab3f0").attr("fill-opacity", 0.85).attr("stroke", "#0f121c").style("cursor", (p) => (p.id ? "pointer" : null))
+    .on("click", (_ev, p) => p.id && goTo(p.id))
+    .append("title").text((p) => `${p.label ? `${p.label}\n` : ""}${yc}: ${p.y}${yu ? ` ${yu}` : ""}${xc ? `\n${xc}: ${p.x}${xu ? ` ${xu}` : ""}` : ""}`);
+  const notes = [`${pts.length} rows plotted`];
+  if (skipped.unit) notes.push(`${skipped.unit} in another unit left out`);
+  if (skipped.missing) notes.push(`${skipped.missing} without both values`);
+  $("viz-note").textContent = `${notes.join(" · ")}. Values as reported; a range is drawn as a bar. Click a point for its record.`;
 }
 
 // ------------------------------------------------------------------------------------------ answers in words
@@ -683,7 +753,7 @@ $("search-form").onsubmit = (e) => {
   if (!q || !G) return;
   store.get("scale-api-key") ? ask(q) : search(q);
 };
-$("query-btn").onclick = () => G && queryCard();
+$("viz-btn").onclick = () => G && vizCard();
 $("labels-btn").onclick = () => { S.linkLabels = linkLabelsShown() ? "off" : "on"; draw(); };
 $("unhide-btn").onclick = () => { S.hidden.clear(); draw(); };
 const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")]];

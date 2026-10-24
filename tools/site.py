@@ -5,8 +5,8 @@
 * the pages of ``site/``: ``index.html`` (the graph explorer) and ``publication.html`` (one publication into a graph,
   which needs the web service, service/README.md);
 * ``data/graphs.json``, the graphs the explorer offers, and ``data/graphs/<id>.json``, each built from its parts
-  (``graphs/*`` and ``examples/*``, as ``scale graph build``) or copied (the catalysis domain's synthetic examples);
-* ``data/questions/<id>.json``, the query plans that run on each graph (its competency questions and saved queries);
+  (``graphs/*`` and ``examples/*``, as ``scale graph build``); the catalysis domain's synthetic examples are not offered;
+* ``data/questions/<id>.json``, the query plans saved beside each graph's parts (``queries/*.yaml``);
 * ``data/query-graph.md``, the query-graph skill, which a question asked in the page follows;
 * ``py/scale-py.zip``, the ``scale`` package with the data a wheel bundles (``layout.BUNDLE``, without the repository's
   examples), which the page runs in Pyodide: a search, a plan or a description in the page is the same code as
@@ -25,7 +25,7 @@ import zipfile
 from pathlib import Path
 
 from . import graphparts, layout
-from .util import load_doc, load_yaml, write_canonical
+from .util import load_yaml, write_canonical
 
 SITE = "site"
 PAGES = ("index.html", "explorer.css", "explorer.js", "worker.js", "publication.html", "app.js", "config.js", "style.css")
@@ -33,10 +33,6 @@ PACKAGE_ZIP = "py/scale-py.zip"
 #: The bundled items the page never reads (the real examples' parts, texts and PDFs are tens of MB; their graphs are
 #: offered as data instead).
 NOT_IN_PACKAGE = (layout.EXAMPLES,)
-
-
-def _slug(text: str) -> str:
-    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
 
 
 def _entry(doc: dict, gid: str, origin: str) -> dict:
@@ -48,39 +44,21 @@ def _entry(doc: dict, gid: str, origin: str) -> dict:
 
 
 def graphs(repo: Path) -> list[tuple[str, str, dict]]:
-    """(id, origin, document) for every graph the site offers: the curated graphs first, then the real examples,
-    then the catalysis domain's synthetic examples. A folder of parts with no source yet is left out."""
+    """(id, origin, document) for every graph the site offers: the curated graphs, then the real examples, each built
+    from its parts. A folder of parts with no source yet is left out, and so are the catalysis domain's synthetic
+    examples (they show the schema, not evidence)."""
     out = []
     for base in (layout.GRAPHS, layout.EXAMPLES):
         for folder in sorted(p for p in (repo / base).glob("*") if (p / "parts" / "header.json").is_file()):
             if not any((folder / "parts" / "sources").glob("*.json")):
                 continue
             out.append((folder.name, f"{base}/{folder.name}", graphparts.build_folder(folder)))
-    decl = load_yaml(repo / layout.DOMAIN / "DOMAIN.yaml")
-    patterns = (decl.get("example_documents") or {}).get("graph") or []
-    seen: set[Path] = set()
-    for pat in patterns:
-        for path in sorted((repo / layout.DOMAIN).glob(pat)):
-            if path in seen or path.name.startswith("_"):
-                continue
-            seen.add(path)
-            rel = path.relative_to(repo / layout.DOMAIN).as_posix()
-            out.append((_slug(rel.removeprefix("examples/scale-catal/").removesuffix(".json")),
-                        f"{layout.DOMAIN}/{rel}", load_doc(path)))
     return out
 
 
 def questions(repo: Path, origins: dict[str, str]) -> dict[str, list[dict]]:
-    """Graph id -> the plans that run on it: the competency questions whose documents include it, and the saved
-    queries beside a graph's parts (``queries/*.yaml``)."""
-    by_doc = {v: k for k, v in origins.items()}
+    """Graph id -> the query plans saved beside its parts (``queries/*.yaml``)."""
     out: dict[str, list[dict]] = {}
-    for f in sorted((repo / layout.DOMAIN / "competency").glob("cq-*.yaml")):
-        q = load_yaml(f)
-        for d in q.get("documents") or []:
-            gid = by_doc.get(f"{layout.DOMAIN}/{d}")
-            if gid and q.get("plan"):
-                out.setdefault(gid, []).append({"id": q.get("id"), "question": q.get("question"), "plan": q["plan"]})
     for gid, origin in origins.items():
         for f in sorted((repo / origin / "queries").glob("*.yaml")) if (repo / origin).is_dir() else []:
             plan = load_yaml(f)

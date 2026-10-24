@@ -29,12 +29,13 @@ def test_the_site_lists_every_graph_with_its_plans(built):
     for e in entries:
         doc = json.loads((out / e["path"]).read_text())
         assert (len(doc["nodes"]), len(doc["links"])) == (e["nodes"], e["links"]), e["id"]
-    synthetic = [e for e in entries if e["from"].startswith("domain/")]
-    assert synthetic and all(e["data_status"] == "synthetic_example" for e in synthetic)
-    # each competency question runs on a graph the site offers, under that graph's id
-    q = json.loads((out / "data/questions/thermal-examples-thermal-contribution.json").read_text())
-    assert [x["id"] for x in q] == ["CQ-34"] and q[0]["plan"]["match"]
-    assert any(x["id"].startswith("q1") for x in json.loads((out / "data/questions/methanol-synthesis-public.json").read_text()))
+    # only real graphs: the catalysis domain's synthetic examples show the schema, not evidence
+    assert all(e["from"].split("/")[0] in ("graphs", "examples") for e in entries)
+    assert not any(e["data_status"] == "synthetic_example" for e in entries)
+    # the plans saved beside a graph's parts run on it, under its id
+    saved = json.loads((out / "data/questions/methanol-synthesis-public.json").read_text())
+    assert any(x["id"].startswith("q1") for x in saved) and all(x["plan"]["match"] for x in saved)
+    assert {e["id"]: e["questions"] for e in entries}["methanol-synthesis-public"] == len(saved)
     assert (out / "data/query-graph.md").read_text().lstrip().startswith("#")       # the skill, without its front matter
     for page in site.PAGES:
         assert (out / page).is_file(), page
@@ -59,16 +60,18 @@ def test_the_package_runs_without_a_checkout(built, tmp_path):
         z.extractall(tmp_path / "lib")
     work = tmp_path / "work"
     work.mkdir()
-    (work / "g.json").write_text((out / "data/graphs/thermal-examples-thermal-contribution.json").read_text())
+    graph = (out / "data/graphs/methanol-synthesis-public.json").read_text()
+    (work / "g.json").write_text(graph)
+    sources = sum(n["label"] == "Source" for n in json.loads(graph)["nodes"])
     code = ("import json; from scale.api import ScaleToolkit; from scale import layout; "
             "k = ScaleToolkit(workspace='work'); "
-            "r = k.call('query', {'path': 'g.json', 'plan': {'match': {'label': 'Analysis', 'as': 'a'}, 'return': ['a.name']}}); "
+            "r = k.call('query', {'path': 'g.json', 'plan': {'match': {'label': 'Source', 'as': 's'}, 'return': ['s.title']}}); "
             "print(json.dumps([r['status'], r['row_count'], str(layout.__file__)]))")
     proc = subprocess.run([sys.executable, "-I", "-c", f"import sys; sys.path.insert(0, 'lib'); {code}"],
                           cwd=tmp_path, capture_output=True, text=True, timeout=120)
     assert proc.returncode == 0, proc.stderr
     status, rows, where = json.loads(proc.stdout)
-    assert (status, rows) == ("answered", 3) and where.startswith(str(tmp_path / "lib"))
+    assert (status, rows) == ("answered", sources) and where.startswith(str(tmp_path / "lib"))
 
 
 def test_the_cli_builds_the_site(tmp_path, capsys):

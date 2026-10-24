@@ -29,8 +29,8 @@ Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to giv
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
 **Or in the browser: [the graph explorer](https://hlxin.github.io/scale/).** Pick one of the repository's graphs
-(or open a graph file), see a map of its record types, step through records with their verbatim evidence, search the
-evidence and run query plans. SCALE's own code runs in the browser (Pyodide), so a search or a plan gives the rows
+(or open a graph file) and see it whole, filter it by label or relationship type, open any node with its verbatim
+evidence, search the evidence, and plot what a saved question or a query plan returns. SCALE's own code runs in the browser (Pyodide), so a search or a plan gives the rows
 `scale graph search` and `scale graph query` give; nothing is sent anywhere. A question in plain language is answered
 by a model following the query-graph skill, with the reader's own Anthropic API key. The page is built by `scale site
 build` and published by GitHub Pages ([`site/`](site/)). A second page, [curate one

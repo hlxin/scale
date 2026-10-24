@@ -154,6 +154,11 @@ code, pre { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
 .gx-meta { color: #a3a6b1; font-size: 11px; }
 .gx-card-warn { color: #f0a35c; }
 
+.gx-viz-axes { display: flex; gap: 10px; margin: 6px 0 2px; }
+.gx-viz-axes label { flex: 1; font-size: 11px; color: #c9cbd3; }
+.gx-chart { width: 100%; height: auto; display: block; margin: 4px 0; }
+.gx-chart .tick text { font-size: 10px; }
+
 /* labels, types and the selected node */
 .gx-section-title { margin: 14px 0 8px; font-size: 12.5px; font-weight: 500; color: var(--fg); }
 .gx-pill-row { display: flex; flex-wrap: wrap; gap: 6px; }
