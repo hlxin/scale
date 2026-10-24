@@ -552,8 +552,10 @@ async function search(q) {
     card(`Matching evidence · ${hits.length}`, (hits.length ? hits.map((h) => `<div class="gx-hit" data-id="${esc(h.record)}">
         <div class="gx-quote">“${esc(h.text)}”</div>
         <div class="gx-meta">${esc(h.label || "")}: ${esc(h.record_name || h.record)} · ${esc(name(G.byId.get(h.source)))}${h.source_year ? ` (${esc(h.source_year)})` : ""}, ${esc(h.locator || "")} · ${Number(h.score || 0).toFixed(3)}</div></div>`).join("")
-      : `<p>No evidence matches “${esc(q)}”.</p>`) + (store.get("scale-api-key") ? "" : `<p class="gx-meta">Add your API key (the key in the search bar) for an answer in words.</p>`));
+      : `<p>No evidence matches “${esc(q)}”.</p>`) + (store.get("scale-api-key") ? "" : `<p class="gx-meta">These are the quotes that match. A written answer needs an Anthropic API key, used from your browser.</p>
+        <p><button class="gx-btn gx-btn-primary" id="answer-in-words" type="button">Answer in words</button></p>`));
     $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => goTo(el.dataset.id)));
+    $("answer-in-words")?.addEventListener("click", () => askFor(q));
   } catch (err) { card("Matching evidence", `<p class="gx-card-warn">${esc(err.message)}</p>`); }
 }
 function resultHtml(r) {
@@ -770,8 +772,28 @@ const keyState = () => $("settings").classList.toggle("on", !!store.get("scale-a
 $("api-key").value = store.get("scale-api-key");
 $("model").value = store.get("scale-model") || "claude-opus-5-5";
 $("remember-key").checked = (() => { try { return !!localStorage.getItem("scale-api-key"); } catch { return false; } })();
-$("settings").onclick = () => $("key-dialog").showModal();
-$("key-save").onclick = () => { store.set("scale-api-key", $("api-key").value.trim(), $("remember-key").checked); store.set("scale-model", $("model").value, true); keyState(); };
+// A question waits while the reader adds a key; saving answers it, closing lists the matching evidence instead.
+let pendingQuestion = null;
+function askFor(q) {
+  if (store.get("scale-api-key")) { ask(q); return; }
+  pendingQuestion = q;
+  $("key-question").hidden = false;
+  $("key-question").textContent = `Your question: “${q}”`;
+  $("key-dialog").showModal();
+  $("api-key").focus();
+}
+$("settings").onclick = () => { pendingQuestion = null; $("key-question").hidden = true; $("key-dialog").showModal(); };
+$("key-save").onclick = (e) => {
+  const key = $("api-key").value.trim();
+  if (!key) { e.preventDefault(); $("api-key").focus(); return; }
+  store.set("scale-api-key", key, $("remember-key").checked); store.set("scale-model", $("model").value, true); keyState();
+};
+$("key-dialog").addEventListener("close", () => {
+  const q = pendingQuestion;
+  pendingQuestion = null;
+  if (!q) return;
+  if ($("key-dialog").returnValue === "save" && store.get("scale-api-key")) ask(q); else search(q);
+});
 keyState();
 
 const TOOLS = [
@@ -815,14 +837,20 @@ async function ask(question) {
       + "extrapolations in a separate, labelled paragraph." }];
     const messages = [{ role: "user", content: question }];
     const plans = [];
-    let tokens = 0, answer = "";
+    let tokens = 0, answer = "", fallbacks = model !== "claude-haiku-5-5";
+    // Refusal fallbacks when the account has them; a request they are refused for is sent again without them.
+    const send = async () => {
+      try {
+        return await client.beta.messages.create({ model, max_tokens: 16000, system, tools: TOOLS, messages, output_config: { effort: "medium" },
+          ...(fallbacks ? { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" } : {}) });
+      } catch (err) {
+        if (fallbacks && err instanceof Anthropic.BadRequestError && /fallback/i.test(String(err.message))) { fallbacks = false; return send(); }
+        throw err;
+      }
+    };
     for (let turn = 0; turn < 16; turn++) {
       say(turn ? `Turn ${turn + 1}…` : "Asking the model…");
-      const r = await client.beta.messages.create({
-        model, max_tokens: 16000, system, tools: TOOLS, messages,
-        ...(model === "claude-haiku-5-5" ? {} : { betas: ["server-side-fallback-2026-07-01"], fallbacks: "default" }),
-        output_config: { effort: "medium" },
-      });
+      const r = await send();
       tokens += (r.usage?.input_tokens || 0) + (r.usage?.output_tokens || 0) + (r.usage?.cache_creation_input_tokens || 0);
       messages.push({ role: "assistant", content: r.content });
       answer = r.content.filter((b) => b.type === "text").map((b) => b.text).join("\n").trim() || answer;
@@ -845,7 +873,13 @@ async function ask(question) {
       ${plans.length ? `<details><summary>How it was answered (${plans.length} plan${plans.length > 1 ? "s" : ""})</summary>${plans.map((p, i) =>
         `<p class="gx-meta">Plan ${i + 1}: ${esc(p.result?.status || p.result?.error || "?")}, ${p.result?.row_count ?? 0} rows</p><pre>${esc(JSON.stringify(p.plan, null, 1))}</pre>`).join("")}</details>` : ""}
       <p class="gx-meta">${esc(model)} · about ${tokens.toLocaleString()} tokens</p>`);
-  } catch (err) { card("Answer", `<p class="gx-card-warn">${esc(err.message || err)}</p>`); }
+  } catch (err) {
+    const status = err?.status;
+    const why = status === 401 ? "The API key was not accepted. Check it under the key in the search bar."
+      : status === 429 ? "The API is busy or the key's rate limit is reached. Try again in a moment."
+      : esc(err.message || err);
+    card("Answer", `<p class="gx-card-warn">${why}</p>`);
+  }
 }
 
 // ------------------------------------------------------------------------------------------ controls
@@ -853,7 +887,7 @@ $("search-form").onsubmit = (e) => {
   e.preventDefault();
   const q = $("search-input").value.trim();
   if (!q || !G) return;
-  store.get("scale-api-key") ? ask(q) : search(q);
+  askFor(q);
 };
 $("viz-btn").onclick = () => G && togglePlot(!PE.on);
 $("labels-btn").onclick = () => { S.linkLabels = linkLabelsShown() ? "off" : "on"; draw(); };

@@ -270,6 +270,7 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
 .gx-dialog input[type=password], .gx-dialog select { display: block; width: 100%; margin-top: 4px; padding: 6px 9px; border: 1px solid var(--line);
   border-radius: 7px; background: var(--bg-input); color: var(--fg); font: inherit; }
 .gx-dialog .gx-check { display: flex; gap: 6px; align-items: center; color: var(--fg); }
+.gx-pending { margin: 10px 0 0; padding: 8px 10px; border-radius: 8px; background: var(--bg-input); font-size: 12.5px; }
 .gx-dialog menu { display: flex; justify-content: flex-end; gap: 8px; padding: 0; margin: 16px 0 0; }
 
 /* narrow screens: the panels stack under the graph */

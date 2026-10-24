@@ -209,10 +209,12 @@
 
 <dialog class="gx-dialog" id="key-dialog">
   <form method="dialog">
-    <h2>Answers in words</h2>
-    <p class="gx-muted">With a key, “Search by asking” answers in words: a model follows SCALE's query-graph skill, searches
-      the evidence, writes query plans, runs them in this page and answers only from the rows they return. Without one it
-      lists the evidence that matches. The key is sent only to api.anthropic.com and kept in this browser.</p>
+    <h2>Answer in words</h2>
+    <p class="gx-muted" id="key-why">This page has no server, so a written answer comes from a model called from your
+      browser with your own Anthropic API key. The model follows SCALE's query-graph skill: it searches the evidence, writes
+      query plans, runs them in this page and answers only from the rows they return, citing them. The key is sent only to
+      api.anthropic.com and kept in this browser.</p>
+    <p class="gx-pending" id="key-question" hidden></p>
     <label>Anthropic API key <input type="password" id="api-key" placeholder="sk-ant-…" autocomplete="off"></label>
     <label>Model
       <select id="model">
@@ -222,7 +224,7 @@
       </select>
     </label>
     <label class="gx-check"><input type="checkbox" id="remember-key"> Remember the key on this device</label>
-    <menu><button class="gx-btn" value="cancel">Close</button><button class="gx-btn gx-btn-primary" id="key-save" value="save">Save</button></menu>
+    <menu><button class="gx-btn" value="cancel" id="key-cancel">Show the matching evidence only</button><button class="gx-btn gx-btn-primary" id="key-save" value="save">Save and answer</button></menu>
   </form>
 </dialog>
 <script type="module" src="explorer.js"></script>
