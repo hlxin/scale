@@ -230,3 +230,8 @@ fixtures:
     reason: A function in a synthesis belongs to an input of a preparation or of a step (HAS_INPUT); a catalyst's
       component has a role in the catalyst (HAS_COMPONENT.role), which says what it is there, not what it did while the
       catalyst was made.
+  - file: ligand-removal-action-as-function.json
+    base: domain/examples/scale-catal/synthesis-examples/staged-colloid.json
+    error: "is not one of"
+    reason: What a step does (remove_ligands) is its action; what an input does in it is its function
+      (ligand_removal_agent), so that steps and the chemicals used in them are found apart.

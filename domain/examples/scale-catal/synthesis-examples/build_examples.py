@@ -543,5 +543,83 @@ def synthesis_strategies() -> dict:
     return d.finish()
 
 
+def staged_colloid() -> dict:
+    """A colloid made in one stage and put on carbon in a second, whose ligands are removed (scale-catal 0.7.7): the
+    whole lists both stages' families, the colloidal stage holds the surfactant, a step that keeps a temperature
+    already reached is a hold, and the ligands come off in a step of their own with the agent that removes them."""
+    d = Doc("ex:stg", "A colloid made in one stage and loaded on carbon in another, its ligands removed (synthetic)")
+    d.source("ptco-cubes", "Ordered PtCo nanocubes on carbon from a one-pot colloidal synthesis")
+    ptco = d.material("ptco-l10", "ordered L1_0 PtCo", formula="PtCo", structure_type="L1_0", material_family="alloy",
+                      crystallinity="crystalline", evidence=[d.ev("Results, XRD")])
+    carbon = d.material("carbon-black", "carbon black", formula="C", material_family="carbon",
+                        evidence=[d.ev("Experimental")])
+    ptacac = d.species("ptacac2", "Pt(C5H7O2)2", {"Pt": 1, "C": 10, "H": 14, "O": 4}, "platinum(II) acetylacetonate")
+    coacac = d.species("coacac2", "Co(C5H7O2)2", {"Co": 1, "C": 10, "H": 14, "O": 4}, "cobalt(II) acetylacetonate")
+    oam = d.species("oleylamine", "C18H37N", {"C": 18, "H": 37, "N": 1}, "oleylamine")
+    top = d.species("top", "C24H51P", {"C": 24, "H": 51, "P": 1}, "trioctylphosphine")
+    acetic = d.species("acetic-acid", "C2H4O2", {"C": 2, "H": 4, "O": 2}, "acetic acid")
+    ethanol = d.species("ethanol", "C2H6O", {"C": 2, "H": 6, "O": 1}, "ethanol")
+    cat = d.node("catalyst/ptco-c", "Catalyst", "PtCo nanocubes/C", catalyst_family="alloy", nominal_formula="PtCo/C",
+                 evidence=[d.ev("Experimental")])
+    d.link("HAS_COMPONENT", cat, ptco, role="active_phase", evidence=[d.ev("Experimental")])
+    d.link("HAS_COMPONENT", cat, carbon, role="support", evidence=[d.ev("Experimental")])
+    batch = d.sample("ptco-c", "PtCo/C", label="CatalystSample", sample_kind="powder")
+    d.link("HAS_FORMULATION", batch, cat)
+    colloid = d.sample("ptco-colloid", "PtCo nanocubes in hexane")
+
+    whole = d.preparation("ptco-c", "PtCo/C: nanocubes made, then loaded on carbon and freed of ligands",
+                          ["thermal_decomposition", "colloidal_reduction", "colloidal_deposition"],
+                          "one-pot colloidal synthesis, then loading on carbon and ligand removal")
+    d.link("HAS_OUTPUT", whole, batch)
+    nc = d.preparation("ptco-nanocubes", "PtCo nanocubes in oleylamine", ["thermal_decomposition", "colloidal_reduction"],
+                       "decomposition and reduction of the acetylacetonates in oleylamine with TOP",
+                       design_aims=["atomic_ordering", "particle_shape"])
+    d.link("PART_OF", nc, whole, order=1)
+    d.link("HAS_OUTPUT", nc, colloid)
+    d.step(nc, 1, "ptco-mix", "Mix the precursors in oleylamine", "mix",
+           inputs=[(ptacac, "reagent", V(0.1, "mmol"), ["metal_precursor"]),
+                   (coacac, "reagent", V(0.1, "mmol"), ["metal_precursor"]),
+                   (oam, "material", V(10, "mL"), ["solvent", "reducing_agent"])], energy_input=["none"])
+    d.step(nc, 2, "ptco-top", "Inject TOP", "inject", inputs=[(top, "reagent", V(0.5, "mL"), ["surfactant"])],
+           temperature=V(353, "K"))
+    d.step(nc, 3, "ptco-heat", "Heat to 523 K", "heat", temperature=V(523, "K"), duration=V(10, "min"),
+           ramp_rate=V(10, "K/min"), atmosphere="N2", energy_input=["thermal"])
+    d.step(nc, 4, "ptco-hold", "Hold at 523 K", "hold", outputs=[colloid], temperature=V(523, "K"),
+           duration=V(30, "min"), atmosphere="N2", energy_input=["thermal"])
+    load = d.preparation("ptco-on-carbon", "Loading on carbon and ligand removal", ["colloidal_deposition"],
+                         "sonication with carbon, then an acetic-acid soak", design_aims=["surface_ligands"])
+    d.link("PART_OF", load, whole, order=2)
+    d.link("HAS_OUTPUT", load, batch)
+    d.step(load, 1, "ptco-load", "Sonicate with carbon black", "sonicate",
+           inputs=[(colloid, "material", V(10, "mg"), None), (carbon, "material", V(40, "mg"), ["support"])],
+           duration=V(2, "h"), energy_input=["ultrasound"])
+    d.step(load, 2, "ptco-strip", "Soak in acetic acid and ethanol to remove the ligands", "remove_ligands",
+           inputs=[(acetic, "reagent", V(10, "mL"), ["ligand_removal_agent"]), (ethanol, "reagent", V(10, "mL"),
+                                                                                ["solvent"])],
+           temperature=V(343, "K"), duration=V(10, "h"), method="immersion", energy_input=["thermal"])
+
+    xrd = d.characterization("ptco-xrd", "XRD of the nanocubes", "powder X-ray diffraction", colloid, "as_prepared",
+                             "Figure 1", information_depth="bulk", sampling="ensemble")
+    xas = d.characterization("ptco-xas", "Pt L3-edge EXAFS", "X-ray absorption spectroscopy", colloid, "as_prepared",
+                             "Figure 2", information_depth="bulk", sampling="ensemble")
+    bond = d.variable("pt-co-bond", "Pt–Co distance (EXAFS fit)", "bond_length", "Å",
+                      "first-shell Pt–Co distance from the fit of the Pt L3-edge EXAFS")
+    fit = d.node("analysis/ptco-exafs-fit", "Analysis", "Fit of the Pt L3-edge EXAFS", analysis_kind="spectral_fit",
+                 method="first-shell fit in R space", limitations="a single Pt–Co path; Pt–Pt held at the foil's value",
+                 result_values=[V(2.68, "Å", id="pt_co", variable=bond, target=ptco, origin="fitted",
+                                  produced_by="ex:stg/analysis/ptco-exafs-fit", evidence_ids=["t1"])],
+                 evidence=[d.ev("Table 1", "table", id="t1")])
+    d.link("HAS_INPUT", fit, xas, role="data")
+    d.state("ptco", "PtCo nanocubes as made", colloid, nc, [xrd, xas], "Figures 1 and 2", particle_shape=["cube"],
+            architecture=["nanoparticles", "intermetallic"], exposed_facets=["{100}"])
+    ftir = d.characterization("ptco-ftir", "FTIR before and after the acid soak", "Fourier-transform infrared spectroscopy",
+                              batch, "as_prepared", "Figure S3", sampling="ensemble",
+                              note="the C-H stretches of oleylamine are gone after the soak")
+    d.state("ptco-c", "PtCo/C after the ligands were removed", batch, load, [ftir], "Figure S3",
+            architecture=["nanoparticles", "intermetallic", "supported"], particle_shape=["cube"])
+    return d.finish()
+
+
 if __name__ == "__main__":
     write_canonical(HERE / "synthesis-strategies.json", synthesis_strategies())
+    write_canonical(HERE / "staged-colloid.json", staged_colloid())
