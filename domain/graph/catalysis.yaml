@@ -530,6 +530,8 @@ nodes:
         - nitridize
         - sulfidize
         - phosphidize
+        - hold
+        - remove_ligands
         description: 'What the step does, as the source does it; `method` says how in its words. Besides the first
           actions: inject (a solution added at once, hot injection), reflux, crystallize (a closed-vessel or aging
           crystallization), centrifuge, sonicate, exchange (ion exchange), ligand_exchange, deposit (from a vapour,
@@ -537,7 +539,9 @@ nodes:
           replace (a galvanic replacement), mill (ball milling, mechanochemistry), spray, evaporate, freeze_dry,
           purge, dose (one precursor pulse of a vapour deposition), quench, disperse, dilute, irradiate (light, a
           laser, an electron or ion beam), shape (extrude, pelletize, granulate), carburize, nitridize, sulfidize,
-          phosphidize.'
+          phosphidize, hold (kept at a temperature already reached, for a time: no ramp), remove_ligands (capping
+          ligands or surfactants taken off a particle surface, by an acid or solvent soak, UV-ozone, a plasma or
+          heating; method says how).'
       temperature:
         type: value
         quantity: temperature
@@ -3351,6 +3355,7 @@ adds_properties:
         - binder
         - substrate
         - ligand
+        - ligand_removal_agent
         - other
       description: 'The function an input serves in a preparation or one of its steps, as the source states it: one
         input may serve several (ethylene glycol solvent and reducing_agent; PVP capping_agent and reducing_agent;
@@ -3363,7 +3368,8 @@ adds_properties:
         mineralizer (OH-, F-); seed; linker and modulator (a framework''s); fuel (of a combustion synthesis);
         carbon_source, nitrogen_source, sulfur_source, phosphorus_source (of a carbide, a N-doped carbon, a sulfide,
         a phosphide); etchant; co_reactant (the second precursor of an ALD cycle: H2O, O3, O2 plasma); carrier_gas;
-        binder; substrate (a body, an electrode or a crystal grown or deposited on); ligand. The kernel''s role
+        binder; substrate (a body, an electrode or a crystal grown or deposited on); ligand; ligand_removal_agent
+        (what takes capping ligands or surfactants off the surface: acetic acid, an amine wash, ozone). The kernel''s role
         (reagent, material) stays what it says: what is added and what it is added to. A function the source does
         not state is not inferred from the chemical.'
 context_targets:
@@ -3924,7 +3930,7 @@ checklist:
           or constrained and their uncertainties are reported; the best model is contrasted with poorer ones)
         should:
         - method
-        - results
+        - result_values
         - limitations
         evidence:
           should:
@@ -3965,7 +3971,7 @@ checklist:
           - numerical
         maturity: provisional
         should:
-        - results
+        - result_values
       - analysis_kind:
           any_of:
           - transport_check
@@ -4332,19 +4338,34 @@ checklist:
           should:
           - name: growth_control
             description: what controls the colloid's growth (an input of a step that is a capping_agent, stabilizer,
-              surfactant or shape_directing_agent), and the agent that reduces the metal where one does
-            path:
-            - edge: PART_OF
-              direction: in
-              label: ProcedureStep
-            - edge: HAS_INPUT
-              edge_where:
-                synthesis_function:
-                  any_of:
-                  - capping_agent
-                  - stabilizer
-                  - surfactant
-                  - shape_directing_agent
+              surfactant or shape_directing_agent), or a stage of the same family (a Preparation PART_OF it), which is
+              asked on its own
+            any_of:
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: ProcedureStep
+              - edge: HAS_INPUT
+                edge_where:
+                  synthesis_function:
+                    any_of:
+                    - capping_agent
+                    - stabilizer
+                    - surfactant
+                    - shape_directing_agent
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: Preparation
+                where:
+                  preparation_methods:
+                    any_of:
+                    - colloidal_reduction
+                    - polyol
+                    - seeded_growth
+                    - hot_injection
+                    - thermal_decomposition
+                    - microemulsion
       - preparation_methods:
           any_of:
           - atomic_layer_deposition
@@ -4352,21 +4373,32 @@ checklist:
         evidence:
           should:
           - name: co_reactant
-            description: the second reactant of each cycle (an input of a step that is a co_reactant)
-            path:
-            - edge: PART_OF
-              direction: in
-              label: ProcedureStep
-            - edge: HAS_INPUT
-              edge_where:
-                synthesis_function:
-                  any_of:
-                  - co_reactant
+            description: the second reactant of each cycle (an input of a step that is a co_reactant), or a stage that
+              is an atomic layer deposition (a Preparation PART_OF it), which is asked on its own
+            any_of:
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: ProcedureStep
+              - edge: HAS_INPUT
+                edge_where:
+                  synthesis_function:
+                    any_of:
+                    - co_reactant
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: Preparation
+                where:
+                  preparation_methods:
+                    any_of:
+                    - atomic_layer_deposition
     ProcedureStep:
       when:
       - action:
           any_of:
           - heat
+          - hold
           - calcine
           - dry
           - age

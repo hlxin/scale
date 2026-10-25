@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- **Schema 0.7.7 (additive): what curating a real synthesis paper asked for.** Curating the syntheses of Gao et al.,
+  Nat. Commun. 2022, 13, 2338 (doi:10.1038/s41467-022-29926-w; ordered B2 CuPd nanocubes in oleylamine, loaded on
+  carbon and soaked in acetic acid) under 0.7.6 found four things the schema could not say or checked wrongly. All
+  new terms are provisional.
+  - **Ligand removal.** A step that takes capping ligands or surfactants off the particles is `action: remove_ligands`
+    (it is not a wash, an etch or a ligand exchange), and what removes them is `synthesis_function:
+    ligand_removal_agent`.
+  - **A hold.** A step that keeps a temperature already reached is `action: hold`; the checklist asks it its
+    temperature and duration, not a ramp, which a heated step is asked.
+  - **Stages in the checklist.** A preparation whose stages are preparations of their own lists their families; what
+    controls a colloid's growth, and an ALD's co-reactant, are now found on a stage of that family, which is asked on
+    its own (0.7.6 asked the whole and found nothing).
+  - **Fits.** A spectral fit and a numerical transport check are asked their `result_values`, the result entries the
+    recipes record, instead of the older `results` map, which 0.7.6 asked for and so counted recorded results as
+    missing.
+  - An example (staged-colloid), a counterexample (the ligand-removal action given as an input's function), tests, the
+    recipes.
+    Existing documents keep 0.7.6; the migration step rewrites nothing.
+
 - **Schema 0.7.6 (additive): syntheses of heterogeneous catalysts by any method, chemistry and strategy.** Requested
   by @hlxin: the schema recorded a preparation's steps with their conditions but not what kind of synthesis it was,
   what each chemical did in it, what it was designed to achieve or the structure it gave, so a question about capping

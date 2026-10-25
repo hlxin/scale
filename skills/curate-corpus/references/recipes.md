@@ -539,7 +539,7 @@ an aim, a shape or a mechanism is never inferred from the chemical or from a typ
   oxidizing_agent, precipitating_agent, ph_modifier, chelating_agent, stabilizer, capping_agent, surfactant,
   shape_directing_agent, structure_directing_agent, template, porogen, mineralizer, seed, linker, modulator, fuel,
   carbon_source, nitrogen_source, sulfur_source, phosphorus_source, etchant, co_reactant, carrier_gas, binder,
-  substrate, ligand, other. One input may serve several (ethylene glycol: `solvent`, `reducing_agent`; PVP:
+  substrate, ligand, ligand_removal_agent (0.7.7), other. One input may serve several (ethylene glycol: `solvent`, `reducing_agent`; PVP:
   `capping_agent`, `stabilizer`); give only those the source names or plainly describes ("ascorbic acid as the
   reductant"). A sacrificial electron donor of a photodeposition is a `reducing_agent`, its role in the `note`.
 - **What drives a step.** `ProcedureStep.energy_input` lists it (thermal, microwave, ultrasound, mechanical,
@@ -548,6 +548,12 @@ an aim, a shape or a mechanism is never inferred from the chemical or from a typ
   `ultrasound_power`, `milling_frequency`, `current_density`, `potential` with the reference electrode in its
   `definition`, `irradiance`). The apparatus is an Instrument the preparation or step `USES_INSTRUMENT`, with its
   `settings` (an autoclave's volume and liner, a mill's jar and balls, an ALD reactor, a microwave reactor, a furnace).
+- **A hold and a ligand removal** (0.7.7). A step that keeps a temperature already reached, for a time, is
+  `action: hold` (asked its temperature and duration, not a ramp); the heating to it is a `heat` step before it. Capping
+  ligands or surfactants taken off the particles (an acid or solvent soak, UV-ozone, a plasma, heating) is a step of its
+  own, `action: remove_ligands`, its `method` saying how and its agent `ligand_removal_agent`; the stage it belongs to
+  aims at `surface_ligands`, and the observation that shows the ligands gone (FTIR, TGA, XPS) determines the state it
+  reaches.
 - **A step repeated as a block.** `repetitions` says how many times a step is carried out, with the sub-steps `PART_OF`
   it in order (the dose, purge, dose and purge of one ALD cycle; the sputter and anneal of one cleaning cycle); the
   block `HAS_INPUT` what its cycle uses, with the function each serves. A step whose repeats differ (a second
@@ -570,7 +576,7 @@ the source does not give is a typed absence):
 
 | families | the steps and inputs | the conditions and outcomes |
 |---|---|---|
-| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the collection (`centrifuge`, washes) and a ligand removal or exchange (`ligand_exchange`, a treatment) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated, with its definition; for a microemulsion the water-to-surfactant ratio |
+| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the heating and the hold (`heat`, then `hold`); the collection (`centrifuge`, washes); a ligand exchange (`ligand_exchange`) or removal (`remove_ligands`, its `ligand_removal_agent`) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated, with its definition; for a microemulsion the water-to-surfactant ratio |
 | colloidal_deposition | the colloid as `material`, the support as `support` | the solvent, time, the loading aimed at |
 | incipient_wetness_impregnation, wet_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` and how it was held; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
 | precipitation, coprecipitation, sol_gel, polymerized_complex, solution_combustion | the precipitating_agent, chelating_agent, fuel, the gel or the ignited mixture as a Sample | the order of addition (Precipitation above), `ph`, aging; the gel's `drying` and the `fuel_to_oxidizer_ratio` with its definition; the ignition temperature |

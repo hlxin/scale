@@ -39,6 +39,7 @@ TRANSIENT = REPO / "domain/examples/scale-catal/transient-examples/transient-kin
 THERMAL = REPO / "domain/examples/scale-catal/thermal-examples/thermal-contribution.json"
 METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-methods.json"
 SYNTHESES = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json"
+STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -341,6 +342,13 @@ def main() -> None:
            lambda d: node(d, "preparation/pt-ald")["props"].__setitem__("preparation_methods", ["ALD"]), base=syntheses)
     defect("particle-shape-not-in-vocabulary", "a state whose particle shape is stated in other words",
            lambda d: node(d, "state/pd-cubes")["props"].__setitem__("particle_shape", ["nanocube"]), base=syntheses)
+
+    def action_as_function(d: dict) -> None:
+        e = next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == "ex:stg/step/ptco-strip"
+                 and e["target"] == "ex:stg/species/acetic-acid")
+        e["props"]["synthesis_function"] = ["remove_ligands"]
+    defect("ligand-removal-action-as-function", "an input whose function is given as the step's action",
+           action_as_function, base=load_doc(STAGED))
 
     def function_on_component(d: dict) -> None:
         e = next(e for e in d["links"] if e["type"] == "HAS_COMPONENT" and e["source"] == "ex:syn/catalyst/pd-cubes-alumina"

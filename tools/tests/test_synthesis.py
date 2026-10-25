@@ -152,3 +152,58 @@ def test_the_structure_obtained_is_a_state_of_the_output(doc):
     assert links(doc, "REACHED_BY", source="state/pd-cubes")[0]["props"]["timing"] == "after"
     st["particle_shape"] = ["nanocube"]
     assert not pgraph.validate(doc, spec_of(doc)).ok
+
+
+# ---------------------------------------------------------------- 0.7.7: what a real paper asked for
+STAGED = EXAMPLES / "scale-catal/synthesis-examples/staged-colloid.json"
+Q = "ex:stg"
+
+
+@pytest.fixture()
+def staged():
+    return copy.deepcopy(load_doc(STAGED))
+
+
+def test_the_staged_example_is_valid_and_finds_every_piece_of_evidence(staged):
+    rep = pgraph.validate(staged, spec_of(staged))
+    assert rep.ok and rep.warnings == [], rep.warnings
+    assert evidence_missing(staged) == {}
+
+
+def test_a_stage_of_the_family_counts_for_what_controls_a_colloids_growth(staged):
+    """The whole lists its stages' families; its colloidal stage holds the surfactant and is asked on its own, so the
+    whole is not asked again (0.7.6 asked it and found nothing, its steps being its stages')."""
+    ev = catalysis(staged)["records"][f"{Q}/preparation/ptco-c"]["evidence"]
+    assert ev["growth_control"]["found"] and ev["growth_control"]["records"] == [f"{Q}/preparation/ptco-nanocubes"]
+    node_ = next(n for n in staged["nodes"] if n["id"] == f"{Q}/preparation/ptco-nanocubes")
+    node_["props"]["preparation_methods"] = ["other"]          # the stage loses its family: the whole is asked again
+    missing = evidence_missing(staged)
+    assert missing.get("growth_control") == [f"{Q}/preparation/ptco-c"]
+
+
+def test_a_hold_is_asked_its_temperature_and_time_not_a_ramp(staged):
+    hold = next(n for n in staged["nodes"] if n["id"] == f"{Q}/step/ptco-hold")["props"]
+    assert hold["action"] == "hold" and "ramp_rate" not in hold
+    rec = catalysis(staged)["records"][f"{Q}/step/ptco-hold"]
+    assert rec["missing"] == {} and rec["expected"] == 2
+    del hold["duration"]
+    assert catalysis(staged)["records"][f"{Q}/step/ptco-hold"]["missing"] == {"ProcedureStep.duration": 1}
+
+
+def test_ligands_come_off_in_a_step_of_their_own_with_the_agent_that_removes_them(staged):
+    strip = next(n for n in staged["nodes"] if n["id"] == f"{Q}/step/ptco-strip")["props"]
+    assert strip["action"] == "remove_ligands"
+    acid = next(e for e in staged["links"] if e["type"] == "HAS_INPUT" and e["source"] == f"{Q}/step/ptco-strip"
+                and e["target"] == f"{Q}/species/acetic-acid")["props"]
+    assert acid["synthesis_function"] == ["ligand_removal_agent"]
+    staged["graph"]["schema_version"] = "0.7.6"                 # the version before it holds none of the three
+    errors = [e["message"] for e in pgraph.validate(staged, spec_of(staged)).errors]
+    assert sum("is not one of" in m for m in errors) == 3, errors
+
+
+def test_a_spectral_fit_is_asked_the_result_entries_the_recipes_record(staged):
+    rec = catalysis(staged)["records"][f"{Q}/analysis/ptco-exafs-fit"]
+    assert "Analysis.result_values" not in rec["missing"] and "Analysis.results" not in rec["missing"]
+    fit = next(n for n in staged["nodes"] if n["id"] == f"{Q}/analysis/ptco-exafs-fit")["props"]
+    del fit["result_values"]
+    assert catalysis(staged)["records"][f"{Q}/analysis/ptco-exafs-fit"]["missing"] == {"Analysis.result_values": 1}

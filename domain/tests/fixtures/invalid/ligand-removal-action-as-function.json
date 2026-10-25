@@ -1,0 +1,1286 @@
+{
+  "nodes": [
+    {
+      "id": "ex:stg/source/ptco-cubes",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Ordered PtCo nanocubes on carbon from a one-pot colloidal synthesis",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Ordered PtCo nanocubes on carbon from a one-pot colloidal synthesis (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:stg/material/ptco-l10",
+      "label": "Material",
+      "props": {
+        "name": "ordered L1_0 PtCo",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "formula": "PtCo",
+        "material_family": "alloy",
+        "origin": "synthetic",
+        "structure_type": "L1_0"
+      }
+    },
+    {
+      "id": "ex:stg/material/carbon-black",
+      "label": "Material",
+      "props": {
+        "name": "carbon black",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "formula": "C",
+        "material_family": "carbon",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/ptacac2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "platinum(II) acetylacetonate",
+        "elemental_composition": {
+          "C": 10,
+          "H": 14,
+          "O": 4,
+          "Pt": 1
+        },
+        "formula": "Pt(C5H7O2)2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/coacac2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "cobalt(II) acetylacetonate",
+        "elemental_composition": {
+          "C": 10,
+          "Co": 1,
+          "H": 14,
+          "O": 4
+        },
+        "formula": "Co(C5H7O2)2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/oleylamine",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oleylamine",
+        "elemental_composition": {
+          "C": 18,
+          "H": 37,
+          "N": 1
+        },
+        "formula": "C18H37N",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/top",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "trioctylphosphine",
+        "elemental_composition": {
+          "C": 24,
+          "H": 51,
+          "P": 1
+        },
+        "formula": "C24H51P",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/acetic-acid",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "acetic acid",
+        "elemental_composition": {
+          "C": 2,
+          "H": 4,
+          "O": 2
+        },
+        "formula": "C2H4O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H6O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/catalyst/ptco-c",
+      "label": "Catalyst",
+      "props": {
+        "name": "PtCo nanocubes/C",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "nominal_formula": "PtCo/C",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/sample/ptco-c",
+      "label": "CatalystSample",
+      "props": {
+        "name": "PtCo/C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:stg/sample/ptco-colloid",
+      "label": "Sample",
+      "props": {
+        "name": "PtCo nanocubes in hexane",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:stg/preparation/ptco-c",
+      "label": "Preparation",
+      "props": {
+        "name": "PtCo/C: nanocubes made, then loaded on carbon and freed of ligands",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "method": "one-pot colloidal synthesis, then loading on carbon and ligand removal",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "thermal_decomposition",
+          "colloidal_reduction",
+          "colloidal_deposition"
+        ]
+      }
+    },
+    {
+      "id": "ex:stg/preparation/ptco-nanocubes",
+      "label": "Preparation",
+      "props": {
+        "name": "PtCo nanocubes in oleylamine",
+        "design_aims": [
+          "atomic_ordering",
+          "particle_shape"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "method": "decomposition and reduction of the acetylacetonates in oleylamine with TOP",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "thermal_decomposition",
+          "colloidal_reduction"
+        ]
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-mix",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mix the precursors in oleylamine",
+        "action": "mix",
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-top",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Inject TOP",
+        "action": "inject",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-heat",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Heat to 523 K",
+        "action": "heat",
+        "atmosphere": "N2",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 10
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 523
+        }
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-hold",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Hold at 523 K",
+        "action": "hold",
+        "atmosphere": "N2",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 30
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 523
+        }
+      }
+    },
+    {
+      "id": "ex:stg/preparation/ptco-on-carbon",
+      "label": "Preparation",
+      "props": {
+        "name": "Loading on carbon and ligand removal",
+        "design_aims": [
+          "surface_ligands"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "method": "sonication with carbon, then an acetic-acid soak",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "colloidal_deposition"
+        ]
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-load",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Sonicate with carbon black",
+        "action": "sonicate",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "energy_input": [
+          "ultrasound"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:stg/step/ptco-strip",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Soak in acetic acid and ethanol to remove the ligands",
+        "action": "remove_ligands",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "method": "immersion",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 343
+        }
+      }
+    },
+    {
+      "id": "ex:stg/characterization/ptco-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of the nanocubes",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:stg/characterization/ptco-xas",
+      "label": "Characterization",
+      "props": {
+        "name": "Pt L3-edge EXAFS",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "X-ray absorption spectroscopy"
+      }
+    },
+    {
+      "id": "ex:stg/variable/pt-co-bond",
+      "label": "Variable",
+      "props": {
+        "name": "Pt–Co distance (EXAFS fit)",
+        "definition": "first-shell Pt–Co distance from the fit of the Pt L3-edge EXAFS",
+        "origin": "synthetic",
+        "quantity_kind": "bond_length",
+        "scale": "quantitative",
+        "unit": "Å"
+      }
+    },
+    {
+      "id": "ex:stg/analysis/ptco-exafs-fit",
+      "label": "Analysis",
+      "props": {
+        "name": "Fit of the Pt L3-edge EXAFS",
+        "analysis_kind": "spectral_fit",
+        "evidence": [
+          {
+            "id": "t1",
+            "kind": "table",
+            "locator": "Table 1",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "limitations": "a single Pt–Co path; Pt–Pt held at the foil's value",
+        "method": "first-shell fit in R space",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "pt_co",
+            "status": "present",
+            "evidence_ids": [
+              "t1"
+            ],
+            "origin": "fitted",
+            "produced_by": "ex:stg/analysis/ptco-exafs-fit",
+            "target": "ex:stg/material/ptco-l10",
+            "unit": "Å",
+            "value": 2.68,
+            "variable": "ex:stg/variable/pt-co-bond"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ex:stg/state/ptco",
+      "label": "CatalystState",
+      "props": {
+        "name": "PtCo nanocubes as made",
+        "architecture": [
+          "nanoparticles",
+          "intermetallic"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figures 1 and 2",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "exposed_facets": [
+          "{100}"
+        ],
+        "origin": "synthetic",
+        "particle_shape": [
+          "cube"
+        ],
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:stg/characterization/ptco-ftir",
+      "label": "Characterization",
+      "props": {
+        "name": "FTIR before and after the acid soak",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure S3",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "experiment_kind": "physical",
+        "note": "the C-H stretches of oleylamine are gone after the soak",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "Fourier-transform infrared spectroscopy"
+      }
+    },
+    {
+      "id": "ex:stg/state/ptco-c",
+      "label": "CatalystState",
+      "props": {
+        "name": "PtCo/C after the ligands were removed",
+        "architecture": [
+          "nanoparticles",
+          "intermetallic",
+          "supported"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure S3",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "particle_shape": [
+          "cube"
+        ],
+        "state_kind": "as_prepared"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:stg/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:stg/catalyst/ptco-c",
+      "target": "ex:stg/material/ptco-l10"
+    },
+    {
+      "id": "ex:stg/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:stg/catalyst/ptco-c",
+      "target": "ex:stg/material/carbon-black"
+    },
+    {
+      "id": "ex:stg/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/sample/ptco-c",
+      "target": "ex:stg/catalyst/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/4",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-c",
+      "target": "ex:stg/sample/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/5",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-nanocubes",
+      "target": "ex:stg/preparation/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/6",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-nanocubes",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/7",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-mix",
+      "target": "ex:stg/preparation/ptco-nanocubes"
+    },
+    {
+      "id": "ex:stg/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:stg/step/ptco-mix",
+      "target": "ex:stg/species/ptacac2"
+    },
+    {
+      "id": "ex:stg/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:stg/step/ptco-mix",
+      "target": "ex:stg/species/coacac2"
+    },
+    {
+      "id": "ex:stg/link/10",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent",
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:stg/step/ptco-mix",
+      "target": "ex:stg/species/oleylamine"
+    },
+    {
+      "id": "ex:stg/link/11",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-top",
+      "target": "ex:stg/preparation/ptco-nanocubes"
+    },
+    {
+      "id": "ex:stg/link/12",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "surfactant"
+        ]
+      },
+      "source": "ex:stg/step/ptco-top",
+      "target": "ex:stg/species/top"
+    },
+    {
+      "id": "ex:stg/link/13",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-heat",
+      "target": "ex:stg/preparation/ptco-nanocubes"
+    },
+    {
+      "id": "ex:stg/link/14",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-hold",
+      "target": "ex:stg/preparation/ptco-nanocubes"
+    },
+    {
+      "id": "ex:stg/link/15",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-hold",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/16",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-on-carbon",
+      "target": "ex:stg/preparation/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/17",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-on-carbon",
+      "target": "ex:stg/sample/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/18",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-load",
+      "target": "ex:stg/preparation/ptco-on-carbon"
+    },
+    {
+      "id": "ex:stg/link/19",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:stg/step/ptco-load",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/20",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:stg/step/ptco-load",
+      "target": "ex:stg/material/carbon-black"
+    },
+    {
+      "id": "ex:stg/link/21",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-strip",
+      "target": "ex:stg/preparation/ptco-on-carbon"
+    },
+    {
+      "id": "ex:stg/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "remove_ligands"
+        ]
+      },
+      "source": "ex:stg/step/ptco-strip",
+      "target": "ex:stg/species/acetic-acid"
+    },
+    {
+      "id": "ex:stg/link/23",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:stg/source/ptco-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:stg/step/ptco-strip",
+      "target": "ex:stg/species/ethanol"
+    },
+    {
+      "id": "ex:stg/link/24",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:stg/characterization/ptco-xrd",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/25",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:stg/characterization/ptco-xas",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/26",
+      "type": "HAS_INPUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "data"
+      },
+      "source": "ex:stg/analysis/ptco-exafs-fit",
+      "target": "ex:stg/characterization/ptco-xas"
+    },
+    {
+      "id": "ex:stg/link/27",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco",
+      "target": "ex:stg/sample/ptco-colloid"
+    },
+    {
+      "id": "ex:stg/link/28",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:stg/state/ptco",
+      "target": "ex:stg/preparation/ptco-nanocubes"
+    },
+    {
+      "id": "ex:stg/link/29",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco",
+      "target": "ex:stg/characterization/ptco-xrd"
+    },
+    {
+      "id": "ex:stg/link/30",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco",
+      "target": "ex:stg/characterization/ptco-xas"
+    },
+    {
+      "id": "ex:stg/link/31",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:stg/characterization/ptco-ftir",
+      "target": "ex:stg/sample/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/32",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco-c",
+      "target": "ex:stg/sample/ptco-c"
+    },
+    {
+      "id": "ex:stg/link/33",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:stg/state/ptco-c",
+      "target": "ex:stg/preparation/ptco-on-carbon"
+    },
+    {
+      "id": "ex:stg/link/34",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco-c",
+      "target": "ex:stg/characterization/ptco-ftir"
+    },
+    {
+      "id": "ex:stg/analysis/ptco-exafs-fit/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/analysis/ptco-exafs-fit",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/catalyst/ptco-c/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/catalyst/ptco-c",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/characterization/ptco-ftir/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/characterization/ptco-ftir",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/characterization/ptco-xas/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/characterization/ptco-xas",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/characterization/ptco-xrd/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/characterization/ptco-xrd",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/material/carbon-black/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/material/carbon-black",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/material/ptco-l10/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/material/ptco-l10",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/preparation/ptco-c/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-c",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/preparation/ptco-nanocubes/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-nanocubes",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/preparation/ptco-on-carbon/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/preparation/ptco-on-carbon",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/sample/ptco-c/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/sample/ptco-c",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/sample/ptco-colloid/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/sample/ptco-colloid",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/state/ptco/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figures 1 and 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/state/ptco-c/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure S3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/state/ptco-c",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-heat/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-heat",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-hold/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-hold",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-load/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-load",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-mix/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-mix",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-strip/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-strip",
+      "target": "ex:stg/source/ptco-cubes"
+    },
+    {
+      "id": "ex:stg/step/ptco-top/reported-in/ptco-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:stg/step/ptco-top",
+      "target": "ex:stg/source/ptco-cubes"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/ligand-removal-action-as-function",
+    "schema": "scale-catal",
+    "schema_version": "0.7.7",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (ligand-removal-action-as-function): an input whose function is given as the step's action"
+  },
+  "multigraph": true
+}

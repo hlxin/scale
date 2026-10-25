@@ -36,6 +36,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.3": ("0.7.4", 'Analysis kind thermal_contribution with partition_method; ThermalContributionAnalysis deprecated, still valid'),
     "0.7.4": ("0.7.5", "methods as records (Method, USES_METHOD) and benchmarks of a method; a failed calculation's status_reason and failure_kind; identifier schemes libxc, catalysis_hub and nomad"),
     "0.7.5": ("0.7.6", 'syntheses of any method: preparation methods, design aims and strategy; the function of each input; energy input and repetitions of a step; particle shape, architecture and facets of a state'),
+    "0.7.6": ("0.7.7", "ligand removal (an action and the agent's function), a hold step; checklist: a stage of a family counts for growth_control and co_reactant, a fit is asked its result_values"),
 }
 
 
