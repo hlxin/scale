@@ -278,7 +278,7 @@ def science_checks(doc: dict, spec: dict, rep) -> None:
             err(e["id"], f"a {e['type']} link joins a record to itself")
         if e.get("type") == "REVISES" and label.get(e.get("source")) != label.get(e.get("target")):
             err(e["id"], "REVISES joins two versions of a record of the same label")
-    for t in ("PART_OF", "PRECEDES", "HAS_PART", "REVISES"):
+    for t in ("PART_OF", "PRECEDES", "HAS_PART", "REVISES", "VARIANT_OF"):
         for cyc in _cyclic([(e["source"], e["target"]) for e in links if e.get("type") == t]):
             err("<graph>", f"{t} forms a cycle: {cyc}")
 

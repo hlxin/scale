@@ -1,0 +1,2595 @@
+{
+  "nodes": [
+    {
+      "id": "ex:cnd/source/pt-sea",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Pt on silica by strong electrostatic adsorption: uptake and dispersion against the pH",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Pt on silica by strong electrostatic adsorption: uptake and dispersion against the pH (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cnd/material/silica",
+      "label": "Material",
+      "props": {
+        "name": "amorphous silica, 200 m2/g",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "formula": "SiO2",
+        "material_family": "oxide",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/pta",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "tetraammineplatinum(II) nitrate",
+        "elemental_composition": {
+          "H": 12,
+          "N": 6,
+          "O": 6,
+          "Pt": 1
+        },
+        "formula": "Pt(NH3)4(NO3)2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/nh4oh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ammonium hydroxide",
+        "elemental_composition": {
+          "H": 5,
+          "N": 1,
+          "O": 1
+        },
+        "formula": "NH4OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/ar",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "argon",
+        "elemental_composition": {
+          "Ar": 1
+        },
+        "formula": "Ar",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:cnd/species/pt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "platinum",
+        "elemental_composition": {
+          "Pt": 1
+        },
+        "formula": "Pt",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:cnd/catalyst/pt-silica",
+      "label": "Catalyst",
+      "props": {
+        "name": "Pt/SiO2 (nominal 1 wt%)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "nominal_formula": "Pt/SiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/sample/pt-sea-11",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pt/SiO2, SEA at pH 11",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:cnd/preparation/pt-sea-11",
+      "label": "Preparation",
+      "props": {
+        "name": "Pt/SiO2 by strong electrostatic adsorption at pH 11",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "method": "SEA of Pt(NH3)4 2+ on silica at pH 11",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "strong_electrostatic_adsorption"
+        ]
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-solution",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Set the water to pH 11 and add the Pt complex",
+        "action": "mix",
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "ph": {
+          "status": "present",
+          "definition": "pH of the solution before the silica was added",
+          "unit": "1",
+          "value": 11.0
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-adsorb",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add the silica and stir",
+        "action": "mix",
+        "agitation": "stirred",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "ph": {
+          "status": "present",
+          "definition": "final pH of the slurry",
+          "unit": "1",
+          "value": 10.8
+        },
+        "stirring_rate": {
+          "status": "present",
+          "unit": "rpm",
+          "value": 300
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-filter",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Filter",
+        "action": "filter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 373
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-reduce",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Reduce in flowing 10 % H2/Ar",
+        "action": "reduce",
+        "atmosphere": "flowing 10% H2/Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-cool",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Cool under Ar",
+        "action": "cool",
+        "atmosphere": "Ar",
+        "cooling_mode": "natural",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "definition": "the temperature it was cooled to",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/sample/pt-sea-9",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pt/SiO2, SEA at pH 9",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:cnd/preparation/pt-sea-9",
+      "label": "Preparation",
+      "props": {
+        "name": "Pt/SiO2 by strong electrostatic adsorption at pH 9",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "method": "SEA of Pt(NH3)4 2+ on silica at pH 9",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "strong_electrostatic_adsorption"
+        ]
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-solution",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Set the water to pH 9 and add the Pt complex",
+        "action": "mix",
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "ph": {
+          "status": "present",
+          "definition": "pH of the solution before the silica was added",
+          "unit": "1",
+          "value": 9.0
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-adsorb",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add the silica and stir",
+        "action": "mix",
+        "agitation": "stirred",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "ph": {
+          "status": "present",
+          "definition": "final pH of the slurry",
+          "unit": "1",
+          "value": 8.8
+        },
+        "stirring_rate": {
+          "status": "present",
+          "unit": "rpm",
+          "value": 300
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-filter",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Filter",
+        "action": "filter",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 373
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-reduce",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Reduce in flowing 10 % H2/Ar",
+        "action": "reduce",
+        "atmosphere": "flowing 10% H2/Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-cool",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Cool under Ar",
+        "action": "cool",
+        "atmosphere": "Ar",
+        "cooling_mode": "natural",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "definition": "the temperature it was cooled to",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/source/ceo2-rods",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: CeO2 nanorods from a hydrothermal route in concentrated NaOH",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CeO2 nanorods from a hydrothermal route in concentrated NaOH (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cnd/species/ce-nitrate",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "cerium(III) nitrate hexahydrate",
+        "elemental_composition": {
+          "Ce": 1,
+          "H": 12,
+          "N": 3,
+          "O": 15
+        },
+        "formula": "Ce(NO3)3·6H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/naoh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium hydroxide",
+        "elemental_composition": {
+          "H": 1,
+          "Na": 1,
+          "O": 1
+        },
+        "formula": "NaOH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H6O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:cnd/instrument/autoclave",
+      "label": "Instrument",
+      "props": {
+        "name": "Teflon-lined stainless-steel autoclave, 100 mL",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "instrument_kind": "autoclave",
+        "origin": "synthetic",
+        "settings": {
+          "volume": {
+            "status": "present",
+            "unit": "mL",
+            "value": 100
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/sample/ceo2-rods",
+      "label": "Sample",
+      "props": {
+        "name": "CeO2 nanorods",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:cnd/preparation/ceo2-rods",
+      "label": "Preparation",
+      "props": {
+        "name": "CeO2 nanorods by hydrothermal synthesis at 373 K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "method": "hydrothermal precipitation in concentrated NaOH, then calcination",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "hydrothermal"
+        ]
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-mix",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mix the cerium nitrate and NaOH solutions",
+        "action": "mix",
+        "agitation": "stirred",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 30
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "stirring_rate": {
+          "status": "present",
+          "unit": "rpm",
+          "value": 500
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-crystallize",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Keep the sealed autoclave at 373 K",
+        "action": "crystallize",
+        "agitation": "static",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "fill_fraction": {
+          "status": "present",
+          "definition": "the mixture's volume over the liner's",
+          "unit": "%",
+          "value": 80
+        },
+        "gas_flow_mode": "sealed",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 373
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-cool",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Cool to room temperature",
+        "action": "cool",
+        "cooling_mode": "natural",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "definition": "the temperature it was cooled to",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash with ethanol and water, 1:1 by volume",
+        "action": "wash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "repetitions": 3
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine in static air",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 4
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "gas_flow_mode": "static",
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 2
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 773
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/source/ceo2-cubes",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: CeO2 nanocubes by the nanorod route at a higher temperature",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "CeO2 nanocubes by the nanorod route at a higher temperature (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:cnd/sample/ceo2-cubes",
+      "label": "Sample",
+      "props": {
+        "name": "CeO2 nanocubes",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:cnd/preparation/ceo2-cubes",
+      "label": "Preparation",
+      "props": {
+        "name": "CeO2 nanocubes by hydrothermal synthesis at 453 K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "method": "hydrothermal precipitation in concentrated NaOH, then calcination",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "hydrothermal"
+        ]
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-mix",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mix the cerium nitrate and NaOH solutions",
+        "action": "mix",
+        "agitation": "stirred",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 30
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "stirring_rate": {
+          "status": "present",
+          "unit": "rpm",
+          "value": 500
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-crystallize",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Keep the sealed autoclave at 453 K",
+        "action": "crystallize",
+        "agitation": "static",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "fill_fraction": {
+          "status": "present",
+          "definition": "the mixture's volume over the liner's",
+          "unit": "%",
+          "value": 80
+        },
+        "gas_flow_mode": "sealed",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 453
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-cool",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Cool to room temperature",
+        "action": "cool",
+        "cooling_mode": "natural",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "definition": "the temperature it was cooled to",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash with ethanol and water, 1:1 by volume",
+        "action": "wash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "repetitions": 3
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine in static air",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 4
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "gas_flow_mode": "static",
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 2
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 773
+        }
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:cnd/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by mass",
+          "unit": "%",
+          "value": 99
+        },
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:cnd/catalyst/pt-silica",
+      "target": "ex:cnd/material/silica"
+    },
+    {
+      "id": "ex:cnd/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by mass",
+          "qualifier": "exact",
+          "unit": "%",
+          "value": 1
+        },
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:cnd/catalyst/pt-silica",
+      "target": "ex:cnd/species/pt"
+    },
+    {
+      "id": "ex:cnd/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/pt-sea-11",
+      "target": "ex:cnd/catalyst/pt-silica"
+    },
+    {
+      "id": "ex:cnd/link/4",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/pt-sea-11",
+      "target": "ex:cnd/sample/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/5",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-solution",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/6",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-solution",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/7",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "ph_modifier"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-solution",
+      "target": "ex:cnd/species/nh4oh"
+    },
+    {
+      "id": "ex:cnd/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 2.5
+        },
+        "concentration": {
+          "status": "present",
+          "unit": "mM",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "stock_concentration": {
+          "status": "present",
+          "unit": "mL",
+          "value": 2.5
+        },
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-solution",
+      "target": "ex:cnd/species/pta"
+    },
+    {
+      "id": "ex:cnd/link/9",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-adsorb",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/10",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-adsorb",
+      "target": "ex:cnd/material/silica"
+    },
+    {
+      "id": "ex:cnd/link/11",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-filter",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/12",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-dry",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/13",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-reduce",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/14",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "flow_rate": {
+          "status": "present",
+          "unit": "sccm",
+          "value": 50
+        },
+        "fraction": {
+          "status": "present",
+          "basis": "by volume",
+          "unit": "%",
+          "value": 10
+        },
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-reduce",
+      "target": "ex:cnd/species/h2"
+    },
+    {
+      "id": "ex:cnd/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by volume",
+          "unit": "%",
+          "value": 90
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cnd/step/pt-sea-11-reduce",
+      "target": "ex:cnd/species/ar"
+    },
+    {
+      "id": "ex:cnd/link/16",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-cool",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "protective_gas"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-11-cool",
+      "target": "ex:cnd/species/ar"
+    },
+    {
+      "id": "ex:cnd/link/18",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-cool",
+      "target": "ex:cnd/sample/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/19",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/pt-sea-9",
+      "target": "ex:cnd/catalyst/pt-silica"
+    },
+    {
+      "id": "ex:cnd/link/20",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/pt-sea-9",
+      "target": "ex:cnd/sample/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/21",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-solution",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/22",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-solution",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/23",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "ph_modifier"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-solution",
+      "target": "ex:cnd/species/nh4oh"
+    },
+    {
+      "id": "ex:cnd/link/24",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 2.5
+        },
+        "concentration": {
+          "status": "present",
+          "unit": "mM",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "stock_concentration": {
+          "status": "present",
+          "unit": "mM",
+          "value": 10
+        },
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-solution",
+      "target": "ex:cnd/species/pta"
+    },
+    {
+      "id": "ex:cnd/link/25",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-adsorb",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/26",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-adsorb",
+      "target": "ex:cnd/material/silica"
+    },
+    {
+      "id": "ex:cnd/link/27",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-filter",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/28",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-dry",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/29",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-reduce",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "flow_rate": {
+          "status": "present",
+          "unit": "sccm",
+          "value": 50
+        },
+        "fraction": {
+          "status": "present",
+          "basis": "by volume",
+          "unit": "%",
+          "value": 10
+        },
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-reduce",
+      "target": "ex:cnd/species/h2"
+    },
+    {
+      "id": "ex:cnd/link/31",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by volume",
+          "unit": "%",
+          "value": 90
+        },
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:cnd/step/pt-sea-9-reduce",
+      "target": "ex:cnd/species/ar"
+    },
+    {
+      "id": "ex:cnd/link/32",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-cool",
+      "target": "ex:cnd/preparation/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/33",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "protective_gas"
+        ]
+      },
+      "source": "ex:cnd/step/pt-sea-9-cool",
+      "target": "ex:cnd/species/ar"
+    },
+    {
+      "id": "ex:cnd/link/34",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-cool",
+      "target": "ex:cnd/sample/pt-sea-9"
+    },
+    {
+      "id": "ex:cnd/link/35",
+      "type": "VARIANT_OF",
+      "props": {
+        "changed": "the solution set to pH 9 instead of 11",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/pt-sea"
+          }
+        ],
+        "origin": "synthetic",
+        "varied": [
+          "ph"
+        ]
+      },
+      "source": "ex:cnd/preparation/pt-sea-9",
+      "target": "ex:cnd/preparation/pt-sea-11"
+    },
+    {
+      "id": "ex:cnd/link/36",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/ceo2-rods",
+      "target": "ex:cnd/sample/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/37",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "actuator"
+      },
+      "source": "ex:cnd/preparation/ceo2-rods",
+      "target": "ex:cnd/instrument/autoclave"
+    },
+    {
+      "id": "ex:cnd/link/38",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-mix",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/39",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.96
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-rods-mix",
+      "target": "ex:cnd/species/ce-nitrate"
+    },
+    {
+      "id": "ex:cnd/link/40",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 16.8
+        },
+        "concentration": {
+          "status": "present",
+          "definition": "NaOH in the mixture",
+          "unit": "mol/L",
+          "value": 6
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "basis": "by mole",
+            "target": "ex:cnd/species/ce-nitrate",
+            "unit": "1",
+            "value": 60
+          }
+        ],
+        "role": "reagent",
+        "synthesis_function": [
+          "precipitating_agent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-rods-mix",
+      "target": "ex:cnd/species/naoh"
+    },
+    {
+      "id": "ex:cnd/link/41",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 70
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-rods-mix",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/42",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-crystallize",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/43",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-cool",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/44",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-wash",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/45",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "basis": "by volume",
+            "target": "ex:cnd/species/water",
+            "unit": "1",
+            "value": 1
+          }
+        ],
+        "role": "reagent",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-rods-wash",
+      "target": "ex:cnd/species/ethanol"
+    },
+    {
+      "id": "ex:cnd/link/46",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-rods"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-rods-wash",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/47",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-dry",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/48",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-calcine",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/49",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-calcine",
+      "target": "ex:cnd/sample/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/link/50",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/ceo2-cubes",
+      "target": "ex:cnd/sample/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/51",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "actuator"
+      },
+      "source": "ex:cnd/preparation/ceo2-cubes",
+      "target": "ex:cnd/instrument/autoclave"
+    },
+    {
+      "id": "ex:cnd/link/52",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-mix",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/53",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.96
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-cubes-mix",
+      "target": "ex:cnd/species/ce-nitrate"
+    },
+    {
+      "id": "ex:cnd/link/54",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 16.8
+        },
+        "concentration": {
+          "status": "present",
+          "definition": "NaOH in the mixture",
+          "unit": "mol/L",
+          "value": 6
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "basis": "by mole",
+            "target": "ex:cnd/species/ce-nitrate",
+            "unit": "1",
+            "value": 60
+          }
+        ],
+        "role": "reagent",
+        "synthesis_function": [
+          "precipitating_agent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-cubes-mix",
+      "target": "ex:cnd/species/naoh"
+    },
+    {
+      "id": "ex:cnd/link/55",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 70
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-cubes-mix",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/56",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-crystallize",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/57",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-cool",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/58",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-wash",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/59",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "basis": "by volume",
+            "target": "ex:cnd/species/water",
+            "unit": "1",
+            "value": 1
+          }
+        ],
+        "role": "reagent",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-cubes-wash",
+      "target": "ex:cnd/species/ethanol"
+    },
+    {
+      "id": "ex:cnd/link/60",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:cnd/step/ceo2-cubes-wash",
+      "target": "ex:cnd/species/water"
+    },
+    {
+      "id": "ex:cnd/link/61",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-dry",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/62",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-calcine",
+      "target": "ex:cnd/preparation/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/63",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-calcine",
+      "target": "ex:cnd/sample/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/link/64",
+      "type": "VARIANT_OF",
+      "props": {
+        "changed": "prepared as reported for the nanorods, with the hydrothermal temperature raised to 453 K",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:cnd/source/ceo2-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "varied": [
+          "crystallize.temperature"
+        ]
+      },
+      "source": "ex:cnd/preparation/ceo2-cubes",
+      "target": "ex:cnd/preparation/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/catalyst/pt-silica/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/catalyst/pt-silica",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/instrument/autoclave/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/instrument/autoclave",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/material/silica/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/material/silica",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/preparation/ceo2-cubes/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/ceo2-cubes",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/preparation/ceo2-rods/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/ceo2-rods",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/preparation/pt-sea-11/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/pt-sea-11",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/preparation/pt-sea-9/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/preparation/pt-sea-9",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/sample/ceo2-cubes/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/ceo2-cubes",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/sample/ceo2-rods/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/ceo2-rods",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/sample/pt-sea-11/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/pt-sea-11",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/sample/pt-sea-9/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/sample/pt-sea-9",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-calcine/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-calcine",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-cool/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-cool",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-crystallize/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-crystallize",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-dry/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-dry",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-mix/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-mix",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-cubes-wash/reported-in/ceo2-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-cubes-wash",
+      "target": "ex:cnd/source/ceo2-cubes"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-calcine/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-calcine",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-cool/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-cool",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-crystallize/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-crystallize",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-dry/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-dry",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-mix/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-mix",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/ceo2-rods-wash/reported-in/ceo2-rods",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/ceo2-rods-wash",
+      "target": "ex:cnd/source/ceo2-rods"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-adsorb/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-adsorb",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-cool/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-cool",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-dry/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-dry",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-filter/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-filter",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-reduce/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-reduce",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-11-solution/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-11-solution",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-adsorb/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-adsorb",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-cool/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-cool",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-dry/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-dry",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-filter/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-filter",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-reduce/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-reduce",
+      "target": "ex:cnd/source/pt-sea"
+    },
+    {
+      "id": "ex:cnd/step/pt-sea-9-solution/reported-in/pt-sea",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:cnd/step/pt-sea-9-solution",
+      "target": "ex:cnd/source/pt-sea"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/stock-concentration-as-volume",
+    "schema": "scale-catal",
+    "schema_version": "0.7.8",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (stock-concentration-as-volume): an input whose stock concentration is given as the volume added"
+  },
+  "multigraph": true
+}

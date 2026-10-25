@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+- **Schema 0.7.8 (additive): the conditions of a synthesis step, the quantities of its inputs, preparations varied
+  from others, and a preparation read as a recipe.** Requested by @hlxin after the synthesis vocabulary of 0.7.6 and
+  0.7.7: a step's pH, stirring and fill fraction were free keys of `conditions`, a concentration was written into an
+  amount, a gas was a phrase, and nothing said that one preparation was another with one thing changed. All new terms
+  are provisional.
+  - **A step's conditions** are its own properties: `ph`, `agitation` (stirred, tumbled, shaken, static),
+    `stirring_rate`, `fill_fraction` (of a closed vessel), `gas_flow_mode` (flowing, static, vacuum, sealed; also on a
+    Treatment) and `cooling_mode` (natural, controlled, quenched).
+  - **An input's quantities** are on its `HAS_INPUT`: `concentration` (in the step's mixture), `stock_concentration`
+    (of the solution it was added as), `fraction` (its share of a mixture or a gas, with its basis), `ratio` (to another
+    input, its target) and `flow_rate`. A gas is an input of its step with its function; `protective_gas` is new for an
+    inert blanket.
+  - **The kernel** adds the quantity kinds `ph`, `ratio` and `rotational_frequency`, the unit `rpm`, and `VARIANT_OF`
+    (a procedure carried out as another with something changed: `varied` names the properties, `changed` says it in
+    the source's words; acyclic).
+  - **The whole and its steps.** A Preparation's own `temperature`, `duration`, `pressure` and `atmosphere` hold only
+    what the source gives for the whole; a summary of the steps is read from them, never recorded.
+  - **The checklist** asks for the pH of an adsorption, a precipitation or an ion exchange, the fill fraction of a
+    hydrothermal or solvothermal synthesis, whether the gas of a calcination or reduction flowed, and how a cool step
+    cooled (documents pinning 0.7.8 or later).
+  - **`scale graph recipe`** (and the agent tool `scale_recipe`) reads each preparation as a recipe: its stages and
+    steps in order with their conditions and inputs, what the checklist does not find, its variants, and a summary
+    (the highest temperature and the time, grouped by unit and never converted; the steps that state no time; the
+    inputs by function; the gases; the pH).
+  - An example (synthesis-conditions: Pt/SiO2 by SEA at pH 11 and pH 9; CeO2 nanorods and, from another paper, cubes at
+    a higher temperature), three counterexamples, CQ-40, tests, the recipes. Existing documents keep their version; the
+    migration step rewrites nothing.
+
 - **Schema 0.7.7 (additive): what curating a real synthesis paper asked for.** Curating the syntheses of Gao et al.,
   Nat. Commun. 2022, 13, 2338 (doi:10.1038/s41467-022-29926-w; ordered B2 CuPd nanocubes in oleylamine, loaded on
   carbon and soaked in acetic acid) under 0.7.6 found four things the schema could not say or checked wrongly. All

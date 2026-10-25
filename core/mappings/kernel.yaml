@@ -415,6 +415,18 @@ kinds:
     term: quantitykind:SpecificEnergy
     label: Specific Energy
     note: "QUDT's is any energy per mass; SCALE's is the energy supplied per mass or per amount of one product."
+  ratio:
+  - match: broad
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
+  ph:
+  - match: close
+    term: quantitykind:PH
+    label: PH
+  rotational_frequency:
+  - match: close
+    term: quantitykind:RotationalFrequency
+    label: Rotational Frequency
 units:
   "°C":
   - match: exact
@@ -666,6 +678,10 @@ units:
   - match: exact
     term: unit:HZ
     label: Hertz
+  rpm:
+  - match: exact
+    term: unit:REV-PER-MIN
+    label: Revolution per Minute
   kHz:
   - match: exact
     term: unit:KiloHZ

@@ -176,6 +176,19 @@ TOOLS: list[dict] = [
             "format": {"type": "string", "enum": ["json", "markdown"], "description": "markdown adds a readable rendering."}}},
     },
     {
+        "name": "scale_recipe",
+        "description": "Read each preparation of a document (or one) as a recipe: its stages and steps in order, each "
+                       "with its conditions (temperature, time, ramp, gas and whether it flowed, pH, stirring, fill "
+                       "fraction, cooling) and its inputs (function, amount, concentration, share, ratio, flow), what "
+                       "the checklist asks of a step and does not find, the preparations it is a variant of, and a "
+                       "summary read from the steps: the highest temperature and the time stated, grouped by unit and "
+                       "never converted, the steps that state no time, the inputs by function, the gases and the pH. "
+                       "The summary is not a record: cite the steps' evidence.",
+        "input_schema": {"type": "object", "properties": {**_DOC, **_DOMAIN,
+            "preparation": {"type": "string", "description": "Only this Preparation (its id)."},
+            "format": {"type": "string", "enum": ["json", "markdown"], "description": "markdown adds a readable rendering."}}},
+    },
+    {
         "name": "scale_search",
         "description": "Search a document's evidence by words and meaning (its evidence index: the one saved beside it "
                        "by `scale graph index`, or built in memory from the document when none is); hits lead to the records that cite each passage. The "
@@ -555,6 +568,15 @@ class ScaleToolkit:
         if format == "markdown":
             rep["markdown"] = render_markdown(rep)
         return rep
+
+    def _scale_recipe(self, document: dict | None = None, path: str | None = None, domain: str | None = None,
+                      preparation: str | None = None, format: str = "json") -> dict:
+        from .recipes import recipe, render_markdown
+        doc = self._doc(document, path)
+        res = recipe(doc, self._doc_spec(doc, domain), preparation)
+        if format == "markdown":
+            res["markdown"] = render_markdown(res)
+        return res
 
     def _index(self, path: str | None, doc: dict, hit: dict | None = None):
         """The evidence index beside ``path``, refused unless it is ``doc``'s, or built in memory from ``doc`` when none is

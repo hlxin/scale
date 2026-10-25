@@ -274,13 +274,20 @@ nodes:
       temperature:
         type: value
         quantity: temperature
+        description: A temperature the source gives for the whole preparation (a synthesis "carried out at 433 K") when
+          it does not give it by step; a step's temperature is the step's, never repeated here. A summary of the steps
+          (the highest temperature, the total time) is read from the steps, not recorded.
       pressure:
         type: value
         quantity: pressure
+        description: A pressure the source gives for the whole preparation, as for temperature.
       duration:
         type: value
+        description: A duration the source gives for the whole preparation, as for temperature.
       atmosphere:
         type: text
+        description: An atmosphere the source gives for the whole preparation, as for temperature; a step's gas is
+          the step's (atmosphere, its gas inputs and gas_flow_mode).
       preparation_methods:
         type: list
         maturity: provisional
@@ -471,6 +478,17 @@ nodes:
         type: value
       atmosphere:
         type: text
+      gas_flow_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - flowing
+        - static
+        - vacuum
+        - sealed
+        - not_reported
+        description: Whether the treatment's gas flowed, stood over the sample, was pumped away or was closed in, as
+          for a step.
   ProcedureStep:
     is_a: Procedure
     description: One step of a preparation, treatment, protocol or characterization (dissolve, precipitate,
@@ -554,6 +572,8 @@ nodes:
         type: value
       atmosphere:
         type: text
+        description: The gas as the source words it ("flowing 10% H2/Ar"); each gas is also an input of the step
+          (HAS_INPUT, with its function, its fraction and its flow_rate), and gas_flow_mode says whether it flowed.
       energy_input:
         type: list
         maturity: provisional
@@ -585,6 +605,59 @@ nodes:
         description: How many times the step, with the steps PART_OF it, is carried out as one block (100 ALD cycles,
           three successive impregnations recorded as one step, five washes); a step with sub-steps (the dose, purge,
           dose and purge of one cycle) holds them PART_OF it, in order.
+      ph:
+        type: value
+        quantity: ph
+        maturity: provisional
+        description: The pH of the step's solution, slurry or gel, as stated; its definition says when (set before the
+          support was added, kept during the exchange, the final slurry). What set it is an input whose function is
+          ph_modifier or precipitating_agent.
+      agitation:
+        type: enum
+        maturity: provisional
+        values:
+        - stirred
+        - tumbled
+        - shaken
+        - static
+        - not_reported
+        description: How the contents were moved during the step, as stated (stirred, a vessel tumbled or rotated,
+          shaken, or left static). Ultrasound and milling are energy_input; the rate is stirring_rate.
+      stirring_rate:
+        type: value
+        quantity: rotational_frequency
+        maturity: provisional
+        description: The stirrer's (or a tumbling vessel's) speed, as stated (500 rpm); its definition says of what.
+      fill_fraction:
+        type: value
+        quantity: fraction
+        maturity: provisional
+        description: The share of a closed vessel's volume the contents fill (an autoclave filled to 70 %), as stated;
+          it sets the pressure a closed vessel reaches. The vessel is an Instrument the preparation USES_INSTRUMENT
+          (instrument_kind autoclave, its volume in settings).
+      gas_flow_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - flowing
+        - static
+        - vacuum
+        - sealed
+        - not_reported
+        description: Whether the gas of the step flowed through it (flowing; its flow_rate on the gas's HAS_INPUT),
+          stood over it (static air in a muffle furnace), was pumped away (vacuum) or was closed in with the contents
+          (sealed, an autoclave under autogenous pressure).
+      cooling_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - natural
+        - controlled
+        - quenched
+        - not_reported
+        description: How the contents were brought back down from the step's temperature, as stated (natural, left to
+          cool in the furnace or in air; controlled, at a set rate, its ramp_rate; quenched, into water, ice or liquid
+          nitrogen, method says into what).
   Characterization:
     is_a: Experiment
     fixed:
@@ -3356,6 +3429,7 @@ adds_properties:
         - substrate
         - ligand
         - ligand_removal_agent
+        - protective_gas
         - other
       description: 'The function an input serves in a preparation or one of its steps, as the source states it: one
         input may serve several (ethylene glycol solvent and reducing_agent; PVP capping_agent and reducing_agent;
@@ -3369,9 +3443,47 @@ adds_properties:
         carbon_source, nitrogen_source, sulfur_source, phosphorus_source (of a carbide, a N-doped carbon, a sulfide,
         a phosphide); etchant; co_reactant (the second precursor of an ALD cycle: H2O, O3, O2 plasma); carrier_gas;
         binder; substrate (a body, an electrode or a crystal grown or deposited on); ligand; ligand_removal_agent
-        (what takes capping ligands or surfactants off the surface: acetic acid, an amine wash, ozone). The kernel''s role
+        (what takes capping ligands or surfactants off the surface: acetic acid, an amine wash, ozone); protective_gas
+        (an inert gas a step is kept under: N2, Ar; a gas that reacts is a reducing_agent, an oxidizing_agent or a
+        source). The kernel''s role
         (reagent, material) stays what it says: what is added and what it is added to. A function the source does
         not state is not inferred from the chemical.'
+    concentration:
+      type: value
+      quantity: concentration
+      maturity: provisional
+      description: The input's concentration in the step's mixture once it is added (0.5 mM Pt in the slurry), as
+        stated. The concentration of the solution it was added as is stock_concentration; amount stays the quantity
+        added (1 mL, 0.1 mmol).
+    stock_concentration:
+      type: value
+      quantity: concentration
+      maturity: provisional
+      description: The concentration of the solution the input was added as ("1 mL of a 10 mM H2PtCl6 solution"), as
+        stated; its amount is the volume added.
+    fraction:
+      type: value
+      quantity: composition_fraction
+      maturity: provisional
+      description: The input's share of the step's mixture or gas, as stated, with its basis (5 vol% H2 in Ar; 25 wt%
+        TMAdaOH in water). The other components are inputs of the step too (the Ar, the water).
+    ratio:
+      type: list
+      quantity: ratio
+      maturity: provisional
+      items:
+        type: value
+      description: The input's quantity relative to another input's, as stated (Pt:Co 1:1 by mole; NaOH/Ce 60; ethanol
+        to water 1:1 by volume), one value per input it is relative to, that input its target and the basis saying by
+        what. A ratio of the whole recipe (a gel's 1 SiO2, 0.042 Al2O3 and 44 H2O) is one value on each input, relative
+        to the same one.
+    flow_rate:
+      type: value
+      quantity: flow_rate
+      maturity: provisional
+      description: The flow of a gas or liquid fed through the step (50 sccm of 10% H2/Ar during a reduction), as
+        stated; a volumetric flow states the conditions it is counted at in its unit (sccm, mL(STP)/min) or basis. A
+        gas a step is merely kept under has none (gas_flow_mode static).
 context_targets:
   species:
     maturity: provisional
@@ -3453,8 +3565,10 @@ checklist:
     doi:10.5281/zenodo.8029159, section 3 (synthesis; 3.A every step in order with its amounts, temperatures, ramps and
     times, the scale and the sources of the reagents), for the preparation items (provisional).
   - Preparation items for colloidal and vapour-phase syntheses (what controls a colloid's growth; the co-reactant of an
-    atomic layer deposition) and for a stated design aim (the structure obtained, observed), proposed from common
-    reporting; to be checked by domain reviewers.
+    atomic layer deposition), for syntheses set by the pH or by a closed vessel (the pH of an adsorption, a
+    precipitation or an exchange; the fill fraction of an autoclave), for a cooling step (how it cooled) and for a
+    stated design aim (the structure obtained, observed), proposed from common reporting; to be checked by domain
+    reviewers.
   - Wismann et al., Electrified methane reforming, elucidating transient phenomena, Chem. Eng. J. 2021, 425,
     131509, doi:10.1016/j.cej.2021.131509 (the transient behaviour of an electrically heated reactor).
   - Wrasman et al., Recommendations for improving rigor and reproducibility in site specific characterization, J.
@@ -4393,6 +4507,69 @@ checklist:
                   preparation_methods:
                     any_of:
                     - atomic_layer_deposition
+      - preparation_methods:
+          any_of:
+          - strong_electrostatic_adsorption
+          - deposition_precipitation
+          - ion_exchange
+          - precipitation
+          - coprecipitation
+        maturity: provisional
+        evidence:
+          should:
+          - name: ph
+            description: the pH of a step (where uptake, precipitation or exchange is set by it), or a stage of one of
+              these families, which is asked on its own
+            any_of:
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: ProcedureStep
+                where:
+                  ph:
+                    present: true
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: Preparation
+                where:
+                  preparation_methods:
+                    any_of:
+                    - strong_electrostatic_adsorption
+                    - deposition_precipitation
+                    - ion_exchange
+                    - precipitation
+                    - coprecipitation
+      - preparation_methods:
+          any_of:
+          - hydrothermal
+          - solvothermal
+        maturity: provisional
+        basis:
+        - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
+          doi:10.5281/zenodo.8029159, section 3.A (every step with its conditions)
+        evidence:
+          should:
+          - name: fill_fraction
+            description: how full the closed vessel was (a step's fill_fraction), which sets the pressure it reaches,
+              or a stage of these families, which is asked on its own
+            any_of:
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: ProcedureStep
+                where:
+                  fill_fraction:
+                    present: true
+            - path:
+              - edge: PART_OF
+                direction: in
+                label: Preparation
+                where:
+                  preparation_methods:
+                    any_of:
+                    - hydrothermal
+                    - solvothermal
     ProcedureStep:
       when:
       - action:
@@ -4439,6 +4616,29 @@ checklist:
         should:
         - atmosphere
         - ramp_rate
+      - action:
+          any_of:
+          - calcine
+          - pyrolyze
+          - reduce
+          - oxidize
+          - activate
+          - carburize
+          - nitridize
+          - sulfidize
+          - phosphidize
+        maturity: provisional
+        basis:
+        - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
+          doi:10.5281/zenodo.8029159, section 3.C (the gas and whether static or flowing)
+        should:
+        - gas_flow_mode
+      - action:
+          any_of:
+          - cool
+        maturity: provisional
+        should:
+        - cooling_mode
   edges:
     HAS_COMPONENT:
       should:
