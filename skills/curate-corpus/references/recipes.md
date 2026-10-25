@@ -443,13 +443,37 @@ a text field reads `not stated`, and nothing is filled from a typical recipe.
   it gives out is `HAS_OUTPUT`.
 - **A solution** made in one step and used in another is a Sample (`sample_kind: other`) with
   `HAS_COMPONENT.concentration` for each solute as stated (mol/L, g/L), the output of its dissolving step and an input
-  of the step that uses it.
-- **Conditions of a step:** `ProcedureStep.temperature`, `duration`, `ramp_rate` and `atmosphere` are its own
-  properties; anything else is a `conditions` entry (`ph`, `final_ph`, `addition_rate`, `stirring_rate`,
-  `incipient_volume`, `filtrate_conductivity`, `vessel_volume`), each value with its unit and a `definition` when its
-  key alone does not say what it is ("the pH of the slurry when the addition ended"). The stirrer (type, size), the
-  vessel and how it was heated go in the step's `method`; what was seen during it (a colour change, turbidity) in its
-  `note`.
+  of the step that uses it. A solution the source only names where it is added ("1 mL of a 10 mM H2PtCl6 solution")
+  can stay one input of that step, its `stock_concentration` 10 mM and its `amount` 1 mL (0.7.8).
+- **The quantities of an input** (0.7.8) are on its `HAS_INPUT`, each as stated: `amount` (what was added),
+  `concentration` (in the step's mixture once added), `stock_concentration` (of the solution it was added as),
+  `fraction` (its share of the mixture or gas, with its `basis`: "by volume" for 5 vol% H2 in Ar) and `ratio` (relative
+  to another input, that input its `target` and the `basis` saying by what: Pt:Co 1:1 "by mole", ethanol to water 1:1
+  "by volume", NaOH/Ce 60). A whole recipe's ratio (a gel's 1 SiO2, 0.042 Al2O3, 44 H2O) is one `ratio` on each input,
+  relative to the same one. A number the source gives one way is never recomputed into another.
+- **Conditions of a step:** `ProcedureStep.temperature`, `duration`, `ramp_rate`, `atmosphere` and (0.7.8) `ph`,
+  `agitation` (stirred, tumbled, shaken, static), `stirring_rate` (rpm), `fill_fraction` (of a closed vessel),
+  `gas_flow_mode` (flowing, static, vacuum, sealed) and `cooling_mode` (natural, controlled, quenched) are its own
+  properties; anything else is a `conditions` entry (`addition_rate`, `incipient_volume`, `filtrate_conductivity`),
+  each value with its unit and a `definition` when its key alone does not say what it is ("the pH of the slurry when
+  the addition ended"). A step with two pH values (set before, read after) is two steps or one `ph` with its
+  `definition` and the other in `conditions`. The stirrer (type, size) and how it was heated go in the step's `method`;
+  the vessel is an Instrument (`USES_INSTRUMENT`, its volume in `settings`); what was seen during it (a colour change,
+  turbidity) in its `note`.
+- **The gas of a step** (0.7.8): `atmosphere` keeps the source's words ("flowing 10% H2/Ar"); each gas is also an input
+  of the step, with its function (`reducing_agent` for H2, `oxidizing_agent` for air or O2, `protective_gas` for an
+  inert blanket, a source for NH3 or H2S), its `fraction` and, for the gas that carries the flow, its `flow_rate` with
+  the conditions it is counted at in its unit (sccm) or `basis`; `gas_flow_mode` says whether it flowed.
+- **Conditions of the whole:** a Preparation's own `temperature`, `duration`, `pressure` and `atmosphere` hold only
+  what the source gives for the whole preparation when it does not give it by step. Never copy a step's value there,
+  and never add up steps into it: `scale graph recipe` reads the highest temperature, the time and the inputs by
+  function from the steps.
+- **A preparation varied from another** (0.7.8): a preparation carried out as another with something changed (a pH
+  series, a temperature series, "as reported in ref. 23 with modifications") is a Preparation of its own with all its
+  steps, `VARIANT_OF` the one it varies, `varied` naming what differs as paths (`ph`, `crystallize.temperature`,
+  `HAS_INPUT.concentration`) and `changed` saying it in the source's words. The earlier paper's preparation, when it is
+  not curated, is a Preparation with what the citing source states of it. A written protocol followed is
+  `FOLLOWS_PROTOCOL` instead.
 - **Sensitivities:** what the source says the synthesis is sensitive to (a precursor lot, air, the passivation rate),
   or that it knows none, goes in the Preparation's `note`, with its evidence.
 
@@ -496,7 +520,8 @@ Name the method, incipient wetness or wet impregnation, in the Preparation's `me
   and `PRECEDES` from the action before it (the preparation, a treatment, a test). `treatment_kind`: `calcination`,
   `reduction`, `oxidation` for a passivation (`method: passivation`), `exposure` for storage or an air exposure.
 - `Treatment.temperature`, `duration` and `atmosphere` as stated ("10 % H2 in Ar"); a flow rate, a space velocity,
-  a ramp rate, the bed (fixed or fluidized, how much powder) or a cooling method in `conditions`. The switch from one
+  a ramp rate or the bed (fixed or fluidized, how much powder) in `conditions`, whether the gas flowed in
+  `gas_flow_mode` (0.7.8) and each gas as an input, as for a step (above). The switch from one
   gas to another (H2 flushed with inert before the passivating gas) is a step of its own or the Treatment's
   `method`.
 - **Storage** is a Treatment (`treatment_kind: exposure`, `method` naming the container and the place: bench,
@@ -576,13 +601,13 @@ the source does not give is a typed absence):
 
 | families | the steps and inputs | the conditions and outcomes |
 |---|---|---|
-| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the heating and the hold (`heat`, then `hold`); the collection (`centrifuge`, washes); a ligand exchange (`ligand_exchange`) or removal (`remove_ligands`, its `ligand_removal_agent`) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated, with its definition; for a microemulsion the water-to-surfactant ratio |
+| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the heating and the hold (`heat`, then `hold`); the collection (`centrifuge`, washes); a ligand exchange (`ligand_exchange`) or removal (`remove_ligands`, its `ligand_removal_agent`) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated (`HAS_INPUT.ratio`); for a microemulsion the water-to-surfactant ratio |
 | colloidal_deposition | the colloid as `material`, the support as `support` | the solvent, time, the loading aimed at |
-| incipient_wetness_impregnation, wet_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` and how it was held; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
+| incipient_wetness_impregnation, wet_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` (the step's) and how it was held; the precursor's `stock_concentration` and `concentration`; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
 | precipitation, coprecipitation, sol_gel, polymerized_complex, solution_combustion | the precipitating_agent, chelating_agent, fuel, the gel or the ignited mixture as a Sample | the order of addition (Precipitation above), `ph`, aging; the gel's `drying` and the `fuel_to_oxidizer_ratio` with its definition; the ignition temperature |
-| hydrothermal, solvothermal, molten_salt, post_synthetic_modification | the gel as a Sample with its molar composition (`HAS_COMPONENT.fraction`, `basis` naming the reference: "per SiO2"); the structure_directing_agent, mineralizer, seed, linker, modulator; the template's removal (a `calcine` step or a treatment) | `crystallize` with its temperature and time; `fill_fraction`, `rotation_rate` (static or tumbled), the autogenous pressure as a typed absence with a `note` when not measured; the autoclave and its liner as an Instrument |
+| hydrothermal, solvothermal, molten_salt, post_synthetic_modification | the gel as a Sample with its molar composition (`HAS_COMPONENT.fraction`, `basis` naming the reference: "per SiO2"); the structure_directing_agent, mineralizer, seed, linker, modulator; the template's removal (a `calcine` step or a treatment) | `crystallize` with its temperature and time; `fill_fraction`, `agitation` (static or tumbled) and `stirring_rate`, `gas_flow_mode: sealed`, the autogenous pressure as a typed absence with a `note` when not measured; the autoclave and its liner as an Instrument |
 | solid_state_reaction, mechanochemical | the oxides, carbonates or salts and their amounts; the milling (`action: mill`, `energy_input: mechanical`) | `milling_frequency`, `ball_to_powder_ratio`, the jar and balls in `method`, the milling time with its pauses; each calcination and regrinding as steps |
-| pyrolysis, thermal_shock, carburization, nitridation, sulfidation, phosphidation, exsolution | the precursor solid; the carbon_source, nitrogen_source, sulfur_source or phosphorus_source (a gas such as NH3 or H2S is an input); a leach (`action: leach`, the acid an `etchant`) | atmosphere and its flow, `ramp_rate`, hold time and temperature; for a thermal shock the pulse duration, peak temperature and `repetitions` (`energy_input: joule_heating`); for exsolution the reduction as a step of the preparation, its gas, temperature and time |
+| pyrolysis, thermal_shock, carburization, nitridation, sulfidation, phosphidation, exsolution | the precursor solid; the carbon_source, nitrogen_source, sulfur_source or phosphorus_source (a gas such as NH3 or H2S is an input); a leach (`action: leach`, the acid an `etchant`) | atmosphere, its gases as inputs with their `flow_rate` and `gas_flow_mode`, `ramp_rate`, hold time and temperature; for a thermal shock the pulse duration, peak temperature and `repetitions` (`energy_input: joule_heating`); for exsolution the reduction as a step of the preparation, its gas, temperature and time |
 | flame_spray_pyrolysis, spray_pyrolysis, spray_drying | the precursor solution (its solvent often also the `fuel`), the dispersion gas (`oxidizing_agent`, `carrier_gas`) | `liquid_feed_rate`, the dispersion gas flow, `pressure_drop` at the nozzle, the pilot flame, the collection (filter, temperature); `batch_scale` or a production rate |
 | atomic_layer_deposition, chemical_vapor_deposition | the metal_precursor and the co_reactant; one cycle as a block with `repetitions` and its dose and purge sub-steps | the substrate temperature, the precursor (bubbler) temperature, dose and purge times, pressure; `deposition_per_cycle` as an outcome; for CVD the gas flows and the deposition time |
 | physical_vapor_deposition, cluster_deposition, model_surface_preparation | the target or source, the substrate (`substrate`); the cleaning cycles as a block (sputter, anneal) with `repetitions` | the deposition rate and the coverage (ML) with how it was calibrated; the cluster size selected (`design_aims: cluster_nuclearity`), the landing energy; the base pressure |

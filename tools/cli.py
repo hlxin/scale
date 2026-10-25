@@ -715,6 +715,14 @@ def cmd_trace_ai(args):
     _emit(rep, args, markdown=render_markdown(rep))
 
 
+def cmd_graph_recipe(args):
+    """A preparation read as a recipe: its stages and steps in order and a summary read from them (tools/recipes.py)."""
+    from .recipes import recipe, render_markdown
+    doc = load_doc(args.graph)
+    res = recipe(doc, _graph_spec(args, doc), args.preparation)
+    _emit(res, args, markdown=render_markdown(res))
+
+
 def cmd_check(args):
     from .devcheck import run_checks
     return 0 if run_checks(_repo(args), fast=args.fast) else 1
@@ -1212,6 +1220,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--out", help="the file to write (a directory with --all); without it only the digest is printed")
     sp.add_argument("--expect", metavar="SHA256", help="check that the version is the schema of this spec digest here "
                     "(exit 1 when it is not, or when the version is not held here)")
+    sp = add("recipe", cmd_graph_recipe, "each preparation read as a recipe: its stages and steps in order with their "
+             "conditions and inputs, and a summary read from the steps (highest temperature, time, inputs by function, "
+             "gases, pH), values as reported", gr)
+    sp.add_argument("graph"); sp.add_argument("--preparation", help="only this Preparation (its id)")
+    sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp, ("markdown", "json"))
     sp = add("index", cmd_graph_index, "build the evidence index: a vector and term statistics per evidence quote", gr)
     sp.add_argument("file"); sp.add_argument("--index", help="index path stem (default: <graph>.evidence)")
     sp.add_argument("--embedder", default="scale-hash-v1"); out_opts(sp)

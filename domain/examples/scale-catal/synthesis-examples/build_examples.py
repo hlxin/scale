@@ -25,6 +25,20 @@ exposed facets) as a catalyst state the preparation reaches and a characterizati
                                   metal_support_interaction and stability; particles socketed in the oxide
     Pd/CeO2 by flame spray        flame_spray_pyrolysis: a precursor solution that is solvent and fuel, sprayed into a
                                   flame (energy_input flame) with O2 as dispersion gas; a batch scale stated
+
+  staged-colloid.json         PtCo nanocubes made in one stage and loaded on carbon in another (scale-catal 0.7.7)
+
+  synthesis-conditions.json   the conditions of a step and the quantities of its inputs (scale-catal 0.7.8)
+    Pt/SiO2 by SEA at pH 11       strong_electrostatic_adsorption: the stock and the slurry concentration of the Pt
+                                  complex, the pH before and after the silica, stirring at 300 rpm; a reduction in
+                                  flowing 10 % H2/Ar at 50 sccm (each gas an input, its fraction and its flow), cooled
+                                  naturally
+    Pt/SiO2 by SEA at pH 9        the same preparation at pH 9, VARIANT_OF the first, varied ph
+    CeO2 nanorods                 hydrothermal: NaOH at 6 mol/L and 60 times the Ce by mole (ratio), an autoclave
+                                  filled to 80 % and sealed, cooled naturally, washed in ethanol and water 1:1 by
+                                  volume, calcined in static air
+    CeO2 nanocubes                another paper's recipe "with modifications", crystallized at 453 K: VARIANT_OF the
+                                  nanorods' preparation, varied crystallize.temperature
 """
 
 from __future__ import annotations
@@ -66,10 +80,10 @@ def T(text, **kw) -> dict:
 class Doc:
     """One synthetic document: its nodes, its links and the helpers that make them."""
 
-    def __init__(self, prefix: str, title: str):
+    def __init__(self, prefix: str, title: str, version: str = HEAD_VERSION):
         self.p = prefix
         self.doc = {"directed": True, "multigraph": True,
-                    "graph": {"schema": "scale-catal", "schema_version": HEAD_VERSION, "graph_id": f"{prefix}/graph",
+                    "graph": {"schema": "scale-catal", "schema_version": version, "graph_id": f"{prefix}/graph",
                               "title": title, "data_status": "synthetic_example", "follows_domains": ["catalysis"],
                               "stewardship": {"access": "public"}},
                     "nodes": [], "links": []}
@@ -108,14 +122,15 @@ class Doc:
 
     def step(self, parent, order, key, name, action, inputs=(), outputs=(), **props):
         """A ProcedureStep PART_OF its preparation (or of the step it is a sub-step of), in order, with what it takes
-        in and gives out. An input is (target, role, amount, functions): its kernel role, its amount as printed and the
-        function it serves in the synthesis, as the source states it."""
+        in and gives out. An input is (target, role, amount, functions[, quantities]): its kernel role, its amount as
+        printed, the function it serves in the synthesis, as the source states it, and any of its concentration,
+        stock_concentration, fraction, ratio and flow_rate."""
         sid = self.node(f"step/{key}", "ProcedureStep", name, action=action,
                         evidence=props.pop("evidence", None) or [self.ev("Experimental, Synthesis")], **props)
         self.link("PART_OF", sid, parent, order=order)
-        for target, role, amount, functions in inputs:
+        for target, role, amount, functions, *more in inputs:
             self.link("HAS_INPUT", sid, target, role=role, **({"amount": amount} if amount else {}),
-                      **({"synthesis_function": functions} if functions else {}),
+                      **({"synthesis_function": functions} if functions else {}), **(more[0] if more else {}),
                       evidence=[self.ev("Experimental, Synthesis")])
         for target in outputs:
             self.link("HAS_OUTPUT", sid, target)
@@ -536,7 +551,7 @@ def pd_ceo2_fsp(d: Doc) -> None:
 
 
 def synthesis_strategies() -> dict:
-    d = Doc("ex:syn", "Syntheses of heterogeneous catalysts by any method: methods, aims, the functions of the inputs, "
+    d = Doc("ex:syn", version="0.7.6", title="Syntheses of heterogeneous catalysts by any method: methods, aims, the functions of the inputs, "
                       "what drives each step and the structure obtained (synthetic)")
     for build in (pd_nanocubes, pt_ald, cu_ssz13, fe_n_c, ni_exsolution, pd_ceo2_fsp):
         build(d)
@@ -547,7 +562,8 @@ def staged_colloid() -> dict:
     """A colloid made in one stage and put on carbon in a second, whose ligands are removed (scale-catal 0.7.7): the
     whole lists both stages' families, the colloidal stage holds the surfactant, a step that keeps a temperature
     already reached is a hold, and the ligands come off in a step of their own with the agent that removes them."""
-    d = Doc("ex:stg", "A colloid made in one stage and loaded on carbon in another, its ligands removed (synthetic)")
+    d = Doc("ex:stg", "A colloid made in one stage and loaded on carbon in another, its ligands removed (synthetic)",
+            version="0.7.7")
     d.source("ptco-cubes", "Ordered PtCo nanocubes on carbon from a one-pot colloidal synthesis")
     ptco = d.material("ptco-l10", "ordered L1_0 PtCo", formula="PtCo", structure_type="L1_0", material_family="alloy",
                       crystallinity="crystalline", evidence=[d.ev("Results, XRD")])
@@ -620,6 +636,117 @@ def staged_colloid() -> dict:
     return d.finish()
 
 
+# ======================================================================================= conditions and quantities
+def pt_sea(d: Doc, silica: str, pta: str, nh4oh: str, water: str, h2: str, ar: str, ph: float, key: str) -> str:
+    """One Pt/SiO2 preparation by strong electrostatic adsorption at the given pH: the Pt complex as a stock solution
+    and at its slurry concentration, the pH set by NH4OH before the silica and read again after, stirred; then dried and
+    reduced in flowing H2/Ar, each gas an input with its share and its flow, and cooled naturally under Ar."""
+    batch = d.sample(key, f"Pt/SiO2, SEA at pH {ph:g}", label="CatalystSample", sample_kind="powder")
+    d.link("HAS_FORMULATION", batch, f"{d.p}/catalyst/pt-silica")
+    prep = d.preparation(key, f"Pt/SiO2 by strong electrostatic adsorption at pH {ph:g}",
+                         ["strong_electrostatic_adsorption"], f"SEA of Pt(NH3)4 2+ on silica at pH {ph:g}")
+    d.link("HAS_OUTPUT", prep, batch)
+    d.step(prep, 1, f"{key}-solution", f"Set the water to pH {ph:g} and add the Pt complex", "mix",
+           inputs=[(water, "material", V(50, "mL"), ["solvent"]), (nh4oh, "reagent", NOT_STATED, ["ph_modifier"]),
+                   (pta, "reagent", V(2.5, "mL"), ["metal_precursor"],
+                    {"stock_concentration": V(10, "mM"), "concentration": V(0.5, "mM")})],
+           ph=V(ph, "1", definition="pH of the solution before the silica was added"), temperature=V(298, "K"),
+           energy_input=["none"])
+    d.step(prep, 2, f"{key}-adsorb", "Add the silica and stir", "mix",
+           inputs=[(silica, "material", V(1, "g"), ["support"])],
+           ph=V(round(ph - 0.2, 1), "1", definition="final pH of the slurry"), agitation="stirred",
+           stirring_rate=V(300, "rpm"), duration=V(1, "h"), temperature=V(298, "K"), energy_input=["none"])
+    d.step(prep, 3, f"{key}-filter", "Filter", "filter")
+    d.step(prep, 4, f"{key}-dry", "Dry", "dry", temperature=V(373, "K"), duration=V(12, "h"), energy_input=["thermal"])
+    d.step(prep, 5, f"{key}-reduce", "Reduce in flowing 10 % H2/Ar", "reduce",
+           inputs=[(h2, "reagent", None, ["reducing_agent"], {"fraction": V(10, "%", basis="by volume"),
+                                                              "flow_rate": V(50, "sccm")}),
+                   (ar, "reagent", None, None, {"fraction": V(90, "%", basis="by volume")})],
+           temperature=V(573, "K"), ramp_rate=V(5, "K/min"), duration=V(1, "h"), atmosphere="flowing 10% H2/Ar",
+           gas_flow_mode="flowing", energy_input=["thermal"])
+    d.step(prep, 6, f"{key}-cool", "Cool under Ar", "cool", outputs=[batch],
+           inputs=[(ar, "reagent", None, ["protective_gas"])], atmosphere="Ar", gas_flow_mode="flowing",
+           cooling_mode="natural", temperature=V(298, "K", definition="the temperature it was cooled to"))
+    return prep
+
+
+def ceo2_hydrothermal(d: Doc, key: str, name: str, temperature: float) -> str:
+    """CeO2 by a hydrothermal route: NaOH at its concentration and as a ratio to the Ce, an autoclave filled to 80 % and
+    sealed, cooled naturally, washed in ethanol and water mixed by volume, calcined in static air."""
+    ce = f"{d.p}/species/ce-nitrate"
+    naoh, water, ethanol = f"{d.p}/species/naoh", f"{d.p}/species/water", f"{d.p}/species/ethanol"
+    product = d.sample(key, name, sample_kind="powder")
+    prep = d.preparation(key, f"{name} by hydrothermal synthesis at {temperature:g} K", ["hydrothermal"],
+                         "hydrothermal precipitation in concentrated NaOH, then calcination")
+    d.link("HAS_OUTPUT", prep, product)
+    d.link("USES_INSTRUMENT", prep, f"{d.p}/instrument/autoclave", role="actuator")
+    d.step(prep, 1, f"{key}-mix", "Mix the cerium nitrate and NaOH solutions", "mix",
+           inputs=[(ce, "reagent", V(1.96, "g"), ["support_precursor"]),
+                   (naoh, "reagent", V(16.8, "g"), ["precipitating_agent"],
+                    {"concentration": V(6, "mol/L", definition="NaOH in the mixture"),
+                     "ratio": [V(60, "1", target=ce, basis="by mole")]}),
+                   (water, "material", V(70, "mL"), ["solvent"])],
+           agitation="stirred", stirring_rate=V(500, "rpm"), duration=V(30, "min"), temperature=V(298, "K"),
+           energy_input=["none"])
+    d.step(prep, 2, f"{key}-crystallize", f"Keep the sealed autoclave at {temperature:g} K", "crystallize",
+           temperature=V(temperature, "K"), duration=V(24, "h"), pressure=NOT_STATED,
+           fill_fraction=V(80, "%", definition="the mixture's volume over the liner's"), gas_flow_mode="sealed",
+           agitation="static", energy_input=["thermal"])
+    d.step(prep, 3, f"{key}-cool", "Cool to room temperature", "cool", cooling_mode="natural",
+           temperature=V(298, "K", definition="the temperature it was cooled to"))
+    d.step(prep, 4, f"{key}-wash", "Wash with ethanol and water, 1:1 by volume", "wash", repetitions=3,
+           inputs=[(ethanol, "reagent", None, ["solvent"], {"ratio": [V(1, "1", target=water, basis="by volume")]}),
+                   (water, "reagent", None, ["solvent"])])
+    d.step(prep, 5, f"{key}-dry", "Dry", "dry", temperature=V(333, "K"), duration=V(12, "h"), energy_input=["thermal"])
+    d.step(prep, 6, f"{key}-calcine", "Calcine in static air", "calcine", outputs=[product], temperature=V(773, "K"),
+           duration=V(4, "h"), ramp_rate=V(2, "K/min"), atmosphere="static air", gas_flow_mode="static",
+           energy_input=["thermal"])
+    return prep
+
+
+def synthesis_conditions() -> dict:
+    """The conditions of a step and the quantities of its inputs (scale-catal 0.7.8): pH, stirring, how full a closed
+    vessel was, whether the gas flowed, how a step cooled; an input's concentration (in the mixture and as a stock),
+    its share of a gas, its ratio to another input and its flow; and a preparation carried out as another with one
+    thing changed (VARIANT_OF), within a paper and from another paper's recipe."""
+    d = Doc("ex:cnd", "The conditions of a step and the quantities of its inputs, and preparations varied from others "
+                      "(synthetic)")
+    d.source("pt-sea", "Pt on silica by strong electrostatic adsorption: uptake and dispersion against the pH")
+    silica = d.material("silica", "amorphous silica, 200 m2/g", formula="SiO2", material_family="oxide",
+                        evidence=[d.ev("Experimental")])
+    pta = d.species("pta", "Pt(NH3)4(NO3)2", {"Pt": 1, "N": 6, "H": 12, "O": 6}, "tetraammineplatinum(II) nitrate")
+    nh4oh = d.species("nh4oh", "NH4OH", {"N": 1, "H": 5, "O": 1}, "ammonium hydroxide")
+    water = d.species("water", "H2O", {"H": 2, "O": 1}, "water")
+    h2 = d.species("h2", "H2", {"H": 2}, "hydrogen")
+    ar = d.species("ar", "Ar", {"Ar": 1}, "argon", species_kind="element")
+    pt = d.species("pt", "Pt", {"Pt": 1}, "platinum", species_kind="element")
+    cat = d.node("catalyst/pt-silica", "Catalyst", "Pt/SiO2 (nominal 1 wt%)", catalyst_family="metal",
+                 nominal_formula="Pt/SiO2", evidence=[d.ev("Experimental")])
+    d.link("HAS_COMPONENT", cat, silica, role="support", fraction=V(99, "%", basis="by mass"),
+           evidence=[d.ev("Experimental")])
+    d.link("HAS_COMPONENT", cat, pt, role="active_component", fraction=V(1, "%", basis="by mass", qualifier="exact"),
+           evidence=[d.ev("Experimental")])
+    at11 = pt_sea(d, silica, pta, nh4oh, water, h2, ar, 11.0, "pt-sea-11")
+    at9 = pt_sea(d, silica, pta, nh4oh, water, h2, ar, 9.0, "pt-sea-9")
+    d.link("VARIANT_OF", at9, at11, varied=["ph"], changed="the solution set to pH 9 instead of 11",
+           evidence=[d.ev("Experimental, Synthesis")])
+
+    d.source("ceo2-rods", "CeO2 nanorods from a hydrothermal route in concentrated NaOH")
+    d.species("ce-nitrate", "Ce(NO3)3·6H2O", {"Ce": 1, "N": 3, "O": 15, "H": 12}, "cerium(III) nitrate hexahydrate")
+    d.species("naoh", "NaOH", {"Na": 1, "O": 1, "H": 1}, "sodium hydroxide")
+    d.species("ethanol", "C2H6O", {"C": 2, "H": 6, "O": 1}, "ethanol")
+    d.node("instrument/autoclave", "Instrument", "Teflon-lined stainless-steel autoclave, 100 mL",
+           instrument_kind="autoclave", settings={"volume": V(100, "mL")}, evidence=[d.ev("Experimental")])
+    rods = ceo2_hydrothermal(d, "ceo2-rods", "CeO2 nanorods", 373)
+    d.source("ceo2-cubes", "CeO2 nanocubes by the nanorod route at a higher temperature")
+    cubes = ceo2_hydrothermal(d, "ceo2-cubes", "CeO2 nanocubes", 453)
+    d.link("VARIANT_OF", cubes, rods, varied=["crystallize.temperature"],
+           changed="prepared as reported for the nanorods, with the hydrothermal temperature raised to 453 K",
+           evidence=[d.ev("Experimental, Synthesis")])
+    return d.finish()
+
+
 if __name__ == "__main__":
     write_canonical(HERE / "synthesis-strategies.json", synthesis_strategies())
     write_canonical(HERE / "staged-colloid.json", staged_colloid())
+    write_canonical(HERE / "synthesis-conditions.json", synthesis_conditions())

@@ -40,6 +40,7 @@ THERMAL = REPO / "domain/examples/scale-catal/thermal-examples/thermal-contribut
 METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-methods.json"
 SYNTHESES = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json"
 STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.json"
+CONDITIONS = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -349,6 +350,22 @@ def main() -> None:
         e["props"]["synthesis_function"] = ["remove_ligands"]
     defect("ligand-removal-action-as-function", "an input whose function is given as the step's action",
            action_as_function, base=load_doc(STAGED))
+
+    conditions = load_doc(CONDITIONS)
+
+    def conditions_input(d: dict, step: str, target: str) -> dict:
+        return next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == f"ex:cnd/step/{step}"
+                    and e["target"] == f"ex:cnd/{target}")["props"]
+    defect("stock-concentration-as-volume", "an input whose stock concentration is given as the volume added",
+           lambda d: conditions_input(d, "pt-sea-11-solution", "species/pta").__setitem__(
+               "stock_concentration", {"status": "present", "value": 2.5, "unit": "mL"}), base=conditions)
+    defect("gas-flow-mode-in-words", "a step whose gas flow mode is stated in other words",
+           lambda d: node(d, "step/ceo2-rods-calcine")["props"].__setitem__("gas_flow_mode", "static air"),
+           base=conditions)
+    defect("variants-in-a-cycle", "two preparations that are each a variant of the other",
+           lambda d: d["links"].append({"id": "ex:cnd/link/back", "type": "VARIANT_OF",
+                                        "source": "ex:cnd/preparation/pt-sea-11", "target": "ex:cnd/preparation/pt-sea-9",
+                                        "props": {"origin": "synthetic", "varied": ["ph"]}}), base=conditions)
 
     def function_on_component(d: dict) -> None:
         e = next(e for e in d["links"] if e["type"] == "HAS_COMPONENT" and e["source"] == "ex:syn/catalyst/pd-cubes-alumina"

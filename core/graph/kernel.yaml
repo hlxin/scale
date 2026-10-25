@@ -2166,6 +2166,27 @@ edges:
           targets:
           - Variable
         description: The variables in which the two differ.
+  VARIANT_OF:
+    maturity: provisional
+    description: The source procedure was carried out as the target one with something changed (a preparation repeated
+      at another pH, a series varying one temperature, a recipe of an earlier paper "with modifications"); varied names
+      the properties that differ, as paths on the procedure, its steps or its inputs, and changed says it in the
+      source's words. Both procedures are records with their own conditions, so what differs is read from them; a
+      written protocol followed is FOLLOWS_PROTOCOL. Acyclic.
+    from:
+    - Procedure
+    to:
+    - Procedure
+    properties:
+      varied:
+        type: list
+        items:
+          type: string
+        description: The properties that differ, each a path (ph, temperature, HAS_INPUT.concentration,
+          HAS_INPUT.synthesis_function); a property of a step names the step's action before it (calcine.temperature).
+      changed:
+        type: text
+        description: What was changed, in the source's words.
   REPLICATES:
     description: The source experiment repeats the target one; changed says what differs.
     from:
@@ -2563,7 +2584,7 @@ rules:
 - A dynamic Operation names its varied_quantities and says how they vary (segments, period or frequency, a
   pseudo-random sequence's bit_duration, pulse_width, or a step's levels); a static one has time_pattern constant (or
   none).
-- PART_OF, PRECEDES, HAS_PART and REVISES are acyclic; no kernel edge joins a record to itself; REVISES
+- PART_OF, PRECEDES, HAS_PART, REVISES and VARIANT_OF are acyclic; no kernel edge joins a record to itself; REVISES
   joins records of the same label.
 - A record_ref resolves to a node or link, and its path to a property of it; evidence_ids name evidence
   of the owning record. A record_ref into result_values names the entry by its id, never by its position.
@@ -2880,6 +2901,7 @@ quantities:
       Ha: energy
       hartree: energy
       Ry: energy
+      rpm: frequency
       '%': dimensionless
       ‰: dimensionless
       ppm: dimensionless
@@ -3455,6 +3477,24 @@ quantities:
       description: The amount (mol/L) or mass (g/L) of a component per volume of its mixture, or its amount per mass of
         solvent (molality, mol/kg), kept apart by its unit.
       dimensions: [amount_concentration, mass_concentration, amount_per_mass]
+    ratio:
+      maturity: provisional
+      description: One component's quantity over another's in a mixture or a recipe (Pt:Co 1:1 by mole, ethanol:water
+        1:1 by volume, H2O/SiO2 44 in a gel), dimensionless; its target is the component it is relative to (the
+        denominator) and its basis says by what it is counted (mole, mass, volume, atom). A share of the whole is a
+        composition_fraction.
+      dimensions: [dimensionless]
+      compare_by: [fraction_basis]
+    ph:
+      maturity: provisional
+      description: The pH of a solution, a slurry or a gel, dimensionless (unit 1); its definition says when and of what
+        (the solution before the support is added, kept during an exchange, the final slurry).
+      dimensions: [dimensionless]
+    rotational_frequency:
+      maturity: provisional
+      description: Revolutions per time of a stirrer, a tumbling vessel or a mill (rpm, Hz); its definition says of
+        what.
+      dimensions: [frequency]
     flow_rate:
       description: A volumetric, molar or mass flow rate; a volumetric flow is comparable only at one stated reference
         condition.

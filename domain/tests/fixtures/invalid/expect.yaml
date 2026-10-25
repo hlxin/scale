@@ -235,3 +235,18 @@ fixtures:
     error: "is not one of"
     reason: What a step does (remove_ligands) is its action; what an input does in it is its function
       (ligand_removal_agent), so that steps and the chemicals used in them are found apart.
+  - file: stock-concentration-as-volume.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json
+    error: "not a dimension of concentration"
+    reason: The concentration of the solution an input was added as is an amount or a mass per volume; the volume added
+      is the input's amount, so the two are never read as one another.
+  - file: gas-flow-mode-in-words.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json
+    error: "is not one of"
+    reason: Whether a step's gas flowed is one of the listed modes, so that calcinations in static and in flowing air are
+      found apart; the source's words stay in atmosphere.
+  - file: variants-in-a-cycle.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json
+    error: "VARIANT_OF forms a cycle"
+    reason: A variant is a procedure carried out as an earlier one with something changed, so the earlier one is not a
+      variant of it in turn; variants never form a cycle.

@@ -1,0 +1,97 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-40
+question: Which preparations were carried out as another with something changed, what was changed, and at what pH, gas
+  and flow were their steps carried out?
+description: |
+  A preparation carried out as another with something changed is a Preparation of its own, with all its steps,
+  VARIANT_OF the one it varies; varied names the properties that differ and changed says it in the source's words
+  (scale-catal 0.7.8). In the conditions example, the Pt/SiO2 made at pH 9 is a variant of the one made at pH 11, and
+  the CeO2 nanocubes of one paper are the nanorods of another made at 453 K instead of 373 K. The conditions of a step
+  are its own properties (ph, agitation, stirring_rate, fill_fraction, gas_flow_mode, cooling_mode) and the quantities
+  of an input are on its HAS_INPUT (concentration, stock_concentration, fraction, ratio, flow_rate), so the pH of each
+  adsorption and the share and flow of the H2 of each reduction are found as such. What the two variants of a pair
+  share is read from their own steps, never copied from one to the other.
+documents:
+  - examples/scale-catal/synthesis-examples/synthesis-conditions.json
+plan:
+  question: Which preparations vary another one, in what, and how does the source say it?
+  match:
+    label: Preparation
+    as: variant
+  steps:
+    - from: variant
+      edge: VARIANT_OF
+      to: Preparation
+      as: base
+      edge_as: varied_from
+  return:
+    - variant.name
+    - base.name
+    - varied_from.varied
+    - varied_from.changed
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    base.name:
+      - Pt/SiO2 by strong electrostatic adsorption at pH 11
+      - CeO2 nanorods by hydrothermal synthesis at 373 K
+variants:
+  - description: The pH of a step is the step's own property, with its definition saying when it was read; each of the
+      two SEA preparations states it twice, set before the silica and read after.
+    plan:
+      match:
+        label: ProcedureStep
+        as: step
+        where:
+          - prop: ph
+            op: exists
+      steps:
+        - from: step
+          edge: PART_OF
+          to: Preparation
+          as: preparation
+      return:
+        - preparation.name
+        - step.name
+        - step.ph
+    expect:
+      status: answered
+      min_rows: 4
+      max_rows: 4
+  - description: The gas of a reduction is an input of the step with its function, its share and its flow, and the step
+      says the gas flowed; the 10 % H2 in Ar at 50 sccm of each SEA preparation is found as such.
+    plan:
+      match:
+        label: ProcedureStep
+        as: step
+        where:
+          - prop: action
+            op: eq
+            value: reduce
+      steps:
+        - from: step
+          edge: HAS_INPUT
+          to: ChemicalSpecies
+          as: gas
+          edge_as: used
+          edge_where:
+            - prop: synthesis_function.*
+              op: eq
+              value: reducing_agent
+      return:
+        - step.name
+        - step.gas_flow_mode
+        - gas.name
+        - used.fraction
+        - used.flow_rate
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        gas.name:
+          - hydrogen
