@@ -510,6 +510,85 @@ Name the method, incipient wetness or wet impregnation, in the Preparation's `me
   states under reaction and after it are CatalystStates `REACHED_BY` the test (`timing: during`, `after`). A batch
   split between cells is a CatalystSample per portion, each with the batch's `batch_identifier`.
 
+### Syntheses by any method
+
+Any catalyst, support, precursor solid or colloid, made by any method and in any number of stages, is recorded with
+the same few structures (scale-catal 0.7.6; the synthesis example, domain/examples/scale-catal/synthesis-examples/,
+and CQ-37, CQ-38 and CQ-39 show each). The recipes above (the batch, its lots and its steps) hold for every method;
+this section adds what tells methods, chemistries and strategies apart. Record only what the source states: a function,
+an aim, a shape or a mechanism is never inferred from the chemical or from a typical recipe.
+
+- **The method.** `Preparation.method` keeps the source's name ("modified polyol route", "SEA at pH 11.5");
+  `preparation_methods` lists the families it belongs to, each once (a hydrothermal support then impregnated is
+  `hydrothermal` and `incipient_wetness_impregnation`). A method none of the families names is `other`, with its name
+  in `method`; a family that recurs in curated sources is a schema change (`evolve-schema`), not a new spelling.
+- **The stages.** A synthesis whose stages are made by methods of their own (the support, then the metal on it; a
+  zeolite, then its ion exchange; a MOF, then its pyrolysis) can be one Preparation with all the steps or a
+  Preparation per stage, `PART_OF` the whole with `order`; each stage `HAS_OUTPUT` what it made, which the next stage
+  takes in (`HAS_INPUT`). The whole `HAS_OUTPUT` the final batch.
+- **The aim and the strategy.** `design_aims` lists what the source says the synthesis is designed to control
+  (particle_size, particle_shape, exposed_facets, atomic_dispersion, elemental_distribution, encapsulation, porosity,
+  metal_support_interaction, …); `strategy` keeps how, in the source's words ("Br- caps the {100} facets"). Neither
+  says the aim was reached: the structure obtained is a state (below), and that the synthesis achieved its aim, or how
+  the structure formed (nucleation and growth, Ostwald ripening, oriented attachment, a Kirkendall effect, a
+  topotactic conversion), is a Claim (`claim_kind: mechanism`, `finding` or `comparison`) `ABOUT` the preparation
+  (role `preparation`) and the state (role `state`), which the characterizations it rests on support (`SUPPORTS`).
+- **The function of every input.** `HAS_INPUT.synthesis_function` lists what the input does in the step, as the source
+  states it, besides the kernel's `role` (`reagent` for what is added, `material` for what it is added to):
+  metal_precursor, support, support_precursor, promoter_precursor, dopant_source, solvent, reducing_agent,
+  oxidizing_agent, precipitating_agent, ph_modifier, chelating_agent, stabilizer, capping_agent, surfactant,
+  shape_directing_agent, structure_directing_agent, template, porogen, mineralizer, seed, linker, modulator, fuel,
+  carbon_source, nitrogen_source, sulfur_source, phosphorus_source, etchant, co_reactant, carrier_gas, binder,
+  substrate, ligand, other. One input may serve several (ethylene glycol: `solvent`, `reducing_agent`; PVP:
+  `capping_agent`, `stabilizer`); give only those the source names or plainly describes ("ascorbic acid as the
+  reductant"). A sacrificial electron donor of a photodeposition is a `reducing_agent`, its role in the `note`.
+- **What drives a step.** `ProcedureStep.energy_input` lists it (thermal, microwave, ultrasound, mechanical,
+  electrochemical, light, laser, plasma, flame, joule_heating, electron_beam, ion_beam; `none` for a step at room
+  temperature with nothing applied); its power, frequency, potential or dose is a condition (`microwave_power`,
+  `ultrasound_power`, `milling_frequency`, `current_density`, `potential` with the reference electrode in its
+  `definition`, `irradiance`). The apparatus is an Instrument the preparation or step `USES_INSTRUMENT`, with its
+  `settings` (an autoclave's volume and liner, a mill's jar and balls, an ALD reactor, a microwave reactor, a furnace).
+- **A step repeated as a block.** `repetitions` says how many times a step is carried out, with the sub-steps `PART_OF`
+  it in order (the dose, purge, dose and purge of one ALD cycle; the sputter and anneal of one cleaning cycle); the
+  block `HAS_INPUT` what its cycle uses, with the function each serves. A step whose repeats differ (a second
+  impregnation with less solution) is a step of its own.
+- **The structure obtained** is a CatalystState of what was made (`state_kind: as_prepared`, `STATE_OF` the colloid,
+  powder or batch), `REACHED_BY` the preparation or the step after which it is observed (`timing: after`) and
+  `DETERMINED_BY` the characterization that shows it, with `particle_shape` (each shape the source reports, once; the
+  share of each in `properties.shape_fraction`, with its count), `architecture` (single_atoms, clusters, core_shell,
+  yolk_shell, hollow, intermetallic, encapsulated, egg_shell, …), `exposed_facets` in Miller indices as printed,
+  `dimensionality` and `morphology` in words. Which phase is where is `HAS_PHASE` with its `location`; a single atom's
+  coordination is a site (`HAS_SITE`). Sizes that go with a shape are characterization results under their own names
+  (`particle_edge_length`, `aspect_ratio`, `shell_thickness`, `wire_diameter`, `film_thickness`), as the other sizes
+  are (Characterization results, above); their units are not checked until the kernel declares them.
+- **What it gave** besides the structure is in `outcomes` (`product_yield`, `metal_uptake`, `deposition_per_cycle`,
+  each with its definition) and `batch_scale` (how much one run made); a loading or a size measured on the product is a
+  characterization result of the product.
+
+By family, what to record besides the general steps (each item a step, an input function or a condition key; a value
+the source does not give is a typed absence):
+
+| families | the steps and inputs | the conditions and outcomes |
+|---|---|---|
+| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the collection (`centrifuge`, washes) and a ligand removal or exchange (`ligand_exchange`, a treatment) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated, with its definition; for a microemulsion the water-to-surfactant ratio |
+| colloidal_deposition | the colloid as `material`, the support as `support` | the solvent, time, the loading aimed at |
+| incipient_wetness_impregnation, wet_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` and how it was held; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
+| precipitation, coprecipitation, sol_gel, polymerized_complex, solution_combustion | the precipitating_agent, chelating_agent, fuel, the gel or the ignited mixture as a Sample | the order of addition (Precipitation above), `ph`, aging; the gel's `drying` and the `fuel_to_oxidizer_ratio` with its definition; the ignition temperature |
+| hydrothermal, solvothermal, molten_salt, post_synthetic_modification | the gel as a Sample with its molar composition (`HAS_COMPONENT.fraction`, `basis` naming the reference: "per SiO2"); the structure_directing_agent, mineralizer, seed, linker, modulator; the template's removal (a `calcine` step or a treatment) | `crystallize` with its temperature and time; `fill_fraction`, `rotation_rate` (static or tumbled), the autogenous pressure as a typed absence with a `note` when not measured; the autoclave and its liner as an Instrument |
+| solid_state_reaction, mechanochemical | the oxides, carbonates or salts and their amounts; the milling (`action: mill`, `energy_input: mechanical`) | `milling_frequency`, `ball_to_powder_ratio`, the jar and balls in `method`, the milling time with its pauses; each calcination and regrinding as steps |
+| pyrolysis, thermal_shock, carburization, nitridation, sulfidation, phosphidation, exsolution | the precursor solid; the carbon_source, nitrogen_source, sulfur_source or phosphorus_source (a gas such as NH3 or H2S is an input); a leach (`action: leach`, the acid an `etchant`) | atmosphere and its flow, `ramp_rate`, hold time and temperature; for a thermal shock the pulse duration, peak temperature and `repetitions` (`energy_input: joule_heating`); for exsolution the reduction as a step of the preparation, its gas, temperature and time |
+| flame_spray_pyrolysis, spray_pyrolysis, spray_drying | the precursor solution (its solvent often also the `fuel`), the dispersion gas (`oxidizing_agent`, `carrier_gas`) | `liquid_feed_rate`, the dispersion gas flow, `pressure_drop` at the nozzle, the pilot flame, the collection (filter, temperature); `batch_scale` or a production rate |
+| atomic_layer_deposition, chemical_vapor_deposition | the metal_precursor and the co_reactant; one cycle as a block with `repetitions` and its dose and purge sub-steps | the substrate temperature, the precursor (bubbler) temperature, dose and purge times, pressure; `deposition_per_cycle` as an outcome; for CVD the gas flows and the deposition time |
+| physical_vapor_deposition, cluster_deposition, model_surface_preparation | the target or source, the substrate (`substrate`); the cleaning cycles as a block (sputter, anneal) with `repetitions` | the deposition rate and the coverage (ML) with how it was calibrated; the cluster size selected (`design_aims: cluster_nuclearity`), the landing energy; the base pressure |
+| electrodeposition, anodization, electrospinning | the electrolyte as a Sample, the substrate (`substrate`); `energy_input: electrochemical` | the `potential` (with its reference scale in the definition) or `current_density`, the charge passed, the time; for electrospinning the voltage, feed rate and distance |
+| galvanic_replacement, dealloying, etching, hard_templating, soft_templating, photodeposition, electroless_deposition | the template (`template`, `porogen`) and the step that removes it; the etchant; the sacrificial component; for photodeposition the light source (a LightSource the step `USES_INSTRUMENT`) and the electron donor | the concentration and time of the etch; the potential of an electrochemical dealloying; the irradiance and wavelength |
+| coating, shaping, additive_manufacturing | the binder, the body (`substrate`) | the washcoat loading as an outcome; the extrusion or pellet dimensions; the printing settings in `method` |
+| laser_ablation, arc_discharge, plasma_synthesis, biological | the target, the liquid or gas, the organism or biomolecule (`template`, `reducing_agent`) | the laser's wavelength, pulse energy and repetition rate; the arc current; the plasma power |
+
+To find syntheses by a value of one of these lists, a plan filters on the list's entries (`preparation_methods.*`,
+`synthesis_function.*`, `particle_shape.*`) with `eq` or `in`, which match a value exactly; `contains` on the list
+also matches a value whose name holds the one asked for (`pyrolysis` in `flame_spray_pyrolysis`).
+
 ## Characterization recipes
 
 What every measurement keeps, then what each technique adds (scale-catal 0.6.0; CQ-19, CQ-20 and CQ-21 show the

@@ -1,0 +1,107 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-37
+question: Which syntheses used an additive to direct the shape of the particles, which additive, and which shapes and
+  facets did they give, as observed?
+description: |
+  The function an input serves in a synthesis is on its HAS_INPUT link (synthesis_function), so a shape-directing agent
+  is found as one whatever the chemical (Br-, Cu2+, CO, a surfactant), and one input may serve several functions (PVP
+  capping agent and stabilizer). The structure a preparation gave is a CatalystState of its output, REACHED_BY the
+  preparation and DETERMINED_BY the characterization that shows it, with its particle_shape, exposed_facets and
+  architecture. The Pd nanocubes of the synthesis example come from KBr as shape-directing agent; their state lists
+  cubes with a few rods and {100} facets, from TEM. That Br- on {100} is why the particles are cubes is the authors'
+  claim, ABOUT the preparation, not a property of it.
+documents:
+  - examples/scale-catal/synthesis-examples/synthesis-strategies.json
+plan:
+  question: Which preparations used a shape-directing agent, which one, and what shapes and facets resulted?
+  match:
+    label: Preparation
+    as: preparation
+  steps:
+    - from: preparation
+      edge: PART_OF
+      direction: in
+      to: ProcedureStep
+      as: step
+    - from: step
+      edge: HAS_INPUT
+      to: ChemicalSpecies
+      as: agent
+      edge_as: used
+      edge_where:
+        - prop: synthesis_function.*
+          op: eq
+          value: shape_directing_agent
+    - from: preparation
+      edge: REACHED_BY
+      direction: in
+      to: CatalystState
+      as: obtained
+    - from: obtained
+      edge: DETERMINED_BY
+      to: Characterization
+      as: shown_by
+  return:
+    - preparation.name
+    - preparation.preparation_methods
+    - agent.name
+    - used.synthesis_function
+    - used.amount
+    - obtained.particle_shape
+    - obtained.exposed_facets
+    - shown_by.technique
+  evidence: true
+expect:
+  status: answered
+  min_rows: 2
+  max_rows: 2
+  values:
+    agent.name:
+      - potassium bromide
+    shown_by.technique:
+      - transmission electron microscopy
+      - high-resolution TEM
+variants:
+  - description: The structure-directing agent of a zeolite is a function of its own (an organic cation that templates
+      the framework), apart from a shape-directing agent of a colloid and from the mineralizer that dissolves the
+      silica. The Cu-SSZ-13 of the example is made in two stages, each a Preparation PART_OF the whole; its first stage
+      takes in TMAdaOH as structure-directing agent and NaOH as mineralizer.
+    plan:
+      match:
+        label: Preparation
+        as: stage
+      steps:
+        - from: stage
+          edge: PART_OF
+          direction: in
+          to: ProcedureStep
+          as: step
+        - from: step
+          edge: HAS_INPUT
+          to: ChemicalSpecies
+          as: agent
+          edge_as: used
+          edge_where:
+            - prop: synthesis_function.*
+              op: in
+              value:
+                - structure_directing_agent
+                - mineralizer
+        - from: stage
+          edge: PART_OF
+          to: Preparation
+          as: whole
+      return:
+        - whole.name
+        - stage.name
+        - agent.name
+        - used.synthesis_function
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      values:
+        agent.name:
+          - N,N,N-trimethyl-1-adamantylammonium hydroxide (25 wt% in water)
+          - sodium hydroxide

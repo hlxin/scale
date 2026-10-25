@@ -210,3 +210,23 @@ fixtures:
     error: "USES_METHOD target must be"
     reason: USES_METHOD names a method record; the code that ran the calculation is a Software it USES_SOFTWARE, whose
       version is not a method's.
+  - file: synthesis-function-not-in-vocabulary.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json
+    error: "is not one of"
+    reason: The function an input serves in a synthesis is one of the listed functions, so that every capping agent, every
+      structure-directing agent and every reducing agent is found as one, whatever the chemical.
+  - file: preparation-method-not-in-vocabulary.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json
+    error: "is not one of"
+    reason: A preparation's method families are listed values, so that the syntheses of one family are found together;
+      the source's own name for the method stays in method.
+  - file: particle-shape-not-in-vocabulary.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json
+    error: "is not one of"
+    reason: A particle shape is one of the listed shapes, so that the cubes of one paper and of another are found as one.
+  - file: synthesis-function-on-a-component.json
+    base: domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json
+    error: "is not declared for this type"
+    reason: A function in a synthesis belongs to an input of a preparation or of a step (HAS_INPUT); a catalyst's
+      component has a role in the catalyst (HAS_COMPONENT.role), which says what it is there, not what it did while the
+      catalyst was made.

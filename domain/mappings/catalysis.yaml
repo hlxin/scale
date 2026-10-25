@@ -236,6 +236,142 @@ mappings:
   - match: close
     term: af-p:AFP_0001478
     label: cooling
+  ProcedureStep.action=crystallize:
+  - match: close
+    term: CHMO:0001477
+    label: crystallisation
+  ProcedureStep.action=centrifuge:
+  - match: close
+    term: OBI:0302886
+    label: centrifugation
+  ProcedureStep.action=sonicate:
+  - match: close
+    term: CHMO:0001707
+    label: sonication
+  ProcedureStep.action=pyrolyze:
+  - match: close
+    term: CHMO:0001502
+    label: pyrolysis
+  ProcedureStep.action=leach:
+  - match: close
+    term: CHMO:0001681
+    label: leaching
+  ProcedureStep.action=etch:
+  - match: close
+    term: CHMO:0001558
+    label: etching
+    note: CHMO's etching usually leaves a pattern; a SCALE etch step removes a component or a layer, patterned or not.
+  ProcedureStep.action=mill:
+  - match: narrow
+    term: CHMO:0001654
+    label: ball milling
+  ProcedureStep.action=evaporate:
+  - match: close
+    term: CHMO:0001574
+    label: evaporation
+  ProcedureStep.action=freeze_dry:
+  - match: close
+    term: CHMO:0001553
+    label: freeze drying
+  Preparation.preparation_methods=precipitation:
+  - match: close
+    term: CHMO:0001688
+    label: precipitation
+  Preparation.preparation_methods=coprecipitation:
+  - match: close
+    term: CHMO:0001690
+    label: co-precipitation
+  Preparation.preparation_methods=sol_gel:
+  - match: close
+    term: CHMO:0001313
+    label: sol–gel method
+  Preparation.preparation_methods=hydrothermal:
+  - match: narrow
+    term: CHMO:0001377
+    label: hydrothermal synthesis
+    note: CHMO's term is the growth of single crystals near 400 °C; a SCALE hydrothermal preparation is any synthesis in
+      water in a closed vessel above its boiling point (a zeolite crystallized at 433 K among them).
+  Preparation.preparation_methods=solvothermal:
+  - match: narrow
+    term: CHMO:0001458
+    label: solvothermal synthesis
+    note: CHMO's term is the growth of single crystals; a SCALE solvothermal preparation is any synthesis in a
+      non-aqueous solvent in a closed vessel above its boiling point.
+  Preparation.preparation_methods=polyol:
+  - match: close
+    term: CHMO:0002167
+    label: polyol method
+  Preparation.preparation_methods=thermal_decomposition:
+  - match: related
+    term: CHMO:0001500
+    label: thermal decomposition
+    note: CHMO's term is the decomposition of a compound by heating; a SCALE thermal_decomposition preparation makes a
+      solid (nanoparticles, an oxide) by decomposing a molecular precursor.
+  Preparation.preparation_methods=pyrolysis:
+  - match: close
+    term: CHMO:0001502
+    label: pyrolysis
+  Preparation.preparation_methods=mechanochemical:
+  - match: related
+    term: CHMO:0001654
+    label: ball milling
+    note: Ball milling is how most mechanochemical syntheses are run; CHMO's term is the reduction of particle size.
+  Preparation.preparation_methods=spray_pyrolysis:
+  - match: close
+    term: CHMO:0001516
+    label: spray pyrolysis
+  Preparation.preparation_methods=spray_drying:
+  - match: close
+    term: CHMO:0001555
+    label: spray drying
+  Preparation.preparation_methods=chemical_vapor_deposition:
+  - match: close
+    term: CHMO:0001314
+    label: chemical vapour deposition
+  Preparation.preparation_methods=atomic_layer_deposition:
+  - match: close
+    term: CHMO:0001311
+    label: atomic layer deposition
+  Preparation.preparation_methods=physical_vapor_deposition:
+  - match: close
+    term: CHMO:0001356
+    label: physical vapour deposition
+  Preparation.preparation_methods=electrodeposition:
+  - match: close
+    term: CHMO:0001331
+    label: electrochemical deposition
+  Preparation.preparation_methods=electroless_deposition:
+  - match: close
+    term: CHMO:0001333
+    label: electroless metal deposition
+  Preparation.preparation_methods=anodization:
+  - match: close
+    term: CHMO:0002152
+    label: anodisation
+  Preparation.preparation_methods=electrospinning:
+  - match: close
+    term: CHMO:0001620
+    label: electrospinning
+  Preparation.preparation_methods=etching:
+  - match: close
+    term: CHMO:0001558
+    label: etching
+  Preparation.preparation_methods=laser_ablation:
+  - match: related
+    term: CHMO:0001132
+    label: laser ablation
+    note: CHMO's term removes material from a specimen; a SCALE laser_ablation preparation makes particles from the
+      material removed.
+  Preparation.preparation_methods=arc_discharge:
+  - match: narrow
+    term: CHMO:0002240
+    label: arc-discharge method
+    note: CHMO's term is the synthesis of carbon nanotubes; a SCALE arc_discharge preparation makes any solid so.
+  Preparation.preparation_methods=coating:
+  - match: narrow
+    term: CHMO:0001471
+    label: dip coating
+    note: Dip coating is one kind of SCALE coating; spin coating (CHMO:0001472) and washcoating are others.
   Characterization:
   - match: broad
     term: OBI:0000070
@@ -574,7 +710,9 @@ subdomains:
     - Treatment
     - Sample
     - CatalystSample
+    - CatalystState
     - PREPARED_FROM
+    - HAS_INPUT
     ontologies4cat:
       contained: []
       related_narrower: []

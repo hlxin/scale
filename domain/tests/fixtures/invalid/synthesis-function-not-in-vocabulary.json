@@ -1,0 +1,6012 @@
+{
+  "nodes": [
+    {
+      "id": "ex:syn/source/pd-cubes",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Palladium nanocubes enclosed by {100} facets on alumina for selective hydrogenation",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Palladium nanocubes enclosed by {100} facets on alumina for selective hydrogenation (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/material/pd-fcc",
+      "label": "Material",
+      "props": {
+        "name": "fcc palladium",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "formula": "Pd",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:syn/material/gamma-alumina",
+      "label": "Material",
+      "props": {
+        "name": "gamma-alumina",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Materials",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "formula": "Al2O3",
+        "material_family": "oxide",
+        "origin": "synthetic",
+        "polymorph": "gamma"
+      }
+    },
+    {
+      "id": "ex:syn/species/na2pdcl4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium tetrachloropalladate",
+        "elemental_composition": {
+          "Cl": 4,
+          "Na": 2,
+          "Pd": 1
+        },
+        "formula": "Na2PdCl4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/ascorbic-acid",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "L-ascorbic acid",
+        "elemental_composition": {
+          "C": 6,
+          "H": 8,
+          "O": 6
+        },
+        "formula": "C6H8O6",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/pvp",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "poly(vinylpyrrolidone), Mw 55 000",
+        "elemental_composition": {
+          "C": 6,
+          "H": 9,
+          "N": 1,
+          "O": 1
+        },
+        "formula": "(C6H9NO)n",
+        "origin": "synthetic",
+        "species_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/species/kbr",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "potassium bromide",
+        "elemental_composition": {
+          "Br": 1,
+          "K": 1
+        },
+        "formula": "KBr",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/pd-cubes-alumina",
+      "label": "Catalyst",
+      "props": {
+        "name": "Pd nanocubes/gamma-Al2O3, 1 wt% Pd (nominal)",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "nominal_formula": "Pd/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/pd-cubes-alumina",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pd cubes/Al2O3, batch 1",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "batch"
+      }
+    },
+    {
+      "id": "ex:syn/sample/pd-cube-colloid",
+      "label": "Sample",
+      "props": {
+        "name": "aqueous colloid of Pd nanocubes",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/pd-cubes",
+      "label": "Preparation",
+      "props": {
+        "name": "Pd nanocubes by reduction in water with Br-, deposited on alumina",
+        "batch_scale": {
+          "status": "present",
+          "definition": "volume of colloid made in one run",
+          "unit": "mL",
+          "value": 11
+        },
+        "design_aims": [
+          "particle_shape",
+          "exposed_facets",
+          "particle_size"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "method": "aqueous reduction of Na2PdCl4 by ascorbic acid with PVP and KBr, then deposition on alumina",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "colloidal_reduction",
+          "colloidal_deposition"
+        ],
+        "strategy": "Br- chemisorbed on the growing particles caps the {100} facets, so the particles grow into cubes; PVP keeps the colloid dispersed"
+      }
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Heat PVP, ascorbic acid and KBr in water",
+        "action": "heat",
+        "conditions": {
+          "stirring_rate": {
+            "status": "present",
+            "unit": "rpm",
+            "value": 600
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "method": "in a 20 mL vial in an oil bath, magnetically stirred",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add the palladium salt and react",
+        "action": "add",
+        "atmosphere": "air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 3
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "method": "3 mL of aqueous Na2PdCl4 added at once",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-3",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Collect by centrifugation and wash",
+        "action": "centrifuge",
+        "conditions": {
+          "centrifugal_speed": {
+            "status": "present",
+            "unit": "rpm",
+            "value": 12000
+          },
+          "washes": {
+            "status": "present",
+            "unit": "1",
+            "value": 3
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 20
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-4",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Deposit the cubes on the alumina",
+        "action": "deposit",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "method": "the colloid in ethanol stirred with the support, then filtered",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-5",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry",
+        "action": "dry",
+        "atmosphere": "vacuum",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:syn/variable/pd-cube-edge",
+      "label": "Variable",
+      "props": {
+        "name": "edge length of the Pd cubes (TEM)",
+        "definition": "number mean of the edge lengths of the cubes counted",
+        "origin": "synthetic",
+        "quantity_kind": "particle_edge_length",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:syn/variable/pd-cube-edge-sd",
+      "label": "Variable",
+      "props": {
+        "name": "standard deviation of the edge lengths (TEM)",
+        "definition": "standard deviation of the number distribution",
+        "origin": "synthetic",
+        "quantity_kind": "particle_edge_length_spread",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:syn/variable/pd-cubes-counted",
+      "label": "Variable",
+      "props": {
+        "name": "particles counted (TEM)",
+        "definition": "particles whose edge lengths make the distribution",
+        "origin": "synthetic",
+        "quantity_kind": "count",
+        "scale": "quantitative",
+        "unit": "1"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/pd-cubes-tem",
+      "label": "Characterization",
+      "props": {
+        "name": "TEM of the colloid",
+        "evidence": [
+          {
+            "id": "f1a",
+            "kind": "figure",
+            "locator": "Figure 1a",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "edge_length",
+            "status": "present",
+            "evidence_ids": [
+              "f1a"
+            ],
+            "target": "ex:syn/material/pd-fcc",
+            "unit": "nm",
+            "value": 10.2,
+            "variable": "ex:syn/variable/pd-cube-edge"
+          },
+          {
+            "id": "edge_length_sd",
+            "status": "present",
+            "evidence_ids": [
+              "f1a"
+            ],
+            "target": "ex:syn/material/pd-fcc",
+            "unit": "nm",
+            "value": 1.1,
+            "variable": "ex:syn/variable/pd-cube-edge-sd"
+          },
+          {
+            "id": "counted",
+            "status": "present",
+            "evidence_ids": [
+              "f1a"
+            ],
+            "target": "ex:syn/material/pd-fcc",
+            "unit": "1",
+            "value": 200,
+            "variable": "ex:syn/variable/pd-cubes-counted"
+          }
+        ],
+        "technique": "transmission electron microscopy"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/pd-cubes-hrtem",
+      "label": "Characterization",
+      "props": {
+        "name": "HRTEM of one cube",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1c",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "sampling": "single_particle",
+        "technique": "high-resolution TEM"
+      }
+    },
+    {
+      "id": "ex:syn/state/pd-cubes",
+      "label": "CatalystState",
+      "props": {
+        "name": "the colloid as made: Pd cubes bounded by {100}",
+        "architecture": [
+          "nanoparticles"
+        ],
+        "dimensionality": "zero_dimensional",
+        "evidence": [
+          {
+            "id": "f1a",
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "exposed_facets": [
+          "{100}"
+        ],
+        "morphology": "cubes with slightly truncated corners, a few rods",
+        "origin": "synthetic",
+        "particle_shape": [
+          "cube",
+          "rod"
+        ],
+        "properties": {
+          "shape_fraction": {
+            "status": "present",
+            "definition": "share of the particles counted that are cubes",
+            "evidence_ids": [
+              "f1a"
+            ],
+            "target": "ex:syn/material/pd-fcc",
+            "unit": "%",
+            "value": 92
+          }
+        },
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:syn/claim/pd-cubes-br",
+      "label": "Claim",
+      "props": {
+        "name": "Br- adsorbed on {100} lowers its surface energy below that o",
+        "claim_kind": "mechanism",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 2",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "statement": "Br- adsorbed on {100} lowers its surface energy below that of {111}, so the particles grow as cubes; without KBr the same synthesis gives cuboctahedra"
+      }
+    },
+    {
+      "id": "ex:syn/source/pt-ald",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Subnanometre Pt on alumina by a few cycles of atomic layer deposition",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Subnanometre Pt on alumina by a few cycles of atomic layer deposition (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/material/pt-fcc",
+      "label": "Material",
+      "props": {
+        "name": "fcc platinum",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "formula": "Pt",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:syn/material/alumina-ald",
+      "label": "Material",
+      "props": {
+        "name": "gamma-alumina powder, 150 m2/g",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "formula": "Al2O3",
+        "material_family": "oxide",
+        "origin": "synthetic",
+        "polymorph": "gamma"
+      }
+    },
+    {
+      "id": "ex:syn/species/mecpptme3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "trimethyl(methylcyclopentadienyl)platinum(IV)",
+        "elemental_composition": {
+          "C": 9,
+          "H": 16,
+          "Pt": 1
+        },
+        "formula": "C9H16Pt",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/o2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxygen",
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/n2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nitrogen",
+        "elemental_composition": {
+          "N": 2
+        },
+        "formula": "N2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/pt-ald",
+      "label": "Catalyst",
+      "props": {
+        "name": "Pt/Al2O3 by 10 ALD cycles",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "nominal_formula": "Pt/Al2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/pt-ald",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pt/Al2O3, 10 cycles",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:syn/instrument/ald-reactor",
+      "label": "Instrument",
+      "props": {
+        "name": "viscous-flow ALD reactor with a powder holder",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "instrument_kind": "atomic layer deposition reactor",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/pt-ald",
+      "label": "Preparation",
+      "props": {
+        "name": "Pt by ten ALD cycles on alumina powder",
+        "design_aims": [
+          "particle_size",
+          "size_distribution"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "method": "ALD of MeCpPtMe3 and O2 at 573 K",
+        "origin": "synthetic",
+        "outcomes": {
+          "loading_per_cycle": {
+            "status": "present",
+            "definition": "Pt loading by ICP-OES divided by the number of cycles",
+            "unit": "wt%",
+            "value": 0.35
+          }
+        },
+        "preparation_methods": [
+          "atomic_layer_deposition"
+        ],
+        "strategy": "few cycles, so that the Pt nucleates as subnanometre particles before they coalesce"
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-degas",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Degas the support in the reactor",
+        "action": "heat",
+        "atmosphere": "flowing N2",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-cycle",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "One ALD cycle, repeated 10 times",
+        "action": "deposit",
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "unit": "Torr",
+          "value": 1
+        },
+        "repetitions": 10,
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-dose-pt",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dose MeCpPtMe3",
+        "action": "dose",
+        "conditions": {
+          "precursor_temperature": {
+            "status": "present",
+            "definition": "temperature of the precursor bubbler",
+            "unit": "K",
+            "value": 343
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "s",
+          "value": 60
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-purge-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Purge",
+        "action": "purge",
+        "duration": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-dose-o2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dose O2",
+        "action": "dose",
+        "duration": {
+          "status": "present",
+          "unit": "s",
+          "value": 60
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/ald-purge-2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Purge",
+        "action": "purge",
+        "duration": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/variable/pt-ald-size",
+      "label": "Variable",
+      "props": {
+        "name": "mean Pt particle diameter (HAADF-STEM)",
+        "definition": "number mean of the projected-area-equivalent diameters",
+        "origin": "synthetic",
+        "quantity_kind": "microscopy_particle_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/pt-ald-stem",
+      "label": "Characterization",
+      "props": {
+        "name": "HAADF-STEM after 10 cycles",
+        "evidence": [
+          {
+            "id": "f2",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "f2"
+            ],
+            "target": "ex:syn/material/pt-fcc",
+            "unit": "nm",
+            "value": 0.9,
+            "variable": "ex:syn/variable/pt-ald-size"
+          }
+        ],
+        "technique": "HAADF-STEM"
+      }
+    },
+    {
+      "id": "ex:syn/state/pt-ald",
+      "label": "CatalystState",
+      "props": {
+        "name": "Pt/Al2O3 after 10 cycles",
+        "architecture": [
+          "clusters",
+          "nanoparticles",
+          "supported"
+        ],
+        "dimensionality": "zero_dimensional",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "particle_shape": [
+          "not_reported"
+        ],
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:syn/source/cu-ssz13",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Isolated Cu2+ ions in SSZ-13 from a direct OSDA route and two ion exchanges",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Isolated Cu2+ ions in SSZ-13 from a direct OSDA route and two ion exchanges (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/material/ssz13",
+      "label": "Material",
+      "props": {
+        "name": "SSZ-13 (CHA), Si/Al 12",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "formula": "SiO2·Al2O3",
+        "framework_code": "CHA",
+        "material_family": "zeolite",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/fumed-silica",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "fumed silica",
+        "elemental_composition": {
+          "O": 2,
+          "Si": 1
+        },
+        "formula": "SiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/aloh3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aluminium hydroxide",
+        "elemental_composition": {
+          "Al": 1,
+          "H": 3,
+          "O": 3
+        },
+        "formula": "Al(OH)3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/tmadaoh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "N,N,N-trimethyl-1-adamantylammonium hydroxide (25 wt% in water)",
+        "elemental_composition": {
+          "C": 13,
+          "H": 25,
+          "N": 1,
+          "O": 1
+        },
+        "formula": "C13H25NO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/naoh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium hydroxide",
+        "elemental_composition": {
+          "H": 1,
+          "Na": 1,
+          "O": 1
+        },
+        "formula": "NaOH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/water-z",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/nh4no3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ammonium nitrate",
+        "elemental_composition": {
+          "H": 4,
+          "N": 2,
+          "O": 3
+        },
+        "formula": "NH4NO3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/cuno3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper(II) nitrate trihydrate",
+        "elemental_composition": {
+          "Cu": 1,
+          "H": 6,
+          "N": 2,
+          "O": 9
+        },
+        "formula": "Cu(NO3)2·3H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/cu",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper",
+        "elemental_composition": {
+          "Cu": 1
+        },
+        "formula": "Cu",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/cu-ssz13",
+      "label": "Catalyst",
+      "props": {
+        "name": "Cu-SSZ-13, Cu/Al 0.2 (nominal)",
+        "catalyst_family": "zeolite",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "nominal_formula": "Cu-SSZ-13",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/cu-ssz13",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Cu-SSZ-13",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:syn/sample/ssz13-gel",
+      "label": "Sample",
+      "props": {
+        "name": "synthesis gel, 1 SiO2 : 0.042 Al2O3 : 0.2 TMAdaOH : 0.1 NaOH : 44 H2O",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/sample/na-ssz13",
+      "label": "Sample",
+      "props": {
+        "name": "Na-SSZ-13 as synthesized, then calcined",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/sample/nh4-ssz13",
+      "label": "Sample",
+      "props": {
+        "name": "NH4-SSZ-13",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/instrument/autoclave",
+      "label": "Instrument",
+      "props": {
+        "name": "Teflon-lined stainless-steel autoclave, 45 mL",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "instrument_kind": "autoclave",
+        "origin": "synthetic",
+        "settings": {
+          "volume": {
+            "status": "present",
+            "unit": "mL",
+            "value": 45
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:syn/preparation/cu-ssz13",
+      "label": "Preparation",
+      "props": {
+        "name": "Cu-SSZ-13: hydrothermal synthesis, then two ion exchanges",
+        "design_aims": [
+          "atomic_dispersion",
+          "acid_base_sites"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "method": "direct OSDA synthesis of SSZ-13, NH4+ then Cu2+ exchange",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "hydrothermal",
+          "ion_exchange"
+        ],
+        "strategy": "a low Cu loading exchanged into paired Al sites, so that Cu stays as isolated Cu2+ ions"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/ssz13",
+      "label": "Preparation",
+      "props": {
+        "name": "Hydrothermal crystallization of SSZ-13 and removal of the OSDA",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "method": "hydrothermal synthesis with TMAdaOH, then calcination",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "hydrothermal"
+        ]
+      }
+    },
+    {
+      "id": "ex:syn/step/ssz13-gel",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Make the gel",
+        "action": "mix",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 298
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/ssz13-crystallize",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Crystallize in the autoclave",
+        "action": "crystallize",
+        "conditions": {
+          "fill_fraction": {
+            "status": "present",
+            "definition": "gel volume over the liner's volume",
+            "unit": "%",
+            "value": 70
+          },
+          "rotation_rate": {
+            "status": "present",
+            "definition": "tumbling of the autoclave in the oven",
+            "unit": "rpm",
+            "value": 40
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "d",
+          "value": 4
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "method": "static oven with a tumbling rotisserie; autogenous pressure",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "not_reported",
+          "missing_reason": "not_stated_in_source"
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 433
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/ssz13-recover",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Filter, wash and dry",
+        "action": "filter",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 373
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/ssz13-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine to remove the OSDA",
+        "action": "calcine",
+        "atmosphere": "flowing air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 8
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 823
+        }
+      }
+    },
+    {
+      "id": "ex:syn/preparation/cu-exchange",
+      "label": "Preparation",
+      "props": {
+        "name": "NH4+ and then Cu2+ ion exchange",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "method": "aqueous ion exchange at 353 K",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "ion_exchange"
+        ]
+      }
+    },
+    {
+      "id": "ex:syn/step/nh4-exchange",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Exchange with NH4NO3, twice",
+        "action": "exchange",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 2
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "repetitions": 2,
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/cu-exchange",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Exchange with Cu(NO3)2",
+        "action": "exchange",
+        "conditions": {
+          "ph": {
+            "status": "present",
+            "definition": "pH of the slurry during the exchange",
+            "unit": "1",
+            "value": 4.5
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/cu-calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 4
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 2
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 823
+        }
+      }
+    },
+    {
+      "id": "ex:syn/characterization/ssz13-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of Cu-SSZ-13",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/cu-epr",
+      "label": "Characterization",
+      "props": {
+        "name": "EPR of the hydrated catalyst",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "electron paramagnetic resonance"
+      }
+    },
+    {
+      "id": "ex:syn/state/cu-ssz13",
+      "label": "CatalystState",
+      "props": {
+        "name": "Cu-SSZ-13 as made",
+        "architecture": [
+          "framework",
+          "single_atoms"
+        ],
+        "dimensionality": "three_dimensional",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figures 1 and 3",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:syn/claim/cu-isolated",
+      "label": "Claim",
+      "props": {
+        "name": "Cu is present as isolated Cu2+ ions at paired Al sites of th",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 3",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "statement": "Cu is present as isolated Cu2+ ions at paired Al sites of the six-membered rings"
+      }
+    },
+    {
+      "id": "ex:syn/source/fe-n-c",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Atomically dispersed Fe-N-C from Fe-encapsulating ZIF-8 for oxygen reduction",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Atomically dispersed Fe-N-C from Fe-encapsulating ZIF-8 for oxygen reduction (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/species/znno3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc nitrate hexahydrate",
+        "elemental_composition": {
+          "H": 12,
+          "N": 2,
+          "O": 12,
+          "Zn": 1
+        },
+        "formula": "Zn(NO3)2·6H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/2-mim",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "2-methylimidazole",
+        "elemental_composition": {
+          "C": 4,
+          "H": 6,
+          "N": 2
+        },
+        "formula": "C4H6N2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/feacac3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron(III) acetylacetonate",
+        "elemental_composition": {
+          "C": 15,
+          "Fe": 1,
+          "H": 21,
+          "O": 6
+        },
+        "formula": "Fe(C5H7O2)3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/methanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "elemental_composition": {
+          "C": 1,
+          "H": 4,
+          "O": 1
+        },
+        "formula": "CH3OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/h2so4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sulfuric acid",
+        "elemental_composition": {
+          "H": 2,
+          "O": 4,
+          "S": 1
+        },
+        "formula": "H2SO4",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/material/zif-8",
+      "label": "Material",
+      "props": {
+        "name": "ZIF-8 with encapsulated Fe(acac)3",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "material_family": "other",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/material/n-carbon",
+      "label": "Material",
+      "props": {
+        "name": "N-doped carbon",
+        "crystallinity": "amorphous",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "material_family": "carbon",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/fe",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron",
+        "elemental_composition": {
+          "Fe": 1
+        },
+        "formula": "Fe",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/fe-n-c",
+      "label": "Catalyst",
+      "props": {
+        "name": "Fe-N-C, 1.5 wt% Fe (measured)",
+        "catalyst_family": "carbon",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "nominal_formula": "Fe-N-C",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/fe-n-c",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Fe-N-C",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:syn/sample/fe-zif8",
+      "label": "Sample",
+      "props": {
+        "name": "Fe(acac)3@ZIF-8 powder",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/sample/fe-n-c-1",
+      "label": "Sample",
+      "props": {
+        "name": "Fe-N-C after the first pyrolysis",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/fe-n-c",
+      "label": "Preparation",
+      "props": {
+        "name": "Fe-N-C by pyrolysis of Fe(acac)3@ZIF-8",
+        "design_aims": [
+          "atomic_dispersion",
+          "porosity"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "method": "Fe(acac)3 encapsulated during ZIF-8 growth, pyrolysed, acid leached, pyrolysed again",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "solvothermal",
+          "pyrolysis",
+          "etching"
+        ],
+        "strategy": "each Fe(acac)3 confined in a ZIF-8 cage, so that on pyrolysis Fe binds N of the carbonizing linker before it can cluster; Zn evaporates and leaves micropores"
+      }
+    },
+    {
+      "id": "ex:syn/step/zif-solutions",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the zinc salt with Fe(acac)3, and the linker, in methanol",
+        "action": "dissolve",
+        "conditions": {
+          "ultrasound_power": {
+            "status": "present",
+            "definition": "nominal power of the bath",
+            "unit": "W",
+            "value": 100
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 10
+        },
+        "energy_input": [
+          "ultrasound"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/zif-grow",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Grow ZIF-8 around Fe(acac)3",
+        "action": "crystallize",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 24
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/pyrolysis-1",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Pyrolyse",
+        "action": "pyrolyze",
+        "atmosphere": "flowing Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 1173
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/leach",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Leach in acid",
+        "action": "leach",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 8
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/pyrolysis-2",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Pyrolyse again",
+        "action": "pyrolyze",
+        "atmosphere": "flowing Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 3
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 1173
+        }
+      }
+    },
+    {
+      "id": "ex:syn/characterization/fe-stem",
+      "label": "Characterization",
+      "props": {
+        "name": "Aberration-corrected HAADF-STEM",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "sampling": "single_particle",
+        "technique": "HAADF-STEM"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/fe-xas",
+      "label": "Characterization",
+      "props": {
+        "name": "Fe K-edge EXAFS",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 3",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "X-ray absorption spectroscopy"
+      }
+    },
+    {
+      "id": "ex:syn/state/fe-n-c",
+      "label": "CatalystState",
+      "props": {
+        "name": "Fe-N-C as made",
+        "architecture": [
+          "single_atoms",
+          "supported"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figures 2 and 3",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "morphology": "polyhedral porous carbon keeping the rhombic dodecahedral shape of the ZIF-8 crystals",
+        "origin": "synthetic",
+        "particle_shape": [
+          "rhombic_dodecahedron"
+        ],
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:syn/claim/fe-n4",
+      "label": "Claim",
+      "props": {
+        "name": "Fe is atomically dispersed as FeN4 sites; no Fe-Fe scatterin",
+        "claim_kind": "finding",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figures 2 and 3",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "statement": "Fe is atomically dispersed as FeN4 sites; no Fe-Fe scattering and no Fe particles are seen"
+      }
+    },
+    {
+      "id": "ex:syn/source/ni-exsolution",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Socketed Ni particles exsolved from a titanate perovskite resist sintering",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Socketed Ni particles exsolved from a titanate perovskite resist sintering (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/species/la2o3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "lanthanum oxide",
+        "elemental_composition": {
+          "La": 2,
+          "O": 3
+        },
+        "formula": "La2O3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/srco3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "strontium carbonate",
+        "elemental_composition": {
+          "C": 1,
+          "O": 3,
+          "Sr": 1
+        },
+        "formula": "SrCO3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/tio2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "titanium dioxide",
+        "elemental_composition": {
+          "O": 2,
+          "Ti": 1
+        },
+        "formula": "TiO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/nio",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nickel oxide",
+        "elemental_composition": {
+          "Ni": 1,
+          "O": 1
+        },
+        "formula": "NiO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H5OH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/material/lstn",
+      "label": "Material",
+      "props": {
+        "name": "La0.4Sr0.4Ti0.94Ni0.06O3",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "material_family": "mixed_oxide",
+        "nominal_formula": "La0.4Sr0.4Ti0.94Ni0.06O3",
+        "origin": "synthetic",
+        "structure_type": "perovskite"
+      }
+    },
+    {
+      "id": "ex:syn/material/ni-fcc",
+      "label": "Material",
+      "props": {
+        "name": "fcc nickel",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "formula": "Ni",
+        "material_family": "metal",
+        "origin": "synthetic",
+        "structure_type": "fcc"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/ni-lstn",
+      "label": "Catalyst",
+      "props": {
+        "name": "Ni exsolved from La0.4Sr0.4Ti0.94Ni0.06O3",
+        "catalyst_family": "mixed_oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "nominal_formula": "Ni/La0.4Sr0.4Ti0.94Ni0.06O3-d",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/ni-lstn",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Ni-exsolved LSTN",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:syn/sample/lstn-oxide",
+      "label": "Sample",
+      "props": {
+        "name": "La0.4Sr0.4Ti0.94Ni0.06O3 powder before reduction",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/ni-exsolution",
+      "label": "Preparation",
+      "props": {
+        "name": "Perovskite by solid-state reaction, then Ni exsolved by reduction",
+        "design_aims": [
+          "metal_support_interaction",
+          "stability",
+          "particle_size"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "method": "ball-milled oxides and carbonate, calcined, then reduced in H2",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "solid_state_reaction",
+          "exsolution"
+        ],
+        "strategy": "A-site deficiency drives Ni out of the B site on reduction, and the particles nucleate in the oxide surface, socketed in it"
+      }
+    },
+    {
+      "id": "ex:syn/step/mill",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mill the oxides and carbonate in ethanol",
+        "action": "mill",
+        "conditions": {
+          "ball_to_powder_ratio": {
+            "status": "present",
+            "basis": "mass",
+            "unit": "1",
+            "value": 10
+          },
+          "milling_frequency": {
+            "status": "present",
+            "unit": "rpm",
+            "value": 300
+          }
+        },
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 6
+        },
+        "energy_input": [
+          "mechanical"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "method": "planetary mill, zirconia jar and balls",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/calcine",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Calcine",
+        "action": "calcine",
+        "atmosphere": "static air",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 1373
+        }
+      }
+    },
+    {
+      "id": "ex:syn/step/exsolve",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Reduce to exsolve Ni",
+        "action": "reduce",
+        "atmosphere": "5 % H2 in Ar, 50 mL/min",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 10
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 1173
+        }
+      }
+    },
+    {
+      "id": "ex:syn/variable/ni-exsolved-size",
+      "label": "Variable",
+      "props": {
+        "name": "mean Ni particle diameter (SEM)",
+        "definition": "number mean of the diameters of the surface particles counted",
+        "origin": "synthetic",
+        "quantity_kind": "microscopy_particle_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/ni-sem",
+      "label": "Characterization",
+      "props": {
+        "name": "SEM of the reduced surface",
+        "evidence": [
+          {
+            "id": "f2",
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "f2"
+            ],
+            "target": "ex:syn/material/ni-fcc",
+            "unit": "nm",
+            "value": 27,
+            "variable": "ex:syn/variable/ni-exsolved-size"
+          }
+        ],
+        "technique": "scanning electron microscopy"
+      }
+    },
+    {
+      "id": "ex:syn/state/ni-lstn",
+      "label": "CatalystState",
+      "props": {
+        "name": "LSTN after reduction, with exsolved Ni",
+        "architecture": [
+          "nanoparticles",
+          "supported"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "morphology": "Ni particles partly embedded (socketed) in the perovskite surface",
+        "origin": "synthetic",
+        "particle_shape": [
+          "sphere"
+        ],
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:syn/claim/ni-socket",
+      "label": "Claim",
+      "props": {
+        "name": "The socketed Ni particles do not sinter in 100 h at 1073 K, ",
+        "claim_kind": "comparison",
+        "claim_status": "proposed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 5",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "statement": "The socketed Ni particles do not sinter in 100 h at 1073 K, unlike Ni impregnated on the same oxide"
+      }
+    },
+    {
+      "id": "ex:syn/source/pd-fsp",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Pd/CeO2 in one step by flame spray pyrolysis",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Pd/CeO2 in one step by flame spray pyrolysis (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:syn/species/ce-ehex",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "cerium(III) 2-ethylhexanoate",
+        "elemental_composition": {
+          "C": 24,
+          "Ce": 1,
+          "H": 45,
+          "O": 6
+        },
+        "formula": "Ce(C8H15O2)3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/pdacac2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "palladium(II) acetylacetonate",
+        "elemental_composition": {
+          "C": 10,
+          "H": 14,
+          "O": 4,
+          "Pd": 1
+        },
+        "formula": "Pd(C5H7O2)2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/xylene",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "xylene",
+        "elemental_composition": {
+          "C": 8,
+          "H": 10
+        },
+        "formula": "C8H10",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/species/o2-fsp",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oxygen",
+        "elemental_composition": {
+          "O": 2
+        },
+        "formula": "O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/material/ceo2",
+      "label": "Material",
+      "props": {
+        "name": "fluorite CeO2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "formula": "CeO2",
+        "material_family": "oxide",
+        "origin": "synthetic",
+        "structure_type": "fluorite"
+      }
+    },
+    {
+      "id": "ex:syn/species/pd",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "palladium",
+        "elemental_composition": {
+          "Pd": 1
+        },
+        "formula": "Pd",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:syn/catalyst/pd-ceo2",
+      "label": "Catalyst",
+      "props": {
+        "name": "1 wt% Pd/CeO2 (nominal)",
+        "catalyst_family": "oxide",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "nominal_formula": "Pd/CeO2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/sample/pd-ceo2",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Pd/CeO2 (FSP)",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:syn/sample/fsp-solution",
+      "label": "Sample",
+      "props": {
+        "name": "precursor solution, 0.5 mol/L Ce in xylene",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "other"
+      }
+    },
+    {
+      "id": "ex:syn/preparation/pd-fsp",
+      "label": "Preparation",
+      "props": {
+        "name": "Pd/CeO2 by flame spray pyrolysis",
+        "batch_scale": {
+          "status": "present",
+          "definition": "powder collected on the filter in one run",
+          "unit": "g",
+          "value": 5
+        },
+        "design_aims": [
+          "dispersion",
+          "metal_support_interaction"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "method": "flame spray pyrolysis of Ce and Pd organometallics in xylene",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "flame_spray_pyrolysis"
+        ],
+        "strategy": "Pd and Ce leave the flame together, so Pd ends up dispersed on and in the ceria"
+      }
+    },
+    {
+      "id": "ex:syn/step/fsp-solution",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dissolve the precursors in xylene",
+        "action": "dissolve",
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/step/fsp-spray",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Spray into the flame",
+        "action": "spray",
+        "conditions": {
+          "liquid_feed_rate": {
+            "status": "present",
+            "unit": "mL/min",
+            "value": 5
+          },
+          "pilot_flame": {
+            "status": "present",
+            "text_value": "CH4/O2 1.5/3.2 L/min"
+          },
+          "pressure_drop": {
+            "status": "present",
+            "definition": "across the nozzle tip",
+            "unit": "bar",
+            "value": 1.5
+          }
+        },
+        "energy_input": [
+          "flame"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "method": "liquid fed through a capillary, dispersed by O2 and ignited by a premixed pilot flame; particles collected on a glass-fibre filter",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:syn/characterization/fsp-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of Pd/CeO2",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:syn/state/pd-ceo2",
+      "label": "CatalystState",
+      "props": {
+        "name": "Pd/CeO2 as collected",
+        "architecture": [
+          "supported"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "morphology": "CeO2 crystals of 5-10 nm with no Pd reflections",
+        "origin": "synthetic",
+        "particle_shape": [
+          "irregular"
+        ],
+        "state_kind": "as_prepared"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:syn/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:syn/catalyst/pd-cubes-alumina",
+      "target": "ex:syn/material/pd-fcc"
+    },
+    {
+      "id": "ex:syn/link/2",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/pd-cubes-alumina",
+      "target": "ex:syn/material/gamma-alumina"
+    },
+    {
+      "id": "ex:syn/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pd-cubes-alumina",
+      "target": "ex:syn/catalyst/pd-cubes-alumina"
+    },
+    {
+      "id": "ex:syn/link/4",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pd-cubes",
+      "target": "ex:syn/sample/pd-cubes-alumina"
+    },
+    {
+      "id": "ex:syn/link/5",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/6",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 8
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/species/water"
+    },
+    {
+      "id": "ex:syn/link/7",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 105
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "capping",
+          "stabilizer"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/species/pvp"
+    },
+    {
+      "id": "ex:syn/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 60
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/species/ascorbic-acid"
+    },
+    {
+      "id": "ex:syn/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 300
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "shape_directing_agent"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/species/kbr"
+    },
+    {
+      "id": "ex:syn/link/10",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-2",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/11",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 57
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-2",
+      "target": "ex:syn/species/na2pdcl4"
+    },
+    {
+      "id": "ex:syn/link/12",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-2",
+      "target": "ex:syn/sample/pd-cube-colloid"
+    },
+    {
+      "id": "ex:syn/link/13",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-3",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/14",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-4",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/15",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/pd-cubes-4",
+      "target": "ex:syn/sample/pd-cube-colloid"
+    },
+    {
+      "id": "ex:syn/link/16",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:syn/step/pd-cubes-4",
+      "target": "ex:syn/material/gamma-alumina"
+    },
+    {
+      "id": "ex:syn/link/17",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-5",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/18",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/pd-cubes-tem",
+      "target": "ex:syn/sample/pd-cube-colloid"
+    },
+    {
+      "id": "ex:syn/link/19",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/pd-cubes-hrtem",
+      "target": "ex:syn/sample/pd-cube-colloid"
+    },
+    {
+      "id": "ex:syn/link/20",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/sample/pd-cube-colloid"
+    },
+    {
+      "id": "ex:syn/link/21",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/22",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/characterization/pd-cubes-tem"
+    },
+    {
+      "id": "ex:syn/link/23",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/characterization/pd-cubes-hrtem"
+    },
+    {
+      "id": "ex:syn/link/24",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1c",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "location": "whole_particle",
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/material/pd-fcc"
+    },
+    {
+      "id": "ex:syn/link/25",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "preparation"
+      },
+      "source": "ex:syn/claim/pd-cubes-br",
+      "target": "ex:syn/preparation/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/26",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:syn/claim/pd-cubes-br",
+      "target": "ex:syn/state/pd-cubes"
+    },
+    {
+      "id": "ex:syn/link/27",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "agent"
+      },
+      "source": "ex:syn/claim/pd-cubes-br",
+      "target": "ex:syn/species/kbr"
+    },
+    {
+      "id": "ex:syn/link/28",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 2",
+            "source": "ex:syn/source/pd-cubes"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/pd-cubes-tem",
+      "target": "ex:syn/claim/pd-cubes-br"
+    },
+    {
+      "id": "ex:syn/link/29",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:syn/catalyst/pt-ald",
+      "target": "ex:syn/material/pt-fcc"
+    },
+    {
+      "id": "ex:syn/link/30",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/pt-ald",
+      "target": "ex:syn/material/alumina-ald"
+    },
+    {
+      "id": "ex:syn/link/31",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pt-ald",
+      "target": "ex:syn/catalyst/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/32",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pt-ald",
+      "target": "ex:syn/sample/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/33",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "actuator"
+      },
+      "source": "ex:syn/preparation/pt-ald",
+      "target": "ex:syn/instrument/ald-reactor"
+    },
+    {
+      "id": "ex:syn/link/34",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-degas",
+      "target": "ex:syn/preparation/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/35",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support",
+          "substrate"
+        ]
+      },
+      "source": "ex:syn/step/ald-degas",
+      "target": "ex:syn/material/alumina-ald"
+    },
+    {
+      "id": "ex:syn/link/36",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-cycle",
+      "target": "ex:syn/preparation/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/37",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/ald-cycle",
+      "target": "ex:syn/species/mecpptme3"
+    },
+    {
+      "id": "ex:syn/link/38",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "co_reactant"
+        ]
+      },
+      "source": "ex:syn/step/ald-cycle",
+      "target": "ex:syn/species/o2"
+    },
+    {
+      "id": "ex:syn/link/39",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-dose-pt",
+      "target": "ex:syn/step/ald-cycle"
+    },
+    {
+      "id": "ex:syn/link/40",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/ald-dose-pt",
+      "target": "ex:syn/species/mecpptme3"
+    },
+    {
+      "id": "ex:syn/link/41",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-purge-1",
+      "target": "ex:syn/step/ald-cycle"
+    },
+    {
+      "id": "ex:syn/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "carrier_gas"
+        ]
+      },
+      "source": "ex:syn/step/ald-purge-1",
+      "target": "ex:syn/species/n2"
+    },
+    {
+      "id": "ex:syn/link/43",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-dose-o2",
+      "target": "ex:syn/step/ald-cycle"
+    },
+    {
+      "id": "ex:syn/link/44",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "co_reactant"
+        ]
+      },
+      "source": "ex:syn/step/ald-dose-o2",
+      "target": "ex:syn/species/o2"
+    },
+    {
+      "id": "ex:syn/link/45",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-purge-2",
+      "target": "ex:syn/step/ald-cycle"
+    },
+    {
+      "id": "ex:syn/link/46",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pt-ald"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "carrier_gas"
+        ]
+      },
+      "source": "ex:syn/step/ald-purge-2",
+      "target": "ex:syn/species/n2"
+    },
+    {
+      "id": "ex:syn/link/47",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/pt-ald-stem",
+      "target": "ex:syn/sample/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/48",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pt-ald",
+      "target": "ex:syn/sample/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/49",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/pt-ald",
+      "target": "ex:syn/preparation/pt-ald"
+    },
+    {
+      "id": "ex:syn/link/50",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pt-ald",
+      "target": "ex:syn/characterization/pt-ald-stem"
+    },
+    {
+      "id": "ex:syn/link/51",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/cu-ssz13",
+      "target": "ex:syn/material/ssz13"
+    },
+    {
+      "id": "ex:syn/link/52",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:syn/catalyst/cu-ssz13",
+      "target": "ex:syn/species/cu"
+    },
+    {
+      "id": "ex:syn/link/53",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/cu-ssz13",
+      "target": "ex:syn/catalyst/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/54",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/cu-ssz13",
+      "target": "ex:syn/sample/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/55",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/ssz13",
+      "target": "ex:syn/preparation/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/56",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/ssz13",
+      "target": "ex:syn/sample/na-ssz13"
+    },
+    {
+      "id": "ex:syn/link/57",
+      "type": "USES_INSTRUMENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "actuator"
+      },
+      "source": "ex:syn/preparation/ssz13",
+      "target": "ex:syn/instrument/autoclave"
+    },
+    {
+      "id": "ex:syn/link/58",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/preparation/ssz13"
+    },
+    {
+      "id": "ex:syn/link/59",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/species/water-z"
+    },
+    {
+      "id": "ex:syn/link/60",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.6
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "mineralizer"
+        ]
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/species/naoh"
+    },
+    {
+      "id": "ex:syn/link/61",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 25
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "structure_directing_agent"
+        ]
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/species/tmadaoh"
+    },
+    {
+      "id": "ex:syn/link/62",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.98
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/species/aloh3"
+    },
+    {
+      "id": "ex:syn/link/63",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 9
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/species/fumed-silica"
+    },
+    {
+      "id": "ex:syn/link/64",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/sample/ssz13-gel"
+    },
+    {
+      "id": "ex:syn/link/65",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-crystallize",
+      "target": "ex:syn/preparation/ssz13"
+    },
+    {
+      "id": "ex:syn/link/66",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/ssz13-crystallize",
+      "target": "ex:syn/sample/ssz13-gel"
+    },
+    {
+      "id": "ex:syn/link/67",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-recover",
+      "target": "ex:syn/preparation/ssz13"
+    },
+    {
+      "id": "ex:syn/link/68",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-calcine",
+      "target": "ex:syn/preparation/ssz13"
+    },
+    {
+      "id": "ex:syn/link/69",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-calcine",
+      "target": "ex:syn/sample/na-ssz13"
+    },
+    {
+      "id": "ex:syn/link/70",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/cu-exchange",
+      "target": "ex:syn/preparation/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/71",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/cu-exchange",
+      "target": "ex:syn/sample/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/72",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/nh4-exchange",
+      "target": "ex:syn/preparation/cu-exchange"
+    },
+    {
+      "id": "ex:syn/link/73",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:syn/step/nh4-exchange",
+      "target": "ex:syn/sample/na-ssz13"
+    },
+    {
+      "id": "ex:syn/link/74",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "definition": "concentration of the 100 mL solution",
+          "unit": "mol/L",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent"
+      },
+      "source": "ex:syn/step/nh4-exchange",
+      "target": "ex:syn/species/nh4no3"
+    },
+    {
+      "id": "ex:syn/link/75",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/nh4-exchange",
+      "target": "ex:syn/sample/nh4-ssz13"
+    },
+    {
+      "id": "ex:syn/link/76",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/cu-exchange",
+      "target": "ex:syn/preparation/cu-exchange"
+    },
+    {
+      "id": "ex:syn/link/77",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "support"
+        ]
+      },
+      "source": "ex:syn/step/cu-exchange",
+      "target": "ex:syn/sample/nh4-ssz13"
+    },
+    {
+      "id": "ex:syn/link/78",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.01
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/cu-exchange",
+      "target": "ex:syn/species/cuno3"
+    },
+    {
+      "id": "ex:syn/link/79",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/cu-calcine",
+      "target": "ex:syn/preparation/cu-exchange"
+    },
+    {
+      "id": "ex:syn/link/80",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "calcined"
+      },
+      "source": "ex:syn/characterization/ssz13-xrd",
+      "target": "ex:syn/sample/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/81",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/cu-epr",
+      "target": "ex:syn/sample/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/82",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/sample/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/83",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/preparation/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/84",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/characterization/ssz13-xrd"
+    },
+    {
+      "id": "ex:syn/link/85",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/characterization/cu-epr"
+    },
+    {
+      "id": "ex:syn/link/86",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "location": "whole_particle",
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/material/ssz13"
+    },
+    {
+      "id": "ex:syn/link/87",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "preparation"
+      },
+      "source": "ex:syn/claim/cu-isolated",
+      "target": "ex:syn/preparation/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/88",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:syn/claim/cu-isolated",
+      "target": "ex:syn/state/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/link/89",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 3",
+            "source": "ex:syn/source/cu-ssz13"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/cu-epr",
+      "target": "ex:syn/claim/cu-isolated"
+    },
+    {
+      "id": "ex:syn/link/90",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/fe-n-c",
+      "target": "ex:syn/material/n-carbon"
+    },
+    {
+      "id": "ex:syn/link/91",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:syn/catalyst/fe-n-c",
+      "target": "ex:syn/species/fe"
+    },
+    {
+      "id": "ex:syn/link/92",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/fe-n-c",
+      "target": "ex:syn/catalyst/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/93",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "precursor"
+      },
+      "source": "ex:syn/sample/fe-zif8",
+      "target": "ex:syn/material/zif-8"
+    },
+    {
+      "id": "ex:syn/link/94",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/fe-n-c",
+      "target": "ex:syn/sample/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/95",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/96",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 80
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/species/methanol"
+    },
+    {
+      "id": "ex:syn/link/97",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.69
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/species/znno3"
+    },
+    {
+      "id": "ex:syn/link/98",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mg",
+          "value": 60
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/species/feacac3"
+    },
+    {
+      "id": "ex:syn/link/99",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.97
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "linker",
+          "carbon_source",
+          "nitrogen_source"
+        ]
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/species/2-mim"
+    },
+    {
+      "id": "ex:syn/link/100",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/zif-grow",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/101",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/zif-grow",
+      "target": "ex:syn/sample/fe-zif8"
+    },
+    {
+      "id": "ex:syn/link/102",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pyrolysis-1",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/103",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/pyrolysis-1",
+      "target": "ex:syn/sample/fe-zif8"
+    },
+    {
+      "id": "ex:syn/link/104",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pyrolysis-1",
+      "target": "ex:syn/sample/fe-n-c-1"
+    },
+    {
+      "id": "ex:syn/link/105",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/leach",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/106",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/leach",
+      "target": "ex:syn/sample/fe-n-c-1"
+    },
+    {
+      "id": "ex:syn/link/107",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "etchant"
+        ]
+      },
+      "source": "ex:syn/step/leach",
+      "target": "ex:syn/species/h2so4"
+    },
+    {
+      "id": "ex:syn/link/108",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pyrolysis-2",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/109",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/fe-stem",
+      "target": "ex:syn/sample/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/110",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/fe-xas",
+      "target": "ex:syn/sample/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/111",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/sample/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/112",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/113",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/characterization/fe-stem"
+    },
+    {
+      "id": "ex:syn/link/114",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/characterization/fe-xas"
+    },
+    {
+      "id": "ex:syn/link/115",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "location": "whole_particle",
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/material/n-carbon"
+    },
+    {
+      "id": "ex:syn/link/116",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "preparation"
+      },
+      "source": "ex:syn/claim/fe-n4",
+      "target": "ex:syn/preparation/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/117",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:syn/claim/fe-n4",
+      "target": "ex:syn/state/fe-n-c"
+    },
+    {
+      "id": "ex:syn/link/118",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figures 2 and 3",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/fe-stem",
+      "target": "ex:syn/claim/fe-n4"
+    },
+    {
+      "id": "ex:syn/link/119",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figures 2 and 3",
+            "source": "ex:syn/source/fe-n-c"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/fe-xas",
+      "target": "ex:syn/claim/fe-n4"
+    },
+    {
+      "id": "ex:syn/link/120",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/ni-lstn",
+      "target": "ex:syn/material/lstn"
+    },
+    {
+      "id": "ex:syn/link/121",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:syn/catalyst/ni-lstn",
+      "target": "ex:syn/material/ni-fcc"
+    },
+    {
+      "id": "ex:syn/link/122",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/ni-lstn",
+      "target": "ex:syn/catalyst/ni-lstn"
+    },
+    {
+      "id": "ex:syn/link/123",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/ni-exsolution",
+      "target": "ex:syn/sample/ni-lstn"
+    },
+    {
+      "id": "ex:syn/link/124",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/preparation/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/link/125",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 2.17
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/species/la2o3"
+    },
+    {
+      "id": "ex:syn/link/126",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 1.97
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/species/srco3"
+    },
+    {
+      "id": "ex:syn/link/127",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 2.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/species/tio2"
+    },
+    {
+      "id": "ex:syn/link/128",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.15
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor",
+          "dopant_source"
+        ]
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/species/nio"
+    },
+    {
+      "id": "ex:syn/link/129",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 20
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/species/ethanol"
+    },
+    {
+      "id": "ex:syn/link/130",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/calcine",
+      "target": "ex:syn/preparation/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/link/131",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/calcine",
+      "target": "ex:syn/sample/lstn-oxide"
+    },
+    {
+      "id": "ex:syn/link/132",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/exsolve",
+      "target": "ex:syn/preparation/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/link/133",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 0.2
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/exsolve",
+      "target": "ex:syn/sample/lstn-oxide"
+    },
+    {
+      "id": "ex:syn/link/134",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:syn/characterization/ni-sem",
+      "target": "ex:syn/sample/ni-lstn"
+    },
+    {
+      "id": "ex:syn/link/135",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/sample/ni-lstn"
+    },
+    {
+      "id": "ex:syn/link/136",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/preparation/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/link/137",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/characterization/ni-sem"
+    },
+    {
+      "id": "ex:syn/link/138",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "minority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "location": "surface",
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/material/ni-fcc"
+    },
+    {
+      "id": "ex:syn/link/139",
+      "type": "HAS_PHASE",
+      "props": {
+        "dominance": "majority",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "location": "bulk",
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/material/lstn"
+    },
+    {
+      "id": "ex:syn/link/140",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "preparation"
+      },
+      "source": "ex:syn/claim/ni-socket",
+      "target": "ex:syn/preparation/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/link/141",
+      "type": "ABOUT",
+      "props": {
+        "origin": "synthetic",
+        "role": "state"
+      },
+      "source": "ex:syn/claim/ni-socket",
+      "target": "ex:syn/state/ni-lstn"
+    },
+    {
+      "id": "ex:syn/link/142",
+      "type": "SUPPORTS",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, Figure 5",
+            "source": "ex:syn/source/ni-exsolution"
+          }
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/ni-sem",
+      "target": "ex:syn/claim/ni-socket"
+    },
+    {
+      "id": "ex:syn/link/143",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "support"
+      },
+      "source": "ex:syn/catalyst/pd-ceo2",
+      "target": "ex:syn/material/ceo2"
+    },
+    {
+      "id": "ex:syn/link/144",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "active_component"
+      },
+      "source": "ex:syn/catalyst/pd-ceo2",
+      "target": "ex:syn/species/pd"
+    },
+    {
+      "id": "ex:syn/link/145",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pd-ceo2",
+      "target": "ex:syn/catalyst/pd-ceo2"
+    },
+    {
+      "id": "ex:syn/link/146",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pd-fsp",
+      "target": "ex:syn/sample/pd-ceo2"
+    },
+    {
+      "id": "ex:syn/link/147",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/preparation/pd-fsp"
+    },
+    {
+      "id": "ex:syn/link/148",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mol/L",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "support_precursor"
+        ]
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/species/ce-ehex"
+    },
+    {
+      "id": "ex:syn/link/149",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/species/pdacac2"
+    },
+    {
+      "id": "ex:syn/link/150",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 100
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent",
+          "fuel"
+        ]
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/species/xylene"
+    },
+    {
+      "id": "ex:syn/link/151",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/sample/fsp-solution"
+    },
+    {
+      "id": "ex:syn/link/152",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/fsp-spray",
+      "target": "ex:syn/preparation/pd-fsp"
+    },
+    {
+      "id": "ex:syn/link/153",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:syn/step/fsp-spray",
+      "target": "ex:syn/sample/fsp-solution"
+    },
+    {
+      "id": "ex:syn/link/154",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "definition": "dispersion gas flow",
+          "unit": "L/min",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:syn/source/pd-fsp"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "oxidizing_agent",
+          "carrier_gas"
+        ]
+      },
+      "source": "ex:syn/step/fsp-spray",
+      "target": "ex:syn/species/o2-fsp"
+    },
+    {
+      "id": "ex:syn/link/155",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:syn/characterization/fsp-xrd",
+      "target": "ex:syn/sample/pd-ceo2"
+    },
+    {
+      "id": "ex:syn/link/156",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-ceo2",
+      "target": "ex:syn/sample/pd-ceo2"
+    },
+    {
+      "id": "ex:syn/link/157",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:syn/state/pd-ceo2",
+      "target": "ex:syn/preparation/pd-fsp"
+    },
+    {
+      "id": "ex:syn/link/158",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-ceo2",
+      "target": "ex:syn/characterization/fsp-xrd"
+    },
+    {
+      "id": "ex:syn/catalyst/cu-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/cu-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/catalyst/fe-n-c/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/fe-n-c",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/catalyst/ni-lstn/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/ni-lstn",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/catalyst/pd-ceo2/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/pd-ceo2",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/catalyst/pd-cubes-alumina/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/pd-cubes-alumina",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/catalyst/pt-ald/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/catalyst/pt-ald",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/characterization/cu-epr/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/cu-epr",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/characterization/fe-stem/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/fe-stem",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/characterization/fe-xas/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/fe-xas",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/characterization/fsp-xrd/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/fsp-xrd",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/characterization/ni-sem/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/ni-sem",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/characterization/pd-cubes-hrtem/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1c"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/pd-cubes-hrtem",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/characterization/pd-cubes-tem/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1a"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/pd-cubes-tem",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/characterization/pt-ald-stem/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/pt-ald-stem",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/characterization/ssz13-xrd/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/characterization/ssz13-xrd",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/claim/cu-isolated/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, Figure 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/claim/cu-isolated",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/claim/fe-n4/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, Figures 2 and 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/claim/fe-n4",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/claim/ni-socket/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, Figure 5"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/claim/ni-socket",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/claim/pd-cubes-br/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/claim/pd-cubes-br",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/instrument/ald-reactor/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/instrument/ald-reactor",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/instrument/autoclave/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/instrument/autoclave",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/material/alumina-ald/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/alumina-ald",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/material/ceo2/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/ceo2",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/material/gamma-alumina/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Materials"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/gamma-alumina",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/material/lstn/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/lstn",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/material/n-carbon/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/n-carbon",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/material/ni-fcc/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/ni-fcc",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/material/pd-fcc/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/pd-fcc",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/material/pt-fcc/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/pt-fcc",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/material/ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/material/zif-8/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/material/zif-8",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/preparation/cu-exchange/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/cu-exchange",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/preparation/cu-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/cu-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/preparation/fe-n-c/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/fe-n-c",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/preparation/ni-exsolution/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/ni-exsolution",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/preparation/pd-cubes/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pd-cubes",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/preparation/pd-fsp/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pd-fsp",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/preparation/pt-ald/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/pt-ald",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/preparation/ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/preparation/ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/sample/cu-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/cu-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/sample/fe-n-c/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/fe-n-c",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/sample/fe-n-c-1/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/fe-n-c-1",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/sample/fe-zif8/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/fe-zif8",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/sample/fsp-solution/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/fsp-solution",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/sample/lstn-oxide/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/lstn-oxide",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/sample/na-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/na-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/sample/nh4-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/nh4-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/sample/ni-lstn/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/ni-lstn",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/sample/pd-ceo2/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pd-ceo2",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/sample/pd-cube-colloid/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pd-cube-colloid",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/sample/pd-cubes-alumina/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pd-cubes-alumina",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/sample/pt-ald/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/pt-ald",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/sample/ssz13-gel/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/sample/ssz13-gel",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/state/cu-ssz13/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figures 1 and 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/cu-ssz13",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/state/fe-n-c/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figures 2 and 3"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/fe-n-c",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/state/ni-lstn/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/ni-lstn",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/state/pd-ceo2/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-ceo2",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/state/pd-cubes/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pd-cubes",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/state/pt-ald/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/state/pt-ald",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-cycle/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-cycle",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-degas/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-degas",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-dose-o2/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-dose-o2",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-dose-pt/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-dose-pt",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-purge-1/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-purge-1",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/ald-purge-2/reported-in/pt-ald",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ald-purge-2",
+      "target": "ex:syn/source/pt-ald"
+    },
+    {
+      "id": "ex:syn/step/calcine/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/calcine",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/step/cu-calcine/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/cu-calcine",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/cu-exchange/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/cu-exchange",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/exsolve/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/exsolve",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/step/fsp-solution/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/fsp-solution",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/step/fsp-spray/reported-in/pd-fsp",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/fsp-spray",
+      "target": "ex:syn/source/pd-fsp"
+    },
+    {
+      "id": "ex:syn/step/leach/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/leach",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/step/mill/reported-in/ni-exsolution",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/mill",
+      "target": "ex:syn/source/ni-exsolution"
+    },
+    {
+      "id": "ex:syn/step/nh4-exchange/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/nh4-exchange",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-1/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-1",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-2/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-2",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-3/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-3",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-4/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-4",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/step/pd-cubes-5/reported-in/pd-cubes",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pd-cubes-5",
+      "target": "ex:syn/source/pd-cubes"
+    },
+    {
+      "id": "ex:syn/step/pyrolysis-1/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pyrolysis-1",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/step/pyrolysis-2/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/pyrolysis-2",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/step/ssz13-calcine/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-calcine",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/ssz13-crystallize/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-crystallize",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/ssz13-gel/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-gel",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/ssz13-recover/reported-in/cu-ssz13",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/ssz13-recover",
+      "target": "ex:syn/source/cu-ssz13"
+    },
+    {
+      "id": "ex:syn/step/zif-grow/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/zif-grow",
+      "target": "ex:syn/source/fe-n-c"
+    },
+    {
+      "id": "ex:syn/step/zif-solutions/reported-in/fe-n-c",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:syn/step/zif-solutions",
+      "target": "ex:syn/source/fe-n-c"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/synthesis-function-not-in-vocabulary",
+    "schema": "scale-catal",
+    "schema_version": "0.7.6",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (synthesis-function-not-in-vocabulary): an input whose function in the synthesis is stated in other words"
+  },
+  "multigraph": true
+}
