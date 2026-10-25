@@ -254,7 +254,17 @@ nodes:
           experiment_status planned.
   Preparation:
     is_a: Procedure
-    description: How a sample was made, with its conditions.
+    description: |-
+      How a sample was made, with its conditions: any synthesis of a catalyst, a support, a precursor solid or a
+      colloid, by any method and in any number of stages. The method as the source names it is `method`; the families
+      it belongs to are `preparation_methods`; what the synthesis is designed to control, as the source states it, is
+      `design_aims`, with the strategy in the source's words (`strategy`). Its steps are ProcedureSteps PART_OF it in
+      order, each with what it takes in (HAS_INPUT, with the function each input serves, `synthesis_function`) and
+      gives out (HAS_OUTPUT); a stage made by a method of its own (the support, then the metal on it) is a Preparation
+      PART_OF the whole. What it made is HAS_OUTPUT; the structure obtained (shape, architecture, facets) is a
+      CatalystState of that output REACHED_BY the preparation and DETERMINED_BY the characterizations that show it.
+      That the synthesis achieved what it aimed at, or how the structure formed (nucleation, ripening, oriented
+      attachment, a Kirkendall effect), is the authors' Claim ABOUT the preparation, never a property of it.
     properties:
       steps:
         type: list
@@ -271,6 +281,165 @@ nodes:
         type: value
       atmosphere:
         type: text
+      preparation_methods:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - incipient_wetness_impregnation
+          - wet_impregnation
+          - ion_exchange
+          - strong_electrostatic_adsorption
+          - deposition_precipitation
+          - colloidal_deposition
+          - grafting
+          - photodeposition
+          - electroless_deposition
+          - galvanic_replacement
+          - precipitation
+          - coprecipitation
+          - sol_gel
+          - polymerized_complex
+          - hydrothermal
+          - solvothermal
+          - molten_salt
+          - colloidal_reduction
+          - polyol
+          - seeded_growth
+          - hot_injection
+          - thermal_decomposition
+          - microemulsion
+          - solution_combustion
+          - post_synthetic_modification
+          - solid_state_reaction
+          - mechanochemical
+          - pyrolysis
+          - thermal_shock
+          - exsolution
+          - carburization
+          - nitridation
+          - sulfidation
+          - phosphidation
+          - flame_spray_pyrolysis
+          - spray_pyrolysis
+          - spray_drying
+          - chemical_vapor_deposition
+          - atomic_layer_deposition
+          - physical_vapor_deposition
+          - cluster_deposition
+          - model_surface_preparation
+          - electrodeposition
+          - anodization
+          - electrospinning
+          - dealloying
+          - etching
+          - exfoliation
+          - hard_templating
+          - soft_templating
+          - coating
+          - shaping
+          - additive_manufacturing
+          - laser_ablation
+          - arc_discharge
+          - plasma_synthesis
+          - biological
+          - other
+          - not_reported
+        description: |-
+          The families of methods the preparation belongs to, as the source names them; a preparation that combines
+          several (a hydrothermal support impregnated, a MOF pyrolysed, a seeded growth on a colloidal deposit) lists
+          each, and its stages may be Preparations of their own. `method` keeps the source's name ("modified polyol
+          route", "SEA at pH 11"). On a support from a liquid: incipient_wetness_impregnation (a solution of the pore
+          volume), wet_impregnation (an excess of solution), ion_exchange, strong_electrostatic_adsorption (uptake
+          set by the pH against the support's point of zero charge), deposition_precipitation, colloidal_deposition
+          (particles made first, then deposited), grafting (a molecular precursor bound to surface groups, surface
+          organometallic chemistry), photodeposition (a metal reduced on a photoexcited semiconductor),
+          electroless_deposition, galvanic_replacement (a less noble metal oxidized by the ions of a more noble
+          one). From solution: precipitation, coprecipitation, sol_gel, polymerized_complex (citrate or Pechini
+          complexation and gelation), hydrothermal and solvothermal (in a closed vessel above the solvent's boiling
+          point; a zeolite or a framework crystallized so), molten_salt, colloidal_reduction (metal ions reduced in
+          solution with a stabilizer), polyol (the polyol both solvent and reductant), seeded_growth, hot_injection,
+          thermal_decomposition (of a molecular precursor), microemulsion, solution_combustion (a precursor with a
+          fuel), post_synthetic_modification (of a zeolite, framework or support after it was made: dealumination,
+          desilication, linker exchange). Solid and thermal: solid_state_reaction, mechanochemical (milling that
+          reacts or alloys), pyrolysis (decomposition in an inert gas; carbonization; a MOF-derived catalyst),
+          thermal_shock (seconds-long heating and quenching, carbothermal shock, Joule heating), exsolution (a metal
+          that leaves a host lattice on reduction), carburization, nitridation, sulfidation, phosphidation. Aerosol:
+          flame_spray_pyrolysis, spray_pyrolysis, spray_drying. From the vapour or in vacuum:
+          chemical_vapor_deposition, atomic_layer_deposition, physical_vapor_deposition (evaporation, sputtering),
+          cluster_deposition (size-selected clusters landed on a support), model_surface_preparation (a single
+          crystal or thin film cleaned and ordered in vacuum). Electrochemical: electrodeposition, anodization,
+          electrospinning. Taking away or structuring: dealloying (a component leached from an alloy), etching,
+          exfoliation, hard_templating (nanocasting in a solid template removed afterwards), soft_templating (micelles
+          or block copolymers), coating (dip, spin or washcoating onto a body), shaping (extrusion, pelletizing,
+          granulation with a binder), additive_manufacturing. Physical: laser_ablation, arc_discharge,
+          plasma_synthesis. biological (an organism, enzyme or biomolecular template makes or shapes the solid).
+          other (say which in method).
+      design_aims:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - particle_size
+          - size_distribution
+          - particle_shape
+          - exposed_facets
+          - composition
+          - elemental_distribution
+          - atomic_ordering
+          - phase
+          - crystallinity
+          - atomic_dispersion
+          - cluster_nuclearity
+          - dispersion
+          - spatial_distribution
+          - metal_support_interaction
+          - interface
+          - encapsulation
+          - porosity
+          - hierarchical_porosity
+          - surface_area
+          - defects
+          - doping
+          - acid_base_sites
+          - surface_ligands
+          - stability
+          - reproducibility
+          - scalability
+          - other
+        description: |-
+          What the source says the synthesis is designed to control or achieve, never the curator's reading of it:
+          particle_size, size_distribution, particle_shape, exposed_facets, composition, elemental_distribution (alloy,
+          segregated, core and shell, a gradient), atomic_ordering (an ordered intermetallic against a random alloy),
+          phase, crystallinity, atomic_dispersion (single atoms), cluster_nuclearity (a number of atoms per cluster),
+          dispersion, spatial_distribution (where in a support body: egg-shell, egg-yolk, uniform),
+          metal_support_interaction (a strong metal-support interaction, an overlayer), interface (a designed contact
+          between two phases), encapsulation (particles confined in pores, a shell or a framework), porosity,
+          hierarchical_porosity, surface_area, defects (vacancies, steps, strain), doping, acid_base_sites,
+          surface_ligands (a ligand left on, exchanged or removed), stability (against sintering, leaching or
+          coking), reproducibility, scalability. Whether it was achieved is a Claim ABOUT the preparation that its
+          characterizations SUPPORT or CONTRADICT.
+      strategy:
+        type: text
+        maturity: provisional
+        description: The synthesis strategy in the source's words ("kinetically controlled overgrowth on Pd cubes with
+          Br- capping the {100} facets", "trapping Pt atoms on CeO2 step edges"), with its evidence.
+      batch_scale:
+        type: value
+        maturity: provisional
+        description: How much one run of the preparation made (or was sized for), as stated (2 g of catalyst, 50 mL of
+          colloid); its definition says of what.
+      outcomes:
+        type: map
+        maturity: provisional
+        items:
+          type: value
+        description: 'Stated values of what the preparation gave, each with its definition, for instance
+          product_yield (the solid recovered over the amount expected), metal_uptake (the share of the metal offered
+          that ended up on the support) or deposition_per_cycle (the growth per ALD cycle). A measured property of the
+          product (a loading, a size) is a characterization result of the product, not an outcome.'
   Treatment:
     is_a: Procedure
     description: A change applied to a sample (drying, calcination, reduction, activation, poisoning,
@@ -333,6 +502,42 @@ nodes:
         - transfer
         - activate
         - other
+        - inject
+        - reflux
+        - crystallize
+        - centrifuge
+        - sonicate
+        - exchange
+        - ligand_exchange
+        - deposit
+        - coat
+        - pyrolyze
+        - leach
+        - etch
+        - replace
+        - mill
+        - spray
+        - evaporate
+        - freeze_dry
+        - purge
+        - dose
+        - quench
+        - disperse
+        - dilute
+        - irradiate
+        - shape
+        - carburize
+        - nitridize
+        - sulfidize
+        - phosphidize
+        description: 'What the step does, as the source does it; `method` says how in its words. Besides the first
+          actions: inject (a solution added at once, hot injection), reflux, crystallize (a closed-vessel or aging
+          crystallization), centrifuge, sonicate, exchange (ion exchange), ligand_exchange, deposit (from a vapour,
+          an electrolyte or a beam onto a substrate), coat, pyrolyze, leach and etch (a component dissolved away),
+          replace (a galvanic replacement), mill (ball milling, mechanochemistry), spray, evaporate, freeze_dry,
+          purge, dose (one precursor pulse of a vapour deposition), quench, disperse, dilute, irradiate (light, a
+          laser, an electron or ion beam), shape (extrude, pelletize, granulate), carburize, nitridize, sulfidize,
+          phosphidize.'
       temperature:
         type: value
         quantity: temperature
@@ -345,6 +550,37 @@ nodes:
         type: value
       atmosphere:
         type: text
+      energy_input:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - thermal
+          - microwave
+          - ultrasound
+          - mechanical
+          - electrochemical
+          - light
+          - laser
+          - plasma
+          - flame
+          - joule_heating
+          - electron_beam
+          - ion_beam
+          - none
+          - not_reported
+        description: 'What drives the step besides its chemistry, as stated: thermal (a furnace, a bath, a hot plate),
+          microwave, ultrasound, mechanical (milling, shear), electrochemical (an applied potential or current; its
+          value in conditions), light, laser, plasma, flame, joule_heating (a current through the material itself),
+          electron_beam, ion_beam; none for a step at room temperature with nothing applied. Its power, frequency or
+          dose goes in conditions (microwave_power, ultrasound_power, milling_frequency, current_density).'
+      repetitions:
+        type: integer
+        maturity: provisional
+        description: How many times the step, with the steps PART_OF it, is carried out as one block (100 ALD cycles,
+          three successive impregnations recorded as one step, five washes); a step with sub-steps (the dose, purge,
+          dose and purge of one cycle) holds them PART_OF it, in order.
   Characterization:
     is_a: Experiment
     fixed:
@@ -1243,6 +1479,99 @@ nodes:
       morphology:
         type: text
         description: The structure in words, as the source gives it ("MoCx overlayers on β-Mo2N").
+      particle_shape:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - sphere
+          - cube
+          - octahedron
+          - truncated_octahedron
+          - cuboctahedron
+          - tetrahedron
+          - decahedron
+          - icosahedron
+          - rhombic_dodecahedron
+          - high_index_polyhedron
+          - plate
+          - sheet
+          - prism
+          - rod
+          - wire
+          - tube
+          - fiber
+          - branched
+          - dendrite
+          - flower
+          - frame
+          - cage
+          - irregular
+          - other
+          - not_reported
+        description: The shapes of the particles in this state, as the source reports them, each listed once
+          (cubes with some rods are cube and rod; a share of each is a value in properties, shape_fraction, with its
+          definition and count). plate is a disc or thin polyhedron, sheet a layer one to a few nm thick,
+          high_index_polyhedron a concave or tetrahexahedral shape bounded by high-index facets, frame and cage open
+          or hollow polyhedra. The sizes that go with them (edge length, aspect ratio, shell thickness) are
+          characterization results.
+      architecture:
+        type: list
+        maturity: provisional
+        items:
+          type: enum
+          values:
+          - single_atoms
+          - clusters
+          - nanoparticles
+          - core_shell
+          - yolk_shell
+          - hollow
+          - porous_particle
+          - janus
+          - alloy
+          - intermetallic
+          - segregated
+          - overlayer
+          - encapsulated
+          - framework
+          - layered
+          - thin_film
+          - supported
+          - unsupported
+          - egg_shell
+          - egg_yolk
+          - uniform_distribution
+          - other
+          - not_reported
+        description: 'How the active solid is built in this state, as the source reports it: single_atoms (isolated
+          atoms), clusters (a few to some tens of atoms), nanoparticles, core_shell and yolk_shell, hollow,
+          porous_particle, janus (two faces of different composition), alloy (a random solid solution) and
+          intermetallic (an ordered compound), segregated (one element enriched at the surface or in domains),
+          overlayer, encapsulated (in pores, a shell or a framework), framework (a zeolite, MOF or COF), layered,
+          thin_film, supported and unsupported; egg_shell, egg_yolk and uniform_distribution say where the active
+          phase is across a support body. Which phase is where is HAS_PHASE with its location; a single atom''s
+          coordination is a site (HAS_SITE).'
+      exposed_facets:
+        type: list
+        maturity: provisional
+        items:
+          type: text
+        description: The facets the particles are reported to expose in this state, in Miller indices as printed
+          ("{100}", "(111)", "{730}"), with the observation that shows them (DETERMINED_BY); a share of each is a
+          value in properties.
+      dimensionality:
+        type: enum
+        maturity: provisional
+        values:
+        - zero_dimensional
+        - one_dimensional
+        - two_dimensional
+        - three_dimensional
+        - not_reported
+        description: The dimensionality the source gives the structure (particles and clusters 0D; rods, wires and
+          tubes 1D; sheets and films 2D; frameworks, foams and assemblies 3D).
       conditions:
         type: map
         items:
@@ -2982,6 +3311,61 @@ adds_properties:
       description: The species that absorbs the light (e.g. the electrogenerated radical cation of the
         photocatalyst). Interface term, since it exists because the electrode generates or regenerates
         the light absorber.
+  HAS_INPUT:
+    synthesis_function:
+      type: list
+      maturity: provisional
+      items:
+        type: enum
+        values:
+        - metal_precursor
+        - support
+        - support_precursor
+        - promoter_precursor
+        - dopant_source
+        - solvent
+        - reducing_agent
+        - oxidizing_agent
+        - precipitating_agent
+        - ph_modifier
+        - chelating_agent
+        - stabilizer
+        - capping_agent
+        - surfactant
+        - shape_directing_agent
+        - structure_directing_agent
+        - template
+        - porogen
+        - mineralizer
+        - seed
+        - linker
+        - modulator
+        - fuel
+        - carbon_source
+        - nitrogen_source
+        - sulfur_source
+        - phosphorus_source
+        - etchant
+        - co_reactant
+        - carrier_gas
+        - binder
+        - substrate
+        - ligand
+        - other
+      description: 'The function an input serves in a preparation or one of its steps, as the source states it: one
+        input may serve several (ethylene glycol solvent and reducing_agent; PVP capping_agent and reducing_agent;
+        CTAB surfactant and shape_directing_agent), and one function may be served by several inputs. metal_precursor,
+        support (the solid the active phase is put on), support_precursor, promoter_precursor, dopant_source;
+        solvent; reducing_agent, oxidizing_agent; precipitating_agent, ph_modifier, chelating_agent (a complexing or
+        gelling agent: citric acid, EDTA); stabilizer, capping_agent (bound to the growing surface), surfactant,
+        shape_directing_agent (an additive that favours facets: Br-, Cu2+, CO); structure_directing_agent (an organic
+        cation that templates a zeolite, OSDA), template (a hard or soft template removed afterwards), porogen,
+        mineralizer (OH-, F-); seed; linker and modulator (a framework''s); fuel (of a combustion synthesis);
+        carbon_source, nitrogen_source, sulfur_source, phosphorus_source (of a carbide, a N-doped carbon, a sulfide,
+        a phosphide); etchant; co_reactant (the second precursor of an ALD cycle: H2O, O3, O2 plasma); carrier_gas;
+        binder; substrate (a body, an electrode or a crystal grown or deposited on); ligand. The kernel''s role
+        (reagent, material) stays what it says: what is added and what it is added to. A function the source does
+        not state is not inferred from the chemical.'
 context_targets:
   species:
     maturity: provisional
@@ -3059,6 +3443,12 @@ checklist:
   - Van Turnhout, Rouwenhorst, Lefferts and Bogaerts, Plasma catalysis, what is needed to create synergy?, EES
     Catal. 2025, 3, 669, doi:10.1039/D5EY00027K (synergy against plasma alone and thermal catalysis at the same
     temperature; the plasma power, not the supply's input; the catalyst characterized after the experiment).
+  - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
+    doi:10.5281/zenodo.8029159, section 3 (synthesis; 3.A every step in order with its amounts, temperatures, ramps and
+    times, the scale and the sources of the reagents), for the preparation items (provisional).
+  - Preparation items for colloidal and vapour-phase syntheses (what controls a colloid's growth; the co-reactant of an
+    atomic layer deposition) and for a stated design aim (the structure obtained, observed), proposed from common
+    reporting; to be checked by domain reviewers.
   - Wismann et al., Electrified methane reforming, elucidating transient phenomena, Chem. Eng. J. 2021, 425,
     131509, doi:10.1016/j.cej.2021.131509 (the transient behaviour of an electrically heated reactor).
   - Wrasman et al., Recommendations for improving rigor and reproducibility in site specific characterization, J.
@@ -3830,6 +4220,193 @@ checklist:
       must:
       - discharge_kind
       - configuration
+    Preparation:
+      should:
+      - method
+      - preparation_methods
+      edges:
+        should:
+        - HAS_OUTPUT
+      evidence:
+        should:
+        - name: steps
+          description: the steps it was carried out in (ProcedureSteps PART_OF it, in order), or its stages
+            (Preparations PART_OF it, each with its own steps)
+          any_of:
+          - path:
+            - edge: PART_OF
+              direction: in
+              label: ProcedureStep
+          - path:
+            - edge: PART_OF
+              direction: in
+              label: Preparation
+        - name: precursors
+          description: what the solid was made from (an input of the preparation or of one of its steps whose
+            synthesis_function names a precursor, a source or the support), or its stages, each stating its own
+          any_of:
+          - path:
+            - edge: PART_OF
+              direction: in
+              label: Preparation
+          - path:
+            - edge: HAS_INPUT
+              edge_where:
+                synthesis_function:
+                  any_of:
+                  - metal_precursor
+                  - support
+                  - support_precursor
+                  - promoter_precursor
+                  - dopant_source
+                  - carbon_source
+                  - nitrogen_source
+                  - sulfur_source
+                  - phosphorus_source
+                  - substrate
+          - path:
+            - edge: PART_OF
+              direction: in
+              label: ProcedureStep
+            - edge: HAS_INPUT
+              edge_where:
+                synthesis_function:
+                  any_of:
+                  - metal_precursor
+                  - support
+                  - support_precursor
+                  - promoter_precursor
+                  - dopant_source
+                  - carbon_source
+                  - nitrogen_source
+                  - sulfur_source
+                  - phosphorus_source
+                  - substrate
+      when:
+      - design_aims:
+          any_of:
+          - particle_size
+          - size_distribution
+          - particle_shape
+          - exposed_facets
+          - composition
+          - elemental_distribution
+          - atomic_ordering
+          - phase
+          - crystallinity
+          - atomic_dispersion
+          - cluster_nuclearity
+          - dispersion
+          - spatial_distribution
+          - metal_support_interaction
+          - interface
+          - encapsulation
+          - porosity
+          - hierarchical_porosity
+          - surface_area
+          - defects
+          - doping
+          - acid_base_sites
+          - surface_ligands
+        maturity: provisional
+        evidence:
+          should:
+          - name: structure_obtained
+            description: the structure it gave, as observed (a CatalystState REACHED_BY it and DETERMINED_BY a
+              characterization); an aim stated is not a structure shown
+            path:
+            - edge: REACHED_BY
+              direction: in
+              label: CatalystState
+            - edge: DETERMINED_BY
+      - preparation_methods:
+          any_of:
+          - colloidal_reduction
+          - polyol
+          - seeded_growth
+          - hot_injection
+          - thermal_decomposition
+          - microemulsion
+        maturity: provisional
+        evidence:
+          should:
+          - name: growth_control
+            description: what controls the colloid's growth (an input of a step that is a capping_agent, stabilizer,
+              surfactant or shape_directing_agent), and the agent that reduces the metal where one does
+            path:
+            - edge: PART_OF
+              direction: in
+              label: ProcedureStep
+            - edge: HAS_INPUT
+              edge_where:
+                synthesis_function:
+                  any_of:
+                  - capping_agent
+                  - stabilizer
+                  - surfactant
+                  - shape_directing_agent
+      - preparation_methods:
+          any_of:
+          - atomic_layer_deposition
+        maturity: provisional
+        evidence:
+          should:
+          - name: co_reactant
+            description: the second reactant of each cycle (an input of a step that is a co_reactant)
+            path:
+            - edge: PART_OF
+              direction: in
+              label: ProcedureStep
+            - edge: HAS_INPUT
+              edge_where:
+                synthesis_function:
+                  any_of:
+                  - co_reactant
+    ProcedureStep:
+      when:
+      - action:
+          any_of:
+          - heat
+          - calcine
+          - dry
+          - age
+          - reflux
+          - crystallize
+          - pyrolyze
+          - reduce
+          - oxidize
+          - activate
+          - carburize
+          - nitridize
+          - sulfidize
+          - phosphidize
+        maturity: provisional
+        basis:
+        - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
+          doi:10.5281/zenodo.8029159, sections 3.A and 3.C (drying and calcination with temperature, ramp, hold time,
+          gas and whether static or flowing)
+        should:
+        - temperature
+        - duration
+      - action:
+          any_of:
+          - heat
+          - calcine
+          - pyrolyze
+          - reduce
+          - oxidize
+          - activate
+          - carburize
+          - nitridize
+          - sulfidize
+          - phosphidize
+        maturity: provisional
+        basis:
+        - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
+          doi:10.5281/zenodo.8029159, sections 3.A and 3.C
+        should:
+        - atmosphere
+        - ramp_rate
   edges:
     HAS_COMPONENT:
       should:

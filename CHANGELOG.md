@@ -2,6 +2,38 @@
 
 ## Unreleased
 
+- **Schema 0.7.6 (additive): syntheses of heterogeneous catalysts by any method, chemistry and strategy.** Requested
+  by @hlxin: the schema recorded a preparation's steps with their conditions but not what kind of synthesis it was,
+  what each chemical did in it, what it was designed to achieve or the structure it gave, so a question about capping
+  agents, structure-directing agents, shapes, facets or single-atom syntheses came back as a schema gap. All new
+  terms are provisional.
+  - **The method and the strategy.** A Preparation lists its method families (`preparation_methods`, 59 values from
+    impregnation, ion exchange, strong electrostatic adsorption and deposition-precipitation through sol-gel,
+    hydrothermal, colloidal, polyol, seeded growth and hot injection, solid-state, mechanochemical, pyrolysis, thermal
+    shock and exsolution, flame spray pyrolysis, CVD, ALD, PVD and cluster deposition, electrodeposition, dealloying and
+    templating), what the source says it is designed to control (`design_aims`) and how (`strategy`), how much one run
+    made (`batch_scale`) and what it gave (`outcomes`). A stage made by a method of its own is a Preparation `PART_OF`
+    the whole.
+  - **What each input does.** `HAS_INPUT.synthesis_function` (reducing agent, capping agent, shape- and
+    structure-directing agent, template, mineralizer, linker, modulator, fuel, carbon or nitrogen source, etchant,
+    co-reactant and 21 more), several per input where the source says so; the kernel's role stays. A domain file can
+    now add properties to a kernel edge type it sees (`adds_properties`), as it could to a label.
+  - **What drives a step.** `ProcedureStep.energy_input` (thermal, microwave, ultrasound, mechanical,
+    electrochemical, light, laser, plasma, flame, Joule heating, electron or ion beam), `repetitions` for a step
+    repeated as one block with its sub-steps `PART_OF` it (an ALD cycle), and 28 more actions (inject, reflux,
+    crystallize, centrifuge, sonicate, exchange, deposit, pyrolyze, leach, etch, replace, mill, spray, dose, purge,
+    carburize, nitridize, …).
+  - **The structure obtained.** A CatalystState states its `particle_shape`, `architecture` (single atoms, clusters,
+    core-shell, yolk-shell, intermetallic, encapsulated, egg-shell, …), `exposed_facets` and `dimensionality`; it is
+    `REACHED_BY` the preparation and `DETERMINED_BY` what shows it. That an aim was reached, or how the structure
+    formed, stays the authors' Claim.
+  - **The checklist** asks a Preparation for its method, families, output, steps and precursors; a colloidal synthesis
+    for what controls its growth; an ALD for its co-reactant; a synthesis with a structural aim for the structure
+    observed; a heated step for its temperature, time, gas and ramp (should items, provisional).
+  - 31 mappings of the method families and step actions to CHMO terms (one to OBI's centrifugation); the recipes (Syntheses by any method, with a table by
+    family) and section G of the preparation reporting checklist; an example of six syntheses (synthesis-examples),
+    CQ-37 to CQ-39, four counterexamples, tests. Existing documents keep 0.7.5; the migration step rewrites nothing.
+
 - **Schema 0.7.5 (additive): the methods calculations apply, benchmarks of a method, and failed calculations.**
   Requested by @hlxin (computational records for corpora that mix in silico and physical experiments). A calculation
   named its functional only in text (`level_of_theory`), so a benchmark of a functional or a limitation a source states

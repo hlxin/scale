@@ -7,7 +7,7 @@ domain-neutral labels and edges of the method of science. A domain's manifest (t
 domain file names itself with ``domain:`` and builds on the kernel, which it sees without importing
 it: it declares new labels (a label that refines a kernel label says ``is_a``), new edge types (one
 that narrows a kernel edge says ``specializes``), *extends* an edge type's endpoints, adds properties
-to a label it can see (``adds_properties``), binds a value property to one of the kernel's quantity contracts
+to a label or an edge type it can see (``adds_properties``), binds a value property to one of the kernel's quantity contracts
 (``quantity:``, with ``context:`` naming the sibling property that states a context; ``quantities``) and may carry
 the domain's ``checklist:`` (``must`` and
 ``should`` fields, ``unless`` and ``when`` cases), which becomes a conformance contract named after the
@@ -211,19 +211,24 @@ def assemble_manifest(man: dict, base: Path) -> dict:
                     raise ScaleError(f"{e}.{side} is {cur!r}; only listed endpoints can be extended")
                 edges[e][side] = cur + [x for x in add if x not in cur]
 
-    # ---- properties a file adds to a label it can see (driving-force vocabulary on CatalyticTest, …)
-    adds: list[tuple[str, str, dict, set]] = []
+    # ---- properties a file adds to a label or an edge type it can see (driving-force vocabulary on CatalyticTest,
+    # the function an input serves in a synthesis on HAS_INPUT, …)
+    adds: list[tuple[str, str, dict, set, set]] = []
     for name, m in mods.items():
         if m.get("adds_properties"):
-            adds.append((name, "adds_properties", m["adds_properties"], visible[name]))
+            adds.append((name, "adds_properties", m["adds_properties"], visible[name], closure(name)))
         for other, br in (m.get("bridges") or {}).items():
             if other in mods and br.get("adds_properties"):
-                adds.append((name, f"bridge to {other}", br["adds_properties"], visible[name] | visible[other]))
-    for name, how, block, scope in adds:
+                adds.append((name, f"bridge to {other}", br["adds_properties"], visible[name] | visible[other],
+                             closure(name) | closure(other)))
+    for name, how, block, scope, owners in adds:
         for lab, props in block.items():
-            if lab not in labels or lab not in scope:
+            if lab in labels and lab in scope:
+                cur = labels[lab].setdefault("properties", {})
+            elif lab in edges and eowner[lab] in owners:
+                cur = edges[lab].setdefault("properties", {})
+            else:
                 raise ScaleError(f"{name} ({how}) adds properties to {lab}, which is not visible to it")
-            cur = labels[lab].setdefault("properties", {})
             for k, d in props.items():
                 if k in cur:
                     raise ScaleError(f"{name} ({how}) adds {lab}.{k}, which is already declared")

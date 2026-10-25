@@ -69,7 +69,8 @@ Worked examples of what it produces are the synthetic documents in `domain/examp
 situations the schema covers less obviously (set and nominal values, conflicts, kinetics,
 thermochemistry, computations, reactor and bed keys, ratios, commercial catalysts, balances and
 impurities, driving forces outside the list, characterization results, sites in a catalyst state, assignments,
-operando observations and fits, preparations (impregnation, coprecipitation, activation, storage and transfer),
+operando observations and fits, preparations (impregnation, coprecipitation, activation, storage and transfer,
+and syntheses by any method),
 characterizations (XAS, electron microscopy, chemisorption, physisorption, sizes, composition), digitizing a figure)
 are in `references/recipes.md` beside this file (through the agent tools:
 `scale call skills '{"name": "curate-corpus", "reference": "references/recipes.md"}'`).
@@ -262,6 +263,16 @@ Never record `± 0`: keep the printed text in `as_reported` and leave `uncertain
   say where each goes. From scale-catal 0.7.5, each method a calculation applies (its functional, its dispersion
   correction) is a Method record it `USES_METHOD`, a benchmark of a method `EVALUATES` it, and a failed calculation
   says what stopped it (`failure_kind`, `status_reason`) when the source reports it.
+- **Syntheses by any method** (scale-catal 0.7.6 on). Record how each catalyst, support, precursor solid or colloid
+  was made as the source tells it, whatever the method: a Preparation with the source's name for the method
+  (`method`) and the families it belongs to (`preparation_methods`), what the source says it is designed to control
+  (`design_aims`) with its strategy in the source's words (`strategy`), and its steps in order, each with the function
+  every input serves (`HAS_INPUT.synthesis_function`: reducing agent, capping agent, structure-directing agent,
+  linker, fuel, co-reactant, …), what drives it (`energy_input`) and how often it is repeated (`repetitions`). A stage
+  made by a method of its own is a Preparation `PART_OF` the whole. The structure obtained (shape, architecture,
+  facets) is a CatalystState of what was made, `REACHED_BY` the preparation and `DETERMINED_BY` the characterization
+  that shows it; that the aim was reached, or how the structure formed, is the authors' Claim. Never infer a function,
+  an aim or a shape the source does not state; the recipes (Syntheses by any method) say where each goes.
 - **Agentic campaigns and their models** (scale-catal 0.7.2 on). A campaign in which an agent chooses the next
   experiments is a Design of kind `adaptive`: record, as the source states them, its `autonomy_level` (TRACE-AI's
   A0-A5; `not_reported` when the source names none, never read off the workflow), `human_oversight`, `interventions`,

@@ -14,7 +14,7 @@ stewards are named in [`DOMAIN.yaml`](DOMAIN.yaml). A second domain would revisi
 | | |
 |---|---|
 | status | `stable`, `founding: true` (its stewardship targets are warnings) |
-| schema version | 0.7.5 (kernel and catalysis together) |
+| schema version | 0.7.6 (kernel and catalysis together) |
 | maintainers | `@hlxin` (the owner) and the reviewers of the review policy, open to more as they join |
 | stewards | Hongliang Xin (`hlxin`), since 2026-09-26 |
 | review areas | `catalysis`, `thermo`, `electrothermo`, `electro`, `photo`, `plasma` |
@@ -201,8 +201,9 @@ named in `decision_record`. Catalysis has one steward today, so the first target
   and loads; it has no `modules:`, `extensions:` or `profiles:`, and each of its files names itself with
   `domain:`.
 - **Identifiers:** one name index is built over the kernel and the catalysis graph files (labels, edge
-  types, and `adds_properties` keys per label). Declaring a name that already exists is an error
-  naming both owners. Extending is `is_a`, `extends`, or `adds_properties` with a new key.
+  types, and `adds_properties` keys per label or edge type). Declaring a name that already exists is an error
+  naming both owners. Extending is `is_a`, `extends`, or `adds_properties` with a new key (on a label, or from
+  0.7.6 on a kernel edge type: `HAS_INPUT.synthesis_function`).
 - No copies of kernel files anywhere in the catalysis domain, its frozen versions included (no
   `kernel:` file, no file byte-identical to a kernel file); frozen kernels live only in
   `core/graph/frozen/`.

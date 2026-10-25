@@ -38,6 +38,7 @@ AGENTIC = REPO / "domain/examples/scale-catal/agentic-examples/self-driving-camp
 TRANSIENT = REPO / "domain/examples/scale-catal/transient-examples/transient-kinetics.json"
 THERMAL = REPO / "domain/examples/scale-catal/thermal-examples/thermal-contribution.json"
 METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-methods.json"
+SYNTHESES = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -328,6 +329,25 @@ def main() -> None:
            lambda d: method_link(d, "USES_METHOD", "computation/o-pt111").__setitem__("target",
                                                                                      "ex:cm/software/plane-wave-code"),
            base=methods)
+    syntheses = load_doc(SYNTHESES)
+
+    def synthesis_input(d: dict, step: str, target: str) -> dict:
+        return next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == f"ex:syn/step/{step}"
+                    and e["target"] == f"ex:syn/{target}")
+    defect("synthesis-function-not-in-vocabulary", "an input whose function in the synthesis is stated in other words",
+           lambda d: synthesis_input(d, "pd-cubes-1", "species/pvp")["props"].__setitem__(
+               "synthesis_function", ["capping", "stabilizer"]), base=syntheses)
+    defect("preparation-method-not-in-vocabulary", "a preparation whose method family is stated in other words",
+           lambda d: node(d, "preparation/pt-ald")["props"].__setitem__("preparation_methods", ["ALD"]), base=syntheses)
+    defect("particle-shape-not-in-vocabulary", "a state whose particle shape is stated in other words",
+           lambda d: node(d, "state/pd-cubes")["props"].__setitem__("particle_shape", ["nanocube"]), base=syntheses)
+
+    def function_on_component(d: dict) -> None:
+        e = next(e for e in d["links"] if e["type"] == "HAS_COMPONENT" and e["source"] == "ex:syn/catalyst/pd-cubes-alumina"
+                 and e["target"] == "ex:syn/material/gamma-alumina")
+        e["props"]["synthesis_function"] = ["support"]
+    defect("synthesis-function-on-a-component", "a catalyst's component that states a function in a synthesis",
+           function_on_component, base=syntheses)
     # it states its access (public, like every committed document) but not who contributed it or its project
     defect("research-data-without-stewardship", "research data that does not say who contributed it or which project it belongs to",
            lambda d: d["graph"].__setitem__("stewardship", {"access": "public"}), base=template("catalysis", VERSION))

@@ -4,8 +4,10 @@
 to the recording recipes for preparations and characterizations
 ([skills/curate-corpus/references/recipes.md](../../../skills/curate-corpus/references/recipes.md), "Preparation
 recipes" and "Characterization recipes") and to the [catalyst-state checklist](catalyst-state-reporting.md), whose
-section A (the action history) it details. It adds no field to the schema: every item names what SCALE already has
-(scale-catal 0.6.0), and the preparation examples (domain/examples/scale-catal/preparation-examples/) record each.
+section A (the action history) it details. Every item names the SCALE field that holds it: sections P to X what
+scale-catal 0.6.0 already had, recorded in the preparation examples (domain/examples/scale-catal/preparation-examples/);
+section G what 0.7.6 adds for syntheses by any method, recorded in the synthesis example
+(domain/examples/scale-catal/synthesis-examples/).
 
 ## Why a checklist
 
@@ -37,6 +39,19 @@ references at the end; "report" is the workshop report, with its section).
 | S3 | For precipitation: the concentrations and volumes of the solutions and the precipitating agent, which was added to which (or both fed together) and how fast, the target pH with its tolerance and the pH measured, the temperature, the aging time and temperature, and the washing (solvent, volume, number of washes, criterion) | R when the catalyst is precipitated | the precipitation step's two inputs (`role: reagent` the one added, `material` the one it was added to) and its `conditions` (`addition_rate`, `stirring_rate`, `ph`, `final_ph`); the aging and washing steps; for a deposition-precipitation, the pH against time a `Dataset` | report §3.A, §3.B (deposition precipitation), §3.C |
 | S4 | Drying and calcination: temperature, ramp, hold time and cooling, gas and whether static or flowing, and how much powder in what vessel | R | `ProcedureStep.temperature`, `ramp_rate`, `duration`, `atmosphere`; the rest in `conditions` | report §3.A, §3.C |
 | S5 | A written procedure followed and every deviation from it; the sensitivities found (or "no known sensitivities") | E | `FOLLOWS_PROTOCOL` a `Protocol`, with `deviations`; the Preparation's `note` | report §3.A |
+
+## G. Any method, any chemistry, any strategy (scale-catal 0.7.6)
+
+| # | Item | | SCALE | From |
+|---|---|---|---|---|
+| G1 | The method by its family and by the name the authors use, and each stage made by a method of its own | R | `Preparation.preparation_methods` and `method`; a stage a `Preparation` `PART_OF {order}` the whole | this checklist |
+| G2 | What each chemical does in the synthesis (precursor, reductant, capping or shape-directing agent, structure-directing agent, mineralizer, linker, fuel, etchant, co-reactant, …), not only its name and amount | R | `HAS_INPUT.synthesis_function` (several when one chemical does several things) | this checklist |
+| G3 | What drives each step besides heat (microwave, ultrasound, milling, an applied potential, light, a plasma, a flame, Joule heating) with its power, frequency or dose, and the apparatus | R when a step is so driven | `ProcedureStep.energy_input`; the power or dose in `conditions`; `USES_INSTRUMENT` an `Instrument` with its `settings` | this checklist |
+| G4 | A step repeated as a cycle (ALD, successive impregnation, cleaning cycles): the number of repetitions and what one cycle consists of, with its times | R when steps are cycled | `ProcedureStep.repetitions` with the sub-steps `PART_OF {order}` it | this checklist |
+| G5 | What the synthesis is designed to control, and the strategy for it | E | `Preparation.design_aims`, `strategy` | this checklist |
+| G6 | The structure obtained, as observed: the shapes and their shares, the architecture (core-shell, single atoms, encapsulated, egg-shell), the exposed facets, with the measurement that shows each | R when an aim is stated | a `CatalystState` `REACHED_BY` the preparation and `DETERMINED_BY` the characterization, with `particle_shape`, `architecture`, `exposed_facets`, `dimensionality`; shares in `properties` | this checklist |
+| G7 | The yield, the metal taken up, the growth per cycle, and how much one run made | E | `Preparation.outcomes`, `batch_scale` | report §3.A (the scale) |
+| G8 | How the authors explain the structure's formation, and whether the aim was reached, as their reading with its evidence | E | a `Claim` `ABOUT` the preparation and the state, with each characterization it rests on `SUPPORTS` it | this checklist |
 
 ## T. Activation, storage, transfer and reaction history
 
@@ -87,9 +102,12 @@ references at the end; "report" is the workshop report, with its section).
 - **Bulk and surface.** A bulk and a surface fraction share a kind and a basis, so a scientific comparison does not
   keep them apart; a plan names the Variable or the information depth. Making information depth a comparison context
   is a schema change.
-- **A preparation checklist.** The catalysis checklist has no case for a Preparation or a Treatment, so `scale graph
-  validate` does not check these items yet; whether to add one (should items) waits for curations that follow the
-  recipes.
+- **A preparation checklist.** From scale-catal 0.7.6 the catalysis checklist asks a Preparation for its method,
+  families, output, steps and precursors, a colloidal synthesis for what controls its growth, an atomic layer
+  deposition for its co-reactant and a synthesis with a structural aim for the structure observed, and a heated step
+  for its temperature, time, gas and ramp; all are should items, provisional. A Treatment still has no case.
+- **Section G** comes from no reference; its items are this draft's, to be checked by domain reviewers against
+  Alba-Rubio et al. (below) and the reporting of colloidal, vapour-phase and framework syntheses.
 - **Not in the references.** None of the references covers the water of hydration of a precursor, a hydrodynamic
   (light-scattering) size, the median of a size distribution or the BET C constant; the items that name them are this
   draft's.

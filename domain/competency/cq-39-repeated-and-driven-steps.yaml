@@ -1,0 +1,80 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-39
+question: Which synthesis steps were carried out as a repeated block, how many times, and what does one repetition
+  consist of?
+description: |
+  A step repeated as one block states its repetitions (the cycles of an atomic layer deposition, an ion exchange done
+  twice); a step with sub-steps holds them PART_OF it, in order. One cycle of the ALD in the synthesis example is a
+  dose of the Pt precursor, a purge, a dose of O2 and a purge, repeated 10 times; the purge times are not stated and
+  stay so. The NH4+ exchange of the Cu-SSZ-13 is done twice and has no sub-steps.
+documents:
+  - examples/scale-catal/synthesis-examples/synthesis-strategies.json
+plan:
+  question: Which steps were repeated as a block, how many times, and with which sub-steps?
+  match:
+    label: ProcedureStep
+    as: block
+    where:
+      - prop: repetitions
+        op: exists
+  steps:
+    - from: block
+      edge: PART_OF
+      direction: in
+      to: ProcedureStep
+      as: substep
+      edge_as: position
+      optional: true
+  return:
+    - block.name
+    - block.repetitions
+    - position.order
+    - substep.action
+    - substep.duration
+  evidence: true
+expect:
+  status: answered
+  min_rows: 5
+  max_rows: 5
+  values:
+    substep.action:
+      - dose
+      - purge
+variants:
+  - description: What drives a step besides its chemistry is its energy_input, so the steps run by ultrasound, by
+      milling or in a flame are found as such, apart from heated ones. The example has three such steps, one each.
+    plan:
+      match:
+        label: ProcedureStep
+        as: step
+        where:
+          - prop: energy_input.*
+            op: in
+            value:
+              - ultrasound
+              - mechanical
+              - flame
+              - microwave
+              - plasma
+              - light
+              - laser
+      steps:
+        - from: step
+          edge: PART_OF
+          to: Preparation
+          as: preparation
+      return:
+        - preparation.name
+        - step.name
+        - step.energy_input
+        - step.conditions
+    expect:
+      status: answered
+      min_rows: 3
+      max_rows: 3
+      values:
+        step.energy_input:
+          - - ultrasound
+          - - mechanical
+          - - flame

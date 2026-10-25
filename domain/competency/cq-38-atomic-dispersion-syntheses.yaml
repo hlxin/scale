@@ -1,0 +1,81 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-38
+question: Which syntheses were designed to give atomically dispersed metal, by which methods and strategy, and what do
+  their authors claim was obtained, on which observations?
+description: |
+  What a synthesis is designed to control is its design_aims, as the source states them, with the strategy in the
+  source's words; neither says the aim was reached. That it was is the authors' Claim ABOUT the preparation (role
+  preparation) and the state it gave, which the characterizations it rests on SUPPORT. The synthesis example has two
+  syntheses aimed at atomic dispersion: Cu-SSZ-13 by a hydrothermal synthesis and two ion exchanges (isolated Cu2+,
+  from EPR) and Fe-N-C by pyrolysis of Fe(acac)3 inside ZIF-8 (FeN4 sites, from HAADF-STEM and EXAFS). A synthesis
+  aimed at single atoms whose authors claim nothing about them, or claim them on no observation, gives no row here.
+documents:
+  - examples/scale-catal/synthesis-examples/synthesis-strategies.json
+plan:
+  question: Which preparations aimed at atomic dispersion, by which methods, and which observations support the claim?
+  match:
+    label: Preparation
+    as: preparation
+    where:
+      - prop: design_aims.*
+        op: eq
+        value: atomic_dispersion
+  steps:
+    - from: preparation
+      edge: ABOUT
+      direction: in
+      to: Claim
+      as: claim
+      edge_where:
+        - prop: role
+          op: eq
+          value: preparation
+    - from: claim
+      edge: SUPPORTS
+      direction: in
+      to: Characterization
+      as: observation
+  return:
+    - preparation.name
+    - preparation.preparation_methods
+    - preparation.strategy
+    - claim.statement
+    - observation.technique
+  evidence: true
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    observation.technique:
+      - electron paramagnetic resonance
+      - HAADF-STEM
+      - X-ray absorption spectroscopy
+variants:
+  - description: The syntheses of one method family are found together, whatever the source calls the method, because
+      preparation_methods takes listed values; method keeps the source's words. A path to the list's entries
+      (preparation_methods.*) with eq matches a family exactly; contains would also match flame_spray_pyrolysis, whose
+      name holds pyrolysis. Of the six syntheses of the example, one is a pyrolysis (of a MOF), and it also lists its
+      solvothermal and etching families.
+    plan:
+      match:
+        label: Preparation
+        as: preparation
+        where:
+          - prop: preparation_methods.*
+            op: eq
+            value: pyrolysis
+      steps: []
+      return:
+        - preparation.name
+        - preparation.method
+        - preparation.preparation_methods
+        - preparation.design_aims
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        preparation.method:
+          - Fe(acac)3 encapsulated during ZIF-8 growth, pyrolysed, acid leached, pyrolysed again

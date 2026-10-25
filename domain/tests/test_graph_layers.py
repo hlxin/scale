@@ -119,6 +119,21 @@ def test_a_domain_cannot_redeclare_a_property(tmp_path):
         pgraph.load_spec(manifest(tmp_path, extra_domains=[bad]))
 
 
+def test_a_domain_adds_properties_to_a_kernel_edge_it_sees(head, tmp_path):
+    """adds_properties names an edge type as it names a label (the function an input serves in a synthesis, on the
+    kernel's HAS_INPUT); the property says which file added it, and redeclaring it, or adding to an edge type no
+    loaded file declares, does not load."""
+    d = head["edges"]["HAS_INPUT"]["properties"]["synthesis_function"]
+    assert d["added_by"] == "catalysis" and "capping_agent" in d["items"]["values"]
+    assert "role" in head["edges"]["HAS_INPUT"]["properties"]                    # the kernel's own stay
+    again = _dom(tmp_path, "again", {"adds_properties": {"HAS_INPUT": {"synthesis_function": {"type": "text"}}}})
+    with pytest.raises(ScaleError, match="HAS_INPUT.synthesis_function, which is already declared"):
+        pgraph.load_spec(manifest(tmp_path, extra_domains=[again]))
+    nowhere = _dom(tmp_path, "nowhere", {"adds_properties": {"MAKES": {"yield": {"type": "value"}}}})
+    with pytest.raises(ScaleError, match="adds properties to MAKES, which is not visible to it"):
+        pgraph.load_spec(manifest(tmp_path, extra_domains=[nowhere]))
+
+
 def test_a_specialization_stays_inside_its_general_edge(tmp_path):
     bad = _dom(tmp_path, "wrong", {"edges": {"MEASURES_SOURCE": {"specializes": "EXAMINES", "from": ["Experiment"], "to": ["Source"]}}})
     with pytest.raises(ScaleError, match="outside EXAMINES"):
