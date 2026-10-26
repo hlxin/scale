@@ -526,8 +526,10 @@ def test_claude_code_runs_confined_and_never_sees_a_token(tmp_path, monkeypatch)
     assert "--restricted" in cmd and cmd[cmd.index("--permission-prompts") + 1] == "none"
     assert cmd[cmd.index("--permission-mode") + 1] == "dontAsk" and "--strict-mcp-config" in cmd
     allowed = cmd[cmd.index("--allowedTools") + 1].split(",")
-    assert all(a in ("Read", "Write", "Edit", "Glob", "Grep") or a.startswith("Bash(scale ") for a in allowed)
-    assert json.loads(cmd[cmd.index("--settings") + 1])["sandbox"]["enabled"] is True
+    assert [a for a in allowed if a.startswith("Bash")] == ["Bash(scale source check:*)", "Bash(scale graph describe:*)"]
+    assert set(allowed) - {"Read", "Write", "Edit", "Glob", "Grep"} == {a for a in allowed if a.startswith("Bash")}
+    sandbox = json.loads(cmd[cmd.index("--settings") + 1])["sandbox"]
+    assert sandbox["enabled"] is True and sandbox["autoAllowBashIfSandboxed"] is False   # no other command runs on its own
     for k in ("SCALE_WEB_GITHUB_TOKEN", "GH_TOKEN", "GITHUB_TOKEN", "SCALE_WEB_SECRET", "GITHUB_CLIENT_SECRET"):
         monkeypatch.setenv(k, "a secret")
     env = runner.claude_env(tmp_path / "bin")
