@@ -338,7 +338,7 @@ function details() {
   const B = G.base || G;                          // in the schema view, the facts are still the graph's
   const g = B.doc.graph || {}, e = B.entry, [scope] = scopeOf(e);
   const facts = [
-    ["Type", `<a href="#" class="gx-type" id="graph-show" title="Show the graph on the canvas">Knowledge graph</a>${scope === "synthetic" ? ` <span class="gx-warn">synthetic example</span>` : ""}`],
+    ["Type", `<a href="#" id="graph-show" title="Show the graph on the canvas">Knowledge graph</a>${G.base || PE.on ? "" : ` <span class="gx-subtle">(shown)</span>`}${scope === "synthetic" ? ` <span class="gx-warn">synthetic example</span>` : ""}`],
     ["Size", `${B.doc.nodes.length.toLocaleString()} nodes · ${B.doc.links.length.toLocaleString()} rels · ${B.props.toLocaleString()} props`],
     g.version ? ["Release", esc(g.version)] : null,
     ["Visibility", e.from === "service" ? "Private to you, until you contribute it" : esc(((g.stewardship || {}).access || "public").replace(/^./, (c) => c.toUpperCase()))],
@@ -1085,6 +1085,7 @@ function togglePlot(on) {
   $("viz-btn").setAttribute("aria-pressed", String(on));
   $("plot-host").hidden = !on;
   $("canvas").classList.toggle("is-plotting", on);
+  renderGraphs();
   if (on && G) { if (PE.mountedFor !== G) { PE.mountedFor = G; peMount(); } else peRender(); }
 }
 pe("mode").onchange = () => { peControls(); PE.hidden.clear(); PE.page = 0; peBuild(); };
