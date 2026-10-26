@@ -55,13 +55,18 @@ def session_for(cfg: Config, login: str) -> str:
     return sign(cfg, {"sub": login.lower(), "exp": int(time.time()) + cfg.session_ttl_s})
 
 
+def admitted(cfg: Config, login: str | None) -> bool:
+    """A login the service serves: one on the allowlist, or any GitHub account when the allowlist is ``*``."""
+    return bool(login) and ("*" in cfg.allowlist or login.lower() in cfg.allowlist)
+
+
 def user_of(cfg: Config, header: str | None) -> str | None:
-    """The allowlisted login an ``Authorization: Bearer`` header carries, else None."""
+    """The admitted login an ``Authorization: Bearer`` header carries, else None."""
     if not header or not header.startswith("Bearer "):
         return None
     p = unsign(cfg, header[7:].strip())
     login = (p or {}).get("sub")
-    return login if login and login in cfg.allowlist else None
+    return login if admitted(cfg, login) else None
 
 
 def allowed_return(cfg: Config, url: str) -> bool:

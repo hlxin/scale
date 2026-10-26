@@ -1,87 +1,278 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SCALE One Publication</title>
-  <meta name="description" content="Curate one catalysis publication into an evidence-backed SCALE graph, see it and ask it questions.">
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
+  <title>SCALE Graph Explorer</title>
+  <meta name="description" content="Browse, search and query SCALE's evidence-backed catalysis graphs in the browser, with SCALE's own code.">
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="explorer.css">
+  <script src="config.js"></script>
+  <script>
+    // the system's theme (before the page paints)
+    try { document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"; } catch { /* old browser */ }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/plotly.js-cartesian-dist-min@2.35.2/plotly-cartesian.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
-  <script src="config.js"></script>
 </head>
 <body>
-<header class="top">
-  <div>
-    <h1>SCALE <span class="muted">· one publication, one graph</span></h1>
-    <p class="muted small">A paper, patent or report curated into a <a href="https://github.com/hlxin/scale">scale-catal</a>
-      graph by the catalysis schema and the curate-corpus skill, every statement with its verbatim evidence.</p>
-  </div>
-  <div id="account" class="account"></div>
-</header>
+<div class="gx-page">
+  <header class="gx-toolbar">
+    <button class="gx-viz gx-curate-open" id="curate-open" type="button" title="Curate a publication (a PDF or a DOI) into a graph">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3 H6 a2 2 0 0 0 -2 2 V19 a2 2 0 0 0 2 2 H18 a2 2 0 0 0 2 -2 V9 Z M14 3 V9 H20 M12 12 V18 M9 15 H15"/></svg>
+      <span>Curate</span>
+    </button>
+    <button class="gx-viz" id="viz-btn" type="button" aria-pressed="false" title="Explore this graph's data">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20 V4"/><path d="M4 20 H20"/><path d="M8 16 L12 11 L15 14 L20 8"/></svg>
+      <span>Visualization</span>
+    </button>
+    <form class="gx-search" id="search-form" role="search" aria-label="Search the graph">
+      <span class="gx-search-prefix" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16"/></svg>
+      </span>
+      <input type="search" class="gx-search-input" id="search-input" placeholder="Search by asking..." autocomplete="off" spellcheck="false">
+      <button type="submit" class="gx-search-submit" aria-label="Search the graph" title="Search the graph">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11 L21 4 L14 21 L11 13 Z"/></svg>
+      </button>
+    </form>
+  </header>
 
-<main class="layout">
-  <section class="panel" id="input">
-    <h2>1 · The publication</h2>
-    <div class="tabs" role="tablist">
-      <button class="tab active" data-tab="pdf" role="tab">Upload a PDF</button>
-      <button class="tab" data-tab="doi" role="tab">DOI</button>
-      <button class="tab" data-tab="url" role="tab">Link</button>
-    </div>
-    <div class="tabpane" data-pane="pdf">
-      <input type="file" id="pdf" accept="application/pdf">
-      <input type="text" id="pdf-doi" placeholder="its DOI (optional: the record's metadata and licence)">
-    </div>
-    <div class="tabpane hidden" data-pane="doi">
-      <input type="text" id="doi" placeholder="10.1021/ie50220a011">
-      <p class="muted small">An open-access copy is fetched only when it carries an open licence; otherwise upload the PDF.</p>
-    </div>
-    <div class="tabpane hidden" data-pane="url">
-      <input type="url" id="url" placeholder="https://arxiv.org/abs/… or a link to a PDF">
-      <p class="muted small">Many publishers refuse downloads: if the link fails, upload the PDF.</p>
-    </div>
-    <button id="start" class="primary">Curate</button>
-    <p class="muted small">The page text is sent to the service's model to curate. Nothing is kept on the service: you
-      get the graph back, its quotes capped by the source's rights, and download it.</p>
-    <div id="job" class="job hidden"></div>
-    <hr>
-    <h2>Or open a graph</h2>
-    <div class="row">
-      <label class="button">A graph file<input type="file" id="graph-file" accept=".json,application/json" hidden></label>
-      <button id="example">The public methanol example</button>
-    </div>
-  </section>
+  <div class="gx-grid" id="grid">
+    <aside class="gx-rail" aria-label="Graphs">
+      <header class="gx-panel-head">
+        <h2 class="gx-panel-title">Graphs</h2>
+        <button class="gx-toggle" id="rail-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+        </button>
+      </header>
+      <label class="gx-add-graph" title="Open a scale-catal graph file from this computer">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5 V19 M5 12 H19"/></svg>
+        <span>Open a graph file</span>
+        <input type="file" id="graph-file" accept=".json,application/json" hidden>
+      </label>
+      <div class="gx-graphs" id="graphs" role="list" aria-label="Graphs"></div>
+      <footer class="gx-rail-summary"><button type="button" class="gx-link-btn" id="board-open">Contributors to catal-commons</button><div id="summary">Displaying 0 nodes, 0 relationships.</div><div class="gx-status" id="status" aria-live="polite">Starting…</div></footer>
+    </aside>
 
-  <section class="panel wide" id="view">
-    <div class="view-head">
-      <h2>2 · The graph <span id="graph-title" class="muted"></span></h2>
-      <div class="row">
-        <select id="label-filter" aria-label="show label"><option value="">every label</option></select>
-        <button id="fit">Fit</button>
-        <button id="download" disabled>Download</button>
-        <button id="contribute" class="hidden" title="Propose this graph for catal-commons, SCALE's community graph">Contribute to the commons</button>
+    <!-- Drag handles on the panel borders (keyboard: arrow keys; double-click or Home resets the width). -->
+    <div class="gx-resizer gx-rail-resizer" id="rail-resizer" role="separator" aria-orientation="vertical"
+         aria-label="Resize the graphs panel" tabindex="0"></div>
+    <div class="gx-resizer gx-inspector-resizer" id="inspector-resizer" role="separator" aria-orientation="vertical"
+         aria-label="Resize the details panel" tabindex="0"></div>
+
+    <main class="gx-canvas" id="canvas">
+      <button class="gx-show gx-show-left" id="rail-show" type="button" title="Show panel" aria-label="Show the graphs panel" hidden>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
+      </button>
+      <button class="gx-show gx-show-right" id="inspector-show" type="button" title="Show panel" aria-label="Show the details panel" hidden>
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+      </button>
+      <div class="gx-actions">
+        <div class="gx-actions-group">
+          <div class="gx-menu-wrap">
+            <button class="gx-btn" id="layout-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Change the layout">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="6" r="2.2"/><circle cx="18" cy="7" r="2.2"/><circle cx="12" cy="18" r="2.2"/><path d="M8 6.5 L16 7 M7 8 L11 16 M17 9 L13 16"/></svg>
+              <span id="layout-label">Force</span>
+            </button>
+            <div class="gx-menu" id="layout-menu" role="menu" hidden>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="force" aria-checked="true">Force-directed<small>Clusters by connection</small></button>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="hierarchical" aria-checked="false">Hierarchical<small>Layers along relationship direction</small></button>
+              <button class="gx-menu-item" type="button" role="menuitemradio" data-layout="radial" aria-checked="false">Radial<small>Hubs in the centre; around the selected node if one is selected</small></button>
+            </div>
+          </div>
+          <button class="gx-btn" id="labels-btn" type="button" aria-pressed="false" title="Show or hide relationship labels">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17 L9 6 L14 17 M6 13 H12 M16 9 H21 M16 13 H21 M16 17 H21"/></svg>
+            <span>Labels</span>
+          </button>
+          <button class="gx-btn" id="unhide-btn" type="button" title="Bring hidden nodes back" hidden>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12 C5 6 19 6 22 12 C19 18 5 18 2 12 Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span id="unhide-label">Show hidden</span>
+          </button>
+        </div>
+        <div class="gx-actions-group">
+          <button class="gx-btn gx-btn-ghost" id="zoom-out" type="button" title="Zoom out" aria-label="Zoom out">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14"/></svg>
+          </button>
+          <button class="gx-btn gx-btn-ghost" id="zoom-in" type="button" title="Zoom in" aria-label="Zoom in">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M20 20 L16 16 M8 11 H14 M11 8 V14"/></svg>
+          </button>
+          <button class="gx-btn gx-btn-ghost" id="fit" type="button" title="Fit graph to view" aria-label="Fit to view">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 9 V4 H9 M20 9 V4 H15 M4 15 V20 H9 M20 15 V20 H15"/></svg>
+          </button>
+          <button class="gx-btn gx-btn-ghost" id="locate" type="button" title="Centre on the selected node" aria-label="Locate selection" disabled>
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="1.6"/><path d="M12 2 V5 M12 19 V22 M2 12 H5 M19 12 H22"/></svg>
+          </button>
+          <div class="gx-menu-wrap">
+            <button class="gx-btn gx-btn-ghost" id="export-btn" type="button" aria-haspopup="menu" aria-expanded="false" title="Export the current view" aria-label="Export">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4 V15 M7 10 L12 15 L17 10 M5 19 H19"/></svg>
+            </button>
+            <div class="gx-menu gx-menu-right" id="export-menu" role="menu" hidden>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="png">Image (PNG)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="svg">Vector (SVG)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="nodes-csv">Nodes (CSV)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="edges-csv">Relationships (CSV)</button>
+              <button class="gx-menu-item" type="button" role="menuitem" data-export="graph">The graph (scale-catal JSON)</button>
+            </div>
+          </div>
+          <button class="gx-btn gx-btn-ghost" id="refresh" type="button" title="Lay the graph out again" aria-label="Refresh">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12 A9 9 0 0 1 19.5 7"/><path d="M21 12 A9 9 0 0 1 4.5 17"/><path d="M19.5 4 V8 H15.5"/><path d="M4.5 20 V16 H8.5"/></svg>
+          </button>
+        </div>
       </div>
-    </div>
-    <div id="contribution" class="job hidden"></div>
-    <div id="cy" class="cy"><p class="empty muted">No graph yet: curate a publication or open a graph.</p></div>
-    <div id="legend" class="legend"></div>
-    <div id="details" class="details muted">Click a record to see its values and evidence.</div>
-  </section>
+      <svg class="gx-svg" id="svg" role="img" aria-label="Graph visualization">
+        <defs id="gx-defs"></defs>
+        <g id="zoom-layer"><g class="gx-links" id="links"></g><g class="gx-nodes" id="nodes"></g></g>
+      </svg>
+      <div class="gx-empty" id="empty"><p>Loading graph…</p></div>
+      <div class="gx-hint">Circle area scales with connectivity · drag nodes to rearrange · scroll to zoom · double-click a node to expand its neighbourhood</div>
 
-  <section class="panel" id="ask">
-    <h2>3 · Ask it</h2>
-    <textarea id="question" rows="3" placeholder="Which catalysts were tested, and at what temperatures?"></textarea>
-    <button id="ask-btn" class="primary">Ask</button>
-    <p class="muted small">Answered by the query-graph skill: query plans and evidence search run by the same code as
-      <code>scale graph query</code> and <code>scale graph search</code>; every sentence cites the rows returned.</p>
-    <div id="answer" class="answer"></div>
-    <hr>
-    <h3>Search the evidence</h3>
-    <div class="row"><input type="text" id="search" placeholder="sulfur poisoning"><button id="search-btn">Search</button></div>
-    <div id="hits" class="hits"></div>
-  </section>
-</main>
-<script src="app.js"></script>
+      <!-- The Visualization: the graph's data explored in place of the graph (counts, degrees, numeric properties). -->
+      <div class="gx-plot-host" id="plot-host" hidden>
+        <main class="pe-page">
+          <header class="pe-head">
+            <div><h1 class="pe-title">Graph explorer</h1><p class="pe-sub" id="pe-sub">Explore quantities and graph structure.</p></div>
+          </header>
+          <div class="pe-stats" id="pe-stats" aria-label="Graph summary"></div>
+          <div class="pe-filters" aria-label="Explorer controls">
+            <label class="pe-field"><span>Explore</span><select id="pe-mode">
+              <option value="labels">Node labels</option><option value="rels">Rel types</option>
+              <option value="numeric">Numeric properties</option><option value="degree">Degree distribution</option>
+            </select></label>
+            <label class="pe-field" id="pe-class-wrap"><span>Node label</span><select id="pe-class"></select></label>
+            <label class="pe-field" id="pe-x-wrap"><span>X</span><select id="pe-x"></select></label>
+            <label class="pe-field" id="pe-y-wrap"><span>Y</span><select id="pe-y"></select></label>
+            <div class="pe-field" role="group" aria-label="Axis scale"><span>Scale</span><div class="pe-toggle-row">
+              <label class="pe-check"><input type="checkbox" id="pe-logx"> Log X</label>
+              <label class="pe-check"><input type="checkbox" id="pe-logy"> Log Y</label></div></div>
+            <div class="pe-field pe-view" role="group" aria-label="View"><span>View</span><div class="pe-seg">
+              <button type="button" data-view="chart" aria-pressed="true">Chart</button>
+              <button type="button" data-view="table" aria-pressed="false">Table</button></div></div>
+          </div>
+          <section class="pe-card" aria-labelledby="pe-plot-title">
+            <header class="pe-card-head">
+              <div><h2 class="pe-plot-title" id="pe-plot-title">…</h2><p class="pe-plot-note" id="pe-plot-note" role="status"></p></div>
+              <button type="button" class="pe-button" id="pe-reset" hidden>Reset zoom</button>
+            </header>
+            <div class="pe-legend" id="pe-legend" role="group" aria-label="Series; click to hide or show"></div>
+            <div class="pe-empty" id="pe-empty" role="status">Loading…</div>
+            <div id="pe-chart-wrap" hidden>
+              <div class="pe-chart" id="pe-chart" role="img" aria-labelledby="pe-plot-title"></div>
+              <p class="pe-help">Hover for details · Click a point for its node · Drag to zoom · Double-click to reset</p>
+            </div>
+            <div id="pe-table-wrap" hidden>
+              <div class="pe-table-tools"><label class="pe-field"><span>Find in table</span><input type="search" id="pe-search" placeholder="Filter visible rows"></label><span id="pe-table-count" role="status"></span></div>
+              <div class="pe-table-scroll"><table class="pe-table" id="pe-table"></table></div>
+              <div class="pe-pagination"><button type="button" class="pe-button" id="pe-prev">Previous</button><span id="pe-page-count"></span><button type="button" class="pe-button" id="pe-next">Next</button></div>
+            </div>
+          </section>
+        </main>
+      </div>
+
+      <aside class="gx-card" id="card" hidden aria-label="Answer">
+        <header class="gx-card-head">
+          <span class="gx-card-title" id="card-title">Answer</span>
+          <button class="gx-icon-btn" id="card-collapse" type="button" title="Collapse" aria-label="Collapse">
+            <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9 L12 15 L18 9"/></svg>
+          </button>
+          <button class="gx-icon-btn" id="card-close" type="button" title="Dismiss" aria-label="Dismiss">
+            <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6 L18 18 M18 6 L6 18"/></svg>
+          </button>
+        </header>
+        <div class="gx-card-body" id="card-body"></div>
+      </aside>
+    </main>
+
+    <aside class="gx-inspector" aria-label="Inspector">
+      <header class="gx-panel-head">
+        <button class="gx-toggle" id="inspector-back" type="button" title="Back to labels" aria-label="Back to labels, types &amp; props" hidden>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
+        </button>
+        <h2 class="gx-panel-title" id="inspector-title">Labels, types &amp; props</h2>
+        <button class="gx-toggle" id="inspector-collapse" type="button" title="Collapse panel" aria-label="Collapse panel">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>
+        </button>
+      </header>
+      <section class="gx-legend" id="legend">
+        <h3 class="gx-section-title">Node labels</h3>
+        <div class="gx-pill-row" id="kinds"></div>
+        <h3 class="gx-section-title">Relationship types</h3>
+        <div class="gx-pill-row" id="rels"></div>
+      </section>
+      <article class="gx-record" id="record" hidden></article>
+    </aside>
+  </div>
+</div>
+
+<dialog class="gx-dialog gx-curate" id="curate-dialog">
+  <form method="dialog">
+    <h2>Curate a publication</h2>
+    <p class="gx-muted">A PDF, a DOI, or both. A model reads the paper and records it as a graph under SCALE Catalysis; the
+      SCALE tools check every record, and every quote against the paper's own text. It takes a few minutes.</p>
+    <label class="gx-drop" id="curate-drop">
+      <input type="file" id="curate-pdf" accept="application/pdf,.pdf">
+      <span id="curate-pdf-name">Drop a PDF here, or choose one</span>
+    </label>
+    <label>DOI <span class="gx-subtle">(alone, or with the PDF for its title, authors and licence)</span>
+      <input type="text" id="curate-doi" placeholder="10.1038/s41467-022-29926-w" autocomplete="off"></label>
+    <p class="gx-subtle">With a DOI alone, only an open-access copy can be fetched. Behind a paywall, upload the PDF you can
+      read through your library.</p>
+    <section class="gx-share" aria-label="What is shared">
+      <h3>What is shared, and with whom</h3>
+      <ul>
+        <li><b>To curate,</b> the PDF or DOI goes to the SCALE service, which sends the paper's text to Anthropic's Claude
+          API to read it.</li>
+        <li><b>The paper is kept only to curate it again</b> when SCALE's schema changes, so nobody has to upload it
+          twice: the PDF and its text, always for a paper under an open licence, and for any other paper only if you tick
+          the box below; otherwise the service deletes them when the job ends. A kept paper is private to the service,
+          never published, and you can withdraw your agreement at any time, which deletes it.</li>
+        <li><b>The graph comes back to you only.</b> Nothing is published unless you contribute it.</li>
+        <li><b>Contributing is a separate click.</b> It opens a public pull request on
+          <a href="https://github.com/hlxin/scale" target="_blank" rel="noopener">github.com/hlxin/scale</a> that names your
+          GitHub login, and once it is merged your login joins the contributors' leaderboard. The records are shared
+          under CC BY 4.0; they quote no text of a paper under copyright. A person reviews it before it joins catal-commons.</li>
+        <li><b>No API key, no cost to you.</b> Signing in with GitHub only tells the service your login, so it can keep
+          use within its daily budget.</li>
+        <li><b>Your questions count toward others' credit.</b> When you are signed in, the leaderboard counts which
+          contributions answered you (a digest of your login and the day, never the question).</li>
+        <li id="curate-contact"><b>A rights holder</b> can ask for a paper's records or kept copy to be removed by
+          <a href="https://github.com/hlxin/scale/issues" target="_blank" rel="noopener">opening an issue</a>.</li>
+      </ul>
+    </section>
+    <label class="gx-check gx-keep" id="curate-attest-row" hidden><input type="checkbox" id="curate-attest"> I have lawful
+      access to this PDF (for example through my library's subscription), and as far as I know its licence allows text
+      mining with an AI tool</label>
+    <label class="gx-check gx-keep" id="curate-keep-row" hidden><input type="checkbox" id="curate-keep"> Keep this paper (the
+      PDF and its text) privately so SCALE can curate it again after a schema change (a paper under an open licence is
+      kept without asking)</label>
+    <div class="gx-curate-account" id="curate-account"></div>
+    <div class="gx-kept" id="curate-kept"></div>
+    <div class="gx-curate-job" id="curate-job" hidden></div>
+    <p class="gx-subtle" id="curate-schema"></p>
+    <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="curate-start">Curate</button></menu>
+  </form>
+</dialog>
+<dialog class="gx-dialog gx-board" id="board-dialog">
+  <form method="dialog">
+    <h2>Contributors to catal-commons</h2>
+    <p class="gx-muted">Everyone who has added a paper to catal-commons, SCALE's shared catalysis graph, scored by the
+      knowledge they added (evidence-backed triples) and by how often it answers other people's questions. Each entry is
+      a merged pull request, read from
+      <a href="https://github.com/hlxin/scale/blob/main/graphs/catal-commons/contributors.yaml" target="_blank" rel="noopener">contributors.yaml</a>.</p>
+    <div class="gx-board-tabs" role="tablist">
+      <button type="button" class="gx-board-tab is-on" data-board="contributors" role="tab">All time</button>
+      <button type="button" class="gx-board-tab" data-board="recent" role="tab">Last 90 days</button>
+    </div>
+    <div id="board"></div>
+    <details class="gx-board-how"><summary>How scoring works</summary><dl id="board-how"></dl>
+      <p class="gx-subtle">The rules are one function, <code>tools/commons.py</code>; changing them is a pull request.</p></details>
+    <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="board-curate">Curate a paper</button></menu>
+  </form>
+</dialog>
+<script type="module" src="explorer.js"></script>
 </body>
 </html>

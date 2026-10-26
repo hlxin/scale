@@ -3,11 +3,14 @@
 A job is ``scale source start`` (the DOI resolved, the PDF read into page texts), the curation loop, then ``scale
 source finish --public``: the result is the graph with every quote capped by the source's rights (the uploaded PDF and
 its page texts never leave the service), its check and the model's summary. The job's folder is deleted when the
-result is read, when the job fails or when it expires.
+result is read, when the job fails or when it expires. Before it goes, a finished job's paper (the PDF and its page
+texts) is kept in the archive when the paper's licence or the contributor's agreement allows (archive.py).
 """
 
 from __future__ import annotations
 
+import hashlib
+import json
 import shutil
 import tempfile
 import threading
@@ -20,6 +23,7 @@ from scale import curate, rights
 from scale.util import ScaleError, load_doc
 
 from . import agent, auth
+from .archive import Archive
 from .auth import Budget
 from .config import Config
 
@@ -34,8 +38,10 @@ class Jobs:
         self.lock = threading.Lock()
         self.slots = threading.Semaphore(cfg.concurrent_jobs)
         self.run_inline = run_inline               # tests: run the job in the calling thread
+        self.archive = Archive(cfg.archive or None)
 
-    def submit(self, owner: str, doi: str | None = None, pdf: bytes | None = None, filename: str | None = None) -> str:
+    def submit(self, owner: str, doi: str | None = None, pdf: bytes | None = None, filename: str | None = None,
+               keep_text: bool = False, text: Path | None = None, recurating: bool = False) -> str:
         self.sweep()
         jid = uuid.uuid4().hex
         folder = self.root / jid
@@ -47,7 +53,8 @@ class Jobs:
             pdf_path.parent.mkdir()
             pdf_path.write_bytes(pdf)
         job = {"id": jid, "owner": owner, "state": "queued", "log": [], "created": time.time(), "folder": folder,
-               "doi": doi}
+               "doi": doi, "keep_text": bool(keep_text), "text": text,
+               "recurating": recurating}
         with self.lock:
             self.jobs[jid] = job
         if self.run_inline:
@@ -73,7 +80,8 @@ class Jobs:
                 self._log(job, "resolving the DOI and reading the PDF" if doi and pdf_path else
                           "resolving the DOI" if doi else "reading the PDF")
                 started = curate.start(work, doi=doi, pdf=pdf_path, email=self.cfg.contact_email or None,
-                                       repo=self.repo, version=self.version())
+                                       repo=self.repo, version=self.version(),
+                                       **({"text": job["text"]} if job.get("text") else {}))
                 job["source"] = {k: started.get(k) for k in ("source_id", "rights_class", "pages", "schema_version", "notes")}
                 if not started.get("pages"):
                     raise ScaleError("no text could be read: give the PDF (an open-access copy was not found or not "
@@ -93,6 +101,18 @@ class Jobs:
                 job["withheld"] = fin["public"]["withheld"]
                 job["rights"] = rights.load_rights(work / "rights.yaml")[started["source_id"]]
                 job["receipt"] = auth.receipt(self.cfg, job["owner"], job["graph"], job["rights"])
+                if started.get("page_texts") and not job["recurating"]:
+                    src = next(n for n in job["graph"]["nodes"] if n.get("label") == "Source")["props"]
+                    digest = hashlib.sha256(json.dumps(job["graph"], sort_keys=True).encode()).hexdigest()
+                    kept = self.archive.keep(work / started["page_texts"], doi=doi or src.get("doi"),
+                                             title=src.get("title"), rights=job["rights"], login=job["owner"],
+                                             consent=job["keep_text"], schema_version=started.get("schema_version"),
+                                             graph_sha256=digest,
+                                             pdf=pdf_path or (work / started["pdf"] if started.get("pdf") else None))
+                    job["kept"] = {"sha256": kept, "because": Archive.why(job["rights"].get("class"), job["keep_text"])} if kept else None
+                    if kept:
+                        self._log(job, "paper kept for curating again after a schema change"
+                                  + (" (open licence)" if job["kept"]["because"] == "open_licence" else " (you agreed)"))
                 job["state"] = "done"
                 self._log(job, "done")
             except Exception as e:                       # the job reports its failure; the service goes on
@@ -108,7 +128,7 @@ class Jobs:
             job = self.jobs.get(jid)
             if not job or job["owner"] != owner:
                 return None
-            out = {k: v for k, v in job.items() if k not in ("folder", "owner", "created")}
+            out = {k: v for k, v in job.items() if k not in ("folder", "owner", "created", "text", "recurating")}
             if job["state"] in ("done", "failed"):
                 self.jobs.pop(jid, None)
                 shutil.rmtree(job["folder"], ignore_errors=True)

@@ -2,6 +2,36 @@
 
 ## Unreleased
 
+- **The graph explorer on GitHub Pages, with curating, asking and contributing through the web service (no schema
+  change).** Requested by @hlxin: browse and query the repository's graphs from the GitHub repository, and let anyone
+  curate a paper and contribute it to catal-commons without an API key of their own.
+  - **The explorer** (`site/index.html`, `scale site build`, `.github/workflows/pages.yml`): pick a curated graph or a
+    graph file and see it whole (circle area by connectivity, colour by label, arrowheads in their link's colour),
+    filter by label or relationship type, open a node with its verbatim evidence and neighbours, search the evidence,
+    and explore its data (Visualization: counts, the degree distribution, two numeric properties of a label, units
+    never mixed). SCALE's own code runs in the browser (Pyodide). The page that curates one publication moves to
+    `site/publication.html`.
+  - **Curate, ask, contribute.** Signed in with GitHub, a reader drops a PDF or gives a DOI; the service curates it
+    under its own budget, a DOI already in catal-commons (or in an open contribution) is answered without curating,
+    and the graph opens private to the reader. A question in plain language goes to the service. One click opens the
+    contribution's pull request, which a person reviews and merges. The dialog says what is shared and with whom.
+  - **Rights.** An uploaded PDF needs the reader's statement that they have lawful access to it and that, as far as
+    they know, its licence allows text mining with an AI tool. A paper is kept on the service (its PDF and text, in a
+    private archive) only to curate it again after a schema change: always under an open licence, otherwise only when
+    the reader ticks the box (unticked by default); they can withdraw it. `python -m scaleweb --recurate` curates the
+    kept papers again. A rights holder is given a contact for removal.
+  - **Repeats discarded on merge.** `scale graph contribute` (and the service) no longer adds a shared record the
+    commons holds under another id (the same identifier, else the same name with no other formula), a value it holds
+    or a link it holds; the contribution points to the held record, which gains its evidence, and a different value is
+    left out for the reviewer. Repeats are reported and never counted.
+  - **The leaderboard.** Each contribution is credited in `graphs/catal-commons/contributors.yaml` with its
+    evidence-backed triples and checklist completeness. Score = triples x (1 + log2(1 + reach)), reach being the
+    distinct (person, day) pairs whose questions it answered, counted by the service for signed-in people other than
+    its contributor (only a keyed digest of the login is kept). Levels (Contributor, Curator, Senior curator, Fellow),
+    all-time and 90-day boards, each contributor's papers, and how scoring works, published with the board.
+  - **Fixed:** the evidence index could not be built where numpy's integers are 32 bits (WebAssembly): `bincount` is
+    given the platform's integers. Nothing changes on a 64-bit machine.
+
 - **Schema 0.7.8 (additive): the conditions of a synthesis step, the quantities of its inputs, preparations varied
   from others, and a preparation read as a recipe.** Requested by @hlxin after the synthesis vocabulary of 0.7.6 and
   0.7.7: a step's pH, stirring and fill fraction were free keys of `conditions`, a concentration was written into an
