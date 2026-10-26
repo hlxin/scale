@@ -2,18 +2,19 @@
 
 ## Unreleased
 
+- **The explorer's toolbar: Curate stands out, the Visualization is gone (no schema change).** Requested by @hlxin:
+  the Visualization (the graph's data in charts, and the Plotly script it loaded) is removed from the explorer, and
+  Curate, the toolbar's one button, is filled in the link colour.
 - **The graph's type opens the graph (explorer, no schema change).** Requested by @hlxin: in a graph's card, "Knowledge
-  graph" is a link like the schema's, which shows the graph on the canvas, coming back from the schema view or the
-  Visualization, or fitting the graph to the view when it is already shown; whichever of the two is shown is marked
-  "(shown)".
+  graph" is a link like the schema's, which shows the graph on the canvas, coming back from the schema view, or fitting
+  the graph to the view when it is already shown; whichever of the two is shown is marked "(shown)".
 - **The graph explorer on GitHub Pages, with curating, asking and contributing through the web service (no schema
   change).** Requested by @hlxin: browse and query the repository's graphs from the GitHub repository, and let anyone
   curate a paper and contribute it to catal-commons without an API key of their own.
   - **The explorer** (`site/index.html`, `scale site build`, `.github/workflows/pages.yml`): pick a curated graph or a
     graph file and see it whole (circle area by connectivity, colour by label, arrowheads in their link's colour),
-    filter by label or relationship type, open a node with its verbatim evidence and neighbours, search the evidence,
-    and explore its data (Visualization: counts, the degree distribution, two numeric properties of a label, units
-    never mixed). SCALE's own code runs in the browser (Pyodide). The page that curates one publication moves to
+    filter by label or relationship type, open a node with its verbatim evidence and neighbours and search the evidence.
+    SCALE's own code runs in the browser (Pyodide). The page that curates one publication moves to
     `site/publication.html`.
   - **Curate, ask, contribute.** Signed in with GitHub, a reader drops a PDF or gives a DOI; the service curates it
     under its own budget, a DOI already in catal-commons (or in an open contribution) is answered without curating,
