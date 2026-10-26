@@ -144,6 +144,7 @@ members.
 | `SCALE_WEB_INBOX_LOGIN` | the GitHub login a PDF dropped into the inbox's queue by hand is credited to | empty: such a PDF is set aside |
 | `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner) | `claude` |
 | `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
+| `SCALE_WEB_PYTHON`, `SCALE_WEB_PORT` | for `service/launchd/scale-web.sh`: the Python with scale-catal's dependencies, and the service's port | `python3`, 8080 |
 
 ## The inbox: Claude Code on a computer of your own
 
