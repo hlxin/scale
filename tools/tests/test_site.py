@@ -87,11 +87,13 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # a question goes to the service, which holds the model's key; no reader is asked for one
     assert '"/ask"' in js and "apiKey" not in js and "@anthropic-ai/sdk" not in js
     # the graph's type in its card is a link back to the graph on the canvas, as its schema is a link to the schema
-    # Curate is the toolbar's one button; the Visualization is gone with Plotly
-    assert 'id="curate-open"' in page and "viz-btn" not in page and "plotly" not in page.lower() and "Plotly" not in js
+    # "Upload, curate, and explore" opens Curate, a toolbar button like the account's; the Visualization is gone
+    assert 'id="curate-open"' in page and "Upload, curate, and explore" in page and "viz-btn" not in page and "plotly" not in page.lower() and "Plotly" not in js
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
+    # signing in comes back to the graph that was open: every sign-in link is signInUrl(), and the fragment is kept
+    assert js.count("/auth/login?return=") == 1 and '"scale-signin-hash"' in js
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
 
 

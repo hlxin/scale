@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **The toolbar's Curate button reads "Upload, curate, and explore" and looks like the Sign in button (no schema
+  change).** Requested by @hlxin: it is an outlined button like the toolbar's others, no longer filled in the link
+  colour, and its name says what it does: upload a publication, curate it into a graph, explore it.
+- **Signing in keeps the graph that was open (no schema change).** Requested by @hlxin: GitHub sign-in returned the
+  reader to the explorer's first graph, since the service's answer replaced the part of the address that names the
+  graph open. The page now keeps it while the reader is at GitHub and opens it again; every sign-in link (the toolbar,
+  Curate, a search's prompt) returns to the page as it was. The service's README says that an empty allowlist turns
+  away every sign-in.
 - **GitHub sign-in in the explorer's toolbar (no schema change).** Requested by @hlxin: a **Sign in** button beside
   the search bar signs a reader in with GitHub through the web service, then shows their avatar and login, with a menu
   (what the service allows today, their GitHub profile, the contributors' board, sign out). Viewing, filtering and

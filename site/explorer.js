@@ -60,7 +60,10 @@ function readSignIn() {                          // the service returns from Git
   if (p.get("token")) { token = p.get("token"); store.set("scale-token", token); }
   const why = p.get("signin");
   for (const k of ["token", "signin", "login"]) p.delete(k);
-  history.replaceState(null, "", location.pathname + location.search + (p.toString() ? `#${p}` : ""));
+  const was = store.get("scale-signin-hash");     // the graph open before GitHub (#g=…), which the return drops
+  store.set("scale-signin-hash", "");
+  const hash = p.toString() || was;
+  history.replaceState(null, "", location.pathname + location.search + (hash ? `#${hash}` : ""));
   const fromCurate = store.get("scale-signin-from") === "curate";
   store.set("scale-signin-from", "");
   const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
@@ -68,8 +71,12 @@ function readSignIn() {                          // the service returns from Git
   if (fromCurate) setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
   else if (why) setTimeout(() => accountMenu(note), 0);
 }
-// where GitHub sends the reader back to: this page, as it is now (the graph open stays open)
+// where GitHub sends the reader back to: this page, as it is now. The service puts its answer in the fragment, so
+// the graph open (#g=…) is kept in this tab's storage when a sign-in link is followed, and readSignIn() restores it.
 const signInUrl = () => `${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname + location.search)}`;
+document.addEventListener("click", (e) => {
+  if (SERVICE && e.target.closest?.(`a[href^="${SERVICE}/auth/login"]`)) store.set("scale-signin-hash", location.hash.slice(1));
+});
 function signOut() {
   token = ""; login = ""; store.set("scale-token", "");
   renderAccount();
@@ -133,8 +140,7 @@ async function curateAccount(note = "") {
     return;
   }
   if (!token) {
-    const back = location.origin + location.pathname;
-    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(back)}">Sign in with GitHub</a>
+    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(signInUrl())}">Sign in with GitHub</a>
       <span class="gx-subtle">Free; the service needs only your login.</span>${warn}`;
     $("curate-signin").onclick = () => store.set("scale-signin-from", "curate", true);
     $("curate-start").disabled = true;
@@ -948,7 +954,7 @@ async function search(q) {
         <div class="gx-quote">“${esc(h.text)}”</div>
         <div class="gx-meta">${esc(h.label || "")}: ${esc(h.record_name || h.record)} · ${esc(name(G.byId.get(h.source)))}${h.source_year ? ` (${esc(h.source_year)})` : ""}, ${esc(h.locator || "")} · ${Number(h.score || 0).toFixed(3)}</div></div>`).join("")
       : `<p>No evidence matches “${esc(q)}”.</p>`) + (SERVICE && !token ? `<p class="gx-meta">These are the quotes that match, found in this browser.
-        <a href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(location.origin + location.pathname)}">Sign in with GitHub</a> to have
+        <a href="${esc(signInUrl())}">Sign in with GitHub</a> to have
         questions answered in words: free, no API key.</p>` : ""));
     $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => goTo(el.dataset.id)));
   } catch (err) { card("Matching evidence", `<p class="gx-card-warn">${esc(err.message)}</p>`); }

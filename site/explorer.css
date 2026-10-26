@@ -37,13 +37,11 @@ code, pre { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
 .gx-account-note { margin: 4px 6px 10px; font-size: 12.5px; line-height: 1.5; }
 .gx-account-menu .gx-account-go { width: 100%; height: 34px; margin-bottom: 6px; text-decoration: none; }
 .gx-account-menu a.gx-menu-item { color: var(--fg); text-decoration: none; }
-/* Curate: the page's one call to action, filled in the link colour */
-.gx-curate-open { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border: 0;
-  border-radius: 999px; background: var(--link-ink); color: #fff; cursor: pointer; font-size: 14px; font-weight: 600;
-  flex-shrink: 0; box-shadow: 0 2px 8px color-mix(in srgb, var(--link-ink) 35%, transparent); transition: filter .15s, box-shadow .15s; }
-.gx-curate-open:hover { filter: brightness(1.08); box-shadow: 0 4px 14px color-mix(in srgb, var(--link-ink) 45%, transparent); }
+/* Upload, curate, and explore: a toolbar button like the account's */
+.gx-curate-open { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--bg); cursor: pointer; font-size: 14px; flex-shrink: 0; white-space: nowrap; }
+.gx-curate-open:hover { background: var(--hover); }
 .gx-curate-open:focus-visible { outline: 2px solid var(--link-ink); outline-offset: 2px; }
-[data-theme="dark"] .gx-curate-open { color: #0d1b26; }
 .gx-search { display: flex; align-items: center; gap: 6px; height: 40px; width: min(768px, 100%); padding: 0 6px 0 14px;
   background: var(--bg-input); border: 1px solid var(--line); border-radius: 999px; }
 .gx-search-prefix { display: inline-flex; color: var(--fg); }
