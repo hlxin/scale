@@ -92,6 +92,8 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
+    # signing in comes back to the graph that was open: every sign-in link is signInUrl(), and the fragment is kept
+    assert js.count("/auth/login?return=") == 1 and '"scale-signin-hash"' in js
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
 
 
