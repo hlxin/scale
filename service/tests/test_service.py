@@ -147,6 +147,37 @@ def test_sign_in_admits_only_the_allowlist_and_returns_only_to_the_site(tmp_path
     assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {old}"}, b"")[0] == 401
 
 
+def test_an_allowlist_of_star_admits_any_github_account(tmp_path, monkeypatch):
+    svc = Service(cfg(tmp_path), repo=REPO)
+    svc.cfg.allowlist = ["*"]
+    _, _, h = svc.route("GET", "/auth/login", {"return": "https://hlxin.github.io/scale/"}, {}, b"")
+    state = dict(x.split("=", 1) for x in h["Location"].split("?", 1)[1].split("&"))["state"]
+    monkeypatch.setattr(auth, "github_login", lambda c, code: "Eve")
+    _, _, h2 = svc.route("GET", "/auth/callback", {"code": "x", "state": state}, {}, b"")
+    assert h2["Location"].startswith("https://hlxin.github.io/scale/#token=")
+    eve = auth.session_for(svc.cfg, "eve")
+    assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {eve}"}, b"")[1]["login"] == "eve"
+    svc.cfg.allowlist = ["ada"]                                  # the session stops when the account is no longer admitted
+    assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {eve}"}, b"")[0] == 401
+
+
+def test_a_doi_the_commons_holds_is_not_curated_again(tmp_path):
+    """A DOI the commons holds is answered from it: no job, no model, nothing taken from the day's jobs; asked again
+    with again=1 it is curated all the same."""
+    svc = Service(cfg(tmp_path, commons="graphs/methanol-synthesis-pre1966"), repo=REPO)
+    svc.client_factory = lambda: pytest.fail("no model is called for a known DOI")
+    svc.cfg.jobs_per_user_per_day = 1
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/json"}
+    st, body, _ = svc.route("POST", "/jobs", {}, h, json.dumps({"doi": "https://doi.org/10.1246/NIKKASHI1898.60.166"}).encode())
+    assert st == 200 and body["known"]["in_commons"][0]["by"] == ["doi"]
+    assert body["known"]["in_commons"][0]["url"].startswith("https://github.com/hlxin/scale/blob/main/graphs/")
+    st, body, _ = svc.route("POST", "/jobs", {}, h, json.dumps({"doi": "10.1246/nikkashi1898.60.166"}).encode())
+    assert st == 200 and "known" in body                         # still free: the day's one job is not used
+    svc.jobs.submit = lambda user, **kw: "j-again"
+    st, body, _ = svc.route("POST", "/jobs", {"again": "1"}, h, json.dumps({"doi": "10.1246/nikkashi1898.60.166"}).encode())
+    assert st == 202 and body["job"] == "j-again"
+
+
 def test_a_job_curates_returns_the_capped_graph_once_and_keeps_nothing(tmp_path, monkeypatch):
     svc = Service(cfg(tmp_path), repo=REPO, run_inline=True)
     real = curate.start
@@ -163,6 +194,8 @@ def test_a_job_curates_returns_the_capped_graph_once_and_keeps_nothing(tmp_path,
     assert svc.route("POST", "/jobs", {}, {**h, "authorization": ""}, b"%PDF")[0] == 401
     assert svc.route("POST", "/jobs", {}, h, b"not a pdf")[0] == 400
     st, body, _ = svc.route("POST", "/jobs", {"filename": "paper.pdf"}, h, b"%PDF-1.7 a file")
+    assert st == 400 and "lawful access" in body["error"]                          # no statement of access, no job
+    st, body, _ = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 a file")
     assert st == 202
     st, job, _ = svc.route("GET", f"/jobs/{body['job']}", {}, h, b"")
     assert st == 200 and job["state"] == "done", job.get("error")
@@ -173,7 +206,7 @@ def test_a_job_curates_returns_the_capped_graph_once_and_keeps_nothing(tmp_path,
     assert not any(Path(svc.jobs.root).iterdir())                                   # nothing kept
     other = {**h, "authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}"}
     svc.cfg.jobs_per_user_per_day = 1
-    assert svc.route("POST", "/jobs", {}, other, b"%PDF-1.7")[0] == 429             # today's jobs used
+    assert svc.route("POST", "/jobs", {"attest": "1"}, other, b"%PDF-1.7")[0] == 429             # today's jobs used
 
 
 def test_links_are_fetched_only_from_public_addresses():
@@ -189,7 +222,8 @@ def test_links_are_fetched_only_from_public_addresses():
 def test_the_page_names_the_service_and_the_readme_links_the_page():
     site = REPO / "site"
     html = (site / "index.html").read_text(encoding="utf-8")
-    assert "config.js" in html and "app.js" in html
+    assert "config.js" in html and "app.js" in (site / "publication.html").read_text(encoding="utf-8")
+    assert "apiKey" not in (site / "explorer.js").read_text(encoding="utf-8")     # no reader is asked for a model key
     assert "SCALE_SERVICE_URL" in (site / "config.js").read_text(encoding="utf-8")
     assert "hlxin.github.io/scale" in (REPO / "README.md").read_text(encoding="utf-8")
 
@@ -258,7 +292,7 @@ def finished_job(tmp_path, monkeypatch, gh):
     monkeypatch.setattr(curate, "start", start)
     svc.client_factory = lambda: Model(curation_turns("ex:pub/source/10.9999-paper.1", "ex:pub/10.9999-paper.1"))
     h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
-    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1"}, h, b"%PDF-1.7 a file")[1]["job"]
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
     job = svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]
     assert job["state"] == "done" and job["rights"]["class"] == "in_copyright" and job["receipt"]
     return svc, h, json.loads(json.dumps(job))              # the page's copy, after a round trip through JSON
@@ -276,7 +310,10 @@ def test_a_curated_graph_is_contributed_by_a_pull_request_once(tmp_path, monkeyp
     assert gh.refs == {"refs/heads/contrib/10.9999-paper.1": "new-commit"} and gh.reviewers == ["mutianyou2013", "diazr04"]
     assert {t["path"] for t in gh.tree_body["tree"]} == {"graphs/catal-commons/parts/sources/10.9999-paper.1.json",
                                                         "graphs/catal-commons/parts/shared.json",
-                                                        "graphs/catal-commons/rights.yaml"}
+                                                        "graphs/catal-commons/rights.yaml",
+                                                        "graphs/catal-commons/contributors.yaml"}
+    ledger = next(t for t in gh.tree_body["tree"] if t["path"].endswith("contributors.yaml"))
+    assert "github: ada" in ledger["content"] and "source: 10.9999-paper.1" in ledger["content"]   # the leaderboard's credit
     pr = gh.pulls[0]
     assert pr["title"].startswith("catal-commons: add ") and "Contributed by @ada" in pr["body"]
     assert "in_copyright" in pr["body"] and "quotes withheld" in pr["body"]
@@ -290,6 +327,7 @@ def test_a_curated_graph_is_contributed_by_a_pull_request_once(tmp_path, monkeyp
 def test_only_the_graph_the_service_curated_for_the_user_can_be_contributed(tmp_path, monkeypatch):
     gh = FakeGitHub()
     svc, h, job = finished_job(tmp_path, monkeypatch, gh)
+    gh.calls.clear()                                             # the job looked its DOI up in the commons
     changed = json.loads(json.dumps(job["graph"]))
     changed["nodes"][0]["props"]["name"] = "something else"
     for graph, receipt, headers in ((changed, job["receipt"], h), (job["graph"], "forged.mac", h),
@@ -298,3 +336,74 @@ def test_only_the_graph_the_service_curated_for_the_user_can_be_contributed(tmp_
         st, body, _ = svc.route("POST", "/contribute", {}, headers, json.dumps({"graph": graph, "receipt": receipt}).encode())
         assert st == 403, body
     assert not gh.calls
+
+
+def test_a_papers_text_is_kept_only_by_its_licence_or_the_users_agreement_and_can_be_withdrawn(tmp_path, monkeypatch):
+    """The archive keeps a paper in copyright (the uploaded PDF and its page texts) only when its contributor agreed;
+    the agreement is listed to them, and withdrawing it removes the paper. A kept paper is curated again from its PDF
+    under another schema version with nobody uploading it, and the new graph is kept beside it."""
+    from scaleweb.app import recurate
+    svc = Service(cfg(tmp_path, archive=str(tmp_path / "kept")), repo=REPO, run_inline=True)
+    real = curate.start
+
+    given = []
+
+    def start(out, doi=None, pdf=None, text=None, **kw):              # the PDF's text, without PyMuPDF
+        given.append(Path(pdf).read_bytes() if pdf else None)
+        if text is None:
+            (tmp_path / "paper.txt").write_text(TEXT, encoding="utf-8")
+            text = tmp_path / "paper.txt"
+        return real(out, text=text, **kw)
+    monkeypatch.setattr(curate, "start", start)
+    sid = "ex:pub/source/paper"
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    assert svc.route("GET", "/health", {}, {}, b"")[1]["keeps_texts"] is True
+    for keep, expect in (("0", None), ("1", "consent")):
+        svc.client_factory = lambda: Model(curation_turns(sid, "ex:pub/paper"))
+        st, body, _ = svc.route("POST", "/jobs", {"filename": "paper.pdf", "keep": keep, "attest": "1"}, h, b"%PDF-1.7 a file")
+        job = svc.route("GET", f"/jobs/{body['job']}", {}, h, b"")[1]
+        assert job["state"] == "done" and job["source"]["rights_class"] == "in_copyright"
+        assert (job["kept"] or {}).get("because") == expect
+    kept = svc.route("GET", "/kept", {}, h, b"")[1]["kept"]
+    folder = tmp_path / "kept" / kept[0]["sha256"]
+    assert len(kept) == 1 and kept[0]["pdf"] and (folder / "pages.txt").read_text().startswith("[page 1]")
+    assert (folder / "paper.pdf").read_bytes() == b"%PDF-1.7 a file"   # the copy the contributor uploaded
+    assert "graph" not in json.dumps(kept)                         # a page sees what is kept, never the text
+    plan = recurate(svc, dry_run=True)
+    assert plan == [] or all(p["to"] == svc.jobs.version() for p in plan)
+    meta = tmp_path / "kept" / kept[0]["sha256"] / "meta.json"
+    m = json.loads(meta.read_text())
+    m["curations"][-1]["schema_version"] = "0.0.1"                    # curated under an older schema
+    meta.write_text(json.dumps(m))
+    svc.client_factory = lambda: Model(curation_turns(sid, "ex:pub/paper"))
+    rows = recurate(svc)
+    assert [r["state"] for r in rows] == ["done"], rows[0].get("error")
+    assert given[-1] == b"%PDF-1.7 a file" and len(list((tmp_path / "kept").iterdir())) == 1   # from the kept PDF, not kept twice
+    assert Path(rows[0]["graph"]).is_file()
+    assert recurate(svc, dry_run=True) == []                          # now curated under the commons' version
+    bob = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    svc.cfg.allowlist = ["ada", "bob"]
+    assert svc.route("POST", "/kept/forget", {}, bob, json.dumps({"sha256": kept[0]["sha256"]}).encode())[0] == 404
+    assert svc.route("POST", "/kept/forget", {}, h, json.dumps({"sha256": kept[0]["sha256"]}).encode())[0] == 200
+    assert not folder.exists()                                       # no agreement left: the PDF and text are gone
+
+
+def test_answers_credit_the_sources_they_use_once_a_person_a_day_never_the_contributor(tmp_path):
+    """A signed-in query, search or question credits each commons source its answer names; a source's reach counts
+    distinct (person, day) pairs and never its own contributor; nothing of the question is kept, and the login only
+    as a keyed digest. /leaderboard returns the boards with that reach."""
+    from scaleweb.usage import Usage
+    u = Usage(tmp_path / "usage.json", "s" * 32, "scale:commons")
+    answer = {"rows": [{"id": "scale:commons/paper-a/test/1", "evidence": [{"source": "scale:commons/source/paper-b"}]},
+                       {"id": "scale:commons/graph/catal-commons"}, {"id": "ex:other/x/y"}]}
+    assert u.sources_in(answer) == {"paper-a", "paper-b"}                  # the graph's own id is no source
+    for who, day in (("ada", "2026-10-24"), ("ada", "2026-10-24"), ("ada", "2026-10-25"), ("bob", "2026-10-25")):
+        u.record(who, answer, day)
+    assert u.record(None, answer) == set()                                   # signed out: not counted
+    assert u.reach({"paper-a": "bob", "paper-b": "carol"}) == {"paper-a": 2, "paper-b": 3}
+    kept = (tmp_path / "usage.json").read_text()
+    assert "ada" not in kept and "bob" not in kept and "test/1" not in kept
+    assert Usage(tmp_path / "usage.json", "s" * 32, "scale:commons").reach({}) == {"paper-a": 3, "paper-b": 3}
+    svc = Service(cfg(tmp_path), repo=REPO)
+    st, board, _ = svc.route("GET", "/leaderboard", {}, {}, b"")
+    assert st == 200 and board["with_reach"] and "scoring" in board and "recent" in board

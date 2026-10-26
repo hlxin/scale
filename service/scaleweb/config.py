@@ -40,6 +40,8 @@ class Config:
     commons: str = "graphs/catal-commons"
     reviewers: list[str] = field(default_factory=list)      # asked to review each contribution
     contributions_per_user_per_day: int = 5
+    archive: str = ""                        # where kept papers live (scaleweb/archive.py); empty: none kept
+    usage: str = ""                          # the use counts of the leaderboard (scaleweb/usage.py); empty: in memory
 
     @classmethod
     def from_env(cls) -> Config:
@@ -68,4 +70,6 @@ class Config:
             commons=os.environ.get("SCALE_WEB_COMMONS", "graphs/catal-commons"),
             reviewers=_list("SCALE_WEB_REVIEWERS"),
             contributions_per_user_per_day=_int("SCALE_WEB_CONTRIBUTIONS_PER_USER", 5),
+            archive=os.environ.get("SCALE_WEB_ARCHIVE", ""),
+            usage=os.environ.get("SCALE_WEB_USAGE", ""),
         )

@@ -246,7 +246,9 @@ def _terms(items: list[dict]):
     rows_a = np.asarray(rows, dtype=np.int32)
     order = np.lexsort((rows_a, term))
     indptr = np.zeros(len(vocab) + 1, dtype=np.int64)
-    np.cumsum(np.bincount(term, minlength=len(vocab)), out=indptr[1:])
+    # bincount takes the platform's integers (int32 in WebAssembly, where the site runs this code); the term ids
+    # are vocabulary positions, so the cast changes nothing on a 64-bit machine
+    np.cumsum(np.bincount(term.astype(np.intp), minlength=len(vocab)), out=indptr[1:])
     return vocab, indptr, rows_a[order], np.asarray(counts, dtype=np.int32)[order], lengths
 
 

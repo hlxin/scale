@@ -28,11 +28,14 @@ pip install git+https://github.com/hlxin/scale
 Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to give an AI agent the tools
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
-**Or in the browser: [curate one publication](https://hlxin.github.io/scale/).** Upload a PDF or give a DOI or a link.
-The page curates it into a graph with the catalysis schema and the curate-corpus skill, shows the graph with each
-record's evidence, and answers questions with the same query and search code as `scale graph query`. Sign-in uses
-GitHub, curation is open to allowlisted accounts, and nothing is kept on the service. The page goes live once the
-service is deployed ([`service/`](service/README.md), [`site/`](site/)).
+**Or in the browser: [the graph explorer](https://hlxin.github.io/scale/).** Pick one of the curated graphs (or
+open a graph file) and see it whole, filter it by label or relationship type, open any node with its verbatim
+evidence, search the evidence, and explore its data (counts, degrees, numeric properties plotted). SCALE's own code
+runs in the browser (Pyodide), so a search or a plan gives the rows `scale graph search` and `scale graph query` give.
+With the web service ([`service/`](service/README.md)), signed in with GitHub and with no API key of your own:
+**Curate** a paper (a PDF or a DOI) into a graph, ask questions in plain language, and contribute a graph to
+catal-commons in one click (a pull request a person reviews). Contributors are credited on a leaderboard. The page is
+built by `scale site build` and published by GitHub Pages ([`site/`](site/)).
 
 ## What's inside
 
@@ -56,8 +59,8 @@ service is deployed ([`service/`](service/README.md), [`site/`](site/)).
   graph (105 sources before 1966, no quoted text of a source in copyright).
 - **Tools** ([`tools/`](tools/README.md)): the `scale` Python package and command, the agent skills and their
   tests.
-- **The web service and page** ([`service/`](service/README.md), [`site/`](site/)): one publication into a graph from
-  a browser, with the tools above and a model behind them.
+- **The site** ([`site/`](site/)): the graph explorer (the repository's graphs, searched and queried in the browser
+  with the `scale` package) and, with the web service ([`service/`](service/README.md)), one publication into a graph.
 - **Governance** ([`governance/`](governance/GOVERNANCE.md)): who reviews, how changes are approved, versions and
   releases.
 - **Releases** ([`releases/`](releases/README.md)): fixed, digested releases built by a person; the first

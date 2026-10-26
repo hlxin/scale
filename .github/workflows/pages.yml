@@ -1,0 +1,52 @@
+name: pages
+
+# Publish the graph explorer (site/, `scale site build`) to GitHub Pages: the repository's graphs, their query plans
+# and the scale package the page runs in the browser. Built from main on every push and by hand; nothing is
+# committed. The job token writes only to Pages (pages: write, id-token: write); it never writes the repository and
+# needs no secret.
+#
+# One-time setup, a human action: Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+# (governance/repository-settings.md). The site is then at https://hlxin.github.io/scale/.
+"on":
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: pip install -e .
+      - name: Build the site
+        run: scale site build --out _site
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

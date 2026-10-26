@@ -209,13 +209,18 @@ def cmd_graph_contribute(args):
     rpath = Path(args.rights) if args.rights else Path(args.file).parent / "rights.yaml"
     sid = next((n["id"] for n in commons.sources_of(doc)), None)
     entry = ((load_yaml(rpath) or {}).get("sources") or {}).get(sid) if rpath.is_file() else None
-    res = commons.contribute(doc, args.to, entry or {}, _repo(args))
+    import datetime
+    res = commons.contribute(doc, args.to, entry or {}, _repo(args), contributor=args.by,
+                             on=datetime.date.today().isoformat() if args.by else None)
     if res.get("already"):
         for h in res["already"]:
             print(f"already in {args.to}: {h['source']} ({h['file']}), the same {', '.join(h['by'])}")
         return 1
-    print(f"{res['source']}: {res['records']['nodes']} records, {res['records']['links']} links; "
+    print(f"{res['source']}: {res['records']['triples']} triples ({res['records']['nodes']} records, "
+          f"{res['records']['links']} links); "
           f"{len(res['shared_added'])} new shared records, {len(res['shared_with_new_evidence'])} with new evidence; "
+          f"repeats discarded: {len(res['repeats']['records'])} records, {res['repeats']['links']} links, "
+          f"{res['repeats']['values']} values; {len(res['conflicts'])} values differ from the held records; "
           f"quotes kept {res['quotes']['kept']}, withheld {res['quotes']['withheld']} ({res['class']})")
     if args.write:
         for rel in commons.write(res, args.to):
@@ -1133,6 +1138,12 @@ def cmd_evidence_access(args):
 
 # ---------------------------------------------------------------- parser
 
+def cmd_site_build(args):
+    from . import site
+    print(json.dumps(site.build(_repo(args), Path(args.out)), indent=1))
+    return 0
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(prog="scale", description="SCALE — Shared Concepts, Attributes, and Links with Evidence")
     p.add_argument("--version", action="version", version=f"scale {__version__}")
@@ -1179,6 +1190,7 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("file"); sp.add_argument("--to", default="graphs/catal-commons", help="the parts folder")
     sp.add_argument("--rights", help="the source's rights file (default: rights.yaml beside the graph)")
     sp.add_argument("--write", action="store_true", help="write the files (default: report what would change)")
+    sp.add_argument("--by", metavar="LOGIN", help="credit the contribution to this GitHub login in contributors.yaml")
     sp = add("build", cmd_graph_build, "build a graph kept as parts (FOLDER/parts/) into one document, sorted by id", gr)
     sp.add_argument("folder"); sp.add_argument("--out", help="the built graph (default: the folder's one *.graph.json, else <folder>.graph.json)")
     sp.add_argument("--check", action="store_true", help="write nothing; exit 1 unless the parts build and a built copy, "
@@ -1481,6 +1493,11 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--no-index", action="store_true", help="do not rebuild the evidence index of a changed document")
     sp.add_argument("--out", help="also write the report (JSON) here")
 
+    st = sub.add_parser("site", help="the static site: the graph explorer, published by GitHub Pages").add_subparsers(
+        dest="sub", required=True)
+    sp = add("build", cmd_site_build, "write the site: the pages of site/, the repository's graphs and their query plans, "
+             "and the scale package the explorer runs in the browser (Pyodide)", st)
+    sp.add_argument("--out", default="_site", help="the folder to write (emptied first; default _site)")
     sp = add("status", cmd_status, "print the implementation-status inventory")
     sp.add_argument("--format", choices=["text", "json", "markdown"], default="text"); sp.add_argument("--out")
     return p
