@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- **The graph's type opens the graph (explorer, no schema change).** Requested by @hlxin: in a graph's card, "Knowledge
+  graph" is a link that shows the graph on the canvas, coming back from the schema view or the Visualization, or fitting
+  the graph to the view when it is already shown.
 - **The graph explorer on GitHub Pages, with curating, asking and contributing through the web service (no schema
   change).** Requested by @hlxin: browse and query the repository's graphs from the GitHub repository, and let anyone
   curate a paper and contribute it to catal-commons without an API key of their own.
