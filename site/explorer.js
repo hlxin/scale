@@ -324,6 +324,8 @@ function renderGraphs() {
   const dl = $("curated-download");
   if (dl) dl.onclick = (ev) => { ev.preventDefault(); downloadGraph(); };
   wireContrib();
+  const gs = $("graph-show");
+  if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
   $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = () => {
@@ -336,7 +338,7 @@ function details() {
   const B = G.base || G;                          // in the schema view, the facts are still the graph's
   const g = B.doc.graph || {}, e = B.entry, [scope] = scopeOf(e);
   const facts = [
-    ["Type", `<span class="gx-type">Knowledge graph</span>${scope === "synthetic" ? ` <span class="gx-warn">synthetic example</span>` : ""}`],
+    ["Type", `<a href="#" id="graph-show" title="Show the graph on the canvas">Knowledge graph</a>${G.base || PE.on ? "" : ` <span class="gx-subtle">(shown)</span>`}${scope === "synthetic" ? ` <span class="gx-warn">synthetic example</span>` : ""}`],
     ["Size", `${B.doc.nodes.length.toLocaleString()} nodes · ${B.doc.links.length.toLocaleString()} rels · ${B.props.toLocaleString()} props`],
     g.version ? ["Release", esc(g.version)] : null,
     ["Visibility", e.from === "service" ? "Private to you, until you contribute it" : esc(((g.stewardship || {}).access || "public").replace(/^./, (c) => c.toUpperCase()))],
@@ -397,7 +399,7 @@ function showSchema() {
   Object.assign(S, { kind: null, rel: null, sources: true, hidden: new Set(), extra: new Set(), match: null, selected: null, pos: new Map(), nodes: [] });
   $("card").hidden = true;
   renderGraphs(); renderLegend(); showLegend(); draw();
-  status(`The schema of ${B.entry.title}: ${doc.nodes.length} labels, ${doc.links.length} label-to-label relationships. Click its name on the left to go back.`);
+  status(`The schema of ${B.entry.title}: ${doc.nodes.length} labels, ${doc.links.length} label-to-label relationships. Click Knowledge graph or its name on the left to go back.`);
 }
 function leaveSchema() {
   if (!G || !G.base) return;
@@ -407,6 +409,15 @@ function leaveSchema() {
   $("card").hidden = true;
   renderGraphs(); renderLegend(); showLegend(); draw();
   status(ready());
+}
+
+// the graph itself on the canvas: back from the schema or the Visualization, else fitted to the view
+function showGraph() {
+  if (!G) return;
+  const away = G.base || PE.on;
+  if (PE.on) togglePlot(false);
+  if (G.base) leaveSchema();
+  if (!away) fit();
 }
 
 async function openFromHash() {
@@ -1074,6 +1085,7 @@ function togglePlot(on) {
   $("viz-btn").setAttribute("aria-pressed", String(on));
   $("plot-host").hidden = !on;
   $("canvas").classList.toggle("is-plotting", on);
+  renderGraphs();
   if (on && G) { if (PE.mountedFor !== G) { PE.mountedFor = G; peMount(); } else peRender(); }
 }
 pe("mode").onchange = () => { peControls(); PE.hidden.clear(); PE.page = 0; peBuild(); };

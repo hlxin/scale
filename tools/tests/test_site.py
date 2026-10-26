@@ -86,6 +86,8 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     assert "pyodide/v0.26.4/" in worker and "d3/7.9.0/" in page and "plotly.js-cartesian-dist-min@2.35.2/" in page
     # a question goes to the service, which holds the model's key; no reader is asked for one
     assert '"/ask"' in js and "apiKey" not in js and "@anthropic-ai/sdk" not in js
+    # the graph's type in its card is a link back to the graph on the canvas, as its schema is a link to the schema
+    assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
 
 
 def test_the_site_publishes_the_leaderboard_with_how_it_scores(built):

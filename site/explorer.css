@@ -85,7 +85,6 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
 .gx-facts { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
 .gx-facts dt { font-size: 10px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); padding-top: 2px; }
 .gx-facts dd { margin: 0; font-size: 12px; overflow-wrap: anywhere; }
-.gx-type { color: var(--link-ink); background: color-mix(in oklab, var(--blue) 12%, transparent); padding: 0 5px; border-radius: 4px; font-weight: 500; }
 .gx-sha { font-family: "JetBrains Mono", ui-monospace, monospace; font-size: 10.5px; color: var(--muted); }
 .gx-warn { color: #b45309; }
 [data-theme="dark"] .gx-warn { color: #f0a35c; }
