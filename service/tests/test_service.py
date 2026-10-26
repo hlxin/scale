@@ -566,3 +566,23 @@ def test_a_pdf_dropped_into_the_queue_by_hand_is_curated_and_a_stopped_job_is_ta
     inbox.recover()                                                           # stopped a second time: it fails
     assert inbox.view(item["id"], "ada")["state"] == "failed" and not (inbox.work / item["id"]).exists()
     assert not (inbox.queue / item["id"]).exists()
+
+
+def test_a_claude_code_run_that_records_nothing_fails_and_opens_no_pull_request(tmp_path, monkeypatch):
+    """The folder's graph passes the check empty, so a Claude Code run that ends at once (an unsupported model, a
+    sign-in that expired) must fail the job, never curate it or open a pull request."""
+    gh = FakeGitHub()
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token")
+    svc = Service(c, repo=REPO, github_request=gh)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 a file")
+    calls = []
+
+    def ends_at_once(folder, prompt, system, cfg, bin_dir):
+        calls.append(prompt)
+        return {"is_error": True, "num_turns": 1, "result": "API Error: 400 this version does not support this model"}
+    done = runner.run(c, repo=REPO, claude=ends_at_once, request=gh)
+    assert done[0]["state"] == "failed" and "recorded nothing: API Error: 400" in done[0]["error"]
+    assert len(calls) == 1 and gh.pulls == [] and not gh.refs                 # no fix rounds, no pull request
+    assert not list((tmp_path / "inbox").rglob("*.pdf"))

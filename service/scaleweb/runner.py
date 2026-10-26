@@ -150,10 +150,14 @@ def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callab
         for round_ in range(1 + FIX_ROUNDS):
             res = claude(work, prompt, system, cfg, bin_dir)
             check = curate.check(work, repo, derive_links=True)
+            recorded = check["records"]["with_evidence"]
             say(f"Claude Code ended ({res.get('num_turns', '?')} turns"
                 + (f", {res['duration_ms'] / 60000:.0f} min" if res.get("duration_ms") else "")
-                + (f", {res['result'][:300]}" if res.get("is_error") else "") + f"); the check: {len(check['errors'])} errors",
-                state="checking")
+                + (f", {res['result'][:300]}" if res.get("is_error") else "")
+                + f"); the check: {len(check['errors'])} errors, {recorded} records with evidence", state="checking")
+            if not recorded:                              # the folder's graph passes the check empty: never curated
+                raise ScaleError("Claude Code recorded nothing" + (f": {str(res.get('result'))[:300]}"
+                                                                   if res.get("is_error") else " from the publication"))
             if check["ok"]:
                 break
             prompt = FIX.format(n=len(check["errors"]), graph=check["graph"],
