@@ -26,6 +26,17 @@ code, pre { font-family: "JetBrains Mono", ui-monospace, Menlo, monospace; }
 /* the search bar */
 .gx-toolbar { display: flex; justify-content: center; align-items: center; gap: 10px; padding: 14px 24px; border-bottom: 1px solid var(--line);
   background: var(--bg); flex-shrink: 0; }
+/* the account: GitHub sign-in, then the reader's avatar and login */
+.gx-account-btn { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 14px; border: 1px solid var(--line);
+  border-radius: 999px; background: var(--bg); cursor: pointer; font-size: 14px; flex-shrink: 0; white-space: nowrap; }
+.gx-account-btn:hover { background: var(--hover); }
+.gx-account-btn.is-signed-in { padding: 0 12px 0 5px; }
+.gx-account-btn #account-label { max-width: 140px; overflow: hidden; text-overflow: ellipsis; }
+.gx-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--bg-input); }
+.gx-account-menu { top: 46px; width: 280px; padding: 8px; }
+.gx-account-note { margin: 4px 6px 10px; font-size: 12.5px; line-height: 1.5; }
+.gx-account-menu .gx-account-go { width: 100%; height: 34px; margin-bottom: 6px; text-decoration: none; }
+.gx-account-menu a.gx-menu-item { color: var(--fg); text-decoration: none; }
 /* Curate: the page's one call to action, filled in the link colour */
 .gx-curate-open { display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 18px; border: 0;
   border-radius: 999px; background: var(--link-ink); color: #fff; cursor: pointer; font-size: 14px; font-weight: 600;
@@ -213,7 +224,9 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
 @media (max-width: 900px) {
   .gx-page { height: auto; min-height: 100vh; overflow: visible; }
   .gx-toolbar { padding: 10px 16px; }
-  .gx-curate-open span { display: none; }
+  .gx-curate-open span, .gx-account-btn #account-label { display: none; }
+  .gx-account-btn { width: 40px; padding: 0; justify-content: center; }
+  .gx-account-btn.is-signed-in { padding: 0; }
   .gx-curate-open { width: 40px; padding: 0; justify-content: center; }
   .gx-grid, .gx-grid.rail-off, .gx-grid.inspector-off, .gx-grid.rail-off.inspector-off { display: flex; flex-direction: column; }
   .gx-grid.rail-off .gx-rail, .gx-grid.inspector-off .gx-inspector { display: flex; }

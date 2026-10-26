@@ -61,9 +61,57 @@ function readSignIn() {                          // the service returns from Git
   const why = p.get("signin");
   for (const k of ["token", "signin", "login"]) p.delete(k);
   history.replaceState(null, "", location.pathname + location.search + (p.toString() ? `#${p}` : ""));
-  if (why) setTimeout(() => { $("curate-dialog").showModal(); curateAccount(why === "not-allowed"
-    ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it." : "GitHub sign-in failed; try again."); }, 0);
-  else setTimeout(() => openCurate(), 0);
+  const fromCurate = store.get("scale-signin-from") === "curate";
+  store.set("scale-signin-from", "");
+  const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
+    : why ? "GitHub sign-in failed; try again." : "";
+  if (fromCurate) setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
+  else if (why) setTimeout(() => accountMenu(note), 0);
+}
+// where GitHub sends the reader back to: this page, as it is now (the graph open stays open)
+const signInUrl = () => `${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname + location.search)}`;
+function signOut() {
+  token = ""; login = ""; store.set("scale-token", "");
+  renderAccount();
+  if ($("curate-dialog").open) curateAccount();
+}
+// The toolbar's account: "Sign in" with GitHub, or the reader's avatar and login with a menu (what the service allows
+// today, sign out). Without a service the button says why sign-in is not available yet.
+let me = null;
+async function renderAccount() {
+  const btn = $("account-btn"), label = $("account-label");
+  btn.classList.remove("is-signed-in");
+  btn.querySelector("img")?.remove();
+  btn.querySelector("svg").removeAttribute("hidden");
+  if (!SERVICE || !token) { me = null; label.textContent = "Sign in"; btn.title = SERVICE ? "Sign in with GitHub" : "Sign-in opens once the SCALE service is running"; return; }
+  try { me = await call("GET", "/me"); } catch { return; }       // a 401 signs out in call()
+  login = me.login;
+  const img = Object.assign(document.createElement("img"), { src: `https://github.com/${encodeURIComponent(me.login)}.png?size=64`, alt: "", className: "gx-avatar" });
+  img.onerror = () => img.remove();
+  btn.querySelector("svg").setAttribute("hidden", "");
+  btn.prepend(img);
+  btn.classList.add("is-signed-in");
+  label.textContent = me.login;
+  btn.title = `Signed in with GitHub as ${me.login}`;
+}
+function accountMenu(note = "") {
+  const box = $("account-menu"), warn = note ? `<p class="gx-account-note gx-err">${esc(note)}</p>` : "";
+  const open = `<p class="gx-account-note gx-subtle">Viewing, filtering and searching the graphs need no account.</p>`;
+  if (!SERVICE) box.innerHTML = `<p class="gx-account-note">Sign-in with GitHub opens once the SCALE service is running; curating will
+    need it.</p>${open}`;
+  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a paper needs a GitHub sign-in, as do contributing it to
+    catal-commons and having questions answered in words. Free: the service reads only your GitHub login, never your
+    repositories.</p>${open}
+    <a class="gx-btn gx-btn-primary gx-account-go" href="${esc(signInUrl())}">Continue with GitHub</a>`;
+  else box.innerHTML = `${warn}<p class="gx-account-note">Signed in as <b>${esc(me.login)}</b><br><span class="gx-subtle">${
+    me.tokens_left_today === 0 ? "The service's budget for today is spent." : "Curating and questions are open to you today."}</span></p>
+    <a class="gx-menu-item" href="https://github.com/${encodeURIComponent(me.login)}" target="_blank" rel="noopener">Your GitHub profile</a>
+    <button class="gx-menu-item" type="button" id="account-board">Contributors to catal-commons</button>
+    <button class="gx-menu-item" type="button" id="account-signout">Sign out</button>`;
+  $("account-signout")?.addEventListener("click", signOut);
+  $("account-board")?.addEventListener("click", () => $("board-open")?.click());
+  box.hidden = false;
+  $("account-btn").setAttribute("aria-expanded", "true");
 }
 async function call(method, path, body, headers = {}) {
   if (!SERVICE) throw new Error("the curation service is not configured (site/config.js)");
@@ -72,7 +120,7 @@ async function call(method, path, body, headers = {}) {
   if (body !== undefined && !(body instanceof Blob)) { h["Content-Type"] = "application/json"; body = JSON.stringify(body); }
   const r = await fetch(SERVICE + path, { method, headers: h, body });
   const data = await r.json().catch(() => ({}));
-  if (r.status === 401) { token = ""; store.set("scale-token", ""); curateAccount(); }
+  if (r.status === 401) { signOut(); }
   if (!r.ok) throw new Error(data.error || `the service answered ${r.status}`);
   return data;
 }
@@ -86,8 +134,9 @@ async function curateAccount(note = "") {
   }
   if (!token) {
     const back = location.origin + location.pathname;
-    el.innerHTML = `<a class="gx-btn gx-btn-primary" href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(back)}">Sign in with GitHub</a>
+    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(back)}">Sign in with GitHub</a>
       <span class="gx-subtle">Free; the service needs only your login.</span>${warn}`;
+    $("curate-signin").onclick = () => store.set("scale-signin-from", "curate", true);
     $("curate-start").disabled = true;
     return;
   }
@@ -97,7 +146,7 @@ async function curateAccount(note = "") {
     el.innerHTML = `<span>Signed in as <b>${esc(me.login)}</b></span><span class="gx-subtle">· ${esc(me.model || "")}</span>`
       + `${me.tokens_left_today === 0 ? `<span class="gx-err">· the service's budget for today is spent</span>` : ""}`
       + `<button type="button" class="gx-btn gx-btn-tiny" id="curate-signout">Sign out</button>${warn}`;
-    $("curate-signout").onclick = () => { token = ""; store.set("scale-token", ""); curateAccount(); };
+    $("curate-signout").onclick = signOut;
     $("curate-start").disabled = false;
   } catch { /* curateAccount ran again on 401 */ }
 }
@@ -301,6 +350,7 @@ async function contribute() {
 async function start() {
   token = store.get("scale-token");
   readSignIn();
+  renderAccount();
   try { manifest = (await (await fetch("data/graphs.json")).json()).graphs || []; } catch { manifest = []; }
   renderGraphs();
   window.onhashchange = () => openFromHash();
@@ -930,9 +980,16 @@ $("search-form").onsubmit = (e) => {
 };
 $("labels-btn").onclick = () => { S.linkLabels = linkLabelsShown() ? "off" : "on"; draw(); };
 $("unhide-btn").onclick = () => { S.hidden.clear(); draw(); };
-const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")]];
+const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")], [$("account-btn"), $("account-menu")]];
 for (const [btn, box] of menus) btn.onclick = (e) => { e.stopPropagation(); for (const [, b] of menus) if (b !== box) b.hidden = true; box.hidden = !box.hidden; btn.setAttribute("aria-expanded", String(!box.hidden)); };
 document.addEventListener("click", () => { for (const [, b] of menus) b.hidden = true; });
+$("account-btn").onclick = (e) => {
+  e.stopPropagation();
+  for (const [, b] of menus) if (b !== $("account-menu")) b.hidden = true;
+  if ($("account-menu").hidden) accountMenu();
+  else { $("account-menu").hidden = true; $("account-btn").setAttribute("aria-expanded", "false"); }
+};
+$("account-menu").onclick = (e) => e.stopPropagation();
 $("layout-menu").querySelectorAll("[data-layout]").forEach((b) => (b.onclick = () => {
   S.layout = b.dataset.layout;
   $("layout-label").textContent = { force: "Force", hierarchical: "Hierarchical", radial: "Radial" }[S.layout];

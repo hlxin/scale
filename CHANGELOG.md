@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **GitHub sign-in in the explorer's toolbar (no schema change).** Requested by @hlxin: a **Sign in** button beside
+  the search bar signs a reader in with GitHub through the web service, then shows their avatar and login, with a menu
+  (what the service allows today, their GitHub profile, the contributors' board, sign out). Viewing, filtering and
+  searching the graphs need no account; curating a paper, contributing it and questions answered in words need the
+  sign-in. Signing in from the Curate dialog returns to it; from the toolbar, to the page as it was. Without a service
+  the button says sign-in opens once the service runs.
 - **The explorer's toolbar: Curate stands out, the Visualization is gone (no schema change).** Requested by @hlxin:
   the Visualization (the graph's data in charts, and the Plotly script it loaded) is removed from the explorer, and
   Curate, the toolbar's one button, is filled in the link colour.
