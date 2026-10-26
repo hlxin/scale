@@ -2,6 +2,22 @@
 
 ## Unreleased
 
+- **The inbox: Claude Code curates on the service's own computer and the pull request opens by itself (no schema
+  change).** Requested by @diazr04: a computer of the lab receives the papers the page uploads, Claude Code curates each
+  one under the schema, and its pull request to catal-commons opens without another click; the PDF is deleted.
+  - **The inbox** (`SCALE_WEB_INBOX`, `service/scaleweb/inbox.py`): `POST /jobs` queues the publication on the
+    service's computer and answers at once; the job stays readable (`GET /jobs/{id}`) and the page lists the reader's
+    publications (`GET /inbox`). A PDF dropped into the queue by hand is curated for `SCALE_WEB_INBOX_LOGIN`.
+  - **The runner** (`python -m scaleweb.runner`, started by launchd whenever the queue holds something:
+    `service/launchd/`): `scale source start`, then Claude Code (`claude -p`, the curate-corpus skill appended to its
+    system prompt) fills the graph until `scale source check --derive-links` passes, its errors handed back twice at
+    most, then `scale source finish --public` and the pull request with the bot's token (`app.contribute`, shared with
+    Contribute). Claude Code runs restricted to the publication's folder, with only the scale commands that check the
+    graph, in its sandbox and with no token in its environment.
+  - **Nothing is kept.** The PDF, its page texts and the working folder are deleted when the job ends, done or failed;
+    the job's state and its capped graph stay 14 days for the page. The Curate dialog says so, and that the pull request
+    opens by itself and names the reader.
+
 - **The explorer's toolbar: Curate stands out, the Visualization is gone (no schema change).** Requested by @hlxin:
   the Visualization (the graph's data in charts, and the Plotly script it loaded) is removed from the explorer, and
   Curate, the toolbar's one button, is filled in the link colour.

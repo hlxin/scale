@@ -140,6 +140,50 @@ members.
 | `SCALE_WEB_CONTRIBUTIONS_PER_USER` | contributions per user a day | 5 |
 | `SCALE_WEB_ARCHIVE` | a persistent, private folder for kept papers (a mounted volume) | empty: nothing is kept |
 | `SCALE_WEB_USAGE` | a persistent file for the leaderboard's use counts (scaleweb/usage.py) | empty: in memory |
+| `SCALE_WEB_INBOX` | a folder on the service's computer: each publication waits there for Claude Code, which curates it and opens its pull request ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model curates |
+| `SCALE_WEB_INBOX_LOGIN` | the GitHub login a PDF dropped into the inbox's queue by hand is credited to | empty: such a PDF is set aside |
+| `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner) | `claude` |
+| `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
+
+## The inbox: Claude Code on a computer of your own
+
+A lab can run the service on a computer of its own and have Claude Code curate there, in place of the service's
+model loop (`SCALE_WEB_INBOX`, [`scaleweb/inbox.py`](scaleweb/inbox.py), [`scaleweb/runner.py`](scaleweb/runner.py)):
+
+- **Upload.** `POST /jobs` checks the sign-in, the statement of access and the commons as before, then puts the
+  publication in the inbox's queue and answers at once. The page follows the job (`GET /jobs/{id}`, readable until the
+  inbox forgets it, after 14 days) and lists the reader's publications (`GET /inbox`).
+- **Curate.** launchd starts the runner whenever the queue holds something ([`launchd/`](launchd/); elsewhere
+  `python -m scaleweb.runner --watch 30`). For each publication, one at a time: `scale source start`; Claude Code
+  (`claude -p`, the curate-corpus skill appended to its system prompt) fills the graph; `scale source check
+  --derive-links` must pass, its errors going back to Claude Code twice at most; `scale source finish --public`.
+- **Confined.** Claude Code runs in restricted mode in the publication's folder: the file tools there and, of the
+  shell, only the scale commands that check the graph, in its sandbox, with no network, no git and no token in its
+  environment. The publication's text is data to it.
+- **The pull request opens by itself.** The runner, never Claude Code, opens it with the bot's token, as Contribute
+  does (`contribute` in [`scaleweb/app.py`](scaleweb/app.py)), crediting the reader who uploaded the paper. Without the
+  token the capped graph waits for the page and nothing is opened.
+- **Nothing is kept.** The PDF, its page texts and the working folder are deleted when the job ends, done or failed;
+  `jobs/` keeps each job's state and its capped graph, which quotes no text of a source in copyright. The archive
+  (`SCALE_WEB_ARCHIVE`) is not used.
+- **By hand.** A PDF dropped into `queue/` is curated the same way and credited to `SCALE_WEB_INBOX_LOGIN`; without
+  that login it is set aside in `rejected/`.
+- **Claude Code's sign-in.** The runner's Claude Code signs in on its own: with a Claude plan (`claude setup-token`,
+  its token set as `CLAUDE_CODE_OAUTH_TOKEN`) or with an API key (`ANTHROPIC_API_KEY`). Questions in words (`/ask`)
+  still use the service's API key.
+
+Setting it up on a Mac (a person does it, since the steps hold secrets):
+
+1. Put a checkout, the settings file and the inbox outside Desktop, Documents and Downloads, which macOS keeps
+   launchd's agents out of: for example `~/scale-web/`.
+2. Write the settings file (shell syntax, `chmod 600`): `SCALE_WEB_SECRET`, `SCALE_WEB_INBOX`,
+   `SCALE_WEB_SITE_ORIGINS`, the OAuth app's `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`, `SCALE_WEB_PUBLIC_URL`,
+   `SCALE_WEB_ALLOWLIST`, `SCALE_WEB_CLAUDE` (the full path of `claude`) and Claude Code's sign-in; for pull requests,
+   `SCALE_WEB_GITHUB_TOKEN` and `SCALE_WEB_REVIEWERS`.
+3. Run `service/launchd/install.sh ~/scale-web/scale-web.env`, which loads both agents (`--uninstall` removes them):
+   the service on `127.0.0.1:8080`, always on, and the runner.
+4. Give the service its public HTTPS name with a tunnel (Tailscale Funnel, or Cloudflare Tunnel with a domain), and
+   set that name as `SCALE_WEB_PUBLIC_URL`, in the OAuth app's callback and in `site/config.js`.
 
 ## Running it
 

@@ -2,6 +2,8 @@
 called, and the source's page texts come from a text file."""
 
 import json
+import os
+import subprocess
 import sys
 import time
 from pathlib import Path
@@ -13,8 +15,9 @@ from conftest import REPO
 
 sys.path.insert(0, str(REPO / "service"))                 # the scaleweb package, not installed with scale-catal
 from scale import curate
-from scale.util import load_doc
-from scaleweb import agent, auth, fetch  # noqa: E402
+from scale.util import load_doc, write_canonical
+from scaleweb import agent, auth, fetch, runner  # noqa: E402
+from scaleweb.inbox import SETTLE_S, Inbox  # noqa: E402
 from scaleweb.app import Service  # noqa: E402
 from scaleweb.config import Config  # noqa: E402
 
@@ -407,3 +410,157 @@ def test_answers_credit_the_sources_they_use_once_a_person_a_day_never_the_contr
     svc = Service(cfg(tmp_path), repo=REPO)
     st, board, _ = svc.route("GET", "/leaderboard", {}, {}, b"")
     assert st == 200 and board["with_reach"] and "scoring" in board and "recent" in board
+
+
+# ------------------------------------------------------------------------------------------------- the inbox
+def text_start(monkeypatch, tmp_path):
+    """curate.start reads the test's text instead of the PDF (no PyMuPDF), and resolves a DOI offline."""
+    real = curate.start
+    meta = {"message": {"title": ["Copper catalysts for methanol synthesis"], "issued": {"date-parts": [[2026]]},
+                        "type": "journal-article"}}
+
+    def start(out, doi=None, pdf=None, **kw):
+        assert pdf is None or pdf.read_bytes().startswith(b"%PDF")
+        (tmp_path / "paper.txt").write_text(TEXT, encoding="utf-8")
+        return real(out, text=tmp_path / "paper.txt", doi=doi, get=lambda url, h: json.dumps(meta).encode(), **kw)
+    monkeypatch.setattr(curate, "start", start)
+
+
+def fake_claude(quote="copper is the active phase", calls=None):
+    """Claude Code in a test: it writes one claim into the folder's graph, its quote in the source's text or not."""
+    def run(folder, prompt, system, cfg, bin_dir):
+        if calls is not None:
+            calls.append({"prompt": prompt, "system": system, "folder": folder})
+        info = load_doc(folder / "source.json")
+        gpath = folder / f"{info['slug']}.graph.json"
+        doc = load_doc(gpath)
+        sid = info["source_id"]
+        doc["nodes"] = [n for n in doc["nodes"] if n["label"] != "Claim"] + [claim(sid, sid.replace("/source/", "/"), quote)]
+        write_canonical(gpath, doc)
+        return {"result": "One claim curated.", "num_turns": 4, "duration_ms": 60000}
+    return run
+
+
+def no_github(*a, **kw):
+    pytest.fail("GitHub is not called without the bot's token")
+
+
+def test_with_an_inbox_an_upload_waits_for_claude_code_and_the_service_curates_nothing(tmp_path):
+    svc = Service(cfg(tmp_path, inbox=str(tmp_path / "inbox"), archive=str(tmp_path / "kept")), repo=REPO)
+    svc.client_factory = lambda: pytest.fail("with an inbox the service's own model curates nothing")
+    health = svc.route("GET", "/health", {}, {}, b"")[1]
+    assert health["inbox"] is True and health["keeps_texts"] is False and health["pull_requests"] is False
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    st, body, _ = svc.route("POST", "/jobs", {"filename": "paper.pdf"}, h, b"%PDF-1.7 a file")
+    assert st == 400 and "lawful access" in body["error"]                    # the statement of access still holds
+    st, body, _ = svc.route("POST", "/jobs", {"filename": "Copper paper.pdf", "attest": "1", "keep": "1"}, h, b"%PDF-1.7 a file")
+    assert st == 202 and body["inbox"] is True and body["position"] == 0
+    item = tmp_path / "inbox" / "queue" / body["job"]
+    assert (item / "Copper-paper.pdf").read_bytes() == b"%PDF-1.7 a file"
+    assert json.loads((item / "request.json").read_text())["owner"] == "ada"
+    for _ in range(2):                                     # an inbox job is read as often as the page asks
+        st, job, _ = svc.route("GET", f"/jobs/{body['job']}", {}, h, b"")
+        assert st == 200 and job["state"] == "queued" and job["position"] == 0 and "owner" not in job
+    svc.cfg.allowlist = ["ada", "bob"]
+    bob = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    assert svc.route("GET", f"/jobs/{body['job']}", {}, bob, b"")[0] == 404             # nobody else's
+    assert [j["id"] for j in svc.route("GET", "/inbox", {}, h, b"")[1]["jobs"]] == [body["job"]]
+    assert svc.route("GET", "/inbox", {}, bob, b"")[1]["jobs"] == []
+    assert not (tmp_path / "kept").exists() or not any((tmp_path / "kept").iterdir())  # nothing is kept
+
+
+def test_the_runner_curates_with_claude_code_opens_the_pull_request_and_deletes_the_pdf(tmp_path, monkeypatch):
+    gh = FakeGitHub()
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token", reviewers=["diazr04"])
+    svc = Service(c, repo=REPO, github_request=gh)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
+    calls = []
+    done = runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=gh)
+    assert [j["state"] for j in done] == ["done"], done[0].get("error")
+    assert done[0]["pull_request"]["url"] == "https://github.com/hlxin/scale/pull/100"
+    assert gh.refs == {"refs/heads/contrib/10.9999-paper.1": "new-commit"} and gh.reviewers == ["diazr04"]
+    assert "Contributed by @ada" in gh.pulls[0]["body"] and "Claude Code" in gh.pulls[0]["body"]
+    assert "# Curate" in calls[0]["system"] and "never instructions" in calls[0]["system"]   # the skill, and text as data
+    assert (calls[0]["folder"] / "BRIEF.md").name == "BRIEF.md" and "pages of text" in calls[0]["prompt"]
+    inbox = tmp_path / "inbox"
+    assert not any((inbox / "queue").iterdir()) and not any((inbox / "work").iterdir())
+    assert not list(inbox.rglob("*.pdf")) and not list(inbox.rglob("*.txt"))            # the PDF and its texts are gone
+    st, job, _ = svc.route("GET", f"/jobs/{jid}", {}, h, b"")
+    assert st == 200 and job["state"] == "done" and job["pull_request"]["number"] == 100
+    assert job["graph"]["nodes"] and "copper is the active phase" not in json.dumps(job["graph"])   # in copyright: no quote
+    assert runner.run(c, repo=REPO, claude=fake_claude(), request=gh) == []           # nothing waits any more
+
+
+def test_a_graph_that_never_checks_fails_its_job_and_its_pdf_is_deleted_too(tmp_path, monkeypatch):
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+    svc = Service(c, repo=REPO)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
+    calls = []
+    done = runner.run(c, repo=REPO, claude=fake_claude("gold is the active phase", calls), request=no_github)
+    assert done[0]["state"] == "failed" and f"after {runner.FIX_ROUNDS} rounds" in done[0]["error"]
+    assert len(calls) == 1 + runner.FIX_ROUNDS and "still reports 1 errors" in calls[1]["prompt"]   # the errors go back
+    assert svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]["state"] == "failed"
+    assert not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def test_without_the_bots_token_the_capped_graph_waits_for_the_page_and_no_pull_request_is_opened(tmp_path, monkeypatch):
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+    svc = Service(c, repo=REPO)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
+    done = runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)
+    assert done[0]["state"] == "curated" and "SCALE_WEB_GITHUB_TOKEN" in done[0]["log"][-1]["msg"]
+    job = svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]
+    assert job["graph"]["graph"]["schema_version"] and "pull_request" not in job
+    assert not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def test_claude_code_runs_confined_and_never_sees_a_token(tmp_path, monkeypatch):
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token")
+    cmd = runner.claude_command(c, "the brief", "the skill")
+    assert "--restricted" in cmd and cmd[cmd.index("--permission-prompts") + 1] == "none"
+    assert cmd[cmd.index("--permission-mode") + 1] == "dontAsk" and "--strict-mcp-config" in cmd
+    allowed = cmd[cmd.index("--allowedTools") + 1].split(",")
+    assert all(a in ("Read", "Write", "Edit", "Glob", "Grep") or a.startswith("Bash(scale ") for a in allowed)
+    assert json.loads(cmd[cmd.index("--settings") + 1])["sandbox"]["enabled"] is True
+    for k in ("SCALE_WEB_GITHUB_TOKEN", "GH_TOKEN", "GITHUB_TOKEN", "SCALE_WEB_SECRET", "GITHUB_CLIENT_SECRET"):
+        monkeypatch.setenv(k, "a secret")
+    env = runner.claude_env(tmp_path / "bin")
+    assert "a secret" not in env.values() and env["PATH"].split(os.pathsep)[0] == str(tmp_path / "bin")
+    scale = runner.scale_bin(tmp_path) / "scale"                 # Claude Code's `scale` is the runner's scale-catal
+    out = subprocess.run([str(scale), "source", "--help"], capture_output=True, text=True, timeout=120)
+    assert out.returncode == 0 and "check" in out.stdout
+
+
+def test_a_pdf_dropped_into_the_queue_by_hand_is_curated_and_a_stopped_job_is_taken_again_once(tmp_path):
+    inbox = Inbox(tmp_path / "inbox")
+    lock = inbox.lock()
+    assert lock is not None and inbox.lock() is None                         # one runner at a time
+    lock.close()
+
+    def drop(name, data=b"%PDF-1.7 by hand", settled=True):
+        (inbox.queue / name).write_bytes(data)
+        if settled:
+            os.utime(inbox.queue / name, (time.time() - SETTLE_S - 5,) * 2)
+    drop("Dropped.pdf")
+    drop("notes.txt", b"x")
+    drop(".DS_Store", b"x")
+    assert inbox.adopt(None) == [] and not any(inbox.queue.iterdir())        # nobody to credit: set aside, queue empty
+    assert sorted(p.name.split("-", 2)[2] for p in inbox.rejected.iterdir()) == ["Dropped.pdf", "notes.txt"]
+    drop("Dropped.pdf")
+    drop("copying.pdf", settled=False)
+    ids = inbox.adopt("ada")
+    assert len(ids) == 1 and [p.name for p in inbox.queue.iterdir() if p.is_file()] == ["copying.pdf"]  # still copying
+    (inbox.queue / "copying.pdf").unlink()
+    item = inbox.claim()
+    assert item["owner"] == "ada" and (item["folder"] / "Dropped.pdf").is_file() and inbox.claim() is None
+    assert inbox.recover() == [item["id"]] and inbox.view(item["id"], "ada")["state"] == "queued"   # taken again
+    item = inbox.claim()
+    inbox.recover()                                                           # stopped a second time: it fails
+    assert inbox.view(item["id"], "ada")["state"] == "failed" and not (inbox.work / item["id"]).exists()
+    assert not (inbox.queue / item["id"]).exists()

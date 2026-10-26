@@ -166,7 +166,8 @@
   <form method="dialog">
     <h2>Curate a publication</h2>
     <p class="gx-muted">A PDF, a DOI, or both. A model reads the paper and records it as a graph under SCALE Catalysis; the
-      SCALE tools check every record, and every quote against the paper's own text. It takes a few minutes.</p>
+      SCALE tools check every record, and every quote against the paper's own text. <span id="curate-time">It takes a few
+      minutes.</span></p>
     <label class="gx-drop" id="curate-drop">
       <input type="file" id="curate-pdf" accept="application/pdf,.pdf">
       <span id="curate-pdf-name">Drop a PDF here, or choose one</span>
@@ -178,17 +179,27 @@
     <section class="gx-share" aria-label="What is shared">
       <h3>What is shared, and with whom</h3>
       <ul>
-        <li><b>To curate,</b> the PDF or DOI goes to the SCALE service, which sends the paper's text to Anthropic's Claude
-          API to read it.</li>
-        <li><b>The paper is kept only to curate it again</b> when SCALE's schema changes, so nobody has to upload it
-          twice: the PDF and its text, always for a paper under an open licence, and for any other paper only if you tick
-          the box below; otherwise the service deletes them when the job ends. A kept paper is private to the service,
-          never published, and you can withdraw your agreement at any time, which deletes it.</li>
-        <li><b>The graph comes back to you only.</b> Nothing is published unless you contribute it.</li>
-        <li><b>Contributing is a separate click.</b> It opens a public pull request on
+        <li data-mode="model"><b>To curate,</b> the PDF or DOI goes to the SCALE service, which sends the paper's text to
+          Anthropic's Claude API to read it.</li>
+        <li data-mode="model"><b>The paper is kept only to curate it again</b> when SCALE's schema changes, so nobody has to
+          upload it twice: the PDF and its text, always for a paper under an open licence, and for any other paper only if
+          you tick the box below; otherwise the service deletes them when the job ends. A kept paper is private to the
+          service, never published, and you can withdraw your agreement at any time, which deletes it.</li>
+        <li data-mode="model"><b>The graph comes back to you only.</b> Nothing is published unless you contribute it.</li>
+        <li data-mode="model"><b>Contributing is a separate click.</b> It opens a public pull request on
           <a href="https://github.com/hlxin/scale" target="_blank" rel="noopener">github.com/hlxin/scale</a> that names your
           GitHub login, and once it is merged your login joins the contributors' leaderboard. The records are shared
           under CC BY 4.0; they quote no text of a paper under copyright. A person reviews it before it joins catal-commons.</li>
+        <li data-mode="inbox" hidden><b>To curate,</b> the PDF or DOI goes to the computer that runs the SCALE service.
+          There Claude Code (Anthropic's Claude) reads the paper's text in a folder of its own, with no network and no
+          other files, and records it as a graph; the SCALE tools check every quote against the text.</li>
+        <li data-mode="inbox" hidden><b>Nothing is kept.</b> The PDF and its text are deleted from that computer as soon as
+          the paper is curated, or when curating it fails.</li>
+        <li data-mode="inbox" hidden><b>The pull request opens by itself.</b> Once the graph passes the checks, the SCALE
+          bot opens a public pull request on <a href="https://github.com/hlxin/scale" target="_blank" rel="noopener">github.com/hlxin/scale</a>
+          that names your GitHub login, and once it is merged your login joins the contributors' leaderboard. The records
+          are shared under CC BY 4.0; they quote no text of a paper under copyright. A person reviews it before it joins
+          catal-commons.</li>
         <li><b>No API key, no cost to you.</b> Signing in with GitHub only tells the service your login, so it can keep
           use within its daily budget.</li>
         <li><b>Your questions count toward others' credit.</b> When you are signed in, the leaderboard counts which
