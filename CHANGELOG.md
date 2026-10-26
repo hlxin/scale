@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **A guide to running the web service on a server (no schema change).** Requested by @hlxin: `service/server-guide.md`
+  takes a person from a Linux server to a running service behind HTTPS (Docker, the GitHub sign-in app, the settings
+  file, Caddy, pointing the page at it, the contribution bot), with how to run it day to day, a way in without open
+  ports, and what to check when something fails.
 - **The graph's type opens the graph (explorer, no schema change).** Requested by @hlxin: in a graph's card, "Knowledge
   graph" is a link like the schema's, which shows the graph on the canvas, coming back from the schema view or the
   Visualization, or fitting the graph to the view when it is already shown; whichever of the two is shown is marked

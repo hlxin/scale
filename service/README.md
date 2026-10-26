@@ -157,6 +157,8 @@ uv run --extra pdf --extra search --with anthropic env PYTHONPATH=service python
 
 ## Deploying (done by a person)
 
+On a server of your own, [server-guide.md](server-guide.md) takes these steps one by one, with the commands.
+
 These steps create accounts and hold secrets, so agents never do them:
 
 1. **Host.** Choose a host and deploy the image with the settings above. Set a spending limit on the API key in the
