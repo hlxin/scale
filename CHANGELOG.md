@@ -24,6 +24,10 @@
     Code starts, the runner looks for the publication by its DOI or PDF digest in catal-commons, in the open
     contributions and among the same reader's curated jobs, and a repeat points to it. A Source record for a cited
     work goes back to Claude Code, since catal-commons takes one Source per contribution.
+  - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words is answered on the service's
+    computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only the query
+    commands; the plans it wrote run again through `scale query` for the page, and the records they return credit the
+    commons sources, as the dialog says. Two questions are answered at a time.
 - **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
   open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
   row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.

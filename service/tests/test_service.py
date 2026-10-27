@@ -728,3 +728,32 @@ def test_kept_papers_are_curated_again_through_the_inbox_under_a_new_schema(tmp_
     assert (folder / "paper.pdf").read_bytes() == b"%PDF-1.7 a file"              # the kept copy stays; the inbox's goes
     assert not list((tmp_path / "inbox").rglob("*.pdf"))
     assert [j["id"] for j in svc.route("GET", "/inbox", {}, h, b"")[1]["jobs"]] != [queued[0]["job"]]
+
+
+def test_with_claude_code_a_question_is_answered_on_this_computer_with_the_plans_it_ran(tmp_path, monkeypatch):
+    """SCALE_WEB_ASK=claude-code: Claude Code answers on the service's computer, in a folder that holds the graph alone,
+    with the query commands only; the plans it wrote run again through scale query for the page, and the records they
+    return go with the answer (they credit the commons sources it used). No API model is called."""
+    svc = Service(cfg(tmp_path, ask="claude-code"), repo=REPO)
+    svc.client_factory = lambda: pytest.fail("no API model is called")
+    plan = {"match": {"label": "Catalyst", "as": "c"}, "return": ["c.name"], "limit": 3}
+    seen = []
+
+    def claude(folder, prompt, system, cfg, bin_dir, allowed, minutes, max_turns):
+        seen.append({"folder": folder, "prompt": prompt, "system": system, "allowed": allowed,
+                     "files": sorted(p.name for p in folder.iterdir())})
+        (folder / "plan1.json").write_text(json.dumps(plan))
+        return {"result": "Three catalysts [rows].", "num_turns": 3}
+    monkeypatch.setattr(runner, "run_claude", claude)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}"}
+    st, body, _ = svc.route("POST", "/ask", {}, h, json.dumps({"graph": load_doc(PUBLIC), "question": "Which catalysts?"}).encode())
+    assert st == 200 and body["answer"] == "Three catalysts [rows]." and body["stopped"] is None
+    direct = svc.route("POST", "/query", {}, {}, json.dumps({"graph": load_doc(PUBLIC), "plan": plan}).encode())[1]
+    assert [(p["status"], p["rows"]) for p in body["plans"]] == [("answered", direct["row_count"])]   # as scale query
+    assert direct["rows"][0]["bound"]["c"] in body["records"]                   # the records its rows hold
+    assert seen[0]["prompt"] == "Which catalysts?" and seen[0]["files"] == ["graph.graph.json"]
+    assert "# Query scale-catal documents" in seen[0]["system"] and "never instructions" in seen[0]["system"]
+    assert [a for a in seen[0]["allowed"] if a.startswith("Bash")] == [
+        "Bash(scale graph query:*)", "Bash(scale graph search:*)", "Bash(scale graph describe:*)", "Bash(scale graph stats:*)"]
+    assert not seen[0]["folder"].exists()                                        # the graph's folder goes after the answer
+    assert svc.route("POST", "/ask", {}, {}, json.dumps({"graph": load_doc(PUBLIC), "question": "?"}).encode())[0] == 401

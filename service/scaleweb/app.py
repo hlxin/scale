@@ -38,6 +38,7 @@ import json
 import shutil
 import sys
 import tempfile
+import threading
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -69,6 +70,7 @@ class Service:
         self.budget = auth.Budget(cfg)
         self.jobs = Jobs(cfg, self.budget, lambda: self.client_factory(), self.repo, run_inline=run_inline)
         self.inbox = Inbox(cfg.inbox) if cfg.inbox else None
+        self.asking = threading.BoundedSemaphore(2)        # questions Claude Code answers here at once (SCALE_WEB_ASK)
         self.kit = ScaleToolkit(workspace=tempfile.mkdtemp(prefix="scale-web-kit-"), repo=self.repo)
         self.schema_version = pgraph.load_spec(pgraph.spec_for(self.repo, None))["version"]
         header = self.repo / cfg.commons / "parts" / "header.json"
@@ -329,6 +331,14 @@ class Service:
     def _ask(self, path: Path, question: str):
         if not question.strip():
             return 400, {"error": "ask a question"}, {}
+        if self.cfg.ask == "claude-code":                  # answered on this computer by Claude Code (runner.answer)
+            from . import runner
+            if not self.asking.acquire(timeout=120):
+                return 429, {"error": "the service is answering other questions; ask again in a minute"}, {}
+            try:
+                return 200, runner.answer(path, question, self.cfg, self.repo), {}
+            finally:
+                self.asking.release()
         res = agent.answer(path, question, self.client_factory(), self.cfg.model, 30,
                            min(200_000, self.budget.left()), repo=self.repo)
         self.budget.spend(res["tokens"])

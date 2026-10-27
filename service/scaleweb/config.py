@@ -47,6 +47,7 @@ class Config:
     claude: str = "claude"                   # the Claude Code command the inbox runner starts
     inbox_turns: int = 200                   # Claude Code's turns for one publication
     inbox_minutes: int = 90                  # and its time
+    ask: str = ""                            # "claude-code": questions answered here by Claude Code (runner.answer)
 
     @classmethod
     def from_env(cls) -> Config:
@@ -82,4 +83,5 @@ class Config:
             claude=os.environ.get("SCALE_WEB_CLAUDE", "claude"),
             inbox_turns=_int("SCALE_WEB_INBOX_TURNS", 200),
             inbox_minutes=_int("SCALE_WEB_INBOX_MINUTES", 90),
+            ask=os.environ.get("SCALE_WEB_ASK", "").strip().lower(),
         )
