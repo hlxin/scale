@@ -16,8 +16,9 @@
                                    they know, their licence allows mining it with an AI tool. With an inbox
                                    (``SCALE_WEB_INBOX``, inbox.py) the source waits there for Claude Code, which
                                    curates it on the service's computer (runner.py)
-* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (read once, then forgotten; an inbox
+* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (again on asking, for an hour; an inbox
                                    job stays readable, its graph signed for its owner each time, until it is forgotten)
+* ``POST /jobs/{id}/done``         the page has the finished job's result: the service forgets it now (not an inbox job)
 * ``GET  /inbox``                  the signed-in user's sources in the inbox, newest first
 * ``GET  /kept``                   the sources kept because the signed-in user agreed (archive.py)
 * ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the source goes when none is left
@@ -132,7 +133,12 @@ class Service:
             if view and view.get("graph") and view.get("rights"):       # curated here: signed for its owner, as a job's
                 view["receipt"] = auth.receipt(self.cfg, user, view["graph"], view["rights"])
             view = view or self.jobs.view(jid, user)
-            return (200, view, {}) if view else (404, {"error": "no such job (a finished job is read once)"}, {})
+            return (200, view, {}) if view else (404, {"error": "no such job (its result was collected, or it expired)"}, {})
+        if method == "POST" and path.startswith("/jobs/") and path.endswith("/done"):
+            if not user:
+                return 401, {"error": "sign in"}, {}
+            jid = path.removeprefix("/jobs/").removesuffix("/done")
+            return (200, {"forgotten": jid}, {}) if self.jobs.done(jid, user) else (404, {"error": "no finished job of yours under that id"}, {})
         if method == "POST" and path in ("/query", "/search", "/ask", "/contribute/check", "/contribute"):
             if len(body) > GRAPH_MAX:
                 return 413, {"error": "the graph is too large for the service"}, {}
@@ -464,6 +470,7 @@ def recurate(svc: Service, only: str | None = None, dry_run: bool = False) -> li
             while svc.jobs.jobs.get(jid, {}).get("state") not in ("done", "failed", None):
                 time.sleep(2)
             job = svc.jobs.view(jid, "scale-recurate")
+            svc.jobs.done(jid, "scale-recurate")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
         row = {"sha256": m["sha256"], "doi": m.get("doi"), "to": version, "state": job["state"],

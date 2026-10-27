@@ -101,6 +101,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # own address (its open graph, #g=…, included) and a nonce; a token is taken only with that tab's nonce
     for page_js in (js, (REPO / "site/app.js").read_text()):
         assert page_js.count("/auth/login?return=") == 1 and "&nonce=${n}" in page_js and "crypto.getRandomValues" in page_js
+        # the reader's own graph and a job under way are kept in the tab, so a sign-in or a reload loses neither; the
+        # service forgets a job's result only when the page says it has it
+        assert '"scale-own"' in page_js and '"scale-job"' in page_js and "/done`" in page_js
         assert "tx.n !==" in page_js and "scale-signin-hash" not in page_js and "scale-signin-from" not in page_js
     assert "location.search + location.hash" in js and all(f'data-signin="{w}"' in js for w in ("toolbar", "curate", "search"))
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
