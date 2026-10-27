@@ -182,8 +182,8 @@ async function openCurate() {
     $("curate-keep-row").hidden = !h.keeps_texts;
     if (h.contact) $("curate-contact").innerHTML = `A rights holder can ask for a source's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
     if (h.keeps_texts && token) showKept();
-    // with an inbox, Claude Code curates on the service's own computer, one source at a time
-    if (h.inbox) $("curate-time").textContent = "Claude Code curates one source at a time on the service's computer, which can take an hour; you can close the page and come back.";
+    // with an inbox, Claude Code curates on the service's own computer, in turn with the other sources sent
+    if (h.inbox) $("curate-time").textContent = "Claude Code curates each source on the service's computer, in turn with the others sent, which can take an hour; you can close the page and come back.";
     if (h.inbox && token) showInbox();
   } catch (e) { $("curate-schema").innerHTML = `<span class="gx-err">The service did not answer: ${esc(e.message)}</span>`; }
 }

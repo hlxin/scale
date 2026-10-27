@@ -165,7 +165,7 @@ Everything the Curate dialog says holds as it does for the model loop:
   publication in the inbox's queue and answers at once. The page follows the job (`GET /jobs/{id}`, readable until the
   inbox forgets it, after 14 days) and lists the reader's publications (`GET /inbox`).
 - **Curate.** launchd starts the runner whenever the queue holds something ([`launchd/`](launchd/); elsewhere
-  `python -m scaleweb.runner --watch 30`). For each publication, one at a time: `scale source start`; Claude Code
+  `python -m scaleweb.runner --watch 30`). For each publication: `scale source start`; Claude Code
   (`claude -p`, the curate-corpus skill appended to its system prompt) fills the graph; `scale source check
   --derive-links` must pass, its problems going back to Claude Code twice at most; `scale source finish --public`. A
   run that records nothing fails.

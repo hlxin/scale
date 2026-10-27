@@ -1,4 +1,4 @@
-"""The inbox runner: curates with Claude Code every publication that waits in the inbox (inbox.py), one at a time.
+"""The inbox runner: curates with Claude Code every publication that waits in the inbox (inbox.py).
 
     python -m scaleweb.runner              curate what the queue holds, then exit (what launchd starts: service/launchd/);
                                            SCALE_WEB_INBOX_WORKERS publications at once, each with its own Claude Code
