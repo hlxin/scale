@@ -2,8 +2,9 @@
 
 * ``GET  /health``                 liveness, the schema version and the contact for a rights holder
 * ``GET  /leaderboard``            catal-commons' contributors scored with the reach of what they added (usage.py)
-* ``GET  /auth/login?return=URL``  sign in with GitHub, back to the page at URL (one of the site origins)
-* ``GET  /auth/callback``          GitHub's return; to the page with ``#token=…`` (allowlisted logins only)
+* ``GET  /auth/login?return=URL&nonce=N``  sign in with GitHub, back to the page at URL (one of the site origins);
+  N is the page's random nonce for this sign-in, returned with the answer
+* ``GET  /auth/callback``          GitHub's return; to the page with ``#token=…&nonce=N`` (allowlisted logins only)
 * ``GET  /example``                the public methanol example (55 public-domain sources), built from its parts
 * ``GET  /me``                     the signed-in login and what is left of today's budget
 * ``POST /jobs``                   start curating: a PDF as the body (``Content-Type: application/pdf``, optional
@@ -62,6 +63,7 @@ class Service:
         self.cfg, self.client_factory, self.github_request = cfg, client_factory, github_request
         self.repo = Path(repo) if repo else find_repo_root()
         self.budget = auth.Budget(cfg)
+        self.states = auth.Once()                     # OAuth states already used
         self.jobs = Jobs(cfg, self.budget, lambda: self.client_factory(), self.repo, run_inline=run_inline)
         self.kit = ScaleToolkit(workspace=tempfile.mkdtemp(prefix="scale-web-kit-"), repo=self.repo)
         self.schema_version = pgraph.load_spec(pgraph.spec_for(self.repo, None))["version"]
@@ -82,10 +84,13 @@ class Service:
         if method == "GET" and path == "/example":
             return 200, load_doc(self.repo / "examples" / "methanol-synthesis-public"), {}
         if method == "GET" and path == "/auth/login":
-            ret = query.get("return", "")
-            if not auth.allowed_return(self.cfg, ret):
+            ret = auth.clean_return(self.cfg, query.get("return", ""))
+            if not ret:
                 return 400, {"error": "return to a page of the site only"}, {}
-            return 302, None, {"Location": auth.login_url(self.cfg, ret)}
+            nonce = query.get("nonce", "")
+            if not auth.NONCE.fullmatch(nonce):
+                return 400, {"error": "start the sign-in from the page again"}, {}
+            return 302, None, {"Location": auth.login_url(self.cfg, ret, nonce)}
         if method == "GET" and path == "/auth/callback":
             return self._callback(query)
         if method == "GET" and path == "/me":
@@ -165,15 +170,17 @@ class Service:
 
     def _callback(self, query: dict):
         state = auth.unsign(self.cfg, query.get("state", ""))
-        if not state or not auth.allowed_return(self.cfg, state.get("ret", "")):
-            return 400, {"error": "the sign-in expired; start again"}, {}
+        ret = auth.clean_return(self.cfg, (state or {}).get("ret", ""))
+        nonce = str((state or {}).get("b", ""))
+        if not ret or not auth.NONCE.fullmatch(nonce) or not self.states.take(str(state.get("n")), state["exp"]):
+            return 400, {"error": "the sign-in expired or was used already; start again"}, {}
         try:
             login = auth.github_login(self.cfg, query.get("code", ""))
         except Exception:
-            return 302, None, {"Location": state["ret"] + "#signin=failed"}
+            return 302, None, {"Location": auth.answer_url(ret, {"signin": "failed", "nonce": nonce})}
         if not auth.admitted(self.cfg, login):
-            return 302, None, {"Location": state["ret"] + "#signin=not-allowed&login=" + urllib.parse.quote(login)}
-        return 302, None, {"Location": state["ret"] + "#token=" + auth.session_for(self.cfg, login)}
+            return 302, None, {"Location": auth.answer_url(ret, {"signin": "not-allowed", "login": login, "nonce": nonce})}
+        return 302, None, {"Location": auth.answer_url(ret, {"token": auth.session_for(self.cfg, login), "nonce": nonce})}
 
     def _submit(self, user: str, query: dict, headers: dict, body: bytes):
         ctype = headers.get("content-type", "").split(";")[0].strip().lower()
@@ -351,9 +358,12 @@ def make_handler(svc: Service):
             return {}
 
         def _send(self, status: int, body: dict | None, headers: dict) -> None:
+            headers = {**self._cors(), **headers}
+            if any(not str(v).isprintable() or not str(v).isascii() for v in headers.values()):   # never a header a value adds
+                status, body, headers = 500, {"error": "the service could not answer"}, self._cors()
             data = json.dumps(body, ensure_ascii=False, default=str).encode() if body is not None else b""
             self.send_response(status)
-            for k, v in {**self._cors(), **headers}.items():
+            for k, v in headers.items():
                 self.send_header(k, v)
             if body is not None:
                 self.send_header("Content-Type", "application/json; charset=utf-8")

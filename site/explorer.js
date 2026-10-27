@@ -55,29 +55,45 @@ const CARET = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" strok
 // ------------------------------------------------------------------------------------------ curating a publication
 const SERVICE = (window.SCALE_SERVICE_URL || "").replace(/\/$/, "");
 let token = "", login = "";
-function readSignIn() {                          // the service returns from GitHub with #token=… (or why it did not)
+// Signing in is one transaction, kept in this tab: a random nonce, where it was started (the toolbar, Curate, a search)
+// and an expiry. The service carries the nonce and this page's address, its fragment (#g=…, the graph open) included,
+// through GitHub and back; a token is taken only with the nonce this tab is waiting for, so a sign-in started anywhere
+// else (someone's link, another tab, an abandoned one) never signs this tab in.
+const SIGNIN = "scale-signin";
+function signIn(from) {
+  const n = Array.from(crypto.getRandomValues(new Uint8Array(18)), (b) => b.toString(16).padStart(2, "0")).join("");
+  if (!store.set(SIGNIN, JSON.stringify({ n, from, exp: Date.now() + 15 * 60e3 }))) {
+    const note = "Signing in needs this site's storage in your browser, which keeps the sign-in to this tab; allow it and try again.";
+    return from === "curate" ? curateAccount(note) : accountMenu(note);
+  }
+  const back = location.origin + location.pathname + location.search + location.hash;
+  location.assign(`${SERVICE}/auth/login?return=${encodeURIComponent(back)}&nonce=${n}`);
+}
+// every sign-in link carries data-signin="<where>"; caught before any menu stops the click
+document.addEventListener("click", (e) => {
+  const a = e.target.closest?.("[data-signin]");
+  if (!a) return;
+  e.preventDefault(); e.stopPropagation();
+  signIn(a.dataset.signin);
+}, true);
+function readSignIn() {                          // the service returns from GitHub with #token=…&nonce=… (or why not)
   const p = new URLSearchParams(location.hash.slice(1));
   if (!p.has("token") && !p.has("signin")) return;
-  if (p.get("token")) { token = p.get("token"); store.set("scale-token", token); }
-  const why = p.get("signin");
-  for (const k of ["token", "signin", "login"]) p.delete(k);
-  const was = store.get("scale-signin-hash");     // the graph open before GitHub (#g=…), which the return drops
-  store.set("scale-signin-hash", "");
-  const hash = p.toString() || was;
-  history.replaceState(null, "", location.pathname + location.search + (hash ? `#${hash}` : ""));
-  const fromCurate = store.get("scale-signin-from") === "curate";
-  store.set("scale-signin-from", "");
+  const got = p.get("token"), why = p.get("signin"), n = p.get("nonce");
+  for (const k of ["token", "signin", "login", "nonce"]) p.delete(k);
+  history.replaceState(null, "", location.pathname + location.search + (p.toString() ? `#${p}` : ""));
+  let tx = null;
+  try { tx = JSON.parse(store.take(SIGNIN) || "null"); } catch { /* not a transaction */ }
+  if (!tx || !n || tx.n !== n || !(tx.exp > Date.now())) {
+    setTimeout(() => accountMenu("That sign-in was not started in this tab, or it took too long, so it was not used. Sign in again here."), 0);
+    return;
+  }
+  if (got) { token = got; store.set("scale-token", token); }
   const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
     : why ? "GitHub sign-in failed; try again." : "";
-  if (fromCurate) setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
+  if (tx.from === "curate") setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
   else if (why) setTimeout(() => accountMenu(note), 0);
 }
-// where GitHub sends the reader back to: this page, as it is now. The service puts its answer in the fragment, so
-// the graph open (#g=…) is kept in this tab's storage when a sign-in link is followed, and readSignIn() restores it.
-const signInUrl = () => `${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname + location.search)}`;
-document.addEventListener("click", (e) => {
-  if (SERVICE && e.target.closest?.(`a[href^="${SERVICE}/auth/login"]`)) store.set("scale-signin-hash", location.hash.slice(1));
-});
 function signOut() {
   token = ""; login = ""; store.set("scale-token", "");
   renderAccount();
@@ -110,7 +126,7 @@ function accountMenu(note = "") {
   else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a paper needs a GitHub sign-in, as do contributing it to
     catal-commons and having questions answered in words. Free: the service reads only your GitHub login, never your
     repositories.</p>${open}
-    <a class="gx-btn gx-btn-primary gx-account-go" href="${esc(signInUrl())}">Continue with GitHub</a>`;
+    <a class="gx-btn gx-btn-primary gx-account-go" href="#" role="button" data-signin="toolbar">Continue with GitHub</a>`;
   else box.innerHTML = `${warn}<p class="gx-account-note">Signed in as <b>${esc(me.login)}</b><br><span class="gx-subtle">${
     me.tokens_left_today === 0 ? "The service's budget for today is spent." : "Curating and questions are open to you today."}</span></p>
     <a class="gx-menu-item" href="https://github.com/${encodeURIComponent(me.login)}" target="_blank" rel="noopener">Your GitHub profile</a>
@@ -141,9 +157,8 @@ async function curateAccount(note = "") {
     return;
   }
   if (!token) {
-    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(signInUrl())}">Sign in with GitHub</a>
+    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="#" role="button" data-signin="curate">Sign in with GitHub</a>
       <span class="gx-subtle">Free; the service needs only your login.</span>${warn}`;
-    $("curate-signin").onclick = () => store.set("scale-signin-from", "curate", true);
     $("curate-start").disabled = true;
     return;
   }
@@ -962,15 +977,27 @@ async function search(q) {
         <div class="gx-quote">“${esc(h.text)}”</div>
         <div class="gx-meta">${esc(h.label || "")}: ${esc(h.record_name || h.record)} · ${esc(name(G.byId.get(h.source)))}${h.source_year ? ` (${esc(h.source_year)})` : ""}, ${esc(h.locator || "")} · ${Number(h.score || 0).toFixed(3)}</div></div>`).join("")
       : `<p>No evidence matches “${esc(q)}”.</p>`) + (SERVICE && !token ? `<p class="gx-meta">These are the quotes that match, found in this browser.
-        <a href="${esc(signInUrl())}">Sign in with GitHub</a> to have
+        <a href="#" role="button" data-signin="search">Sign in with GitHub</a> to have
         questions answered in words: free, no API key.</p>` : ""));
     $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => goTo(el.dataset.id)));
   } catch (err) { card("Matching evidence", `<p class="gx-card-warn">${esc(err.message)}</p>`); }
 }
 // ------------------------------------------------------------------------------------------ answers in words
-// The page keeps the service's session token only (sessionStorage, or localStorage when it was saved before).
-const store = { get(k) { try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ""; } catch { return ""; } },
-  set(k, v, keep) { try { (keep ? localStorage : sessionStorage).setItem(k, v); if (!keep) localStorage.removeItem(k); } catch { /* storage off */ } } };
+// The page keeps the service's session token (sessionStorage, or localStorage when it was saved before) and the sign-in
+// under way (this tab's sessionStorage only). Each storage is tried on its own, so one that is blocked hides no other.
+const inStore = (kind, f) => { try { return f(window[kind]); } catch { return undefined; } };
+const store = {
+  get: (k) => inStore("localStorage", (s) => s.getItem(k)) || inStore("sessionStorage", (s) => s.getItem(k)) || "",
+  set(k, v, keep) {              // true when it was kept
+    const ok = inStore(keep ? "localStorage" : "sessionStorage", (s) => { if (v) s.setItem(k, v); else s.removeItem(k); return true; });
+    if (!keep) inStore("localStorage", (s) => s.removeItem(k));
+    return ok === true;
+  },
+  take(k) {                      // read once, from this tab only
+    const v = inStore("sessionStorage", (s) => s.getItem(k)) || "";
+    inStore("sessionStorage", (s) => s.removeItem(k));
+    return v;
+  } };
 // A question is answered by the service (the query-graph skill over this graph, within the service's budget) for a
 // signed-in reader; anyone else sees the matching evidence, found in this browser.
 async function ask(question) {

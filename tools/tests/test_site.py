@@ -92,8 +92,12 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
-    # signing in comes back to the graph that was open: every sign-in link is signInUrl(), and the fragment is kept
-    assert js.count("/auth/login?return=") == 1 and '"scale-signin-hash"' in js
+    # a sign-in is one transaction of the tab that starts it: one place builds the sign-in address, carrying the page's
+    # own address (its open graph, #g=…, included) and a nonce; a token is taken only with that tab's nonce
+    for page_js in (js, (REPO / "site/app.js").read_text()):
+        assert page_js.count("/auth/login?return=") == 1 and "&nonce=${n}" in page_js and "crypto.getRandomValues" in page_js
+        assert "tx.n !==" in page_js and "scale-signin-hash" not in page_js and "scale-signin-from" not in page_js
+    assert "location.search + location.hash" in js and all(f'data-signin="{w}"' in js for w in ("toolbar", "curate", "search"))
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
     # the open graph's caret folds and unfolds its facts; the caret turns with the row's aria-expanded
     css = (REPO / "site/explorer.css").read_text()
