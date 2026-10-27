@@ -1,9 +1,12 @@
-"""PDF checks (library module — not run directly): validity, same-paper title match, SI-document guard, and the
-license statement printed in the PDF. PDFs are untrusted input; they are only parsed (PyMuPDF / pypdf), never executed.
+"""PDF checks (library module — not run directly): validity, same-paper title match (or the source's own DOI printed in
+it), SI-document guard, and the license statement printed in the PDF. PDFs are untrusted input; they are only parsed
+(PyMuPDF / pypdf, and poppler's pdftotext as a second reader when it is installed), never executed.
 """
 import hashlib
 import logging
 import re
+import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -75,6 +78,27 @@ def extract_text(path, first=2, last=3, max_chars=60000):
     except Exception:
         return "", ""
     return "\n".join(out_first)[:max_chars], "\n".join(out_last)[:max_chars]
+
+
+def poppler_text(path, pages=2):
+    """The first pages read by poppler's pdftotext, a second reader for fonts PyMuPDF decodes badly; "" without it."""
+    exe = shutil.which("pdftotext")
+    if not exe:
+        return ""
+    try:
+        r = subprocess.run([exe, "-q", "-l", str(pages), str(path), "-"], capture_output=True, timeout=60)
+        return r.stdout.decode("utf-8", "replace")
+    except (OSError, subprocess.SubprocessError):
+        return ""
+
+
+def doi_printed(doi, text):
+    """True when this exact DOI is printed in the text: line breaks inside it allowed, but not a longer DOI that
+    merely starts with it (10.15376/biores.21.2.Wang is not 10.15376/biores.21.2.Wang2)."""
+    if not doi or not text:
+        return False
+    body = r"\s*".join(re.escape(ch) for ch in doi.strip().lower())
+    return re.search(rf"(?<![a-z0-9.]){body}(?![a-z0-9])", text.lower()) is not None
 
 
 def _norm(s):

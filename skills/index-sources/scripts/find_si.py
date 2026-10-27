@@ -36,7 +36,7 @@ import _mdpi as MDPI
 from _cache import Cache
 from _common import (PACER, HTTPFail, Project, add_project_arg, get_json, host_of, load_config, log, norm_doi, now_iso,
                      session, update_state)
-from _download import load_blocked, route_landing
+from _download import is_blocked, load_blocked, route_landing
 from _ledger import Ledger
 
 CHUNK = 20000            # sources per block
@@ -190,6 +190,8 @@ def head_ok(url):
 
 
 def elsevier_files(cr):
+    if is_blocked("ars.els-cdn.com"):          # a project that keeps Elsevier out lists its CDN in blocked_hosts.json
+        return []
     pii = None
     for a in (cr or {}).get("alternative_id") or []:
         x = a.replace("-", "").replace("(", "").replace(")", "").upper()
