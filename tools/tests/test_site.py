@@ -95,6 +95,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # signing in comes back to the graph that was open: every sign-in link is signInUrl(), and the fragment is kept
     assert js.count("/auth/login?return=") == 1 and '"scale-signin-hash"' in js
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js
+    # the open graph's caret folds and unfolds its facts; the caret turns with the row's aria-expanded
+    css = (REPO / "site/explorer.css").read_text()
+    assert "folded = !folded" in js and 'aria-expanded="${open}"' in js and '[aria-expanded="true"] .gx-graph-caret' in css
 
 
 def test_the_site_publishes_the_leaderboard_with_how_it_scores(built):

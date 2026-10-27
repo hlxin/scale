@@ -18,6 +18,7 @@ const PROVENANCE_KIND = "Source", PROVENANCE_EDGE = "REPORTED_IN";   // hidden u
 
 let G = null;                     // the graph: {entry, doc, byId, out, inn, labels, rels, sha, props}
 let manifest = [];
+let folded = false;               // the open graph's facts are folded under its row (its caret)
 const kindColour = new Map(), edgeColour = new Map();
 const S = {                       // what the canvas shows
   kind: null, rel: null, sources: false, hidden: new Set(), extra: new Set(), match: null,
@@ -372,10 +373,10 @@ async function start() {
 function renderGraphs() {
   const list = G && !manifest.includes(G.entry) ? [G.entry, ...manifest] : manifest;
   $("graphs").innerHTML = list.map((e) => {
-    const [scope, c] = scopeOf(e), active = G && G.entry === e;
+    const [scope, c] = scopeOf(e), active = G && G.entry === e, open = active && !folded;
     return `<div role="listitem"><button class="gx-graph-item${active ? " is-active" : ""}" type="button" data-id="${esc(e.id)}" title="${esc(e.title)}"
-        aria-expanded="${active}" style="--dot:${c}"><span class="gx-graph-caret">${CARET}</span><span class="gx-graph-dot"></span>
-        <span class="gx-graph-title">${esc(e.title)}</span><span class="gx-graph-scope">${scope}</span></button>${active ? details() : ""}</div>`;
+        aria-expanded="${open}" style="--dot:${c}"><span class="gx-graph-caret">${CARET}</span><span class="gx-graph-dot"></span>
+        <span class="gx-graph-title">${esc(e.title)}</span><span class="gx-graph-scope">${scope}</span></button>${open ? details() : ""}</div>`;
   }).join("") || `<p class="gx-muted">No graphs are listed: open a file.</p>`;
   const dl = $("curated-download");
   if (dl) dl.onclick = (ev) => { ev.preventDefault(); downloadGraph(); };
@@ -384,10 +385,16 @@ function renderGraphs() {
   if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
-  $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = () => {
+  $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = (ev) => {
+    if (b.classList.contains("is-active")) {      // the open graph: its row folds and unfolds its facts (in the schema
+      if (G.base && !ev.target.closest(".gx-graph-caret")) { leaveSchema(); return; }   // view, only its caret does)
+      folded = !folded;
+      renderGraphs();
+      $("graphs").querySelector(".gx-graph-item.is-active")?.focus();
+      return;
+    }
     const e = manifest.find((x) => x.id === b.dataset.id);
-    if (e && G && G.entry === e && G.base) { leaveSchema(); return; }
-    if (e && !(G && G.entry === e)) location.hash = `g=${encodeURIComponent(e.id)}`;
+    if (e) location.hash = `g=${encodeURIComponent(e.id)}`;
   }));
 }
 function details() {
@@ -501,6 +508,7 @@ async function openGraph(entry, text) {
   [...labels].sort((a, b) => b[1] - a[1]).forEach(([l]) => colourForKind(l));
   [...rels].sort((a, b) => b[1] - a[1]).forEach(([t]) => colourForEdge(t));
   G = { entry, file: `${entry.id}.json`, doc, byId, out, inn, labels, rels, props, sha: "" };
+  folded = false;
   Object.assign(S, { kind: null, rel: null, sources: false, hidden: new Set(), extra: new Set(), match: null, selected: null, pos: new Map(), nodes: [] });
   $("card").hidden = true;
   renderGraphs();
