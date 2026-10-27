@@ -88,7 +88,8 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
 .gx-graph-item:hover { background: var(--hover); }
 .gx-graph-item.is-active { background: var(--active); border-color: var(--line); }
 .gx-graph-caret { display: inline-flex; color: var(--muted); transition: transform .15s ease; flex: none; }
-.gx-graph-item.is-active .gx-graph-caret { color: var(--fg); transform: rotate(90deg); }
+.gx-graph-item.is-active .gx-graph-caret { color: var(--fg); }
+.gx-graph-item[aria-expanded="true"] .gx-graph-caret { transform: rotate(90deg); }
 .gx-graph-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--dot); flex: none; }
 .gx-graph-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .gx-graph-scope { flex: none; font-size: 9px; text-transform: uppercase; letter-spacing: .04em; padding: 1px 5px; border-radius: 5px;
