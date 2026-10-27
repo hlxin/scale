@@ -52,32 +52,48 @@ const SCOPE = { service: ["new", "var(--select)"], graphs: ["curated", "var(--gr
 const scopeOf = (e) => SCOPE[(e.from || "").split("/")[0]] || ["file", "var(--subtle)"];
 const CARET = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>`;
 
-// ------------------------------------------------------------------------------------------ curating a publication
+// ------------------------------------------------------------------------------------------ curating a source
 const SERVICE = (window.SCALE_SERVICE_URL || "").replace(/\/$/, "");
 let token = "", login = "";
-function readSignIn() {                          // the service returns from GitHub with #token=… (or why it did not)
+// Signing in is one transaction, kept in this tab: a random nonce, where it was started (the toolbar, Curate, a search)
+// and an expiry. The service carries the nonce and this page's address, its fragment (#g=…, the graph open) included,
+// through GitHub and back; a token is taken only with the nonce this tab is waiting for, so a sign-in started anywhere
+// else (someone's link, another tab, an abandoned one) never signs this tab in.
+const SIGNIN = "scale-signin";
+function signIn(from) {
+  const n = Array.from(crypto.getRandomValues(new Uint8Array(18)), (b) => b.toString(16).padStart(2, "0")).join("");
+  if (!store.set(SIGNIN, JSON.stringify({ n, from, exp: Date.now() + 15 * 60e3 }))) {
+    const note = "Signing in needs this site's storage in your browser, which keeps the sign-in to this tab; allow it and try again.";
+    return from === "curate" ? curateAccount(note) : accountMenu(note);
+  }
+  const back = location.origin + location.pathname + location.search + location.hash;
+  location.assign(`${SERVICE}/auth/login?return=${encodeURIComponent(back)}&nonce=${n}`);
+}
+// every sign-in link carries data-signin="<where>"; caught before any menu stops the click
+document.addEventListener("click", (e) => {
+  const a = e.target.closest?.("[data-signin]");
+  if (!a) return;
+  e.preventDefault(); e.stopPropagation();
+  signIn(a.dataset.signin);
+}, true);
+function readSignIn() {                          // the service returns from GitHub with #token=…&nonce=… (or why not)
   const p = new URLSearchParams(location.hash.slice(1));
   if (!p.has("token") && !p.has("signin")) return;
-  if (p.get("token")) { token = p.get("token"); store.set("scale-token", token); }
-  const why = p.get("signin");
-  for (const k of ["token", "signin", "login"]) p.delete(k);
-  const was = store.get("scale-signin-hash");     // the graph open before GitHub (#g=…), which the return drops
-  store.set("scale-signin-hash", "");
-  const hash = p.toString() || was;
-  history.replaceState(null, "", location.pathname + location.search + (hash ? `#${hash}` : ""));
-  const fromCurate = store.get("scale-signin-from") === "curate";
-  store.set("scale-signin-from", "");
+  const got = p.get("token"), why = p.get("signin"), n = p.get("nonce");
+  for (const k of ["token", "signin", "login", "nonce"]) p.delete(k);
+  history.replaceState(null, "", location.pathname + location.search + (p.toString() ? `#${p}` : ""));
+  let tx = null;
+  try { tx = JSON.parse(store.take(SIGNIN) || "null"); } catch { /* not a transaction */ }
+  if (!tx || !n || tx.n !== n || !(tx.exp > Date.now())) {
+    setTimeout(() => accountMenu("That sign-in was not started in this tab, or it took too long, so it was not used. Sign in again here."), 0);
+    return;
+  }
+  if (got) { token = got; store.set("scale-token", token); }
   const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
     : why ? "GitHub sign-in failed; try again." : "";
-  if (fromCurate) setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
+  if (tx.from === "curate") setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
   else if (why) setTimeout(() => accountMenu(note), 0);
 }
-// where GitHub sends the reader back to: this page, as it is now. The service puts its answer in the fragment, so
-// the graph open (#g=…) is kept in this tab's storage when a sign-in link is followed, and readSignIn() restores it.
-const signInUrl = () => `${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname + location.search)}`;
-document.addEventListener("click", (e) => {
-  if (SERVICE && e.target.closest?.(`a[href^="${SERVICE}/auth/login"]`)) store.set("scale-signin-hash", location.hash.slice(1));
-});
 function signOut() {
   token = ""; login = ""; store.set("scale-token", "");
   renderAccount();
@@ -107,10 +123,10 @@ function accountMenu(note = "") {
   const open = `<p class="gx-account-note gx-subtle">Viewing, filtering and searching the graphs need no account.</p>`;
   if (!SERVICE) box.innerHTML = `<p class="gx-account-note">Sign-in with GitHub opens once the SCALE service is running; curating will
     need it.</p>${open}`;
-  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a paper needs a GitHub sign-in, as do contributing it to
+  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a source needs a GitHub sign-in, as do contributing it to
     catal-commons and having questions answered in words. Free: the service reads only your GitHub login, never your
     repositories.</p>${open}
-    <a class="gx-btn gx-btn-primary gx-account-go" href="${esc(signInUrl())}">Continue with GitHub</a>`;
+    <a class="gx-btn gx-btn-primary gx-account-go" href="#" role="button" data-signin="toolbar">Continue with GitHub</a>`;
   else box.innerHTML = `${warn}<p class="gx-account-note">Signed in as <b>${esc(me.login)}</b><br><span class="gx-subtle">${
     me.tokens_left_today === 0 ? "The service's budget for today is spent." : "Curating and questions are open to you today."}</span></p>
     <a class="gx-menu-item" href="https://github.com/${encodeURIComponent(me.login)}" target="_blank" rel="noopener">Your GitHub profile</a>
@@ -141,9 +157,8 @@ async function curateAccount(note = "") {
     return;
   }
   if (!token) {
-    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(signInUrl())}">Sign in with GitHub</a>
+    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="#" role="button" data-signin="curate">Sign in with GitHub</a>
       <span class="gx-subtle">Free; the service needs only your login.</span>${warn}`;
-    $("curate-signin").onclick = () => store.set("scale-signin-from", "curate", true);
     $("curate-start").disabled = true;
     return;
   }
@@ -165,10 +180,10 @@ async function openCurate() {
     const h = await call("GET", "/health");
     $("curate-schema").textContent = `Curated under SCALE Catalysis, schema scale-catal v${h.schema_version} (scale-catal ${h.scale_catal}).`;
     $("curate-keep-row").hidden = !h.keeps_texts;
-    if (h.contact) $("curate-contact").innerHTML = `<b>A rights holder</b> can ask for a paper's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
+    if (h.contact) $("curate-contact").innerHTML = `A rights holder can ask for a source's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
     if (h.keeps_texts && token) showKept();
-    // with an inbox, Claude Code curates on the service's own computer, one paper at a time
-    if (h.inbox) $("curate-time").textContent = "Claude Code curates one paper at a time on the service's computer, which can take an hour; you can close the page and come back.";
+    // with an inbox, Claude Code curates on the service's own computer, one source at a time
+    if (h.inbox) $("curate-time").textContent = "Claude Code curates one source at a time on the service's computer, which can take an hour; you can close the page and come back.";
     if (h.inbox && token) showInbox();
   } catch (e) { $("curate-schema").innerHTML = `<span class="gx-err">The service did not answer: ${esc(e.message)}</span>`; }
 }
@@ -189,18 +204,18 @@ function boardRow(r) {
       <span class="gx-level gx-level-${esc((lv.name || "").toLowerCase().replace(/ /g, "-"))}">${esc(lv.name || "")}</span>${mine ? ` <span class="gx-subtle">you</span>` : ""}</td>
     <td class="gx-num"><b>${Number(r.score).toLocaleString()}</b></td><td class="gx-num">${Number(r.triples).toLocaleString()}</td>
     <td class="gx-num">${boardData.with_reach ? Number(r.reach).toLocaleString() : "–"}</td><td class="gx-num">${pct(r.completeness)}</td><td class="gx-num">${esc(r.sources)}</td></tr>
-    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Paper</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
+    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
 }
 function drawBoard() {
   const rows = boardData[boardTab] || [];
   if (!rows.length) {
-    $("board").innerHTML = `<p class="gx-muted">${boardTab === "recent" ? "Nothing merged in the last 90 days yet." : "No contributions are merged yet: the first paper you contribute puts you at the top."}</p>`;
+    $("board").innerHTML = `<p class="gx-muted">${boardTab === "recent" ? "Nothing merged in the last 90 days yet." : "No contributions are merged yet: the first source you contribute puts you at the top."}</p>`;
     return;
   }
   const top = rows.slice(0, BOARD_TOP);
   const me = login && rows.find((r, i) => i >= BOARD_TOP && r.github.toLowerCase() === login.toLowerCase());
   $("board").innerHTML = `<table class="gx-board-table"><tr><th>#</th><th>Contributor</th><th class="gx-num">Score</th><th class="gx-num">Triples</th>
-    <th class="gx-num" title="Distinct people and days whose questions it answered">Reach</th><th class="gx-num" title="Checklist items and evidence found">Complete</th><th class="gx-num">Papers</th></tr>
+    <th class="gx-num" title="Distinct people and days whose questions it answered">Reach</th><th class="gx-num" title="Checklist items and evidence found">Complete</th><th class="gx-num">Sources</th></tr>
     ${top.map(boardRow).join("")}${me ? `<tr class="gx-board-gap"><td colspan="7">…</td></tr>${boardRow(me)}` : ""}</table>`
     + (rows.length > BOARD_TOP && !me ? `<p class="gx-subtle">${rows.length - BOARD_TOP} more contributors.</p>` : "")
     + (boardData.with_reach ? "" : `<p class="gx-subtle">Reach is counted by the curation service; it shows here once the service is set up.</p>`);
@@ -229,7 +244,7 @@ $("board-curate").onclick = () => { $("board-dialog").close(); openCurate(); };
 async function showKept() {
   try {
     const r = await call("GET", "/kept");
-    $("curate-kept").innerHTML = (r.kept || []).length ? `<details><summary>Papers kept with your agreement (${r.kept.length})</summary><ul>${r.kept.map((k) =>
+    $("curate-kept").innerHTML = (r.kept || []).length ? `<details><summary>Sources kept with your agreement (${r.kept.length})</summary><ul>${r.kept.map((k) =>
       `<li>${esc(k.title || k.doi || k.sha256.slice(0, 12))} <button type="button" class="gx-btn gx-btn-tiny" data-forget="${esc(k.sha256)}">Withdraw</button></li>`).join("")}</ul></details>` : "";
     $("curate-kept").querySelectorAll("[data-forget]").forEach((b) => (b.onclick = async () => {
       b.disabled = true;
@@ -237,12 +252,12 @@ async function showKept() {
     }));
   } catch { $("curate-kept").innerHTML = ""; }
 }
-// The publications this reader sent to the inbox, each with its state; a curated one opens again, with its receipt.
+// The sources this reader sent to the inbox, each with its state; a curated one opens again, with its receipt.
 async function showInbox() {
   try {
     const jobs = ((await call("GET", "/inbox")).jobs || []).slice(0, 10);
     const open = jobs.some((j) => !["done", "failed"].includes(j.state));
-    $("curate-inbox").innerHTML = jobs.length ? `<details${open ? " open" : ""}><summary>Your publications in the inbox (${jobs.length})</summary><ul>${jobs.map((j) =>
+    $("curate-inbox").innerHTML = jobs.length ? `<details${open ? " open" : ""}><summary>Your sources in the inbox (${jobs.length})</summary><ul>${jobs.map((j) =>
       `<li>${esc(j.filename || j.doi || j.id.slice(0, 8))} · ${esc(j.state)} <button type="button" class="gx-btn gx-btn-tiny" data-follow="${esc(j.id)}">${j.state === "done" ? "Open" : "Follow"}</button></li>`).join("")}</ul></details>` : "";
     $("curate-inbox").querySelectorAll("[data-follow]").forEach((b) => (b.onclick = () => { $("curate-job").hidden = false; followJob(b.dataset.follow, true); }));
   } catch { $("curate-inbox").innerHTML = ""; }
@@ -287,7 +302,7 @@ function showKnown(k) {
   $("curate-job").innerHTML = (k.in_commons
     ? `<div class="gx-state">Already in catal-commons</div><div>${k.in_commons.map((h) => `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.file)}</a>`).join(", ")}</div>`
     : k.proposed ? `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`
-    : `<div class="gx-state">Already curated for you</div><div>You sent this paper before (the same ${esc((k.same_as.by || []).map((b) => ({ text_sha256: "PDF", doi: "DOI", title_year: "title and year" })[b] || b.replace("identifier:", "")).join(", "))}); its graph is in your inbox.</div>`)
+    : `<div class="gx-state">Already curated for you</div><div>You sent this source before (the same ${esc((k.same_as.by || []).map((b) => ({ text_sha256: "PDF", doi: "DOI", title_year: "title and year" })[b] || b.replace("identifier:", "")).join(", "))}); its graph is in your inbox.</div>`)
     + `<div class="gx-subtle">Nothing was curated, so nothing was spent.</div><p>`
     + (commons && k.in_commons ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-open">Open catal-commons</button> ` : "")
     + (k.same_as ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-mine">Open it</button> ` : "")
@@ -304,7 +319,7 @@ async function followJob(id, inbox = false) {
     try { j = await call("GET", `/jobs/${id}`); } catch (e) { job.innerHTML = `<span class="gx-err">${esc(e.message)}</span>`; return; }
     const log = (j.log || []).slice(-12).map((l) => `<li>${esc(l.t)} s · ${esc(l.msg)}</li>`).join("");
     const src = j.source ? `<div class="gx-subtle">${esc(j.source.pages)} pages · rights: ${esc(j.source.rights_class)} · schema ${esc(j.source.schema_version)}</div>` : "";
-    const wait = j.position ? `<div class="gx-subtle">${esc(j.position)} ${j.position > 1 ? "publications wait" : "publication waits"} before yours</div>` : "";
+    const wait = j.position ? `<div class="gx-subtle">${esc(j.position)} ${j.position > 1 ? "sources wait" : "source waits"} before yours</div>` : "";
     job.innerHTML = `<div class="gx-state">${esc(j.state)}</div>${src}${wait}<ol>${log}</ol>`;
     if (j.known) { showKnown(j.known); return; }
     if (j.state === "done") {
@@ -325,7 +340,7 @@ async function followJob(id, inbox = false) {
 // contributed (only that graph, unchanged, by the user it was curated for).
 async function openCurated(doc, receipt) {
   if (!doc) return;
-  const title = doc.graph?.title || "Curated publication";
+  const title = doc.graph?.title || "Curated source";
   const entry = { id: `curated-${title.toLowerCase().replace(/\W+/g, "-").slice(0, 40)}`, title, from: "service" };
   await openGraph(entry, JSON.stringify(doc));
   G.receipt = receipt || null;
@@ -359,7 +374,7 @@ async function checkContribution() {
       <ul class="gx-contrib-terms"><li>Adds ${Number(p.records.triples).toLocaleString()} new triples (${esc(p.records.nodes)} records, ${esc(p.records.links)} links), your credit on the leaderboard</li>
         ${p.repeats && (p.repeats.records.length + p.repeats.links + p.repeats.values) ? `<li>${esc(p.repeats.records.length + p.repeats.links + p.repeats.values)} repeats of what catal-commons holds are discarded and not counted</li>` : ""}
         ${p.conflicts && p.conflicts.length ? `<li>${esc(p.conflicts.length)} values differ from catal-commons' records; the reviewer decides</li>` : ""}<li>A public pull request on GitHub, naming you</li>
-        <li>Shared under CC BY 4.0; ${esc(p.quotes.kept)} quotes kept, ${esc(p.quotes.withheld)} withheld for the paper's rights</li><li>Reviewed by a person before it is merged</li></ul>`);
+        <li>Shared under CC BY 4.0; ${esc(p.quotes.kept)} quotes kept, ${esc(p.quotes.withheld)} withheld for the source's rights</li><li>Reviewed by a person before it is merged</li></ul>`);
   } catch (e) { setContrib(`<span class="gx-err">${esc(e.message)}</span>`); }
 }
 async function contribute() {
@@ -981,15 +996,27 @@ async function search(q) {
         <div class="gx-quote">“${esc(h.text)}”</div>
         <div class="gx-meta">${esc(h.label || "")}: ${esc(h.record_name || h.record)} · ${esc(name(G.byId.get(h.source)))}${h.source_year ? ` (${esc(h.source_year)})` : ""}, ${esc(h.locator || "")} · ${Number(h.score || 0).toFixed(3)}</div></div>`).join("")
       : `<p>No evidence matches “${esc(q)}”.</p>`) + (SERVICE && !token ? `<p class="gx-meta">These are the quotes that match, found in this browser.
-        <a href="${esc(signInUrl())}">Sign in with GitHub</a> to have
+        <a href="#" role="button" data-signin="search">Sign in with GitHub</a> to have
         questions answered in words: free, no API key.</p>` : ""));
     $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => goTo(el.dataset.id)));
   } catch (err) { card("Matching evidence", `<p class="gx-card-warn">${esc(err.message)}</p>`); }
 }
 // ------------------------------------------------------------------------------------------ answers in words
-// The page keeps the service's session token only (sessionStorage, or localStorage when it was saved before).
-const store = { get(k) { try { return localStorage.getItem(k) || sessionStorage.getItem(k) || ""; } catch { return ""; } },
-  set(k, v, keep) { try { (keep ? localStorage : sessionStorage).setItem(k, v); if (!keep) localStorage.removeItem(k); } catch { /* storage off */ } } };
+// The page keeps the service's session token (sessionStorage, or localStorage when it was saved before) and the sign-in
+// under way (this tab's sessionStorage only). Each storage is tried on its own, so one that is blocked hides no other.
+const inStore = (kind, f) => { try { return f(window[kind]); } catch { return undefined; } };
+const store = {
+  get: (k) => inStore("localStorage", (s) => s.getItem(k)) || inStore("sessionStorage", (s) => s.getItem(k)) || "",
+  set(k, v, keep) {              // true when it was kept
+    const ok = inStore(keep ? "localStorage" : "sessionStorage", (s) => { if (v) s.setItem(k, v); else s.removeItem(k); return true; });
+    if (!keep) inStore("localStorage", (s) => s.removeItem(k));
+    return ok === true;
+  },
+  take(k) {                      // read once, from this tab only
+    const v = inStore("sessionStorage", (s) => s.getItem(k)) || "";
+    inStore("sessionStorage", (s) => s.removeItem(k));
+    return v;
+  } };
 // A question is answered by the service (the query-graph skill over this graph, within the service's budget) for a
 // signed-in reader; anyone else sees the matching evidence, found in this browser.
 async function ask(question) {

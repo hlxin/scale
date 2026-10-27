@@ -22,7 +22,7 @@
 <body>
 <div class="gx-page">
   <header class="gx-toolbar">
-    <button class="gx-curate-open" id="curate-open" type="button" title="Upload a publication (a PDF or a DOI), curate it into a graph and explore it">
+    <button class="gx-curate-open" id="curate-open" type="button" title="Upload a source (a paper, patent or report, as a PDF or a DOI), curate it into a graph and explore it">
       <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3 H6 a2 2 0 0 0 -2 2 V19 a2 2 0 0 0 2 2 H18 a2 2 0 0 0 2 -2 V9 Z M14 3 V9 H20 M12 12 V18 M9 15 H15"/></svg>
       <span>Upload, curate, and explore</span>
     </button>
@@ -171,46 +171,43 @@
 
 <dialog class="gx-dialog gx-curate" id="curate-dialog">
   <form method="dialog">
-    <h2>Curate a publication</h2>
-    <p class="gx-muted">A PDF, a DOI, or both. A model reads the paper and records it as a graph under SCALE Catalysis; the
-      SCALE tools check every record, and every quote against the paper's own text. <span id="curate-time">It takes a few
-      minutes.</span></p>
+    <h2>Curate a source</h2>
+    <p class="gx-muted">A paper, patent or report, as a PDF or a DOI. SCALE turns it into a graph and checks every quote
+      against the source. <span id="curate-time">It takes a few minutes.</span></p>
     <label class="gx-drop" id="curate-drop">
       <input type="file" id="curate-pdf" accept="application/pdf,.pdf">
       <span id="curate-pdf-name">Drop a PDF here, or choose one</span>
     </label>
-    <label>DOI <span class="gx-subtle">(alone, or with the PDF for its title, authors and licence)</span>
+    <label>DOI <span class="gx-subtle">(optional with a PDF; alone, open-access sources only)</span>
       <input type="text" id="curate-doi" placeholder="10.1038/s41467-022-29926-w" autocomplete="off"></label>
-    <p class="gx-subtle">With a DOI alone, only an open-access copy can be fetched. Behind a paywall, upload the PDF you can
-      read through your library.</p>
-    <section class="gx-share" aria-label="What is shared">
-      <h3>What is shared, and with whom</h3>
+    <section class="gx-share" aria-label="What happens to the source">
       <ul>
-        <li><b>To curate,</b> the PDF or DOI goes to the SCALE service, which sends the paper's text to Anthropic's Claude
-          API to read it.</li>
-        <li><b>The paper is kept only to curate it again</b> when SCALE's schema changes, so nobody has to upload it
-          twice: the PDF and its text, always for a paper under an open licence, and for any other paper only if you tick
-          the box below; otherwise the service deletes them when the job ends. A kept paper is private to the service,
-          never published, and you can withdraw your agreement at any time, which deletes it.</li>
-        <li><b>The graph comes back to you only.</b> Nothing is published unless you contribute it.</li>
-        <li><b>Contributing is a separate click.</b> It opens a public pull request on
-          <a href="https://github.com/hlxin/scale" target="_blank" rel="noopener">github.com/hlxin/scale</a> that names your
-          GitHub login, and once it is merged your login joins the contributors' leaderboard. The records are shared
-          under CC BY 4.0; they quote no text of a paper under copyright. A person reviews it before it joins catal-commons.</li>
-        <li><b>No API key, no cost to you.</b> Signing in with GitHub only tells the service your login, so it can keep
-          use within its daily budget.</li>
-        <li><b>Your questions count toward others' credit.</b> When you are signed in, the leaderboard counts which
-          contributions answered you (a digest of your login and the day, never the question).</li>
-        <li id="curate-contact"><b>A rights holder</b> can ask for a paper's records or kept copy to be removed by
-          <a href="https://github.com/hlxin/scale/issues" target="_blank" rel="noopener">opening an issue</a>.</li>
+        <li><b>Free.</b> No API key. Signing in with GitHub gives the service only your login.</li>
+        <li><b>Private.</b> The graph comes back to you only. It is published only if you click Contribute, for a person
+          to review.</li>
+        <li><b>Read by Claude.</b> The source's text goes to the SCALE service and Anthropic's Claude API.</li>
+        <li><b>Deleted after the job,</b> unless it is openly licensed or you tick Keep below.</li>
       </ul>
+      <details>
+        <summary>More details</summary>
+        <ul>
+          <li>A kept copy is private to the service, used only to curate the source again when SCALE's schema changes.
+            You can withdraw your agreement at any time, which deletes it.</li>
+          <li>Contributing opens a public pull request on
+            <a href="https://github.com/hlxin/scale" target="_blank" rel="noopener">github.com/hlxin/scale</a> under your
+            GitHub login. The records are shared under CC BY 4.0 and quote no text of a source in copyright. Once merged,
+            your login joins the contributors' leaderboard.</li>
+          <li>When you are signed in, the leaderboard counts which contributions answered your questions (a digest of your
+            login and the day, never the question).</li>
+          <li id="curate-contact">A rights holder can ask for a source's records or kept copy to be removed by
+            <a href="https://github.com/hlxin/scale/issues" target="_blank" rel="noopener">opening an issue</a>.</li>
+        </ul>
+      </details>
     </section>
-    <label class="gx-check gx-keep" id="curate-attest-row" hidden><input type="checkbox" id="curate-attest"> I have lawful
-      access to this PDF (for example through my library's subscription), and as far as I know its licence allows text
-      mining with an AI tool</label>
-    <label class="gx-check gx-keep" id="curate-keep-row" hidden><input type="checkbox" id="curate-keep"> Keep this paper (the
-      PDF and its text) privately so SCALE can curate it again after a schema change (a paper under an open licence is
-      kept without asking)</label>
+    <label class="gx-check gx-keep" id="curate-attest-row" hidden><input type="checkbox" id="curate-attest"> I can lawfully use
+      this PDF (for example through my library), and as far as I know its licence allows text mining with AI</label>
+    <label class="gx-check gx-keep" id="curate-keep-row" hidden><input type="checkbox" id="curate-keep"> Keep a private copy so
+      SCALE can curate it again after a schema change</label>
     <div class="gx-curate-account" id="curate-account"></div>
     <div class="gx-kept" id="curate-kept"></div>
     <div class="gx-kept" id="curate-inbox"></div>
@@ -222,7 +219,7 @@
 <dialog class="gx-dialog gx-board" id="board-dialog">
   <form method="dialog">
     <h2>Contributors to catal-commons</h2>
-    <p class="gx-muted">Everyone who has added a paper to catal-commons, SCALE's shared catalysis graph, scored by the
+    <p class="gx-muted">Everyone who has added a source to catal-commons, SCALE's shared catalysis graph, scored by the
       knowledge they added (evidence-backed triples) and by how often it answers other people's questions. Each entry is
       a merged pull request, read from
       <a href="https://github.com/hlxin/scale/blob/main/graphs/catal-commons/contributors.yaml" target="_blank" rel="noopener">contributors.yaml</a>.</p>
@@ -233,7 +230,7 @@
     <div id="board"></div>
     <details class="gx-board-how"><summary>How scoring works</summary><dl id="board-how"></dl>
       <p class="gx-subtle">The rules are one function, <code>tools/commons.py</code>; changing them is a pull request.</p></details>
-    <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="board-curate">Curate a paper</button></menu>
+    <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="board-curate">Curate a source</button></menu>
   </form>
 </dialog>
 <script type="module" src="explorer.js"></script>

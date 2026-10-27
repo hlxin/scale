@@ -28,9 +28,21 @@
     computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only the query
     commands; the plans it wrote run again through `scale query` for the page, and the records they return credit the
     commons sources, as the dialog says. Two questions are answered at a time.
+- **Sign-in hardened, from an outside review (no schema change).** Requested by @hlxin after a Codex review of #72:
+  each sign-in is one transaction of the tab that starts it (a random nonce the service returns, checked by the page),
+  so a link carrying another person's token or their unfinished sign-in no longer signs a reader in; the OAuth state is
+  used once; a return address with control characters is refused and the redirect is rebuilt from its parts, so it
+  cannot add a header. The service now carries the page's address, its open graph (`#g=…`) included, through GitHub
+  and back, which keeps the graph from every sign-in link, with storage blocked in part, and across tabs. Where a
+  sign-in started (Curate) stays in its own tab.
 - **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
   open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
   row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.
+- **The Curate dialog, short and plain, and about a source (no schema change).** Requested by @hlxin: the dialog read
+  as too much to agree to. It now says in two lines what curating does, then four short points (free, private, read by
+  Claude, deleted after the job unless kept); the rest folds under "More details". A source is a paper, patent or
+  report, so the explorer says "source" where it said "paper" or "publication" (the dialog, the leaderboard, kept
+  copies).
 - **The toolbar's Curate button reads "Upload, curate, and explore" and looks like the Sign in button (no schema
   change).** Requested by @hlxin: it is an outlined button like the toolbar's others, no longer filled in the link
   colour, and its name says what it does: upload a publication, curate it into a graph, explore it.

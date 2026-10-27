@@ -101,6 +101,11 @@ When a job is done, the page offers **Contribute to the commons**:
   before the page links to the service.
 - **How it works.** GitHub's OAuth returns the user to the page with a signed session token, an HMAC with
   `SCALE_WEB_SECRET`. The GitHub token is read once for the login and dropped.
+- **One sign-in, one tab.** The page starts each sign-in with a random nonce that it keeps in that tab
+  (`/auth/login?return=…&nonce=…`). The service returns the nonce with its answer, and the page takes a token only with
+  the nonce it is waiting for. So a link carrying someone else's token, or someone else's unfinished sign-in, never
+  signs a reader in. The OAuth state is used once. The return address must be a page of the site in plain ASCII, and the
+  answer is merged into its fragment, so the explorer's open graph (`#g=…`) comes back with the reader.
 - **Daily budgets** (UTC days, counted in memory, so run one instance):
   - jobs per user, and questions per user;
   - tokens per job;

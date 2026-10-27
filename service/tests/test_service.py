@@ -7,6 +7,7 @@ import os
 import subprocess
 import sys
 import time
+import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
@@ -133,16 +134,32 @@ def test_search_runs_without_sign_in_and_asking_needs_it(tmp_path):
     assert svc.route("POST", "/ask", {}, {}, json.dumps({"graph": graph, "question": "?"}).encode())[0] == 401
 
 
+NONCE = "n0nce-of-this-tab-0123"
+
+
+def signed_in(svc, ret="https://hlxin.github.io/scale/", nonce=NONCE):
+    """Start a sign-in at /auth/login; the OAuth state GitHub would send back to /auth/callback."""
+    st, _, h = svc.route("GET", "/auth/login", {"return": ret, "nonce": nonce}, {}, b"")
+    assert st == 302 and h["Location"].startswith("https://github.com/login/oauth/authorize?")
+    return urllib.parse.parse_qs(urllib.parse.urlsplit(h["Location"]).query)["state"][0]
+
+
+def answer(location):
+    """The page's address and the answer in its fragment."""
+    u = urllib.parse.urlsplit(location)
+    return urllib.parse.urlunsplit((u.scheme, u.netloc, u.path, u.query, "")), dict(urllib.parse.parse_qsl(u.fragment))
+
+
 def test_sign_in_admits_only_the_allowlist_and_returns_only_to_the_site(tmp_path, monkeypatch):
     svc = Service(cfg(tmp_path), repo=REPO)
-    assert svc.route("GET", "/auth/login", {"return": "https://evil.example/"}, {}, b"")[0] == 400
-    st, _, h = svc.route("GET", "/auth/login", {"return": "https://hlxin.github.io/scale/"}, {}, b"")
-    assert st == 302 and h["Location"].startswith("https://github.com/login/oauth/authorize?")
-    state = dict(x.split("=", 1) for x in h["Location"].split("?", 1)[1].split("&"))["state"]
-    for login, expect in (("Ada", "#token="), ("eve", "#signin=not-allowed")):
+    assert svc.route("GET", "/auth/login", {"return": "https://evil.example/", "nonce": NONCE}, {}, b"")[0] == 400
+    for login, expect in (("Ada", "token"), ("eve", "signin")):
+        state = signed_in(svc)
         monkeypatch.setattr(auth, "github_login", lambda c, code, login=login: login)
         _, _, h2 = svc.route("GET", "/auth/callback", {"code": "x", "state": state}, {}, b"")
-        assert h2["Location"].startswith("https://hlxin.github.io/scale/" + expect)
+        page, frag = answer(h2["Location"])
+        assert page == "https://hlxin.github.io/scale/" and expect in frag and frag["nonce"] == NONCE
+    assert frag["signin"] == "not-allowed" and frag["login"] == "eve"
     token = svc.route("GET", "/auth/callback", {"code": "x", "state": "forged.mac"}, {}, b"")
     assert token[0] == 400
     good = auth.session_for(svc.cfg, "ada")
@@ -152,14 +169,39 @@ def test_sign_in_admits_only_the_allowlist_and_returns_only_to_the_site(tmp_path
     assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {old}"}, b"")[0] == 401
 
 
+def test_a_sign_in_is_one_transaction_of_the_tab_that_started_it(tmp_path, monkeypatch):
+    """The page's nonce goes through GitHub and back with the answer, the OAuth state is used once, and the page's
+    fragment (the explorer's open graph) comes back with the answer merged into it."""
+    svc = Service(cfg(tmp_path), repo=REPO)
+    monkeypatch.setattr(auth, "github_login", lambda c, code: "ada")
+    for nonce in ("", "short", "has space in it 0123456", "x" * 129):        # no nonce, no sign-in
+        assert svc.route("GET", "/auth/login", {"return": "https://hlxin.github.io/scale/", "nonce": nonce}, {}, b"")[0] == 400
+    state = signed_in(svc, ret="https://hlxin.github.io/scale/?a=1#g=methanol%2Fpre1966&token=stale&nonce=old")
+    _, _, h = svc.route("GET", "/auth/callback", {"code": "x", "state": state}, {}, b"")
+    page, frag = answer(h["Location"])
+    assert page == "https://hlxin.github.io/scale/?a=1"
+    assert frag["g"] == "methanol/pre1966" and frag["nonce"] == NONCE and frag["token"] != "stale"
+    assert auth.unsign(svc.cfg, frag["token"])["sub"] == "ada"
+    again = svc.route("GET", "/auth/callback", {"code": "y", "state": state}, {}, b"")   # the same state twice
+    assert again[0] == 400 and "used already" in again[1]["error"]
+
+
+def test_a_return_address_cannot_add_a_header(tmp_path):
+    svc = Service(cfg(tmp_path), repo=REPO)
+    for ret in ("https://hlxin.github.io/scale/\r\nX-Injected: yes", "https://hlxin.github.io/scale/\nSet-Cookie: a=b",
+                "https://hlxin.github.io/sc ale/", "https://hlxin.github.io/scälé/", "javascript://hlxin.github.io/%0aalert(1)",
+                "https://hlxin.github.io.evil.example/", "https://user@hlxin.github.io/"):
+        assert svc.route("GET", "/auth/login", {"return": ret, "nonce": NONCE}, {}, b"")[0] == 400, ret
+    assert auth.clean_return(svc.cfg, "https://hlxin.github.io") == "https://hlxin.github.io/"
+
+
 def test_an_allowlist_of_star_admits_any_github_account(tmp_path, monkeypatch):
     svc = Service(cfg(tmp_path), repo=REPO)
     svc.cfg.allowlist = ["*"]
-    _, _, h = svc.route("GET", "/auth/login", {"return": "https://hlxin.github.io/scale/"}, {}, b"")
-    state = dict(x.split("=", 1) for x in h["Location"].split("?", 1)[1].split("&"))["state"]
+    state = signed_in(svc)
     monkeypatch.setattr(auth, "github_login", lambda c, code: "Eve")
     _, _, h2 = svc.route("GET", "/auth/callback", {"code": "x", "state": state}, {}, b"")
-    assert h2["Location"].startswith("https://hlxin.github.io/scale/#token=")
+    assert "token" in answer(h2["Location"])[1]
     eve = auth.session_for(svc.cfg, "eve")
     assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {eve}"}, b"")[1]["login"] == "eve"
     svc.cfg.allowlist = ["ada"]                                  # the session stops when the account is no longer admitted
