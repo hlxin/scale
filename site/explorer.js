@@ -189,14 +189,14 @@ async function openCurate() {
 }
 $("curate-open").onclick = () => openCurate();
 // The leaderboard: catal-commons' contributors scored by tools/commons.py (SCORING). The service's copy carries each
-// paper's reach (how often it answered other people); the site's copy (data/leaderboard.json) is the same without it.
+// source's reach (how often it answered other people); the site's copy (data/leaderboard.json) is the same without it.
 let boardData = null, boardTab = "contributors";
 const BOARD_TOP = 20;
 const pct = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
 function boardRow(r) {
   const lv = r.level || {};
   const next = lv.next ? `<div class="gx-subtle">${Number(lv.to_next).toLocaleString()} to ${esc(lv.next)}</div>` : "";
-  const papers = (r.contributions || []).map((c) => `<tr><td>${esc(c.source)}</td><td>${esc(c.added)}</td><td>${Number(c.triples).toLocaleString()}</td>
+  const sources = (r.contributions || []).map((c) => `<tr><td>${esc(c.source)}</td><td>${esc(c.added)}</td><td>${Number(c.triples).toLocaleString()}</td>
     <td>${Number(c.reach).toLocaleString()}</td><td>${pct(c.completeness)}</td><td>${Number(c.score).toLocaleString()}</td></tr>`).join("");
   const mine = login && r.github.toLowerCase() === login.toLowerCase();
   return `<tr class="gx-board-row${mine ? " is-me" : ""}" tabindex="0"><td>${esc(r.rank)}</td>
@@ -204,7 +204,7 @@ function boardRow(r) {
       <span class="gx-level gx-level-${esc((lv.name || "").toLowerCase().replace(/ /g, "-"))}">${esc(lv.name || "")}</span>${mine ? ` <span class="gx-subtle">you</span>` : ""}</td>
     <td class="gx-num"><b>${Number(r.score).toLocaleString()}</b></td><td class="gx-num">${Number(r.triples).toLocaleString()}</td>
     <td class="gx-num">${boardData.with_reach ? Number(r.reach).toLocaleString() : "–"}</td><td class="gx-num">${pct(r.completeness)}</td><td class="gx-num">${esc(r.sources)}</td></tr>
-    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
+    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-sources"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${sources}</table></td></tr>`;
 }
 function drawBoard() {
   const rows = boardData[boardTab] || [];
@@ -240,7 +240,7 @@ $("board-open").onclick = async () => {
   } catch { $("board").innerHTML = `<p class="gx-muted">The leaderboard is published with the site.</p>`; }
 };
 $("board-curate").onclick = () => { $("board-dialog").close(); openCurate(); };
-// The papers the service keeps because this reader agreed, each with a way to withdraw.
+// The sources the service keeps because this reader agreed, each with a way to withdraw.
 async function showKept() {
   try {
     const r = await call("GET", "/kept");
@@ -296,7 +296,7 @@ async function startCuration(again = false) {
   $("curate-start").disabled = !token;
 }
 $("curate-start").onclick = () => startCuration();
-// The commons holds the paper already, or an open contribution adds it: nothing was curated and nothing spent.
+// The commons holds the source already, or an open contribution adds it: nothing was curated and nothing spent.
 function showKnown(k) {
   const commons = manifest.find((e) => e.id === "catal-commons");
   $("curate-job").innerHTML = (k.in_commons

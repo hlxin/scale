@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **"Source", not "paper", on the one-source page and in the service (no schema change).** Requested by @hlxin after
+  #75: the page `site/publication.html` (its title, heading and prompts), the service's messages and help (the
+  inbox's and its runner's included), its README, the leaderboard's "how scoring works" and the code's descriptions
+  say "source" (a paper, patent or report) where they said "paper" or "publication". The page keeps its address, a
+  kept source's folder keeps its file names, and the runner's instructions to Claude Code are unchanged.
 - **The inbox: Claude Code curates on the service's own computer (no schema change).** Requested by @diazr04: a
   computer of the lab receives the papers the page uploads and Claude Code curates each one under the schema, keeping
   every promise of the Curate dialog: the graph comes back to its owner only, contributing is a separate click, and a

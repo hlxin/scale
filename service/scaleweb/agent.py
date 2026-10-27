@@ -1,4 +1,4 @@
-"""The two model loops: curate one publication, and answer a question from a graph.
+"""The two model loops: curate one source, and answer a question from a graph.
 
 Both run the model (the Claude Messages API, through a client the caller passes) over tools that call the scale-catal
 code itself: the curation loop reads the page texts, describes the schema, writes records into the working graph and

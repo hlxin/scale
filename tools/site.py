@@ -2,13 +2,13 @@
 
 ``scale site build --out DIR`` writes the site into DIR:
 
-* the pages of ``site/``: ``index.html`` (the graph explorer) and ``publication.html`` (one publication into a graph,
+* the pages of ``site/``: ``index.html`` (the graph explorer) and ``publication.html`` (one source into a graph,
   which needs the web service, service/README.md);
 * ``data/graphs.json``, the graphs the explorer offers, and ``data/graphs/<id>.json``: the curated graphs
   (``graphs/*``), each built from its parts as ``scale graph build`` does (the examples are not offered);
 * ``data/query-graph.md``, the query-graph skill, which a question asked in the page follows;
 * ``data/leaderboard.json``, the contributors of catal-commons scored and ranked from its ``contributors.yaml``
-  (``commons.boards``: all time and the last 90 days, with how scoring works; the reach of each paper is the web
+  (``commons.boards``: all time and the last 90 days, with how scoring works; the reach of each source is the web
   service's to count, so the page asks the service for it when one is set up);
 * ``py/scale-py.zip``, the ``scale`` package with the data a wheel bundles (``layout.BUNDLE``, without the repository's
   examples), which the page runs in Pyodide: a search, a plan or a description in the page is the same code as

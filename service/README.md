@@ -1,6 +1,6 @@
 # The SCALE web service
 
-One publication into a graph from a web page: a user uploads a PDF or gives a DOI or a link. The service fetches it,
+One source (a source, patent or report) into a graph from a web page: a user uploads a PDF or gives a DOI or a link. The service fetches it,
 curates it into a scale-catal graph, and returns the graph for the page [`site/publication.html`](../site/publication.html) to show and to answer
 questions from.
 
@@ -25,28 +25,28 @@ questions from.
   `stats`, `search` and `query`. These are the same functions as `scale graph query` and `scale graph search`, so a
   plan the model runs gives exactly the rows the CLI gives. The answer cites those rows, and the page lists the plans
   it ran. `/query` and `/search` run a plan or a search directly, without the model.
-- **Keeps a paper only when it may.** A job's folder, holding the PDF, the page texts and the working graph, is
-  deleted when the job ends (the paper is first copied to the kept papers when its licence or the user allows). The capped graph is held in memory until the page reads it, once, or until the
+- **Keeps a source only when it may.** A job's folder, holding the PDF, the page texts and the working graph, is
+  deleted when the job ends (the source is first copied to the kept sources when its licence or the user allows). The capped graph is held in memory until the page reads it, once, or until the
   job expires (an hour). Questions are answered from the graph the page sends, written to a temporary folder that is
   removed after the answer.
-- **The kept papers** (`SCALE_WEB_ARCHIVE`, [`scaleweb/archive.py`](scaleweb/archive.py)). So that a paper can be
+- **The kept sources** (`SCALE_WEB_ARCHIVE`, [`scaleweb/archive.py`](scaleweb/archive.py)). So that a source can be
   curated again after a schema change without anyone uploading it again, the copy the user gave (the PDF they
   uploaded, or the open-access copy fetched for a DOI, and its page texts) is kept in a private folder of the
-  service: always for a paper under an open licence, and for any other paper only when the user ticks the box that
+  service: always for a source under an open licence, and for any other source only when the user ticks the box that
   agrees to it (`?keep=1`, unticked by default), recorded with their login and the time. An embedding cannot be read
-  back into the numbers and quotes a curation needs, so the paper itself is what is kept. Nothing kept is published, committed or sent to a
-  page. `GET /kept` lists a user's agreements and `POST /kept/forget` withdraws one; the paper goes when none is left.
-- **Curating again.** `python -m scaleweb --recurate` curates every kept paper whose latest curation is under another
+  back into the numbers and quotes a curation needs, so the source itself is what is kept. Nothing kept is published, committed or sent to a
+  page. `GET /kept` lists a user's agreements and `POST /kept/forget` withdraws one; the source goes when none is left.
+- **Curating again.** `python -m scaleweb --recurate` curates every kept source whose latest curation is under another
   schema version than catal-commons', from its PDF (else its texts), within the day's budget (`--dry-run` lists them,
   `--only SHA256` takes one), and keeps each new graph beside it. Updating catal-commons with it is a pull request a person opens and reviews.
-- **Before keeping papers in copyright,** the person who runs the service checks that the law where it runs
+- **Before keeping sources in copyright,** the person who runs the service checks that the law where it runs
   allows it (text-and-data-mining exceptions differ between countries) and says so in the page's sharing note. A
-  contributor's agreement does not cover the publisher's rights: a paper read through a library subscription is
+  contributor's agreement does not cover the publisher's rights: a source read through a library subscription is
   governed by that library's licence, and some licences limit sending text to a third party's generative AI tool.
 - **A statement of access for every PDF.** An uploaded PDF is curated only when the user ticks that they have lawful
   access to it (for example through their library) and that, as far as they know, its licence allows text mining with
   an AI tool (`?attest=1`; without it the upload is refused). A DOI alone is curated only from an openly licensed copy.
-- **Removal.** A rights holder asks for a paper's records or kept copy to be removed at `SCALE_CONTACT_EMAIL` (the
+- **Removal.** A rights holder asks for a source's records or kept copy to be removed at `SCALE_CONTACT_EMAIL` (the
   page shows it), or by an issue on the repository; the person who runs the service removes the kept copy
   (`POST /kept/forget` for the contributor's agreement, or by deleting its folder) and opens the pull request that
   removes its records.
@@ -80,16 +80,16 @@ When a job is done, the page offers **Contribute to the commons**:
 `commons.boards` (`tools/commons.py`, `SCORING`) scores each contributor; the site publishes it without use counts
 (`data/leaderboard.json`), and `GET /leaderboard` adds them:
 
-- **Score** = the sum over a contributor's merged papers of triples x (1 + log2(1 + reach)). A **triple** is one
+- **Score** = the sum over a contributor's merged sources of triples x (1 + log2(1 + reach)). A **triple** is one
   evidence-backed statement: a link between two records, or a value a record or link states, when it cites evidence
   (evidence, notes, provenance, values not reported and bibliographic details do not count). **Reach** is how many
-  distinct (person, day) pairs had a question, query or search answered with one of the paper's records, counted by
-  the service for signed-in people other than the paper's contributor ([`scaleweb/usage.py`](scaleweb/usage.py)): the
+  distinct (person, day) pairs had a question, query or search answered with one of the source's records, counted by
+  the service for signed-in people other than the source's contributor ([`scaleweb/usage.py`](scaleweb/usage.py)): the
   same question a hundred times a day counts once, and nobody raises their own score. Only a keyed digest of the login
   and the day are kept, never the question (`SCALE_WEB_USAGE`).
 - **Completeness** (the checklist's should items and evidence patterns found) is shown beside the score, never mixed
   into it. **Levels** by score: Contributor, Curator (1,000), Senior curator (10,000), Fellow (100,000). Boards: all
-  time and the last 90 days; each contributor's row opens their papers.
+  time and the last 90 days; each contributor's row opens their sources.
 - The rules are published with the board ("How scoring works") and change by pull request.
 
 ## Who may use it
@@ -113,10 +113,10 @@ When a job is done, the page offers **Contribute to the commons**:
 
 ## What it costs, and who pays
 
-The service spends its own API key, so a reader needs no key and pays nothing. A paper costs about $1 to $3 with
+The service spends its own API key, so a reader needs no key and pays nothing. A source costs about $1 to $3 with
 Claude Opus 5.5 ($4 and $20 per million input and output tokens, $0.20 per million cached input tokens): the skill and
 the schema are a cached system prompt, and `SCALE_WEB_TOKENS_PER_JOB` caps a job. `SCALE_WEB_TOKENS_PER_DAY`, the jobs
-per user and a spending limit on the key in the Claude Console bound a day. A paper already in catal-commons costs
+per user and a spending limit on the key in the Claude Console bound a day. A source already in catal-commons costs
 nothing. Whoever runs the service pays for it: the project's API account, or a lab that runs its own instance for its
 members.
 
@@ -145,13 +145,13 @@ members.
 | `SCALE_WEB_REPO`, `SCALE_WEB_COMMONS` | the repository and the commons folder | `hlxin/scale`, `graphs/catal-commons` |
 | `SCALE_WEB_REVIEWERS` | GitHub logins asked to review each contribution, comma-separated | empty |
 | `SCALE_WEB_CONTRIBUTIONS_PER_USER` | contributions per user a day | 5 |
-| `SCALE_WEB_ARCHIVE` | a persistent, private folder for kept papers (a mounted volume) | empty: nothing is kept |
+| `SCALE_WEB_ARCHIVE` | a persistent, private folder for kept sources (a mounted volume) | empty: nothing is kept |
 | `SCALE_WEB_USAGE` | a persistent file for the leaderboard's use counts (scaleweb/usage.py) | empty: in memory |
-| `SCALE_WEB_INBOX` | a folder on the service's computer: each publication waits there for Claude Code, which curates it ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model curates |
+| `SCALE_WEB_INBOX` | a folder on the service's computer: each source waits there for Claude Code, which curates it ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model curates |
 | `SCALE_WEB_INBOX_LOGIN` | the GitHub login a PDF dropped into the inbox's queue by hand is credited to | empty: such a PDF is set aside |
 | `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner; a release recent enough for `SCALE_WEB_MODEL`, since an older one refuses a newer model) | `claude` |
-| `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
-| `SCALE_WEB_INBOX_WORKERS` | publications Claude Code curates at once in the inbox, each in its own folder | 1 |
+| `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one source | 200, 90 |
+| `SCALE_WEB_INBOX_WORKERS` | sources Claude Code curates at once in the inbox, each in its own folder | 1 |
 | `SCALE_WEB_ASK` | `claude-code`: questions in words are answered on the service's computer by Claude Code, confined as the inbox's curation is, two at a time ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model (the API key) |
 | `SCALE_WEB_PYTHON`, `SCALE_WEB_PORT` | for `service/launchd/scale-web.sh`: the Python with scale-catal's dependencies, and the service's port | `python3`, 8080 |
 
@@ -162,38 +162,38 @@ model loop (`SCALE_WEB_INBOX`, [`scaleweb/inbox.py`](scaleweb/inbox.py), [`scale
 Everything the Curate dialog says holds as it does for the model loop:
 
 - **Upload.** `POST /jobs` checks the sign-in, the statement of access and the commons as before, then puts the
-  publication in the inbox's queue and answers at once. The page follows the job (`GET /jobs/{id}`, readable until the
-  inbox forgets it, after 14 days) and lists the reader's publications (`GET /inbox`).
+  source in the inbox's queue and answers at once. The page follows the job (`GET /jobs/{id}`, readable until the
+  inbox forgets it, after 14 days) and lists the reader's sources (`GET /inbox`).
 - **Curate.** launchd starts the runner whenever the queue holds something ([`launchd/`](launchd/); elsewhere
-  `python -m scaleweb.runner --watch 30`). For each publication: `scale source start`; Claude Code
+  `python -m scaleweb.runner --watch 30`). For each source: `scale source start`; Claude Code
   (`claude -p`, the curate-corpus skill appended to its system prompt) fills the graph; `scale source check
   --derive-links` must pass, its problems going back to Claude Code twice at most; `scale source finish --public`. A
   run that records nothing fails.
-- **Confined.** Claude Code runs in restricted mode in the publication's folder: the file tools there and, of the
+- **Confined.** Claude Code runs in restricted mode in the source's folder: the file tools there and, of the
   shell, only `scale source check` and `scale graph describe`, in its sandbox (which runs no other command on its
-  own), with no network, no git and no token in its environment. The publication's text is data to it.
-- **The graph comes back to its owner only.** `GET /jobs/{id}` gives it to the reader who sent the paper, signed for
+  own), with no network, no git and no token in its environment. The source's text is data to it.
+- **The graph comes back to its owner only.** `GET /jobs/{id}` gives it to the reader who sent the source, signed for
   them as a job's graph is, and nothing is published unless they contribute it: Contribute, a separate click, opens
   the bot's pull request. The runner opens none.
 - **Kept as the page says.** When the job ends, the PDF and its page texts go to the archive (`SCALE_WEB_ARCHIVE`,
-  [`scaleweb/archive.py`](scaleweb/archive.py)) always for a paper under an open licence and for any other only when
+  [`scaleweb/archive.py`](scaleweb/archive.py)) always for a source under an open licence and for any other only when
   its owner ticked the box, and leave the inbox, done or failed. `GET /kept` and `POST /kept/forget` work as before.
-  `python -m scaleweb.runner --recurate` (`--dry-run` lists them) sends the kept papers curated under another schema
-  version than catal-commons' through the inbox again, and keeps each new graph beside its paper; updating catal-commons
+  `python -m scaleweb.runner --recurate` (`--dry-run` lists them) sends the kept sources curated under another schema
+  version than catal-commons' through the inbox again, and keeps each new graph beside its source; updating catal-commons
   with it is a person's pull request.
 - **By hand.** A PDF dropped into `queue/` is curated the same way for `SCALE_WEB_INBOX_LOGIN`, who opens its graph from
   the page; without that login it is set aside in `rejected/`.
 - **Several at once.** Each upload is a job of its own, told its place in the queue. One runner works the queue
   (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while it works: up to
-  `SCALE_WEB_INBOX_WORKERS` publications at once, each in its own folder with its own Claude Code, and the
+  `SCALE_WEB_INBOX_WORKERS` sources at once, each in its own folder with its own Claude Code, and the
   workers ask Crossref for a DOI's record one at a time, waiting out its "too many requests". More at once spends a
   Claude plan's usage sooner, not more of it. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
-- **The same paper twice.** Before Claude Code starts, the runner looks for the publication by its DOI or its PDF's
+- **The same source twice.** Before Claude Code starts, the runner looks for the source by its DOI or its PDF's
   digest (and by title and year when the DOI gives them) in catal-commons, in the open contributions and among the
   same reader's curated jobs; another reader's job never counts, since their graph is theirs. A repeat ends there and
   points to the other one; "Curate it anyway" sends it again.
 - **One Source.** catal-commons takes one Source per contribution, so a Source record Claude Code adds for a work the
-  publication cites goes back to it as a problem, with the check's errors.
+  source cites goes back to it as a problem, with the check's errors.
 - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words (`/ask`) is answered on the
   service's computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only
   `scale graph query`, `search`, `describe` and `stats`. The plans it wrote run again through `scale query` for the
@@ -222,7 +222,7 @@ docker build -f service/Dockerfile -t scale-web .          # from the repository
 docker run -p 8080:8080 --env-file scale-web.env scale-web
 ```
 
-The image runs on any container host. Curating one paper takes minutes, but the page polls `GET /jobs/{id}`, so no
+The image runs on any container host. Curating one source takes minutes, but the page polls `GET /jobs/{id}`, so no
 request is long. Locally without Docker:
 
 ```bash

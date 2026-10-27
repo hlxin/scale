@@ -91,6 +91,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     assert 'id="curate-open"' in page and "Upload, curate, and explore" in page and "viz-btn" not in page and "plotly" not in page.lower() and "Plotly" not in js
     # the Curate dialog is about a source (a paper, patent or report) and says what happens in four short points
     assert "<h2>Curate a source</h2>" in page and "Curate a publication" not in page and "<summary>More details</summary>" in page
+    # the one-source page says "source" too
+    one = (REPO / "site/publication.html").read_text()
+    assert "<title>SCALE One Source</title>" in one and "publication" not in one.replace("publication.html", "").lower()
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
