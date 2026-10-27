@@ -26,8 +26,8 @@ questions from.
   plan the model runs gives exactly the rows the CLI gives. The answer cites those rows, and the page lists the plans
   it ran. `/query` and `/search` run a plan or a search directly, without the model.
 - **Keeps a source only when it may.** A job's folder, holding the PDF, the page texts and the working graph, is
-  deleted when the job ends (the source is first copied to the kept sources when its licence or the user allows). The capped graph is held in memory until the page reads it, once, or until the
-  job expires (an hour). Questions are answered from the graph the page sends, written to a temporary folder that is
+  deleted when the job ends (the source is first copied to the kept sources when its licence or the user allows). The capped graph is held in memory until the page says it has it (`POST
+  /jobs/{id}/done`), or an hour after the job ends, so a reply lost on the way can be asked for again. Questions are answered from the graph the page sends, written to a temporary folder that is
   removed after the answer.
 - **The kept sources** (`SCALE_WEB_ARCHIVE`, [`scaleweb/archive.py`](scaleweb/archive.py)). So that a source can be
   curated again after a schema change without anyone uploading it again, the copy the user gave (the PDF they
@@ -100,7 +100,8 @@ When a job is done, the page offers **Contribute to the commons**:
   admits only those accounts: with an empty allowlist every GitHub sign-in ends in "not admitted", so set it (or `*`)
   before the page links to the service.
 - **How it works.** GitHub's OAuth returns the user to the page with a signed session token, an HMAC with
-  `SCALE_WEB_SECRET`. The GitHub token is read once for the login and dropped.
+  `SCALE_WEB_SECRET`. The GitHub token is read once for the login and dropped. Each token the service signs names its
+  use: a session (a day) signs a reader in, and a contribution receipt (a week) never does.
 - **One sign-in, one tab.** The page starts each sign-in with a random nonce that it keeps in that tab
   (`/auth/login?return=…&nonce=…`). The service returns the nonce with its answer, and the page takes a token only with
   the nonce it is waiting for. So a link carrying someone else's token, or someone else's unfinished sign-in, never

@@ -1,10 +1,11 @@
-"""Curation jobs: one source each, run in the background, kept only until their result is read or they expire.
+"""Curation jobs: one source each, run in the background, kept only until their owner has the result or they expire.
 
 A job is ``scale source start`` (the DOI resolved, the PDF read into page texts), the curation loop, then ``scale
 source finish --public``: the result is the graph with every quote capped by the source's rights (the uploaded PDF and
-its page texts never leave the service), its check and the model's summary. The job's folder is deleted when the
-result is read, when the job fails or when it expires. Before it goes, a finished job's source (the PDF and its page
-texts) is kept in the archive when the source's licence or the contributor's agreement allows (archive.py).
+its page texts never leave the service), its check and the model's summary. The job's working files are deleted
+when the job ends; its result stays in memory until the page says it has it (``done``) or an hour after the job ends,
+so that a reply lost on the way can be asked for again. Before the files go, a finished job's source (the PDF and its
+page texts) is kept in the archive when the source's licence or the contributor's agreement allows (archive.py).
 """
 
 from __future__ import annotations
@@ -121,23 +122,30 @@ class Jobs:
             finally:
                 shutil.rmtree(job["folder"] / "upload", ignore_errors=True)
                 shutil.rmtree(work, ignore_errors=True)          # the page texts and the PDF go now; the result stays in memory
+                job["ended"] = time.time()
 
     def view(self, jid: str, owner: str) -> dict | None:
-        """The job as its owner sees it; once a finished job is read, it is forgotten."""
+        """The job as its owner sees it, as often as they ask, until they say they have it (``done``) or it expires."""
         with self.lock:
             job = self.jobs.get(jid)
             if not job or job["owner"] != owner:
                 return None
-            out = {k: v for k, v in job.items() if k not in ("folder", "owner", "created", "text", "recurating")}
-            if job["state"] in ("done", "failed"):
-                self.jobs.pop(jid, None)
-                shutil.rmtree(job["folder"], ignore_errors=True)
-            return out
+            return {k: v for k, v in job.items() if k not in ("folder", "owner", "created", "ended", "text", "recurating")}
+
+    def done(self, jid: str, owner: str) -> bool:
+        """The owner has a finished job's result: forget it now. A job still running is not stopped."""
+        with self.lock:
+            job = self.jobs.get(jid)
+            if not job or job["owner"] != owner or job["state"] not in ("done", "failed"):
+                return False
+            self.jobs.pop(jid)
+        shutil.rmtree(job["folder"], ignore_errors=True)
+        return True
 
     def sweep(self) -> None:
         now = time.time()
         with self.lock:
             for jid, job in list(self.jobs.items()):
-                if now - job["created"] > self.cfg.job_ttl_s and job["state"] in ("done", "failed"):
+                if job["state"] in ("done", "failed") and now - job.get("ended", job["created"]) > self.cfg.job_ttl_s:
                     self.jobs.pop(jid)
                     shutil.rmtree(job["folder"], ignore_errors=True)

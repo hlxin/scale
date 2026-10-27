@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **Three fixes from a Codex review of the site (no schema change).** Requested by @hlxin: a contribution receipt no
+  longer signs anyone in (each token the service signs names its use, and each check takes only its own); the
+  reader's own graph (curated just now, or opened from a file) and a job under way are kept in the tab, and the address
+  names the graph, so signing in again or reloading loses neither; a finished job's result is kept until the page says
+  it has it (or an hour after the job ends), and the pages ask again when a reply is lost.
 - **"Source", not "paper", on the one-source page and in the service (no schema change).** Requested by @hlxin after
   #75: the page `site/publication.html` (its title, heading and prompts), the service's messages and help (the
   inbox's and its runner's included), its README, the leaderboard's "how scoring works" and the code's descriptions
