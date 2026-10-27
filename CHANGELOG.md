@@ -12,6 +12,11 @@
 - **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
   open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
   row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.
+- **The Curate dialog, short and plain, and about a source (no schema change).** Requested by @hlxin: the dialog read
+  as too much to agree to. It now says in two lines what curating does, then four short points (free, private, read by
+  Claude, deleted after the job unless kept); the rest folds under "More details". A source is a paper, patent or
+  report, so the explorer says "source" where it said "paper" or "publication" (the dialog, the leaderboard, kept
+  copies).
 - **The toolbar's Curate button reads "Upload, curate, and explore" and looks like the Sign in button (no schema
   change).** Requested by @hlxin: it is an outlined button like the toolbar's others, no longer filled in the link
   colour, and its name says what it does: upload a publication, curate it into a graph, explore it.
