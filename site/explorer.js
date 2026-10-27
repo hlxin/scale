@@ -182,6 +182,9 @@ async function openCurate() {
     $("curate-keep-row").hidden = !h.keeps_texts;
     if (h.contact) $("curate-contact").innerHTML = `A rights holder can ask for a source's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
     if (h.keeps_texts && token) showKept();
+    // with an inbox, Claude Code curates on the service's own computer, in turn with the other sources sent
+    if (h.inbox) $("curate-time").textContent = "Claude Code curates each source on the service's computer, in turn with the others sent, which can take an hour; you can close the page and come back.";
+    if (h.inbox && token) showInbox();
   } catch (e) { $("curate-schema").innerHTML = `<span class="gx-err">The service did not answer: ${esc(e.message)}</span>`; }
 }
 $("curate-open").onclick = () => openCurate();
@@ -249,6 +252,16 @@ async function showKept() {
     }));
   } catch { $("curate-kept").innerHTML = ""; }
 }
+// The sources this reader sent to the inbox, each with its state; a curated one opens again, with its receipt.
+async function showInbox() {
+  try {
+    const jobs = ((await call("GET", "/inbox")).jobs || []).slice(0, 10);
+    const open = jobs.some((j) => !["done", "failed"].includes(j.state));
+    $("curate-inbox").innerHTML = jobs.length ? `<details${open ? " open" : ""}><summary>Your sources in the inbox (${jobs.length})</summary><ul>${jobs.map((j) =>
+      `<li>${esc(j.filename || j.doi || j.id.slice(0, 8))} · ${esc(j.state)} <button type="button" class="gx-btn gx-btn-tiny" data-follow="${esc(j.id)}">${j.state === "done" ? "Open" : "Follow"}</button></li>`).join("")}</ul></details>` : "";
+    $("curate-inbox").querySelectorAll("[data-follow]").forEach((b) => (b.onclick = () => { $("curate-job").hidden = false; followJob(b.dataset.follow, true); }));
+  } catch { $("curate-inbox").innerHTML = ""; }
+}
 // One drop zone and one DOI field: a PDF (with or without its DOI), or a DOI alone.
 const pdfName = () => { const f = $("curate-pdf").files[0]; $("curate-pdf-name").textContent = f ? f.name : "Drop a PDF here, or choose one"; $("curate-drop").classList.toggle("has-file", !!f); $("curate-attest-row").hidden = !f; };
 $("curate-pdf").onchange = pdfName;
@@ -278,7 +291,7 @@ async function startCuration(again = false) {
     } else res = await call("POST", `/jobs${again ? "?again=1" : ""}`, { doi, keep_text: keep });
     if (res.known) { showKnown(res.known); return; }
     $("curate-start").disabled = true;
-    await followJob(res.job);
+    await followJob(res.job, !!res.inbox);
   } catch (e) { job.innerHTML = `<span class="gx-err">${esc(e.message)}</span>`; }
   $("curate-start").disabled = !token;
 }
@@ -288,21 +301,27 @@ function showKnown(k) {
   const commons = manifest.find((e) => e.id === "catal-commons");
   $("curate-job").innerHTML = (k.in_commons
     ? `<div class="gx-state">Already in catal-commons</div><div>${k.in_commons.map((h) => `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.file)}</a>`).join(", ")}</div>`
-    : `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`)
+    : k.proposed ? `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`
+    : `<div class="gx-state">Already curated for you</div><div>You sent this source before (the same ${esc((k.same_as.by || []).map((b) => ({ text_sha256: "PDF", doi: "DOI", title_year: "title and year" })[b] || b.replace("identifier:", "")).join(", "))}); its graph is in your inbox.</div>`)
     + `<div class="gx-subtle">Nothing was curated, so nothing was spent.</div><p>`
     + (commons && k.in_commons ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-open">Open catal-commons</button> ` : "")
+    + (k.same_as ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-mine">Open it</button> ` : "")
     + `<button type="button" class="gx-btn gx-btn-tiny" id="known-again">Curate it anyway</button></p>`;
   $("known-open")?.addEventListener("click", () => { $("curate-dialog").close(); location.hash = "g=catal-commons"; });
+  $("known-mine")?.addEventListener("click", () => followJob(k.same_as.job, true));
   $("known-again").onclick = () => startCuration(true);
 }
-async function followJob(id) {
+// An inbox job (inbox) waits its turn on the service's computer and stays readable, so it is followed more slowly.
+async function followJob(id, inbox = false) {
   const job = $("curate-job");
   for (;;) {
     let j;
     try { j = await call("GET", `/jobs/${id}`); } catch (e) { job.innerHTML = `<span class="gx-err">${esc(e.message)}</span>`; return; }
     const log = (j.log || []).slice(-12).map((l) => `<li>${esc(l.t)} s · ${esc(l.msg)}</li>`).join("");
     const src = j.source ? `<div class="gx-subtle">${esc(j.source.pages)} pages · rights: ${esc(j.source.rights_class)} · schema ${esc(j.source.schema_version)}</div>` : "";
-    job.innerHTML = `<div class="gx-state">${esc(j.state)}</div>${src}<ol>${log}</ol>`;
+    const wait = j.position ? `<div class="gx-subtle">${esc(j.position)} ${j.position > 1 ? "sources wait" : "source waits"} before yours</div>` : "";
+    job.innerHTML = `<div class="gx-state">${esc(j.state)}</div>${src}${wait}<ol>${log}</ol>`;
+    if (j.known) { showKnown(j.known); return; }
     if (j.state === "done") {
       job.innerHTML += `<div>${esc(j.summary || "")}</div>`
         + (j.withheld ? `<div class="gx-subtle">${esc(j.withheld)} quotes withheld for the source's rights (their sha256 kept).</div>` : "")
@@ -314,7 +333,7 @@ async function followJob(id) {
       job.innerHTML += `<div class="gx-err">${esc(j.error)}</div>`;
       return;
     }
-    await new Promise((r) => setTimeout(r, 3000));
+    await new Promise((r) => setTimeout(r, inbox ? 10000 : 3000));
   }
 }
 // A graph the service just curated: opened like any other, with the service's receipt, which alone lets it be

@@ -2,6 +2,34 @@
 
 ## Unreleased
 
+- **The inbox: Claude Code curates on the service's own computer (no schema change).** Requested by @diazr04: a
+  computer of the lab receives the papers the page uploads and Claude Code curates each one under the schema, keeping
+  every promise of the Curate dialog: the graph comes back to its owner only, contributing is a separate click, and a
+  paper is kept only as the page says.
+  - **The inbox** (`SCALE_WEB_INBOX`, `service/scaleweb/inbox.py`): `POST /jobs` queues the publication on the
+    service's computer and answers at once; the job stays readable (`GET /jobs/{id}`, its graph signed for its owner
+    each time it is read) and the page lists the reader's publications (`GET /inbox`). A PDF dropped into the queue by
+    hand is curated for `SCALE_WEB_INBOX_LOGIN`.
+  - **The runner** (`python -m scaleweb.runner`, started by launchd whenever the queue holds something:
+    `service/launchd/`): `scale source start`, then Claude Code (`claude -p`, the curate-corpus skill appended to its
+    system prompt) fills the graph until `scale source check --derive-links` passes, its problems handed back twice at
+    most, then `scale source finish --public`. Claude Code runs restricted to the publication's folder, with only
+    `scale source check` and `scale graph describe`, in its sandbox (which runs no other command on its own) and with no
+    token in its environment. A run that records nothing fails.
+  - **As the page says.** The graph is its owner's, and Contribute, a separate click, opens the bot's pull request. The
+    paper is kept in the archive (`SCALE_WEB_ARCHIVE`) always under an open licence and otherwise only when its owner
+    ticks the box, and leaves the inbox when the job ends; `python -m scaleweb.runner --recurate` sends the kept papers
+    curated under another schema version through the inbox again.
+  - **Several at once, and repeats.** Uploads sent together wait in turn; `SCALE_WEB_INBOX_WORKERS` of them are
+    curated at once, each with its own Claude Code (one by default), asking Crossref for DOIs one at a time and
+    waiting out its 429. Before Claude Code starts, the runner looks for
+    the publication by its DOI or PDF digest in catal-commons, in the open contributions and among the same reader's
+    curated jobs, and a repeat points to it. A Source record for a cited work goes back to Claude Code, since
+    catal-commons takes one Source per contribution.
+  - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words is answered on the service's
+    computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only the query
+    commands; the plans it wrote run again through `scale query` for the page, and the records they return credit the
+    commons sources, as the dialog says. Two questions are answered at a time.
 - **Sign-in hardened, from an outside review (no schema change).** Requested by @hlxin after a Codex review of #72:
   each sign-in is one transaction of the tab that starts it (a random nonce the service returns, checked by the page),
   so a link carrying another person's token or their unfinished sign-in no longer signs a reader in; the OAuth state is

@@ -147,6 +147,73 @@ members.
 | `SCALE_WEB_CONTRIBUTIONS_PER_USER` | contributions per user a day | 5 |
 | `SCALE_WEB_ARCHIVE` | a persistent, private folder for kept papers (a mounted volume) | empty: nothing is kept |
 | `SCALE_WEB_USAGE` | a persistent file for the leaderboard's use counts (scaleweb/usage.py) | empty: in memory |
+| `SCALE_WEB_INBOX` | a folder on the service's computer: each publication waits there for Claude Code, which curates it ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model curates |
+| `SCALE_WEB_INBOX_LOGIN` | the GitHub login a PDF dropped into the inbox's queue by hand is credited to | empty: such a PDF is set aside |
+| `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner; a release recent enough for `SCALE_WEB_MODEL`, since an older one refuses a newer model) | `claude` |
+| `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
+| `SCALE_WEB_INBOX_WORKERS` | publications Claude Code curates at once in the inbox, each in its own folder | 1 |
+| `SCALE_WEB_ASK` | `claude-code`: questions in words are answered on the service's computer by Claude Code, confined as the inbox's curation is, two at a time ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model (the API key) |
+| `SCALE_WEB_PYTHON`, `SCALE_WEB_PORT` | for `service/launchd/scale-web.sh`: the Python with scale-catal's dependencies, and the service's port | `python3`, 8080 |
+
+## The inbox: Claude Code on a computer of your own
+
+A lab can run the service on a computer of its own and have Claude Code curate there, in place of the service's
+model loop (`SCALE_WEB_INBOX`, [`scaleweb/inbox.py`](scaleweb/inbox.py), [`scaleweb/runner.py`](scaleweb/runner.py)).
+Everything the Curate dialog says holds as it does for the model loop:
+
+- **Upload.** `POST /jobs` checks the sign-in, the statement of access and the commons as before, then puts the
+  publication in the inbox's queue and answers at once. The page follows the job (`GET /jobs/{id}`, readable until the
+  inbox forgets it, after 14 days) and lists the reader's publications (`GET /inbox`).
+- **Curate.** launchd starts the runner whenever the queue holds something ([`launchd/`](launchd/); elsewhere
+  `python -m scaleweb.runner --watch 30`). For each publication: `scale source start`; Claude Code
+  (`claude -p`, the curate-corpus skill appended to its system prompt) fills the graph; `scale source check
+  --derive-links` must pass, its problems going back to Claude Code twice at most; `scale source finish --public`. A
+  run that records nothing fails.
+- **Confined.** Claude Code runs in restricted mode in the publication's folder: the file tools there and, of the
+  shell, only `scale source check` and `scale graph describe`, in its sandbox (which runs no other command on its
+  own), with no network, no git and no token in its environment. The publication's text is data to it.
+- **The graph comes back to its owner only.** `GET /jobs/{id}` gives it to the reader who sent the paper, signed for
+  them as a job's graph is, and nothing is published unless they contribute it: Contribute, a separate click, opens
+  the bot's pull request. The runner opens none.
+- **Kept as the page says.** When the job ends, the PDF and its page texts go to the archive (`SCALE_WEB_ARCHIVE`,
+  [`scaleweb/archive.py`](scaleweb/archive.py)) always for a paper under an open licence and for any other only when
+  its owner ticked the box, and leave the inbox, done or failed. `GET /kept` and `POST /kept/forget` work as before.
+  `python -m scaleweb.runner --recurate` (`--dry-run` lists them) sends the kept papers curated under another schema
+  version than catal-commons' through the inbox again, and keeps each new graph beside its paper; updating catal-commons
+  with it is a person's pull request.
+- **By hand.** A PDF dropped into `queue/` is curated the same way for `SCALE_WEB_INBOX_LOGIN`, who opens its graph from
+  the page; without that login it is set aside in `rejected/`.
+- **Several at once.** Each upload is a job of its own, told its place in the queue. One runner works the queue
+  (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while it works: up to
+  `SCALE_WEB_INBOX_WORKERS` publications at once, each in its own folder with its own Claude Code, and the
+  workers ask Crossref for a DOI's record one at a time, waiting out its "too many requests". More at once spends a
+  Claude plan's usage sooner, not more of it. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
+- **The same paper twice.** Before Claude Code starts, the runner looks for the publication by its DOI or its PDF's
+  digest (and by title and year when the DOI gives them) in catal-commons, in the open contributions and among the
+  same reader's curated jobs; another reader's job never counts, since their graph is theirs. A repeat ends there and
+  points to the other one; "Curate it anyway" sends it again.
+- **One Source.** catal-commons takes one Source per contribution, so a Source record Claude Code adds for a work the
+  publication cites goes back to it as a problem, with the check's errors.
+- **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words (`/ask`) is answered on the
+  service's computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only
+  `scale graph query`, `search`, `describe` and `stats`. The plans it wrote run again through `scale query` for the
+  page, and the records they return credit the commons sources the answer used (usage.py). Two questions are answered
+  at a time; without the setting, questions use the service's model and its API key.
+- **Claude Code's sign-in.** The runner's Claude Code signs in on its own: with a Claude plan (`claude setup-token`,
+  its token set as `CLAUDE_CODE_OAUTH_TOKEN`) or with an API key (`ANTHROPIC_API_KEY`).
+
+Setting it up on a Mac (a person does it, since the steps hold secrets):
+
+1. Put a checkout, the settings file and the inbox outside Desktop, Documents and Downloads, which macOS keeps
+   launchd's agents out of: for example `~/scale-web/`.
+2. Write the settings file (shell syntax, `chmod 600`): `SCALE_WEB_SECRET`, `SCALE_WEB_INBOX`,
+   `SCALE_WEB_SITE_ORIGINS`, the OAuth app's `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`, `SCALE_WEB_PUBLIC_URL`,
+   `SCALE_WEB_ALLOWLIST`, `SCALE_WEB_CLAUDE` (the full path of `claude`), Claude Code's sign-in and `SCALE_WEB_ARCHIVE`
+   (after the legal check above); for contributions, `SCALE_WEB_GITHUB_TOKEN` and `SCALE_WEB_REVIEWERS`.
+3. Run `service/launchd/install.sh ~/scale-web/scale-web.env`, which loads both agents (`--uninstall` removes them):
+   the service on `127.0.0.1:8080`, always on, and the runner.
+4. Give the service its public HTTPS name with a tunnel (Tailscale Funnel, or Cloudflare Tunnel with a domain), and
+   set that name as `SCALE_WEB_PUBLIC_URL`, in the OAuth app's callback and in `site/config.js`.
 
 ## Running it
 

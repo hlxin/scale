@@ -173,7 +173,7 @@
   <form method="dialog">
     <h2>Curate a source</h2>
     <p class="gx-muted">A paper, patent or report, as a PDF or a DOI. SCALE turns it into a graph and checks every quote
-      against the source. It takes a few minutes.</p>
+      against the source. <span id="curate-time">It takes a few minutes.</span></p>
     <label class="gx-drop" id="curate-drop">
       <input type="file" id="curate-pdf" accept="application/pdf,.pdf">
       <span id="curate-pdf-name">Drop a PDF here, or choose one</span>
@@ -210,6 +210,7 @@
       SCALE can curate it again after a schema change</label>
     <div class="gx-curate-account" id="curate-account"></div>
     <div class="gx-kept" id="curate-kept"></div>
+    <div class="gx-kept" id="curate-inbox"></div>
     <div class="gx-curate-job" id="curate-job" hidden></div>
     <p class="gx-subtle" id="curate-schema"></p>
     <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="curate-start">Curate</button></menu>
