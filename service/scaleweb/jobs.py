@@ -1,10 +1,10 @@
-"""Curation jobs: one publication each, run in the background, kept only until their result is read or they expire.
+"""Curation jobs: one source each, run in the background, kept only until their result is read or they expire.
 
 A job is ``scale source start`` (the DOI resolved, the PDF read into page texts), the curation loop, then ``scale
 source finish --public``: the result is the graph with every quote capped by the source's rights (the uploaded PDF and
 its page texts never leave the service), its check and the model's summary. The job's folder is deleted when the
-result is read, when the job fails or when it expires. Before it goes, a finished job's paper (the PDF and its page
-texts) is kept in the archive when the paper's licence or the contributor's agreement allows (archive.py).
+result is read, when the job fails or when it expires. Before it goes, a finished job's source (the PDF and its page
+texts) is kept in the archive when the source's licence or the contributor's agreement allows (archive.py).
 """
 
 from __future__ import annotations
@@ -48,7 +48,7 @@ class Jobs:
         folder.mkdir()
         pdf_path = None
         if pdf is not None:
-            stem = "".join(c if c.isalnum() or c in "._-" else "-" for c in Path(filename or "paper.pdf").stem)[:80] or "paper"
+            stem = "".join(c if c.isalnum() or c in "._-" else "-" for c in Path(filename or "source.pdf").stem)[:80] or "source"
             pdf_path = folder / "upload" / f"{stem}.pdf"
             pdf_path.parent.mkdir()
             pdf_path.write_bytes(pdf)
@@ -111,7 +111,7 @@ class Jobs:
                                              pdf=pdf_path or (work / started["pdf"] if started.get("pdf") else None))
                     job["kept"] = {"sha256": kept, "because": Archive.why(job["rights"].get("class"), job["keep_text"])} if kept else None
                     if kept:
-                        self._log(job, "paper kept for curating again after a schema change"
+                        self._log(job, "source kept for curating again after a schema change"
                                   + (" (open licence)" if job["kept"]["because"] == "open_licence" else " (you agreed)"))
                 job["state"] = "done"
                 self._log(job, "done")

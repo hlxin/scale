@@ -1,4 +1,4 @@
-// The page of the SCALE web service: send a publication, follow the job, show the graph, ask it questions.
+// The page of the SCALE web service: send a source, follow the job, show the graph, ask it questions.
 // Everything the page computes is display; validation, queries and search run in the service (scale-catal itself).
 "use strict";
 
