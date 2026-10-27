@@ -4,6 +4,10 @@ The page sends the user to ``/auth/login``; GitHub returns them to ``/auth/callb
 their login and, when the login is on the allowlist, sends them back to the page with a signed session token in the
 URL fragment (never in a cookie: the page and the service are on different sites). The token is ``login.expiry.mac``
 (HMAC-SHA256 with the service secret); the GitHub access token is used once to read the login and then dropped.
+
+A sign-in is one transaction. The page starts it with a random nonce that it keeps in its own tab, and the service
+returns that nonce with its answer; the page takes a token only with the nonce it is waiting for, so a sign-in started
+by someone else (a link, another tab) never signs a reader in. The OAuth state is used once.
 """
 
 from __future__ import annotations
@@ -13,6 +17,7 @@ import datetime as _dt
 import hashlib
 import hmac
 import json
+import re
 import secrets
 import threading
 import time
@@ -69,16 +74,51 @@ def user_of(cfg: Config, header: str | None) -> str | None:
     return login if admitted(cfg, login) else None
 
 
-def allowed_return(cfg: Config, url: str) -> bool:
-    u = urllib.parse.urlparse(url)
-    return f"{u.scheme}://{u.netloc}" in cfg.site_origins
+NONCE = re.compile(r"[A-Za-z0-9_-]{16,128}")
+ANSWER = ("token", "signin", "login", "nonce")      # the fragment keys the service writes back to the page
 
 
-def login_url(cfg: Config, return_to: str) -> str:
-    state = sign(cfg, {"ret": return_to, "n": secrets.token_urlsafe(8), "exp": int(time.time()) + 600})
+def clean_return(cfg: Config, url: str) -> str | None:
+    """The page to return to, rebuilt from its parts, when it is a page of the site; else None. Anything but printable
+    ASCII is refused before parsing, so nothing a caller sends can add a header to the redirect."""
+    if not isinstance(url, str) or not url or any(not "!" <= c <= "~" for c in url):
+        return None
+    u = urllib.parse.urlsplit(url)
+    if u.scheme not in ("https", "http") or f"{u.scheme}://{u.netloc}" not in cfg.site_origins:
+        return None
+    return urllib.parse.urlunsplit((u.scheme, u.netloc, u.path or "/", u.query, u.fragment))
+
+
+def answer_url(ret: str, answer: dict) -> str:
+    """The page's address with the service's answer merged into its fragment, which keeps what the page had there
+    (the explorer's open graph, #g=…) and drops any earlier answer."""
+    u = urllib.parse.urlsplit(ret)
+    kept = [(k, v) for k, v in urllib.parse.parse_qsl(u.fragment, keep_blank_values=True) if k not in ANSWER]
+    return urllib.parse.urlunsplit((u.scheme, u.netloc, u.path, u.query, urllib.parse.urlencode(kept + list(answer.items()))))
+
+
+def login_url(cfg: Config, return_to: str, nonce: str) -> str:
+    state = sign(cfg, {"ret": return_to, "b": nonce, "n": secrets.token_urlsafe(12), "exp": int(time.time()) + 600})
     q = {"client_id": cfg.github_client_id, "redirect_uri": f"{cfg.public_url}/auth/callback", "state": state,
          "scope": "", "allow_signup": "false"}
     return "https://github.com/login/oauth/authorize?" + urllib.parse.urlencode(q)
+
+
+class Once:
+    """OAuth states already used, until they expire (in memory: one instance, as the budgets)."""
+
+    def __init__(self):
+        self.lock, self.seen = threading.Lock(), {}
+
+    def take(self, key: str, exp: float) -> bool:
+        """True the first time a key is taken; False when it was taken before."""
+        with self.lock:
+            now = time.time()
+            self.seen = {k: e for k, e in self.seen.items() if e > now}
+            if key in self.seen:
+                return False
+            self.seen[key] = exp
+            return True
 
 
 def github_login(cfg: Config, code: str, opener=urllib.request.urlopen) -> str:

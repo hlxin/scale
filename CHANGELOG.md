@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Sign-in hardened, from an outside review (no schema change).** Requested by @hlxin after a Codex review of #72:
+  each sign-in is one transaction of the tab that starts it (a random nonce the service returns, checked by the page),
+  so a link carrying another person's token or their unfinished sign-in no longer signs a reader in; the OAuth state is
+  used once; a return address with control characters is refused and the redirect is rebuilt from its parts, so it
+  cannot add a header. The service now carries the page's address, its open graph (`#g=…`) included, through GitHub
+  and back, which keeps the graph from every sign-in link, with storage blocked in part, and across tabs. Where a
+  sign-in started (Curate) stays in its own tab.
 - **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
   open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
   row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.

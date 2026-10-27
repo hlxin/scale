@@ -33,20 +33,37 @@ async function call(method, path, body, headers = {}) {
 }
 
 // ------------------------------------------------------------------------------------------- sign-in
+// A sign-in is one transaction kept in this tab: a random nonce that the service returns with its answer. A token is
+// taken only with the nonce this tab is waiting for, so a sign-in started elsewhere never signs this tab in.
+const SIGNIN = "scale-signin";
+function signIn() {
+  const n = Array.from(crypto.getRandomValues(new Uint8Array(18)), (b) => b.toString(16).padStart(2, "0")).join("");
+  store.set(SIGNIN, JSON.stringify({ n, exp: Date.now() + 15 * 60e3 }));
+  if (store.get(SIGNIN) === null) { alert("Signing in needs this site's storage in your browser; allow it and try again."); return; }
+  location.assign(`${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname)}&nonce=${n}`);
+}
 function readFragment() {
   const p = new URLSearchParams(location.hash.slice(1));
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+  if (!p.has("token") && !p.has("signin")) return;
+  let tx = null;
+  try { tx = JSON.parse(store.get(SIGNIN) || "null"); } catch { /* not a transaction */ }
+  store.set(SIGNIN, null);
+  if (!tx || tx.n !== p.get("nonce") || !(tx.exp > Date.now())) {
+    alert("That sign-in was not started in this tab, or it took too long, so it was not used. Sign in again here.");
+    return;
+  }
   if (p.get("token")) { token = p.get("token"); store.set("scale-token", token); }
   if (p.get("signin") === "not-allowed") alert(`${p.get("login") || "This account"} is not on the service's allowlist. Ask a maintainer to add it.`);
   if (p.get("signin") === "failed") alert("GitHub sign-in failed; try again.");
-  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
 }
 
 async function account() {
   const el = $("account");
   if (!SERVICE) { el.innerHTML = `<span class="muted small">service not configured</span>`; return; }
   if (!token) {
-    const back = location.origin + location.pathname;
-    el.innerHTML = `<a class="button" href="${SERVICE}/auth/login?return=${encodeURIComponent(back)}">Sign in with GitHub</a>`;
+    el.innerHTML = `<a class="button" href="#" role="button" id="signin">Sign in with GitHub</a>`;
+    $("signin").onclick = (e) => { e.preventDefault(); signIn(); };
     return;
   }
   try {
