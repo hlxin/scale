@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- **index-sources 4.1.0 and fetch-corpus 1.1.0 take the fixes made to a local paper-acquisition after the split (no
+  schema change).** Requested by @diazr04, so that one copy of the skills is kept. The topic gate's `english_only`
+  turns away records in another language (`_lang.py`: only on clear evidence, never on Greek letters, formulas or
+  element symbols) and `remove_sources.py` takes sources out on request (`--non-english`, `--ids`), each logged in full,
+  its files kept under `.scripts/removed/`. Gate rescue rules (`title_any`, `journal_any`, `journal_not`) let in sources
+  of the topic that never write its anchor word, and keyword screening keeps them in scope. search.py stops a secondary
+  OpenAlex query early only after 25 pages in a row with nothing new (one such page used to stop it at its first
+  results), asks OpenAlex for pages of 200, and takes `--queries` and `--label` for a run of its own; raw hits may be
+  kept as `.jsonl.gz`, and build_list.py cuts a raw file larger than a batch at line breaks. The same-source check of a
+  PDF reads it a second time with poppler's `pdftotext`, accepts the source's own DOI printed in a PDF of 3+ pages and
+  names pages that are only images; fetch-corpus's `accept_pdf.py` files a rejected PDF someone has checked, and
+  `import_pdfs.py` copies in the PDFs another project downloaded (one made before the rename is read as it is, never
+  upgraded). download_open.py takes `--ids`, and a narrowed `--access` leaves a source with a status of its own as it
+  is (an open-access-only run no longer takes sources out of the EZproxy queue); download_paywalled.py takes `--access`
+  and `--dry-run` (the queue per publisher, nothing contacted); run_paywalled.sh stops on bad arguments; a run that adds
+  a host to `.scripts/blocked_hosts.json` keeps the ones listed meanwhile, and listing Elsevier's SI CDN there keeps
+  find_si.py and fetch_si.py off it. Not taken: the local copy's Elsevier article-API route.
 - **Sign-in hardened, from an outside review (no schema change).** Requested by @hlxin after a Codex review of #72:
   each sign-in is one transaction of the tab that starts it (a random nonce the service returns, checked by the page),
   so a link carrying another person's token or their unfinished sign-in no longer signs a reader in; the OAuth state is

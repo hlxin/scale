@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks the settled corpus
-version: 1.0.0
+version: 1.1.0
 scale_release: ">v0.2.0"
 inputs:
   - A frozen corpus (sources/<topic>/corpora/<name>/sources.json, from index-sources' freeze_corpus.py), or a whole topic
@@ -16,7 +16,7 @@ outputs:
   - The included sources' PDFs and SI in sources/<topic>/files/<access>/ (SI in files/SI/<access>/), each with its licence decision in the index
   - The corpus manifest settled - each included source with its pdf and si paths, or not_retrieved with the reason - and fetched_at
 validation:
-  - Every fetched PDF passed the same-source title check and carries the licence printed in it
+  - Every fetched PDF passed the same-source check (its title, else its own DOI printed in it, or a person's review logged by accept_pdf.py) and carries the licence printed in it
   - "`settle_corpus.py` accounts for every included source: a file, or the reason there is none"
   - "`scale corpus check <manifest>` reports ok after the settle"
   - No paywalled source was fetched except through the library EZproxy within the limiter's caps; no login, CAPTCHA or pirate site was used
@@ -59,6 +59,7 @@ install` copies them). No corpus yet → index-sources first (its "Freeze a corp
 
 ```
 - [ ] GATE: the corpus's numbers; ask what to fetch
+- [ ] PDFs another project has     import_pdfs.py --from <its folder> [--access ...] --dry-run   (optional, no network)
 - [ ] open routes                  download_open.py --corpus <manifest> [--access ...] [--max N]
 - [ ] paywalled (if chosen)        check_paywalled_access.py -> run_paywalled.sh --corpus <manifest>
 - [ ] supplementary information    fetch_si.py --corpus <manifest>   (the SI the index lists, then the source page's)
@@ -86,7 +87,12 @@ Every known open copy is tried, most open first (repositories, the PMC open-data
 landing page's PDF link), never hosts that block scripted clients. Each PDF is validated, checked against the
 source's title, and filed by the licence printed in it. Datasets and software are never downloaded; US patents come
 from the USPTO image server. A source in two topics is fetched once (the copy in the other topic's folder is a
-clone).
+clone). `--access` and `--ids FILE` (one source ID per line) narrow a run without touching the rest: a source of
+another access type keeps the status it has (an open-access-only run never takes sources out of the EZproxy queue), and
+only one never tried yet is marked as of a type not fetched. PDFs an earlier project (or a colleague's copy, made by
+index-sources or by paper-acquisition, its earlier name) already downloaded come in first, with no network:
+`import_pdfs.py --from <its folder> [--access OA,OA+ND] --dry-run`, then without `--dry-run` — matched by DOI, checked
+and filed like downloads; the other folder is only read, never upgraded.
 
 **Paywalled** (only if chosen; details [references/paywalled.md](references/paywalled.md)):
 `check_paywalled_access.py --topic <topic> [--host <ezproxy host>]`. `"access": true` → re-run `download_open.py
@@ -100,7 +106,9 @@ nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh "$PWD" --corpus <manifest
 
 `"access": false` → tell the user the `reason` and `next` from the JSON and follow it. The runner works for days. A
 publisher that keeps answering with a login page or a block while the others download is left out with
-`--skip-publishers <keys>` (its sources stay queued; tell the user which and why).
+`--skip-publishers <keys>` (its sources stay queued; tell the user which and why). Open licences only (the user chose
+"open access" = OA + OA+ND): add `--access OA,OA+ND` (the other sources stay queued); `download_paywalled.py --corpus
+<manifest> --access OA,OA+ND --dry-run` shows that queue per publisher first and contacts nothing.
 
 **SI.** `fetch_si.py --corpus <manifest>` after the open downloads: it fetches the SI the index lists (index-sources'
 find_si) first, then looks for more on the source's own page.
@@ -118,6 +126,11 @@ fetched since is included again. Then `scale corpus check <manifest>`.
 the files are (`sources/<topic>/files/<access>/<ID>.pdf`); the index `Notes` column says why a source was not
 fetched. Then offer curate-corpus on the manifest.
 
+**Rejected files.** A PDF that fails the same-source check (its title; else its own DOI printed in a PDF of 3+ pages)
+is kept in `.scripts/rejected/wrong_paper/<ID>_<hash>.pdf`, and one whose pages are only images says so. Look at its
+first page (Read the PDF) and, when it is the source, file it with `accept_pdf.py --id <ID> --file <path> --reason
+"<what page 1 shows>"` (validated and filed like a download, the reason logged); then settle again.
+
 Retry later: `download_open.py --corpus <manifest> --retry-failed`, `fetch_si.py --corpus <manifest> --retry`, then
 settle again.
 
@@ -125,9 +138,11 @@ settle again.
 
 | Script | What it does |
 |---|---|
-| `download_open.py` | open-route downloads, PDF title and licence check, folder routing; `--corpus` or `--topic`, `--access`, `--max`, `--retry-failed`, `--added-since` |
+| `download_open.py` | open-route downloads, PDF title and licence check, folder routing; `--corpus` or `--topic`, `--access`, `--ids`, `--max`, `--retry-failed`, `--added-since` |
+| `import_pdfs.py` | `--from <other project>`: copies in the PDFs another project already downloaded (matched by DOI, checked and filed like downloads; `--access`, `--topic`, `--dry-run`; no network) |
+| `accept_pdf.py` | files a rejected PDF after someone looked at it and confirmed it is the source (`--reason` logged) |
 | `check_paywalled_access.py` | checks the library's EZproxy with one of the topic's paywalled sources and saves the verdict (machine-wide) |
-| `run_paywalled.sh` / `download_paywalled.py` | the single rate-limited EZproxy runner (keep-alive wrapper / the runner); `--corpus` or `--topic`, else every queue |
+| `run_paywalled.sh` / `download_paywalled.py` | the single rate-limited EZproxy runner (keep-alive wrapper / the runner); `--corpus` or `--topic`, else every queue; `--access`, `--skip-publishers`, `--dry-run` (the queue per publisher, nothing contacted) |
 | `fetch_si.py` | fetches the SI the index lists (then the source page's) into `files/SI/<access>/`; `--corpus` or `--topic`, `--retry` |
 | `settle_corpus.py` | records the fetched files, and why the others are missing, in the corpus manifest |
 | `_ezlimit.py status` | EZproxy counters, cooldowns, hard stop (`clear-hard-stop` only after the user's review) |

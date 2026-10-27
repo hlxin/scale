@@ -29,6 +29,9 @@ update it or rebuild the index. Everything else is just a request, no mode:
   (`find_si.py`: ACS/PLOS `.s001` components, DataCite deposits, Crossref relations, PubMed Central files, and for
   topics up to 50,000 sources the Elsevier/MDPI CDNs and open publisher pages; index SI column "Available (n
   deposits)"). fetch-corpus fetches the listed files first; SI on walled sites comes when the source is fetched.
+- **Only English**, if you want it: the topic gate's `english_only` keeps records in other languages out of every later
+  search; `remove_sources.py --non-english` takes those already indexed out (each logged in full, its files kept under
+  `.scripts/removed/`). Sources leave the index only when you ask.
 - **A corpus** is the selection a question needs, frozen by a rule (relevance, Topic A/B/C, document types, years,
   access types, or a list of IDs): `freeze_corpus.py` writes `sources/<topic>/corpora/<name>/sources.json`, which
   fetch-corpus fetches and curate-corpus curates.

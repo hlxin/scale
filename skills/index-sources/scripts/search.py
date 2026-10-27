@@ -21,19 +21,22 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from _common import (KEY_FILES_HELP, Gate, HTTPFail, Project, add_project_arg, clean_text, die, http_get, json_read,
-                     jsonl_append, load_config, load_keys, load_state, log, norm_doi, now_iso, polite_email, update_state)
+                     jsonl_append, load_config, load_keys, load_state, log, norm_doi, now_iso, open_text, polite_email,
+                     update_state)
 from _databases import CATALOG, FETCHERS, OALEX_SELECT, iso_or_none, keys_needed, openalex_budget_ok, openalex_record
 
 # Relevance-ranked databases stop a query when < 4% of a page passes the topic gate twice in a row (the rest is a tail
 # of loose matches). Strict boolean/filter databases and year-walked J-STAGE always page to the end.
 STRICT_SOURCES = {"openalex", "citations", "pmc", "arxiv", "jstage", "europepmc_patents", "epo", "lens_patents", "s2"}
 TAIL_STOP = 0.04
+DUP_PAGES = 25         # OpenAlex: pages in a row without a new DOI before a secondary query stops early
 
 
-def load_queries(proj, slug, databases):
-    qs = json_read(proj.topic_dir(slug) / "queries.json")
+def load_queries(proj, slug, databases, path=None):
+    qs = json_read(Path(path) if path else proj.topic_dir(slug) / "queries.json")
     if not qs:
-        die(f"missing .scripts/{slug}/queries.json — write the per-database queries first (references/queries.md)")
+        die(f"missing {path or f'.scripts/{slug}/queries.json'} — write the per-database queries first "
+            "(references/queries.md)")
     bad = [s for s in qs if s not in FETCHERS]
     if bad:
         die(f"queries.json has unknown databases {bad}; valid: {sorted(FETCHERS)}")
@@ -81,8 +84,8 @@ class Runner:
         with self.seen_lock:
             if self.seen is None:
                 self.seen = set()
-                for f in self.raw.glob("*.jsonl"):
-                    for line in open(f, encoding="utf-8"):
+                for f in [*self.raw.glob("*.jsonl"), *self.raw.glob("*.jsonl.gz")]:
+                    for line in open_text(f):
                         m = re.search(r'"doi": "([^"]+)"', line)
                         if m:
                             self.seen.add(m.group(1))
@@ -98,7 +101,7 @@ class Runner:
             if r["title"] or r["doi"]:
                 out.append(r)
         jsonl_append(self.raw / f"{src}.jsonl", out)
-        passed = sum(1 for r in out if self.gate.passes(r["title"], r["abstract"]))
+        passed = sum(1 for r in out if self.gate.passes(r["title"], r["abstract"], r.get("journal")))
         new = 0
         sd = self.seen_dois()
         with self.seen_lock:
@@ -134,10 +137,15 @@ class Runner:
                 low = low + 1 if p / max(1, n) < thr else 0
                 if low >= 2:
                     done, why = True, f"relevance tail (gate pass rate < {thr:.0%} twice)"
-            if src == "openalex" and not primary and recs and new == 0 and not done:
-                done, why = True, "all-duplicates page (every DOI already found by an earlier query)"
+            # results come by relevance, so the first pages repeat what earlier queries found: only a long run of pages
+            # with nothing new ends a query early (one such page used to stop it at its first 100 results)
+            dup = c.get("dup_streak", 0) if pages > 1 else 0
+            dup = dup + 1 if (recs and new == 0) else 0
+            c["dup_streak"] = dup
+            if src == "openalex" and not primary and dup >= DUP_PAGES and not done:
+                done, why = True, f"{DUP_PAGES} pages in a row with every DOI already found by an earlier query"
             self.set_cursor(src, qid, cursor=nxt, pages=pages, hits=hits, passed=passed, total=total, low_streak=low,
-                            done=done, stopped_because=why, error=None)
+                            dup_streak=dup, done=done, stopped_because=why, error=None)
             if pages % 10 == 0 or done:
                 log(f"{src} {qid}: pages={pages} hits={hits} gate_pass={passed} total={total}"
                     + (f" DONE ({why})" if why else (" DONE" if done else "")))
@@ -165,7 +173,8 @@ def count_only(runner, queries, skipped=None):
         for qid, q in qs.items():
             try:
                 recs, nxt, tot = FETCHERS[src](q, None, runner.since, runner.ctx)
-                ok = sum(1 for r in recs if runner.gate.passes(clean_text(r.get("title")), clean_text(r.get("abstract"))))
+                ok = sum(1 for r in recs if runner.gate.passes(clean_text(r.get("title")), clean_text(r.get("abstract")),
+                                                         r.get("journal")))
                 rate = ok / len(recs) if recs else 0
                 loose = src not in STRICT_SOURCES
                 est = ok if loose else round((tot or 0) * rate)
@@ -242,11 +251,15 @@ def main():
     ap.add_argument("--citing", action="store_true", help="citation chasing from the topic's core sources (OpenAlex)")
     ap.add_argument("--year-from", type=int, default=None, help="index limited to works from this year on (default: "
                                                               "config search.year_from); the run stays a full index")
+    ap.add_argument("--queries", default=None, help="a queries file of its own (default: .scripts/<topic>/queries.json)")
+    ap.add_argument("--label", default=None, help="name of this run (raw/<label>/, its own state; build_list --run "
+                                                  "<label> reads just it); default full / since-<date> / citing")
     a = ap.parse_args()
     proj = Project(a.project)
     cfg = load_config(proj, a.topic)
     since = iso_or_none(a.since)
-    label = (f"citing-since-{since}" if since else "citing") if a.citing else (f"since-{since}" if since else "full")
+    label = a.label or ((f"citing-since-{since}" if since else "citing") if a.citing else
+                        (f"since-{since}" if since else "full"))
     year_from = a.year_from or (cfg.get("search") or {}).get("year_from")
     if year_from and not since:      # a year-limited index: each database's date filter, but still the full index run
         since = f"{int(year_from)}-01-01"
@@ -268,7 +281,7 @@ def main():
     databases, skipped = usable_databases(wanted, runner.ctx["keys"])
     for s_, why in skipped.items():
         log(f"{s_}: skipped — {why}")
-    queries = load_queries(proj, a.topic, databases)
+    queries = load_queries(proj, a.topic, databases, a.queries)
     if not queries:
         die("no queries for the chosen databases")
     if a.count_only:

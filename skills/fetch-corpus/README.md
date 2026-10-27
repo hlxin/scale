@@ -11,7 +11,9 @@ this corpus, paywalled ones too", "resume the fetch").
 1. **Asks first**: the corpus's sources by access type, what is already on disk, and how long the rest takes; you
    choose the access types (OA, OA+ND, Free-to-read, Paywalled).
 2. **Open routes**: every known open copy, most open first (repositories, PubMed Central, arXiv, publisher CDNs); each
-   PDF is checked against the source's title and filed by the licence printed in it.
+   PDF is checked against the source's title (or its own DOI printed in it) and filed by the licence printed in it. A
+   PDF the check rejects is kept for review, and filed once someone has confirmed it (`accept_pdf.py`). PDFs another
+   project already downloaded can be copied in first, with no network (`import_pdfs.py`).
 3. **Paywalled sources**: only through your library's EZproxy from the campus network or VPN, by one rate-limited
    process per computer (≤ 120 sources per publisher per day, ≤ 600 per day overall, long pauses, automatic stops on
    any block or login page). It never logs in, never types credentials, never solves CAPTCHAs.
@@ -33,4 +35,5 @@ The machine-wide EZproxy settings and limiter state are in `~/.scale/sources/ezp
 ## Requirements
 
 Python 3.10+ with `requests`, `pymupdf` and `pypdf`, and the index-sources skill beside this one: it works in the
-same project and uses index-sources' scripts as its library.
+same project and uses index-sources' scripts as its library. Optional: poppler's `pdftotext`, a second reader for PDFs
+whose fonts PyMuPDF decodes badly.
