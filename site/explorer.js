@@ -52,7 +52,7 @@ const SCOPE = { service: ["new", "var(--select)"], graphs: ["curated", "var(--gr
 const scopeOf = (e) => SCOPE[(e.from || "").split("/")[0]] || ["file", "var(--subtle)"];
 const CARET = `<svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6 L15 12 L9 18"/></svg>`;
 
-// ------------------------------------------------------------------------------------------ curating a publication
+// ------------------------------------------------------------------------------------------ curating a source
 const SERVICE = (window.SCALE_SERVICE_URL || "").replace(/\/$/, "");
 let token = "", login = "";
 function readSignIn() {                          // the service returns from GitHub with #token=… (or why it did not)
@@ -107,7 +107,7 @@ function accountMenu(note = "") {
   const open = `<p class="gx-account-note gx-subtle">Viewing, filtering and searching the graphs need no account.</p>`;
   if (!SERVICE) box.innerHTML = `<p class="gx-account-note">Sign-in with GitHub opens once the SCALE service is running; curating will
     need it.</p>${open}`;
-  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a paper needs a GitHub sign-in, as do contributing it to
+  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a source needs a GitHub sign-in, as do contributing it to
     catal-commons and having questions answered in words. Free: the service reads only your GitHub login, never your
     repositories.</p>${open}
     <a class="gx-btn gx-btn-primary gx-account-go" href="${esc(signInUrl())}">Continue with GitHub</a>`;
@@ -165,7 +165,7 @@ async function openCurate() {
     const h = await call("GET", "/health");
     $("curate-schema").textContent = `Curated under SCALE Catalysis, schema scale-catal v${h.schema_version} (scale-catal ${h.scale_catal}).`;
     $("curate-keep-row").hidden = !h.keeps_texts;
-    if (h.contact) $("curate-contact").innerHTML = `<b>A rights holder</b> can ask for a paper's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
+    if (h.contact) $("curate-contact").innerHTML = `A rights holder can ask for a source's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
     if (h.keeps_texts && token) showKept();
   } catch (e) { $("curate-schema").innerHTML = `<span class="gx-err">The service did not answer: ${esc(e.message)}</span>`; }
 }
@@ -186,18 +186,18 @@ function boardRow(r) {
       <span class="gx-level gx-level-${esc((lv.name || "").toLowerCase().replace(/ /g, "-"))}">${esc(lv.name || "")}</span>${mine ? ` <span class="gx-subtle">you</span>` : ""}</td>
     <td class="gx-num"><b>${Number(r.score).toLocaleString()}</b></td><td class="gx-num">${Number(r.triples).toLocaleString()}</td>
     <td class="gx-num">${boardData.with_reach ? Number(r.reach).toLocaleString() : "–"}</td><td class="gx-num">${pct(r.completeness)}</td><td class="gx-num">${esc(r.sources)}</td></tr>
-    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Paper</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
+    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
 }
 function drawBoard() {
   const rows = boardData[boardTab] || [];
   if (!rows.length) {
-    $("board").innerHTML = `<p class="gx-muted">${boardTab === "recent" ? "Nothing merged in the last 90 days yet." : "No contributions are merged yet: the first paper you contribute puts you at the top."}</p>`;
+    $("board").innerHTML = `<p class="gx-muted">${boardTab === "recent" ? "Nothing merged in the last 90 days yet." : "No contributions are merged yet: the first source you contribute puts you at the top."}</p>`;
     return;
   }
   const top = rows.slice(0, BOARD_TOP);
   const me = login && rows.find((r, i) => i >= BOARD_TOP && r.github.toLowerCase() === login.toLowerCase());
   $("board").innerHTML = `<table class="gx-board-table"><tr><th>#</th><th>Contributor</th><th class="gx-num">Score</th><th class="gx-num">Triples</th>
-    <th class="gx-num" title="Distinct people and days whose questions it answered">Reach</th><th class="gx-num" title="Checklist items and evidence found">Complete</th><th class="gx-num">Papers</th></tr>
+    <th class="gx-num" title="Distinct people and days whose questions it answered">Reach</th><th class="gx-num" title="Checklist items and evidence found">Complete</th><th class="gx-num">Sources</th></tr>
     ${top.map(boardRow).join("")}${me ? `<tr class="gx-board-gap"><td colspan="7">…</td></tr>${boardRow(me)}` : ""}</table>`
     + (rows.length > BOARD_TOP && !me ? `<p class="gx-subtle">${rows.length - BOARD_TOP} more contributors.</p>` : "")
     + (boardData.with_reach ? "" : `<p class="gx-subtle">Reach is counted by the curation service; it shows here once the service is set up.</p>`);
@@ -226,7 +226,7 @@ $("board-curate").onclick = () => { $("board-dialog").close(); openCurate(); };
 async function showKept() {
   try {
     const r = await call("GET", "/kept");
-    $("curate-kept").innerHTML = (r.kept || []).length ? `<details><summary>Papers kept with your agreement (${r.kept.length})</summary><ul>${r.kept.map((k) =>
+    $("curate-kept").innerHTML = (r.kept || []).length ? `<details><summary>Sources kept with your agreement (${r.kept.length})</summary><ul>${r.kept.map((k) =>
       `<li>${esc(k.title || k.doi || k.sha256.slice(0, 12))} <button type="button" class="gx-btn gx-btn-tiny" data-forget="${esc(k.sha256)}">Withdraw</button></li>`).join("")}</ul></details>` : "";
     $("curate-kept").querySelectorAll("[data-forget]").forEach((b) => (b.onclick = async () => {
       b.disabled = true;
@@ -306,7 +306,7 @@ async function followJob(id) {
 // contributed (only that graph, unchanged, by the user it was curated for).
 async function openCurated(doc, receipt) {
   if (!doc) return;
-  const title = doc.graph?.title || "Curated publication";
+  const title = doc.graph?.title || "Curated source";
   const entry = { id: `curated-${title.toLowerCase().replace(/\W+/g, "-").slice(0, 40)}`, title, from: "service" };
   await openGraph(entry, JSON.stringify(doc));
   G.receipt = receipt || null;
@@ -340,7 +340,7 @@ async function checkContribution() {
       <ul class="gx-contrib-terms"><li>Adds ${Number(p.records.triples).toLocaleString()} new triples (${esc(p.records.nodes)} records, ${esc(p.records.links)} links), your credit on the leaderboard</li>
         ${p.repeats && (p.repeats.records.length + p.repeats.links + p.repeats.values) ? `<li>${esc(p.repeats.records.length + p.repeats.links + p.repeats.values)} repeats of what catal-commons holds are discarded and not counted</li>` : ""}
         ${p.conflicts && p.conflicts.length ? `<li>${esc(p.conflicts.length)} values differ from catal-commons' records; the reviewer decides</li>` : ""}<li>A public pull request on GitHub, naming you</li>
-        <li>Shared under CC BY 4.0; ${esc(p.quotes.kept)} quotes kept, ${esc(p.quotes.withheld)} withheld for the paper's rights</li><li>Reviewed by a person before it is merged</li></ul>`);
+        <li>Shared under CC BY 4.0; ${esc(p.quotes.kept)} quotes kept, ${esc(p.quotes.withheld)} withheld for the source's rights</li><li>Reviewed by a person before it is merged</li></ul>`);
   } catch (e) { setContrib(`<span class="gx-err">${esc(e.message)}</span>`); }
 }
 async function contribute() {
