@@ -1,8 +1,8 @@
-"""The inbox runner: curates with Claude Code every publication that waits in the inbox (inbox.py), one at a time, and
-opens each one's pull request to catal-commons.
+"""The inbox runner: curates with Claude Code every publication that waits in the inbox (inbox.py), one at a time.
 
     python -m scaleweb.runner              curate what the queue holds, then exit (what launchd starts: service/launchd/)
     python -m scaleweb.runner --watch 30   look at the queue every 30 s (a host without launchd)
+    python -m scaleweb.runner --recurate [--dry-run]   queue the kept papers curated under another schema version
 
 Each publication, in a folder of its own:
 
@@ -11,17 +11,20 @@ Each publication, in a folder of its own:
    to that folder: the file tools there and, of the shell, only the scale commands that check the graph, in Claude
    Code's sandbox, with no network, no git, and no token in its environment. The publication's text is data to it;
 3. ``scale source check --derive-links`` must pass: its errors go back to Claude Code, up to FIX_ROUNDS times;
-4. ``scale source finish --public`` caps the quotes by the source's rights;
-5. the runner, never Claude Code, opens the pull request with the bot's token (``SCALE_WEB_GITHUB_TOKEN``), as
-   Contribute does (app.contribute). Without the token the capped graph is kept for the page and no pull request is
-   opened.
+4. ``scale source finish --public`` caps the quotes by the source's rights, and the graph goes to its owner alone
+   (``GET /jobs/{id}`` signs it for them). Nothing is published unless they contribute it: Contribute, a separate click,
+   opens the bot's pull request (app.py). The runner opens none and holds no GitHub token Claude Code could reach.
 
-The PDF and its page texts are deleted when the job ends, done or failed (inbox.py).
+When the job ends the paper is kept in the archive as the page says (always under an open licence, otherwise only
+with its owner's agreement; archive.py) and deleted from the inbox, done or failed. ``--recurate`` sends the kept
+papers curated under another schema version than catal-commons' through the inbox again, and keeps each new graph
+beside its paper in the archive; updating catal-commons with it is a person's pull request.
 """
 
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import shlex
@@ -36,6 +39,7 @@ from scale import curate, rights
 from scale.util import ScaleError, find_repo_root, load_doc
 
 from . import agent, app, github
+from .archive import Archive
 from .config import Config
 from .inbox import Inbox
 
@@ -136,30 +140,32 @@ def run_claude(folder: Path, prompt: str, system: str, cfg: Config, bin_dir: Pat
 
 def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callable = run_claude,
                request: Callable = github.http, bin_dir: Path | None = None) -> dict:
-    """Curate one publication the runner took from the queue, and open its pull request; returns the job."""
+    """Curate one publication the runner took from the queue; returns the job. The graph goes to its owner alone."""
     jid, folder, owner = item["id"], item["folder"], item["owner"]
     say = lambda msg, **kw: inbox.update(jid, msg=msg, **kw)           # noqa: E731
     work = folder / "source"
     try:
-        doi = item.get("doi")
-        if doi and not item.get("again"):
+        doi, again = item.get("doi"), bool(item.get("again") or item.get("recurate"))
+        if doi and not again:
             k = app.known(cfg, repo, doi, request)
             if k:                                         # added or proposed since it was queued: nothing to curate
                 return say("already in catal-commons, or proposed: nothing was curated", state="done", known=k)
         say("reading the publication", state="reading")
         pdf = next(iter(sorted(folder.glob("*.pdf"))), None)
-        started = curate.start(work, doi=doi, pdf=pdf, email=cfg.contact_email or None, repo=repo,
-                               version=commons_version(cfg, repo))
+        text = None if pdf else next(iter(sorted(folder.glob("*.txt"))), None)    # a kept paper with no PDF
+        version = commons_version(cfg, repo)
+        started = curate.start(work, doi=doi, pdf=pdf, email=cfg.contact_email or None, repo=repo, version=version,
+                               **({"text": text} if text else {}))
         source = {k: started.get(k) for k in ("source_id", "rights_class", "pages", "schema_version", "notes")}
         if not started.get("pages"):
             raise ScaleError("no text could be read: give the PDF (an open-access copy was not found or not openly "
                              "licensed)" if doi and not pdf else "no text could be read from the PDF")
         probe = identity(load_doc(work / started["graph"]), started["source_id"], doi)
-        if not item.get("again"):                         # the same paper, by its DOI or its PDF's digest
-            k = app.known_source(cfg, repo, probe, request) or inbox.same_source(probe, jid)
+        if not again:                                     # the same paper, by its DOI or its PDF's digest
+            k = app.known_source(cfg, repo, probe, request) or inbox.same_source(probe, jid, owner)
             if k:
-                return say("the same publication is in catal-commons, proposed, or curated here already: nothing was "
-                           "curated", state="done", known=k, source=source)
+                return say("the same publication is in catal-commons, proposed, or curated for you already: nothing "
+                           "was curated", state="done", known=k, source=source)
         say(f"{started['pages']} pages read; rights: {started['rights_class']}; Claude Code is curating",
             state="curating", source=source, source_record=probe["nodes"][0])
         shutil.copytree(repo / "skills" / "curate-corpus" / "references", work / "skill" / "references")
@@ -189,28 +195,48 @@ def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callab
         fin = curate.finish(work, public=True, repo=repo)
         graph = load_doc(work / fin["public"]["graph"])
         entry = rights.load_rights(work / "rights.yaml")[started["source_id"]]
+        done = {"summary": (res.get("result") or "").strip()[-3000:], "withheld": fin["public"]["withheld"],
+                "records": check["records"], "rights": entry}
+        archive = Archive(cfg.archive or None)
+        if item.get("recurate"):                          # a kept paper under the commons' new schema: kept beside it
+            archive.record(item["recurate"], version, graph, "scale-recurate")
+            return say(f"curated again under schema {version}; the graph is kept beside the paper", state="done", **done)
         inbox.keep_graph(jid, graph)
-        summary = {"summary": (res.get("result") or "").strip()[-3000:], "withheld": fin["public"]["withheld"],
-                   "records": check["records"]}
-        if not cfg.github_token:
-            return say("curated; no pull request: contributions are not set up on this service (SCALE_WEB_GITHUB_TOKEN)",
-                       state="curated", **summary)
-        say("opening the pull request", state="contributing", **summary)
-        status, body = app.contribute(cfg, repo, graph, entry, owner, request,
-                                      how=f"Claude Code ({cfg.model}) curated it by the curate-corpus skill in the "
-                                          "service's inbox")
-        if status == 201:
-            pr = body["pull_request"]
-            return say(f"opened pull request #{pr['number']}", state="done", pull_request=pr)
-        if status == 200:
-            return say("already in catal-commons, or proposed", state="done",
-                       known={"in_commons": body["already"]} if "already" in body else {"proposed": body["proposed"]})
-        raise ScaleError(body.get("error") or f"the pull request could not be opened ({status})")
+        kept = None
+        if started.get("page_texts"):                     # kept as the page says: an open licence, or the owner's yes
+            src = next(n for n in graph["nodes"] if n.get("label") == "Source")["props"]
+            sha = archive.keep(work / started["page_texts"], doi=doi or src.get("doi"), title=src.get("title"),
+                               rights=entry, login=owner, consent=bool(item.get("keep")),
+                               schema_version=started.get("schema_version"),
+                               graph_sha256=hashlib.sha256(json.dumps(graph, sort_keys=True).encode()).hexdigest(),
+                               pdf=pdf or (work / started["pdf"] if started.get("pdf") else None))
+            kept = {"sha256": sha, "because": Archive.why(entry.get("class"), bool(item.get("keep")))} if sha else None
+        return say("curated: the graph is yours, to see, download or contribute"
+                   + (" (the paper is kept to curate it again after a schema change)" if kept else ""),
+                   state="done", kept=kept, **done)
     except Exception as e:                                # the job reports its failure; the runner goes on
         err = f"{e}" if isinstance(e, ScaleError) else f"{type(e).__name__}: {e}"
         return say(f"failed: {err}", state="failed", error=err)
     finally:
-        inbox.finish(jid)                                 # the PDF and its page texts go now
+        inbox.finish(jid)                                 # the PDF and its page texts leave the inbox now
+
+
+def recurate(cfg: Config, repo: Path | None = None, dry_run: bool = False) -> list[dict]:
+    """Queue every kept paper whose latest curation is under another schema version than catal-commons' (archive.py)
+    for Claude Code in the inbox, from its kept PDF, else its texts; the runner keeps each new graph beside the paper."""
+    repo = Path(repo) if repo else find_repo_root()
+    archive, version, out = Archive(cfg.archive or None), commons_version(cfg, repo), []
+    for m in archive.stale(version):
+        row = {"sha256": m["sha256"], "doi": m.get("doi"), "to": version,
+               "from": (m.get("curations") or [{}])[-1].get("schema_version")}
+        if not dry_run:
+            pdf = archive.pdf(m["sha256"])
+            row["job"] = Inbox(cfg.inbox).add(
+                "scale-recurate", doi=m.get("doi"), pdf=pdf.read_bytes() if pdf else None,
+                filename=f"{m.get('slug') or 'paper'}.pdf", again=True, recurate=m["sha256"],
+                text=None if pdf else (archive.root / m["sha256"] / "pages.txt").read_text(encoding="utf-8"))
+        out.append(row)
+    return out
 
 
 def run(cfg: Config, repo: Path | None = None, claude: Callable = run_claude, request: Callable = github.http) -> list[dict]:
@@ -237,15 +263,21 @@ def run(cfg: Config, repo: Path | None = None, claude: Callable = run_claude, re
 
 def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(prog="python -m scaleweb.runner", description="Curate the inbox's publications with "
-                                "Claude Code and open their pull requests (service/README.md)")
+                                "Claude Code (service/README.md, \"The inbox\")")
     p.add_argument("--watch", type=int, metavar="SECONDS", help="look at the queue every SECONDS instead of once")
+    p.add_argument("--recurate", action="store_true", help="queue the kept papers curated under another schema "
+                   "version than catal-commons' (the runner then curates them), and exit")
+    p.add_argument("--dry-run", action="store_true", help="with --recurate: list them only")
     a = p.parse_args(argv)
     cfg = Config.from_env()
     if not cfg.inbox:
         raise SystemExit("SCALE_WEB_INBOX is not set: there is no inbox to curate")
+    if a.recurate:
+        print(json.dumps(recurate(cfg, dry_run=a.dry_run), indent=1))
+        return
     while True:
         for job in run(cfg):
-            print(time.strftime("%Y-%m-%d %H:%M:%S"), json.dumps({k: job.get(k) for k in ("id", "state", "error", "pull_request")}),
+            print(time.strftime("%Y-%m-%d %H:%M:%S"), json.dumps({k: job.get(k) for k in ("id", "state", "error")}),
                   file=sys.stderr, flush=True)
         if not a.watch:
             return

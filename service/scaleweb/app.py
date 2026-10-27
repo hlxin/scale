@@ -14,9 +14,9 @@
                                    ``?attest=1``: the user states they have lawful access to it and that, as far as
                                    they know, their licence allows mining it with an AI tool. With an inbox
                                    (``SCALE_WEB_INBOX``, inbox.py) the publication waits there for Claude Code, which
-                                   curates it and opens its pull request (runner.py); nothing is kept
+                                   curates it on the service's computer (runner.py)
 * ``GET  /jobs/{id}``              the job's state and log; when done, the graph (read once, then forgotten; an inbox
-                                   job stays readable, with its pull request, until the inbox forgets it)
+                                   job stays readable, its graph signed for its owner each time, until it is forgotten)
 * ``GET  /inbox``                  the signed-in user's publications in the inbox, newest first
 * ``GET  /kept``                   the papers kept because the signed-in user agreed (archive.py)
 * ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the paper goes when none is left
@@ -81,9 +81,8 @@ class Service:
         user = auth.user_of(self.cfg, headers.get("authorization"))
         if method == "GET" and path == "/health":
             return 200, {"ok": True, "scale_catal": __version__, "schema_version": self.schema_version,
-                         "sign_in": bool(self.cfg.github_client_id),
-                         "keeps_texts": self.jobs.archive.on and not self.inbox, "inbox": bool(self.inbox),
-                         "pull_requests": bool(self.cfg.github_token), "contact": self.cfg.contact_email or None}, {}
+                         "sign_in": bool(self.cfg.github_client_id), "keeps_texts": self.jobs.archive.on,
+                         "inbox": bool(self.inbox), "contact": self.cfg.contact_email or None}, {}
         if method == "GET" and path == "/leaderboard":
             return 200, self._leaderboard(), {}
         if method == "GET" and path == "/example":
@@ -122,7 +121,10 @@ class Service:
             if not user:
                 return 401, {"error": "sign in"}, {}
             jid = path.removeprefix("/jobs/")
-            view = (self.inbox.view(jid, user) if self.inbox else None) or self.jobs.view(jid, user)
+            view = self.inbox.view(jid, user) if self.inbox else None
+            if view and view.get("graph") and view.get("rights"):       # curated here: signed for its owner, as a job's
+                view["receipt"] = auth.receipt(self.cfg, user, view["graph"], view["rights"])
+            view = view or self.jobs.view(jid, user)
             return (200, view, {}) if view else (404, {"error": "no such job (a finished job is read once)"}, {})
         if method == "POST" and path in ("/query", "/search", "/ask", "/contribute/check", "/contribute"):
             if len(body) > GRAPH_MAX:
@@ -225,10 +227,10 @@ class Service:
         refused = self.budget.take("job", user)
         if refused:
             return 429, {"error": refused}, {}
-        if self.inbox:                                     # Claude Code curates it in the inbox; nothing is kept
-            jid = self.inbox.add(user, doi=doi, pdf=pdf, filename=name, again=query.get("again") == "1")
-            return 202, {"job": jid, "inbox": True, "position": self.inbox.position(jid)}, {}
         keep = query.get("keep") == "1" or (ctype != "application/pdf" and bool(json.loads(body or b"{}").get("keep_text")))
+        if self.inbox:                                     # Claude Code curates it on this computer (runner.py)
+            jid = self.inbox.add(user, doi=doi, pdf=pdf, filename=name, again=query.get("again") == "1", keep=keep)
+            return 202, {"job": jid, "inbox": True, "position": self.inbox.position(jid)}, {}
         return 202, {"job": self.jobs.submit(user, doi=doi, pdf=pdf, filename=name, keep_text=keep)}, {}
 
     def _known(self, doi: str) -> dict | None:
@@ -243,9 +245,77 @@ class Service:
             return 403, {"error": "only a graph this service curated for you, unchanged, can be contributed"}, {}
         if not self.cfg.github_token:
             return 503, {"error": "contributions are not set up on this service (SCALE_WEB_GITHUB_TOKEN)"}, {}
-        status, body = contribute(self.cfg, self.repo, graph, entry, user, self.github_request, open_pr,
-                                  take=lambda: self.budget.take("contribution", user))
-        return status, body, {}
+        repo = github.Repo(self.cfg.repo, self.cfg.github_token, self.cfg.commons, request=self.github_request)
+        d = Path(tempfile.mkdtemp(prefix="scale-web-c-"))
+        try:
+            sha = repo.fetch_folder(d)
+            try:
+                res = commons.contribute(graph, d, entry, self.repo, contributor=user,
+                                         on=datetime.date.today().isoformat())
+            except ScaleError as e:
+                return 422, {"error": str(e)}, {}
+            if res.get("already"):
+                return 200, {"already": [{**h, "url": f"https://github.com/{self.cfg.repo}/blob/main/{self.cfg.commons}/{h['file']}"}
+                                         for h in res["already"]]}, {}
+            for pr in repo.open_contributions():
+                hits = commons.find(graph, {"sources": pr["sources"]})
+                if hits:
+                    return 200, {"proposed": {"number": pr["number"], "url": pr["url"], "title": pr["title"],
+                                              "by": hits[0]["by"]}}, {}
+            preview = {k: res[k] for k in ("source", "slug", "class", "records", "shared_added",
+                                           "shared_with_new_evidence", "repeats", "conflicts", "quotes")}
+            preview["files"] = sorted(f"{self.cfg.commons}/{f}" for f in res["files"])
+            if not open_pr:
+                return 200, {"new": preview}, {}
+            refused = self.budget.take("contribution", user)
+            if refused:
+                return 429, {"error": refused}, {}
+            title, body = self._pr_text(user, graph, entry, preview)
+            try:
+                pr = repo.open_pull_request(sha, f"{github.BRANCH_PREFIX}{res['slug']}", res["files"], title, body,
+                                            f"{title}\n\nContributed by @{user} through the SCALE web service.",
+                                            self.cfg.reviewers)
+            except FileExistsError as e:
+                return 409, {"error": str(e)}, {}
+            return 201, {"new": preview, "pull_request": pr}, {}
+        finally:
+            shutil.rmtree(d, ignore_errors=True)
+
+    def _pr_text(self, user: str, graph: dict, entry: dict, p: dict) -> tuple[str, str]:
+        src = next(n for n in graph["nodes"] if n.get("label") == "Source")["props"]
+        name = src.get("title") or src.get("name") or p["slug"]
+        ref = f"doi:{src['doi']}" if src.get("doi") else p["slug"]
+        title = f"catal-commons: add {name[:70]}{'…' if len(name) > 70 else ''} ({ref})"
+        withheld = (f"{p['quotes']['withheld']} quotes withheld as sha256 and length (the source is {p['class']}: the "
+                    "commons quotes no text of a source in copyright)" if p["quotes"]["withheld"]
+                    else f"every quote kept ({p['class']})")
+        body = "\n".join([
+            f"**What it adds.** `{p['source']}`, {name}" + (f" ({src['year']})" if src.get("year") else "")
+            + (f", {ref}" if src.get("doi") else "") + f", to `{self.cfg.commons}`: {p['records']['triples']} triples "
+            f"({p['records']['nodes']} records and {p['records']['links']} links) in `parts/sources/{p['slug']}.json`, "
+            f"{len(p['shared_added'])} new shared records and {len(p['shared_with_new_evidence'])} shared records "
+            "with new evidence in `parts/shared.json`, the source's entry in `rights.yaml`, and the contribution in "
+            "`contributors.yaml` (the leaderboard).",
+            "",
+            f"**Repeats discarded.** {len(p['repeats']['records'])} shared records the commons holds under another id "
+            f"(pointed to the held record), {p['repeats']['links']} links and {p['repeats']['values']} values it holds "
+            "already; none is merged or counted."
+            + ("" if not p["conflicts"] else " **Values that differ from the held record, left out for the reviewer:** "
+               + "; ".join(f"`{x['record']}` {x['property']}: held {json.dumps(x['held'])}, given {json.dumps(x['given'])}"
+                           for x in p["conflicts"][:20]) + "."),
+            "",
+            f"**Who.** Contributed by @{user} through the SCALE web service. The model ({self.cfg.model}) curated it "
+            "by the curate-corpus skill until `scale source check` passed, every quote found in the source's text.",
+            "",
+            f"**Rights.** {entry.get('class')}: {entry.get('licence')} ({entry.get('basis')}); {withheld}.",
+            "",
+            "**Checked.** The source is not in the commons on main (by DOI, identifier, text digest or title and "
+            "year) nor in an open contribution; the commons builds and validates with it (`scale graph contribute`).",
+            "",
+            "**For the reviewer.** Check the records against the source; the shared records it adds may duplicate "
+            "ones under another id. A person approves and merges; the service never does.",
+        ])
+        return title, body
 
     def _with_file(self, graph: dict, fn):
         d = Path(tempfile.mkdtemp(prefix="scale-web-q-"))
@@ -295,84 +365,6 @@ def known_source(cfg: Config, repo_path: Path, probe: dict, request=github.http)
     finally:
         if cfg.github_token:
             shutil.rmtree(d, ignore_errors=True)
-
-
-def contribute(cfg: Config, repo_path: Path, graph: dict, entry: dict, user: str, request=github.http,
-               open_pr: bool = True, take=lambda: None, how: str | None = None) -> tuple[int, dict]:
-    """Is the graph's source in the commons (on main, or in an open contribution)? If not, what adding it changes,
-    and with ``open_pr`` the pull request that adds it, opened with the bot's token and crediting ``user``. ``take``
-    counts the contribution just before the pull request (the reason it is refused, or None); ``how`` says in the
-    pull request who curated it. Contribute (the service) and the inbox runner both open their pull requests here."""
-    repo = github.Repo(cfg.repo, cfg.github_token, cfg.commons, request=request)
-    d = Path(tempfile.mkdtemp(prefix="scale-web-c-"))
-    try:
-        sha = repo.fetch_folder(d)
-        try:
-            res = commons.contribute(graph, d, entry, repo_path, contributor=user, on=datetime.date.today().isoformat())
-        except ScaleError as e:
-            return 422, {"error": str(e)}
-        if res.get("already"):
-            return 200, {"already": [{**h, "url": f"https://github.com/{cfg.repo}/blob/main/{cfg.commons}/{h['file']}"}
-                                     for h in res["already"]]}
-        for pr in repo.open_contributions():
-            hits = commons.find(graph, {"sources": pr["sources"]})
-            if hits:
-                return 200, {"proposed": {"number": pr["number"], "url": pr["url"], "title": pr["title"], "by": hits[0]["by"]}}
-        preview = {k: res[k] for k in ("source", "slug", "class", "records", "shared_added",
-                                       "shared_with_new_evidence", "repeats", "conflicts", "quotes")}
-        preview["files"] = sorted(f"{cfg.commons}/{f}" for f in res["files"])
-        if not open_pr:
-            return 200, {"new": preview}
-        refused = take()
-        if refused:
-            return 429, {"error": refused}
-        title, body = pr_text(cfg, user, graph, entry, preview, how)
-        try:
-            pr = repo.open_pull_request(sha, f"{github.BRANCH_PREFIX}{res['slug']}", res["files"], title, body,
-                                        f"{title}\n\nContributed by @{user} through the SCALE web service.", cfg.reviewers)
-        except FileExistsError as e:
-            return 409, {"error": str(e)}
-        return 201, {"new": preview, "pull_request": pr}
-    finally:
-        shutil.rmtree(d, ignore_errors=True)
-
-
-def pr_text(cfg: Config, user: str, graph: dict, entry: dict, p: dict, how: str | None = None) -> tuple[str, str]:
-    src = next(n for n in graph["nodes"] if n.get("label") == "Source")["props"]
-    name = src.get("title") or src.get("name") or p["slug"]
-    ref = f"doi:{src['doi']}" if src.get("doi") else p["slug"]
-    title = f"catal-commons: add {name[:70]}{'…' if len(name) > 70 else ''} ({ref})"
-    withheld = (f"{p['quotes']['withheld']} quotes withheld as sha256 and length (the source is {p['class']}: the "
-                "commons quotes no text of a source in copyright)" if p["quotes"]["withheld"]
-                else f"every quote kept ({p['class']})")
-    body = "\n".join([
-        f"**What it adds.** `{p['source']}`, {name}" + (f" ({src['year']})" if src.get("year") else "")
-        + (f", {ref}" if src.get("doi") else "") + f", to `{cfg.commons}`: {p['records']['triples']} triples "
-        f"({p['records']['nodes']} records and {p['records']['links']} links) in `parts/sources/{p['slug']}.json`, "
-        f"{len(p['shared_added'])} new shared records and {len(p['shared_with_new_evidence'])} shared records "
-        "with new evidence in `parts/shared.json`, the source's entry in `rights.yaml`, and the contribution in "
-        "`contributors.yaml` (the leaderboard).",
-        "",
-        f"**Repeats discarded.** {len(p['repeats']['records'])} shared records the commons holds under another id "
-        f"(pointed to the held record), {p['repeats']['links']} links and {p['repeats']['values']} values it holds "
-        "already; none is merged or counted."
-        + ("" if not p["conflicts"] else " **Values that differ from the held record, left out for the reviewer:** "
-           + "; ".join(f"`{x['record']}` {x['property']}: held {json.dumps(x['held'])}, given {json.dumps(x['given'])}"
-                       for x in p["conflicts"][:20]) + "."),
-        "",
-        f"**Who.** Contributed by @{user} through the SCALE web service. "
-        f"{how or f'The model ({cfg.model}) curated it by the curate-corpus skill'} until `scale source check` "
-        "passed, every quote found in the source's text.",
-        "",
-        f"**Rights.** {entry.get('class')}: {entry.get('licence')} ({entry.get('basis')}); {withheld}.",
-        "",
-        "**Checked.** The source is not in the commons on main (by DOI, identifier, text digest or title and "
-        "year) nor in an open contribution; the commons builds and validates with it (`scale graph contribute`).",
-        "",
-        "**For the reviewer.** Check the records against the source; the shared records it adds may duplicate "
-        "ones under another id. A person approves and merges; the service never does.",
-    ])
-    return title, body
 
 
 def make_handler(svc: Service):

@@ -451,7 +451,7 @@ def test_with_an_inbox_an_upload_waits_for_claude_code_and_the_service_curates_n
     svc = Service(cfg(tmp_path, inbox=str(tmp_path / "inbox"), archive=str(tmp_path / "kept")), repo=REPO)
     svc.client_factory = lambda: pytest.fail("with an inbox the service's own model curates nothing")
     health = svc.route("GET", "/health", {}, {}, b"")[1]
-    assert health["inbox"] is True and health["keeps_texts"] is False and health["pull_requests"] is False
+    assert health["inbox"] is True and health["keeps_texts"] is True                 # the box to keep a paper shows
     h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
     st, body, _ = svc.route("POST", "/jobs", {"filename": "paper.pdf"}, h, b"%PDF-1.7 a file")
     assert st == 400 and "lawful access" in body["error"]                    # the statement of access still holds
@@ -459,7 +459,8 @@ def test_with_an_inbox_an_upload_waits_for_claude_code_and_the_service_curates_n
     assert st == 202 and body["inbox"] is True and body["position"] == 0
     item = tmp_path / "inbox" / "queue" / body["job"]
     assert (item / "Copper-paper.pdf").read_bytes() == b"%PDF-1.7 a file"
-    assert json.loads((item / "request.json").read_text())["owner"] == "ada"
+    request = json.loads((item / "request.json").read_text())
+    assert request["owner"] == "ada" and request["keep"] is True                 # the reader's agreement travels with it
     for _ in range(2):                                     # an inbox job is read as often as the page asks
         st, job, _ = svc.route("GET", f"/jobs/{body['job']}", {}, h, b"")
         assert st == 200 and job["state"] == "queued" and job["position"] == 0 and "owner" not in job
@@ -468,10 +469,11 @@ def test_with_an_inbox_an_upload_waits_for_claude_code_and_the_service_curates_n
     assert svc.route("GET", f"/jobs/{body['job']}", {}, bob, b"")[0] == 404             # nobody else's
     assert [j["id"] for j in svc.route("GET", "/inbox", {}, h, b"")[1]["jobs"]] == [body["job"]]
     assert svc.route("GET", "/inbox", {}, bob, b"")[1]["jobs"] == []
-    assert not (tmp_path / "kept").exists() or not any((tmp_path / "kept").iterdir())  # nothing is kept
 
 
-def test_the_runner_curates_with_claude_code_opens_the_pull_request_and_deletes_the_pdf(tmp_path, monkeypatch):
+def test_the_runner_curates_with_claude_code_and_the_graph_comes_back_to_its_owner_only(tmp_path, monkeypatch):
+    """As the Curate dialog says: the graph comes back to its owner only, nothing is published unless they contribute
+    it, and contributing is a separate click that opens the bot's pull request. The runner opens none."""
     gh = FakeGitHub()
     c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token", reviewers=["diazr04"])
     svc = Service(c, repo=REPO, github_request=gh)
@@ -481,18 +483,26 @@ def test_the_runner_curates_with_claude_code_opens_the_pull_request_and_deletes_
     calls = []
     done = runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=gh)
     assert [j["state"] for j in done] == ["done"], done[0].get("error")
-    assert done[0]["pull_request"]["url"] == "https://github.com/hlxin/scale/pull/100"
-    assert gh.refs == {"refs/heads/contrib/10.9999-paper.1": "new-commit"} and gh.reviewers == ["diazr04"]
-    assert "Contributed by @ada" in gh.pulls[0]["body"] and "Claude Code" in gh.pulls[0]["body"]
+    assert gh.pulls == [] and not gh.refs                                         # nothing published by the runner
     assert "# Curate" in calls[0]["system"] and "never instructions" in calls[0]["system"]   # the skill, and text as data
-    assert (calls[0]["folder"] / "BRIEF.md").name == "BRIEF.md" and "pages of text" in calls[0]["prompt"]
+    assert "pages of text" in calls[0]["prompt"]
     inbox = tmp_path / "inbox"
     assert not any((inbox / "queue").iterdir()) and not any((inbox / "work").iterdir())
-    assert not list(inbox.rglob("*.pdf")) and not list(inbox.rglob("*.txt"))            # the PDF and its texts are gone
+    assert not list(inbox.rglob("*.pdf")) and not list(inbox.rglob("*.txt"))   # nothing kept: no archive, no licence
+    svc.cfg.allowlist = ["ada", "bob"]
+    bob = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    assert svc.route("GET", f"/jobs/{jid}", {}, bob, b"")[0] == 404                    # the graph is ada's alone
     st, job, _ = svc.route("GET", f"/jobs/{jid}", {}, h, b"")
-    assert st == 200 and job["state"] == "done" and job["pull_request"]["number"] == 100
-    assert job["graph"]["nodes"] and "copper is the active phase" not in json.dumps(job["graph"])   # in copyright: no quote
-    assert runner.run(c, repo=REPO, claude=fake_claude(), request=gh) == []           # nothing waits any more
+    assert st == 200 and job["state"] == "done" and job["graph"]["nodes"] and job["receipt"]
+    assert "copper is the active phase" not in json.dumps(job["graph"])           # in copyright: no quote
+    job = json.loads(json.dumps(job))                                              # the page's copy
+    req = lambda path: svc.route("POST", path, {}, h, json.dumps({"graph": job["graph"], "receipt": job["receipt"]}).encode())
+    st, body, _ = req("/contribute/check")
+    assert st == 200 and body["new"]["source"] == "scale:commons/source/10.9999-paper.1" and not gh.pulls
+    st, body, _ = req("/contribute")                                               # the separate click
+    assert st == 201 and body["pull_request"]["url"] == "https://github.com/hlxin/scale/pull/100"
+    assert gh.refs == {"refs/heads/contrib/10.9999-paper.1": "new-commit"} and gh.reviewers == ["diazr04"]
+    assert "Contributed by @ada" in gh.pulls[0]["body"]
 
 
 def test_a_graph_that_never_checks_fails_its_job_and_its_pdf_is_deleted_too(tmp_path, monkeypatch):
@@ -509,17 +519,36 @@ def test_a_graph_that_never_checks_fails_its_job_and_its_pdf_is_deleted_too(tmp_
     assert not list((tmp_path / "inbox").rglob("*.pdf"))
 
 
-def test_without_the_bots_token_the_capped_graph_waits_for_the_page_and_no_pull_request_is_opened(tmp_path, monkeypatch):
-    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+def test_an_open_paper_is_kept_and_another_only_when_its_owner_ticks_the_box(tmp_path, monkeypatch):
+    """The archive's rules, as the page says: a paper under an open licence is kept always, any other only when its
+    owner ticked the box (listed to them, and withdrawn on their word), and the rest is deleted when the job ends."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), archive=str(tmp_path / "kept"))
     svc = Service(c, repo=REPO)
-    text_start(monkeypatch, tmp_path)
+    real = curate.start
+    licences = {"10.9999/open.1": [{"URL": "https://creativecommons.org/licenses/by/4.0/"}]}
+
+    def start(out, doi=None, pdf=None, **kw):               # each paper its own text (the archive keys papers by it)
+        text = tmp_path / f"{doi.replace('/', '-')}.txt"
+        text.write_text(TEXT + f"\n[page 3]\nThis is {doi}.\n", encoding="utf-8")
+        meta = {"message": {"title": [f"Copper catalysts {doi}"], "issued": {"date-parts": [[2026]]},
+                            "type": "journal-article", "license": licences.get(doi, [])}}
+        return real(out, text=text, doi=doi, get=lambda url, h: json.dumps(meta).encode(), **kw)
+    monkeypatch.setattr(curate, "start", start)
     h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
-    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
-    done = runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)
-    assert done[0]["state"] == "curated" and "SCALE_WEB_GITHUB_TOKEN" in done[0]["log"][-1]["msg"]
-    job = svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]
-    assert job["graph"]["graph"]["schema_version"] and "pull_request" not in job
-    assert not list((tmp_path / "inbox").rglob("*.pdf"))
+    jobs = {}
+    for doi, keep in (("10.9999/open.1", "0"), ("10.9999/closed.1", "0"), ("10.9999/closed.2", "1")):
+        jobs[doi] = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": doi, "attest": "1", "keep": keep}, h,
+                              f"%PDF-1.7 {doi}".encode())[1]["job"]
+    done = {j["id"]: j for j in runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)}
+    assert {j["state"] for j in done.values()} == {"done"}
+    assert done[jobs["10.9999/open.1"]]["kept"]["because"] == "open_licence"
+    assert done[jobs["10.9999/closed.1"]]["kept"] is None
+    assert done[jobs["10.9999/closed.2"]]["kept"]["because"] == "consent"
+    assert len(list((tmp_path / "kept").iterdir())) == 2 and not list((tmp_path / "inbox").rglob("*.pdf"))
+    kept = svc.route("GET", "/kept", {}, h, b"")[1]["kept"]
+    assert [k["doi"] for k in kept] == ["10.9999/closed.2"] and kept[0]["pdf"]   # the one kept on ada's word
+    assert svc.route("POST", "/kept/forget", {}, h, json.dumps({"sha256": kept[0]["sha256"]}).encode())[0] == 200
+    assert len(list((tmp_path / "kept").iterdir())) == 1                          # withdrawn: deleted
 
 
 def test_claude_code_runs_confined_and_never_sees_a_token(tmp_path, monkeypatch):
@@ -620,40 +649,41 @@ def test_several_uploads_at_once_wait_in_turn_and_are_each_curated_once(tmp_path
     assert sorted(svc.inbox.position(j) for j in jobs) == [0, 1, 2, 3]
     calls = []
     done = runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=no_github)
-    assert sorted(j["id"] for j in done) == sorted(jobs) and {j["state"] for j in done} == {"curated"}
+    assert sorted(j["id"] for j in done) == sorted(jobs) and {j["state"] for j in done} == {"done"}
     assert len(calls) == 4 and not list((tmp_path / "inbox").rglob("*.pdf"))
 
 
-def test_the_same_pdf_uploaded_twice_at_once_is_curated_once(tmp_path, monkeypatch):
-    """Two uploads of one PDF (no DOI): the second is matched to the first by the PDF's digest before Claude Code is
-    started, and points to it."""
+def test_the_same_pdf_sent_twice_by_one_reader_is_curated_once_and_another_readers_is_curated_for_them(tmp_path, monkeypatch):
+    """One reader's second upload of a PDF is matched to their first by the PDF's digest before Claude Code starts. A
+    graph comes back to its owner only, so another reader's upload of the same PDF is curated for them."""
     c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
     svc = Service(c, repo=REPO)
     digest_start(monkeypatch, tmp_path)
-    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
-    first = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 one paper")[1]["job"]
     svc.cfg.allowlist = ["ada", "bob"]
-    bob = {**h, "authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
-    second = svc.route("POST", "/jobs", {"filename": "copy.pdf", "attest": "1"}, bob, b"%PDF-1.7 one paper")[1]["job"]
+    ada = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    bob = {**ada, "authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    sent = [svc.route("POST", "/jobs", {"filename": name, "attest": "1"}, who, b"%PDF-1.7 one paper")[1]["job"]
+            for name, who in (("paper.pdf", ada), ("copy.pdf", ada), ("paper.pdf", bob))]
     calls = []
     done = {j["id"]: j for j in runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=no_github)}
-    assert done[first]["state"] == "curated" and len(calls) == 1
-    assert done[second]["state"] == "done" and done[second]["known"]["same_as"]["job"] == first
-    assert done[second]["known"]["same_as"]["by"] == ["text_sha256"]
-    st, job, _ = svc.route("GET", f"/jobs/{second}", {}, bob, b"")
-    assert st == 200 and job["known"]["same_as"]["job"] == first and "graph" not in job
+    first, again, bobs = (done[j] for j in sent)
+    assert first["state"] == "done" and "graph" not in again and len(calls) == 2
+    assert again["known"]["same_as"] == {"job": sent[0], "state": "done", "by": ["text_sha256"]}
+    assert bobs["state"] == "done" and not bobs.get("known")                       # curated for bob, from his upload
+    st, job, _ = svc.route("GET", f"/jobs/{sent[1]}", {}, ada, b"")
+    assert st == 200 and job["known"]["same_as"]["job"] == sent[0] and "graph" not in job
+    assert svc.route("GET", f"/jobs/{sent[0]}", {}, bob, b"")[0] == 404
     assert not list((tmp_path / "inbox").rglob("*.pdf"))
 
 
 def test_a_source_record_for_a_cited_work_goes_back_to_claude_code(tmp_path, monkeypatch):
     """catal-commons takes one Source per contribution: a Source added for a cited work is handed back as a problem,
-    and the graph is contributed with the publication's Source alone."""
-    gh = FakeGitHub()
-    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token")
-    svc = Service(c, repo=REPO, github_request=gh)
+    and the owner's graph holds the publication's Source alone."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+    svc = Service(c, repo=REPO)
     text_start(monkeypatch, tmp_path)
     h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
-    svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1"}, h, b"%PDF-1.7 a file")
+    jid = svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1"}, h, b"%PDF-1.7 a file")[1]["job"]
     calls, write = [], fake_claude()
 
     def cites(folder, prompt, system, cfg, bin_dir):
@@ -669,8 +699,32 @@ def test_a_source_record_for_a_cited_work_goes_back_to_claude_code(tmp_path, mon
                                                                            "origin": "reported"}})
         write_canonical(gpath, doc)
         return res
-    done = runner.run(c, repo=REPO, claude=cites, request=gh)
+    done = runner.run(c, repo=REPO, claude=cites, request=no_github)
     assert done[0]["state"] == "done", done[0].get("error")
     assert len(calls) == 2 and "one Source per contribution" in calls[1]
-    added = next(t for t in gh.tree_body["tree"] if t["path"].endswith("10.9999-paper.1.json"))
-    assert json.loads(added["content"])["nodes"] and sum(n["label"] == "Source" for n in json.loads(added["content"])["nodes"]) == 1
+    graph = svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]["graph"]
+    assert sum(n["label"] == "Source" for n in graph["nodes"]) == 1
+
+
+def test_kept_papers_are_curated_again_through_the_inbox_under_a_new_schema(tmp_path, monkeypatch):
+    """A kept paper whose latest curation is under another schema version than catal-commons' goes through the inbox
+    again, from its kept PDF, and the new graph is kept beside it; nobody uploads it twice."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), archive=str(tmp_path / "kept"))
+    svc = Service(c, repo=REPO)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1", "keep": "1"}, h, b"%PDF-1.7 a file")
+    assert runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)[0]["kept"]["because"] == "consent"
+    assert runner.recurate(c, repo=REPO, dry_run=True) == []                       # curated under the commons' version
+    folder = next((tmp_path / "kept").iterdir())
+    meta = json.loads((folder / "meta.json").read_text())
+    meta["curations"][-1]["schema_version"] = "0.0.1"                              # as if the schema had moved on
+    (folder / "meta.json").write_text(json.dumps(meta))
+    queued = runner.recurate(c, repo=REPO)
+    assert [r["from"] for r in queued] == ["0.0.1"] and queued[0]["job"]
+    done = runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)
+    assert [j["state"] for j in done] == ["done"], done[0].get("error")
+    assert (folder / "graphs" / f"{queued[0]['to']}.json").is_file() and runner.recurate(c, repo=REPO, dry_run=True) == []
+    assert (folder / "paper.pdf").read_bytes() == b"%PDF-1.7 a file"              # the kept copy stays; the inbox's goes
+    assert not list((tmp_path / "inbox").rglob("*.pdf"))
+    assert [j["id"] for j in svc.route("GET", "/inbox", {}, h, b"")[1]["jobs"]] != [queued[0]["job"]]

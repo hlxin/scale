@@ -2,26 +2,28 @@
 
 ## Unreleased
 
-- **The inbox: Claude Code curates on the service's own computer and the pull request opens by itself (no schema
-  change).** Requested by @diazr04: a computer of the lab receives the papers the page uploads, Claude Code curates each
-  one under the schema, and its pull request to catal-commons opens without another click; the PDF is deleted.
+- **The inbox: Claude Code curates on the service's own computer (no schema change).** Requested by @diazr04: a
+  computer of the lab receives the papers the page uploads and Claude Code curates each one under the schema, keeping
+  every promise of the Curate dialog: the graph comes back to its owner only, contributing is a separate click, and a
+  paper is kept only as the page says.
   - **The inbox** (`SCALE_WEB_INBOX`, `service/scaleweb/inbox.py`): `POST /jobs` queues the publication on the
-    service's computer and answers at once; the job stays readable (`GET /jobs/{id}`) and the page lists the reader's
-    publications (`GET /inbox`). A PDF dropped into the queue by hand is curated for `SCALE_WEB_INBOX_LOGIN`.
+    service's computer and answers at once; the job stays readable (`GET /jobs/{id}`, its graph signed for its owner
+    each time it is read) and the page lists the reader's publications (`GET /inbox`). A PDF dropped into the queue by
+    hand is curated for `SCALE_WEB_INBOX_LOGIN`.
   - **The runner** (`python -m scaleweb.runner`, started by launchd whenever the queue holds something:
     `service/launchd/`): `scale source start`, then Claude Code (`claude -p`, the curate-corpus skill appended to its
-    system prompt) fills the graph until `scale source check --derive-links` passes, its errors handed back twice at
-    most, then `scale source finish --public` and the pull request with the bot's token (`app.contribute`, shared with
-    Contribute). Claude Code runs restricted to the publication's folder, with only the scale commands that check the
-    graph, in its sandbox and with no token in its environment.
-  - **Nothing is kept.** The PDF, its page texts and the working folder are deleted when the job ends, done or failed;
-    the job's state and its capped graph stay 14 days for the page. The Curate dialog says so, and that the pull request
-    opens by itself and names the reader.
-  - **Several at once, and repeats.** Uploads sent together wait in turn and are curated one at a time. The same paper
-    sent twice (the same DOI or PDF digest) is curated once: before Claude Code starts, the runner finds it in
-    catal-commons, in an open contribution or among the inbox's curated jobs, and the repeat points to it. A Source
-    record for a cited work goes back to Claude Code, since catal-commons takes one Source per contribution.
-
+    system prompt) fills the graph until `scale source check --derive-links` passes, its problems handed back twice at
+    most, then `scale source finish --public`. Claude Code runs restricted to the publication's folder, with only
+    `scale source check` and `scale graph describe`, in its sandbox (which runs no other command on its own) and with no
+    token in its environment. A run that records nothing fails.
+  - **As the page says.** The graph is its owner's, and Contribute, a separate click, opens the bot's pull request. The
+    paper is kept in the archive (`SCALE_WEB_ARCHIVE`) always under an open licence and otherwise only when its owner
+    ticks the box, and leaves the inbox when the job ends; `python -m scaleweb.runner --recurate` sends the kept papers
+    curated under another schema version through the inbox again.
+  - **Several at once, and repeats.** Uploads sent together wait in turn and are curated one at a time. Before Claude
+    Code starts, the runner looks for the publication by its DOI or PDF digest in catal-commons, in the open
+    contributions and among the same reader's curated jobs, and a repeat points to it. A Source record for a cited
+    work goes back to Claude Code, since catal-commons takes one Source per contribution.
 - **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
   open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
   row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.

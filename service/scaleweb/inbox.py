@@ -1,19 +1,22 @@
 """The inbox: publications that wait, on the computer that runs the service, for Claude Code to curate them.
 
-With ``SCALE_WEB_INBOX`` set, the service curates nothing itself. ``POST /jobs`` puts the publication in the inbox and
-answers at once; the runner (``python -m scaleweb.runner``, runner.py), which the operating system starts whenever the
-queue holds something (service/launchd/), curates each one with Claude Code by the curate-corpus skill and opens its
-pull request to catal-commons. A PDF dropped into ``queue/`` by hand is curated the same way, credited to
-``SCALE_WEB_INBOX_LOGIN``. The folder::
+With ``SCALE_WEB_INBOX`` set, the service's own model curates nothing. ``POST /jobs`` puts the publication in the
+inbox and answers at once; the runner (``python -m scaleweb.runner``, runner.py), which the operating system starts
+whenever the queue holds something (service/launchd/), curates each one with Claude Code by the curate-corpus skill.
+The graph comes back to its owner only (``GET /jobs/{id}``, with the service's receipt), and nothing is published
+unless they contribute it, a separate click (``POST /contribute``). A PDF dropped into ``queue/`` by hand is curated the
+same way for ``SCALE_WEB_INBOX_LOGIN``. The folder::
 
-    queue/<id>/            waiting: the PDF (none for a DOI alone) and request.json (who, the DOI, the file name)
+    queue/<id>/            waiting: the PDF (or a kept paper's text; none for a DOI alone) and request.json (who, the
+                           DOI, the file name, whether they agreed to keep the paper)
     work/<id>/             being curated: the same, and source/, the ``scale source start`` folder
-    jobs/<id>.json         what the page shows: the state, the log, the pull request or the error
-    jobs/<id>.graph.json   the curated graph, its quotes capped by the source's rights (what the pull request adds)
+    jobs/<id>.json         what the page shows: the state, the log, the source's rights, or the error
+    jobs/<id>.graph.json   the curated graph, its quotes capped by the source's rights, for its owner only
     rejected/              what was dropped into the queue and is not a PDF
 
-The PDF and its page texts are deleted when the job ends, done or failed: only ``jobs/`` stays, and a job is forgotten
-after JOB_DAYS days. A publication is moved, never copied, from one folder to the next, so it is in one place at a time.
+When the job ends, the PDF and its page texts are kept in the service's archive (archive.py) as the page says (always
+under an open licence, otherwise only when the owner ticked the box) and deleted from the inbox: only ``jobs/`` stays,
+and a job is forgotten after JOB_DAYS days. A publication is moved, never copied, from one folder to the next.
 """
 
 from __future__ import annotations
@@ -57,15 +60,18 @@ class Inbox:
 
     # ------------------------------------------------------------------------------------------ the service's side
     def add(self, owner: str, doi: str | None = None, pdf: bytes | None = None, filename: str | None = None,
-            again: bool = False) -> str:
-        """Queue a publication (its PDF, or a DOI alone) for the runner; returns the job's id."""
+            again: bool = False, keep: bool = False, text: str | None = None, recurate: str | None = None) -> str:
+        """Queue a publication (its PDF, a kept paper's page texts, or a DOI alone) for the runner; ``keep``: its owner
+        agreed to keep it (archive.py); ``recurate``: the archive key of a kept paper curated again. Returns the id."""
         jid = uuid.uuid4().hex
         tmp = self.incoming / jid                         # written whole, then moved into the queue in one step
         tmp.mkdir()
         if pdf is not None:
             (tmp / pdf_name(filename)).write_bytes(pdf)
+        elif text is not None:
+            (tmp / pdf_name(filename)).with_suffix(".txt").write_text(text, encoding="utf-8")
         _write(tmp / "request.json", {"id": jid, "owner": owner, "doi": doi, "filename": filename, "again": again,
-                                      "created": _now(), "attempts": 0})
+                                      "keep": keep, "recurate": recurate, "created": _now(), "attempts": 0})
         self._save({"id": jid, "owner": owner, "doi": doi, "filename": filename, "state": "queued", "created": _now(),
                     "created_s": time.time(), "updated": _now(), "log": [{"t": 0.0, "msg": "waiting in the inbox"}]})
         os.replace(tmp, self.queue / jid)
@@ -88,26 +94,25 @@ class Inbox:
     def mine(self, owner: str) -> list[dict]:
         """The owner's jobs, newest first, without their graphs or logs: what the page lists."""
         jobs = [j for j in map(self._load, self._ids()) if j and j.get("owner") == owner]
-        keep = ("id", "state", "doi", "filename", "created", "updated", "pull_request", "known", "error")
+        keep = ("id", "state", "doi", "filename", "created", "updated", "known", "kept", "error")
         return [{k: j[k] for k in keep if k in j} for j in sorted(jobs, key=lambda j: j.get("created_s", 0), reverse=True)]
 
-    def same_source(self, probe: dict, exclude: str) -> dict | None:
-        """Another job here whose publication is the probe's (the same DOI, identifier or PDF digest, as commons.find
-        matches): ``{"same_as": {...}}`` with its state and pull request, else None. Only jobs that went on to be curated
-        count, so a publication uploaded twice at once is curated once, and one whose curation failed can be sent again."""
+    def same_source(self, probe: dict, exclude: str, owner: str) -> dict | None:
+        """Another job of the same owner whose publication is the probe's (the same DOI, identifier or PDF digest, as
+        commons.find matches): ``{"same_as": {...}}``, else None. Another reader's job never counts, since a graph comes
+        back to its owner only; nor a job that failed, so a publication can be sent again."""
         from scale import commons
         held = {}
         for jid in self._ids():
             job = self._load(jid) if jid != exclude else None
-            if job and job.get("source_record") and job.get("state") not in ("failed", "queued", "reading"):
+            if job and job.get("owner") == owner and job.get("source_record") and job.get("state") not in ("failed", "queued", "reading"):
                 held[jid] = {"nodes": [job["source_record"]]}
         hits = commons.find(probe, {"sources": held}) if held else []
         if not hits:
             return None
         jid = hits[0]["file"].removeprefix("parts/sources/").removesuffix(".json")
         job = self._load(jid)
-        return {"same_as": {"job": jid, "state": job["state"], "by": hits[0]["by"],
-                            **({"pull_request": job["pull_request"]} if job.get("pull_request") else {})}}
+        return {"same_as": {"job": jid, "state": job["state"], "by": hits[0]["by"]}}
 
     def position(self, jid: str) -> int:
         """How many publications wait before this one (0: it is next)."""

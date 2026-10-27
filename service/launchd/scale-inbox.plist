@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!-- The inbox runner: launchd starts it whenever the inbox's queue folder holds something (a publication the service
-     queued, or a PDF dropped there by hand), and again while it does; the runner curates each one with Claude Code,
-     opens its pull request and empties the queue (scaleweb/runner.py). install.sh fills the @...@ paths. -->
+     queued, or a PDF dropped there by hand), and again while it does; the runner curates each one with Claude Code for
+     its owner and empties the queue (scaleweb/runner.py). install.sh fills the @...@ paths. -->
 <plist version="1.0">
 <dict>
   <key>Label</key>

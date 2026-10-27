@@ -165,12 +165,10 @@ async function openCurate() {
     const h = await call("GET", "/health");
     $("curate-schema").textContent = `Curated under SCALE Catalysis, schema scale-catal v${h.schema_version} (scale-catal ${h.scale_catal}).`;
     $("curate-keep-row").hidden = !h.keeps_texts;
-    // with an inbox, Claude Code curates on the service's computer and the pull request opens by itself
-    document.querySelectorAll("#curate-dialog [data-mode]").forEach((el) => (el.hidden = el.dataset.mode !== (h.inbox ? "inbox" : "model")));
-    $("curate-time").textContent = h.inbox ? "Claude Code curates one paper at a time on the service's computer, which can take an hour; you can close the page meanwhile." : "It takes a few minutes.";
-    $("curate-start").textContent = h.inbox && h.pull_requests ? "Curate and open a pull request" : "Curate";
     if (h.contact) $("curate-contact").innerHTML = `<b>A rights holder</b> can ask for a paper's records or kept copy to be removed: <a href="mailto:${esc(h.contact)}">${esc(h.contact)}</a>.`;
     if (h.keeps_texts && token) showKept();
+    // with an inbox, Claude Code curates on the service's own computer, one paper at a time
+    if (h.inbox) $("curate-time").textContent = "Claude Code curates one paper at a time on the service's computer, which can take an hour; you can close the page and come back.";
     if (h.inbox && token) showInbox();
   } catch (e) { $("curate-schema").innerHTML = `<span class="gx-err">The service did not answer: ${esc(e.message)}</span>`; }
 }
@@ -239,16 +237,15 @@ async function showKept() {
     }));
   } catch { $("curate-kept").innerHTML = ""; }
 }
-// The publications this reader sent to the inbox: each one's state, and its pull request once it is open.
+// The publications this reader sent to the inbox, each with its state; a curated one opens again, with its receipt.
 async function showInbox() {
   try {
     const jobs = ((await call("GET", "/inbox")).jobs || []).slice(0, 10);
-    const open = jobs.some((j) => !["done", "curated", "failed"].includes(j.state));
-    $("curate-kept").innerHTML = jobs.length ? `<details${open ? " open" : ""}><summary>Your publications in the inbox (${jobs.length})</summary><ul>${jobs.map((j) =>
-      `<li>${esc(j.filename || j.doi || j.id.slice(0, 8))} · ${esc(j.state)}${j.pull_request ? ` · <a href="${esc(j.pull_request.url)}" target="_blank" rel="noopener">pull request #${esc(j.pull_request.number)}</a>` : ""}`
-      + ` <button type="button" class="gx-btn gx-btn-tiny" data-follow="${esc(j.id)}">${j.state === "done" || j.state === "curated" ? "Open" : "Follow"}</button></li>`).join("")}</ul></details>` : "";
-    $("curate-kept").querySelectorAll("[data-follow]").forEach((b) => (b.onclick = () => { $("curate-job").hidden = false; followJob(b.dataset.follow, true); }));
-  } catch { $("curate-kept").innerHTML = ""; }
+    const open = jobs.some((j) => !["done", "failed"].includes(j.state));
+    $("curate-inbox").innerHTML = jobs.length ? `<details${open ? " open" : ""}><summary>Your publications in the inbox (${jobs.length})</summary><ul>${jobs.map((j) =>
+      `<li>${esc(j.filename || j.doi || j.id.slice(0, 8))} · ${esc(j.state)} <button type="button" class="gx-btn gx-btn-tiny" data-follow="${esc(j.id)}">${j.state === "done" ? "Open" : "Follow"}</button></li>`).join("")}</ul></details>` : "";
+    $("curate-inbox").querySelectorAll("[data-follow]").forEach((b) => (b.onclick = () => { $("curate-job").hidden = false; followJob(b.dataset.follow, true); }));
+  } catch { $("curate-inbox").innerHTML = ""; }
 }
 // One drop zone and one DOI field: a PDF (with or without its DOI), or a DOI alone.
 const pdfName = () => { const f = $("curate-pdf").files[0]; $("curate-pdf-name").textContent = f ? f.name : "Drop a PDF here, or choose one"; $("curate-drop").classList.toggle("has-file", !!f); $("curate-attest-row").hidden = !f; };
@@ -287,19 +284,19 @@ $("curate-start").onclick = () => startCuration();
 // The commons holds the paper already, or an open contribution adds it: nothing was curated and nothing spent.
 function showKnown(k) {
   const commons = manifest.find((e) => e.id === "catal-commons");
-  const pr = k.same_as?.pull_request;
   $("curate-job").innerHTML = (k.in_commons
     ? `<div class="gx-state">Already in catal-commons</div><div>${k.in_commons.map((h) => `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.file)}</a>`).join(", ")}</div>`
     : k.proposed ? `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`
-    : `<div class="gx-state">Already curated here</div><div>Another upload of this paper (the same ${esc((k.same_as.by || []).join(", "))}) was curated by the service${pr ? `: <a href="${esc(pr.url)}" target="_blank" rel="noopener">pull request #${esc(pr.number)}</a>` : ""}.</div>`)
+    : `<div class="gx-state">Already curated for you</div><div>You sent this paper before (the same ${esc((k.same_as.by || []).map((b) => ({ text_sha256: "PDF", doi: "DOI", title_year: "title and year" })[b] || b.replace("identifier:", "")).join(", "))}); its graph is in your inbox.</div>`)
     + `<div class="gx-subtle">Nothing was curated, so nothing was spent.</div><p>`
     + (commons && k.in_commons ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-open">Open catal-commons</button> ` : "")
+    + (k.same_as ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-mine">Open it</button> ` : "")
     + `<button type="button" class="gx-btn gx-btn-tiny" id="known-again">Curate it anyway</button></p>`;
   $("known-open")?.addEventListener("click", () => { $("curate-dialog").close(); location.hash = "g=catal-commons"; });
+  $("known-mine")?.addEventListener("click", () => followJob(k.same_as.job, true));
   $("known-again").onclick = () => startCuration(true);
 }
-// An inbox job (inbox) is curated by Claude Code on the service's computer and opens its own pull request; it stays
-// readable, so it is followed more slowly and can be opened again from the dialog's list.
+// An inbox job (inbox) waits its turn on the service's computer and stays readable, so it is followed more slowly.
 async function followJob(id, inbox = false) {
   const job = $("curate-job");
   for (;;) {
@@ -310,12 +307,10 @@ async function followJob(id, inbox = false) {
     const wait = j.position ? `<div class="gx-subtle">${esc(j.position)} ${j.position > 1 ? "publications wait" : "publication waits"} before yours</div>` : "";
     job.innerHTML = `<div class="gx-state">${esc(j.state)}</div>${src}${wait}<ol>${log}</ol>`;
     if (j.known) { showKnown(j.known); return; }
-    if (j.state === "done" || j.state === "curated") {
-      job.innerHTML += `<div>${esc((j.summary || "").slice(0, 800))}</div>`
+    if (j.state === "done") {
+      job.innerHTML += `<div>${esc(j.summary || "")}</div>`
         + (j.withheld ? `<div class="gx-subtle">${esc(j.withheld)} quotes withheld for the source's rights (their sha256 kept).</div>` : "")
-        + (!inbox ? `<div class="gx-subtle">The graph is open on the canvas and private to you. Its card on the left downloads it or contributes it to catal-commons.</div>`
-          : j.pull_request ? `<div>Opened <a href="${esc(j.pull_request.url)}" target="_blank" rel="noopener">pull request #${esc(j.pull_request.number)}</a>, which names you; a person reviews it before it joins catal-commons. The graph is open on the canvas.</div>`
-          : `<div class="gx-subtle">The graph is open on the canvas. No pull request was opened: contributions are not set up on this service yet.</div>`);
+        + `<div class="gx-subtle">The graph is open on the canvas and private to you. Its card on the left downloads it or contributes it to catal-commons.</div>`;
       await openCurated(j.graph, j.receipt);
       return;
     }
