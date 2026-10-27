@@ -1,6 +1,7 @@
 """The inbox runner: curates with Claude Code every publication that waits in the inbox (inbox.py), one at a time.
 
-    python -m scaleweb.runner              curate what the queue holds, then exit (what launchd starts: service/launchd/)
+    python -m scaleweb.runner              curate what the queue holds, then exit (what launchd starts: service/launchd/);
+                                           SCALE_WEB_INBOX_WORKERS publications at once, each with its own Claude Code
     python -m scaleweb.runner --watch 30   look at the queue every 30 s (a host without launchd)
     python -m scaleweb.runner --recurate [--dry-run]   queue the kept papers curated under another schema version
 
@@ -35,7 +36,9 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import threading
 import time
+from concurrent.futures import FIRST_COMPLETED, ThreadPoolExecutor, wait
 from pathlib import Path
 from typing import Callable
 
@@ -49,6 +52,8 @@ from .config import Config
 from .inbox import Inbox
 
 FIX_ROUNDS = 2                  # Claude Code gets the check's errors back this many times before the job fails
+# with several workers: one job at a time looks for the same paper and marks its own; one writes the archive
+_SAME, _KEEP = threading.Lock(), threading.Lock()
 TOOLS = "Read,Write,Edit,Glob,Grep,Bash"
 # the file tools act in the publication's folder only (--restricted); the shell runs these two scale commands only,
 # which take no path outside the folder: the check, and the schema
@@ -185,13 +190,15 @@ def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callab
             raise ScaleError("no text could be read: give the PDF (an open-access copy was not found or not openly "
                              "licensed)" if doi and not pdf else "no text could be read from the PDF")
         probe = identity(load_doc(work / started["graph"]), started["source_id"], doi)
-        if not again:                                     # the same paper, by its DOI or its PDF's digest
-            k = app.known_source(cfg, repo, probe, request) or inbox.same_source(probe, jid, owner)
-            if k:
-                return say("the same publication is in catal-commons, proposed, or curated for you already: nothing "
-                           "was curated", state="done", known=k, source=source)
-        say(f"{started['pages']} pages read; rights: {started['rights_class']}; Claude Code is curating",
-            state="curating", source=source, source_record=probe["nodes"][0])
+        k = None if again else app.known_source(cfg, repo, probe, request)   # the same paper: its DOI or PDF digest
+        with _SAME:                                       # two uploads of one paper at once: the second sees the first
+            k = k or (None if again else inbox.same_source(probe, jid, owner))
+            if not k:
+                say(f"{started['pages']} pages read; rights: {started['rights_class']}; Claude Code is curating",
+                    state="curating", source=source, source_record=probe["nodes"][0])
+        if k:
+            return say("the same publication is in catal-commons, proposed, or curated for you already: nothing "
+                       "was curated", state="done", known=k, source=source)
         shutil.copytree(repo / "skills" / "curate-corpus" / "references", work / "skill" / "references")
         system = agent._skill(repo, "curate-corpus") + WORKING_HERE
         prompt = (work / "BRIEF.md").read_text(encoding="utf-8") + f"\n\nThe source has {started['pages']} pages of text."
@@ -223,17 +230,19 @@ def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callab
                 "records": check["records"], "rights": entry}
         archive = Archive(cfg.archive or None)
         if item.get("recurate"):                          # a kept paper under the commons' new schema: kept beside it
-            archive.record(item["recurate"], version, graph, "scale-recurate")
+            with _KEEP:
+                archive.record(item["recurate"], version, graph, "scale-recurate")
             return say(f"curated again under schema {version}; the graph is kept beside the paper", state="done", **done)
         inbox.keep_graph(jid, graph)
         kept = None
         if started.get("page_texts"):                     # kept as the page says: an open licence, or the owner's yes
             src = next(n for n in graph["nodes"] if n.get("label") == "Source")["props"]
-            sha = archive.keep(work / started["page_texts"], doi=doi or src.get("doi"), title=src.get("title"),
-                               rights=entry, login=owner, consent=bool(item.get("keep")),
-                               schema_version=started.get("schema_version"),
-                               graph_sha256=hashlib.sha256(json.dumps(graph, sort_keys=True).encode()).hexdigest(),
-                               pdf=pdf or (work / started["pdf"] if started.get("pdf") else None))
+            with _KEEP:
+                sha = archive.keep(work / started["page_texts"], doi=doi or src.get("doi"), title=src.get("title"),
+                                   rights=entry, login=owner, consent=bool(item.get("keep")),
+                                   schema_version=started.get("schema_version"),
+                                   graph_sha256=hashlib.sha256(json.dumps(graph, sort_keys=True).encode()).hexdigest(),
+                                   pdf=pdf or (work / started["pdf"] if started.get("pdf") else None))
             kept = {"sha256": sha, "because": Archive.why(entry.get("class"), bool(item.get("keep")))} if sha else None
         return say("curated: the graph is yours, to see, download or contribute"
                    + (" (the paper is kept to curate it again after a schema change)" if kept else ""),
@@ -299,7 +308,8 @@ def recurate(cfg: Config, repo: Path | None = None, dry_run: bool = False) -> li
 
 
 def run(cfg: Config, repo: Path | None = None, claude: Callable = run_claude, request: Callable = github.http) -> list[dict]:
-    """Curate every publication in the inbox, the oldest first, until the queue is empty; one runner at a time."""
+    """Curate every publication in the inbox, the oldest first, until the queue is empty: up to
+    ``SCALE_WEB_INBOX_WORKERS`` at once, each in its own folder with its own Claude Code; one runner at a time."""
     inbox = Inbox(cfg.inbox)
     lock = inbox.lock()
     if lock is None:
@@ -309,13 +319,19 @@ def run(cfg: Config, repo: Path | None = None, claude: Callable = run_claude, re
         inbox.sweep()
         inbox.recover()
         bin_dir = scale_bin(inbox.root)
-        done = []
-        while True:
-            inbox.adopt(cfg.inbox_login or None)
-            item = inbox.claim()
-            if item is None:
-                return done
-            done.append(curate_one(inbox, item, cfg, repo, claude, request, bin_dir))
+        workers, done, running = max(1, cfg.inbox_workers), [], set()
+        with ThreadPoolExecutor(workers) as pool:
+            while True:
+                inbox.adopt(cfg.inbox_login or None)      # one thread takes PDFs dropped by hand and claims jobs
+                while len(running) < workers:
+                    item = inbox.claim()
+                    if item is None:
+                        break
+                    running.add(pool.submit(curate_one, inbox, item, cfg, repo, claude, request, bin_dir))
+                if not running:
+                    return done
+                finished, running = wait(running, return_when=FIRST_COMPLETED)
+                done.extend(f.result() for f in finished)
     finally:
         lock.close()
 

@@ -20,10 +20,11 @@
     paper is kept in the archive (`SCALE_WEB_ARCHIVE`) always under an open licence and otherwise only when its owner
     ticks the box, and leaves the inbox when the job ends; `python -m scaleweb.runner --recurate` sends the kept papers
     curated under another schema version through the inbox again.
-  - **Several at once, and repeats.** Uploads sent together wait in turn and are curated one at a time. Before Claude
-    Code starts, the runner looks for the publication by its DOI or PDF digest in catal-commons, in the open
-    contributions and among the same reader's curated jobs, and a repeat points to it. A Source record for a cited
-    work goes back to Claude Code, since catal-commons takes one Source per contribution.
+  - **Several at once, and repeats.** Uploads sent together wait in turn; `SCALE_WEB_INBOX_WORKERS` of them are
+    curated at once, each with its own Claude Code (one by default). Before Claude Code starts, the runner looks for
+    the publication by its DOI or PDF digest in catal-commons, in the open contributions and among the same reader's
+    curated jobs, and a repeat points to it. A Source record for a cited work goes back to Claude Code, since
+    catal-commons takes one Source per contribution.
   - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words is answered on the service's
     computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only the query
     commands; the plans it wrote run again through `scale query` for the page, and the records they return credit the

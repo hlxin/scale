@@ -151,6 +151,7 @@ members.
 | `SCALE_WEB_INBOX_LOGIN` | the GitHub login a PDF dropped into the inbox's queue by hand is credited to | empty: such a PDF is set aside |
 | `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner; a release recent enough for `SCALE_WEB_MODEL`, since an older one refuses a newer model) | `claude` |
 | `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
+| `SCALE_WEB_INBOX_WORKERS` | publications Claude Code curates at once in the inbox, each in its own folder | 1 |
 | `SCALE_WEB_ASK` | `claude-code`: questions in words are answered on the service's computer by Claude Code, confined as the inbox's curation is, two at a time ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model (the API key) |
 | `SCALE_WEB_PYTHON`, `SCALE_WEB_PORT` | for `service/launchd/scale-web.sh`: the Python with scale-catal's dependencies, and the service's port | `python3`, 8080 |
 
@@ -182,9 +183,10 @@ Everything the Curate dialog says holds as it does for the model loop:
   with it is a person's pull request.
 - **By hand.** A PDF dropped into `queue/` is curated the same way for `SCALE_WEB_INBOX_LOGIN`, who opens its graph from
   the page; without that login it is set aside in `rejected/`.
-- **Several at once.** Each upload is a job of its own, told its place in the queue. The runner curates one
-  publication at a time (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while
-  it works. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
+- **Several at once.** Each upload is a job of its own, told its place in the queue. One runner works the queue
+  (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while it works: up to
+  `SCALE_WEB_INBOX_WORKERS` publications at once, each in its own folder with its own Claude Code. More at once
+  spends a Claude plan's usage sooner, not more of it. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
 - **The same paper twice.** Before Claude Code starts, the runner looks for the publication by its DOI or its PDF's
   digest (and by title and year when the DOI gives them) in catal-commons, in the open contributions and among the
   same reader's curated jobs; another reader's job never counts, since their graph is theirs. A repeat ends there and

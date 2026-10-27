@@ -6,6 +6,7 @@ import json
 import os
 import subprocess
 import sys
+import threading
 import time
 import urllib.parse
 from concurrent.futures import ThreadPoolExecutor
@@ -799,3 +800,29 @@ def test_with_claude_code_a_question_is_answered_on_this_computer_with_the_plans
         "Bash(scale graph query:*)", "Bash(scale graph search:*)", "Bash(scale graph describe:*)", "Bash(scale graph stats:*)"]
     assert not seen[0]["folder"].exists()                                        # the graph's folder goes after the answer
     assert svc.route("POST", "/ask", {}, {}, json.dumps({"graph": load_doc(PUBLIC), "question": "?"}).encode())[0] == 401
+
+
+def test_with_three_workers_three_sources_are_curated_at_the_same_time(tmp_path, monkeypatch):
+    """SCALE_WEB_INBOX_WORKERS=3: three queued sources are curated at the same time, each in its own folder with its
+    own Claude Code. Here the runs meet at a barrier that only three runs at once can pass; one at a time, it breaks."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), inbox_workers=3)
+    svc = Service(c, repo=REPO)
+    real = curate.start
+
+    def start(out, doi=None, pdf=None, **kw):              # each source its own text file: the workers read at once
+        text = tmp_path / f"{pdf.stem}.txt"
+        text.write_text(TEXT, encoding="utf-8")
+        return real(out, text=text, doi=doi, **kw)
+    monkeypatch.setattr(curate, "start", start)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    jobs = [svc.route("POST", "/jobs", {"filename": f"paper{i}.pdf", "attest": "1"}, h, f"%PDF-1.7 paper {i}".encode())[1]["job"]
+            for i in range(3)]
+    meet, folders, write = threading.Barrier(3, timeout=20), [], fake_claude()
+
+    def together(folder, prompt, system, cfg, bin_dir):
+        folders.append(folder)
+        meet.wait()                                           # passes only with three runs inside at once
+        return write(folder, prompt, system, cfg, bin_dir)
+    done = runner.run(c, repo=REPO, claude=together, request=no_github)
+    assert sorted(j["id"] for j in done) == sorted(jobs) and {j["state"] for j in done} == {"done"}, done
+    assert len(set(folders)) == 3 and not list((tmp_path / "inbox").rglob("*.pdf"))
