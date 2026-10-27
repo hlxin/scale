@@ -271,7 +271,14 @@ $("ask-btn").onclick = async () => {
   if (!q) return;
   out.innerHTML = `<span class="muted">Working: writing and running query plans…</span>`;
   try {
-    const r = await call("POST", "/ask", { graph, question: q });
+    let r = await call("POST", "/ask", { graph, question: q, wait: false });
+    while (r.ask && r.state !== "done") {      // Claude Code answers on the service's computer: the question waits its turn
+      if (r.state === "failed") throw new Error(r.error || "the service could not answer the question");
+      out.innerHTML = `<span class="muted">${r.state !== "waiting" ? "Claude Code is answering on the service's computer…"
+        : r.position ? `Waiting in line: ${r.position} question${r.position > 1 ? "s" : ""} before yours.` : "Next in line…"}</span>`;
+      await new Promise((ok) => setTimeout(ok, 3000));
+      r = await call("GET", `/ask/${r.ask}`);
+    }
     const plans = (r.plans || []).map((p, i) => `<details><summary>plan ${i + 1}: ${esc(p.status)}, ${esc(p.rows)} rows</summary><pre>${esc(JSON.stringify(p.plan, null, 1))}</pre></details>`).join("");
     out.innerHTML = DOMPurify.sanitize(marked.parse(r.answer || "")) + plans + (r.stopped ? `<p class="err">${esc(r.stopped)}</p>` : "");
   } catch (e) {

@@ -1018,17 +1018,29 @@ const store = {
     return v;
   } };
 // A question is answered by the service (the query-graph skill over this graph, within the service's budget) for a
-// signed-in reader; anyone else sees the matching evidence, found in this browser.
+// signed-in reader; anyone else sees the matching evidence, found in this browser. When Claude Code answers on the
+// service's own computer, the question waits its turn in a line there, and the page follows it until it is answered.
+let asked = 0;                   // the question the page shows; an older one still in the line stops showing
+const inLine = (n) => (n ? `Waiting in line: ${n} question${n > 1 ? "s" : ""} before yours.` : "Next in line…");
 async function ask(question) {
   leaveSchema();
+  const mine = ++asked;
   card("Answer", `<p class="gx-meta">Answering… the service runs query plans over this graph.</p>`);
   try {
-    const r = await call("POST", "/ask", { graph: (G.base || G).doc, question });
+    let r = await call("POST", "/ask", { graph: (G.base || G).doc, question, wait: false });
+    while (r.ask && r.state !== "done") {
+      if (r.state === "failed") throw new Error(r.error || "the service could not answer the question");
+      if (mine !== asked) return;
+      card("Answer", `<p class="gx-meta">${r.state === "waiting" ? inLine(r.position) : "Claude Code is answering on the service's computer…"}</p>`);
+      await new Promise((ok) => setTimeout(ok, 3000));
+      r = await call("GET", `/ask/${r.ask}`);
+    }
+    if (mine !== asked) return;
     card("Answer", `${idLinks(md(r.answer || "No answer."))}
       ${(r.plans || []).length ? `<details><summary>How it was answered (${r.plans.length} plan${r.plans.length > 1 ? "s" : ""})</summary>${r.plans.map((p, i) =>
         `<p class="gx-meta">Plan ${i + 1}: ${esc(p.status || "?")}, ${p.rows ?? 0} rows</p><pre>${esc(JSON.stringify(p.plan, null, 1))}</pre>`).join("")}</details>` : ""}
-      <p class="gx-meta">about ${Number(r.tokens || 0).toLocaleString()} tokens, from the service's budget</p>`);
-  } catch (err) { card("Answer", `<p class="gx-card-warn">${esc(err.message || err)}</p>`); search(question); }
+      ${r.tokens ? `<p class="gx-meta">about ${Number(r.tokens).toLocaleString()} tokens, from the service's budget</p>` : ""}`);
+  } catch (err) { if (mine === asked) { card("Answer", `<p class="gx-card-warn">${esc(err.message || err)}</p>`); search(question); } }
 }
 
 // ------------------------------------------------------------------------------------------ controls

@@ -802,6 +802,53 @@ def test_with_claude_code_a_question_is_answered_on_this_computer_with_the_plans
     assert svc.route("POST", "/ask", {}, {}, json.dumps({"graph": load_doc(PUBLIC), "question": "?"}).encode())[0] == 401
 
 
+def test_with_claude_code_questions_wait_in_line_and_none_is_turned_away(tmp_path, monkeypatch):
+    """SCALE_WEB_ASK_WORKERS=2: two questions are answered at once and the others wait their turn in one line, the
+    oldest first, none turned away. The page (``"wait": false``) gets each question's place at once and follows it;
+    another client waits for its answer. Only the reader who asked reads a question."""
+    svc = Service(cfg(tmp_path, ask="claude-code", ask_workers=2), repo=REPO)
+    svc.cfg.allowlist.append("bob")
+    running, peak, go, lock = [0], [0], threading.Event(), threading.Lock()
+
+    def claude(folder, prompt, system, cfg, bin_dir, allowed, minutes, max_turns):
+        with lock:
+            running[0] += 1
+            peak[0] = max(peak[0], running[0])
+        go.wait(20)
+        with lock:
+            running[0] -= 1
+        return {"result": f"Answer to {prompt}", "num_turns": 1}
+    monkeypatch.setattr(runner, "run_claude", claude)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}"}
+    graph = load_doc(PUBLIC)
+
+    def post(question, **kw):
+        return svc.route("POST", "/ask", {}, h, json.dumps({"graph": graph, "question": question, **kw}).encode())
+
+    def view(qid, who=h):
+        return svc.route("GET", f"/ask/{qid}", {}, who, b"")
+    asked = [post(f"Q{i}?", wait=False) for i in range(4)]
+    assert [st for st, _, _ in asked] == [202] * 4
+    ids = [body["ask"] for _, body, _ in asked]
+    deadline = time.time() + 10
+    while running[0] < 2 and time.time() < deadline:
+        time.sleep(0.05)
+    views = [view(q)[1] for q in ids]
+    assert [v["state"] for v in views] == ["answering", "answering", "waiting", "waiting"]
+    assert [v["position"] for v in views[2:]] == [0, 1]                      # the questions before each
+    assert view(ids[0], {"authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"})[0] == 404
+    later = ThreadPoolExecutor(1).submit(post, "Q4?")                       # a client that waits for its answer
+    time.sleep(0.3)
+    assert not later.done()                                                  # it waits its turn, never refused
+    go.set()
+    st, body, _ = later.result(timeout=30)
+    assert st == 200 and body["answer"] == "Answer to Q4?"
+    while time.time() < deadline + 10 and any(view(q)[1]["state"] != "done" for q in ids):
+        time.sleep(0.05)
+    assert [view(q)[1]["answer"] for q in ids] == [f"Answer to Q{i}?" for i in range(4)]
+    assert peak[0] == 2                                                      # never more than two at once
+
+
 def test_with_three_workers_three_sources_are_curated_at_the_same_time(tmp_path, monkeypatch):
     """SCALE_WEB_INBOX_WORKERS=3: three queued sources are curated at the same time, each in its own folder with its
     own Claude Code. Here the runs meet at a barrier that only three runs at once can pass; one at a time, it breaks."""

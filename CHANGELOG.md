@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Questions wait their turn instead of being turned away (service and explorer, no schema change).** Requested by
+  @diazr04: with `SCALE_WEB_ASK=claude-code`, the questions Claude Code answers on the service's computer join one
+  line (`service/scaleweb/asks.py`), `SCALE_WEB_ASK_WORKERS` at once (two by default), the oldest first; the others
+  wait for their turn instead of being refused after two minutes. The explorer and the publication page send
+  `"wait": false`, get the question's place at once and follow it (`GET /ask/{id}`), saying how many questions wait
+  before it; a client that does not send it waits for the answer as before. A question is read by the reader who asked
+  it only, for an hour once answered. The explorer no longer shows "about 0 tokens" under an answer Claude Code gave.
 - **The inbox: Claude Code curates on the service's own computer (no schema change).** Requested by @diazr04: a
   computer of the lab receives the papers the page uploads and Claude Code curates each one under the schema, keeping
   every promise of the Curate dialog: the graph comes back to its owner only, contributing is a separate click, and a
