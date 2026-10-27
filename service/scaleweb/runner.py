@@ -52,8 +52,10 @@ from .config import Config
 from .inbox import Inbox
 
 FIX_ROUNDS = 2                  # Claude Code gets the check's errors back this many times before the job fails
-# with several workers: one job at a time looks for the same paper and marks its own; one writes the archive
-_SAME, _KEEP = threading.Lock(), threading.Lock()
+# with several workers: one job at a time looks for the same paper and marks its own; one writes the archive; and
+# one asks Crossref for a DOI's record, since its public pool refuses requests sent at once (HTTP 429)
+_SAME, _KEEP, _CROSSREF = threading.Lock(), threading.Lock(), threading.Lock()
+CROSSREF_WAITS = (0, 5, 20)     # seconds before each try of a DOI's record, when Crossref answers 429
 TOOLS = "Read,Write,Edit,Glob,Grep,Bash"
 # the file tools act in the publication's folder only (--restricted); the shell runs these two scale commands only,
 # which take no path outside the folder: the check, and the schema
@@ -167,6 +169,21 @@ def run_claude(folder: Path, prompt: str, system: str, cfg: Config, bin_dir: Pat
         return {"is_error": True, "result": (r.stderr or r.stdout or f"Claude Code ended with {r.returncode}").strip()[-2000:]}
 
 
+def start(work: Path, **kw) -> dict:
+    """``scale source start``, one DOI lookup at a time over the workers, waiting out Crossref's "too many requests"."""
+    for i, pause in enumerate(CROSSREF_WAITS):
+        time.sleep(pause)
+        try:
+            if not kw.get("doi"):
+                return curate.start(work, **kw)
+            with _CROSSREF:
+                return curate.start(work, **kw)
+        except ScaleError as e:
+            if "429" not in str(e) or i == len(CROSSREF_WAITS) - 1:
+                raise
+            shutil.rmtree(work, ignore_errors=True)
+
+
 def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callable = run_claude,
                request: Callable = github.http, bin_dir: Path | None = None) -> dict:
     """Curate one publication the runner took from the queue; returns the job. The graph goes to its owner alone."""
@@ -183,8 +200,8 @@ def curate_one(inbox: Inbox, item: dict, cfg: Config, repo: Path, claude: Callab
         pdf = next(iter(sorted(folder.glob("*.pdf"))), None)
         text = None if pdf else next(iter(sorted(folder.glob("*.txt"))), None)    # a kept paper with no PDF
         version = commons_version(cfg, repo)
-        started = curate.start(work, doi=doi, pdf=pdf, email=cfg.contact_email or None, repo=repo, version=version,
-                               **({"text": text} if text else {}))
+        started = start(work, doi=doi, pdf=pdf, email=cfg.contact_email or None, repo=repo, version=version,
+                        **({"text": text} if text else {}))
         source = {k: started.get(k) for k in ("source_id", "rights_class", "pages", "schema_version", "notes")}
         if not started.get("pages"):
             raise ScaleError("no text could be read: give the PDF (an open-access copy was not found or not openly "
@@ -330,7 +347,7 @@ def run(cfg: Config, repo: Path | None = None, claude: Callable = run_claude, re
                     running.add(pool.submit(curate_one, inbox, item, cfg, repo, claude, request, bin_dir))
                 if not running:
                     return done
-                finished, running = wait(running, return_when=FIRST_COMPLETED)
+                finished, running = wait(running, timeout=5, return_when=FIRST_COMPLETED)   # and look at the queue again
                 done.extend(f.result() for f in finished)
     finally:
         lock.close()

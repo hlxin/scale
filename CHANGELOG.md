@@ -21,7 +21,8 @@
     ticks the box, and leaves the inbox when the job ends; `python -m scaleweb.runner --recurate` sends the kept papers
     curated under another schema version through the inbox again.
   - **Several at once, and repeats.** Uploads sent together wait in turn; `SCALE_WEB_INBOX_WORKERS` of them are
-    curated at once, each with its own Claude Code (one by default). Before Claude Code starts, the runner looks for
+    curated at once, each with its own Claude Code (one by default), asking Crossref for DOIs one at a time and
+    waiting out its 429. Before Claude Code starts, the runner looks for
     the publication by its DOI or PDF digest in catal-commons, in the open contributions and among the same reader's
     curated jobs, and a repeat points to it. A Source record for a cited work goes back to Claude Code, since
     catal-commons takes one Source per contribution.

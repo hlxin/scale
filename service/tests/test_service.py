@@ -826,3 +826,35 @@ def test_with_three_workers_three_sources_are_curated_at_the_same_time(tmp_path,
     done = runner.run(c, repo=REPO, claude=together, request=no_github)
     assert sorted(j["id"] for j in done) == sorted(jobs) and {j["state"] for j in done} == {"done"}, done
     assert len(set(folders)) == 3 and not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def test_crossref_too_many_requests_is_waited_out_and_dois_are_asked_one_at_a_time(tmp_path, monkeypatch):
+    """Found with three workers on a lab computer: three DOIs looked up at once, and Crossref's public pool answered
+    429 to one, which failed its job. The runner asks Crossref one DOI at a time and waits out a 429."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), inbox_workers=3)
+    svc = Service(c, repo=REPO)
+    real, calls, inside = curate.start, [], []
+    meta = {"message": {"title": ["Copper catalysts"], "issued": {"date-parts": [[2026]]}, "type": "journal-article"}}
+
+    def start(out, doi=None, pdf=None, **kw):
+        inside.append(1)
+        try:
+            assert len(inside) == 1, "two DOI lookups at once"
+            calls.append(doi)
+            if calls.count(doi) == 1 and doi.endswith(".1"):
+                raise curate.ScaleError(f"{doi}: Crossref could not resolve it (HTTP Error 429: Too Many Requests)")
+            text = tmp_path / f"{doi.replace('/', '-')}.txt"
+            text.write_text(TEXT, encoding="utf-8")
+            time.sleep(0.2)                                   # long enough for the workers to overlap
+            return real(out, text=text, doi=doi, get=lambda url, h: json.dumps(meta).encode(), **kw)
+        finally:
+            inside.pop()
+    monkeypatch.setattr(curate, "start", start)
+    monkeypatch.setattr(runner, "CROSSREF_WAITS", (0, 0, 0))
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    for i in (1, 2, 3):
+        svc.route("POST", "/jobs", {"filename": f"p{i}.pdf", "doi": f"10.9999/paper.{i}", "attest": "1"}, h,
+                  f"%PDF-1.7 paper {i}".encode())
+    done = runner.run(c, repo=REPO, claude=fake_claude(), request=no_github)
+    assert {j["state"] for j in done} == {"done"}, [j.get("error") for j in done]
+    assert calls.count("10.9999/paper.1") == 2                                  # the 429, then the record

@@ -185,8 +185,9 @@ Everything the Curate dialog says holds as it does for the model loop:
   the page; without that login it is set aside in `rejected/`.
 - **Several at once.** Each upload is a job of its own, told its place in the queue. One runner works the queue
   (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while it works: up to
-  `SCALE_WEB_INBOX_WORKERS` publications at once, each in its own folder with its own Claude Code. More at once
-  spends a Claude plan's usage sooner, not more of it. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
+  `SCALE_WEB_INBOX_WORKERS` publications at once, each in its own folder with its own Claude Code, and the
+  workers ask Crossref for a DOI's record one at a time, waiting out its "too many requests". More at once spends a
+  Claude plan's usage sooner, not more of it. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
 - **The same paper twice.** Before Claude Code starts, the runner looks for the publication by its DOI or its PDF's
   digest (and by title and year when the DOI gives them) in catal-commons, in the open contributions and among the
   same reader's curated jobs; another reader's job never counts, since their graph is theirs. A repeat ends there and
