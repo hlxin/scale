@@ -91,6 +91,24 @@ class Inbox:
         keep = ("id", "state", "doi", "filename", "created", "updated", "pull_request", "known", "error")
         return [{k: j[k] for k in keep if k in j} for j in sorted(jobs, key=lambda j: j.get("created_s", 0), reverse=True)]
 
+    def same_source(self, probe: dict, exclude: str) -> dict | None:
+        """Another job here whose publication is the probe's (the same DOI, identifier or PDF digest, as commons.find
+        matches): ``{"same_as": {...}}`` with its state and pull request, else None. Only jobs that went on to be curated
+        count, so a publication uploaded twice at once is curated once, and one whose curation failed can be sent again."""
+        from scale import commons
+        held = {}
+        for jid in self._ids():
+            job = self._load(jid) if jid != exclude else None
+            if job and job.get("source_record") and job.get("state") not in ("failed", "queued", "reading"):
+                held[jid] = {"nodes": [job["source_record"]]}
+        hits = commons.find(probe, {"sources": held}) if held else []
+        if not hits:
+            return None
+        jid = hits[0]["file"].removeprefix("parts/sources/").removesuffix(".json")
+        job = self._load(jid)
+        return {"same_as": {"job": jid, "state": job["state"], "by": hits[0]["by"],
+                            **({"pull_request": job["pull_request"]} if job.get("pull_request") else {})}}
+
     def position(self, jid: str) -> int:
         """How many publications wait before this one (0: it is next)."""
         ids = [p.name for p in self._waiting()]

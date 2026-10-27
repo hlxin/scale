@@ -1,11 +1,13 @@
 """The web service (service/scaleweb), offline: a scripted model stands in for the Messages API, GitHub is never
 called, and the source's page texts come from a text file."""
 
+import hashlib
 import json
 import os
 import subprocess
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -502,7 +504,7 @@ def test_a_graph_that_never_checks_fails_its_job_and_its_pdf_is_deleted_too(tmp_
     calls = []
     done = runner.run(c, repo=REPO, claude=fake_claude("gold is the active phase", calls), request=no_github)
     assert done[0]["state"] == "failed" and f"after {runner.FIX_ROUNDS} rounds" in done[0]["error"]
-    assert len(calls) == 1 + runner.FIX_ROUNDS and "still reports 1 errors" in calls[1]["prompt"]   # the errors go back
+    assert len(calls) == 1 + runner.FIX_ROUNDS and "still has 1 problems" in calls[1]["prompt"]   # the errors go back
     assert svc.route("GET", f"/jobs/{jid}", {}, h, b"")[1]["state"] == "failed"
     assert not list((tmp_path / "inbox").rglob("*.pdf"))
 
@@ -586,3 +588,89 @@ def test_a_claude_code_run_that_records_nothing_fails_and_opens_no_pull_request(
     assert done[0]["state"] == "failed" and "recorded nothing: API Error: 400" in done[0]["error"]
     assert len(calls) == 1 and gh.pulls == [] and not gh.refs                 # no fix rounds, no pull request
     assert not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def digest_start(monkeypatch, tmp_path):
+    """curate.start reads the test's text, and records the uploaded PDF's sha256 as reading the PDF would."""
+    real = curate.start
+
+    def start(out, doi=None, pdf=None, **kw):
+        (tmp_path / "paper.txt").write_text(TEXT, encoding="utf-8")
+        res = real(out, text=tmp_path / "paper.txt", doi=doi, **kw)
+        doc = load_doc(Path(out) / res["graph"])
+        next(n for n in doc["nodes"] if n["id"] == res["source_id"])["props"]["text_sha256"] = \
+            hashlib.sha256(pdf.read_bytes()).hexdigest()
+        write_canonical(Path(out) / res["graph"], doc)
+        return res
+    monkeypatch.setattr(curate, "start", start)
+
+
+def test_several_uploads_at_once_wait_in_turn_and_are_each_curated_once(tmp_path, monkeypatch):
+    """Four PDFs sent at the same moment are four jobs, each told its place in the queue; the runner curates them one
+    after the other (one runner at a time) and deletes each PDF."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+    svc = Service(c, repo=REPO)
+    digest_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    with ThreadPoolExecutor(4) as pool:
+        sent = list(pool.map(lambda i: svc.route("POST", "/jobs", {"filename": f"paper{i}.pdf", "attest": "1"}, h,
+                                                 f"%PDF-1.7 paper {i}".encode()), range(4)))
+    jobs = [body["job"] for st, body, _ in sent]
+    assert [st for st, _, _ in sent] == [202] * 4 and len(set(jobs)) == 4
+    assert sorted(svc.inbox.position(j) for j in jobs) == [0, 1, 2, 3]
+    calls = []
+    done = runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=no_github)
+    assert sorted(j["id"] for j in done) == sorted(jobs) and {j["state"] for j in done} == {"curated"}
+    assert len(calls) == 4 and not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def test_the_same_pdf_uploaded_twice_at_once_is_curated_once(tmp_path, monkeypatch):
+    """Two uploads of one PDF (no DOI): the second is matched to the first by the PDF's digest before Claude Code is
+    started, and points to it."""
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"))
+    svc = Service(c, repo=REPO)
+    digest_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    first = svc.route("POST", "/jobs", {"filename": "paper.pdf", "attest": "1"}, h, b"%PDF-1.7 one paper")[1]["job"]
+    svc.cfg.allowlist = ["ada", "bob"]
+    bob = {**h, "authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    second = svc.route("POST", "/jobs", {"filename": "copy.pdf", "attest": "1"}, bob, b"%PDF-1.7 one paper")[1]["job"]
+    calls = []
+    done = {j["id"]: j for j in runner.run(c, repo=REPO, claude=fake_claude(calls=calls), request=no_github)}
+    assert done[first]["state"] == "curated" and len(calls) == 1
+    assert done[second]["state"] == "done" and done[second]["known"]["same_as"]["job"] == first
+    assert done[second]["known"]["same_as"]["by"] == ["text_sha256"]
+    st, job, _ = svc.route("GET", f"/jobs/{second}", {}, bob, b"")
+    assert st == 200 and job["known"]["same_as"]["job"] == first and "graph" not in job
+    assert not list((tmp_path / "inbox").rglob("*.pdf"))
+
+
+def test_a_source_record_for_a_cited_work_goes_back_to_claude_code(tmp_path, monkeypatch):
+    """catal-commons takes one Source per contribution: a Source added for a cited work is handed back as a problem,
+    and the graph is contributed with the publication's Source alone."""
+    gh = FakeGitHub()
+    c = cfg(tmp_path, inbox=str(tmp_path / "inbox"), github_token="bot-token")
+    svc = Service(c, repo=REPO, github_request=gh)
+    text_start(monkeypatch, tmp_path)
+    h = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}", "content-type": "application/pdf"}
+    svc.route("POST", "/jobs", {"filename": "paper.pdf", "doi": "10.9999/paper.1", "attest": "1"}, h, b"%PDF-1.7 a file")
+    calls, write = [], fake_claude()
+
+    def cites(folder, prompt, system, cfg, bin_dir):
+        calls.append(prompt)
+        res = write(folder, prompt, system, cfg, bin_dir)
+        info = load_doc(folder / "source.json")
+        gpath = folder / f"{info['slug']}.graph.json"
+        doc = load_doc(gpath)
+        cited = f"{info['source_id'].replace('/source/', '/')}/source/ref12"
+        doc["nodes"] = [n for n in doc["nodes"] if n["id"] != cited]
+        if len(calls) == 1:                                   # first round: a Source for the work it cites
+            doc["nodes"].append({"id": cited, "label": "Source", "props": {"name": "Cited work", "kind": "article",
+                                                                           "origin": "reported"}})
+        write_canonical(gpath, doc)
+        return res
+    done = runner.run(c, repo=REPO, claude=cites, request=gh)
+    assert done[0]["state"] == "done", done[0].get("error")
+    assert len(calls) == 2 and "one Source per contribution" in calls[1]
+    added = next(t for t in gh.tree_body["tree"] if t["path"].endswith("10.9999-paper.1.json"))
+    assert json.loads(added["content"])["nodes"] and sum(n["label"] == "Source" for n in json.loads(added["content"])["nodes"]) == 1

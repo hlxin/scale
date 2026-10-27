@@ -231,9 +231,11 @@ $("curate-start").onclick = () => startCuration();
 // The commons holds the paper already, or an open contribution adds it: nothing was curated and nothing spent.
 function showKnown(k) {
   const commons = manifest.find((e) => e.id === "catal-commons");
+  const pr = k.same_as?.pull_request;
   $("curate-job").innerHTML = (k.in_commons
     ? `<div class="gx-state">Already in catal-commons</div><div>${k.in_commons.map((h) => `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.file)}</a>`).join(", ")}</div>`
-    : `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`)
+    : k.proposed ? `<div class="gx-state">Already proposed</div><div><a href="${esc(k.proposed.url)}" target="_blank" rel="noopener">#${esc(k.proposed.number)} ${esc(k.proposed.title)}</a>, waiting for review.</div>`
+    : `<div class="gx-state">Already curated here</div><div>Another upload of this paper (the same ${esc((k.same_as.by || []).join(", "))}) was curated by the service${pr ? `: <a href="${esc(pr.url)}" target="_blank" rel="noopener">pull request #${esc(pr.number)}</a>` : ""}.</div>`)
     + `<div class="gx-subtle">Nothing was curated, so nothing was spent.</div><p>`
     + (commons && k.in_commons ? `<button type="button" class="gx-btn gx-btn-tiny gx-btn-primary" id="known-open">Open catal-commons</button> ` : "")
     + `<button type="button" class="gx-btn gx-btn-tiny" id="known-again">Curate it anyway</button></p>`;

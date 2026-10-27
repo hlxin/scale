@@ -169,6 +169,14 @@ model loop (`SCALE_WEB_INBOX`, [`scaleweb/inbox.py`](scaleweb/inbox.py), [`scale
   (`SCALE_WEB_ARCHIVE`) is not used.
 - **By hand.** A PDF dropped into `queue/` is curated the same way and credited to `SCALE_WEB_INBOX_LOGIN`; without
   that login it is set aside in `rejected/`.
+- **Several at once.** Each upload is a job of its own, told its place in the queue. The runner curates one
+  publication at a time (launchd starts one, and a lock keeps it one), the oldest first, and takes what arrives while
+  it works. A reader queues at most `SCALE_WEB_JOBS_PER_USER` a day.
+- **The same paper twice.** Before Claude Code starts, the runner looks for the publication by its DOI or its PDF's
+  digest (and by title and year when the DOI gives them) in catal-commons, in the open contributions and among the
+  inbox's own curated jobs. A repeat ends there and points to the other one; "Curate it anyway" sends it again.
+- **One Source.** catal-commons takes one Source per contribution, so a Source record Claude Code adds for a work the
+  publication cites goes back to it as a problem, with the check's errors.
 - **Claude Code's sign-in.** The runner's Claude Code signs in on its own: with a Claude plan (`claude setup-token`,
   its token set as `CLAUDE_CODE_OAUTH_TOKEN`) or with an API key (`ANTHROPIC_API_KEY`). Questions in words (`/ask`)
   still use the service's API key.

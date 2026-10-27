@@ -266,10 +266,16 @@ class Service:
 
 
 def known(cfg: Config, repo_path: Path, doi: str, request=github.http) -> dict | None:
-    """The commons' record of a DOI, before any model is spent on it: ``{"in_commons": [...]}`` when a source on
-    main is that DOI, ``{"proposed": {...}}`` when an open contribution adds it, else None. Read from GitHub when
-    contributions are set up, else from the service's own copy of the commons; a lookup that fails is no hit."""
-    probe = {"nodes": [{"id": "probe/source/doi", "label": "Source", "props": {"doi": doi}}]}
+    """The commons' record of a DOI, before any model is spent on it (known_source)."""
+    return known_source(cfg, repo_path, {"nodes": [{"id": "probe/source/doi", "label": "Source", "props": {"doi": doi}}]},
+                        request)
+
+
+def known_source(cfg: Config, repo_path: Path, probe: dict, request=github.http) -> dict | None:
+    """The commons' record of the probe's one Source (its DOI, identifiers, text digest, or title and year), before any
+    model is spent on it: ``{"in_commons": [...]}`` when a source on main is that one, ``{"proposed": {...}}`` when an
+    open contribution adds it, else None. Read from GitHub when contributions are set up, else from the service's own
+    copy of the commons; a lookup that fails is no hit."""
     base = f"https://github.com/{cfg.repo}/blob/main/{cfg.commons}/"
     repo, d = None, repo_path / cfg.commons
     try:

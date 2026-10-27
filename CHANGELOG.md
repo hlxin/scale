@@ -17,6 +17,10 @@
   - **Nothing is kept.** The PDF, its page texts and the working folder are deleted when the job ends, done or failed;
     the job's state and its capped graph stay 14 days for the page. The Curate dialog says so, and that the pull request
     opens by itself and names the reader.
+  - **Several at once, and repeats.** Uploads sent together wait in turn and are curated one at a time. The same paper
+    sent twice (the same DOI or PDF digest) is curated once: before Claude Code starts, the runner finds it in
+    catal-commons, in an open contribution or among the inbox's curated jobs, and the repeat points to it. A Source
+    record for a cited work goes back to Claude Code, since catal-commons takes one Source per contribution.
 
 - **The explorer's toolbar: Curate stands out, the Visualization is gone (no schema change).** Requested by @hlxin:
   the Visualization (the graph's data in charts, and the Plotly script it loaded) is removed from the explorer, and
