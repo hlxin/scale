@@ -96,7 +96,9 @@ When a job is done, the page offers **Contribute to the commons**:
 
 - **Sign-in.** Only GitHub accounts on the allowlist (`SCALE_WEB_ALLOWLIST`) may start a job or ask a question, since
   both spend the service's model budget; an allowlist of `*` admits any GitHub account, each within its daily budget.
-  Anyone may open a graph, view it, query it and search it. No reader ever gives a model key.
+  Anyone may open a graph, view it, query it and search it. No reader ever gives a model key. Signing in itself
+  admits only those accounts: with an empty allowlist every GitHub sign-in ends in "not admitted", so set it (or `*`)
+  before the page links to the service.
 - **How it works.** GitHub's OAuth returns the user to the page with a signed session token, an HMAC with
   `SCALE_WEB_SECRET`. The GitHub token is read once for the login and dropped.
 - **Daily budgets** (UTC days, counted in memory, so run one instance):

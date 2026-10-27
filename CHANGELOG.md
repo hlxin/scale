@@ -22,6 +22,23 @@
     catal-commons, in an open contribution or among the inbox's curated jobs, and the repeat points to it. A Source
     record for a cited work goes back to Claude Code, since catal-commons takes one Source per contribution.
 
+- **The open graph's arrow folds its card (explorer, no schema change).** Requested by @hlxin: the arrow beside the
+  open graph in the Graphs panel folds and unfolds the graph's card (its type, size, source and schema); clicking the
+  row does too, or, in the schema view, goes back to the graph as before. Opening another graph shows its card unfolded.
+- **The toolbar's Curate button reads "Upload, curate, and explore" and looks like the Sign in button (no schema
+  change).** Requested by @hlxin: it is an outlined button like the toolbar's others, no longer filled in the link
+  colour, and its name says what it does: upload a publication, curate it into a graph, explore it.
+- **Signing in keeps the graph that was open (no schema change).** Requested by @hlxin: GitHub sign-in returned the
+  reader to the explorer's first graph, since the service's answer replaced the part of the address that names the
+  graph open. The page now keeps it while the reader is at GitHub and opens it again; every sign-in link (the toolbar,
+  Curate, a search's prompt) returns to the page as it was. The service's README says that an empty allowlist turns
+  away every sign-in.
+- **GitHub sign-in in the explorer's toolbar (no schema change).** Requested by @hlxin: a **Sign in** button beside
+  the search bar signs a reader in with GitHub through the web service, then shows their avatar and login, with a menu
+  (what the service allows today, their GitHub profile, the contributors' board, sign out). Viewing, filtering and
+  searching the graphs need no account; curating a paper, contributing it and questions answered in words need the
+  sign-in. Signing in from the Curate dialog returns to it; from the toolbar, to the page as it was. Without a service
+  the button says sign-in opens once the service runs.
 - **The explorer's toolbar: Curate stands out, the Visualization is gone (no schema change).** Requested by @hlxin:
   the Visualization (the graph's data in charts, and the Plotly script it loaded) is removed from the explorer, and
   Curate, the toolbar's one button, is filled in the link colour.

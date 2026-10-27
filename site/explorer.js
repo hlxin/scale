@@ -18,6 +18,7 @@ const PROVENANCE_KIND = "Source", PROVENANCE_EDGE = "REPORTED_IN";   // hidden u
 
 let G = null;                     // the graph: {entry, doc, byId, out, inn, labels, rels, sha, props}
 let manifest = [];
+let folded = false;               // the open graph's facts are folded under its row (its caret)
 const kindColour = new Map(), edgeColour = new Map();
 const S = {                       // what the canvas shows
   kind: null, rel: null, sources: false, hidden: new Set(), extra: new Set(), match: null,
@@ -60,10 +61,65 @@ function readSignIn() {                          // the service returns from Git
   if (p.get("token")) { token = p.get("token"); store.set("scale-token", token); }
   const why = p.get("signin");
   for (const k of ["token", "signin", "login"]) p.delete(k);
-  history.replaceState(null, "", location.pathname + location.search + (p.toString() ? `#${p}` : ""));
-  if (why) setTimeout(() => { $("curate-dialog").showModal(); curateAccount(why === "not-allowed"
-    ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it." : "GitHub sign-in failed; try again."); }, 0);
-  else setTimeout(() => openCurate(), 0);
+  const was = store.get("scale-signin-hash");     // the graph open before GitHub (#g=…), which the return drops
+  store.set("scale-signin-hash", "");
+  const hash = p.toString() || was;
+  history.replaceState(null, "", location.pathname + location.search + (hash ? `#${hash}` : ""));
+  const fromCurate = store.get("scale-signin-from") === "curate";
+  store.set("scale-signin-from", "");
+  const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
+    : why ? "GitHub sign-in failed; try again." : "";
+  if (fromCurate) setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
+  else if (why) setTimeout(() => accountMenu(note), 0);
+}
+// where GitHub sends the reader back to: this page, as it is now. The service puts its answer in the fragment, so
+// the graph open (#g=…) is kept in this tab's storage when a sign-in link is followed, and readSignIn() restores it.
+const signInUrl = () => `${SERVICE}/auth/login?return=${encodeURIComponent(location.origin + location.pathname + location.search)}`;
+document.addEventListener("click", (e) => {
+  if (SERVICE && e.target.closest?.(`a[href^="${SERVICE}/auth/login"]`)) store.set("scale-signin-hash", location.hash.slice(1));
+});
+function signOut() {
+  token = ""; login = ""; store.set("scale-token", "");
+  renderAccount();
+  if ($("curate-dialog").open) curateAccount();
+}
+// The toolbar's account: "Sign in" with GitHub, or the reader's avatar and login with a menu (what the service allows
+// today, sign out). Without a service the button says why sign-in is not available yet.
+let me = null;
+async function renderAccount() {
+  const btn = $("account-btn"), label = $("account-label");
+  btn.classList.remove("is-signed-in");
+  btn.querySelector("img")?.remove();
+  btn.querySelector("svg").removeAttribute("hidden");
+  if (!SERVICE || !token) { me = null; label.textContent = "Sign in"; btn.title = SERVICE ? "Sign in with GitHub" : "Sign-in opens once the SCALE service is running"; return; }
+  try { me = await call("GET", "/me"); } catch { return; }       // a 401 signs out in call()
+  login = me.login;
+  const img = Object.assign(document.createElement("img"), { src: `https://github.com/${encodeURIComponent(me.login)}.png?size=64`, alt: "", className: "gx-avatar" });
+  img.onerror = () => img.remove();
+  btn.querySelector("svg").setAttribute("hidden", "");
+  btn.prepend(img);
+  btn.classList.add("is-signed-in");
+  label.textContent = me.login;
+  btn.title = `Signed in with GitHub as ${me.login}`;
+}
+function accountMenu(note = "") {
+  const box = $("account-menu"), warn = note ? `<p class="gx-account-note gx-err">${esc(note)}</p>` : "";
+  const open = `<p class="gx-account-note gx-subtle">Viewing, filtering and searching the graphs need no account.</p>`;
+  if (!SERVICE) box.innerHTML = `<p class="gx-account-note">Sign-in with GitHub opens once the SCALE service is running; curating will
+    need it.</p>${open}`;
+  else if (!me) box.innerHTML = `${warn}<p class="gx-account-note">Curating a paper needs a GitHub sign-in, as do contributing it to
+    catal-commons and having questions answered in words. Free: the service reads only your GitHub login, never your
+    repositories.</p>${open}
+    <a class="gx-btn gx-btn-primary gx-account-go" href="${esc(signInUrl())}">Continue with GitHub</a>`;
+  else box.innerHTML = `${warn}<p class="gx-account-note">Signed in as <b>${esc(me.login)}</b><br><span class="gx-subtle">${
+    me.tokens_left_today === 0 ? "The service's budget for today is spent." : "Curating and questions are open to you today."}</span></p>
+    <a class="gx-menu-item" href="https://github.com/${encodeURIComponent(me.login)}" target="_blank" rel="noopener">Your GitHub profile</a>
+    <button class="gx-menu-item" type="button" id="account-board">Contributors to catal-commons</button>
+    <button class="gx-menu-item" type="button" id="account-signout">Sign out</button>`;
+  $("account-signout")?.addEventListener("click", signOut);
+  $("account-board")?.addEventListener("click", () => $("board-open")?.click());
+  box.hidden = false;
+  $("account-btn").setAttribute("aria-expanded", "true");
 }
 async function call(method, path, body, headers = {}) {
   if (!SERVICE) throw new Error("the curation service is not configured (site/config.js)");
@@ -72,7 +128,7 @@ async function call(method, path, body, headers = {}) {
   if (body !== undefined && !(body instanceof Blob)) { h["Content-Type"] = "application/json"; body = JSON.stringify(body); }
   const r = await fetch(SERVICE + path, { method, headers: h, body });
   const data = await r.json().catch(() => ({}));
-  if (r.status === 401) { token = ""; store.set("scale-token", ""); curateAccount(); }
+  if (r.status === 401) { signOut(); }
   if (!r.ok) throw new Error(data.error || `the service answered ${r.status}`);
   return data;
 }
@@ -85,9 +141,9 @@ async function curateAccount(note = "") {
     return;
   }
   if (!token) {
-    const back = location.origin + location.pathname;
-    el.innerHTML = `<a class="gx-btn gx-btn-primary" href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(back)}">Sign in with GitHub</a>
+    el.innerHTML = `<a class="gx-btn gx-btn-primary" id="curate-signin" href="${esc(signInUrl())}">Sign in with GitHub</a>
       <span class="gx-subtle">Free; the service needs only your login.</span>${warn}`;
+    $("curate-signin").onclick = () => store.set("scale-signin-from", "curate", true);
     $("curate-start").disabled = true;
     return;
   }
@@ -97,7 +153,7 @@ async function curateAccount(note = "") {
     el.innerHTML = `<span>Signed in as <b>${esc(me.login)}</b></span><span class="gx-subtle">· ${esc(me.model || "")}</span>`
       + `${me.tokens_left_today === 0 ? `<span class="gx-err">· the service's budget for today is spent</span>` : ""}`
       + `<button type="button" class="gx-btn gx-btn-tiny" id="curate-signout">Sign out</button>${warn}`;
-    $("curate-signout").onclick = () => { token = ""; store.set("scale-token", ""); curateAccount(); };
+    $("curate-signout").onclick = signOut;
     $("curate-start").disabled = false;
   } catch { /* curateAccount ran again on 401 */ }
 }
@@ -325,6 +381,7 @@ async function contribute() {
 async function start() {
   token = store.get("scale-token");
   readSignIn();
+  renderAccount();
   try { manifest = (await (await fetch("data/graphs.json")).json()).graphs || []; } catch { manifest = []; }
   renderGraphs();
   window.onhashchange = () => openFromHash();
@@ -340,10 +397,10 @@ async function start() {
 function renderGraphs() {
   const list = G && !manifest.includes(G.entry) ? [G.entry, ...manifest] : manifest;
   $("graphs").innerHTML = list.map((e) => {
-    const [scope, c] = scopeOf(e), active = G && G.entry === e;
+    const [scope, c] = scopeOf(e), active = G && G.entry === e, open = active && !folded;
     return `<div role="listitem"><button class="gx-graph-item${active ? " is-active" : ""}" type="button" data-id="${esc(e.id)}" title="${esc(e.title)}"
-        aria-expanded="${active}" style="--dot:${c}"><span class="gx-graph-caret">${CARET}</span><span class="gx-graph-dot"></span>
-        <span class="gx-graph-title">${esc(e.title)}</span><span class="gx-graph-scope">${scope}</span></button>${active ? details() : ""}</div>`;
+        aria-expanded="${open}" style="--dot:${c}"><span class="gx-graph-caret">${CARET}</span><span class="gx-graph-dot"></span>
+        <span class="gx-graph-title">${esc(e.title)}</span><span class="gx-graph-scope">${scope}</span></button>${open ? details() : ""}</div>`;
   }).join("") || `<p class="gx-muted">No graphs are listed: open a file.</p>`;
   const dl = $("curated-download");
   if (dl) dl.onclick = (ev) => { ev.preventDefault(); downloadGraph(); };
@@ -352,10 +409,16 @@ function renderGraphs() {
   if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
-  $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = () => {
+  $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = (ev) => {
+    if (b.classList.contains("is-active")) {      // the open graph: its row folds and unfolds its facts (in the schema
+      if (G.base && !ev.target.closest(".gx-graph-caret")) { leaveSchema(); return; }   // view, only its caret does)
+      folded = !folded;
+      renderGraphs();
+      $("graphs").querySelector(".gx-graph-item.is-active")?.focus();
+      return;
+    }
     const e = manifest.find((x) => x.id === b.dataset.id);
-    if (e && G && G.entry === e && G.base) { leaveSchema(); return; }
-    if (e && !(G && G.entry === e)) location.hash = `g=${encodeURIComponent(e.id)}`;
+    if (e) location.hash = `g=${encodeURIComponent(e.id)}`;
   }));
 }
 function details() {
@@ -469,6 +532,7 @@ async function openGraph(entry, text) {
   [...labels].sort((a, b) => b[1] - a[1]).forEach(([l]) => colourForKind(l));
   [...rels].sort((a, b) => b[1] - a[1]).forEach(([t]) => colourForEdge(t));
   G = { entry, file: `${entry.id}.json`, doc, byId, out, inn, labels, rels, props, sha: "" };
+  folded = false;
   Object.assign(S, { kind: null, rel: null, sources: false, hidden: new Set(), extra: new Set(), match: null, selected: null, pos: new Map(), nodes: [] });
   $("card").hidden = true;
   renderGraphs();
@@ -922,7 +986,7 @@ async function search(q) {
         <div class="gx-quote">“${esc(h.text)}”</div>
         <div class="gx-meta">${esc(h.label || "")}: ${esc(h.record_name || h.record)} · ${esc(name(G.byId.get(h.source)))}${h.source_year ? ` (${esc(h.source_year)})` : ""}, ${esc(h.locator || "")} · ${Number(h.score || 0).toFixed(3)}</div></div>`).join("")
       : `<p>No evidence matches “${esc(q)}”.</p>`) + (SERVICE && !token ? `<p class="gx-meta">These are the quotes that match, found in this browser.
-        <a href="${esc(SERVICE)}/auth/login?return=${encodeURIComponent(location.origin + location.pathname)}">Sign in with GitHub</a> to have
+        <a href="${esc(signInUrl())}">Sign in with GitHub</a> to have
         questions answered in words: free, no API key.</p>` : ""));
     $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => goTo(el.dataset.id)));
   } catch (err) { card("Matching evidence", `<p class="gx-card-warn">${esc(err.message)}</p>`); }
@@ -954,9 +1018,16 @@ $("search-form").onsubmit = (e) => {
 };
 $("labels-btn").onclick = () => { S.linkLabels = linkLabelsShown() ? "off" : "on"; draw(); };
 $("unhide-btn").onclick = () => { S.hidden.clear(); draw(); };
-const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")]];
+const menus = [[$("layout-btn"), $("layout-menu")], [$("export-btn"), $("export-menu")], [$("account-btn"), $("account-menu")]];
 for (const [btn, box] of menus) btn.onclick = (e) => { e.stopPropagation(); for (const [, b] of menus) if (b !== box) b.hidden = true; box.hidden = !box.hidden; btn.setAttribute("aria-expanded", String(!box.hidden)); };
 document.addEventListener("click", () => { for (const [, b] of menus) b.hidden = true; });
+$("account-btn").onclick = (e) => {
+  e.stopPropagation();
+  for (const [, b] of menus) if (b !== $("account-menu")) b.hidden = true;
+  if ($("account-menu").hidden) accountMenu();
+  else { $("account-menu").hidden = true; $("account-btn").setAttribute("aria-expanded", "false"); }
+};
+$("account-menu").onclick = (e) => e.stopPropagation();
 $("layout-menu").querySelectorAll("[data-layout]").forEach((b) => (b.onclick = () => {
   S.layout = b.dataset.layout;
   $("layout-label").textContent = { force: "Force", hierarchical: "Hierarchical", radial: "Radial" }[S.layout];
