@@ -58,6 +58,10 @@ with the format's validator (`bundle_validate.py`, with `--previous` for a later
 it. The tests run the validator when `SCALE_BUNDLE_VALIDATOR` names that file. Any platform that reads the format
 loads the zip as it is: the first release as a new graph, each later release as an update of it, in order.
 
+**To look at one,** open the zip with "Open a graph or bundle" in SCALE's graph explorer (the site, `site/bundle.js`):
+it draws the bundle's graph in the browser, with each record's values and evidence, and searches its quotes. It shows
+the bundle; it does not validate it or check its digests (the format's validator does).
+
 The mapping from scale-catal to the bundle (ids, units, evidence, statements, access) is described in the module
 docstring of `tools/kgbundle.py`, and the export skill (`skills/export-graph/SKILL.md`) says when to choose
 a bundle over the native document.

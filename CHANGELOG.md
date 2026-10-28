@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **The explorer opens a knowledge-graph bundle (no schema change).** Requested by @hlxin: "Open a graph or bundle" in
+  the explorer takes the zip `scale graph export --to kg-bundle` makes (docs/kg-bundle-format.md) as well as a graph
+  file, and shows its graph like any other: its sources (the bundle's Publications), values as reported, typed
+  absences, and evidence with its source and page; search works on it in the browser. The page reads the zip itself
+  (`site/bundle.js`); it does not validate the bundle or check its digests. A value map (a test's conditions) now reads
+  as "name: value" in a record's details instead of JSON.
 - **Three fixes from a Codex review of the site (no schema change).** Requested by @hlxin: a contribution receipt no
   longer signs anyone in (each token the service signs names its use, and each check takes only its own); the
   reader's own graph (curated just now, or opened from a file) and a job under way are kept in the tab, and the address
