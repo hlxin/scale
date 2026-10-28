@@ -29,7 +29,7 @@ from . import commons, graphparts, layout
 from .util import write_canonical
 
 SITE = "site"
-PAGES = ("index.html", "explorer.css", "explorer.js", "worker.js", "publication.html", "app.js", "config.js", "style.css")
+PAGES = ("index.html", "explorer.css", "explorer.js", "bundle.js", "worker.js", "publication.html", "app.js", "config.js", "style.css")
 PACKAGE_ZIP = "py/scale-py.zip"
 #: The bundled items the page never reads (the real examples' parts, texts and PDFs are tens of MB; their graphs are
 #: offered as data instead).

@@ -4,6 +4,7 @@
 // lists the evidence that matches; signed in, the SCALE service answers in words by SCALE's query-graph skill. No reader
 // ever gives a model key: the service curates, answers and contributes within its own budget.
 // Search, query plans and descriptions run SCALE's own code in a worker (worker.js).
+import { readBundle } from "./bundle.js";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const md = (s) => DOMPurify.sanitize(marked.parse(String(s || "")));
@@ -440,10 +441,16 @@ async function start() {
   window.onhashchange = () => openFromHash();
   $("graph-file").onchange = async (e) => {
     const f = e.target.files[0];
+    e.target.value = "";                            // the same file can be opened again
     if (!f) return;
-    const text = await f.text();
-    try { await openOwn({ id: `file-${f.name.replace(/\.json$/, "").replace(/\W+/g, "-")}`, title: f.name.replace(/\.json$/, ""), from: "" }, text); }
-    catch (err) { alert(`not a graph: ${err.message}`); }
+    const base = f.name.replace(/\.(json|zip)$/i, "");
+    try {
+      if (/\.zip$/i.test(f.name)) {                 // a knowledge-graph bundle (scale graph export --to kg-bundle)
+        status("Reading the bundle…");
+        const b = await readBundle(f);
+        await openOwn({ id: `bundle-${base.replace(/\W+/g, "-")}`, title: b.version ? `${b.title} (v${b.version})` : b.title, from: "" }, JSON.stringify(b.doc));
+      } else await openOwn({ id: `file-${base.replace(/\W+/g, "-")}`, title: base, from: "" }, await f.text());
+    } catch (err) { status(ready()); alert(`Not a graph or a graph bundle: ${err.message}`); }
   };
   let pending = null;                               // a job followed before a reload or a sign-in: follow it again
   try { pending = JSON.parse(store.get(JOB) || "null"); } catch { /* none */ }
@@ -645,6 +652,8 @@ function value(v) {
     const shown = `${esc(num)}${v.unit && v.unit !== "1" ? ` ${esc(v.unit)}` : ""}`;
     return v.as_reported && String(v.as_reported) !== String(num) ? `${shown} <span class="gx-subtle">(as reported: ${esc(v.as_reported)})</span>` : shown;
   }
+  const parts = Object.entries(v);                  // a map of values (conditions, a feed's composition): one per name
+  if (parts.length && parts.every(([, x]) => x && typeof x === "object" && "status" in x)) return parts.map(([k, x]) => `${esc(k.replace(/_/g, " "))}: ${value(x)}`).join("; ");
   return `<code>${esc(JSON.stringify(v))}</code>`;
 }
 const idLinks = (html) => html.replace(/((?:ex|scale|[a-z][a-z0-9-]*):[A-Za-z0-9_.\/#-]+)/g,
