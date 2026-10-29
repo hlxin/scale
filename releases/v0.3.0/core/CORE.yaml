@@ -1,0 +1,62 @@
+# The science kernel's declaration, checked by `scale domains check` and copied into every release.
+# Paths are relative to core/. `version` states the schema's one version (kernel and catalysis together), the
+# catalysis manifest's (domain/graph/scale-catal.yaml); the kernel file carries none of its own.
+core: scale-core
+title: SCALE science kernel
+summary: 'The science kernel: the general base layer that every domain builds on (catalysis, for now).'
+version: 0.7.8
+kernel: graph/kernel.yaml
+scope: |
+  In scope: the science kernel (scale-kernel): the method of science (Question, Hypothesis,
+  Prediction, Experiment, Procedure, Protocol, Operation, Design, Variable, Claim), what is studied
+  (ObjectOfStudy), what science is done with (Instrument, Model, Dataset, Source) and who does it
+  (Person, Institution, Project, Software), with the value object, evidence items, record
+  references, stewardship, common properties, extension keys and the links between them.
+  Concepts belong here when they are general scientific distinctions that are not specific to one
+  field. Out of scope: anything specific to catalysis (its entities, checklist, examples and competency
+  questions), which belongs in the catalysis domain, domain/.
+compatibility: |
+  The schema has one version for the kernel and the catalysis domain together: the catalysis
+  manifest's `version` (domain/graph/scale-catal.yaml), numbered from 0.1.0. Every schema change
+  raises it in its own pull request, whether it changes the kernel, the catalysis file or both:
+  additive changes raise the third number (0.1.0 -> 0.1.1); breaking changes (removals, narrowed
+  ranges, newly required properties, changed meaning) raise the second (0.1.0 -> 0.2.0) and need a
+  migration rule. Prefer deprecation to removal. The kernel of each earlier version is frozen in
+  graph/frozen/kernel-<version>.yaml when a change moves the schema on (scale schema bump).
+# One reviewer group for the kernel and the catalysis domain for now (governance/review-policy.yaml); a reviewer
+# who joins is added here too (never invent one).
+maintainers:
+  team: '@hlxin'
+  people:
+    - name: Hongliang Xin
+      github: hlxin
+      since: '2026-09-26'
+      roles:
+        - steward
+    - name: Tianyou Mou
+      github: mutianyou2013
+      since: '2026-10-11'
+      roles:
+        - maintainer
+    - name: Raul Diaz
+      github: diazr04
+      since: '2026-10-11'
+      roles:
+        - maintainer
+review_areas:
+  - kernel
+examples:
+  - examples
+example_documents:
+  graph:
+    - examples/science-examples/*.json
+tests: tests
+docs: graph/README.md
+# the kernel's terms mapped to ontology terms; the ontologies they cite are in mappings/ontologies.yaml
+# (docs/mappings.md)
+mappings: mappings/kernel.yaml
+contributors:
+  - name: Hongliang Xin
+    github: hlxin
+    roles:
+      - steward

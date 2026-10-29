@@ -5,4 +5,4 @@ graphs across domains: schema evolution, evidence-preserving curation and contex
 science kernel and catalysis as the first domain.
 """
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"

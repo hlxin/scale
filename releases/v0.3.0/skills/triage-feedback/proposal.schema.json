@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://w3id.org/scale/skills/triage-feedback/proposal.schema.json",
+  "title": "SCALE triage proposals",
+  "description": "Decision paths proposed for community-feedback topics in queue.json. Proposals never contain decisions; human experts decide.",
+  "type": "object",
+  "required": ["proposals"],
+  "properties": {
+    "proposals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["cluster_id", "category", "summary", "options", "proposed_by"],
+        "properties": {
+          "cluster_id": {"type": "string", "description": "Topic id from queue.json (e.g. T12)."},
+          "category": {"enum": ["missing_concept", "extraction_error", "source_information", "new_source", "competency_question", "mapping", "tooling", "question", "general_comment"]},
+          "summary": {"type": "string", "description": "One neutral sentence describing the topic."},
+          "options": {
+            "type": "array", "minItems": 1,
+            "items": {
+              "type": "object", "required": ["id", "action", "description"],
+              "properties": {
+                "id": {"type": "string", "pattern": "^[A-Z]$"},
+                "action": {"type": "string", "description": "e.g. open_proposal, map_to_existing, re_extract, not_an_error, curate, add_competency_question, answer"},
+                "description": {"type": "string"},
+                "consequence": {"type": "string", "description": "What changes if experts choose this option."},
+                "evidence": {"type": "array", "items": {"type": "string"}, "description": "URLs, record ids or locators supporting the option."}
+              }
+            }
+          },
+          "recommended_option": {"type": ["string", "null"], "description": "Optional; must be one of the option ids."},
+          "rationale": {"type": "string"},
+          "reviewers_required": {"type": "array", "items": {"enum": ["domain", "committee", "maintainer"]}},
+          "decision_needed": {"type": "boolean"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "proposed_by": {"type": "string", "description": "System and version that produced the proposal."}
+        },
+        "not": {"anyOf": [{"required": ["decision"]}, {"required": ["approved"]}]}
+      }
+    }
+  }
+}

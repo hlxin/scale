@@ -63,7 +63,7 @@ records no comparison.
 |---|---|---|
 | 1. Open a release issue | the owner or a reviewer | lists the changes since the last release (the CHANGELOG), and the target version |
 | 2. Freeze | the owner | announce on the issue; until step 7, merge only release preparation and fixes to it |
-| 3. Prepare a branch | the owner or a reviewer | branch `release/vX.Y.Z`; set `version` in `pyproject.toml` and `release` in `scale-release.yaml`; update `CHANGELOG.md`, `CITATION.cff` (version, date) and release notes |
+| 3. Prepare a branch | the owner or a reviewer | branch `release/vX.Y.Z`; set `version` in `pyproject.toml`, `__version__` in `tools/__init__.py` and `release` in `scale-release.yaml`; update `CHANGELOG.md`, `CITATION.cff` (version, date) and release notes |
 | 4. Check | the same | `uv run --extra dev scale check` |
 | 5. Build | **human** | `scale release build vX.Y.Z --date YYYY-MM-DD`, then `scale release verify` |
 | 6. Review | one reviewer other than the author | pull request from `release/vX.Y.Z`; the required checks pass |
