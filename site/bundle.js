@@ -5,10 +5,11 @@
 //
 // A bundle's graph can be larger than a browser holds as one text (the train split of a dataset can pass 900 MB), so
 // the zip is read from the file a slice at a time and the graph a record at a time as it is decompressed. A graph with
-// more records than the explorer draws at once opens in parts, by source: each part holds the records some of the
-// bundle's sources report, and the records they link to.
+// more records than the explorer draws at once is kept whole, each record as compact text (UTF-8, outside the
+// script's memory), and drawn around one source at a time: that source and the sources most like it, up to as many
+// records as the reader chooses; search covers every record.
 
-export const WHOLE_RECORDS = 60000, PART_RECORDS = 40000;   // a larger graph opens in parts of about this many records
+export const WHOLE_RECORDS = 60000;    // a larger graph is drawn around one source at a time
 
 // Read a stream to its end, a chunk at a time.
 async function* chunksOf(stream) {
@@ -59,23 +60,26 @@ async function unzip(file) {
 }
 
 // A graph's text, read a piece at a time: each element of its "nodes" and "links" arrays is parsed alone and handed
-// to `each(key, element)`, so the graph is never one text; its other top-level values are returned.
+// to `each(key, element, text)`, so the graph is never one text; its other top-level values are returned.
+const QUOTE = /["\\]/g;
 async function scanGraph(pieces, each, progress = () => {}) {
   const top = {};
   let depth = 0, inStr = false, esc = false, afterColon = false, key = null, arr = null, cap = null, read = 0;
   for await (const s of pieces) {
     let from = 0;                                   // where the value being captured starts in this piece
     for (let i = 0; i < s.length; i++) {
-      const c = s.charCodeAt(i);
-      if (inStr) {
-        if (esc) esc = false;
-        else if (c === 92) esc = true;              // \
-        else if (c === 34) {                        // the string ends; a key at the top level is kept
-          inStr = false;
-          if (cap?.kind === "key") { cap.text.push(s.slice(from, i + 1)); key = JSON.parse(cap.text.join("")); cap = null; }
-        }
+      if (inStr) {                                  // a string's text is skipped at once, to its next quote or backslash
+        if (esc) { esc = false; continue; }
+        QUOTE.lastIndex = i;
+        const m = QUOTE.exec(s);
+        if (!m) break;                              // the string goes on in the next piece
+        i = m.index;
+        if (s.charCodeAt(i) === 92) { esc = true; continue; }   // \
+        inStr = false;                              // the string ends; a key at the top level is kept
+        if (cap?.kind === "key") { cap.text.push(s.slice(from, i + 1)); key = JSON.parse(cap.text.join("")); cap = null; }
         continue;
       }
+      const c = s.charCodeAt(i);
       if (c === 34) {                               // "
         inStr = true;
         if (depth === 1 && !afterColon) { cap = { kind: "key", text: [] }; from = i; }
@@ -85,7 +89,7 @@ async function scanGraph(pieces, each, progress = () => {}) {
         depth++;
       } else if (c === 125 || c === 93) {           // } ]
         depth--;
-        if (cap?.kind === "item" && depth === 2) { cap.text.push(s.slice(from, i + 1)); each(arr, JSON.parse(cap.text.join(""))); cap = null; }
+        if (cap?.kind === "item" && depth === 2) { cap.text.push(s.slice(from, i + 1)); const t = cap.text.join(""); each(arr, JSON.parse(t), t); cap = null; }
         else if (depth === 1 && c === 93 && arr) arr = null;
         else if (depth === 0 && cap?.kind === "value") { cap.text.push(s.slice(from, i)); top[key] = JSON.parse(cap.text.join("")); cap = null; }
       } else if (depth === 1 && c === 58) {         // : a top-level value starts (the two arrays are read element by element)
@@ -131,10 +135,28 @@ function props(p, sourceOf) {
   return out;
 }
 
+// Texts kept as UTF-8 in large blocks, each found again by its block, bytes and characters: a record decodes alone,
+// and a search reads a whole block as one text, where each record's characters lie at a known place.
+class Texts {
+  constructor(block = 64 << 20) { this.block = block; this.blocks = []; this.used = []; this.chars = []; this.at = []; this.enc = new TextEncoder(); this.dec = new TextDecoder(); }
+  put(text) {                                       // its number
+    let b = this.blocks.length - 1;
+    if (b < 0 || this.used[b] + text.length * 3 > this.blocks[b].length) {   // at most three bytes for each character
+      this.blocks.push(new Uint8Array(Math.max(this.block, text.length * 3))); this.used.push(0); this.chars.push(0); b++;
+    }
+    const { written } = this.enc.encodeInto(text, this.blocks[b].subarray(this.used[b]));
+    this.at.push(b, this.used[b], written, this.chars[b], text.length);
+    this.used[b] += written; this.chars[b] += text.length;
+    return this.at.length / 5 - 1;
+  }
+  get(k) { const a = this.at, b = a[5 * k]; return this.dec.decode(this.blocks[b].subarray(a[5 * k + 1], a[5 * k + 1] + a[5 * k + 2])); }
+}
+
 // The bundle in a zip file, for the explorer: { title, version, doc } (doc: nodes and links, a scale-catal document's
-// shape), or, for a graph of more than WHOLE_RECORDS records, { title, version, records, sources, parts, part(i) }:
-// the parts by source (each one's sources, records and years) and a function that reads one part as a doc.
-export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS, size = PART_RECORDS } = {}) {
+// shape), or, for a graph of more than WHOLE_RECORDS records, the whole graph to draw around one source at a time:
+// { title, version, records, sources (each { title, year, records }), years, start, around(source, limit),
+// search(query, k), sourceOf(id), mainOf(year) }.
+export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS } = {}) {
   const files = await unzip(file);
   const names = [...files.keys()].filter((n) => !n.startsWith("__MACOSX/"));
   const manifestName = names.filter((n) => /^([^/]+\/)?bundle\.json$/.test(n)).sort((a, b) => a.length - b.length)[0];
@@ -145,19 +167,24 @@ export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS, 
   const entry = files.get(graphName);
   if (!entry) throw new Error(`the bundle has no ${graphName}`);
   const mb = (n) => `${Math.round(n / 1e6).toLocaleString()} MB`;
+  let told = 0;                                     // the progress is told a few times a second, not for every piece
+  const progress = (n) => { const now = Date.now(); if (now - told > 250) { told = now; say(`Reading the bundle… ${mb(n)} of ${mb(entry.size)}`); } };
 
-  // Read once: each record's id and label, each link's ends, each source's year; the records themselves while few.
-  const index = new Map(), labels = [], ends = [], reported = [], years = new Map(), named = new Map();
+  // Read once: each record's id, label and text, each link's ends and text, each source's title and year; the
+  // records themselves too while they are few enough to draw whole.
+  const index = new Map(), labels = [], ends = [], reported = [], pubs = new Map(), named = new Map();
+  const texts = new Texts(), nodeText = [], linkText = [];
   let kept = { nodes: [], links: [] };
   const at = (id) => { let i = index.get(id); if (i === undefined) { i = labels.length; index.set(id, i); labels.push(null); } return i; };
-  const top = await scanGraph(await entry.chunks(), (key, x) => {
+  const top = await scanGraph(await entry.chunks(), (key, x, text) => {
     if (key === "nodes") {
       const i = at(x.id);
       labels[i] = named.get(x.label) || (named.set(x.label, x.label), x.label);
-      if (x.label === "Publication") years.set(i, Number.parseInt(x.props?.year, 10) || null);
-    } else { ends.push(at(x.source), at(x.target)); reported.push(x.type === "REPORTED_IN"); }
+      if (x.label === "Publication") pubs.set(i, { title: String(x.props?.title || x.id), year: Number.parseInt(x.props?.year, 10) || null });
+      nodeText[i] = texts.put(text);
+    } else { ends.push(at(x.source), at(x.target)); reported.push(x.type === "REPORTED_IN" ? 1 : 0); linkText.push(texts.put(text)); }
     if (kept) { kept[key].push(x); if (labels.length > whole) kept = null; }
-  }, (n) => say(`Reading the bundle… ${mb(n)} of ${mb(entry.size)}`));
+  }, progress);
   const title = manifest.topic || top.graph?.topic || manifest.bundle_id || file.name;
   const toDoc = (nodes, links, extra = {}) => {
     const sourceOf = (sid) => (index.has(`Publication:${sid}`) ? `Publication:${sid}` : sid);
@@ -174,60 +201,152 @@ export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS, 
     if (!kept.nodes.length && !kept.links.length) throw new Error(`${graphName} has no nodes and links`);
     return { title, version: manifest.version, doc: toDoc(kept.nodes, kept.links) };
   }
-  const split = partsOf(labels, ends, reported, years, size);
-  return { title, version: manifest.version, records: labels.length, sources: years.size,
-    parts: split.map(({ mask, ...p }) => p),
-    part: async (i, say2 = say) => {               // read again, keeping one part's records and the links among them
-      const { mask } = split[i], nodes = [], links = [];
-      await scanGraph(await entry.chunks(), (key, x) => {
-        if (key === "nodes") { if (mask[index.get(x.id)]) nodes.push(x); }
-        else if (mask[index.get(x.source)] && mask[index.get(x.target)]) links.push(x);
-      }, (n) => say2(`Reading part ${i + 1} of ${split.length}… ${mb(n)} of ${mb(entry.size)}`));
-      return toDoc(nodes, links, { title: `${title} · part ${i + 1} of ${split.length}` });
-    } };
+  say("Indexing the bundle…");
+  return { title, version: manifest.version,
+    ...wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, linkText, toDoc }) };
 }
 
-// A graph's parts by source: the sources in order (by year when they give one) taken in turn until a part's records
-// reach about `size` (a little less: a part also holds what its records link to). A part holds its sources, the records they report, and every record one link
-// away from the records only its sources report (the species, instruments and materials a recipe uses), so no link of
-// a part's own records is cut; a record many sources report (a common species) brings in only itself, not every record
-// that uses it. Records no part reaches make a part of their own.
-function partsOf(labels, ends, reported, years, size) {
-  const n = labels.length, pubOf = new Int32Array(n).fill(-1), more = new Map();
-  for (let e = 0; e < reported.length; e++) {
+// The whole graph of a large bundle, drawn around one source at a time. A source's records are those it reports;
+// records only one source reports are its own, and what they link to that other sources report too (a species, an
+// instrument, a material) is what sources share. Around a source: that source, then the sources that share the most
+// with it (a thing few sources share counts more; one that most share, like water, not at all), then the sources
+// nearest in year, until the records reach the limit; each source brings its records and what its own records link
+// to, so no link of a drawn source's own records is cut.
+function wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, linkText, toDoc }) {
+  const n = labels.length, nLinks = reported.length, ids = [...index.keys()];
+  const pubOf = new Int32Array(n).fill(-1), more = new Map();
+  for (let e = 0; e < nLinks; e++) {
     const a = ends[2 * e], b = ends[2 * e + 1];
-    if (!reported[e] || labels[b] !== "Publication") continue;
+    if (!reported[e] || !pubs.has(b)) continue;
     if (pubOf[a] < 0) pubOf[a] = b; else (more.get(a) || more.set(a, []).get(a)).push(b);
   }
-  const pubsOf = (v) => (pubOf[v] < 0 ? [] : [pubOf[v], ...(more.get(v) || [])]);
-  const count = new Map();
-  for (let v = 0; v < n; v++) for (const b of pubsOf(v)) count.set(b, (count.get(b) || 0) + 1);
-  const pubs = [...years.keys()].sort((x, y) => (years.get(x) ?? 9999) - (years.get(y) ?? 9999) || x - y);
-  const partOf = new Map(), groups = [[]];
-  let sum = 0;
-  for (const v of pubs) {
-    const c = (count.get(v) || 0) + 1;
-    if (sum && sum + c > size * 0.95) { groups.push([]); sum = 0; }
-    groups.at(-1).push(v); partOf.set(v, groups.length - 1); sum += c;
+  const own = (v) => pubOf[v] >= 0 && !more.has(v);
+  // each record's links (both ends), as one list per record
+  const start = new Int32Array(n + 1);
+  for (let e = 0; e < nLinks; e++) { start[ends[2 * e] + 1]++; start[ends[2 * e + 1] + 1]++; }
+  for (let v = 0; v < n; v++) start[v + 1] += start[v];
+  const adj = new Int32Array(2 * nLinks), fill = start.slice(0, n);
+  for (let e = 0; e < nLinks; e++) { adj[fill[ends[2 * e]]++] = e; adj[fill[ends[2 * e + 1]]++] = e; }
+  // each source's records, and what its own records share with other sources
+  const src = [...pubs.keys()], number = new Map(src.map((v, s) => [v, s])), S = src.length;
+  const recs = Array.from({ length: S }, () => []), shared = Array.from({ length: S }, () => []);
+  for (let v = 0; v < n; v++) {
+    if (pubOf[v] < 0) continue;
+    recs[number.get(pubOf[v])].push(v);
+    for (const b of more.get(v) || []) recs[number.get(b)].push(v);
   }
-  const core = groups.map(() => new Uint8Array(n));
-  for (const v of pubs) core[partOf.get(v)][v] = 1;
-  for (let v = 0; v < n; v++) for (const b of pubsOf(v)) core[partOf.get(b)][v] = 1;
-  const masks = core.map((c) => c.slice());
-  const own = (v) => pubOf[v] >= 0 && !more.has(v);    // reported by one source: that source's part alone holds it
-  for (let e = 0; e < reported.length; e++) {
-    if (reported[e]) continue;
-    const a = ends[2 * e], b = ends[2 * e + 1];
-    if (own(a)) masks[partOf.get(pubOf[a])][b] = 1;
-    if (own(b)) masks[partOf.get(pubOf[b])][a] = 1;
+  const stamp = new Int32Array(n).fill(-1), df = new Int32Array(n);
+  for (let s = 0; s < S; s++) for (const v of recs[s]) {
+    if (!own(v)) continue;
+    for (let k = start[v]; k < start[v + 1]; k++) {
+      const e = adj[k];
+      if (reported[e]) continue;
+      const u = ends[2 * e] === v ? ends[2 * e + 1] : ends[2 * e];
+      if (own(u) || pubs.has(u) || stamp[u] === s) continue;
+      stamp[u] = s; shared[s].push(u); df[u]++;
+    }
   }
-  const loose = new Uint8Array(n);
-  let nLoose = 0;
-  for (let v = 0; v < n; v++) if (!masks.some((m) => m[v])) { loose[v] = 1; nLoose++; }
-  if (nLoose) { masks.push(loose); groups.push([]); }
-  return masks.map((mask, p) => {
-    const ys = groups[p].map((v) => years.get(v)).filter(Boolean);
-    return { mask, sources: groups[p].length, records: mask.reduce((s, x) => s + x, 0),
-      years: ys.length ? [Math.min(...ys), Math.max(...ys)] : null };
-  });
+  const postStart = new Int32Array(n + 1);
+  for (let u = 0; u < n; u++) postStart[u + 1] = postStart[u] + df[u];
+  const post = new Int32Array(postStart[n]), pfill = postStart.slice(0, n);
+  for (let s = 0; s < S; s++) for (const u of shared[s]) post[pfill[u]++] = s;
+  const common = Math.max(25, Math.ceil(S * 0.02));  // shared by more sources than this: says nothing about likeness
+  const sources = src.map((v, s) => ({ ...pubs.get(v), records: recs[s].length }));
+  const years = [...new Set(sources.map((x) => x.year).filter(Boolean))].sort((a, b) => a - b);
+  const richest = (keep) => { let best = -1; for (let s = 0; s < S; s++) if (keep(s) && (best < 0 || recs[s].length > recs[best].length)) best = s; return best; };
+
+  const mask = new Uint8Array(n), linkMark = new Uint8Array(nLinks), score = new Float64Array(S);
+  function around(centre, limit) {
+    // the sources in the order they are drawn: the centre, those sharing the most with it, then the nearest in year
+    for (const u of shared[centre]) {
+      if (df[u] > common) continue;
+      const w = 1 / Math.log2(1 + df[u]);
+      for (let k = postStart[u]; k < postStart[u + 1]; k++) score[post[k]] += w;
+    }
+    score[centre] = Infinity;
+    const y0 = sources[centre].year;
+    const order = Array.from({ length: S }, (_, s) => s).sort((a, b) => score[b] - score[a]
+      || Math.abs((sources[a].year ?? 3000) - (y0 ?? 3000)) - Math.abs((sources[b].year ?? 3000) - (y0 ?? 3000)) || a - b);
+    score.fill(0);
+    const nodes = [], drawn = [];
+    const add = (v) => { if (!mask[v]) { mask[v] = 1; nodes.push(v); } };
+    for (const s of order) {
+      const before = nodes.length;
+      add(src[s]);
+      for (const v of recs[s]) {
+        add(v);
+        if (!own(v)) continue;
+        for (let k = start[v]; k < start[v + 1]; k++) { const e = adj[k]; add(ends[2 * e] === v ? ends[2 * e + 1] : ends[2 * e]); }
+      }
+      if (nodes.length > limit && drawn.length) {          // this source would pass the limit: it stays out
+        for (const v of nodes.splice(before)) mask[v] = 0;
+        break;
+      }
+      drawn.push(s);
+    }
+    const links = [];
+    for (const v of nodes) for (let k = start[v]; k < start[v + 1]; k++) {
+      const e = adj[k];
+      if (!linkMark[e] && mask[ends[2 * e]] && mask[ends[2 * e + 1]]) { linkMark[e] = 1; links.push(e); }
+    }
+    for (const v of nodes) mask[v] = 0;
+    for (const e of links) linkMark[e] = 0;
+    const c = sources[centre];
+    const doc = toDoc(nodes.map((v) => JSON.parse(texts.get(nodeText[v]))), links.map((e) => JSON.parse(texts.get(linkText[e]))),
+      { around: { source: ids[src[centre]], title: c.title, year: c.year, sources: drawn.length, records: nodes.length } });
+    return { doc, centre, sources: drawn.length, records: nodes.length };
+  }
+
+  // A search of every record and link, the terms in any case: each text block is read whole and searched for the
+  // first term, each record it is found in checked for the others. A link's match is told as its own record's. The
+  // records whose name has the terms come first.
+  let owner = null;                                    // each text's record (>= 0) or link (-1 - its number)
+  function search(query, k = 50) {
+    const terms = query.toLowerCase().split(/\s+/).filter((w) => w.length > 1).map((w) => w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+    if (!terms.length) return [];
+    if (!owner) { owner = new Int32Array(texts.at.length / 5); nodeText.forEach((t, v) => { owner[t] = v; }); linkText.forEach((t, e) => { owner[t] = -1 - e; }); }
+    const first = new RegExp(terms[0], "gi"), rest = terms.slice(1).map((w) => new RegExp(w, "i")), all = new RegExp(terms.join("|"), "i");
+    const at = texts.at, count = at.length / 5, hits = [], seen = new Set();
+    for (let lo = 0; lo < count && hits.length < 4 * k;) {
+      let hi = lo + 1;                                     // a piece: texts of one block, about 4 MB
+      while (hi < count && at[5 * hi] === at[5 * lo] && at[5 * hi + 1] - at[5 * lo + 1] < 4 << 20) hi++;
+      const b0 = at[5 * lo + 1], c00 = at[5 * lo + 3], last = hi - 1;
+      const piece = texts.dec.decode(texts.blocks[at[5 * lo]].subarray(b0, at[5 * last + 1] + at[5 * last + 2]));
+      first.lastIndex = 0;
+      for (let m = first.exec(piece); m && hits.length < 4 * k; m = first.exec(piece)) {
+        let a = lo, z = last;                              // the text the match lies in
+        while (a < z) { const mid = (a + z + 1) >> 1; if (at[5 * mid + 3] - c00 <= m.index) a = mid; else z = mid - 1; }
+        const c0 = at[5 * a + 3] - c00, text = piece.slice(c0, c0 + at[5 * a + 4]);
+        first.lastIndex = c0 + text.length;
+        const o = owner[a], v = o >= 0 ? o : ends[2 * (-1 - o)];
+        if (seen.has(v) || !rest.every((r) => r.test(text))) continue;
+        seen.add(v);
+        hits.push({ v, x: JSON.parse(text), o });
+      }
+      lo = hi;
+    }
+    const nameOf = (x) => String(x.props?.name || x.props?.title || x.props?.formula || "");
+    const named = (h) => (h.o >= 0 && [new RegExp(terms[0], "i"), ...rest].every((r) => r.test(nameOf(h.x))) ? 0 : 1);
+    return hits.sort((a, b) => named(a) - named(b)).slice(0, k).map(({ v, x, o }) => {
+      const quotes = (x.props?._evidence || []).map((e) => e.quote).filter(Boolean);
+      const words = [];                                  // the record's own words that match: a quote, else a value
+      (function walk(o, depth) {
+        if (words.length || depth > 4 || !o) return;
+        if (typeof o === "string") { if (all.test(o) && !/^[A-Za-z]+:/.test(o)) words.push(o); return; }
+        if (typeof o === "object") for (const [key, val] of Object.entries(o)) if (key !== "scale_id" && key !== "source_paper_ids") walk(val, depth + 1);
+      })({ q: quotes, ...x.props }, 0);
+      const s = pubs.has(v) ? number.get(v) : pubOf[v] >= 0 ? number.get(pubOf[v]) : null;
+      return { record: ids[v], label: labels[v] === "Publication" ? "Source" : labels[v],
+        name: o >= 0 ? nameOf(x) || ids[v] : ids[v],
+        text: words[0] || (o >= 0 ? nameOf(x) || quotes[0] : `${x.type.replace(/_/g, " ").toLowerCase()} → ${x.target}`) || ids[v],
+        source: s, sourceTitle: s == null ? "" : sources[s].title, year: s == null ? null : sources[s].year };
+    });
+  }
+
+  return {
+    records: n, sources, years, start: richest(() => true),
+    around, search,
+    sourceOf: (id) => { const v = index.get(id); if (v === undefined) return null; const p = pubs.has(v) ? v : pubOf[v]; return p >= 0 ? number.get(p) : null; },
+    mainOf: (year) => richest((s) => sources[s].year === year),
+  };
 }

@@ -130,6 +130,7 @@
         <defs id="gx-defs"></defs>
         <g id="zoom-layer"><g class="gx-links" id="links"></g><g class="gx-nodes" id="nodes"></g></g>
       </svg>
+      <canvas class="gx-big" id="gx-canvas" hidden></canvas>
       <div class="gx-empty" id="empty"><p>Loading graph…</p></div>
       <div class="gx-hint">Circle area scales with connectivity · drag nodes to rearrange · scroll to zoom · double-click a node to expand its neighbourhood</div>
 
@@ -231,14 +232,6 @@
     <details class="gx-board-how"><summary>How scoring works</summary><dl id="board-how"></dl>
       <p class="gx-subtle">The rules are one function, <code>tools/commons.py</code>; changing them is a pull request.</p></details>
     <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="board-curate">Curate a source</button></menu>
-  </form>
-</dialog>
-<dialog class="gx-dialog" id="parts-dialog">
-  <form method="dialog">
-    <h2>Open a part of the bundle</h2>
-    <p class="gx-muted" id="parts-note"></p>
-    <label>Part <select id="parts-select"></select></label>
-    <menu><button class="gx-btn" value="cancel">Cancel</button><button type="button" class="gx-btn gx-btn-primary" id="parts-open">Open</button></menu>
   </form>
 </dialog>
 <script type="module" src="explorer.js"></script>

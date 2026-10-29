@@ -154,10 +154,13 @@ def parts_bundle(path):
         f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(graph, indent=1))
 
 
-def test_a_bundle_too_large_to_draw_at_once_opens_in_parts_by_source(tmp_path):
-    js = (REPO / "site/explorer.js").read_text()
-    # the explorer asks which part to open, and the open part's card offers the others
-    assert "b.parts" in js and "choosePart" in js and 'id="parts-dialog"' in (REPO / "site/index.html").read_text()
+def test_a_bundle_too_large_to_draw_at_once_is_drawn_around_a_source_and_searched_whole(tmp_path):
+    js, page = (REPO / "site/explorer.js").read_text(), (REPO / "site/index.html").read_text()
+    # the explorer draws a large bundle around a source, with a draw distance the reader sets, and searches it whole;
+    # a large graph is drawn on a canvas and laid out off the page's thread
+    assert "drawAround" in js and 'id="draw-limit"' in js and "searchBundle" in js and 'id="gx-canvas"' in page
+    assert 'new Worker("layout.js")' in js and "layout.js" in site.PAGES
+    assert "d3/7.9.0/" in (REPO / "site/layout.js").read_text()
     node = shutil.which("node")
     if not node:
         pytest.skip("node is not installed")
@@ -166,28 +169,36 @@ def test_a_bundle_too_large_to_draw_at_once_opens_in_parts_by_source(tmp_path):
               f"import {{ readFileSync }} from 'node:fs';\n"
               f"const buf = readFileSync({json.dumps(str(tmp_path / 'tiny.zip'))});\n"
               "const file = { name: 'tiny.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
-              "const b = await readBundle(file, () => {}, { whole: 10, size: 10 });\n"
-              "console.log(JSON.stringify({ ...b, first: await b.part(0) }));")
+              "const b = await readBundle(file, () => {}, { whole: 10 });\n"
+              "console.log(JSON.stringify({ records: b.records, sources: b.sources, years: b.years, start: b.start,\n"
+              "  near: b.around(b.start, 7), all: b.around(b.start, 100).records, hits: b.search('sample 3.1', 5),\n"
+              "  of: b.sourceOf('Sample:s3-1'), main: b.mainOf(2004) }));")
     run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
     assert run.returncode == 0, run.stderr
     b = json.loads(run.stdout)
-    # 19 records, more than the 10 drawn at once: parts of two sources, in the order of their years
-    assert (b["records"], b["sources"]) == (19, 6)
-    assert b["parts"] == [{"sources": 2, "records": 7, "years": [2000 + 2 * i, 2001 + 2 * i]} for i in range(3)]
-    first = b["first"]
-    assert first["graph"]["title"] == "Tiny bundle · part 1 of 3"
-    # a part: its sources, the samples only they report, and the species the samples use, which brings in no sample
-    # of another part although every source reports it
-    assert sorted(n["id"] for n in first["nodes"]) == ["ChemicalSpecies:water", "Publication:10.1/s0", "Publication:10.1/s1",
-                                                       "Sample:s0-0", "Sample:s0-1", "Sample:s1-0", "Sample:s1-1"]
-    assert {n["label"] for n in first["nodes"] if n["id"].startswith("Publication:")} == {"Source"}
-    assert next(n for n in first["nodes"] if n["id"] == "Publication:10.1/s0")["props"]["title"] == 'Paper 0: "{a} [b]"'
-    assert len(first["links"]) == 10                   # four REPORTED_IN, four HAS_INPUT, the species in its two sources
+    # 19 records, more than the 10 drawn at once: kept whole, each source with its records and year
+    assert b["records"] == 19 and [s["year"] for s in b["sources"]] == list(range(2000, 2006)) and b["years"] == list(range(2000, 2006))
+    assert b["sources"][0] == {"title": 'Paper 0: "{a} [b]"', "year": 2000, "records": 3}
+    # around a source, up to 7 records: it and the source most like it (the same species, the nearest year); the
+    # species every source reports brings in no sample of another source
+    near = b["near"]
+    assert (near["records"], near["sources"]) == (7, 2)
+    assert sorted(n["id"] for n in near["doc"]["nodes"]) == ["ChemicalSpecies:water", "Publication:10.1/s0", "Publication:10.1/s1",
+                                                             "Sample:s0-0", "Sample:s0-1", "Sample:s1-0", "Sample:s1-1"]
+    assert len(near["doc"]["links"]) == 10              # four REPORTED_IN, four HAS_INPUT, the species in its two sources
+    assert near["doc"]["graph"]["around"] == {"source": "Publication:10.1/s0", "title": 'Paper 0: "{a} [b]"', "year": 2000,
+                                              "sources": 2, "records": 7}
+    assert {n["label"] for n in near["doc"]["nodes"] if n["id"].startswith("Publication:")} == {"Source"}
+    assert b["all"] == 19                                # far enough, the whole graph
+    # the search reads every record, drawn or not, and names each match's source
+    assert b["hits"] == [{"record": "Sample:s3-1", "label": "Sample", "name": "sample 3.1", "text": "sample 3.1",
+                          "source": 3, "sourceTitle": 'Paper 3: "{a} [b]"', "year": 2003}]
+    assert (b["of"], b["main"]) == (3, 4)
     # read whole, the same bundle is one graph
-    whole = subprocess.run([node, "--input-type=module", "-e", script.replace("{ whole: 10, size: 10 }", "{}")
-                            .replace("first: await b.part(0)", "first: null")], capture_output=True, text=True, timeout=60)
+    whole = subprocess.run([node, "--input-type=module", "-e", script.replace("{ whole: 10 }", "{}").replace(
+        script[script.index("console.log"):], "console.log(JSON.stringify(b.doc.nodes.length));")], capture_output=True, text=True, timeout=60)
     assert whole.returncode == 0, whole.stderr
-    assert len(json.loads(whole.stdout)["doc"]["nodes"]) == 19
+    assert json.loads(whole.stdout) == 19
 
 
 def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
