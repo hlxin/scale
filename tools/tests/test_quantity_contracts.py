@@ -414,6 +414,21 @@ def test_comparison_plan_errors(spec):
         _run(old, {**RANK, "comparison": "scientific"})
 
 
+def test_a_schemas_contracts_are_compiled_once_and_a_changed_copy_gets_its_own(spec, monkeypatch):
+    """A loaded schema's contracts are hashed once, not on every query; a changed copy of the schema (a new object)
+    is read afresh, and an equal copy shares the compiled contracts."""
+    first = quantities.contracts(spec)
+    calls, sha256 = [], quantities.hashlib.sha256
+    monkeypatch.setattr(quantities.hashlib, "sha256", lambda b: calls.append(b) or sha256(b))
+    assert quantities.contracts(spec) is first and not calls
+    same = copy.deepcopy(spec)
+    assert quantities.contracts(same) is first and len(calls) == 1
+    changed = copy.deepcopy(spec)
+    changed["quantities"]["kinds"]["temperature"]["dimensions"] = ["temperature", "energy"]
+    other = quantities.contracts(changed)
+    assert other is not first and quantities.contracts(spec) is first
+
+
 # ------------------------------------------------------------------------------------------ the schema diff
 def _diff(spec, change) -> dict:
     b = copy.deepcopy(spec)
