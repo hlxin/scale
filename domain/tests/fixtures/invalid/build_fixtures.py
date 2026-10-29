@@ -41,6 +41,7 @@ METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-meth
 SYNTHESES = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json"
 STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.json"
 CONDITIONS = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json"
+SELECTIVITY = REPO / "domain/examples/scale-catal/product-measurement-examples/selectivity-basis.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -421,6 +422,11 @@ def main() -> None:
                "function", ["ex:bifunctional/reaction/step1"])), base=load_doc(bi))
     defect("site-proximity-without-status", "a site proximity without its status",
            bifunctional(lambda d, c, e: c["props"]["site_proximity"].pop("status")), base=load_doc(bi))
+    # selectivity basis (#82): a share within a pool whose record the document does not hold
+    defect("selectivity-relative-to-unresolved", "a selectivity within a pool of products that is no record of the document",
+           lambda d: next(x for n in d["nodes"] if n["label"] == "CatalyticTest" for x in n["props"].get("result_values", [])
+                          if x["id"] == "c5_olefins_in_olefins").__setitem__("relative_to", "ex:sb/lump/missing"),
+           base=load_doc(SELECTIVITY))
 
 
 if __name__ == "__main__":

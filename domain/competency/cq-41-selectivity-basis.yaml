@@ -1,0 +1,114 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-41
+question: Which tests reported a CH4 selectivity, and which of those selectivities are shares of the same whole,
+  counted the same way?
+description: |
+  Two Fischer-Tropsch papers can report "CH4 selectivity" on carbon atoms and still mean different things: one as a share
+  of the hydrocarbons formed (CO2 not in the denominator), another as a share of the converted CO (CO2 in it), a third says
+  nothing about its denominator. A selectivity is compared only with selectivities that count the same way
+  (selectivity_count) and are a share of the same whole (selectivity_whole). The example holds three CH4 selectivities:
+  2.6 % of the hydrocarbons (a Lyu-like row, CO2 excluded, which also gives CO2 itself as 20.3 % of the converted CO),
+  9 % of the converted CO with CO2 included (a Xie-like test) and 12 % that states neither. Ranked scientifically they
+  fall into three groups, never one: no whole is assumed for the third, and 2.6 % is not said to be lower than 9 %.
+  Shares within a pool (C5+ olefins 74.5 % within the olefins, by carbon atoms; aldehydes 97 wt% within the oxygenates,
+  by mass) are further quantities, named by the value's relative_to, and a share within one record is not one within
+  another. The values are invented; the three wholes follow the issue that asked for the distinction (Lyu et al. 2020,
+  Xie et al. 2019 and others report them), no source text is stored.
+
+  Limit: the contexts are read from the unit, the basis and the definition by listed terms; a phrase outside them is not
+  read and its value is then compared with the values that state nothing. Lump ids are minted per document, so two
+  documents' "olefins" never match by id.
+documents:
+  - examples/scale-catal/product-measurement-examples/selectivity-basis.json
+plan:
+  question: Which tests reported a CH4 selectivity, and on which basis?
+  comparison: scientific
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries: result_values
+      kind: selectivity
+      as: result
+    - from: result
+      field: target
+      to: ChemicalSpecies
+      as: product
+      where:
+        - prop: formula
+          op: eq
+          value: CH4
+  where:
+    - var: result
+      prop: value
+      op: ge
+      value: 0
+      unit: '%'
+  return:
+    - test.name
+    - result
+  order_by:
+    - var: result
+      prop: value
+  evidence: false
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    test.name:
+      - Syngas conversion, CO2 beside the hydrocarbons
+      - Syngas conversion, shares of the converted CO
+      - Syngas conversion, selectivity without a basis
+variants:
+  - description: Asked for shares of the converted CO with CO2 included, only the Xie-like 9 % is compared; the 2.6 % of
+      the hydrocarbons and the 12 % that states no whole are both incompatible_context; the 12 % is never assumed to be
+      a share of anything (the value that states nothing is compared only with those that state nothing).
+    plan:
+      order_by:
+        - var: result
+          prop: value
+          context:
+            selectivity_whole: converted_reactant_incl_co2
+            selectivity_count: carbon_atoms
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      excluded:
+        incompatible_context: 2
+      values:
+        test.name:
+          - Syngas conversion, shares of the converted CO
+  - description: Asked for shares within the olefins, only the C5+ olefins' 74.5 % is returned, and it is a share of that
+      pool (relative_to), never of the hydrocarbons or of the converted CO. The target is the lump, not a species.
+    plan:
+      steps:
+        - from: test
+          entries: result_values
+          kind: selectivity
+          as: result
+        - from: result
+          field: relative_to
+          to: ProductLump
+          as: pool
+          where:
+            - prop: name
+              op: eq
+              value: olefins
+      return:
+        - test.name
+        - result
+        - pool.name
+      order_by:
+        - var: result
+          prop: value
+    expect:
+      status: answered
+      min_rows: 1
+      max_rows: 1
+      values:
+        pool.name:
+          - olefins

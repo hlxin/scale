@@ -250,3 +250,7 @@ fixtures:
     error: "VARIANT_OF forms a cycle"
     reason: A variant is a procedure carried out as an earlier one with something changed, so the earlier one is not a
       variant of it in turn; variants never form a cycle.
+  - file: selectivity-relative-to-unresolved.json
+    base: domain/examples/scale-catal/product-measurement-examples/selectivity-basis.json
+    error: "relative_to: reference 'ex:sb/lump/missing' does not resolve"
+    reason: A share within a pool names the pool as a record of the document (relative_to); a pool that is no record leaves the share's whole unknown, and a comparison would group by a name that points nowhere.
