@@ -2,6 +2,33 @@
 
 ## Unreleased
 
+- **A large knowledge-graph bundle opens in the explorer a window at a time, and is searched whole (no schema
+  change).** Requested by @diazr04: a bundle whose graph is larger than a browser holds as one text (the train split of
+  a recipes dataset, 899 MB and 542,226 records) failed with "Failed to fetch", and a graph of 40,000 records took about
+  a minute and a half to lay out, the page frozen meanwhile.
+  - The page reads the zip from the file a slice at a time and the graph a record at a time as it is decompressed
+    (`site/bundle.js`), so it is never one text.
+  - A graph of more than 60,000 records is kept whole, each record as compact text, and drawn a window at a time: its
+    sources in an order (by year, the oldest first; or around a source, the sources most like it first, by what their
+    records share, a thing nearly every source shares not counting) and as many records as the reader sets (the width,
+    5,000 to 80,000; 30,000 to begin with). The graph's card says where the window lies ("records 30,000–60,000 of
+    542,226 · 2016–2017"), and its arrows step from one window to the next, so that the windows cover the whole graph;
+    a slider places the window anywhere, and a year jumps to where its sources begin. A double-click on a record draws
+    around its source. Search covers every record of the bundle, drawn or not, in about a second; a match not drawn is
+    drawn around its source when chosen.
+  - A graph of more than 10,000 records is drawn on a canvas instead of as SVG elements, and laid out off the page's
+    thread with cheaper forces (`site/layout.js`: a repulsion felt within 300 px, no collision, fewer steps), its
+    records starting beside the others of their source: 40,000 records lay out in about 4 s instead of 100 s, and the
+    page stays responsive meanwhile. While the view moves, the last picture moves with it, and the graph is drawn anew
+    when it stops. A click shows a record, a double-click expands it; such a graph exports as PNG. Smaller graphs are
+    drawn as before.
+- **The explorer no longer uses the lab computer's service (no schema change).** Requested by @diazr04: curating a
+  source and answering questions in words on the lab's computer wait for new requirements (a way in without GitHub's
+  authorization page). `site/config.js` names no service again: the page opens, draws and searches graphs in the
+  browser and says the service is not configured, and it shows no Sign in button while there is no service. The
+  service's code stays (the inbox, `SCALE_WEB_INBOX`; questions answered by Claude Code, `SCALE_WEB_ASK`), off unless
+  set.
+
 ## v0.3.0 — 2026-10-29
 
 Schema 0.7.8 (from 0.2.0, with breaking changes on the way: a document at an earlier version stays valid under it

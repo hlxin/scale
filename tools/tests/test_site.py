@@ -135,6 +135,81 @@ def test_the_explorer_opens_a_knowledge_graph_bundle_zip(tmp_path):
     assert run.returncode != 0 and "no bundle.json" in run.stderr
 
 
+def parts_bundle(path):
+    """Six sources of two samples each, every sample made from the one species they all report; links before nodes,
+    and a quote with braces and quotes in it, as the reader must take them."""
+    nodes, links = [{"id": "ChemicalSpecies:water", "label": "ChemicalSpecies", "props": {"name": "water"}}], []
+    for s in range(6):
+        pub = f"Publication:10.1/s{s}"
+        nodes.append({"id": pub, "label": "Publication", "props": {"title": f'Paper {s}: "{{a}} [b]"', "year": str(2000 + s)}})
+        links.append({"id": f"w:{s}", "source": "ChemicalSpecies:water", "target": pub, "type": "REPORTED_IN", "props": {}})
+        for r in range(2):
+            rid = f"Sample:s{s}-{r}"
+            nodes.append({"id": rid, "label": "Sample", "props": {"name": f"sample {s}.{r}"}})
+            links += [{"id": f"r:{rid}", "source": rid, "target": pub, "type": "REPORTED_IN", "props": {}},
+                      {"id": f"u:{rid}", "source": rid, "target": "ChemicalSpecies:water", "type": "HAS_INPUT", "props": {}}]
+    graph = {"directed": True, "multigraph": True, "graph": {"topic": "Tiny bundle"}, "links": links, "nodes": nodes}
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as f:
+        f.writestr("tiny_v1.0.0/bundle.json", json.dumps({"bundle_id": "tiny", "version": "1.0.0", "topic": "Tiny bundle"}))
+        f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(graph, indent=1))
+
+
+def test_a_bundle_too_large_to_draw_at_once_is_drawn_a_window_at_a_time_and_searched_whole(tmp_path):
+    js, page = (REPO / "site/explorer.js").read_text(), (REPO / "site/index.html").read_text()
+    # the explorer draws a large bundle a window at a time (the arrows step through the whole graph, the width is the
+    # reader's) and searches it whole; a large graph is drawn on a canvas and laid out off the page's thread
+    assert "drawWindow" in js and 'id="window-next"' in js and 'id="window-width"' in js and "searchBundle" in js
+    assert 'id="gx-canvas"' in page
+    assert 'new Worker("layout.js")' in js and "layout.js" in site.PAGES
+    assert "d3/7.9.0/" in (REPO / "site/layout.js").read_text()
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node is not installed")
+    parts_bundle(tmp_path / "tiny.zip")
+    script = (f"import {{ readBundle }} from {json.dumps((REPO / 'site/bundle.js').as_uri())};\n"
+              f"import {{ readFileSync }} from 'node:fs';\n"
+              f"const buf = readFileSync({json.dumps(str(tmp_path / 'tiny.zip'))});\n"
+              "const file = { name: 'tiny.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
+              "const b = await readBundle(file, () => {}, { whole: 10 });\n"
+              "console.log(JSON.stringify({ records: b.records, sources: b.sources, years: b.years, start: b.start,\n"
+              "  near: b.around(b.start, 7), all: b.around(b.start, 100).records, hits: b.search('sample 3.1', 5),\n"
+              "  windows: [0, 7, 13, 999].map((f) => { const w = b.view(null, f, 7); return [w.from, w.to, w.total, w.records, w.years]; }),\n"
+              "  y2004: b.startOf(2004),\n"
+              "  of: b.sourceOf('Sample:s3-1'), main: b.mainOf(2004) }));")
+    run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stderr
+    b = json.loads(run.stdout)
+    # 19 records, more than the 10 drawn at once: kept whole, each source with its records and year
+    assert b["records"] == 19 and [s["year"] for s in b["sources"]] == list(range(2000, 2006)) and b["years"] == list(range(2000, 2006))
+    assert b["sources"][0] == {"title": 'Paper 0: "{a} [b]"', "year": 2000, "records": 3}
+    # around a source, up to 7 records: it and the source most like it (the same species, the nearest year); the
+    # species every source reports brings in no sample of another source
+    near = b["near"]
+    assert (near["records"], near["sources"]) == (7, 2)
+    assert sorted(n["id"] for n in near["doc"]["nodes"]) == ["ChemicalSpecies:water", "Publication:10.1/s0", "Publication:10.1/s1",
+                                                             "Sample:s0-0", "Sample:s0-1", "Sample:s1-0", "Sample:s1-1"]
+    assert len(near["doc"]["links"]) == 10              # four REPORTED_IN, four HAS_INPUT, the species in its two sources
+    assert near["doc"]["graph"]["window"] == {"order": "around", "from": 0, "to": 7, "total": 19, "sources": 2, "records": 7,
+                                              "years": [2000, 2001], "source": "Publication:10.1/s0",
+                                              "title": 'Paper 0: "{a} [b]"', "year": 2000}
+    assert {n["label"] for n in near["doc"]["nodes"] if n["id"].startswith("Publication:")} == {"Source"}
+    assert b["all"] == 19                                # far enough, the whole graph
+    # by year, windows of 7 records one after the other cover the whole graph; the species comes with each, as its
+    # sources' samples use it; past the end, the last window
+    assert b["windows"] == [[0, 7, 19, 7, [2000, 2001]], [7, 13, 19, 7, [2002, 2003]], [13, 19, 19, 7, [2004, 2005]],
+                            [16, 19, 19, 4, [2005, 2005]]]
+    assert b["y2004"] == 13
+    # the search reads every record, drawn or not, and names each match's source
+    assert b["hits"] == [{"record": "Sample:s3-1", "label": "Sample", "name": "sample 3.1", "text": "sample 3.1",
+                          "source": 3, "sourceTitle": 'Paper 3: "{a} [b]"', "year": 2003}]
+    assert (b["of"], b["main"]) == (3, 4)
+    # read whole, the same bundle is one graph
+    whole = subprocess.run([node, "--input-type=module", "-e", script.replace("{ whole: 10 }", "{}").replace(
+        script[script.index("console.log"):], "console.log(JSON.stringify(b.doc.nodes.length));")], capture_output=True, text=True, timeout=60)
+    assert whole.returncode == 0, whole.stderr
+    assert json.loads(whole.stdout) == 19
+
+
 def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     page = (REPO / "site/index.html").read_text()
     js = (REPO / "site/explorer.js").read_text()

@@ -112,6 +112,12 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
               radial-gradient(circle at 82% 78%, rgba(91, 141, 239, 0.04), transparent 60%), var(--bg); }
 .gx-svg { width: 100%; height: 100%; display: block; cursor: grab; touch-action: none; }
 .gx-svg:active { cursor: grabbing; }
+/* a large graph is drawn on this canvas, over the SVG, which still takes the pointer (explorer.js, canvas mode) */
+.gx-big { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.gx-range { width: 100%; margin: 2px 0; accent-color: var(--select); }
+.gx-window { display: flex; align-items: center; gap: 6px; }
+.gx-window span { flex: 1; }
+.gx-select { width: 100%; padding: 3px 6px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--fg); font: inherit; font-size: 12px; }
 .gx-links path { stroke-width: 1.6; stroke-linecap: round; fill: none; }
 .gx-link-label { font-size: 10px; font-weight: 600; letter-spacing: .04em; text-anchor: middle; pointer-events: none; user-select: none;
   paint-order: stroke; stroke: var(--bg); stroke-width: 3px; stroke-linejoin: round; }

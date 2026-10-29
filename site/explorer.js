@@ -13,6 +13,8 @@ const EDGE_PALETTE = ["#7c3aed", "#0891b2", "#ea580c", "#16a34a", "#db2777", "#0
 const NODE_R_MIN = 7, NODE_R_MAX = 40, NODE_R_STEP = 3.3;   // a node's radius from its own links only
 const BIG_GRAPH = 400;            // past this, names hide when seen from far (arrowheads stay)
 const HUGE_GRAPH = 1000;          // past this, the layout runs in slices
+const CANVAS_GRAPH = 10000;       // past this, drawn on a canvas and laid out off the page's thread (layout.js)
+const DRAW_DEFAULT = 30000;       // a bundle's window: how many records, until the reader sets another
 const FAR_ZOOM = 0.6;
 const LABELS_AUTO_MAX = 400;      // relationship names shown by default up to this many links
 const PROVENANCE_KIND = "Source", PROVENANCE_EDGE = "REPORTED_IN";   // hidden until asked for, as the evidence is on each node
@@ -106,6 +108,7 @@ function signOut() {
 let me = null;
 async function renderAccount() {
   const btn = $("account-btn"), label = $("account-label");
+  btn.hidden = !SERVICE;                          // nothing to sign in to without the service
   btn.classList.remove("is-signed-in");
   btn.querySelector("img")?.remove();
   btn.querySelector("svg").removeAttribute("hidden");
@@ -363,22 +366,23 @@ function collected(id, inbox) {
 // service's receipt, and the address names it like any other (#g=…): a sign-in, which leaves the page and comes back,
 // or a reload opens it again, and it stays in the list when another graph is opened.
 const OWN = "scale-own";
-let own = null;                                      // { entry, text, receipt }
-async function openOwn(entry, text, receipt = null) {
-  const doc = JSON.parse(text);
+let own = null;                                      // { entry, text, receipt, doc }
+async function openOwn(entry, text, receipt = null, doc = null) {
+  doc ||= JSON.parse(text);
   if (!Array.isArray(doc.nodes) || !Array.isArray(doc.links)) throw new Error("no nodes and links");
-  own = { entry, text, receipt };
+  own = { entry, text, receipt, doc };
   store.set(OWN, "");                                 // a graph too large to keep must not leave an older one behind
-  own.kept = store.set(OWN, JSON.stringify(own));    // false when it is too large for the tab's storage
+  // false when it is too large for the tab's storage (a few MB), which a larger one is not even tried in
+  own.kept = !!text && text.length < 4e6 && store.set(OWN, JSON.stringify({ entry, text, receipt }));
   if (new URLSearchParams(location.hash.slice(1)).get("g") !== entry.id) history.pushState(null, "", `#g=${encodeURIComponent(entry.id)}`);
   await showOwn();
 }
 async function showOwn() {
-  await openGraph(own.entry, own.text);
+  await openGraph(own.entry, own.text, own.doc);
   G.receipt = own.receipt;
   G.contrib = own.receipt ? `<span class="gx-subtle">Checking catal-commons…</span>` : "";
   renderGraphs();
-  if (!own.kept) status("This graph is too large to keep in this tab: download it before you sign in or reload.");
+  if (!own.kept && !own.entry.windowed) status("This graph is too large to keep in this tab: download it before you sign in or reload.");
   if (own.receipt) checkContribution();
 }
 // A graph the service just curated, with its receipt, which alone lets it be contributed (only that graph, unchanged,
@@ -447,8 +451,10 @@ async function start() {
     try {
       if (/\.zip$/i.test(f.name)) {                 // a knowledge-graph bundle (scale graph export --to kg-bundle)
         status("Reading the bundle…");
-        const b = await readBundle(f);
-        await openOwn({ id: `bundle-${base.replace(/\W+/g, "-")}`, title: b.version ? `${b.title} (v${b.version})` : b.title, from: "" }, JSON.stringify(b.doc));
+        const b = await readBundle(f, status);
+        const id = `bundle-${base.replace(/\W+/g, "-")}`, title = b.version ? `${b.title} (v${b.version})` : b.title;
+        if (b.view) { bundle = { b, id, title, width: DRAW_DEFAULT, centre: null, from: 0 }; await drawWindow({ centre: null, from: 0 }); }
+        else await openOwn({ id, title, from: "" }, JSON.stringify(b.doc), null, b.doc);
       } else await openOwn({ id: `file-${base.replace(/\W+/g, "-")}`, title: base, from: "" }, await f.text());
     } catch (err) { status(ready()); alert(`Not a graph or a graph bundle: ${err.message}`); }
   };
@@ -471,6 +477,7 @@ function renderGraphs() {
   wireContrib();
   const gs = $("graph-show");
   if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
+  wireWindow();
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
   $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = (ev) => {
@@ -494,7 +501,8 @@ function details() {
     g.version ? ["Release", esc(g.version)] : null,
     ["Visibility", e.from === "service" ? "Private to you, until you contribute it" : esc(((g.stewardship || {}).access || "public").replace(/^./, (c) => c.toUpperCase()))],
     g.created || g.date ? ["Created", esc(g.created || g.date)] : null,
-    ["Checksum", B.sha ? `<span class="gx-sha" title="sha256 ${esc(B.sha)}">${esc(B.sha.slice(0, 12))}…</span>` : "…"],
+    e.windowed ? null : ["Checksum", B.sha ? `<span class="gx-sha" title="sha256 ${esc(B.sha)}">${esc(B.sha.slice(0, 12))}…</span>` : "…"],
+    ...windowRows(e),
     ["Source", e.from === "service" ? "curated by the service just now" : e.from ? `<a href="https://github.com/hlxin/scale/tree/main/${esc(e.from)}">${esc(e.from)}</a>` : "a file on this computer"],
     ["Schema", `<a href="#" id="schema-toggle" title="${G.base ? "Back to the graph" : "Show the schema on the canvas"}">${esc(g.schema || "scale-catal")} v${esc(g.schema_version || "?")}</a>${G.base ? ` <span class="gx-subtle">(shown)</span>` : ""}<br>
       ${B.labels.size} labels · ${B.rels.size} rel types · ${schemaPropCount(B).toLocaleString()} props`],
@@ -502,6 +510,234 @@ function details() {
   ].filter(Boolean);
   return `<div class="gx-graph-detail"><dl class="gx-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`
     + (e.from === "service" ? `<div class="gx-contrib" id="contrib-box">${B.contrib || ""}</div>` : "") + `</div>`;
+}
+
+// A bundle with more records than the explorer draws at once is drawn a window at a time (bundle.js): its sources in
+// an order (by year, the oldest first; or around a source, those most like it first) and as many records as the
+// reader sets (the width). The arrows step from one window to the next, so that the windows cover the whole graph; a
+// double-click on a record, or a search match not drawn, draws around its source; a year jumps in the order by year.
+let bundle = null;                                 // { b, id, title, width, centre, from, drawn }
+async function drawWindow({ centre = bundle.centre, from = 0, focus = null } = {}) {
+  const { b } = bundle;
+  status(centre == null ? `Drawing records from ${from.toLocaleString()} on…` : `Drawing around “${trunc(b.sources[centre].title, 60)}”…`);
+  await new Promise((r) => setTimeout(r, 30));       // the status shows before the work
+  const w = b.view(centre, from, bundle.width);
+  Object.assign(bundle, { centre, from: w.from, drawn: w });
+  await openOwn({ id: bundle.id, title: bundle.title, from: "", windowed: true }, null, null, w.doc);
+  status(`Records ${w.from.toLocaleString()}–${w.to.toLocaleString()} of ${w.total.toLocaleString()} drawn. Search covers them all.`);
+  if (focus && G.byId.has(focus)) goTo(focus);
+}
+function windowRows(e) {
+  if (!e.windowed || bundle?.id !== e.id || !bundle.drawn) return [];
+  const { b, drawn: w, width } = bundle, span = w.years ? ` · ${w.years[0] === w.years[1] ? w.years[0] : `${w.years[0]}–${w.years[1]}`}` : "";
+  return [
+    ["Order", w.order === "year" ? "Sources by year, the oldest first"
+      : `Around <a href="#" id="window-centre" title="${esc(w.title)}">${esc(trunc(w.title, 44))}</a>${w.year ? ` (${w.year})` : ""}, the sources most
+        like it first · <a href="#" id="window-by-year">by year</a>`],
+    ["Window", `<div class="gx-window"><button type="button" class="gx-btn gx-btn-tiny" id="window-prev" title="The window before"${w.from ? "" : " disabled"}>◀</button>
+      <span>records ${w.from.toLocaleString()}–${w.to.toLocaleString()} of ${w.total.toLocaleString()}${span}</span>
+      <button type="button" class="gx-btn gx-btn-tiny" id="window-next" title="The window after"${w.to < w.total ? "" : " disabled"}>▶</button></div>
+      <input type="range" class="gx-range" id="window-from" min="0" max="${w.total - 1}" step="1000" value="${w.from}" aria-label="Where the window starts">
+      <span class="gx-subtle">${w.sources.toLocaleString()} sources; ${w.records.toLocaleString()} records drawn with what they link to</span>`],
+    ["Width", `<input type="range" class="gx-range" id="window-width" min="5000" max="80000" step="5000" value="${width}"
+      aria-label="Records drawn at once"><span id="window-width-n">${width.toLocaleString()}</span> records at once`],
+    ["Go to", `<select class="gx-select" id="window-year" aria-label="Where a year's sources begin, in the order by year"><option value="">a year…</option>${
+      b.years.map((y) => `<option value="${y}">${y}</option>`).join("")}</select>`],
+  ];
+}
+function wireWindow() {
+  if (!$("window-from") || !bundle?.drawn) return;
+  const w = bundle.drawn, go = (from) => drawWindow({ from });
+  $("window-prev").onclick = () => go(Math.max(0, w.from - bundle.width));
+  $("window-next").onclick = () => go(w.to);
+  const f = $("window-from"), r = $("window-width"), y = $("window-year");
+  f.onchange = () => go(Number(f.value));
+  r.oninput = () => { $("window-width-n").textContent = Number(r.value).toLocaleString(); };
+  r.onchange = () => { bundle.width = Number(r.value); go(w.from); };
+  y.onchange = () => { if (y.value) drawWindow({ centre: null, from: bundle.b.startOf(Number(y.value)) }); };
+  $("window-centre")?.addEventListener("click", (ev) => { ev.preventDefault(); goTo(w.source); });
+  $("window-by-year")?.addEventListener("click", (ev) => { ev.preventDefault(); drawWindow({ centre: null, from: 0 }); });
+}
+// The bundle is searched whole: a record not drawn is drawn around its own source when chosen.
+async function searchBundle(q) {
+  leaveSchema();
+  card("Matching records", `<p class="gx-meta">Searching all ${bundle.b.records.toLocaleString()} records…</p>`);
+  await new Promise((r) => setTimeout(r, 30));
+  const t0 = performance.now(), hits = bundle.b.search(q, 50), ms = Math.round(performance.now() - t0);
+  S.match = new Set(hits.map((h) => h.record).filter((id) => G.byId.has(id)));
+  const missing = [...S.match].filter((id) => !S.nodes.some((n) => n.id === id));
+  if (missing.length) { missing.forEach((id) => S.extra.add(id)); draw(); } else markMatches();
+  const shown = S.nodes.filter((n) => S.match.has(n.id));
+  if (shown.length) setTimeout(() => { S.viewMoved = true; fit(false, shown); }, 300);
+  card(`Matching records · ${hits.length}${hits.length === 50 ? "+" : ""}`, (hits.length ? hits.map((h) => `<div class="gx-hit" data-id="${esc(h.record)}" data-source="${h.source ?? ""}">
+      <div class="gx-quote">“${esc(trunc(h.text, 260))}”</div>
+      <div class="gx-meta">${esc(h.label)}: ${esc(trunc(h.name, 60))} · ${esc(trunc(h.sourceTitle, 80))}${h.year ? ` (${h.year})` : ""}${
+        G.byId.has(h.record) ? "" : " · <i>not drawn yet: a click draws around it</i>"}</div></div>`).join("")
+    : `<p>Nothing in the ${bundle.b.records.toLocaleString()} records matches “${esc(q)}”.</p>`)
+    + `<p class="gx-meta">Searched every record of the bundle (${ms.toLocaleString()} ms).</p>`);
+  $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => {
+    const id = el.dataset.id, s = el.dataset.source;
+    if (G.byId.has(id)) goTo(id); else if (s !== "") drawWindow({ centre: Number(s), from: 0, focus: id });
+  }));
+}
+
+// ------------------------------------------------------------------------------------------ a large graph: a canvas
+// A graph of more than CANVAS_GRAPH records is drawn on a canvas, not as SVG elements, and laid out off the page's
+// thread (layout.js): the page stays responsive while the layout settles, and moving or zooming redraws at once.
+const layout = { worker: null, run: 0, running: false };
+const HINT = document.querySelector(".gx-hint").textContent;
+function hint() {
+  document.querySelector(".gx-hint").textContent = !S.big ? HINT : G?.entry.windowed
+    ? "A window of the bundle: its card's arrows step through the whole graph · click a record for its details · double-click one to draw around its source · search covers every record"
+    : "A large graph, drawn on a canvas · scroll to zoom · click a record for its details · double-click one to expand its neighbourhood";
+}
+function drawCanvas() {
+  S.sim?.stop();
+  S.big = true;
+  S.zoom.scaleExtent([0.005, 4]);                     // a large graph is seen whole from further away
+  d3.select("#nodes").selectAll("*").remove(); d3.select("#links").selectAll("*").remove();
+  $("gx-canvas").hidden = false;
+  S.at = new Map(S.nodes.map((d) => [d.id, d]));
+  S.nodeGroups = new Map(); S.linkGroups = new Map();
+  for (const d of S.nodes) { d.r = radius(d.id); const c = colourForKind(d.label); (S.nodeGroups.get(c) || S.nodeGroups.set(c, []).get(c)).push(d); }
+  for (const e of S.links) {
+    const a = S.at.get(e.source), b = S.at.get(e.target), c = colourForEdge(e.type);
+    if (a && b) (S.linkGroups.get(c) || S.linkGroups.set(c, []).get(c)).push([a, b]);
+  }
+  S.quad = null;
+  S.draw = () => { if (!S.frame) S.frame = requestAnimationFrame(paint); };
+  S.sim = { alpha: () => (layout.running ? 0.5 : 0), alphaMin: () => 0.001, alphaTarget() { return this; }, stop: layoutStop, restart() { layoutRun(); return this; } };
+  S.viewMoved = false;
+  hint();
+  if (S.layout !== "force") applyLayout(S.layout, false); else layoutRun();
+}
+function leaveCanvas() {
+  layoutStop();
+  S.big = false;
+  S.zoom.scaleExtent([0.05, 4]);
+  $("gx-canvas").hidden = true;
+  hint();
+}
+// records new to the canvas start beside the others of their source (REPORTED_IN): each source's records in a disc,
+// the sources on a spiral, the largest in the middle; the layout then has little left to do
+function seed(W, H) {
+  const fresh = S.nodes.filter((d) => !Number.isFinite(d.x));
+  if (!fresh.length) return;
+  const group = new Map();
+  for (const e of G.doc.links) if (e.type === PROVENANCE_EDGE && !group.has(e.source)) group.set(e.source, e.target);
+  const members = new Map();
+  for (const d of fresh) { const g = group.get(d.id) ?? (d.label === PROVENANCE_KIND ? d.id : ""); (members.get(g) || members.set(g, []).get(g)).push(d); }
+  const cell = 26;
+  let filled = 0, k = 0;
+  for (const list of [...members.values()].sort((a, b) => b.length - a.length)) {
+    const r = cell * Math.sqrt(filled + list.length / 2), a = k++ * 2.399963, spread = (cell * Math.sqrt(list.length)) / 2;
+    const cx = W / 2 + r * Math.cos(a), cy = H / 2 + r * Math.sin(a);
+    for (const d of list) { const t = Math.random() * 2 * Math.PI, s = spread * Math.sqrt(Math.random()); d.x = cx + s * Math.cos(t); d.y = cy + s * Math.sin(t); }
+    filled += list.length;
+  }
+}
+function layoutRun() {
+  const [W, H] = size(), n = S.nodes.length, at = new Map(S.nodes.map((d, i) => [d.id, i]));
+  seed(W, H);
+  const x = new Float32Array(n), y = new Float32Array(n), degree = new Uint16Array(n), links = new Int32Array(2 * S.links.length);
+  S.nodes.forEach((d, i) => { x[i] = d.x; y[i] = d.y; degree[i] = Math.min(65535, S.degree.get(d.id) || 0); });
+  S.links.forEach((e, k) => { links[2 * k] = at.get(e.source.id ?? e.source); links[2 * k + 1] = at.get(e.target.id ?? e.target); });
+  if (!layout.worker) {
+    layout.worker = new Worker("layout.js");
+    layout.worker.onmessage = ({ data }) => {
+      if (data.run !== layout.run || !S.big) return;
+      const p = data.pos;
+      S.nodes.forEach((d, i) => { d.x = p[2 * i]; d.y = p[2 * i + 1]; });
+      S.quad = null;
+      layout.running = !data.done;
+      S.draw();
+      if (!S.viewMoved) fit(!data.done);
+    };
+  }
+  layout.running = true;
+  layout.worker.postMessage({ op: "layout", run: ++layout.run, x, y, links, degree, alpha: 0.6, distance: 55, charge: -110, cx: W / 2, cy: H / 2 },
+    [x.buffer, y.buffer, links.buffer, degree.buffer]);
+}
+function layoutStop() {
+  layout.running = false;
+  if (layout.worker) layout.worker.postMessage({ op: "stop", run: ++layout.run });
+}
+function paint() {
+  S.frame = 0;
+  if (!S.big) return;
+  const c = $("gx-canvas"), [W, H] = size(), dpr = window.devicePixelRatio || 1;
+  if (c.width !== Math.round(W * dpr) || c.height !== Math.round(H * dpr)) { c.width = Math.round(W * dpr); c.height = Math.round(H * dpr); }
+  const ctx = c.getContext("2d"), t = d3.zoomTransform(svg.node()), m = S.match, css = getComputedStyle(document.documentElement);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, W, H);
+  ctx.setTransform(dpr * t.k, 0, 0, dpr * t.k, dpr * t.x, dpr * t.y);
+  ctx.lineWidth = 1 / t.k;
+  ctx.globalAlpha = m ? 0.08 : 0.35;
+  for (const [colour, list] of S.linkGroups) {
+    ctx.strokeStyle = colour;
+    ctx.beginPath();
+    for (const [a, b] of list) { ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); }
+    ctx.stroke();
+  }
+  const tiny = t.k * NODE_R_MIN < 1.5;              // far away, a record is a square of a pixel or two
+  ctx.globalAlpha = m ? 0.25 : 0.9;
+  for (const [colour, list] of S.nodeGroups) {
+    ctx.fillStyle = colour;
+    ctx.beginPath();
+    for (const d of list) {
+      if (tiny) ctx.rect(d.x - d.r, d.y - d.r, 2 * d.r, 2 * d.r);
+      else { ctx.moveTo(d.x + d.r, d.y); ctx.arc(d.x, d.y, d.r, 0, 2 * Math.PI); }
+    }
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+  const ring = (d, w) => { ctx.beginPath(); ctx.arc(d.x, d.y, d.r + 3 / t.k, 0, 2 * Math.PI); ctx.lineWidth = w / t.k; ctx.stroke(); };
+  ctx.strokeStyle = css.getPropertyValue("--select").trim() || "#ffae3a";
+  if (m) for (const d of S.nodes) if (m.has(d.id)) { ctx.fillStyle = colourForKind(d.label); ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 2 * Math.PI); ctx.fill(); ring(d, 1.5); }
+  const sel = S.selected && S.at.get(S.selected);
+  if (sel) ring(sel, 3);
+  snapshot(c, t);
+  if (t.k >= FAR_ZOOM) {                             // near enough, the names of the records in view
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.font = "11px system-ui, sans-serif";
+    ctx.fillStyle = getComputedStyle(document.body).color;
+    let shown = 0;
+    for (const d of S.nodes) {
+      const sx = t.x + d.x * t.k, sy = t.y + d.y * t.k;
+      if (sx < 0 || sy < 0 || sx > W || sy > H) continue;
+      ctx.fillText(trunc(d.name, 22), sx + d.r * t.k + 3, sy + 4);
+      if (++shown >= 600) break;
+    }
+  }
+}
+// While the view moves, a large graph's last picture moves with it, scaled and shifted at once; the graph is drawn anew
+// when the view stops. (The names, drawn on top, come back with that new picture.)
+const SNAP_GRAPH = 20000;
+function snapshot(c, t) {
+  if (S.nodes.length < SNAP_GRAPH) { S.snapAt = null; return; }
+  S.snap ||= document.createElement("canvas");
+  if (S.snap.width !== c.width || S.snap.height !== c.height) { S.snap.width = c.width; S.snap.height = c.height; }
+  const ctx = S.snap.getContext("2d");
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, c.width, c.height); ctx.drawImage(c, 0, 0);
+  S.snapAt = { k: t.k, x: t.x, y: t.y };
+}
+function moved() {
+  if (!S.snapAt) { S.draw(); return; }
+  if (!S.quick) S.quick = requestAnimationFrame(() => {
+    S.quick = 0;
+    const c = $("gx-canvas"), ctx = c.getContext("2d"), t = d3.zoomTransform(svg.node()), a = S.snapAt, k = t.k / a.k, dpr = window.devicePixelRatio || 1;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(S.snap, dpr * (t.x - a.x * k), dpr * (t.y - a.y * k), S.snap.width * k, S.snap.height * k);
+  });
+  clearTimeout(S.still);
+  S.still = setTimeout(() => S.draw(), 160);
+}
+// the record under the pointer, if any
+function hit(ev) {
+  const t = d3.zoomTransform(svg.node()), [px, py] = t.invert(d3.pointer(ev, svg.node()));
+  S.quad ||= d3.quadtree(S.nodes, (d) => d.x, (d) => d.y);
+  const d = S.quad.find(px, py, NODE_R_MAX + 8 / t.k);
+  return d && Math.hypot(d.x - px, d.y - py) <= d.r + 6 / t.k ? d.id : null;
 }
 
 // ------------------------------------------------------------------------------------------ the schema view
@@ -583,8 +819,8 @@ async function openFromHash() {
   await openGraph(entry, text);
 }
 
-async function openGraph(entry, text) {
-  const doc = JSON.parse(text);
+async function openGraph(entry, text, doc = null) {
+  doc ||= JSON.parse(text);
   if (!Array.isArray(doc.nodes) || !Array.isArray(doc.links)) throw new Error("no nodes and links");
   const byId = new Map(doc.nodes.map((n) => [n.id, n]));
   const out = new Map(), inn = new Map(), labels = new Map(), rels = new Map();
@@ -607,8 +843,9 @@ async function openGraph(entry, text) {
   renderLegend();
   showLegend();
   draw();
-  sha256(text).then((h) => { if (G && G.entry === entry) { G.sha = h; renderGraphs(); } });
   const g = G;
+  if (!text) return;                                // a bundle drawn around a source: the bundle searches itself
+  sha256(text).then((h) => { if (G && G.entry === entry) { G.sha = h; renderGraphs(); } });
   await rpc({ op: "put", name: G.file, text }).then(() => { g.loaded = true; })
     .catch((err) => status(`SCALE could not load the graph: ${err.message}`));
   if (G !== g) return;
@@ -704,11 +941,16 @@ function draw() {
   if (!S.zoom) {
     S.zoom = d3.zoom().scaleExtent([0.05, 4]).on("zoom", (ev) => {
       zoomLayer.attr("transform", ev.transform);
+      if (S.big) moved();
       if (ev.sourceEvent) S.viewMoved = true;
       syncFar(ev.transform.k);
     });
     svg.call(S.zoom).on("dblclick.zoom", null);
-    svg.on("click.inspector", (ev) => { if (ev.target === svg.node()) clearSelection(); });
+    svg.on("click.inspector", (ev) => {
+      if (S.big) { const id = hit(ev); id ? select(id) : clearSelection(); return; }
+      if (ev.target === svg.node()) clearSelection();
+    });
+    svg.on("dblclick.canvas", (ev) => { if (!S.big) return; const id = hit(ev); if (id) expand(id); });
   }
   // degree, for the radius and the repulsion
   S.degree = new Map();
@@ -716,6 +958,8 @@ function draw() {
   const degs = [...S.degree.values()];
   S.maxDeg = degs.length ? Math.max(...degs) : 0;
   S.minDeg = degs.length ? Math.min(...degs) : 0;
+  if (nodes.length > CANVAS_GRAPH) return drawCanvas();
+  if (S.big) leaveCanvas();
 
   const showLabels = linkLabelsShown();
   const link = d3.select("#links").selectAll("g").data(S.links, (d) => d.id).join((enter) => {
@@ -810,6 +1054,7 @@ function tick(lines, labels, groups, showLabels) {
 }
 // A big graph is laid out in slices of 40 ms, so the page stays responsive; the view follows it as it spreads.
 function settle() {
+  if (S.big) { layoutRun(); return; }
   const gen = ++S.settleGen, sim = S.sim;
   sim.stop(); sim.alpha(0.9);
   let drawnAt = 0;
@@ -831,7 +1076,7 @@ function fit(instant = false, nodes = S.nodes) {
     const xs = pts.map((p) => p[0]), ys = pts.map((p) => p[1]);
     const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys);
     const [W, H] = size(), PAD = 70;
-    const k = Math.min(2, Math.max(0.05, Math.min(W / (maxX - minX + PAD * 2 || 1), H / (maxY - minY + PAD * 2 || 1))));
+    const k = Math.min(2, Math.max(S.zoom.scaleExtent()[0], Math.min(W / (maxX - minX + PAD * 2 || 1), H / (maxY - minY + PAD * 2 || 1))));
     const to = d3.zoomIdentity.translate(W / 2 - ((minX + maxX) / 2) * k, H / 2 - ((minY + maxY) / 2) * k).scale(k);
     instant ? svg.call(S.zoom.transform, to) : svg.transition().duration(450).call(S.zoom.transform, to);
   };
@@ -949,12 +1194,14 @@ function showLegend() {
 }
 function clearSelection() {
   S.selected = null;
+  if (S.big) S.draw();
   d3.selectAll(".gx-node").classed("selected", false);
   $("locate").disabled = true;
   showLegend();
 }
 function select(id) {
   S.selected = id;
+  if (S.big) S.draw();
   d3.selectAll(".gx-node").classed("selected", (d) => d.id === id);
   $("locate").disabled = false;
   showDetails(G.byId.get(id));
@@ -968,6 +1215,10 @@ function goTo(id) {
   setTimeout(() => { if (n && Number.isFinite(n.x)) { S.viewMoved = true; svg.transition().duration(450).call(S.zoom.translateTo, n.x, n.y); } }, S.sim && S.sim.alpha() > 0.1 ? 900 : 0);
 }
 function expand(id) {
+  if (G.entry.windowed && bundle?.drawn) {           // a bundle's window: draw around this record's source
+    const s = bundle.b.sourceOf(id);
+    if (s != null && !(s === bundle.centre && bundle.from === 0)) { drawWindow({ centre: s, from: 0, focus: id }); return; }
+  }
   const near = [...(G.out.get(id) || []), ...(G.inn.get(id) || [])].slice(0, 50);
   for (const e of near) for (const n of [e.source, e.target]) { S.hidden.delete(n); S.extra.add(n); }
   S.extra.add(id);
@@ -1033,6 +1284,7 @@ function card(title, html) {
   wireIds($("card-body"));
 }
 function markMatches() {
+  if (S.big) { S.draw(); return; }
   const m = S.match;
   d3.selectAll(".gx-node").classed("match", (d) => !!m && m.has(d.id)).classed("dim", (d) => !!m && !m.has(d.id));
   d3.selectAll("#links path").classed("dim", (d) => !!m && !(m.has(d.source.id ?? d.source) && m.has(d.target.id ?? d.target)));
@@ -1041,6 +1293,7 @@ $("card-close").onclick = () => { $("card").hidden = true; S.match = null; markM
 $("card-collapse").onclick = () => $("card").classList.toggle("collapsed");
 
 async function search(q) {
+  if (G?.entry.windowed && bundle?.drawn) return searchBundle(q);
   leaveSchema();
   card("Matching evidence", `<p class="gx-meta">Searching…</p>`);
   try {
@@ -1133,6 +1386,15 @@ function svgText() {
 $("export-menu").querySelectorAll("[data-export]").forEach((b) => (b.onclick = () => {
   if (!G) return;
   const kind = b.dataset.export, csv = (rows) => rows.map((r) => r.map((v) => `"${String(v ?? "").replace(/"/g, '""')}"`).join(",")).join("\n");
+  if (S.big && kind === "svg") { alert("This graph is drawn on a canvas: export it as PNG, or download the graph as JSON."); return; }
+  if (S.big && kind === "png") {
+    const from = $("gx-canvas"), c = document.createElement("canvas");
+    c.width = from.width; c.height = from.height;
+    const ctx = c.getContext("2d"); ctx.fillStyle = getComputedStyle(document.body).backgroundColor; ctx.fillRect(0, 0, c.width, c.height);
+    ctx.drawImage(from, 0, 0);
+    c.toBlob((blob) => download(`${G.entry.id}.png`, blob));
+    return;
+  }
   if (kind === "svg") download(`${G.entry.id}.svg`, new Blob([svgText()], { type: "image/svg+xml" }));
   if (kind === "nodes-csv") download(`${G.entry.id}-nodes.csv`, new Blob([csv([["id", "label", "name"], ...S.nodes.map((n) => [n.id, n.label, n.name])])], { type: "text/csv" }));
   if (kind === "edges-csv") download(`${G.entry.id}-relationships.csv`, new Blob([csv([["id", "type", "source", "target"], ...S.links.map((e) => [e.id, e.type, e.source.id ?? e.source, e.target.id ?? e.target])])], { type: "text/csv" }));
