@@ -41,6 +41,7 @@ METHODS = REPO / "domain/examples/scale-catal/method-examples/computational-meth
 SYNTHESES = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-strategies.json"
 STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.json"
 CONDITIONS = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json"
+SALT = REPO / "domain/examples/scale-catal/synthesis-examples/salt-matrix-anneal.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -366,6 +367,13 @@ def main() -> None:
            lambda d: d["links"].append({"id": "ex:cnd/link/back", "type": "VARIANT_OF",
                                         "source": "ex:cnd/preparation/pt-sea-11", "target": "ex:cnd/preparation/pt-sea-9",
                                         "props": {"origin": "synthetic", "varied": ["ph"]}}), base=conditions)
+
+    def addition_in_words(d: dict) -> None:
+        e = next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == "ex:anl/step/ptfe-add-fe"
+                 and e["target"] == "ex:anl/species/feacac3")
+        e["props"]["addition_mode"] = "slowly over 10 min"
+    defect("addition-mode-in-words", "an input whose addition mode is stated in other words", addition_in_words,
+           base=load_doc(SALT))
 
     def function_on_component(d: dict) -> None:
         e = next(e for e in d["links"] if e["type"] == "HAS_COMPONENT" and e["source"] == "ex:syn/catalyst/pd-cubes-alumina"

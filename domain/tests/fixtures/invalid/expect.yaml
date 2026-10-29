@@ -250,3 +250,8 @@ fixtures:
     error: "VARIANT_OF forms a cycle"
     reason: A variant is a procedure carried out as an earlier one with something changed, so the earlier one is not a
       variant of it in turn; variants never form a cycle.
+  - file: addition-mode-in-words.json
+    base: domain/examples/scale-catal/synthesis-examples/salt-matrix-anneal.json
+    error: "is not one of"
+    reason: How an input went into a step is one of the listed modes, so that dropwise and one-shot additions are found
+      apart; the source's words (a time, a rate) stay in the step's method and the input's flow_rate.

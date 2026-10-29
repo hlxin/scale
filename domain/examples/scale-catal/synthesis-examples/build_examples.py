@@ -710,7 +710,7 @@ def synthesis_conditions() -> dict:
     its share of a gas, its ratio to another input and its flow; and a preparation carried out as another with one
     thing changed (VARIANT_OF), within a paper and from another paper's recipe."""
     d = Doc("ex:cnd", "The conditions of a step and the quantities of its inputs, and preparations varied from others "
-                      "(synthetic)")
+                      "(synthetic)", version="0.7.8")
     d.source("pt-sea", "Pt on silica by strong electrostatic adsorption: uptake and dispersion against the pH")
     silica = d.material("silica", "amorphous silica, 200 m2/g", formula="SiO2", material_family="oxide",
                         evidence=[d.ev("Experimental")])
@@ -746,7 +746,112 @@ def synthesis_conditions() -> dict:
     return d.finish()
 
 
+# ======================================================================================= an anneal in a salt matrix
+def salt_matrix_anneal() -> dict:
+    """What curating nanoparticle-synthesis recipes asked for (scale-catal 0.7.9): a colloid made with one precursor
+    added dropwise and the reductant at once, precipitated with an antisolvent and kept as a dispersion, carried into
+    water by a phase-transfer agent, dried in a salt that keeps the particles apart while they are annealed into the
+    ordered phase, the salt then washed out, and the powder annealed again as a treatment before it is examined."""
+    d = Doc("ex:anl", "A colloid annealed in a salt matrix: dropwise and one-shot additions, an antisolvent, a phase "
+                      "transfer and an anneal (synthetic)")
+    d.source("ptfe-salt", "Ordered PtFe nanoparticles by annealing colloidal particles in a NaCl matrix")
+    ptfe = d.material("ptfe-l10", "ordered L1_0 PtFe", formula="PtFe", structure_type="L1_0", material_family="alloy",
+                      crystallinity="crystalline", evidence=[d.ev("Results, XRD")])
+    ptacac = d.species("ptacac2", "Pt(C5H7O2)2", {"Pt": 1, "C": 10, "H": 14, "O": 4}, "platinum(II) acetylacetonate")
+    feacac = d.species("feacac3", "Fe(C5H7O2)3", {"Fe": 1, "C": 15, "H": 21, "O": 6}, "iron(III) acetylacetonate")
+    oam = d.species("oleylamine", "C18H37N", {"C": 18, "H": 37, "N": 1}, "oleylamine")
+    hdd = d.species("hdd", "C16H34O2", {"C": 16, "H": 34, "O": 2}, "1,2-hexadecanediol")
+    ethanol = d.species("ethanol", "C2H6O", {"C": 2, "H": 6, "O": 1}, "ethanol")
+    hexane = d.species("hexane", "C6H14", {"C": 6, "H": 14}, "hexane")
+    tmah = d.species("tmah", "C4H13NO", {"C": 4, "H": 13, "N": 1, "O": 1}, "tetramethylammonium hydroxide")
+    water = d.species("water", "H2O", {"H": 2, "O": 1}, "water")
+    nacl = d.species("nacl", "NaCl", {"Na": 1, "Cl": 1}, "sodium chloride")
+    h2 = d.species("h2", "H2", {"H": 2}, "hydrogen")
+    ar = d.species("ar", "Ar", {"Ar": 1}, "argon", species_kind="element")
+    cat = d.node("catalyst/ptfe", "Catalyst", "PtFe nanoparticles", catalyst_family="alloy", nominal_formula="PtFe",
+                 evidence=[d.ev("Experimental")])
+    d.link("HAS_COMPONENT", cat, ptfe, role="active_phase", fraction=V(100, "%", basis="by mass"),
+           evidence=[d.ev("Experimental")])
+    powder = d.sample("ptfe", "PtFe nanoparticles, annealed and washed", label="CatalystSample", sample_kind="powder")
+    d.link("HAS_FORMULATION", powder, cat)
+    crude = d.sample("ptfe-crude", "PtFe colloid in oleylamine", sample_kind="dispersion")
+    in_hexane = d.sample("ptfe-hexane", "PtFe nanoparticles in hexane", sample_kind="dispersion")
+    in_water = d.sample("ptfe-water", "PtFe nanoparticles in water", sample_kind="dispersion")
+    in_salt = d.sample("ptfe-salt", "PtFe nanoparticles dried in NaCl", sample_kind="powder")
+    annealed = d.sample("ptfe-annealed", "PtFe nanoparticles annealed in NaCl", sample_kind="powder")
+
+    whole = d.preparation("ptfe", "PtFe: colloidal particles, then annealed in a salt matrix",
+                          ["colloidal_reduction", "other"],
+                          "colloidal co-reduction in oleylamine, then an anneal in NaCl and the salt washed out")
+    d.link("HAS_OUTPUT", whole, powder)
+    colloid = d.preparation("ptfe-colloid", "PtFe nanoparticles in hexane", ["colloidal_reduction"],
+                            "reduction of the acetylacetonates by the diol in oleylamine",
+                            design_aims=["particle_size", "composition"])
+    d.link("PART_OF", colloid, whole, order=1)
+    d.link("HAS_OUTPUT", colloid, in_hexane)
+    d.step(colloid, 1, "ptfe-mix", "Mix Pt(acac)2 and the diol in oleylamine", "mix",
+           inputs=[(ptacac, "reagent", V(0.5, "mmol"), ["metal_precursor"]),
+                   (hdd, "reagent", V(2.0, "mmol"), ["reducing_agent"], {"addition_mode": "all_at_once"}),
+                   (oam, "material", V(20, "mL"), ["solvent", "capping_agent"])], energy_input=["none"])
+    d.step(colloid, 2, "ptfe-add-fe", "Add the Fe(acac)3 solution dropwise at 393 K", "add",
+           inputs=[(feacac, "reagent", V(0.5, "mmol"), ["metal_precursor"], {"addition_mode": "dropwise"}),
+                   (oam, "material", V(5, "mL"), ["solvent"])], temperature=V(393, "K"))
+    d.step(colloid, 3, "ptfe-heat", "Heat to 573 K", "heat", temperature=V(573, "K"), duration=V(36, "min"),
+           ramp_rate=V(5, "K/min"), atmosphere="N2", energy_input=["thermal"])
+    d.step(colloid, 4, "ptfe-hold", "Hold at 573 K", "hold", outputs=[crude], temperature=V(573, "K"),
+           duration=V(1, "h"), atmosphere="N2", energy_input=["thermal"])
+    d.step(colloid, 5, "ptfe-precipitate", "Precipitate the particles with ethanol", "precipitate",
+           inputs=[(crude, "material", None, None),
+                   (ethanol, "reagent", V(40, "mL"), ["antisolvent"], {"addition_mode": "all_at_once"})])
+    d.step(colloid, 6, "ptfe-redisperse", "Disperse the particles in hexane", "disperse", outputs=[in_hexane],
+           inputs=[(hexane, "material", V(10, "mL"), ["solvent"])])
+    size = d.variable("ptfe-size", "mean PtFe particle diameter (TEM)", "microscopy_particle_size", "nm",
+                      "number mean of the projected-area-equivalent diameters of 200 particles")
+    tem = d.characterization("ptfe-tem", "TEM of the particles in hexane", "transmission electron microscopy",
+                             in_hexane, "as_prepared", "Figure 1",
+                             [V(4.2, "nm", id="mean_diameter", variable=size, target=ptfe, evidence_ids=["f1"])],
+                             eid="f1", observation_mode="ex_situ", sampling="ensemble")
+    d.state("ptfe-colloid", "PtFe nanoparticles as made", in_hexane, colloid, [tem], "Figure 1",
+            architecture=["nanoparticles", "alloy"], particle_shape=["sphere"])
+    anneal = d.preparation("ptfe-salt-anneal", "Annealing the particles in a NaCl matrix", ["other"],
+                           "phase transfer into water, drying in NaCl, an anneal under H2/Ar and the salt washed out",
+                           design_aims=["atomic_ordering", "particle_size"])
+    d.link("PART_OF", anneal, whole, order=2)
+    d.link("HAS_INPUT", anneal, in_hexane, role="material", evidence=[d.ev("Experimental, Synthesis")])
+    d.link("HAS_OUTPUT", anneal, powder)
+    d.step(anneal, 1, "ptfe-transfer", "Carry the particles into water with TMAH", "mix", outputs=[in_water],
+           inputs=[(in_hexane, "material", V(10, "mL"), None),
+                   (tmah, "reagent", V(1, "mL"), ["phase_transfer_agent"], {"addition_mode": "all_at_once"}),
+                   (water, "material", V(10, "mL"), ["solvent"])], method="stirred until the hexane phase is clear")
+    d.step(anneal, 2, "ptfe-salt-mix", "Mix the aqueous particles with NaCl", "mix",
+           inputs=[(in_water, "material", V(10, "mL"), None),
+                   (nacl, "reagent", V(5, "g"), ["isolating_medium"], {"addition_mode": "portionwise"})])
+    d.step(anneal, 3, "ptfe-salt-dry", "Dry the mixture", "dry", outputs=[in_salt], temperature=V(353, "K"),
+           duration=V(12, "h"))
+    d.step(anneal, 4, "ptfe-anneal", "Anneal at 973 K under 5% H2 in Ar", "anneal", outputs=[annealed],
+           inputs=[(in_salt, "material", None, None),
+                   (h2, "reagent", None, ["reducing_agent"], {"fraction": V(5, "%", basis="by volume")}),
+                   (ar, "material", None, ["protective_gas"])],
+           temperature=V(973, "K"), duration=V(6, "h"), ramp_rate=V(10, "K/min"), atmosphere="5% H2 in Ar",
+           gas_flow_mode="flowing", energy_input=["thermal"])
+    d.step(anneal, 5, "ptfe-wash", "Wash out the NaCl with water", "wash",
+           inputs=[(annealed, "material", None, None), (water, "material", V(50, "mL"), ["solvent"])])
+    d.step(anneal, 6, "ptfe-dry", "Dry the washed particles", "dry", outputs=[powder], temperature=V(333, "K"),
+           duration=V(12, "h"))
+
+    treat = d.node("treatment/ptfe-anneal-again", "Treatment", "Annealed again under Ar before examination",
+                   treatment_kind="annealing", temperature=V(773, "K"), duration=V(1, "h"), atmosphere="Ar",
+                   gas_flow_mode="flowing", evidence=[d.ev("Experimental, Characterization")])
+    d.link("TREATED_BY", powder, treat, order=1)
+    xrd = d.characterization("ptfe-xrd", "XRD of the annealed particles", "powder X-ray diffraction", powder,
+                             "as_prepared", "Figure 2", information_depth="bulk", sampling="ensemble")
+    d.state("ptfe", "PtFe nanoparticles after the anneal", powder, anneal, [xrd], "Figure 2",
+            architecture=["nanoparticles", "intermetallic", "unsupported"])
+    return d.finish()
+
+
 if __name__ == "__main__":
     write_canonical(HERE / "synthesis-strategies.json", synthesis_strategies())
     write_canonical(HERE / "staged-colloid.json", staged_colloid())
     write_canonical(HERE / "synthesis-conditions.json", synthesis_conditions())
+    write_canonical(HERE / "salt-matrix-anneal.json", salt_matrix_anneal())
