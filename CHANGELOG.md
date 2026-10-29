@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Queries about four times faster, with the same answers (no schema change).** Requested by @hlxin. A query
+  re-hashed the schema's quantity contracts twice, rebuilt a table of every link, labelled the same evidence again in
+  every row, and copied its answer with `copy.deepcopy`. Now the contracts are compiled once per loaded schema, the
+  links table and each evidence item's source labels are kept with the document's query `Graph`, and the answer is
+  copied as plain data (`pgraph_query.detached`), still sharing no object with the document. The competency questions
+  on their documents (62 runs) take 18 ms instead of 73 ms, and three broad plans on the public methanol graph (1,494
+  rows) 19 ms instead of 31 ms; every answer is identical.
 - **A large knowledge-graph bundle opens in the explorer a window at a time, and is searched whole (no schema
   change).** Requested by @diazr04: a bundle whose graph is larger than a browser holds as one text (the train split of
   a recipes dataset, 899 MB and 542,226 records) failed with "Failed to fetch", and a graph of 40,000 records took about

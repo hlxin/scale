@@ -804,6 +804,11 @@ class _Parser:
 
 # ------------------------------------------------------------------------------------------ a schema's contracts
 _COMPILED: dict[str, Contracts] = {}
+# the contracts of the schema objects asked about lately, by the object: a loaded schema is not changed (as a query's
+# Graph assumes), so its block is hashed once, not on every call (twice a query). Each entry holds its block, so an id
+# is never reused while it is here; a schema dropped from here is hashed again, and gets the same compiled contracts.
+_BY_OBJECT: dict[int, tuple[dict, Contracts]] = {}
+_BY_OBJECT_MAX = 32
 
 
 def contracts(spec: dict) -> Contracts | None:
@@ -811,9 +816,15 @@ def contracts(spec: dict) -> Contracts | None:
     block = spec.get("quantities") if isinstance(spec, dict) else None
     if not isinstance(block, dict):
         return None
+    hit = _BY_OBJECT.get(id(block))
+    if hit is not None and hit[0] is block:
+        return hit[1]
     key = hashlib.sha256(json.dumps(block, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     if key not in _COMPILED:
         _COMPILED[key] = Contracts(block)
+    if len(_BY_OBJECT) >= _BY_OBJECT_MAX:
+        _BY_OBJECT.pop(next(iter(_BY_OBJECT)))          # the oldest
+    _BY_OBJECT[id(block)] = (block, _COMPILED[key])
     return _COMPILED[key]
 
 

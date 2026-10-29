@@ -145,6 +145,7 @@ from __future__ import annotations
 
 import copy
 import datetime as dt
+import functools
 import json
 import math
 import re
@@ -195,6 +196,7 @@ class Graph:
         self.year = {n["id"]: _year(n["props"]) for n in doc["nodes"] if n["label"] in ("Source", "Dataset")}
         self._digest = self._life = self._inclusion = self._held = None
         self._access: dict[str, dict] = {}
+        self.source_labels: dict[tuple, dict] = {}      # (record, source) -> what an evidence item of it is labelled
 
     @property
     def digest(self) -> str:
@@ -226,6 +228,13 @@ class Graph:
         if self._held is None:
             self._held = {(it["record"], it["evidence"], it["text"]) for it in passages.evidence_items(self.doc)}
         return self._held
+
+    @property
+    def links(self) -> dict:
+        """Every link by id."""
+        if getattr(self, "_links", None) is None:
+            self._links = {e["id"]: e for e in self.doc["links"]}
+        return self._links
 
     @property
     def records(self) -> dict:
@@ -1210,8 +1219,13 @@ def unfiltered(plan: dict) -> bool:
 
 def _eco(t: Any) -> str:
     """An ECO id however it is written (ECO:0000033, ECO_0000033, an OBO IRI)."""
-    m = re.search(r"ECO[:_](\d{7})", str(t or ""))
-    return f"ECO:{m.group(1)}" if m else str(t or "")
+    return _eco_text(str(t or ""))
+
+
+@functools.lru_cache(maxsize=4096)
+def _eco_text(t: str) -> str:
+    m = re.search(r"ECO[:_](\d{7})", t)
+    return f"ECO:{m.group(1)}" if m else t
 
 
 # ------------------------------------------------------------------------------------------ execution
@@ -1219,7 +1233,26 @@ def run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | N
     """Run ``plan`` on ``doc``. ``graph``: the document's :class:`Graph`, when several plans run on one document (used
     only when it was built from this document and schema). The result shares no object with the document: a caller
     may change it without changing the document, or a later answer drawn from it."""
-    return copy.deepcopy(_run(doc, spec, plan, evidence_index, graph))
+    return detached(_run(doc, spec, plan, evidence_index, graph))
+
+
+_ATOMS = (str, int, float, bool, type(None))
+
+
+def detached(x: Any) -> Any:
+    """A copy of an answer that shares no mutable object with it: dicts, lists and tuples copied, strings, numbers,
+    booleans and None kept (they cannot change), anything else deep-copied. Several times faster than
+    ``copy.deepcopy`` on an answer, which is plain data; an object the answer holds twice is copied twice."""
+    t = type(x)
+    if t is dict:
+        return {k: v if type(v) in _ATOMS else detached(v) for k, v in x.items()}
+    if t is list:
+        return [v if type(v) in _ATOMS else detached(v) for v in x]
+    if t in _ATOMS:
+        return x
+    if t is tuple:
+        return tuple(detached(v) for v in x)
+    return copy.deepcopy(x)
 
 
 def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | None = None) -> dict:
@@ -1375,7 +1408,7 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
                 "props": {**x, "value": x, "kind": kind},
                 "_entry": {"record": owner["id"], "path": ptr, "prop": prop, "key": key, "kind": kind, "owner": owner}}
 
-    link_by_id = {e["id"]: e for e in doc["links"]}
+    link_by_id = g.links
     cands = ([m["id"]] if m["id"] in g.nodes else []) if m.get("id") else sorted(g.by_label.get(m["label"], []))
     rows = []
     for nid in cands:
@@ -1640,13 +1673,18 @@ def _run(doc: dict, spec: dict, plan: dict, evidence_index=None, graph: Graph | 
         """The evidence item with its source's derived publication status (and, for a partial retraction
         recorded as a dataset, the retracted dataset that includes its record and comes from its source), its
         source's kind and peer review as recorded, and whether it is second-hand (ECO:0000033)."""
-        item["source_status"] = lifecycle.status_of(life, item.get("source"))
-        why = lifecycle.retracted_by(life, inclusion, item["record"], item.get("source"))
-        if why and item["source_status"] not in lifecycle.RETRACTED:
-            item["retracted_in_dataset"] = why[0]
-        src = g.nodes.get(item.get("source")) or {}
-        item["source_kind"] = (src.get("props") or {}).get("kind") or ("dataset" if src.get("label") == "Dataset" else None)
-        item["source_peer_reviewed"] = (src.get("props") or {}).get("peer_reviewed")
+        key = (item["record"], item.get("source"))          # the same for every item of a record from one source
+        lab = g.source_labels.get(key)
+        if lab is None:
+            lab = {"source_status": lifecycle.status_of(life, item.get("source"))}
+            why = lifecycle.retracted_by(life, inclusion, item["record"], item.get("source"))
+            if why and lab["source_status"] not in lifecycle.RETRACTED:
+                lab["retracted_in_dataset"] = why[0]
+            src = g.nodes.get(item.get("source")) or {}
+            lab["source_kind"] = (src.get("props") or {}).get("kind") or ("dataset" if src.get("label") == "Dataset" else None)
+            lab["source_peer_reviewed"] = (src.get("props") or {}).get("peer_reviewed")
+            g.source_labels[key] = lab
+        item.update(lab)
         if _eco(item.get("evidence_type")) in SECOND_HAND_ECO:
             item["second_hand"] = True
         return item

@@ -320,6 +320,26 @@ def test_a_shared_graph_answers_as_a_fresh_one(doc, spec):
     other = copy.deepcopy(doc)
     other["nodes"] = [n for n in other["nodes"] if n["label"] != "CatalyticTest"]
     assert pgraph_query.run(other, spec, CU_PLAN, None, g)["row_count"] == 0
+    # what a shared Graph keeps between runs (an evidence item's labels) is not changed by changing an answer
+    first = pgraph_query.run(doc, spec, CU_PLAN, ix, g)
+    kept = copy.deepcopy(first)
+    for row in first["rows"]:
+        for ev in row.get("evidence") or []:
+            ev.update(source_status="scrambled", source_kind="scrambled")
+    assert pgraph_query.run(doc, spec, CU_PLAN, ix, g) == kept
+
+
+def test_an_answer_is_detached_as_plain_data():
+    """run's copy of an answer: every dict, list and tuple a new object (tuples stay tuples), strings, numbers and
+    None kept, anything else deep-copied."""
+    inner = {"v": [1, 2.5, None, True, "x"]}
+    obj = {"a": inner, "b": [inner, (inner, "t")], "s": {1, 2}}
+    out = pgraph_query.detached(obj)
+    assert out == obj and type(out["b"][1]) is tuple
+    assert out["a"] is not inner and out["b"][0] is not inner and out["b"][1][0] is not inner
+    assert out["a"]["v"] is not inner["v"] and out["s"] is not obj["s"]
+    out["a"]["v"].append("changed")
+    assert inner["v"] == [1, 2.5, None, True, "x"]
 
 
 def test_a_text_plan_ranks_only_the_evidence_of_the_rows_it_keeps(doc, spec):
