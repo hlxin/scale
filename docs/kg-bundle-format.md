@@ -62,8 +62,8 @@ loads the zip as it is: the first release as a new graph, each later release as 
 it draws the bundle's graph in the browser, with each record's values and evidence, and searches its quotes. It shows
 the bundle; it does not validate it or check its digests (the format's validator does). The page reads the graph a
 record at a time, so a graph larger than the browser holds as one text still opens. One of more than 60,000 records is
-drawn around one source at a time, with the sources most like it, up to as many records as the reader sets; its search
-covers every record.
+drawn a window at a time, as many records as the reader sets, its sources by year or around a source; the windows one
+after the other cover the whole graph, and its search covers every record.
 
 The mapping from scale-catal to the bundle (ids, units, evidence, statements, access) is described in the module
 docstring of `tools/kgbundle.py`, and the export skill (`skills/export-graph/SKILL.md`) says when to choose

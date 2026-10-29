@@ -6,10 +6,11 @@
 // A bundle's graph can be larger than a browser holds as one text (the train split of a dataset can pass 900 MB), so
 // the zip is read from the file a slice at a time and the graph a record at a time as it is decompressed. A graph with
 // more records than the explorer draws at once is kept whole, each record as compact text (UTF-8, outside the
-// script's memory), and drawn around one source at a time: that source and the sources most like it, up to as many
-// records as the reader chooses; search covers every record.
+// script's memory), and drawn a window at a time: the sources in an order (by year, or around a source, those most like
+// it first), as many records as the reader chooses, the windows one after the other covering the whole graph; search
+// covers every record.
 
-export const WHOLE_RECORDS = 60000;    // a larger graph is drawn around one source at a time
+export const WHOLE_RECORDS = 60000;    // a larger graph is drawn a window at a time
 
 // Read a stream to its end, a chunk at a time.
 async function* chunksOf(stream) {
@@ -154,8 +155,8 @@ class Texts {
 
 // The bundle in a zip file, for the explorer: { title, version, doc } (doc: nodes and links, a scale-catal document's
 // shape), or, for a graph of more than WHOLE_RECORDS records, the whole graph to draw around one source at a time:
-// { title, version, records, sources (each { title, year, records }), years, start, around(source, limit),
-// search(query, k), sourceOf(id), mainOf(year) }.
+// { title, version, records, sources (each { title, year, records }), years, start, view(centre, from, width),
+// around(centre, width), startOf(year), search(query, k), sourceOf(id), mainOf(year) }.
 export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS } = {}) {
   const files = await unzip(file);
   const names = [...files.keys()].filter((n) => !n.startsWith("__MACOSX/"));
@@ -206,12 +207,11 @@ export async function readBundle(file, say = () => {}, { whole = WHOLE_RECORDS }
     ...wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, linkText, toDoc }) };
 }
 
-// The whole graph of a large bundle, drawn around one source at a time. A source's records are those it reports;
-// records only one source reports are its own, and what they link to that other sources report too (a species, an
-// instrument, a material) is what sources share. Around a source: that source, then the sources that share the most
-// with it (a thing few sources share counts more; one that most share, like water, not at all), then the sources
-// nearest in year, until the records reach the limit; each source brings its records and what its own records link
-// to, so no link of a drawn source's own records is cut.
+// The whole graph of a large bundle, drawn a window at a time. A source's records are those it reports; records only
+// one source reports are its own, and what they link to that other sources report too (a species, an instrument, a
+// material) is what sources share. Sources like a source are those that share the most with it (a thing few sources
+// share counts more; one that most share, like water, not at all). A window brings each of its sources' records and
+// what their own records link to, so no link of a drawn source's own records is cut.
 function wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, linkText, toDoc }) {
   const n = labels.length, nLinks = reported.length, ids = [...index.keys()];
   const pubOf = new Int32Array(n).fill(-1), more = new Map();
@@ -256,33 +256,61 @@ function wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, link
   const richest = (keep) => { let best = -1; for (let s = 0; s < S; s++) if (keep(s) && (best < 0 || recs[s].length > recs[best].length)) best = s; return best; };
 
   const mask = new Uint8Array(n), linkMark = new Uint8Array(nLinks), score = new Float64Array(S);
-  function around(centre, limit) {
-    // the sources in the order they are drawn: the centre, those sharing the most with it, then the nearest in year
-    for (const u of shared[centre]) {
-      if (df[u] > common) continue;
-      const w = 1 / Math.log2(1 + df[u]);
-      for (let k = postStart[u]; k < postStart[u + 1]; k++) score[post[k]] += w;
-    }
-    score[centre] = Infinity;
-    const y0 = sources[centre].year;
-    const order = Array.from({ length: S }, (_, s) => s).sort((a, b) => score[b] - score[a]
-      || Math.abs((sources[a].year ?? 3000) - (y0 ?? 3000)) - Math.abs((sources[b].year ?? 3000) - (y0 ?? 3000)) || a - b);
-    score.fill(0);
-    const nodes = [], drawn = [];
+  // a source's records, and what its own records link to, added to the records drawn (each once)
+  const addSource = (s, nodes) => {
     const add = (v) => { if (!mask[v]) { mask[v] = 1; nodes.push(v); } };
-    for (const s of order) {
-      const before = nodes.length;
-      add(src[s]);
-      for (const v of recs[s]) {
-        add(v);
-        if (!own(v)) continue;
-        for (let k = start[v]; k < start[v + 1]; k++) { const e = adj[k]; add(ends[2 * e] === v ? ends[2 * e + 1] : ends[2 * e]); }
+    add(src[s]);
+    for (const v of recs[s]) {
+      add(v);
+      if (!own(v)) continue;
+      for (let k = start[v]; k < start[v + 1]; k++) { const e = adj[k]; add(ends[2 * e] === v ? ends[2 * e + 1] : ends[2 * e]); }
+    }
+  };
+  // The sources in an order: by year, the oldest first (centre null), or around a source: it, those sharing the most
+  // with it, then the nearest in year. Each order keeps, for each place, the records drawn up to it, so that a window
+  // of the order is a range of records, and windows one after the other cover the whole graph.
+  const orders = new Map();
+  function orderOf(centre) {
+    const key = centre ?? "year";
+    if (orders.has(key)) return orders.get(key);
+    const year = (s) => sources[s].year ?? 3000, all = Array.from({ length: S }, (_, s) => s);
+    let order;
+    if (centre == null) order = all.sort((a, b) => year(a) - year(b) || a - b);
+    else {
+      for (const u of shared[centre]) {
+        if (df[u] > common) continue;
+        const w = 1 / Math.log2(1 + df[u]);
+        for (let k = postStart[u]; k < postStart[u + 1]; k++) score[post[k]] += w;
       }
-      if (nodes.length > limit && drawn.length) {          // this source would pass the limit: it stays out
+      score[centre] = Infinity;
+      const y0 = year(centre);
+      order = all.sort((a, b) => score[b] - score[a] || Math.abs(year(a) - y0) - Math.abs(year(b) - y0) || a - b);
+      score.fill(0);
+    }
+    const upTo = new Int32Array(S), seen = [];
+    order.forEach((s, k) => { addSource(s, seen); upTo[k] = seen.length; });
+    for (const v of seen) mask[v] = 0;
+    if (orders.size >= 8) orders.clear();
+    const o = { order, upTo };
+    orders.set(key, o);
+    return o;
+  }
+  // The window of an order that starts at record `from` (the source holding it) and holds sources while the records
+  // stay within `width`: its doc, and where it lies ({ from, to, total }, in records of the order).
+  function view(centre, from, width) {
+    const { order, upTo } = orderOf(centre), total = upTo[S - 1];
+    let k0 = 0, hi = S - 1;                              // the first source whose records reach past `from`
+    from = Math.max(0, Math.min(from, total - 1));
+    while (k0 < hi) { const mid = (k0 + hi) >> 1; if (upTo[mid] > from) hi = mid; else k0 = mid + 1; }
+    const nodes = [], drawn = [];
+    for (let k = k0; k < S; k++) {
+      const before = nodes.length;
+      addSource(order[k], nodes);
+      if (nodes.length > width && drawn.length) {       // this source would pass the width: it stays out
         for (const v of nodes.splice(before)) mask[v] = 0;
         break;
       }
-      drawn.push(s);
+      drawn.push(order[k]);
     }
     const links = [];
     for (const v of nodes) for (let k = start[v]; k < start[v + 1]; k++) {
@@ -291,11 +319,15 @@ function wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, link
     }
     for (const v of nodes) mask[v] = 0;
     for (const e of links) linkMark[e] = 0;
-    const c = sources[centre];
-    const doc = toDoc(nodes.map((v) => JSON.parse(texts.get(nodeText[v]))), links.map((e) => JSON.parse(texts.get(linkText[e]))),
-      { around: { source: ids[src[centre]], title: c.title, year: c.year, sources: drawn.length, records: nodes.length } });
-    return { doc, centre, sources: drawn.length, records: nodes.length };
+    const ys = drawn.map((s) => sources[s].year).filter(Boolean), c = centre == null ? null : sources[centre];
+    const where = { order: centre == null ? "year" : "around", from: k0 ? upTo[k0 - 1] : 0, to: upTo[k0 + drawn.length - 1], total,
+      sources: drawn.length, records: nodes.length, years: ys.length ? [Math.min(...ys), Math.max(...ys)] : null,
+      ...(c ? { source: ids[src[centre]], title: c.title, year: c.year } : {}) };
+    const doc = toDoc(nodes.map((v) => JSON.parse(texts.get(nodeText[v]))), links.map((e) => JSON.parse(texts.get(linkText[e]))), { window: where });
+    return { doc, centre, ...where };
   }
+  // where a year's sources begin in the order by year
+  const startOf = (y) => { const { order, upTo } = orderOf(null), k = order.findIndex((s) => (sources[s].year ?? 3000) >= y); return k > 0 ? upTo[k - 1] : 0; };
 
   // A search of every record and link, the terms in any case: each text block is read whole and searched for the
   // first term, each record it is found in checked for the others. A link's match is told as its own record's. The
@@ -345,7 +377,7 @@ function wholeGraph({ labels, ends, reported, pubs, index, texts, nodeText, link
 
   return {
     records: n, sources, years, start: richest(() => true),
-    around, search,
+    view, around: (centre, width) => view(centre, 0, width), startOf, search,
     sourceOf: (id) => { const v = index.get(id); if (v === undefined) return null; const p = pubs.has(v) ? v : pubOf[v]; return p >= 0 ? number.get(p) : null; },
     mainOf: (year) => richest((s) => sources[s].year === year),
   };

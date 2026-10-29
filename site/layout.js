@@ -12,7 +12,7 @@ onmessage = ({ data: m }) => {
   for (let i = 0; i < n; i++) nodes[i] = { x: m.x[i], y: m.y[i] };
   const links = new Array(m.links.length / 2);
   for (let e = 0; e < links.length; e++) links[e] = { source: m.links[2 * e], target: m.links[2 * e + 1] };
-  const sim = d3.forceSimulation(nodes).stop().alpha(m.alpha).alphaDecay(0.08)
+  const sim = d3.forceSimulation(nodes).stop().alpha(m.alpha).alphaDecay(n > 50000 ? 0.1 : 0.08)   // fewer steps for more records
     .force("link", d3.forceLink(links).distance(m.distance).strength(0.7))
     .force("charge", d3.forceManyBody().theta(2).distanceMax(300).strength((d, i) => m.charge - Math.min(m.degree[i], 60) * 8))
     .force("x", d3.forceX(m.cx).strength(0.03))

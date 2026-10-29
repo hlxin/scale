@@ -14,7 +14,7 @@ const NODE_R_MIN = 7, NODE_R_MAX = 40, NODE_R_STEP = 3.3;   // a node's radius f
 const BIG_GRAPH = 400;            // past this, names hide when seen from far (arrowheads stay)
 const HUGE_GRAPH = 1000;          // past this, the layout runs in slices
 const CANVAS_GRAPH = 10000;       // past this, drawn on a canvas and laid out off the page's thread (layout.js)
-const DRAW_DEFAULT = 30000;       // a bundle drawn around a source: how many records, until the reader sets another
+const DRAW_DEFAULT = 30000;       // a bundle's window: how many records, until the reader sets another
 const FAR_ZOOM = 0.6;
 const LABELS_AUTO_MAX = 400;      // relationship names shown by default up to this many links
 const PROVENANCE_KIND = "Source", PROVENANCE_EDGE = "REPORTED_IN";   // hidden until asked for, as the evidence is on each node
@@ -382,7 +382,7 @@ async function showOwn() {
   G.receipt = own.receipt;
   G.contrib = own.receipt ? `<span class="gx-subtle">Checking catal-commons…</span>` : "";
   renderGraphs();
-  if (!own.kept && !own.entry.around) status("This graph is too large to keep in this tab: download it before you sign in or reload.");
+  if (!own.kept && !own.entry.windowed) status("This graph is too large to keep in this tab: download it before you sign in or reload.");
   if (own.receipt) checkContribution();
 }
 // A graph the service just curated, with its receipt, which alone lets it be contributed (only that graph, unchanged,
@@ -453,7 +453,7 @@ async function start() {
         status("Reading the bundle…");
         const b = await readBundle(f, status);
         const id = `bundle-${base.replace(/\W+/g, "-")}`, title = b.version ? `${b.title} (v${b.version})` : b.title;
-        if (b.around) { bundle = { b, id, title, limit: DRAW_DEFAULT }; await drawAround(b.start); }
+        if (b.view) { bundle = { b, id, title, width: DRAW_DEFAULT, centre: null, from: 0 }; await drawWindow({ centre: null, from: 0 }); }
         else await openOwn({ id, title, from: "" }, JSON.stringify(b.doc), null, b.doc);
       } else await openOwn({ id: `file-${base.replace(/\W+/g, "-")}`, title: base, from: "" }, await f.text());
     } catch (err) { status(ready()); alert(`Not a graph or a graph bundle: ${err.message}`); }
@@ -477,7 +477,7 @@ function renderGraphs() {
   wireContrib();
   const gs = $("graph-show");
   if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
-  wireAround();
+  wireWindow();
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
   $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = (ev) => {
@@ -501,8 +501,8 @@ function details() {
     g.version ? ["Release", esc(g.version)] : null,
     ["Visibility", e.from === "service" ? "Private to you, until you contribute it" : esc(((g.stewardship || {}).access || "public").replace(/^./, (c) => c.toUpperCase()))],
     g.created || g.date ? ["Created", esc(g.created || g.date)] : null,
-    e.around ? null : ["Checksum", B.sha ? `<span class="gx-sha" title="sha256 ${esc(B.sha)}">${esc(B.sha.slice(0, 12))}…</span>` : "…"],
-    ...aroundRows(e),
+    e.windowed ? null : ["Checksum", B.sha ? `<span class="gx-sha" title="sha256 ${esc(B.sha)}">${esc(B.sha.slice(0, 12))}…</span>` : "…"],
+    ...windowRows(e),
     ["Source", e.from === "service" ? "curated by the service just now" : e.from ? `<a href="https://github.com/hlxin/scale/tree/main/${esc(e.from)}">${esc(e.from)}</a>` : "a file on this computer"],
     ["Schema", `<a href="#" id="schema-toggle" title="${G.base ? "Back to the graph" : "Show the schema on the canvas"}">${esc(g.schema || "scale-catal")} v${esc(g.schema_version || "?")}</a>${G.base ? ` <span class="gx-subtle">(shown)</span>` : ""}<br>
       ${B.labels.size} labels · ${B.rels.size} rel types · ${schemaPropCount(B).toLocaleString()} props`],
@@ -512,41 +512,51 @@ function details() {
     + (e.from === "service" ? `<div class="gx-contrib" id="contrib-box">${B.contrib || ""}</div>` : "") + `</div>`;
 }
 
-// A bundle with more records than the explorer draws at once is drawn around one source at a time (bundle.js): that
-// source and the sources most like it, up to as many records as the reader sets (the draw distance). The reader moves
-// by searching the whole bundle, by double-clicking a record (drawn around its source), or by a year.
-let bundle = null;                                 // { b, id, title, limit, centre, drawn }
-async function drawAround(centre, focus = null) {
-  const { b } = bundle, c = b.sources[centre];
-  status(`Drawing around “${trunc(c.title, 60)}”…`);
+// A bundle with more records than the explorer draws at once is drawn a window at a time (bundle.js): its sources in
+// an order (by year, the oldest first; or around a source, those most like it first) and as many records as the
+// reader sets (the width). The arrows step from one window to the next, so that the windows cover the whole graph; a
+// double-click on a record, or a search match not drawn, draws around its source; a year jumps in the order by year.
+let bundle = null;                                 // { b, id, title, width, centre, from, drawn }
+async function drawWindow({ centre = bundle.centre, from = 0, focus = null } = {}) {
+  const { b } = bundle;
+  status(centre == null ? `Drawing records from ${from.toLocaleString()} on…` : `Drawing around “${trunc(b.sources[centre].title, 60)}”…`);
   await new Promise((r) => setTimeout(r, 30));       // the status shows before the work
-  const w = b.around(centre, bundle.limit);
-  Object.assign(bundle, { centre, drawn: w });
-  await openOwn({ id: bundle.id, title: bundle.title, from: "", around: true }, null, null, w.doc);
-  status(`${w.records.toLocaleString()} of ${b.records.toLocaleString()} records drawn. Search covers them all.`);
+  const w = b.view(centre, from, bundle.width);
+  Object.assign(bundle, { centre, from: w.from, drawn: w });
+  await openOwn({ id: bundle.id, title: bundle.title, from: "", windowed: true }, null, null, w.doc);
+  status(`Records ${w.from.toLocaleString()}–${w.to.toLocaleString()} of ${w.total.toLocaleString()} drawn. Search covers them all.`);
   if (focus && G.byId.has(focus)) goTo(focus);
 }
-function aroundRows(e) {
-  if (!e.around || bundle?.id !== e.id || !bundle.drawn) return [];
-  const { b, drawn, centre, limit } = bundle, c = b.sources[centre];
+function windowRows(e) {
+  if (!e.windowed || bundle?.id !== e.id || !bundle.drawn) return [];
+  const { b, drawn: w, width } = bundle, span = w.years ? ` · ${w.years[0] === w.years[1] ? w.years[0] : `${w.years[0]}–${w.years[1]}`}` : "";
   return [
-    ["Drawn", `${drawn.records.toLocaleString()} of ${b.records.toLocaleString()} records, from ${drawn.sources.toLocaleString()} of
-      ${b.sources.length.toLocaleString()} sources, around <a href="#" id="around-centre" title="${esc(c.title)}">${esc(trunc(c.title, 48))}</a>${c.year ? ` (${c.year})` : ""}
-      and the sources most like it`],
-    ["Draw distance", `<input type="range" class="gx-range" id="draw-limit" min="5000" max="80000" step="5000" value="${limit}"
-      aria-label="Records drawn at once"><span id="draw-limit-n">${limit.toLocaleString()}</span> records`],
-    ["Go to", `<select class="gx-select" id="draw-year" aria-label="Draw around the largest source of a year"><option value="">a year…</option>${
+    ["Order", w.order === "year" ? "Sources by year, the oldest first"
+      : `Around <a href="#" id="window-centre" title="${esc(w.title)}">${esc(trunc(w.title, 44))}</a>${w.year ? ` (${w.year})` : ""}, the sources most
+        like it first · <a href="#" id="window-by-year">by year</a>`],
+    ["Window", `<div class="gx-window"><button type="button" class="gx-btn gx-btn-tiny" id="window-prev" title="The window before"${w.from ? "" : " disabled"}>◀</button>
+      <span>records ${w.from.toLocaleString()}–${w.to.toLocaleString()} of ${w.total.toLocaleString()}${span}</span>
+      <button type="button" class="gx-btn gx-btn-tiny" id="window-next" title="The window after"${w.to < w.total ? "" : " disabled"}>▶</button></div>
+      <input type="range" class="gx-range" id="window-from" min="0" max="${w.total - 1}" step="1000" value="${w.from}" aria-label="Where the window starts">
+      <span class="gx-subtle">${w.sources.toLocaleString()} sources; ${w.records.toLocaleString()} records drawn with what they link to</span>`],
+    ["Width", `<input type="range" class="gx-range" id="window-width" min="5000" max="80000" step="5000" value="${width}"
+      aria-label="Records drawn at once"><span id="window-width-n">${width.toLocaleString()}</span> records at once`],
+    ["Go to", `<select class="gx-select" id="window-year" aria-label="Where a year's sources begin, in the order by year"><option value="">a year…</option>${
       b.years.map((y) => `<option value="${y}">${y}</option>`).join("")}</select>`],
   ];
 }
-function wireAround() {
-  const r = $("draw-limit"), y = $("draw-year"), c = $("around-centre");
-  if (r) {
-    r.oninput = () => { $("draw-limit-n").textContent = Number(r.value).toLocaleString(); };
-    r.onchange = () => { bundle.limit = Number(r.value); drawAround(bundle.centre); };
-  }
-  if (y) y.onchange = () => { if (y.value) drawAround(bundle.b.mainOf(Number(y.value))); };
-  if (c) c.onclick = (ev) => { ev.preventDefault(); goTo(bundle.drawn.doc.graph.around.source); };
+function wireWindow() {
+  if (!$("window-from") || !bundle?.drawn) return;
+  const w = bundle.drawn, go = (from) => drawWindow({ from });
+  $("window-prev").onclick = () => go(Math.max(0, w.from - bundle.width));
+  $("window-next").onclick = () => go(w.to);
+  const f = $("window-from"), r = $("window-width"), y = $("window-year");
+  f.onchange = () => go(Number(f.value));
+  r.oninput = () => { $("window-width-n").textContent = Number(r.value).toLocaleString(); };
+  r.onchange = () => { bundle.width = Number(r.value); go(w.from); };
+  y.onchange = () => { if (y.value) drawWindow({ centre: null, from: bundle.b.startOf(Number(y.value)) }); };
+  $("window-centre")?.addEventListener("click", (ev) => { ev.preventDefault(); goTo(w.source); });
+  $("window-by-year")?.addEventListener("click", (ev) => { ev.preventDefault(); drawWindow({ centre: null, from: 0 }); });
 }
 // The bundle is searched whole: a record not drawn is drawn around its own source when chosen.
 async function searchBundle(q) {
@@ -567,7 +577,7 @@ async function searchBundle(q) {
     + `<p class="gx-meta">Searched every record of the bundle (${ms.toLocaleString()} ms).</p>`);
   $("card-body").querySelectorAll(".gx-hit").forEach((el) => (el.onclick = () => {
     const id = el.dataset.id, s = el.dataset.source;
-    if (G.byId.has(id)) goTo(id); else if (s !== "") drawAround(Number(s), id);
+    if (G.byId.has(id)) goTo(id); else if (s !== "") drawWindow({ centre: Number(s), from: 0, focus: id });
   }));
 }
 
@@ -577,8 +587,8 @@ async function searchBundle(q) {
 const layout = { worker: null, run: 0, running: false };
 const HINT = document.querySelector(".gx-hint").textContent;
 function hint() {
-  document.querySelector(".gx-hint").textContent = !S.big ? HINT : G?.entry.around
-    ? "Drawn around one source and the ones most like it · scroll to zoom · click a record for its details · double-click one to draw around its source · search covers the whole bundle"
+  document.querySelector(".gx-hint").textContent = !S.big ? HINT : G?.entry.windowed
+    ? "A window of the bundle: its card's arrows step through the whole graph · click a record for its details · double-click one to draw around its source · search covers every record"
     : "A large graph, drawn on a canvas · scroll to zoom · click a record for its details · double-click one to expand its neighbourhood";
 }
 function drawCanvas() {
@@ -686,6 +696,7 @@ function paint() {
   if (m) for (const d of S.nodes) if (m.has(d.id)) { ctx.fillStyle = colourForKind(d.label); ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 2 * Math.PI); ctx.fill(); ring(d, 1.5); }
   const sel = S.selected && S.at.get(S.selected);
   if (sel) ring(sel, 3);
+  snapshot(c, t);
   if (t.k >= FAR_ZOOM) {                             // near enough, the names of the records in view
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.font = "11px system-ui, sans-serif";
@@ -698,6 +709,28 @@ function paint() {
       if (++shown >= 600) break;
     }
   }
+}
+// While the view moves, a large graph's last picture moves with it, scaled and shifted at once; the graph is drawn anew
+// when the view stops. (The names, drawn on top, come back with that new picture.)
+const SNAP_GRAPH = 20000;
+function snapshot(c, t) {
+  if (S.nodes.length < SNAP_GRAPH) { S.snapAt = null; return; }
+  S.snap ||= document.createElement("canvas");
+  if (S.snap.width !== c.width || S.snap.height !== c.height) { S.snap.width = c.width; S.snap.height = c.height; }
+  const ctx = S.snap.getContext("2d");
+  ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, c.width, c.height); ctx.drawImage(c, 0, 0);
+  S.snapAt = { k: t.k, x: t.x, y: t.y };
+}
+function moved() {
+  if (!S.snapAt) { S.draw(); return; }
+  if (!S.quick) S.quick = requestAnimationFrame(() => {
+    S.quick = 0;
+    const c = $("gx-canvas"), ctx = c.getContext("2d"), t = d3.zoomTransform(svg.node()), a = S.snapAt, k = t.k / a.k, dpr = window.devicePixelRatio || 1;
+    ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, c.width, c.height);
+    ctx.drawImage(S.snap, dpr * (t.x - a.x * k), dpr * (t.y - a.y * k), S.snap.width * k, S.snap.height * k);
+  });
+  clearTimeout(S.still);
+  S.still = setTimeout(() => S.draw(), 160);
 }
 // the record under the pointer, if any
 function hit(ev) {
@@ -908,7 +941,7 @@ function draw() {
   if (!S.zoom) {
     S.zoom = d3.zoom().scaleExtent([0.05, 4]).on("zoom", (ev) => {
       zoomLayer.attr("transform", ev.transform);
-      if (S.big) S.draw();
+      if (S.big) moved();
       if (ev.sourceEvent) S.viewMoved = true;
       syncFar(ev.transform.k);
     });
@@ -1182,9 +1215,9 @@ function goTo(id) {
   setTimeout(() => { if (n && Number.isFinite(n.x)) { S.viewMoved = true; svg.transition().duration(450).call(S.zoom.translateTo, n.x, n.y); } }, S.sim && S.sim.alpha() > 0.1 ? 900 : 0);
 }
 function expand(id) {
-  if (G.entry.around && bundle?.drawn) {             // a bundle drawn around a source: draw around this record's source
+  if (G.entry.windowed && bundle?.drawn) {           // a bundle's window: draw around this record's source
     const s = bundle.b.sourceOf(id);
-    if (s != null && s !== bundle.centre) { drawAround(s, id); return; }
+    if (s != null && !(s === bundle.centre && bundle.from === 0)) { drawWindow({ centre: s, from: 0, focus: id }); return; }
   }
   const near = [...(G.out.get(id) || []), ...(G.inn.get(id) || [])].slice(0, 50);
   for (const e of near) for (const n of [e.source, e.target]) { S.hidden.delete(n); S.extra.add(n); }
@@ -1260,7 +1293,7 @@ $("card-close").onclick = () => { $("card").hidden = true; S.match = null; markM
 $("card-collapse").onclick = () => $("card").classList.toggle("collapsed");
 
 async function search(q) {
-  if (G?.entry.around && bundle?.drawn) return searchBundle(q);
+  if (G?.entry.windowed && bundle?.drawn) return searchBundle(q);
   leaveSchema();
   card("Matching evidence", `<p class="gx-meta">Searching…</p>`);
   try {
