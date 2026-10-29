@@ -10,6 +10,9 @@ Runs for days. Start it in the background with the keep-alive wrapper:
   nohup zsh .../scripts/run_paywalled.sh <project> > /dev/null 2>&1 &
 or directly (foreground, e.g. to test a few sources):
   python3 -I download_paywalled.py [--topic <slug>] [--max-sources 3] [--exit-when-empty] [--no-si]
+                                   [--access OA,OA+ND] [--skip-publishers iop] [--dry-run]
+--access keeps only sources of those access types (and their SI): OA,OA+ND = open licences only (CC BY, CC BY-NC,
+CC BY-ND, CC BY-NC-ND ...), the rest stays queued. --dry-run prints the queue per publisher and contacts nothing.
 Requires ~/.scale/sources/ezproxy/config.json written by check_paywalled_access.py (enabled + verified).
 """
 import argparse
@@ -25,7 +28,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _ezlimit as EZL
 import _ezproxy as EZ
-from _common import Project, add_project_arg, json_read, jsonl_append, jsonl_iter, log, now_iso, user_agent, set_contact
+from _common import (ACCESS_TYPES, Project, add_project_arg, json_read, jsonl_append, jsonl_iter, log, now_iso,
+                     user_agent, set_contact)
 from _download import clone_or_copy, ez_publisher
 from _corpus import add_corpus_arg, scope
 from _ledger import Ledger
@@ -38,15 +42,17 @@ NOTE = {"not_subscribed": "EZproxy: not covered by the institution's subscriptio
         "no_pdf_link": "EZproxy: no PDF link on the publisher page"}
 
 
-def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None):
-    """{publisher: [(priority, kind, source)]} — PDFs first, then SI. Publishers in `skip` are never contacted."""
+def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None, access=frozenset()):
+    """{publisher: [(priority, kind, source)]} — PDFs first, then SI. Publishers in `skip` are never contacted; with
+    `access`, only sources of those access types (and their SI) are queued."""
     where = "WHERE p.downloaded = 0 AND p.dl_status = 'queued_paywalled'"
     args = ()
     if topic:
         where += " AND p.id IN (SELECT source_id FROM source_topics WHERE topic = ?)"
         args = (topic,)
+    only = f" AND p.access_type IN ({','.join('?' * len(access))})" if access else ""
     q = defaultdict(list)
-    for r in led.q(f"SELECT p.* FROM sources p {where}", args):
+    for r in led.q(f"SELECT p.* FROM sources p {where}{only}", args + tuple(sorted(access))):
         p = led.row(r)
         pub = ez_publisher(p.get("doi"))
         if ids is not None and p["id"] not in ids:
@@ -57,7 +63,8 @@ def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None):
         rel = max([t["relevance"] for t in ts if t.get("relevance") is not None] or [3])
         q[pub].append(((-rel, -(p.get("cited_by") or 0)), "pdf", p))
     if with_si:
-        for r in led.q("SELECT p.* FROM sources p WHERE p.downloaded = 1 AND p.si_status = 'queued_paywalled'"):
+        for r in led.q(f"SELECT p.* FROM sources p WHERE p.downloaded = 1 AND p.si_status = 'queued_paywalled'{only}",
+                       tuple(sorted(access))):
             p = led.row(r)
             pub = ez_publisher(p.get("doi"))
             if ids is not None and p["id"] not in ids:
@@ -69,6 +76,15 @@ def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None):
     return q
 
 
+def retry_counts(proj):
+    """Failed tries so far per source (and per source's SI), from the outcomes log."""
+    tries = Counter()
+    for r in jsonl_iter(proj.ez / "outcomes.jsonl"):
+        if r.get("outcome") in EZ.RETRYABLE:
+            tries[(r.get("kind") == "si" and ("si", r["id"])) or r["id"]] += 1
+    return tries
+
+
 def main():
     ap = add_project_arg(argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter))
     add_corpus_arg(ap)                    # neither: the queue of every topic
@@ -78,9 +94,23 @@ def main():
     ap.add_argument("--skip-publishers", default="",
                     help="comma list of publisher keys never contacted, PDFs and SI (e.g. sage,annualreviews: they ask for "
                          "a login through the proxy; iop after a block page)")
+    ap.add_argument("--access", default="",
+                    help="comma list of access types to fetch, e.g. OA,OA+ND (open licences only); default: every queued source")
+    ap.add_argument("--dry-run", action="store_true", help="print the queue per publisher and stop, contacting nothing")
     a = ap.parse_args()
+    access = frozenset(x.strip() for x in a.access.split(",") if x.strip())
+    if access - set(ACCESS_TYPES):
+        print(json.dumps({"error": f"unknown access type(s) {sorted(access - set(ACCESS_TYPES))}; known: {ACCESS_TYPES}"}))
+        return 2
+    skip = frozenset(x.strip().lower() for x in a.skip_publishers.split(",") if x.strip())
     proj = Project(a.project)
     a.topic, ids = scope(a)
+    if a.dry_run:
+        q = queues(proj, Ledger(proj), a.topic, not a.no_si, retry_counts(proj), skip, ids, access)
+        n = Counter(kind for v in q.values() for _, kind, _ in v)
+        print(json.dumps({"queue": {p: len(v) for p, v in sorted(q.items()) if v}, "pdfs": n["pdf"], "si": n["si"],
+                          "access": sorted(access) or "all", "skipped_publishers": sorted(skip)}))
+        return 0
     proj.ezg.mkdir(parents=True, exist_ok=True)
     ez = json_read(proj.ezg / "config.json", {}) or {}
     if not (ez.get("enabled") and ez.get("host") and ez.get("verified_at")):
@@ -104,20 +134,17 @@ def main():
     sess = requests.Session()
     sess.headers.update({"User-Agent": user_agent()})
     done_log = proj.ez / "outcomes.jsonl"
-    tries = Counter()
-    for r in jsonl_iter(done_log):
-        if r.get("outcome") in EZ.RETRYABLE:
-            tries[(r.get("kind") == "si" and ("si", r["id"])) or r["id"]] += 1
-    skip = frozenset(x.strip().lower() for x in a.skip_publishers.split(",") if x.strip())
-    q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids)
+    tries = retry_counts(proj)
+    q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids, access)
     reloaded = time.time()
     log(f"EZproxy via {host}: queue " + ", ".join(f"{p}={len(v)}" for p, v in sorted(q.items())) + f" | limits={EZL.LIMITS}"
-        + (f" | skipped publishers: {','.join(sorted(skip))}" if skip else ""))
+        + (f" | skipped publishers: {','.join(sorted(skip))}" if skip else "")
+        + (f" | access: {','.join(sorted(access))}" if access else ""))
     unsupported, rr_order, handled, since_export = set(), [], 0, 0
     try:
         while True:
             if time.time() - reloaded > 1800:
-                q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids)
+                q = queues(proj, led, a.topic, not a.no_si, tries, skip, ids, access)
                 for p in unsupported:
                     q.pop(p, None)
                 reloaded = time.time()

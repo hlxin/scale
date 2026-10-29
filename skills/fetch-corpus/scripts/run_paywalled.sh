@@ -17,7 +17,7 @@ while true; do
   if python3 -I -c "import json,sys; sys.exit(0 if (json.load(open(sys.argv[1])).get('hard_stop')) else 1)" "$G/limiter_state.json" 2>/dev/null; then
     echo "[$(date +%T)] runner: HARD STOP in effect — not restarting" >> $L; exit 0
   fi
-  if [[ $rc -eq 3 || $rc -eq 4 ]]; then echo "[$(date +%T)] runner: exit $rc (not set up / already running) — not restarting" >> $L; exit $rc; fi
+  if [[ $rc -eq 2 || $rc -eq 3 || $rc -eq 4 ]]; then echo "[$(date +%T)] runner: exit $rc (bad arguments / not set up / already running) — not restarting" >> $L; exit $rc; fi
   [[ $(date +%F) != $day ]] && { day=$(date +%F); restarts=0; }
   restarts=$((restarts+1))
   if (( restarts > 20 )); then echo "[$(date +%T)] runner: >20 restarts today — giving up" >> $L; exit 1; fi

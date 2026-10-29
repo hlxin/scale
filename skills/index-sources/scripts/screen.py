@@ -385,16 +385,19 @@ class _Term:
 
 
 class KeywordScorer:
-    """keywords.json -> relevance 0-5 and a short note per source; a topic of millions of sources is scored in minutes."""
+    """keywords.json -> relevance 0-5 and a short note per source; a topic of millions of sources is scored in minutes.
+    A source that names no include term but meets a rescue rule of the topic gate (a catalytic reaction in its title,
+    a catalysis journal: _common.Gate.rescue) scores 4, with that reason as its note."""
 
-    def __init__(self, kw):
+    def __init__(self, kw, gate=None):
+        self.gate = gate if gate is not None and (gate.title_any or gate.journal_any) else None
         raw_groups = [g for g in kw.get("include_groups") or [] if g]
         self.groups = [[_Term(rx, raw) for rx, raw in zip(_compile_terms(g), g)] for g in raw_groups]
         self.terms = raw_groups
         ex = kw.get("exclude") or []
         self.excl = [_Term(rx, raw) for rx, raw in zip(_compile_terms(ex), ex)]
 
-    def score(self, title, abstract):
+    def score(self, title, abstract, journal=None):
         title, abstract = unify_dashes(title or ""), unify_dashes(abstract or "")
         both = f"{title} . {abstract}"
         low_t, low_a, low_b = title.casefold(), abstract.casefold(), both.casefold()
@@ -410,6 +413,9 @@ class KeywordScorer:
             s = 2
         else:
             s = 0
+        rescued = self.gate.rescue(title, journal) if s == 0 and self.gate else None
+        if rescued:
+            s = 4
         ex_t = [t.raw for t in self.excl if t.found(title, low_t)]
         ex_a = [t.raw for t in self.excl if t.found(abstract, low_a)]
         if ex_t:
@@ -423,7 +429,9 @@ class KeywordScorer:
         if missing:
             parts.append("no mention of " + " / ".join("(" + ", ".join(_show(t) for t in terms[:3]) + ")"
                                                        for terms in missing))
-        if parts:
+        if rescued and not (ex_t or ex_a):
+            note = f"rescued by the topic gate ({rescued})"
+        elif parts:
             note = "; ".join(parts)
         else:
             hits = sorted({t.raw for g in self.groups for t in g if t.found(both, low_b)})
@@ -446,7 +454,7 @@ def run_keywords(proj, slug, cfg, led, export=True):
     kw = json_read(proj.topic_dir(slug) / "keywords.json")
     if not kw:
         die(f"missing .scripts/{slug}/keywords.json (format: references/screening.md)")
-    sc = KeywordScorer(kw)
+    sc = KeywordScorer(kw, Gate(cfg.get("gate")))
     thr = int(kw.get("threshold", threshold(cfg)))
     if not sc.groups:
         die("keywords.json needs at least one include group")
@@ -455,7 +463,7 @@ def run_keywords(proj, slug, cfg, led, export=True):
     for rows in led.iter_topic(slug, f"AND p.is_erratum = 0 AND {NOT_MANUAL}", chunk=BLOCK):   # notices: never scored
         with led.tx():
             for r in rows:
-                s, note = sc.score(r.get("title"), r.get("abstract"))
+                s, note = sc.score(r.get("title"), r.get("abstract"), r.get("journal"))
                 led.set_topic(r["id"], slug, relevance=s, relevance_note=note, relevance_method="keywords",
                               in_scope=int(s >= thr))
                 cnt[s] += 1

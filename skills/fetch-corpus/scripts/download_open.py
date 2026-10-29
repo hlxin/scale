@@ -11,6 +11,10 @@ software are indexed only (never downloaded); US patents come from the USPTO ima
 
 usage:
   python3 -I download_open.py --topic <slug> [--max N] [--workers 10] [--retry-failed] [--added-since YYYY-MM-DD]
+                              [--access OA,OA+ND] [--ids FILE]
+--access (default: the topic's config) and --ids (one source ID per line) narrow a run without touching the rest: a
+source outside them keeps the status it has (queued for the EZproxy runner, failed ...); only one never tried yet is
+marked as of an access type not selected.
 Long runs: nohup python3 -I .../download_open.py --topic <slug> > .scripts/<slug>/download_open.log 2>&1 &
 """
 import argparse
@@ -25,8 +29,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
 import _mdpi as MDPI
-from _common import (ACCESS_TYPES, NOT_DOWNLOADED_TYPES, Project, access_rank, add_project_arg, host_of, json_read,
-                     load_config, log, now_iso, update_state)
+from _common import (ACCESS_TYPES, NOT_DOWNLOADED_TYPES, Project, access_rank, add_project_arg, die, host_of,
+                     json_read, load_config, log, now_iso, update_state)
 from _download import (NOT_PROXYABLE, arxiv_pdf, attempt, ez_publisher, fetch, file_pdf, is_blocked, link_existing,
                        load_blocked, pdf_links_from_html, publisher_pdf_patterns)
 from _corpus import add_corpus_arg, scope
@@ -155,12 +159,21 @@ def main():
     ap.add_argument("--added-since", default=None, help="YYYY-MM-DD or YYYY-MM-DDTHH:MM:SSZ: only sources that entered this "
                                                          "topic at/after that time (update mode: download just the new "
                                                          "sources; build_list.py prints the run's start time)")
+    ap.add_argument("--ids", default=None, help="file of source IDs, one per line: try only these (the others are left "
+                                                "as they are)")
     a = ap.parse_args()
     proj = Project(a.project)
     a.topic, ids = scope(a, topic_required=True)
+    if a.ids:                                      # narrows the corpus (or the topic) further
+        if not Path(a.ids).is_file():
+            die(f"no file {a.ids}")
+        only = {int(x) for x in Path(a.ids).read_text().split() if x.strip().isdigit()}
+        ids = only if ids is None else ids & only
     cfg = load_config(proj, a.topic)
     selected = ({x.strip() for x in a.access.split(",") if x.strip()} if a.access else
                 set((cfg.get("download") or {}).get("access_types") or ["OA", "OA+ND", "Free-to-read"]))
+    if a.access and selected - set(ACCESS_TYPES):
+        die(f"unknown access type(s) {sorted(selected - set(ACCESS_TYPES))}; known: {ACCESS_TYPES}")
     ez_ok = paywalled_ready(proj)                  # EZproxy is a route for walled open copies of any selected type
     pw = ez_ok and "Paywalled" in selected         # ... and the only route for Paywalled sources
     load_blocked(proj)
@@ -178,13 +191,15 @@ def main():
         with led.tx():
             for p in rows:
                 if ids is not None and p["id"] not in ids:
-                    continue                                  # not in the corpus
+                    continue                                  # not in the corpus (or --ids)
                 acc = p.get("access_type")
                 if (p.get("doc_type") or "") in NOT_DOWNLOADED_TYPES:
                     skipped["dataset_or_software"] += 1      # indexed only, never downloaded
                     continue
                 if acc not in selected:
-                    if p.get("dl_status") != "not_selected":
+                    # the topic's selection decides for every source; a narrower --access leaves a status of its own
+                    # alone (an OA-only run never takes sources out of the EZproxy runner's queue)
+                    if p.get("dl_status") != "not_selected" and not (a.access and p.get("dl_status")):
                         led.set(p["id"], dl_status="not_selected", dl_note=f"{acc or 'Unknown access'} — type not selected for download")
                     skipped["not_selected"] += 1
                     continue

@@ -74,7 +74,8 @@ def mark_challenge(host):
         if _challenges[host] >= 2 and host not in _blocked:
             _blocked.add(host)
             log(f"host {host} now treated as bot-walled for open routes")
-            if _blocked_file["path"]:
+            if _blocked_file["path"]:                # keep what other runs listed meanwhile
+                _blocked.update((json_read(_blocked_file["path"], {}) or {}).get("blocked", []))
                 json_write_atomic(_blocked_file["path"], {"blocked": sorted(_blocked), "updated_at": now_iso()})
 
 
@@ -287,9 +288,15 @@ def file_pdf(proj, led, paper, entry, tmp, method, final_url=None):
     tm = C.title_match(paper.get("title"), first)
     thr = 0.5 if entry.get("version") in ("submittedVersion", "acceptedVersion") else 0.55
     if tm is not None and tm < thr:
-        dst = rej / f"{paper['id']}_{uuid.uuid4().hex[:8]}.pdf"
-        Path(tmp).replace(dst)
-        return "wrong_paper", f"title_match={tm:.2f} kept at {proj.rel(dst)}"
+        alt = C.poppler_text(tmp)                 # a second reader: some fonts defeat the first one
+        tm = max(tm, C.title_match(paper.get("title"), alt) or 0.0)
+        first = f"{first}\n{alt}"
+        # the source's own DOI printed in it also proves it (3+ pages: a short correction notice prints it too)
+        if tm < thr and not (pages >= 3 and C.doi_printed(paper.get("doi"), first)):
+            dst = rej / f"{paper['id']}_{uuid.uuid4().hex[:8]}.pdf"
+            Path(tmp).replace(dst)
+            why = f"title_match={tm:.2f}" if first.strip() else "no text layer (pages are images): title not checked"
+            return "wrong_paper", f"{why} kept at {proj.rel(dst)}"
     return _file_checked(proj, led, paper, entry, tmp, pages, final_url, method, decide_access(entry, first, last))
 
 

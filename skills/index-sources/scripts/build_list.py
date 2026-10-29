@@ -14,7 +14,8 @@ usage: python3 -I build_list.py --topic <slug> [--run since-2026-09-01] [--batch
 --run limits the input to one search run (update mode on a big topic: only the new raw hits are read; DOIs already in
 the ledger are matched, title-level duplicates across runs are caught by dedup.py).
 --batches N splits the raw files into N groups processed one after another in this process (several million raw hits
-would not fit in memory at once); the index CSVs and index.db are written once at the end. --no-export skips that
+would not fit in memory at once; a plain .jsonl file larger than a group, e.g. one OpenAlex run of millions of records,
+is cut into byte ranges at line breaks); the index CSVs and index.db are written once at the end. --no-export skips that
 final refresh (run export.py later). --si-links-only re-reads the raw hits only to link SI deposits to their sources.
 """
 import argparse
@@ -305,21 +306,56 @@ def dedup(recs):
                     "nodoi_groups": len(fb), "keyed_groups": len(by_key)}
 
 
+def _part_size(part):
+    return part[2] - part[1] if isinstance(part, tuple) else part.stat().st_size
+
+
 def split_files(files, n):
-    """n groups of consecutive raw files with about the same total size (a file goes where its middle falls)."""
-    if n <= 1 or len(files) <= 1:
+    """n groups of consecutive raw files with about the same total size (a file goes where its middle falls); a plain
+    .jsonl file larger than one and a half groups is first cut into byte ranges (path, start, end) of about a group each,
+    read by iter_part."""
+    if n <= 1:
         return [files]
-    n = min(n, len(files))
     total = sum(f.stat().st_size for f in files) or 1
-    groups, cur, acc = [], [], 0
+    parts = []
     for f in files:
         size = f.stat().st_size
+        k = int(size // (total / n)) if f.suffix == ".jsonl" and size > 1.5 * total / n else 1
+        parts += [(f, size * i // k, size * (i + 1) // k) for i in range(k)] if k > 1 else [f]
+    if len(parts) <= 1:
+        return [parts]
+    n = min(n, len(parts))
+    groups, cur, acc = [], [], 0
+    for part in parts:
+        size = _part_size(part)
         if cur and len(groups) < n - 1 and acc + size / 2 > total * (len(groups) + 1) / n:
             groups.append(cur)
             cur = []
-        cur.append(f)
+        cur.append(part)
         acc += size
     return groups + ([cur] if cur else [])
+
+
+def iter_part(part):
+    """The records of a raw file, or of a byte range of one: a range owns every line that starts inside it (it skips
+    the line crossing its start, which the range before owns, and finishes the one crossing its end)."""
+    if not isinstance(part, tuple):
+        yield from jsonl_iter(part)
+        return
+    path, start, end = part
+    with open(path, "rb") as fh:
+        if start:
+            fh.seek(start - 1)
+            fh.readline()
+        while fh.tell() < end:
+            line = fh.readline()
+            if not line:
+                return
+            if line.strip():
+                try:
+                    yield json.loads(line)
+                except json.JSONDecodeError:
+                    continue      # a torn final line after a crash
 
 
 def merge_hints(hp, hints, partial):
@@ -345,13 +381,13 @@ def merge_hints(hp, hints, partial):
 def build_batch(proj, led, topic, gate, year_from, files, vocab):
     recs, si_recs, n_raw, n_off, n_si, n_old = [], [], 0, 0, 0, 0
     for f in files:
-        for r in jsonl_iter(f):
+        for r in iter_part(f):
             n_raw += 1
             if is_si_deposit(r):
                 n_si += 1
                 si_recs.append(r)
                 continue
-            if r.get("source") != "manual" and not gate.passes(r.get("title"), r.get("abstract")):
+            if r.get("source") != "manual" and not gate.passes(r.get("title"), r.get("abstract"), r.get("journal")):
                 n_off += 1
                 continue
             y = str(r.get("year") or "")[:4]
@@ -427,7 +463,8 @@ def main():
     gate = Gate(cfg.get("gate"))
     year_from = (cfg.get("search") or {}).get("year_from")
     raw_dir = proj.topic_dir(a.topic) / "raw"
-    files = sorted(f for r in a.run for f in (raw_dir / r).glob("*.jsonl")) if a.run else sorted(raw_dir.rglob("*.jsonl"))
+    files = (sorted(f for r in a.run for pat in ("*.jsonl", "*.jsonl.gz") for f in (raw_dir / r).glob(pat)) if a.run
+             else sorted([*raw_dir.rglob("*.jsonl"), *raw_dir.rglob("*.jsonl.gz")]))      # raw hits may be kept compressed
     led = Ledger(proj)
     if a.si_links_only:
         n_si = n_links = 0
@@ -456,7 +493,7 @@ def main():
     totals, created_all = Counter(), []
     for i, g in enumerate(groups, 1):
         if len(groups) > 1:
-            log(f"batch {i}/{len(groups)}: {len(g)} raw files")
+            log(f"batch {i}/{len(groups)}: {len(g)} raw files or file ranges")
         st, hints, created_ids = build_batch(proj, led, a.topic, gate, year_from, g, vocab)
         merge_hints(hp, hints, partial=bool(a.run) or i > 1)
         totals.update(st)
