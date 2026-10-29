@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- **A large knowledge-graph bundle opens in the explorer, in parts by source (no schema change).** Requested by
+  @diazr04: a bundle whose graph is larger than a browser holds as one text (the train split of a recipes dataset,
+  899 MB and 542,226 records) failed with "Failed to fetch". The page now reads the zip from the file a slice at a time
+  and the graph a record at a time as it is decompressed (`site/bundle.js`), so it is never one text. A graph of more
+  than 60,000 records opens in parts by source of about 40,000 records, the sources in the order of their years: the
+  page asks which part to open, and the open part's card offers the others. A part holds its sources, the records only
+  they report and the records those link to, so a species many sources report comes without every record that uses
+  it. A smaller bundle opens whole, as before.
+- **The explorer no longer uses the lab computer's service (no schema change).** Requested by @diazr04: curating a
+  source and answering questions in words on the lab's computer wait for new requirements (a way in without GitHub's
+  authorization page). `site/config.js` names no service again: the page opens, draws and searches graphs in the
+  browser and says the service is not configured, and it shows no Sign in button while there is no service. The
+  service's code stays (the inbox, `SCALE_WEB_INBOX`; questions answered by Claude Code, `SCALE_WEB_ASK`), off unless
+  set.
 - **The explorer opens a knowledge-graph bundle (no schema change).** Requested by @hlxin: "Open a graph or bundle" in
   the explorer takes the zip `scale graph export --to kg-bundle` makes (docs/kg-bundle-format.md) as well as a graph
   file, and shows its graph like any other: its sources (the bundle's Publications), values as reported, typed

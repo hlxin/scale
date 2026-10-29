@@ -135,6 +135,61 @@ def test_the_explorer_opens_a_knowledge_graph_bundle_zip(tmp_path):
     assert run.returncode != 0 and "no bundle.json" in run.stderr
 
 
+def parts_bundle(path):
+    """Six sources of two samples each, every sample made from the one species they all report; links before nodes,
+    and a quote with braces and quotes in it, as the reader must take them."""
+    nodes, links = [{"id": "ChemicalSpecies:water", "label": "ChemicalSpecies", "props": {"name": "water"}}], []
+    for s in range(6):
+        pub = f"Publication:10.1/s{s}"
+        nodes.append({"id": pub, "label": "Publication", "props": {"title": f'Paper {s}: "{{a}} [b]"', "year": str(2000 + s)}})
+        links.append({"id": f"w:{s}", "source": "ChemicalSpecies:water", "target": pub, "type": "REPORTED_IN", "props": {}})
+        for r in range(2):
+            rid = f"Sample:s{s}-{r}"
+            nodes.append({"id": rid, "label": "Sample", "props": {"name": f"sample {s}.{r}"}})
+            links += [{"id": f"r:{rid}", "source": rid, "target": pub, "type": "REPORTED_IN", "props": {}},
+                      {"id": f"u:{rid}", "source": rid, "target": "ChemicalSpecies:water", "type": "HAS_INPUT", "props": {}}]
+    graph = {"directed": True, "multigraph": True, "graph": {"topic": "Tiny bundle"}, "links": links, "nodes": nodes}
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as f:
+        f.writestr("tiny_v1.0.0/bundle.json", json.dumps({"bundle_id": "tiny", "version": "1.0.0", "topic": "Tiny bundle"}))
+        f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(graph, indent=1))
+
+
+def test_a_bundle_too_large_to_draw_at_once_opens_in_parts_by_source(tmp_path):
+    js = (REPO / "site/explorer.js").read_text()
+    # the explorer asks which part to open, and the open part's card offers the others
+    assert "b.parts" in js and "choosePart" in js and 'id="parts-dialog"' in (REPO / "site/index.html").read_text()
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node is not installed")
+    parts_bundle(tmp_path / "tiny.zip")
+    script = (f"import {{ readBundle }} from {json.dumps((REPO / 'site/bundle.js').as_uri())};\n"
+              f"import {{ readFileSync }} from 'node:fs';\n"
+              f"const buf = readFileSync({json.dumps(str(tmp_path / 'tiny.zip'))});\n"
+              "const file = { name: 'tiny.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
+              "const b = await readBundle(file, () => {}, { whole: 10, size: 10 });\n"
+              "console.log(JSON.stringify({ ...b, first: await b.part(0) }));")
+    run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stderr
+    b = json.loads(run.stdout)
+    # 19 records, more than the 10 drawn at once: parts of two sources, in the order of their years
+    assert (b["records"], b["sources"]) == (19, 6)
+    assert b["parts"] == [{"sources": 2, "records": 7, "years": [2000 + 2 * i, 2001 + 2 * i]} for i in range(3)]
+    first = b["first"]
+    assert first["graph"]["title"] == "Tiny bundle · part 1 of 3"
+    # a part: its sources, the samples only they report, and the species the samples use, which brings in no sample
+    # of another part although every source reports it
+    assert sorted(n["id"] for n in first["nodes"]) == ["ChemicalSpecies:water", "Publication:10.1/s0", "Publication:10.1/s1",
+                                                       "Sample:s0-0", "Sample:s0-1", "Sample:s1-0", "Sample:s1-1"]
+    assert {n["label"] for n in first["nodes"] if n["id"].startswith("Publication:")} == {"Source"}
+    assert next(n for n in first["nodes"] if n["id"] == "Publication:10.1/s0")["props"]["title"] == 'Paper 0: "{a} [b]"'
+    assert len(first["links"]) == 10                   # four REPORTED_IN, four HAS_INPUT, the species in its two sources
+    # read whole, the same bundle is one graph
+    whole = subprocess.run([node, "--input-type=module", "-e", script.replace("{ whole: 10, size: 10 }", "{}")
+                            .replace("first: await b.part(0)", "first: null")], capture_output=True, text=True, timeout=60)
+    assert whole.returncode == 0, whole.stderr
+    assert len(json.loads(whole.stdout)["doc"]["nodes"]) == 19
+
+
 def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     page = (REPO / "site/index.html").read_text()
     js = (REPO / "site/explorer.js").read_text()

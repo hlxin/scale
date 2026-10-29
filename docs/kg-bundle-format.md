@@ -60,7 +60,10 @@ loads the zip as it is: the first release as a new graph, each later release as 
 
 **To look at one,** open the zip with "Open a graph or bundle" in SCALE's graph explorer (the site, `site/bundle.js`):
 it draws the bundle's graph in the browser, with each record's values and evidence, and searches its quotes. It shows
-the bundle; it does not validate it or check its digests (the format's validator does).
+the bundle; it does not validate it or check its digests (the format's validator does). The page reads the graph a
+record at a time, so a graph larger than the browser holds as one text still opens; one of more than 60,000 records
+opens in parts by source of about 40,000 records, each with its sources, the records only they report and the records
+those link to.
 
 The mapping from scale-catal to the bundle (ids, units, evidence, statements, access) is described in the module
 docstring of `tools/kgbundle.py`, and the export skill (`skills/export-graph/SKILL.md`) says when to choose

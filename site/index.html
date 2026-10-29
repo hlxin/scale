@@ -233,6 +233,14 @@
     <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="board-curate">Curate a source</button></menu>
   </form>
 </dialog>
+<dialog class="gx-dialog" id="parts-dialog">
+  <form method="dialog">
+    <h2>Open a part of the bundle</h2>
+    <p class="gx-muted" id="parts-note"></p>
+    <label>Part <select id="parts-select"></select></label>
+    <menu><button class="gx-btn" value="cancel">Cancel</button><button type="button" class="gx-btn gx-btn-primary" id="parts-open">Open</button></menu>
+  </form>
+</dialog>
 <script type="module" src="explorer.js"></script>
 </body>
 </html>

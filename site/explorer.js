@@ -106,6 +106,7 @@ function signOut() {
 let me = null;
 async function renderAccount() {
   const btn = $("account-btn"), label = $("account-label");
+  btn.hidden = !SERVICE;                          // nothing to sign in to without the service
   btn.classList.remove("is-signed-in");
   btn.querySelector("img")?.remove();
   btn.querySelector("svg").removeAttribute("hidden");
@@ -447,8 +448,10 @@ async function start() {
     try {
       if (/\.zip$/i.test(f.name)) {                 // a knowledge-graph bundle (scale graph export --to kg-bundle)
         status("Reading the bundle…");
-        const b = await readBundle(f);
-        await openOwn({ id: `bundle-${base.replace(/\W+/g, "-")}`, title: b.version ? `${b.title} (v${b.version})` : b.title, from: "" }, JSON.stringify(b.doc));
+        const b = await readBundle(f, status);
+        const id = `bundle-${base.replace(/\W+/g, "-")}`, title = b.version ? `${b.title} (v${b.version})` : b.title;
+        if (b.parts) { bundle = { b, id, title }; status(ready()); choosePart(); }
+        else await openOwn({ id, title, from: "" }, JSON.stringify(b.doc));
       } else await openOwn({ id: `file-${base.replace(/\W+/g, "-")}`, title: base, from: "" }, await f.text());
     } catch (err) { status(ready()); alert(`Not a graph or a graph bundle: ${err.message}`); }
   };
@@ -471,6 +474,8 @@ function renderGraphs() {
   wireContrib();
   const gs = $("graph-show");
   if (gs) gs.onclick = (ev) => { ev.preventDefault(); showGraph(); };
+  const bp = $("bundle-parts");
+  if (bp) bp.onclick = (ev) => { ev.preventDefault(); choosePart(); };
   const st = $("schema-toggle");
   if (st) st.onclick = (ev) => { ev.preventDefault(); G.base ? leaveSchema() : showSchema(); };
   $("graphs").querySelectorAll(".gx-graph-item").forEach((b) => (b.onclick = (ev) => {
@@ -495,6 +500,7 @@ function details() {
     ["Visibility", e.from === "service" ? "Private to you, until you contribute it" : esc(((g.stewardship || {}).access || "public").replace(/^./, (c) => c.toUpperCase()))],
     g.created || g.date ? ["Created", esc(g.created || g.date)] : null,
     ["Checksum", B.sha ? `<span class="gx-sha" title="sha256 ${esc(B.sha)}">${esc(B.sha.slice(0, 12))}…</span>` : "…"],
+    e.part ? ["Part", `${e.part[0]} of ${e.part[1]} of the bundle${bundle?.id === e.bundle ? ` · <a href="#" id="bundle-parts">open another part</a>` : ""}`] : null,
     ["Source", e.from === "service" ? "curated by the service just now" : e.from ? `<a href="https://github.com/hlxin/scale/tree/main/${esc(e.from)}">${esc(e.from)}</a>` : "a file on this computer"],
     ["Schema", `<a href="#" id="schema-toggle" title="${G.base ? "Back to the graph" : "Show the schema on the canvas"}">${esc(g.schema || "scale-catal")} v${esc(g.schema_version || "?")}</a>${G.base ? ` <span class="gx-subtle">(shown)</span>` : ""}<br>
       ${B.labels.size} labels · ${B.rels.size} rel types · ${schemaPropCount(B).toLocaleString()} props`],
@@ -503,6 +509,28 @@ function details() {
   return `<div class="gx-graph-detail"><dl class="gx-facts">${facts.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("")}</dl>`
     + (e.from === "service" ? `<div class="gx-contrib" id="contrib-box">${B.contrib || ""}</div>` : "") + `</div>`;
 }
+
+// A bundle with more records than the explorer draws at once opens a part at a time (bundle.js): the reader picks
+// one here, and the open part's card offers the others while the zip is open in this tab.
+let bundle = null;                                 // { b, id, title }: the bundle last opened in parts
+function choosePart() {
+  const { b } = bundle, span = (y) => (y ? `, ${y[0] === y[1] ? y[0] : `${y[0]}–${y[1]}`}` : "");
+  $("parts-note").textContent = `${b.title}: ${b.records.toLocaleString()} records from ${b.sources.toLocaleString()} sources, more than the`
+    + ` explorer draws at once. It opens in ${b.parts.length} parts by source; each holds its sources, the records they report`
+    + " and the records those link to.";
+  $("parts-select").innerHTML = b.parts.map((p, i) => `<option value="${i}">Part ${i + 1}: ${p.sources
+    ? `${p.sources.toLocaleString()} sources${span(p.years)}` : "records no source reports"} · ${p.records.toLocaleString()} records</option>`).join("");
+  $("parts-dialog").showModal();
+}
+$("parts-open").onclick = async () => {
+  const i = Number($("parts-select").value), { b, id, title } = bundle;
+  $("parts-dialog").close();
+  try {
+    const doc = await b.part(i, status);
+    await openOwn({ id: `${id}-part-${i + 1}`, title: `${title} · part ${i + 1} of ${b.parts.length}`, from: "", part: [i + 1, b.parts.length], bundle: id },
+      JSON.stringify(doc));
+  } catch (err) { status(ready()); alert(`That part of the bundle could not be read: ${err.message}`); }
+};
 
 // ------------------------------------------------------------------------------------------ the schema view
 // The graph's schema as the graph uses it: a node per label, a link per label -> relationship type -> label, each with
