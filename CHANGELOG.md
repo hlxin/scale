@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **A selectivity says what it counts and what it is a share of (breaking, schema 0.7.8 -> 0.8.0).** Answers #82.
+  Selectivities of one product on different wholes (a share of converted CO with CO2 inside, of the hydrocarbons
+  alone, of one pool such as the olefins) or counted differently (carbon atoms, moles, mass) are no longer put in one
+  group by a scientific comparison. New contexts `selectivity_count` and `selectivity_whole`, both in the selectivity
+  kind's `compare_by`, and the provisional value field `relative_to` naming the pool; `wt%` and `mass%` state mass. A
+  value that states neither is compared only with such values (`not stated`); `mol%` is left unread, never guessed.
+  No document needs rewriting (the migration step changes nothing); as-reported comparison is unchanged. Example,
+  counterexample and competency question CQ-41 added.
 - **Queries about four times faster, with the same answers (no schema change).** Requested by @hlxin. A query
   re-hashed the schema's quantity contracts twice, rebuilt a table of every link, labelled the same evidence again in
   every row, and copied its answer with `copy.deepcopy`. Now the contracts are compiled once per loaded schema, the
