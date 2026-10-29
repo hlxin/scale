@@ -11,16 +11,17 @@
                                    ``?doi=``), or JSON ``{"doi": …}`` or ``{"url": …}``; signed in. A DOI catal-commons
                                    already holds, or an open contribution adds, is answered ``{"known": …}`` without
                                    curating (``?again=1`` curates it all the same). ``?keep=1`` (or ``keep_text``)
-                                   records the user's agreement to keep the paper (archive.py). A PDF needs
+                                   records the user's agreement to keep the source (archive.py). A PDF needs
                                    ``?attest=1``: the user states they have lawful access to it and that, as far as
                                    they know, their licence allows mining it with an AI tool. With an inbox
-                                   (``SCALE_WEB_INBOX``, inbox.py) the publication waits there for Claude Code, which
+                                   (``SCALE_WEB_INBOX``, inbox.py) the source waits there for Claude Code, which
                                    curates it on the service's computer (runner.py)
-* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (read once, then forgotten; an inbox
+* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (again on asking, for an hour; an inbox
                                    job stays readable, its graph signed for its owner each time, until it is forgotten)
-* ``GET  /inbox``                  the signed-in user's publications in the inbox, newest first
-* ``GET  /kept``                   the papers kept because the signed-in user agreed (archive.py)
-* ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the paper goes when none is left
+* ``POST /jobs/{id}/done``         the page has the finished job's result: the service forgets it now (not an inbox job)
+* ``GET  /inbox``                  the signed-in user's sources in the inbox, newest first
+* ``GET  /kept``                   the sources kept because the signed-in user agreed (archive.py)
+* ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the source goes when none is left
 * ``POST /query``                  ``{"graph": doc, "plan": plan}``: ``scale query``, no model, no sign-in
 * ``POST /search``                 ``{"graph": doc, "query": text, "k": n}``: ``scale search``, no sign-in
 * ``POST /ask``                    ``{"graph": doc, "question": text}``: the question loop; signed in
@@ -132,7 +133,12 @@ class Service:
             if view and view.get("graph") and view.get("rights"):       # curated here: signed for its owner, as a job's
                 view["receipt"] = auth.receipt(self.cfg, user, view["graph"], view["rights"])
             view = view or self.jobs.view(jid, user)
-            return (200, view, {}) if view else (404, {"error": "no such job (a finished job is read once)"}, {})
+            return (200, view, {}) if view else (404, {"error": "no such job (its result was collected, or it expired)"}, {})
+        if method == "POST" and path.startswith("/jobs/") and path.endswith("/done"):
+            if not user:
+                return 401, {"error": "sign in"}, {}
+            jid = path.removeprefix("/jobs/").removesuffix("/done")
+            return (200, {"forgotten": jid}, {}) if self.jobs.done(jid, user) else (404, {"error": "no finished job of yours under that id"}, {})
         if method == "POST" and path in ("/query", "/search", "/ask", "/contribute/check", "/contribute"):
             if len(body) > GRAPH_MAX:
                 return 413, {"error": "the graph is too large for the service"}, {}
@@ -213,7 +219,7 @@ class Service:
                 if query.get("attest") != "1":
                     return 400, {"error": "confirm that you have lawful access to this PDF and that, as far as you "
                                           "know, its licence allows text mining with an AI tool"}, {}
-                pdf, name = body, query.get("filename") or "paper.pdf"
+                pdf, name = body, query.get("filename") or "source.pdf"
                 doi = fetch.doi_in(query.get("doi", "")) if query.get("doi") else None
             else:
                 req = json.loads(body or b"{}")
@@ -440,7 +446,7 @@ def make_handler(svc: Service):
 
 
 def recurate(svc: Service, only: str | None = None, dry_run: bool = False) -> list[dict]:
-    """Curate the kept papers again under the commons' schema version: each paper whose latest curation is under
+    """Curate the kept sources again under the commons' schema version: each source whose latest curation is under
     another version (or the one named), as a job from its kept PDF (else its texts), within the service's budget. Each graph is kept in the
     archive beside its text; contributing it is a person's step (the pull request that updates the commons)."""
     version = svc.jobs.version()
@@ -458,12 +464,13 @@ def recurate(svc: Service, only: str | None = None, dry_run: bool = False) -> li
         tmp = Path(tempfile.mkdtemp(prefix="scale-web-r-"))
         try:
             kept_pdf = svc.jobs.archive.pdf(m["sha256"])
-            source = ({"pdf": kept_pdf.read_bytes(), "filename": f"{m.get('slug') or 'paper'}.pdf"} if kept_pdf else
+            source = ({"pdf": kept_pdf.read_bytes(), "filename": f"{m.get('slug') or 'source'}.pdf"} if kept_pdf else
                       {"text": svc.jobs.archive.pages(m["sha256"], tmp)})
             jid = svc.jobs.submit("scale-recurate", doi=m.get("doi"), recurating=True, **source)
             while svc.jobs.jobs.get(jid, {}).get("state") not in ("done", "failed", None):
                 time.sleep(2)
             job = svc.jobs.view(jid, "scale-recurate")
+            svc.jobs.done(jid, "scale-recurate")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
         row = {"sha256": m["sha256"], "doi": m.get("doi"), "to": version, "state": job["state"],
@@ -479,9 +486,9 @@ def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(prog="python -m scaleweb", description="The SCALE web service")
     p.add_argument("--host", default="0.0.0.0")
     p.add_argument("--port", type=int, default=8080)
-    p.add_argument("--recurate", action="store_true", help="curate the kept papers again under the commons' schema "
+    p.add_argument("--recurate", action="store_true", help="curate the kept sources again under the commons' schema "
                    "version, then exit (instead of serving)")
-    p.add_argument("--only", metavar="SHA256", help="with --recurate: only this kept paper")
+    p.add_argument("--only", metavar="SHA256", help="with --recurate: only this kept source")
     p.add_argument("--dry-run", action="store_true", help="with --recurate: list what would be curated again")
     a = p.parse_args(argv)
     svc = Service(Config.from_env())

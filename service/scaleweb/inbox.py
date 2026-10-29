@@ -1,14 +1,14 @@
-"""The inbox: publications that wait, on the computer that runs the service, for Claude Code to curate them.
+"""The inbox: sources that wait, on the computer that runs the service, for Claude Code to curate them.
 
-With ``SCALE_WEB_INBOX`` set, the service's own model curates nothing. ``POST /jobs`` puts the publication in the
+With ``SCALE_WEB_INBOX`` set, the service's own model curates nothing. ``POST /jobs`` puts the source in the
 inbox and answers at once; the runner (``python -m scaleweb.runner``, runner.py), which the operating system starts
 whenever the queue holds something (service/launchd/), curates each one with Claude Code by the curate-corpus skill.
 The graph comes back to its owner only (``GET /jobs/{id}``, with the service's receipt), and nothing is published
 unless they contribute it, a separate click (``POST /contribute``). A PDF dropped into ``queue/`` by hand is curated the
 same way for ``SCALE_WEB_INBOX_LOGIN``. The folder::
 
-    queue/<id>/            waiting: the PDF (or a kept paper's text; none for a DOI alone) and request.json (who, the
-                           DOI, the file name, whether they agreed to keep the paper)
+    queue/<id>/            waiting: the PDF (or a kept source's text; none for a DOI alone) and request.json (who, the
+                           DOI, the file name, whether they agreed to keep the source)
     work/<id>/             being curated: the same, and source/, the ``scale source start`` folder
     jobs/<id>.json         what the page shows: the state, the log, the source's rights, or the error
     jobs/<id>.graph.json   the curated graph, its quotes capped by the source's rights, for its owner only
@@ -16,7 +16,7 @@ same way for ``SCALE_WEB_INBOX_LOGIN``. The folder::
 
 When the job ends, the PDF and its page texts are kept in the service's archive (archive.py) as the page says (always
 under an open licence, otherwise only when the owner ticked the box) and deleted from the inbox: only ``jobs/`` stays,
-and a job is forgotten after JOB_DAYS days. A publication is moved, never copied, from one folder to the next.
+and a job is forgotten after JOB_DAYS days. A source is moved, never copied, from one folder to the next.
 """
 
 from __future__ import annotations
@@ -47,7 +47,7 @@ def _write(path: Path, doc: dict) -> None:
 def pdf_name(filename: str | None) -> str:
     """The file name a PDF is kept under while it waits: its own name made safe (its stem names the source)."""
     stem = "".join(c if c.isalnum() or c in "._-" else "-" for c in Path(filename or "paper.pdf").stem)[:80].strip(".")
-    return f"{stem or 'paper'}.pdf"
+    return f"{stem or 'source'}.pdf"
 
 
 class Inbox:
@@ -61,8 +61,8 @@ class Inbox:
     # ------------------------------------------------------------------------------------------ the service's side
     def add(self, owner: str, doi: str | None = None, pdf: bytes | None = None, filename: str | None = None,
             again: bool = False, keep: bool = False, text: str | None = None, recurate: str | None = None) -> str:
-        """Queue a publication (its PDF, a kept paper's page texts, or a DOI alone) for the runner; ``keep``: its owner
-        agreed to keep it (archive.py); ``recurate``: the archive key of a kept paper curated again. Returns the id."""
+        """Queue a source (its PDF, a kept source's page texts, or a DOI alone) for the runner; ``keep``: its owner
+        agreed to keep it (archive.py); ``recurate``: the archive key of a kept source curated again. Returns the id."""
         jid = uuid.uuid4().hex
         tmp = self.incoming / jid                         # written whole, then moved into the queue in one step
         tmp.mkdir()
@@ -98,9 +98,9 @@ class Inbox:
         return [{k: j[k] for k in keep if k in j} for j in sorted(jobs, key=lambda j: j.get("created_s", 0), reverse=True)]
 
     def same_source(self, probe: dict, exclude: str, owner: str) -> dict | None:
-        """Another job of the same owner whose publication is the probe's (the same DOI, identifier or PDF digest, as
+        """Another job of the same owner whose source is the probe's (the same DOI, identifier or PDF digest, as
         commons.find matches): ``{"same_as": {...}}``, else None. Another reader's job never counts, since a graph comes
-        back to its owner only; nor a job that failed, so a publication can be sent again."""
+        back to its owner only; nor a job that failed, so a source can be sent again."""
         from scale import commons
         held = {}
         for jid in self._ids():
@@ -115,7 +115,7 @@ class Inbox:
         return {"same_as": {"job": jid, "state": job["state"], "by": hits[0]["by"]}}
 
     def position(self, jid: str) -> int:
-        """How many publications wait before this one (0: it is next)."""
+        """How many sources wait before this one (0: it is next)."""
         ids = [p.name for p in self._waiting()]
         return ids.index(jid) if jid in ids else 0
 
@@ -155,7 +155,7 @@ class Inbox:
         return out
 
     def claim(self) -> dict | None:
-        """Take the publication that has waited longest, moved from the queue into work/ (None when none waits)."""
+        """Take the source that has waited longest, moved from the queue into work/ (None when none waits)."""
         for p in self._waiting():
             dest = self.work / p.name
             try:

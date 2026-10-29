@@ -2,6 +2,7 @@
 explorer runs in the browser, which works from its bundled data alone (no checkout), as a wheel does."""
 
 import json
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -74,6 +75,64 @@ def test_the_cli_builds_the_site(tmp_path, capsys):
     assert main(["--repo", str(REPO), "site", "build", "--out", str(tmp_path / "s")]) == 0
     assert json.loads(capsys.readouterr().out)["graphs"]
     assert (tmp_path / "s/index.html").is_file() and (tmp_path / "s/.nojekyll").is_file()
+    assert (tmp_path / "s/bundle.js").is_file()
+
+
+# A small knowledge-graph bundle, as `scale graph export --to kg-bundle` writes one (docs/kg-bundle-format.md).
+BUNDLE_GRAPH = {
+    "directed": True, "multigraph": True, "graph": {"bundle_id": "tiny", "topic": "Tiny bundle", "version": "1.0.0"},
+    "nodes": [
+        {"id": "Publication:10.1/x", "label": "Publication", "props": {"title": "A paper", "year": 1930}},
+        {"id": "CatalyticTest:t-1", "label": "CatalyticTest", "props": {
+            "name": "test 1", "temperature": {"value": 573.15, "unit": "K", "as_reported": "300 °C"},
+            "conditions": json.dumps({"operation": {"status": "present", "text_value": "closed circuit"}}),
+            "_value_status": {"pressure": {"status": "not_reported", "missing_reason": "not_stated_in_source"}},
+            "_evidence": [{"quote": "at 300 °C", "locator": {"page": 3, "section": "Figure 3", "figure": "Figure 3"},
+                           "source_id": "10.1/x"}]}},
+    ],
+    "links": [{"id": "e:1", "source": "CatalyticTest:t-1", "target": "Publication:10.1/x", "type": "REPORTED_IN", "props": {}}],
+}
+
+
+def test_the_explorer_opens_a_knowledge_graph_bundle_zip(tmp_path):
+    page = (REPO / "site/index.html").read_text()
+    js = (REPO / "site/explorer.js").read_text()
+    # the file button takes a bundle's zip as well as a graph file, and reads it with the page's bundle reader
+    assert 'accept=".json,application/json,.zip,application/zip"' in page and "Open a graph or bundle" in page
+    assert 'import { readBundle } from "./bundle.js";' in js and "bundle.js" in site.PAGES
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node is not installed")
+    z = tmp_path / "tiny_v1.0.0.zip"
+    with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as f:      # the folder at the top, as the format ships it
+        f.writestr("tiny_v1.0.0/bundle.json", json.dumps({"bundle_id": "tiny", "version": "1.0.0", "topic": "Tiny bundle",
+                                                          "graph_file": "kg/graph.json"}))
+        f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(BUNDLE_GRAPH))
+        f.writestr("__MACOSX/tiny_v1.0.0/._bundle.json", "")
+    script = (f"import {{ readBundle }} from {json.dumps((REPO / 'site/bundle.js').as_uri())};\n"
+              f"import {{ readFileSync }} from 'node:fs';\n"
+              f"const buf = readFileSync({json.dumps(str(z))});\n"
+              "const file = { name: 'tiny_v1.0.0.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
+              "console.log(JSON.stringify(await readBundle(file)));")
+    run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stderr
+    b = json.loads(run.stdout)
+    assert (b["title"], b["version"]) == ("Tiny bundle", "1.0.0")
+    src, test = b["doc"]["nodes"]
+    # a Publication is a source, hidden until asked for like any graph's sources; a value reads as reported
+    assert src["label"] == "Source" and test["label"] == "CatalyticTest"
+    p = test["props"]
+    assert p["temperature"] == {"status": "present", "value": 573.15, "unit": "K", "as_reported": "300 °C"}
+    assert p["conditions"] == {"operation": {"status": "present", "text_value": "closed circuit"}}
+    assert p["pressure"] == {"status": "not_reported", "missing_reason": "not_stated_in_source"}
+    assert p["evidence"] == [{"quote": "at 300 °C", "locator": "p. 3, section Figure 3", "source": "Publication:10.1/x"}]
+    assert b["doc"]["links"][0]["type"] == "REPORTED_IN"
+    # a zip that holds no bundle is refused, saying why
+    with zipfile.ZipFile(tmp_path / "other.zip", "w") as f:
+        f.writestr("notes.txt", "hello")
+    run = subprocess.run([node, "--input-type=module", "-e", script.replace(str(z), str(tmp_path / "other.zip"))],
+                         capture_output=True, text=True, timeout=60)
+    assert run.returncode != 0 and "no bundle.json" in run.stderr
 
 
 def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
@@ -91,6 +150,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     assert 'id="curate-open"' in page and "Upload, curate, and explore" in page and "viz-btn" not in page and "plotly" not in page.lower() and "Plotly" not in js
     # the Curate dialog is about a source (a paper, patent or report) and says what happens in four short points
     assert "<h2>Curate a source</h2>" in page and "Curate a publication" not in page and "<summary>More details</summary>" in page
+    # the one-source page says "source" too
+    one = (REPO / "site/publication.html").read_text()
+    assert "<title>SCALE One Source</title>" in one and "publication" not in one.replace("publication.html", "").lower()
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
@@ -98,6 +160,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # own address (its open graph, #g=…, included) and a nonce; a token is taken only with that tab's nonce
     for page_js in (js, (REPO / "site/app.js").read_text()):
         assert page_js.count("/auth/login?return=") == 1 and "&nonce=${n}" in page_js and "crypto.getRandomValues" in page_js
+        # the reader's own graph and a job under way are kept in the tab, so a sign-in or a reload loses neither; the
+        # service forgets a job's result only when the page says it has it
+        assert '"scale-own"' in page_js and '"scale-job"' in page_js and "/done`" in page_js
         assert "tx.n !==" in page_js and "scale-signin-hash" not in page_js and "scale-signin-from" not in page_js
     assert "location.search + location.hash" in js and all(f'data-signin="{w}"' in js for w in ("toolbar", "curate", "search"))
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js

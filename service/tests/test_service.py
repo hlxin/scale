@@ -226,7 +226,7 @@ def test_a_doi_the_commons_holds_is_not_curated_again(tmp_path):
     assert st == 202 and body["job"] == "j-again"
 
 
-def test_a_job_curates_returns_the_capped_graph_once_and_keeps_nothing(tmp_path, monkeypatch):
+def test_a_job_curates_returns_the_capped_graph_until_collected_and_keeps_nothing(tmp_path, monkeypatch):
     svc = Service(cfg(tmp_path), repo=REPO, run_inline=True)
     real = curate.start
 
@@ -250,11 +250,47 @@ def test_a_job_curates_returns_the_capped_graph_once_and_keeps_nothing(tmp_path,
     assert job["check"]["ok"] and job["source"]["rights_class"] == "in_copyright"
     quotes = [ev for n in job["graph"]["nodes"] for ev in (n["props"].get("evidence") or [])]
     assert quotes and all(len(ev.get("quote", "")) <= 300 for ev in quotes)
-    assert svc.route("GET", f"/jobs/{body['job']}", {}, h, b"")[0] == 404           # read once
+    jid = body["job"]
+    st, again, _ = svc.route("GET", f"/jobs/{jid}", {}, h, b"")                    # a reply lost on the way: asked again
+    assert st == 200 and again["graph"] == job["graph"]
+    bob = {"authorization": f"Bearer {auth.session_for(svc.cfg, 'bob')}"}
+    svc.cfg.allowlist.append("bob")
+    assert svc.route("POST", f"/jobs/{jid}/done", {}, bob, b"")[0] == 404            # only its owner collects it
+    assert svc.route("POST", f"/jobs/{jid}/done", {}, h, b"")[0] == 200
+    assert svc.route("GET", f"/jobs/{jid}", {}, h, b"")[0] == 404                    # then it is forgotten
     assert not any(Path(svc.jobs.root).iterdir())                                   # nothing kept
     other = {**h, "authorization": f"Bearer {auth.session_for(svc.cfg, 'ada')}"}
     svc.cfg.jobs_per_user_per_day = 1
     assert svc.route("POST", "/jobs", {"attest": "1"}, other, b"%PDF-1.7")[0] == 429             # today's jobs used
+
+
+def test_an_uncollected_result_goes_an_hour_after_its_job_ends_and_a_running_job_stays(tmp_path):
+    svc = Service(cfg(tmp_path), repo=REPO)
+    now = time.time()
+
+    def job(jid, state, ended=None):
+        (svc.jobs.root / jid).mkdir()
+        return {"id": jid, "owner": "ada", "state": state, "created": now - 7200, "folder": svc.jobs.root / jid, "log": [],
+                **({"ended": ended} if ended else {})}
+    svc.jobs.jobs = {"fresh": job("fresh", "done", now - 60), "old": job("old", "failed", now - 3700),
+                     "running": job("running", "curating")}
+    svc.jobs.sweep()
+    assert set(svc.jobs.jobs) == {"fresh", "running"} and not (svc.jobs.root / "old").exists()
+    assert not svc.jobs.done("running", "ada") and svc.jobs.view("running", "ada")["state"] == "curating"
+
+
+def test_a_receipt_never_signs_in_and_a_session_is_no_receipt(tmp_path):
+    """A contribution receipt lives a week, a session a day: each token names its use, and each check takes only its own."""
+    svc = Service(cfg(tmp_path), repo=REPO)
+    graph, entry = {"graph": {}, "nodes": [], "links": []}, {"class": "open"}
+    receipt, session = auth.receipt(svc.cfg, "ada", graph, entry), auth.session_for(svc.cfg, "ada")
+    assert auth.user_of(svc.cfg, f"Bearer {receipt}") is None
+    assert svc.route("GET", "/me", {}, {"authorization": f"Bearer {receipt}"}, b"")[0] == 401
+    assert auth.user_of(svc.cfg, f"Bearer {session}") == "ada"
+    assert auth.check_receipt(svc.cfg, session, "ada", graph) is None
+    assert auth.check_receipt(svc.cfg, receipt, "ada", graph) == entry
+    legacy = auth.sign(svc.cfg, {"sub": "ada", "exp": int(time.time()) + 600})     # a token that names no use
+    assert auth.user_of(svc.cfg, f"Bearer {legacy}") is None
 
 
 def test_links_are_fetched_only_from_public_addresses():

@@ -1,18 +1,18 @@
-"""The papers the service keeps, so that a paper can be curated again (after a schema change) without anyone
+"""The sources (sources, patents, reports) the service keeps, so that a source can be curated again (after a schema change) without anyone
 uploading it again.
 
 What is kept is the copy the contributor gave: the PDF they uploaded (or the open-access copy fetched for a DOI) and
-its page texts. An embedding cannot be read back into the numbers and quotes a curation needs, so the paper itself is
+its page texts. An embedding cannot be read back into the numbers and quotes a curation needs, so the source itself is
 what is kept. It is kept in a private folder of the service (``SCALE_WEB_ARCHIVE``), never published, never committed
 and never sent to a page:
 
-* a paper under an open licence (rights class ``open`` or ``public_domain``) is kept, as its licence allows;
-* any other paper only when the contributor agreed when they started the job (``keep_text``), which is recorded with
-  their login and the time; they can withdraw it (``forget``), and the paper goes when no agreement is left.
+* a source under an open licence (rights class ``open`` or ``public_domain``) is kept, as its licence allows;
+* any other source only when the contributor agreed when they started the job (``keep_text``), which is recorded with
+  their login and the time; they can withdraw it (``forget``), and the source goes when no agreement is left.
 
-Each paper is a folder named by the sha256 of its page texts: ``paper.pdf`` (when there was a PDF), ``pages.txt`` (as
+Each source is a folder named by the sha256 of its page texts: ``paper.pdf`` (when there was a PDF), ``pages.txt`` (as
 ``scale source start`` writes them) and ``meta.json`` (its DOI and title, its rights entry, why it is kept, who agreed, and every curation of it with the schema
-version it was curated under). ``recurate`` curates the kept papers again under the commons' schema, from the PDF
+version it was curated under). ``recurate`` curates the kept sources again under the commons' schema, from the PDF
 when there is one (so a better reading of its tables and figures counts), else from the texts.
 """
 
@@ -45,13 +45,13 @@ class Archive:
 
     @staticmethod
     def why(rights_class: str | None, consent: bool) -> str | None:
-        """Why a paper's text may be kept: its licence, the contributor's agreement, or not at all (None)."""
+        """Why a source's text may be kept: its licence, the contributor's agreement, or not at all (None)."""
         return "open_licence" if rights_class in KEPT_BY_LICENCE else "consent" if consent else None
 
     def keep(self, pages: Path, *, doi: str | None, title: str | None, rights: dict, login: str, consent: bool,
              schema_version: str | None, graph_sha256: str | None, pdf: Path | None = None) -> str | None:
         # pages is ``work/texts/<slug>.txt``: the slug is kept so that curating it again gives the same source id
-        """Keep a curated paper (its PDF, when there was one, and its page texts) when its licence or the contributor's
+        """Keep a curated source (its PDF, when there was one, and its page texts) when its licence or the contributor's
         agreement allows; returns the key (the sha256 of the texts), or None when nothing was kept."""
         if not self.on or not pages.is_file():
             return None
@@ -79,13 +79,13 @@ class Archive:
         return sha
 
     def mine(self, login: str) -> list[dict]:
-        """The papers kept because this login agreed: what a contributor sees and can withdraw."""
+        """The sources kept because this login agreed: what a contributor sees and can withdraw."""
         return [{**{k: m.get(k) for k in ("sha256", "doi", "title")}, "pdf": self.pdf(m["sha256"]) is not None}
                 for m in self.entries()
                 if any(c["github"] == login for c in m.get("consents") or [])]
 
     def forget(self, sha: str, login: str) -> bool:
-        """Withdraw a login's agreement; the paper (PDF and texts) goes when it is kept by agreement and none is left."""
+        """Withdraw a login's agreement; the source (PDF and texts) goes when it is kept by agreement and none is left."""
         if not self.on or not (self.root / sha).is_dir() or "/" in sha or ".." in sha:
             return False
         meta = self._meta(sha)
@@ -105,19 +105,19 @@ class Archive:
         return [self._meta(p.name) for p in sorted(self.root.iterdir()) if (p / "meta.json").is_file()]
 
     def pages(self, sha: str, into: Path) -> Path:
-        """A copy of a kept paper's page texts under its own name (``<slug>.txt``) in ``into``, to curate it from."""
+        """A copy of a kept source's page texts under its own name (``<slug>.txt``) in ``into``, to curate it from."""
         into.mkdir(parents=True, exist_ok=True)
-        out = into / f"{self._meta(sha).get('slug') or 'paper'}.txt"
+        out = into / f"{self._meta(sha).get('slug') or 'source'}.txt"
         shutil.copyfile(self.root / sha / "pages.txt", out)
         return out
 
     def pdf(self, sha: str) -> Path | None:
-        """The kept PDF of a paper, or None (a paper kept from its texts alone)."""
+        """The kept PDF of a source, or None (a source kept from its texts alone)."""
         p = self.root / sha / "paper.pdf" if self.on else None
         return p if p is not None and p.is_file() else None
 
     def stale(self, version: str) -> list[dict]:
-        """The kept papers whose latest curation is under another schema version than ``version``."""
+        """The kept sources whose latest curation is under another schema version than ``version``."""
         return [m for m in self.entries() if (m.get("curations") or [{}])[-1].get("schema_version") != version]
 
     def record(self, sha: str, version: str, graph: dict, by: str) -> Path:

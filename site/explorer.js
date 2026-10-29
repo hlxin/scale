@@ -4,6 +4,7 @@
 // lists the evidence that matches; signed in, the SCALE service answers in words by SCALE's query-graph skill. No reader
 // ever gives a model key: the service curates, answers and contributes within its own budget.
 // Search, query plans and descriptions run SCALE's own code in a worker (worker.js).
+import { readBundle } from "./bundle.js";
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const md = (s) => DOMPurify.sanitize(marked.parse(String(s || "")));
@@ -91,12 +92,13 @@ function readSignIn() {                          // the service returns from Git
   if (got) { token = got; store.set("scale-token", token); }
   const note = why === "not-allowed" ? "This GitHub account is not admitted by the service yet; ask a maintainer to add it."
     : why ? "GitHub sign-in failed; try again." : "";
-  if (tx.from === "curate") setTimeout(() => (why ? ($("curate-dialog").showModal(), curateAccount(note)) : openCurate()), 0);
+  if (tx.from === "curate") setTimeout(() => (why ? (openCurate(), curateAccount(note)) : openCurate()), 0);
   else if (why) setTimeout(() => accountMenu(note), 0);
 }
 function signOut() {
   token = ""; login = ""; store.set("scale-token", "");
   renderAccount();
+  if (!$("account-menu").hidden) accountMenu();      // an open menu offers sign-in again, not the account just left
   if ($("curate-dialog").open) curateAccount();
 }
 // The toolbar's account: "Sign in" with GitHub, or the reader's avatar and login with a menu (what the service allows
@@ -145,7 +147,7 @@ async function call(method, path, body, headers = {}) {
   const r = await fetch(SERVICE + path, { method, headers: h, body });
   const data = await r.json().catch(() => ({}));
   if (r.status === 401) { signOut(); }
-  if (!r.ok) throw new Error(data.error || `the service answered ${r.status}`);
+  if (!r.ok) throw Object.assign(new Error(data.error || `the service answered ${r.status}`), { status: r.status });
   return data;
 }
 async function curateAccount(note = "") {
@@ -173,7 +175,7 @@ async function curateAccount(note = "") {
   } catch { /* curateAccount ran again on 401 */ }
 }
 async function openCurate() {
-  $("curate-dialog").showModal();
+  if (!$("curate-dialog").open) $("curate-dialog").showModal();
   curateAccount();
   if (!SERVICE) { $("curate-schema").textContent = ""; return; }
   try {
@@ -189,14 +191,14 @@ async function openCurate() {
 }
 $("curate-open").onclick = () => openCurate();
 // The leaderboard: catal-commons' contributors scored by tools/commons.py (SCORING). The service's copy carries each
-// paper's reach (how often it answered other people); the site's copy (data/leaderboard.json) is the same without it.
+// source's reach (how often it answered other people); the site's copy (data/leaderboard.json) is the same without it.
 let boardData = null, boardTab = "contributors";
 const BOARD_TOP = 20;
 const pct = (x) => (x == null ? "–" : `${Math.round(x * 100)}%`);
 function boardRow(r) {
   const lv = r.level || {};
   const next = lv.next ? `<div class="gx-subtle">${Number(lv.to_next).toLocaleString()} to ${esc(lv.next)}</div>` : "";
-  const papers = (r.contributions || []).map((c) => `<tr><td>${esc(c.source)}</td><td>${esc(c.added)}</td><td>${Number(c.triples).toLocaleString()}</td>
+  const sources = (r.contributions || []).map((c) => `<tr><td>${esc(c.source)}</td><td>${esc(c.added)}</td><td>${Number(c.triples).toLocaleString()}</td>
     <td>${Number(c.reach).toLocaleString()}</td><td>${pct(c.completeness)}</td><td>${Number(c.score).toLocaleString()}</td></tr>`).join("");
   const mine = login && r.github.toLowerCase() === login.toLowerCase();
   return `<tr class="gx-board-row${mine ? " is-me" : ""}" tabindex="0"><td>${esc(r.rank)}</td>
@@ -204,7 +206,7 @@ function boardRow(r) {
       <span class="gx-level gx-level-${esc((lv.name || "").toLowerCase().replace(/ /g, "-"))}">${esc(lv.name || "")}</span>${mine ? ` <span class="gx-subtle">you</span>` : ""}</td>
     <td class="gx-num"><b>${Number(r.score).toLocaleString()}</b></td><td class="gx-num">${Number(r.triples).toLocaleString()}</td>
     <td class="gx-num">${boardData.with_reach ? Number(r.reach).toLocaleString() : "–"}</td><td class="gx-num">${pct(r.completeness)}</td><td class="gx-num">${esc(r.sources)}</td></tr>
-    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-papers"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${papers}</table></td></tr>`;
+    <tr class="gx-board-more" hidden><td></td><td colspan="6">${next}<table class="gx-board-sources"><tr><th>Source</th><th>Merged</th><th>Triples</th><th>Reach</th><th>Complete</th><th>Score</th></tr>${sources}</table></td></tr>`;
 }
 function drawBoard() {
   const rows = boardData[boardTab] || [];
@@ -240,7 +242,7 @@ $("board-open").onclick = async () => {
   } catch { $("board").innerHTML = `<p class="gx-muted">The leaderboard is published with the site.</p>`; }
 };
 $("board-curate").onclick = () => { $("board-dialog").close(); openCurate(); };
-// The papers the service keeps because this reader agreed, each with a way to withdraw.
+// The sources the service keeps because this reader agreed, each with a way to withdraw.
 async function showKept() {
   try {
     const r = await call("GET", "/kept");
@@ -296,7 +298,7 @@ async function startCuration(again = false) {
   $("curate-start").disabled = !token;
 }
 $("curate-start").onclick = () => startCuration();
-// The commons holds the paper already, or an open contribution adds it: nothing was curated and nothing spent.
+// The commons holds the source already, or an open contribution adds it: nothing was curated and nothing spent.
 function showKnown(k) {
   const commons = manifest.find((e) => e.id === "catal-commons");
   $("curate-job").innerHTML = (k.in_commons
@@ -311,42 +313,81 @@ function showKnown(k) {
   $("known-mine")?.addEventListener("click", () => followJob(k.same_as.job, true));
   $("known-again").onclick = () => startCuration(true);
 }
-// An inbox job (inbox) waits its turn on the service's computer and stays readable, so it is followed more slowly.
+// A job under way is kept in this tab (its id), so that following it survives a reload or a sign-in; a reply lost on
+// the way is asked for again, and the service forgets the result only when the page says it has it. An inbox job
+// (inbox) waits its turn on the service's computer and stays readable in the reader's inbox, so it is followed more
+// slowly and never forgotten from here.
+const JOB = "scale-job";
 async function followJob(id, inbox = false) {
   const job = $("curate-job");
-  for (;;) {
+  store.set(JOB, JSON.stringify({ id, inbox }));
+  for (let misses = 0; ;) {
     let j;
-    try { j = await call("GET", `/jobs/${id}`); } catch (e) { job.innerHTML = `<span class="gx-err">${esc(e.message)}</span>`; return; }
+    try { j = await call("GET", `/jobs/${id}`); misses = 0; } catch (e) {
+      const lost = e.status === 404 || e.status === 401;
+      if (e.status === 404) store.set(JOB, "");
+      if (lost || ++misses > 10) {
+        job.innerHTML = `<span class="gx-err">${esc(e.message)}${e.status === 401 ? "; sign in again to see the job" : ""}</span>`;
+        return;
+      }
+      job.innerHTML = `<div class="gx-subtle">The service did not answer (${esc(e.message)}); asking again…</div>`;
+      await new Promise((r) => setTimeout(r, Math.min(3000 * misses, 30000)));
+      continue;
+    }
     const log = (j.log || []).slice(-12).map((l) => `<li>${esc(l.t)} s · ${esc(l.msg)}</li>`).join("");
     const src = j.source ? `<div class="gx-subtle">${esc(j.source.pages)} pages · rights: ${esc(j.source.rights_class)} · schema ${esc(j.source.schema_version)}</div>` : "";
     const wait = j.position ? `<div class="gx-subtle">${esc(j.position)} ${j.position > 1 ? "sources wait" : "source waits"} before yours</div>` : "";
     job.innerHTML = `<div class="gx-state">${esc(j.state)}</div>${src}${wait}<ol>${log}</ol>`;
-    if (j.known) { showKnown(j.known); return; }
+    if (j.known) { store.set(JOB, ""); showKnown(j.known); return; }
     if (j.state === "done") {
       job.innerHTML += `<div>${esc(j.summary || "")}</div>`
         + (j.withheld ? `<div class="gx-subtle">${esc(j.withheld)} quotes withheld for the source's rights (their sha256 kept).</div>` : "")
         + `<div class="gx-subtle">The graph is open on the canvas and private to you. Its card on the left downloads it or contributes it to catal-commons.</div>`;
       await openCurated(j.graph, j.receipt);
+      collected(id, inbox);
       return;
     }
     if (j.state === "failed") {
       job.innerHTML += `<div class="gx-err">${esc(j.error)}</div>`;
+      collected(id, inbox);
       return;
     }
     await new Promise((r) => setTimeout(r, inbox ? 10000 : 3000));
   }
 }
-// A graph the service just curated: opened like any other, with the service's receipt, which alone lets it be
-// contributed (only that graph, unchanged, by the user it was curated for).
+function collected(id, inbox) {
+  store.set(JOB, "");
+  if (!inbox) call("POST", `/jobs/${id}/done`).catch(() => { /* the service forgets it within the hour anyway */ });
+}
+// The reader's own graph (curated by the service just now, or opened from a file) is kept in this tab with the
+// service's receipt, and the address names it like any other (#g=…): a sign-in, which leaves the page and comes back,
+// or a reload opens it again, and it stays in the list when another graph is opened.
+const OWN = "scale-own";
+let own = null;                                      // { entry, text, receipt }
+async function openOwn(entry, text, receipt = null) {
+  const doc = JSON.parse(text);
+  if (!Array.isArray(doc.nodes) || !Array.isArray(doc.links)) throw new Error("no nodes and links");
+  own = { entry, text, receipt };
+  store.set(OWN, "");                                 // a graph too large to keep must not leave an older one behind
+  own.kept = store.set(OWN, JSON.stringify(own));    // false when it is too large for the tab's storage
+  if (new URLSearchParams(location.hash.slice(1)).get("g") !== entry.id) history.pushState(null, "", `#g=${encodeURIComponent(entry.id)}`);
+  await showOwn();
+}
+async function showOwn() {
+  await openGraph(own.entry, own.text);
+  G.receipt = own.receipt;
+  G.contrib = own.receipt ? `<span class="gx-subtle">Checking catal-commons…</span>` : "";
+  renderGraphs();
+  if (!own.kept) status("This graph is too large to keep in this tab: download it before you sign in or reload.");
+  if (own.receipt) checkContribution();
+}
+// A graph the service just curated, with its receipt, which alone lets it be contributed (only that graph, unchanged,
+// by the user it was curated for).
 async function openCurated(doc, receipt) {
   if (!doc) return;
   const title = doc.graph?.title || "Curated source";
   const entry = { id: `curated-${title.toLowerCase().replace(/\W+/g, "-").slice(0, 40)}`, title, from: "service" };
-  await openGraph(entry, JSON.stringify(doc));
-  G.receipt = receipt || null;
-  G.contrib = receipt ? `<span class="gx-subtle">Checking catal-commons…</span>` : "";
-  renderGraphs();
-  if (receipt) checkContribution();
+  await openOwn(entry, JSON.stringify(doc), receipt || null);
 }
 function downloadGraph() {
   const B = G.base || G;
@@ -383,6 +424,7 @@ async function contribute() {
   try {
     const o = await call("POST", "/contribute", { graph: B.doc, receipt: B.receipt });
     B.receipt = null;
+    if (own && own.entry === B.entry) { own.receipt = null; store.set(OWN, JSON.stringify(own)); }
     setContrib(o.pull_request ? `Opened <a href="${esc(o.pull_request.url)}" target="_blank" rel="noopener">pull request #${esc(o.pull_request.number)}</a>. Thank you.`
       : "It is in catal-commons already, or proposed.");
   } catch (e) { $("contrib-go").disabled = false; setContrib(contribHtml() + `<div class="gx-err">${esc(e.message)}</div>`); }
@@ -390,6 +432,8 @@ async function contribute() {
 
 async function start() {
   token = store.get("scale-token");
+  try { own = JSON.parse(store.get(OWN) || "null"); } catch { own = null; }
+  if (own) own.kept = true;
   readSignIn();
   renderAccount();
   try { manifest = (await (await fetch("data/graphs.json")).json()).graphs || []; } catch { manifest = []; }
@@ -397,15 +441,25 @@ async function start() {
   window.onhashchange = () => openFromHash();
   $("graph-file").onchange = async (e) => {
     const f = e.target.files[0];
+    e.target.value = "";                            // the same file can be opened again
     if (!f) return;
-    try { await openGraph({ id: f.name.replace(/\W+/g, "-"), title: f.name.replace(/\.json$/, ""), from: "" }, await f.text()); }
-    catch (err) { alert(`not a graph: ${err.message}`); }
+    const base = f.name.replace(/\.(json|zip)$/i, "");
+    try {
+      if (/\.zip$/i.test(f.name)) {                 // a knowledge-graph bundle (scale graph export --to kg-bundle)
+        status("Reading the bundle…");
+        const b = await readBundle(f);
+        await openOwn({ id: `bundle-${base.replace(/\W+/g, "-")}`, title: b.version ? `${b.title} (v${b.version})` : b.title, from: "" }, JSON.stringify(b.doc));
+      } else await openOwn({ id: `file-${base.replace(/\W+/g, "-")}`, title: base, from: "" }, await f.text());
+    } catch (err) { status(ready()); alert(`Not a graph or a graph bundle: ${err.message}`); }
   };
+  let pending = null;                               // a job followed before a reload or a sign-in: follow it again
+  try { pending = JSON.parse(store.get(JOB) || "null"); } catch { /* none */ }
+  if (pending?.id && token && SERVICE) { openCurate(); $("curate-job").hidden = false; followJob(pending.id, !!pending.inbox); }
   await openFromHash();
 }
 
 function renderGraphs() {
-  const list = G && !manifest.includes(G.entry) ? [G.entry, ...manifest] : manifest;
+  const list = own ? [own.entry, ...manifest] : manifest;
   $("graphs").innerHTML = list.map((e) => {
     const [scope, c] = scopeOf(e), active = G && G.entry === e, open = active && !folded;
     return `<div role="listitem"><button class="gx-graph-item${active ? " is-active" : ""}" type="button" data-id="${esc(e.id)}" title="${esc(e.title)}"
@@ -427,7 +481,7 @@ function renderGraphs() {
       $("graphs").querySelector(".gx-graph-item.is-active")?.focus();
       return;
     }
-    const e = manifest.find((x) => x.id === b.dataset.id);
+    const e = (own ? [own.entry, ...manifest] : manifest).find((x) => x.id === b.dataset.id);
     if (e) location.hash = `g=${encodeURIComponent(e.id)}`;
   }));
 }
@@ -516,6 +570,10 @@ function showGraph() {
 
 async function openFromHash() {
   const want = new URLSearchParams(location.hash.slice(1)).get("g");
+  if (own && own.entry.id === want) {
+    if (!(G && G.entry === own.entry)) await showOwn();
+    return;
+  }
   const entry = manifest.find((g) => g.id === want) || manifest[0];
   if (!entry || (G && G.entry === entry)) return;
   status(`Loading ${entry.title}…`);
@@ -594,6 +652,8 @@ function value(v) {
     const shown = `${esc(num)}${v.unit && v.unit !== "1" ? ` ${esc(v.unit)}` : ""}`;
     return v.as_reported && String(v.as_reported) !== String(num) ? `${shown} <span class="gx-subtle">(as reported: ${esc(v.as_reported)})</span>` : shown;
   }
+  const parts = Object.entries(v);                  // a map of values (conditions, a feed's composition): one per name
+  if (parts.length && parts.every(([, x]) => x && typeof x === "object" && "status" in x)) return parts.map(([k, x]) => `${esc(k.replace(/_/g, " "))}: ${value(x)}`).join("; ");
   return `<code>${esc(JSON.stringify(v))}</code>`;
 }
 const idLinks = (html) => html.replace(/((?:ex|scale|[a-z][a-z0-9-]*):[A-Za-z0-9_.\/#-]+)/g,

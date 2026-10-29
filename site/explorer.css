@@ -237,7 +237,7 @@ body[data-resizing] { cursor: col-resize; user-select: none; }
   .gx-show, #rail-collapse, #inspector-collapse, .gx-resizer { display: none !important; }
 }
 
-/* curating a publication: the dialog, its job log, and the commons on a curated graph's card */
+/* curating a source: the dialog, its job log, and the commons on a curated graph's card */
 button.gx-add-graph { width: 100%; font: inherit; color: inherit; cursor: pointer; }
 .gx-curate { width: min(520px, 94vw); }
 .gx-curate input[type=text], .gx-curate input[type=file] { display: block; width: 100%; margin-top: 4px; padding: 6px 9px;
@@ -279,9 +279,9 @@ button.gx-add-graph { width: 100%; font: inherit; color: inherit; cursor: pointe
 .gx-board-row.is-me { box-shadow: inset 3px 0 0 var(--blue); }
 .gx-board-more td { padding-top: 2px; }
 .gx-board-gap td { text-align: center; color: var(--subtle); border-bottom: 0; }
-.gx-board-papers { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 4px; }
-.gx-board-papers th, .gx-board-papers td { padding: 3px 6px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
-.gx-board-papers th:first-child, .gx-board-papers td:first-child, .gx-board-papers th:nth-child(2), .gx-board-papers td:nth-child(2) { text-align: left; }
+.gx-board-sources { width: 100%; border-collapse: collapse; font-size: 11.5px; margin-top: 4px; }
+.gx-board-sources th, .gx-board-sources td { padding: 3px 6px; border-bottom: 1px solid var(--line); text-align: right; font-variant-numeric: tabular-nums; }
+.gx-board-sources th:first-child, .gx-board-sources td:first-child, .gx-board-sources th:nth-child(2), .gx-board-sources td:nth-child(2) { text-align: left; }
 .gx-level { display: inline-block; margin-left: 6px; padding: 1px 7px; border-radius: 999px; font-size: 10.5px; font-weight: 500;
   background: color-mix(in oklab, var(--muted) 14%, transparent); color: var(--muted); }
 .gx-level-curator { background: color-mix(in oklab, var(--blue) 14%, transparent); color: var(--blue); }

@@ -56,8 +56,10 @@ def unsign(cfg: Config, token: str) -> dict | None:
     return payload if payload.get("exp", 0) > time.time() else None
 
 
+# Every token the service signs names what it is for ("use"), and each check accepts only its own kind: a receipt,
+# which lives a week, never signs anyone in, and a session never stands for a receipt.
 def session_for(cfg: Config, login: str) -> str:
-    return sign(cfg, {"sub": login.lower(), "exp": int(time.time()) + cfg.session_ttl_s})
+    return sign(cfg, {"use": "session", "sub": login.lower(), "exp": int(time.time()) + cfg.session_ttl_s})
 
 
 def admitted(cfg: Config, login: str | None) -> bool:
@@ -69,8 +71,8 @@ def user_of(cfg: Config, header: str | None) -> str | None:
     """The admitted login an ``Authorization: Bearer`` header carries, else None."""
     if not header or not header.startswith("Bearer "):
         return None
-    p = unsign(cfg, header[7:].strip())
-    login = (p or {}).get("sub")
+    p = unsign(cfg, header[7:].strip()) or {}
+    login = p.get("sub") if p.get("use") == "session" else None
     return login if admitted(cfg, login) else None
 
 
@@ -191,12 +193,12 @@ def graph_digest(graph: dict) -> str:
 
 def receipt(cfg: Config, owner: str, graph: dict, entry: dict) -> str:
     """What the service signs for a graph it curated: whose it is, its digest and its source's rights, a week long."""
-    return sign(cfg, {"sub": owner, "g": graph_digest(graph), "r": entry, "exp": int(time.time()) + 7 * 86400})
+    return sign(cfg, {"use": "receipt", "sub": owner, "g": graph_digest(graph), "r": entry, "exp": int(time.time()) + 7 * 86400})
 
 
 def check_receipt(cfg: Config, token: str, owner: str, graph: dict) -> dict | None:
     """The rights entry a receipt signs, when it is the owner's and for this very graph; else None."""
     p = unsign(cfg, token or "")
-    if not p or p.get("sub") != owner or p.get("g") != graph_digest(graph):
+    if not p or p.get("use") != "receipt" or p.get("sub") != owner or p.get("g") != graph_digest(graph):
         return None
     return p.get("r")
