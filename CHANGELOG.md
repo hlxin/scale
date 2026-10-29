@@ -28,6 +28,17 @@
   browser and says the service is not configured, and it shows no Sign in button while there is no service. The
   service's code stays (the inbox, `SCALE_WEB_INBOX`; questions answered by Claude Code, `SCALE_WEB_ASK`), off unless
   set.
+
+## v0.3.0 — 2026-10-29
+
+Schema 0.7.8 (from 0.2.0, with breaking changes on the way: a document at an earlier version stays valid under it
+and moves with `scale graph migrate`), the `scale-catal` tools 0.3.0 and nine skills (index-sources, fetch-corpus and
+curate-corpus replace curate-source and curate-dataset). Since v0.2.0: quantity contracts and a scientific comparison
+mode in queries; each result recorded on its own; computed energies compared under explicit definitions; syntheses,
+calculation methods and many catalysis subdomains; mappings to ontology terms and to QUDT; `graphs/` with
+catal-commons and contributions to it; one source into a graph (`scale source`), the web service and the graph
+explorer site.
+
 - **The explorer opens a knowledge-graph bundle (no schema change).** Requested by @hlxin: "Open a graph or bundle" in
   the explorer takes the zip `scale graph export --to kg-bundle` makes (docs/kg-bundle-format.md) as well as a graph
   file, and shows its graph like any other: its sources (the bundle's Publications), values as reported, typed

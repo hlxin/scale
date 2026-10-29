@@ -1,0 +1,2962 @@
+kernel: scale-kernel
+status: candidate
+maturity: provisional
+format:
+  description: |
+    Node-link JSON, as written by NetworkX and read by D3:
+      {"directed": true, "multigraph": true, "graph": {...}, "nodes": [...], "links": [...]}
+    A node is {"id", "label", "props"}; a link is {"id", "source", "target", "type", "props"}.
+    Ids are CURIE-like ("prefix:path") and unique across nodes and links. Several links may join
+    the same two nodes (a multigraph): each source's statement is its own link.
+    Endpoint and reference lists name labels; a label stands for itself and every label that is_a
+    it. ANY (a scalar, never inside a list) is every concrete label; {any_except: [...]} every other.
+  graph_props:
+    required:
+    - schema
+    - schema_version
+    - graph_id
+    - title
+    - data_status
+    properties:
+      schema:
+        type: string
+        description: Always "scale-catal".
+      schema_version:
+        type: string
+      graph_id:
+        type: string
+      title:
+        type: text
+        description: What the graph covers and what it leaves out.
+      data_status:
+        type: enum
+        values:
+        - research_data
+        - synthetic_example
+        - mixed
+      domains:
+        type: list
+        items:
+          type: string
+      description:
+        type: text
+      stewardship:
+        type: stewardship
+        description: The default stewardship of every node and link. Required for research_data graphs.
+      filtered_for:
+        type: text
+        description: Set by `scale graph filter`; which viewer the graph was filtered for and what was
+          withheld.
+      follows_domains:
+        type: list
+        items:
+          type: string
+        description: Domains every node follows unless it declares its own, as name or name@version (e.g.
+          thermocatalysis@0.1.0). A node follows a domain's checklist; the domain's vocabulary is available
+          to every document.
+property_types:
+  string: A short string.
+  text: Free text.
+  integer: An integer.
+  number: A number.
+  boolean: true or false.
+  enum: One of the listed values.
+  ref: The id of a node whose label is one of the listed targets (or a label that is_a one of them).
+  list: A list of items of one type.
+  map: An object whose keys are snake_case names and whose values have one type.
+  value: A value object (below).
+  evidence: An evidence item (below).
+  record_ref: A reference to a record or to one property of it (below).
+  stewardship: A stewardship object (below).
+  date: An ISO 8601 calendar date at the precision the source gives — YYYY, YYYY-MM or YYYY-MM-DD.
+  datetime: An ISO 8601 date-time with a time zone, e.g. 2026-09-27T14:05:00Z.
+  status_check: Whether a source or dataset was checked for notices (retraction, correction, concern),
+    when and how (the status_check structure).
+value:
+  fields:
+    status:
+      type: enum
+      values:
+      - present
+      - not_reported
+      - not_measured
+      - not_applicable
+      - below_detection_limit
+      - below_quantification_limit
+      description: Required. Missing values are declared, never filled in.
+    missing_reason:
+      type: enum
+      values:
+      - not_stated_in_source
+      - not_curated
+      - ambiguous_in_source
+      - withheld
+      - not_extractable
+      description: |
+        Why a not_reported value is missing. not_curated = the curator did not look;
+        ambiguous_in_source = the source states it inconsistently (keep the variants in note and
+        the passages in evidence); withheld = known but not shared.
+    value:
+      type: number
+      description: The number in the unit the source used. No unit conversion is implied.
+    lower:
+      type: number
+      description: Lower end of a reported range ("250–260 °C").
+    upper:
+      type: number
+    bound:
+      type: enum
+      values:
+      - upper
+      - lower
+      description: The number is a one-sided bound ("did not exceed 1 %", "at least 2").
+    text_value:
+      type: text
+      description: A category or ordinal level (a reference-electrode type, "high", "amorphous").
+    boolean_value:
+      type: boolean
+    ref_value:
+      type: ref
+      targets: ANY
+      description: A value that is a record (the species that was the major product).
+    unit:
+      type: string
+      description: The unit as reported ("°C", "atm", "%", "1" for dimensionless). Numbers only.
+    qualifier:
+      type: enum
+      values:
+      - exact
+      - approximate
+    uncertainty:
+      type: number
+      description: A symmetric uncertainty (≥ 0) of the kind given in uncertainty_kind.
+    interval_lower:
+      type: number
+      description: Lower end of an uncertainty or confidence interval, when it is asymmetric or stated
+        as an interval.
+    interval_upper:
+      type: number
+    uncertainty_kind:
+      type: enum
+      values:
+      - standard_uncertainty
+      - combined_standard_uncertainty
+      - expanded_uncertainty
+      - standard_deviation
+      - standard_error
+      - confidence_interval
+      - plus_minus_unspecified
+    uncertainty_evaluation:
+      type: enum
+      values:
+      - type_a
+      - type_b
+      - type_a_and_b
+      - not_stated
+      description: GUM evaluation method (statistical analysis of series, other means, or both).
+    coverage_factor:
+      type: number
+      description: k of an expanded uncertainty.
+    confidence_level:
+      type: number
+      description: Between 0 and 1 (0.95 for a 95 % interval).
+    replicates:
+      type: integer
+      description: Number of independent determinations behind the value (n ≥ 1).
+    variable:
+      type: ref
+      targets:
+      - Variable
+      description: The measurand or factor this is a value of.
+    target:
+      type: ref
+      targets: ANY
+      description: The entity the value refers to (the product species of a yield). Profiles may narrow
+        it, and a domain narrows the targets a context reads (context_targets).
+    unresolved_target:
+      type: text
+      maturity: provisional
+      description: What the value refers to, as the source names it, when that is not one record (a group or a class of
+        products, a product the source does not identify, the remainder a balance leaves, such as "C2+ products",
+        "unidentified oxygenates" or "unaccounted"). It goes without target, so that a value whose product is unknown
+        stays explicit;
+        it is never read as any one species, and a comparison of species leaves it out.
+    id:
+      type: string
+      maturity: provisional
+      description: The value's identifier in its record (snake_case, never only digits), unique among the record's
+        values. A result entry (Experiment.result_values) has one, and a record_ref names a list entry by it
+        (/result_values/<id>), so the entry keeps its identity when its list is appended to, reordered, migrated or
+        filtered.
+    phase:
+      type: enum
+      maturity: provisional
+      values:
+      - gas
+      - liquid
+      - solid
+      - supercritical
+      - adsorbed
+      - mixed
+      description: The phase the value was measured in or refers to (the gas a chromatograph samples, the liquid
+        electrolyte an NMR spectrum is taken of). One product's results in two phases are two results.
+    stream:
+      type: text
+      maturity: provisional
+      description: The stream or part of the system the value was measured in, as the source names it (the outlet gas,
+        the catholyte, the condensate, the headspace), as FEEDS_INTO names one. With phase, it says what a result
+        covers and what a balance includes.
+    as_reported:
+      type: text
+      description: The source's own wording when it differs from the structured value.
+    basis:
+      type: text
+      description: What the value is normalized to or computed on.
+    definition:
+      type: text
+    origin:
+      type: enum
+      values:
+      - reported
+      - measured
+      - derived
+      - computed
+      - fitted
+      - predicted
+      - assumed
+      description: |
+        Set when the value's origin differs from its record's. fitted = obtained by fitting data
+        (it cannot count as a successful prediction of the same data); assumed = set by the author,
+        not measured.
+    produced_by:
+      type: ref
+      targets:
+      - Experiment
+      description: The experiment that produced the value when it sits on another record (a measured,
+        derived, computed or fitted value).
+    calibration:
+      type: ref
+      targets:
+      - Experiment
+      description: The calibration the value depends on (metrological traceability).
+    normalized_by:
+      type: record_ref
+      maturity: provisional
+      description: The record, and with path the value, that a normalized quantity is divided by, where the denominator
+        must be identified (the electrode area of a current density, the catalyst mass or bed volume of a space
+        velocity, the site inventory of a turnover frequency). Only on a value whose quantity contract declares a
+        denominator. The value it names keeps its own origin, so whether the denominator was measured, derived,
+        computed or assumed stays what that value says.
+    evidence_ids:
+      type: list
+      items:
+        type: string
+      description: Ids of the owning record's evidence items that state this value.
+    note:
+      type: text
+  rules:
+  - status is required.
+  - present needs exactly one representation — a number (value, or lower and upper) with a unit, text_value,
+    boolean_value or ref_value.
+  - below_detection_limit and below_quantification_limit need value (the limit) and unit.
+  - not_reported, not_measured and not_applicable carry no representation; missing_reason goes only with
+    not_reported.
+  - lower and upper come together, lower ≤ upper, and not together with value; bound needs value.
+  - uncertainty ≥ 0 and needs uncertainty_kind; interval_lower and interval_upper come together, ordered,
+    and need uncertainty_kind.
+  - confidence_interval needs confidence_level; expanded_uncertainty needs coverage_factor or confidence_level;
+    0 < confidence_level < 1; replicates ≥ 1.
+  - origin derived, computed or fitted names produced_by; evidence_ids name evidence items of the owning
+    record.
+  - A value of a property bound to a quantity contract (quantities) is in a unit of one of its kind's dimensions;
+    normalized_by goes only on a value whose kind declares a denominator, resolves (with its path) to a value object,
+    and names a value of the denominator's dimensions (and, where the denominator names kinds, a value of one of them).
+  - A value divided by a one-sided bound (its normalized_by names a value with bound) is a bound the other way (a rate
+    divided by at most N sites is at least the quotient) and states it (bound); one that does not is reported (a
+    warning) and kept as reported, and a scientific comparison shows the bound of what it is divided by.
+  - A value of a kind whose denominator is marked unstated (a turnover frequency) says how it was calculated (its
+    normalized_by names what it is divided by, or its basis or definition says it); one that says neither is reported
+    (a warning) and kept as reported. Its basis says how it was calculated, so a scientific comparison reads it, and
+    compares the value whatever it says.
+  - target and unresolved_target do not go together; a target a domain narrows for a context (context_targets) names
+    a record of one of its labels.
+  - A context read from a value's producer (a computed energy's level_of_theory and charge_treatment) is read from the
+    experiment its produced_by names, then from the experiment that holds it; a producer whose label has no such property
+    (a measurement, a fit) has none, and its values are compared apart from the others, never left out. A value whose kind
+    shows a property with warn (a free energy's temperature) and whose producer states none is reported (a warning) and
+    kept as reported.
+  - id is snake_case and not only digits, and no two values of a record share one.
+evidence:
+  description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
+    when the source text is supplied.
+  required:
+  - source
+  - locator
+  - kind
+  fields:
+    id:
+      type: string
+      description: Optional; unique within its record. Lets values (evidence_ids) and arguments (record_ref)
+        cite one passage.
+    source:
+      type: ref
+      targets:
+      - Source
+      - Dataset
+    locator:
+      type: text
+      description: Page, section, table, figure or dataset row.
+    kind:
+      type: enum
+      values:
+      - text
+      - table
+      - figure
+      - dataset_row
+      - computation
+      - curation_note
+    evidence_type:
+      type: string
+      description: ECO evidence type (e.g. ECO:0000006 experimental evidence, ECO:0007672 computational
+        evidence).
+    quote:
+      type: text
+      description: A short verbatim excerpt; only text found verbatim in the source goes here.
+    note:
+      type: text
+      description: A reading or remark that is not verbatim.
+    passage:
+      type: string
+      description: |-
+        The id of the source passage the quote was found in (a page or part of a page), as listed
+        in the passage index built by `scale graph index`; lets a search over passages and their
+        vectors return the records that cite them.
+    reading:
+      type: enum
+      values:
+      - text_layer
+      - ocr
+      - vision
+      - vision_ocr
+      description: 'How the evidence was read: from the PDF''s text layer, from OCR, from the page image
+        by a vision-capable curator, or from the image and checked against OCR in the same region (vision_ocr).
+        Absent means text_layer or ocr, as the page text records.'
+    region:
+      type: list
+      items:
+        type: number
+      description: 'Where on the page (the locator''s PDF page) the evidence was read: x0, y0, x1, y1
+        as fractions of the page width and height, origin at the top left.'
+    transcription:
+      type: text
+      description: What the curator read in the region, character for character as printed (a table row,
+        a caption, the numbers of a figure point), for evidence read from the page image. The values of
+        the record must appear in it. It is a reading, not a verbatim text-layer quote.
+    agreement:
+      type: enum
+      values:
+      - agree
+      - partial
+      - disagree
+      - no_ocr
+      description: 'Set by the curation tool, never by the curator: whether the numbers of the transcription
+        are also read by OCR in the same region (look-alike characters allowed). agree confirms the reading;
+        partial, disagree and no_ocr require a second_reading.'
+    second_reading:
+      type: text
+      description: An independent second visual reading of the same region by another curator, who did
+        not see the first transcription; its numbers must agree with the transcription for the evidence
+        to count where OCR does not confirm it.
+record_ref:
+  description: |
+    A reference to a record, or to one part of it: a result of an experiment, a value on a
+    sample, an evidence item. Values and evidence stay on their owning records; arguments and
+    tests point at them.
+  required:
+  - record
+  fields:
+    record:
+      type: string
+      description: The id of a node or link.
+    path:
+      type: string
+      description: JSON pointer into the record's props, e.g. /results/space_time_yield or /evidence/2. A step into a
+        list may name an item by its id instead of its position (/result_values/meoh_yield_gc, /evidence/e3); an entry
+        of result_values is named so, never by its position, so that no reordering, appending or filtering of the list
+        makes the reference name another result.
+    record_version:
+      type: integer
+      description: The record_version referred to, when the record may be revised.
+stewardship:
+  description: |
+    Who contributed and curated a record, which project it belongs to and who may see it. The
+    graph header's stewardship is the default for every node and link; a record's own
+    stewardship overrides it field by field.
+  fields:
+    contributed_by:
+      type: list
+      items:
+        type: ref
+        targets:
+        - Institution
+    curated_by:
+      type: list
+      items:
+        type: ref
+        targets:
+        - Person
+        - Software
+    project:
+      type: ref
+      targets:
+      - Project
+    access:
+      type: enum
+      values:
+      - public
+      - consortium
+      - project
+      - institution
+      - embargoed
+      description: |
+        public: anyone. consortium: any institution in a project of the graph. project: the
+        record's project. institution: the contributing institutions. embargoed: the contributing
+        institutions until embargo_until, then access_after_embargo.
+    embargo_until:
+      type: date
+    access_after_embargo:
+      type: enum
+      values:
+      - public
+      - consortium
+      - project
+      - institution
+    licence:
+      type: text
+    note:
+      type: text
+  rules:
+  - A research_data graph declares stewardship with contributed_by, project and access.
+  - embargoed requires embargo_until and access_after_embargo; they are used only with embargoed.
+common:
+  node:
+    required:
+    - name
+    properties:
+      name:
+        type: text
+      origin:
+        type: enum
+        values:
+        - reported
+        - recorded
+        - derived
+        - computed
+        - curated
+        - hypothesized
+        - synthetic
+        description: |
+          reported = taken from a source; recorded = first-hand data written in the project
+          (requires recorded_at); derived = computed or normalized from reported values; curated =
+          added by a curator; hypothesized = proposed by a person or agent, not by a source.
+      evidence:
+        type: list
+        items:
+          type: evidence
+      description:
+        type: text
+      note:
+        type: text
+      unmodeled:
+        type: list
+        items:
+          type: text
+        description: Source context this schema cannot yet express; raised as a gap.
+      stewardship:
+        type: stewardship
+      identifiers:
+        type: map
+        items:
+          type: string
+        description: External identifiers (doi, orcid, ror, inchikey, an ontology IRI).
+      recorded_at:
+        type: datetime
+        description: When this version of the record was written into the graph.
+      record_version:
+        type: integer
+        description: Version of the record, starting at 1; a new version REVISES the previous one.
+      follows_domains:
+        type: list
+        items:
+          type: string
+        description: Domains this node follows, replacing the graph's list; an empty list follows none.
+  link:
+    properties:
+      stewardship:
+        type: stewardship
+      recorded_at:
+        type: datetime
+      status:
+        type: enum
+        values:
+        - asserted
+        - hypothesized
+        - supported
+        - disputed
+        - refuted
+        description: Epistemic status of the relationship as the source states it.
+      origin:
+        type: enum
+        values:
+        - reported
+        - recorded
+        - derived
+        - computed
+        - curated
+        - hypothesized
+        - synthetic
+      evidence:
+        type: list
+        items:
+          type: evidence
+      basis:
+        type: text
+      confidence:
+        type: number
+        description: A curator's confidence in the extraction, 0 to 1. Not a scientific probability.
+      note:
+        type: text
+extensions:
+  key_pattern: ^_[a-z0-9]+_[a-z0-9_]+$
+  registry: registry/extension-prefixes.yaml
+  description: |
+    A property no module declares may appear only as an extension key _<prefix>_<name>, with a
+    registered prefix. Readers keep extension keys; the validator does not check their values. An
+    extension never changes the meaning of a declared property; useful ones graduate into a module.
+nodes:
+  Question:
+    maps_to:
+    - ORKG ResearchProblem
+    - discourse-graph Question
+    description: A research question or problem, with its scope. Designs, experiments, hypotheses and
+      claims address it.
+    required:
+    - statement
+    properties:
+      statement:
+        type: text
+      scope:
+        type: text
+      question_status:
+        type: enum
+        values:
+        - open
+        - addressed
+        - answered
+        - abandoned
+  Hypothesis:
+    maps_to:
+    - EXPO ExperimentalHypothesis
+    - SIO hypothesis
+    - IAO hypothesis textual entity
+    description: |
+      A conjectured, testable statement about how or why the studied system behaves. It is not a
+      finding: experiments TEST it, and its standing follows from the outcomes. Conclusions about it
+      are Claims ABOUT it; accumulating support does not turn it into a Claim.
+    required:
+    - statement
+    - hypothesis_kind
+    properties:
+      statement:
+        type: text
+      formal_statement:
+        type: text
+      hypothesis_kind:
+        type: enum
+        values:
+        - explanatory
+        - mechanistic
+        - causal
+        - descriptive
+        - auxiliary
+        - competing
+        description: auxiliary = an assumption needed to derive predictions; competing = an alternative
+          explanation (a confounder, a bias, a design effect).
+      statistical_role:
+        type: enum
+        values:
+        - 'null'
+        - alternative
+        - not_applicable
+        description: EXPO NullHypothesis H0 / alternative H1, when the hypothesis is tested statistically.
+      refuted_if:
+        type: text
+        description: What observation would refute it, when stated.
+      scope:
+        type: text
+      proposed_at:
+        type: date
+        description: When the hypothesis was first proposed (from the source), not when it was recorded.
+      hypothesis_status:
+        type: enum
+        values:
+        - proposed
+        - under_test
+        - supported
+        - disputed
+        - refuted
+        - superseded
+        - retracted
+  Prediction:
+    maps_to:
+    - EXPO deduced consequence
+    - hypothetico-deductive prediction
+    description: |
+      An expected outcome derived from a hypothesis or a model: an expected value of a variable,
+      or a qualitative expectation. Its proposed_at is compared with the start of the experiment
+      that tests it; a prediction proposed after the result is post hoc.
+    properties:
+      statement:
+        type: text
+      expected:
+        type: value
+      variable:
+        type: ref
+        targets:
+        - Variable
+      direction:
+        type: enum
+        values:
+        - increase
+        - decrease
+        - no_change
+        - value
+        - qualitative
+      proposed_at:
+        type: date
+  Experiment:
+    maps_to:
+    - EXPO ScientificExperiment
+    - OBI planned process
+    - OBI assay
+    - PROV-O Activity
+    description: |
+      A research method carried out to produce information about target variables of a studied
+      system: a laboratory test, a characterization, a field observation, a simulation, a fit or a
+      re-analysis of data. Modules specialize it. Its conditions and results are properties of
+      the node (or of its specialization); a result that is a value of a Variable names it.
+    properties:
+      experiment_kind:
+        type: enum
+        values:
+        - physical
+        - computational
+        description: EXPO. A fit or a re-analysis of existing data is computational.
+      manipulation:
+        type: enum
+        values:
+        - interventional
+        - observational
+        - not_reported
+        description: interventional = the experimenter sets the factors; observational = they vary without
+          intervention.
+      approach:
+        type: enum
+        values:
+        - hypothesis_driven
+        - exploratory
+        - not_reported
+        description: EXPO Galilean (tests a hypothesis) or Baconian (forms hypotheses, e.g. a screen).
+      goal:
+        type: enum
+        values:
+        - confirm
+        - investigate
+        - explain
+        - compute
+        - benchmark
+        - calibrate
+        - validate
+      method_id:
+        type: string
+        description: An identifier of the method or technique (OBI, CHMO, STATO term), when known.
+      experiment_status:
+        type: enum
+        values:
+        - proposed
+        - planned
+        - running
+        - completed
+        - failed
+        - aborted
+        description: The lifecycle of the experiment (proposed = suggested, e.g. by an agent, not yet
+          accepted).
+      freshness_status:
+        type: enum
+        values:
+        - current
+        - inputs_revised
+        - not_assessed
+        description: Separate from the lifecycle. inputs_revised = an input used has a newer version.
+      started_at:
+        type: datetime
+      finished_at:
+        type: datetime
+      performed_on:
+        type: date
+        description: The date the source gives, at its precision, when no datetime is known.
+      conditions:
+        type: map
+        items:
+          type: value
+      results:
+        type: map
+        items:
+          type: value
+      result_values:
+        type: list
+        maturity: provisional
+        items:
+          type: value
+        description: |
+          The experiment's results, one value object per result, each identified by what it is, of what, how, where and
+          when: its variable (required: a Variable, whose quantity_kind gives its contract, such as product_yield,
+          selectivity or faradaic_efficiency), its target (the product species; unresolved_target when the source does
+          not identify one), its producer (produced_by: the assay, a Characterization or an Analysis, with its
+          calibration, the reference standards it HAS_INPUT and the raw Dataset it HAS_OUTPUT), its phase and stream,
+          its basis and normalization (basis, normalized_by), and its interval (the producer's timing, else this
+          experiment's own: time on stream, duration, started_at). Each entry has an id (a record_ref names it
+          /result_values/<id>) and, when it states a number or a text, the evidence_ids of the items that state it. The
+          experiment holding an entry is its one owner: a result is recorded once, never also on another record. Two
+          results of one variable and target are distinct when their producer, phase, stream, basis or normalization
+          differ; entries that nothing tells apart are reported, never averaged. The scalar results (yield,
+          selectivity, conversion), the results map and the per-product lists (faradaic_efficiency, …) stay as they
+          are.
+      configuration:
+        type: ref
+        targets:
+        - Dataset
+        description: Input files or settings of a computational experiment.
+      execution_environment:
+        type: ref
+        targets:
+        - Dataset
+        description: Container image, environment lock file or hardware description.
+      random_seed:
+        type: integer
+  Procedure:
+    maps_to:
+    - EXPO experimental action
+    - OBI planned process
+    - PROV-O Activity
+    description: |
+      Something carried out on material things that is not itself an experiment: making,
+      treating, conditioning, sampling or disposing of them. Modules specialize it (Preparation,
+      Treatment). Inputs and outputs are HAS_INPUT and HAS_OUTPUT.
+    properties:
+      method:
+        type: text
+      method_id:
+        type: string
+      procedure_status:
+        type: enum
+        values:
+        - proposed
+        - planned
+        - running
+        - completed
+        - failed
+        - aborted
+      started_at:
+        type: datetime
+      finished_at:
+        type: datetime
+      performed_on:
+        type: date
+      conditions:
+        type: map
+        items:
+          type: value
+  Protocol:
+    maps_to:
+    - OBI plan specification
+    - EXPO PlanExperimentalActions
+    description: An intended, reusable plan for experiments or procedures — the plan, not an execution.
+    properties:
+      protocol_kind:
+        type: enum
+        values:
+        - synthesis
+        - treatment
+        - measurement
+        - analysis
+        - computation
+        - sampling
+        - other
+      steps:
+        type: list
+        items:
+          type: text
+      version:
+        type: string
+      uri:
+        type: string
+  Operation:
+    maps_to:
+    - SOSA/SSN Actuation (its time course)
+    - ISA-88 operation (procedural element)
+    - OBI planned process (execution regime)
+    description: |
+      How an experiment or procedure is operated in time. Static: the conditions are held.
+      Dynamic: they are programmed to change (pulses, cycles, ramps, switching, modulation). The
+      driving-force domains say what is driven (a potential, light, heat); the Operation says how
+      it varies. Any experiment or procedure, in any science, can be operated statically or
+      dynamically.
+    required:
+    - operation_mode
+    properties:
+      operation_mode:
+        type: enum
+        values:
+        - static
+        - dynamic
+      time_pattern:
+        type: enum
+        values:
+        - constant
+        - periodic
+        - step
+        - ramp
+        - programmed
+        - transient
+        - not_reported
+      varied_quantities:
+        type: list
+        items:
+          type: text
+        description: The quantities that change in a dynamic operation (e.g. electrode_potential, irradiance,
+          temperature).
+      period:
+        type: value
+      frequency:
+        type: value
+      duty_cycle:
+        type: value
+        quantity: fraction
+      cycles:
+        type: integer
+      total_duration:
+        type: value
+      segments:
+        type: list
+        items:
+          type: map
+          items:
+            type: value
+        description: |
+          The program, in order: each segment is a map of the values held in it, including its
+          duration (e.g. {electrode_potential: 0.2 V, duration: 2 s}).
+  Design:
+    maps_to:
+    - EXPO ExperimentalDesign
+    - OBI study design
+    - Fisher design of experiments
+    description: |
+      How a set of experiments is arranged to answer a question: which factors vary and at which
+      levels, which are held fixed, the controls, the experimental units, replication,
+      randomization, blocking and, for adaptive designs, the stopping rule. It states intent;
+      outcomes belong to the experiments (an analysis experiment may pool them).
+    properties:
+      design_kind:
+        type: enum
+        values:
+        - one_factor
+        - full_factorial
+        - fractional_factorial
+        - response_surface
+        - paired_comparison
+        - screening
+        - time_series
+        - adaptive
+        - observational_cohort
+        - meta_analysis
+        - other
+      assignment_method:
+        type: enum
+        values:
+        - randomized
+        - systematic
+        - adaptive
+        - convenience
+        - not_reported
+      randomization_seed:
+        type: integer
+      blocked:
+        type: boolean
+      blinding:
+        type: text
+      planned_replicates:
+        type: integer
+      inclusion_criteria:
+        type: text
+        description: For a meta-analysis or benchmark, which sources or records were admitted.
+      exclusion_criteria:
+        type: text
+      stopping_criterion:
+        type: text
+        description: For adaptive and autonomous campaigns.
+      strategy:
+        type: text
+        description: Normalization and quality-control strategy, in words (EXPO).
+  Variable:
+    maps_to:
+    - EXPO TargetVariable
+    - EXPO Factor
+    - STATO variable
+    - QUDT quantity kind
+    description: |
+      A quantity or quality that can take values in a study (a temperature, a metal loading, a
+      yield, a reference-electrode type). Its role (target, factor, controlled) belongs to a
+      design or an experiment, so it sits on the HAS_VARIABLE edge.
+    required:
+    - scale
+    properties:
+      scale:
+        type: enum
+        values:
+        - quantitative
+        - ordinal
+        - nominal
+        - boolean
+      quantity_kind:
+        type: string
+        description: The kind of quantity, required for quantitative variables. A kind the kernel declares (quantities,
+          kinds) brings its contract to the variable's unit and to every value that names the variable; any other kind
+          is recorded as stated and not checked.
+      unit:
+        type: string
+      categories:
+        type: list
+        items:
+          type: text
+        description: The allowed levels of an ordinal (in order) or nominal variable.
+      definition:
+        type: text
+      of:
+        type: ref
+        targets: ANY
+        description: What the variable is a property of, when fixed — usually an ObjectOfStudy or a module's
+          specialization of it.
+  Claim:
+    maps_to:
+    - EXPO ExperimentalConclusion
+    - SEPIO assertion
+    - micropublication claim
+    - nanopublication assertion
+    - discourse-graph Claim
+    description: |
+      A scoped statement drawn from evidence: a finding, a conclusion, a generalization, a law or a
+      proposed mechanism, with its epistemic status. Typed edges express most relationships; a
+      Claim is for statements no edge expresses.
+    required:
+    - statement
+    - claim_kind
+    - claim_status
+    properties:
+      statement:
+        type: text
+      claim_kind:
+        type: enum
+        values:
+        - finding
+        - conclusion
+        - generalization
+        - law
+        - mechanism
+        - comparison
+        - causal
+        - structure_property
+        - data_quality
+        - other
+      claim_status:
+        type: enum
+        values:
+        - proposed
+        - supported
+        - disputed
+        - refuted
+        - superseded
+        - retracted
+        - not_evaluated
+      inference_type:
+        type: enum
+        values:
+        - observational
+        - interventional
+        - computational
+        - theoretical
+        - meta_analysis
+        - expert_opinion
+        - not_stated
+      scope:
+        type: text
+        description: The systems and conditions over which the claim is generalized.
+      limitations:
+        type: text
+  ObjectOfStudy:
+    maps_to:
+    - SOSA / ISO 19156 FeatureOfInterest
+    - OBOE Entity (object or phenomenon)
+    - EXPO ObjectOfExperiment
+    - BFO independent continuant (thing, system) / occurrent (phenomenon)
+    description: |
+      What a study is about: a thing, a system of things, a phenomenon or a population. Its
+      properties are Variables (Variable.of); experiments EXAMINE it; models REPRESENT it.
+      Being studied is a role, carried by the edge (EXAMINES), not a kind of thing: the same
+      material is an object of study in one experiment and an input in another. Domain modules
+      specialize it — in catalysis, Material, ChemicalSpecies, Catalyst and ActiveSite are things,
+      Reaction is a phenomenon — and add physical specimens (CatalystSample) of their own.
+    required:
+    - object_kind
+    properties:
+      object_kind:
+        type: enum
+        values:
+        - thing
+        - system
+        - phenomenon
+        - population
+        description: |
+          thing = a material entity or substance that endures; system = an arrangement of things
+          studied together; phenomenon = something that happens (a process, event or effect);
+          population = a collection studied statistically.
+      generality:
+        type: enum
+        values:
+        - kind
+        - particular
+        description: kind = a type (CO2 hydrogenation, Cu/ZnO catalysts); particular = one individual
+          (the reaction in test 12).
+      scope:
+        type: text
+        description: The conditions or boundaries of what is studied.
+  Instrument:
+    maps_to:
+    - EXPO ExperimentalEquipment
+    - OBI device
+    required:
+    - instrument_kind
+    properties:
+      instrument_kind:
+        type: text
+      manufacturer:
+        type: text
+      model:
+        type: text
+      serial_number:
+        type: string
+      settings:
+        type: map
+        items:
+          type: value
+  Model:
+    maps_to:
+    - EXPO ExperimentalModel
+    - SIO model
+    description: A representation of the studied system used to derive predictions or to compute (kinetic,
+      thermodynamic, statistical, machine-learning).
+    properties:
+      model_kind:
+        type: text
+      equations:
+        type: list
+        items:
+          type: text
+      assumptions:
+        type: list
+        items:
+          type: text
+      validity_domain:
+        type: text
+        description: The conditions under which the model is meant to hold.
+      parameters:
+        type: map
+        items:
+          type: value
+      version:
+        type: string
+        description: The model's version as its source names it; for a trained model, the checkpoint whose predictions
+          are recorded.
+      stored_in:
+        type: ref
+        targets:
+        - Dataset
+        maturity: provisional
+        description: The Dataset that holds the model itself, with its version and sha256 (the coordinates of an atomistic
+          structure, the weights of a trained model at its checkpoint, a mechanism or rate-law file). The record keeps what
+          a query reads and compares; the file keeps the rest.
+  Source:
+    maps_to:
+    - IAO document
+    - dcterms BibliographicResource
+    required:
+    - kind
+    - title
+    properties:
+      kind:
+        type: enum
+        values:
+        - article
+        - patent
+        - thesis
+        - report
+        - book
+        - preprint
+        - dataset_paper
+        - review_report
+        - correction
+        - retraction_notice
+        - webpage
+        - lab_notebook
+        - other
+        - expression_of_concern
+        - withdrawal_notice
+        - removal_notice
+        - addendum
+      title:
+        type: text
+      doi:
+        type: string
+      url:
+        type: string
+      year:
+        type: integer
+      venue:
+        type: text
+      licence:
+        type: text
+      peer_reviewed:
+        type: boolean
+      status_check:
+        type: status_check
+        description: That someone checked this source for notices, when and how; absent means never checked.
+          The publication status is derived from the RETRACTS and UPDATES links that reach the source.
+        maturity: provisional
+      text_version:
+        type: enum
+        values:
+        - author_original
+        - submitted_manuscript
+        - accepted_manuscript
+        - proof
+        - version_of_record
+        - corrected_version_of_record
+        - enhanced_version_of_record
+        description: The version of the text that was read for the evidence that cites this source (NISO
+          JAV stages), so that locators and quotes can be found again; the version of record is not assumed.
+        maturity: provisional
+      text_sha256:
+        type: string
+        description: The SHA-256 digest of the file that was read (64 hexadecimal characters).
+        maturity: provisional
+      retrieved_from:
+        type: text
+        description: Where the file that was read came from (a publisher, a preprint server, a repository,
+          a library), as a name or a URL.
+        maturity: provisional
+      retrieved_on:
+        type: date
+        description: When the file that was read was retrieved.
+        maturity: provisional
+      published_on:
+        type: date
+        description: The date of the source at the precision it gives (YYYY, YYYY-MM or YYYY-MM-DD); date_basis
+          says which date it is. year stays the year.
+        maturity: provisional
+      date_basis:
+        type: enum
+        values:
+        - published
+        - issued
+        - granted
+        - priority
+        - accepted
+        - available
+        description: Which date published_on is (a patent's grant or publication, an article's publication
+          or acceptance, a preprint's availability).
+        maturity: provisional
+      priority_date:
+        type: date
+        description: A patent's earliest priority date, at the precision known.
+        maturity: provisional
+  Dataset:
+    maps_to:
+    - DCAT Dataset
+    - IAO data set
+    required:
+    - data_kind
+    - availability
+    properties:
+      data_kind:
+        type: enum
+        values:
+        - table
+        - raw
+        - processed
+        - spectrum
+        - image
+        - structure
+        - model_output
+        - time_series
+        - configuration
+        - environment
+        - other
+      version:
+        type: string
+      uri:
+        type: string
+      sha256:
+        type: string
+      media_type:
+        type: string
+      data_schema:
+        type: text
+      distributions:
+        type: list
+        items:
+          type: string
+        description: Other locations or formats of the same data (DCAT distributions).
+      availability:
+        type: enum
+        values:
+        - available
+        - restricted
+        - not_reported
+      licence:
+        type: text
+      status_check:
+        type: status_check
+        description: That someone checked this dataset for notices (withdrawal, correction, a new version),
+          when and how; absent means never checked.
+        maturity: provisional
+      issued:
+        type: date
+        description: When the dataset (this version) was issued, at the precision known (DataCite dateType
+          Issued).
+        maturity: provisional
+  Person:
+    maps_to:
+    - foaf Person
+    - PROV-O Agent
+    properties:
+      orcid:
+        type: string
+      surname:
+        type: text
+      given_names:
+        type: text
+      name_variants:
+        type: list
+        items:
+          type: text
+  Institution:
+    maps_to:
+    - schema.org Organization
+    - ROR organization
+    properties:
+      institution_kind:
+        type: enum
+        values:
+        - university
+        - company
+        - government_laboratory
+        - research_institute
+        - funding_agency
+        - publisher
+        - unit
+        - other
+        - not_reported
+      ror:
+        type: string
+      url:
+        type: string
+      country:
+        type: string
+  Project:
+    maps_to:
+    - FRAPO Project
+    - schema.org ResearchProject
+    properties:
+      award_id:
+        type: string
+      url:
+        type: string
+      start_date:
+        type: date
+      end_date:
+        type: date
+  Software:
+    maps_to:
+    - schema.org SoftwareApplication
+    - PROV-O SoftwareAgent
+    properties:
+      software_kind:
+        type: enum
+        values:
+        - library
+        - application
+        - agent
+        - service
+        - other
+      version:
+        type: string
+      repository:
+        type: string
+      licence:
+        type: text
+      developer:
+        type: text
+      inputs:
+        type: list
+        items:
+          type: text
+        description: What the software or agent consumes (labels or data kinds), so agents can be discovered
+          and chained.
+      outputs:
+        type: list
+        items:
+          type: text
+      endpoint:
+        type: string
+        description: Where a service or agent can be called.
+edges:
+  ADDRESSES:
+    maps_to:
+    - ORKG addresses research problem
+    from:
+    - Design
+    - Experiment
+    - Hypothesis
+    - Claim
+    - Project
+    to:
+    - Question
+  DERIVES:
+    description: A prediction is derived from a hypothesis or a model (the deductive step).
+    from:
+    - Hypothesis
+    - Model
+    - Claim
+    to:
+    - Prediction
+    properties:
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+        description: Auxiliary hypotheses or claims the derivation relies on.
+  COMPETES_WITH:
+    description: Two hypotheses explain the same observations differently. Symmetric in meaning; stored
+      once, queried both ways.
+    from:
+    - Hypothesis
+    to:
+    - Hypothesis
+  PROPOSED_BY:
+    description: Who or what proposed a hypothesis, a prediction, a design or an experiment (a person,
+      an agent, a model) and why.
+    from:
+    - Hypothesis
+    - Prediction
+    - Design
+    - Experiment
+    - Procedure
+    to:
+    - Person
+    - Institution
+    - Software
+    - Model
+    properties:
+      rationale:
+        type: text
+      proposed_at:
+        type: datetime
+      acquisition_value:
+        type: number
+        description: The score an autonomous agent gave the proposal, when it gives one.
+  AIMS_TO_TEST:
+    description: The intent of a design or a planned experiment to test a hypothesis or prediction (before
+      any outcome).
+    from:
+    - Design
+    - Experiment
+    to:
+    - Hypothesis
+    - Prediction
+  TESTS:
+    maps_to:
+    - EXPO FactSupport
+    - EXPO FactReject
+    - SIO in support of / in dispute of / in refutation of
+    description: A carried-out experiment tests a hypothesis or prediction, and how it came out.
+    from:
+    - Experiment
+    to:
+    - Hypothesis
+    - Prediction
+    properties:
+      outcome:
+        type: enum
+        values:
+        - supports
+        - disputes
+        - refutes
+        - inconclusive
+        - not_reported
+      statistical_decision:
+        type: enum
+        values:
+        - reject_null
+        - fail_to_reject_null
+        - not_applicable
+        description: Failing to reject a null hypothesis is not support for it.
+      result_refs:
+        type: list
+        items:
+          type: record_ref
+        description: The results the outcome rests on.
+      error:
+        type: enum
+        values:
+        - none_reported
+        - false_positive_suspected
+        - false_negative_suspected
+        - faulty_comparison
+        - incomplete_data
+        - confounded
+        description: EXPO ResultError, as stated by the source or judged by the assessor.
+      warrant:
+        type: text
+        description: Why the result bears on the hypothesis.
+      severity:
+        type: enum
+        values:
+        - low
+        - moderate
+        - high
+        - not_assessed
+        description: As stated or judged; not computed by the tools.
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  SUPPORTS:
+    maps_to:
+    - SEPIO has evidence line
+    - micropublication supports
+    - discourse-graph supports
+    description: Evidence for a claim or hypothesis. Not independent of a TESTS link it restates (premise_refs
+      names that link).
+    from:
+    - Experiment
+    - Claim
+    - Dataset
+    - Source
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      warrant:
+        type: text
+      premise_refs:
+        type: list
+        items:
+          type: record_ref
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  CONTRADICTS:
+    maps_to:
+    - micropublication challenges
+    - discourse-graph opposes
+    from:
+    - Experiment
+    - Claim
+    - Dataset
+    - Source
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      warrant:
+        type: text
+      premise_refs:
+        type: list
+        items:
+          type: record_ref
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  CONCLUDES:
+    maps_to:
+    - EXPO ExperimentalConclusion
+    description: The conclusion an experiment reaches. It records the conclusion, not support for it.
+    from:
+    - Experiment
+    to:
+    - Claim
+  ABOUT:
+    from:
+    - Question
+    - Hypothesis
+    - Claim
+    - Prediction
+    to: ANY
+    properties:
+      role:
+        type: text
+  EVALUATES:
+    description: An experiment verifies, validates, calibrates or benchmarks a model, software, prediction
+      or method.
+    from:
+    - Experiment
+    to:
+    - Model
+    - Software
+    - Prediction
+    - Experiment
+    - Protocol
+    properties:
+      evaluation_kind:
+        type: enum
+        values:
+        - verification
+        - validation
+        - calibration
+        - benchmark
+        description: verification = solved or implemented correctly; validation = agrees with the real
+          system within a stated criterion.
+      criterion:
+        type: text
+      outcome:
+        type: enum
+        values:
+        - passes
+        - fails
+        - partial
+        - inconclusive
+        - not_reported
+      result_refs:
+        type: list
+        items:
+          type: record_ref
+      scope:
+        type: text
+  CALIBRATED_BY:
+    maps_to:
+    - VIM calibration
+    description: An instrument was calibrated by an experiment (which HAS_INPUT its reference standards).
+    from:
+    - Instrument
+    to:
+    - Experiment
+    properties:
+      valid_until:
+        type: date
+  SUPERSEDES:
+    description: A newer claim or hypothesis replaces an older one; the older one is kept.
+    from:
+    - Claim
+    - Hypothesis
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      judged_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Source
+      judged_at:
+        type: date
+      reason:
+        type: text
+  RETRACTS:
+    from:
+    - Source
+    - Claim
+    to:
+    - Source
+    - Claim
+    - Hypothesis
+    - Dataset
+    properties:
+      reason:
+        type: text
+      retracted_on:
+        type: date
+      scope:
+        type: enum
+        values:
+        - full
+        - partial
+        description: full = the whole source (or dataset, claim) is retracted, which is also what a link
+          without scope means; partial = only the parts named in scope_locators.
+        maturity: provisional
+      scope_locators:
+        type: list
+        items:
+          type: text
+        description: The retracted parts of a partial retraction, as the notice names them ("Table 2",
+          "Figure 3", "section 3.2"). Only with scope partial.
+        maturity: provisional
+    description: |
+      A notice, a source or a claim retracts a source, a claim, a hypothesis or a dataset. A RETRACTS link
+      from a notice Source (kind retraction_notice) is authoritative: the retracted source's publication
+      status is derived from it, never typed by hand, and the link cites the notice as evidence. scope says
+      whether the whole source is retracted (full, the default) or part of it (partial, the parts named in
+      scope_locators). A partial retraction can also be recorded record by record: a Dataset for the
+      retracted part (a table, a figure) INCLUDES the affected records, and the notice RETRACTS that
+      Dataset with scope full. A retraction does not make what the source reported false and removes no
+      record: tools flag the records that rest on retracted sources and leave them out of query answers by
+      default.
+  REVIEWS:
+    description: A review report or a person reviews a source, claim or dataset.
+    from:
+    - Source
+    - Person
+    to:
+    - Source
+    - Claim
+    - Dataset
+    - Hypothesis
+    properties:
+      outcome:
+        type: enum
+        values:
+        - accept
+        - minor_revision
+        - major_revision
+        - reject
+        - commentary
+        - not_reported
+      reviewed_on:
+        type: date
+  PART_OF_DESIGN:
+    description: An experiment realizes a design, as one unit, block, arm, replicate or iteration of it.
+    from:
+    - Experiment
+    to:
+    - Design
+    properties:
+      experimental_unit:
+        type: ref
+        targets: ANY
+        description: The independent unit the treatment is applied to (a specimen, a reactor charge, a
+          subject); replicates are counted over units.
+      block:
+        type: string
+      arm:
+        type: string
+        description: The treatment or control group.
+      replicate_group:
+        type: string
+      run_order:
+        type: integer
+      iteration:
+        type: integer
+        description: The round of an adaptive or autonomous campaign.
+  HAS_VARIABLE:
+    maps_to:
+    - EXPO TargetVariable / Factor / FactorLevel
+    description: A variable of a design or experiment, with its role there; for an experiment, the level
+      it took.
+    from:
+    - Design
+    - Experiment
+    to:
+    - Variable
+    properties:
+      role:
+        type: enum
+        values:
+        - target
+        - factor
+        - controlled
+        - covariate
+        - nuisance
+      levels:
+        type: list
+        items:
+          type: value
+        description: For a design, the planned levels.
+      level:
+        type: value
+        description: For an experiment, the value the factor or controlled variable took. If the same
+          value is also in conditions, they must agree.
+  CONTROL_FOR:
+    maps_to:
+    - EXPO ComparisonControl / TargetGroups
+    - Mill's method of difference
+    description: The source experiment serves as a control for the target experiment.
+    from:
+    - Experiment
+    to:
+    - Experiment
+    properties:
+      control_kind:
+        type: enum
+        values:
+        - negative
+        - positive
+        - blank
+        - baseline
+        - reference
+        - sham
+      differs_in:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Variable
+        description: The variables in which the two differ.
+  REPLICATES:
+    description: The source experiment repeats the target one; changed says what differs.
+    from:
+    - Experiment
+    to:
+    - Experiment
+    properties:
+      level:
+        type: enum
+        values:
+        - repeat
+        - replicate
+        - reproduce
+        description: repeat = same setup, people and sample; replicate = new data, same method; reproduce
+          = independently, by other means or people.
+      changed:
+        type: list
+        items:
+          type: enum
+          values:
+          - data
+          - sample
+          - method
+          - instrument
+          - software
+          - team
+          - site
+          - time
+      agreement:
+        type: enum
+        values:
+        - agrees
+        - partly_agrees
+        - disagrees
+        - not_stated
+      criterion:
+        type: text
+        description: How agreement was judged.
+  EXAMINES:
+    maps_to:
+    - EXPO ObjectOfExperiment
+    - OBI has evaluant (role)
+    - SOSA hasFeatureOfInterest
+    description: |
+      What an experiment studies, in the role of its object of study. Modules add the physical
+      specimens that are examined (catalysis extends it to CatalystSample) and their own specific
+      edges (USES_CATALYST).
+    from:
+    - Experiment
+    to:
+    - ObjectOfStudy
+    properties:
+      role:
+        type: text
+      state:
+        type: text
+  REPRESENTS:
+    description: A model represents an object of study (a modelling correspondence, not identity). An atomistic model of
+      a catalyst stands for a specimen or a state of it without being it, so a state computed on the model needs no
+      specimen; what of the object the model stands for, and what the correspondence assumes, are on the link.
+    from:
+    - Model
+    to:
+    - ObjectOfStudy
+    properties:
+      aspect:
+        type: text
+        maturity: provisional
+        description: What of the object the model stands for, as the source says, when it is not the whole object (its
+          step sites, the working surface of one facet, one particle).
+      assumptions:
+        type: list
+        maturity: provisional
+        items:
+          type: text
+        description: What the correspondence assumes, as the source states it (a clean surface, no support, one facet for
+          every particle, a stated coverage). The model's own assumptions stay on the Model.
+  HAS_PART:
+    maps_to:
+    - BFO has part
+    description: A system or phenomenon has a part (a catalytic system has its catalyst; a mechanism its
+      steps). Acyclic.
+    from:
+    - ObjectOfStudy
+    to:
+    - ObjectOfStudy
+    properties:
+      role:
+        type: text
+  HAS_INPUT:
+    maps_to:
+    - OBI has specified input
+    - PROV-O used
+    from:
+    - Experiment
+    - Procedure
+    to: ANY
+    properties:
+      role:
+        type: enum
+        values:
+        - material
+        - sample
+        - reagent
+        - reference_standard
+        - data
+        - training_data
+        - calibration_data
+        - validation_data
+        - test_data
+        - parameter
+        - other
+      amount:
+        type: value
+      input_version:
+        type: integer
+        description: The record_version of the input that was used.
+      sha256:
+        type: string
+      used_at:
+        type: datetime
+  HAS_OUTPUT:
+    maps_to:
+    - OBI has specified output
+    - PROV-O wasGeneratedBy (inverse)
+    from:
+    - Experiment
+    - Procedure
+    to: ANY
+  FOLLOWS_PROTOCOL:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Protocol
+    properties:
+      deviations:
+        type: text
+  USES_INSTRUMENT:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Instrument
+    properties:
+      role:
+        type: enum
+        values:
+        - measurement
+        - sensor
+        - actuator
+        - analysis
+        - other
+  USES_MODEL:
+    from:
+    - Experiment
+    to:
+    - Model
+  USES_SOFTWARE:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Software
+    properties:
+      version:
+        type: string
+  PART_OF:
+    description: A step of a larger experiment or procedure. Acyclic.
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Experiment
+    - Procedure
+    properties:
+      order:
+        type: integer
+  PRECEDES:
+    description: Order between experiments or procedures. Acyclic.
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Experiment
+    - Procedure
+  HAS_OPERATION:
+    description: How an experiment or procedure is operated in time (static or dynamic).
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Operation
+  PERFORMED_BY:
+    maps_to:
+    - PROV-O wasAssociatedWith
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Person
+    - Institution
+    - Software
+    properties:
+      role:
+        type: text
+  REPORTED_IN:
+    description: A record is reported in a source or dataset; derived from its evidence and checked against
+      it.
+    from:
+      any_except:
+      - Source
+    to:
+    - Source
+    - Dataset
+    properties:
+      locators:
+        type: list
+        items:
+          type: text
+  AUTHORED_BY:
+    from:
+    - Source
+    - Dataset
+    to:
+    - Person
+    - Institution
+    properties:
+      role:
+        type: enum
+        values:
+        - author
+        - author_affiliation
+        - inventor
+        - assignee
+        - publisher
+        - creator
+      position:
+        type: integer
+  MEMBER_OF:
+    from:
+    - Person
+    - Institution
+    to:
+    - Institution
+    properties:
+      role:
+        type: text
+  PARTICIPATES_IN:
+    from:
+    - Institution
+    - Person
+    to:
+    - Project
+    properties:
+      role:
+        type: enum
+        values:
+        - lead
+        - partner
+        - data_provider
+        - curator
+        - other
+  FUNDED_BY:
+    from:
+    - Project
+    - Experiment
+    - Source
+    to:
+    - Institution
+    properties:
+      award_id:
+        type: string
+  INCLUDES:
+    description: A project, design or dataset aggregates records (a research object).
+    from:
+    - Project
+    - Design
+    - Dataset
+    to: ANY
+  REVISES:
+    description: A new version of a graph record replaces an earlier one of the same label; the earlier
+      one is kept. Acyclic. For graph records only; versions of a publication (preprint, accepted manuscript,
+      version of record), its translations and duplicate publications are SAME_WORK_AS between Sources.
+    from: ANY
+    to: ANY
+  UPDATES:
+    maps_to:
+    - Crossref update types (Crossmark)
+    - PROV-O wasRevisionOf
+    description: |
+      A notice updates a published source or dataset without retracting it: a correction (erratum,
+      corrigendum), an expression of concern, an addendum or clarification, a withdrawal or removal, a new
+      version or edition. The notice is a Source of its own (kind correction, expression_of_concern,
+      addendum, withdrawal_notice, removal_notice, or the new version itself) and the link cites it as
+      evidence. A retraction is RETRACTS, not an update. The updated source's publication status is
+      derived from these links and RETRACTS (withdrawal and removal count as retraction), never typed by
+      hand; the records it supports are kept.
+    from:
+    - Source
+    to:
+    - Source
+    - Dataset
+    required:
+    - update_type
+    - evidence
+    properties:
+      update_type:
+        type: enum
+        values:
+        - correction
+        - erratum
+        - corrigendum
+        - expression_of_concern
+        - addendum
+        - clarification
+        - withdrawal
+        - removal
+        - new_version
+        - new_edition
+        description: What the notice does, in Crossref's terms (correction, erratum and corrigendum correct
+          errors; withdrawal and removal take the source out of the record; new_version and new_edition
+          supersede it).
+      updated_on:
+        type: date
+        description: When the notice was issued, at the precision known.
+      reason:
+        type: text
+        description: The reason the notice gives, in a short paraphrase or quote.
+    maturity: provisional
+  SAME_WORK_AS:
+    maps_to:
+    - Crossref relation types (preprint, manuscript, version, translation, identical)
+    - DataCite relationType IsVersionOf, IsTranslationOf, IsIdenticalTo
+    description: |
+      Two sources report the same work: the source is the preprint, the accepted manuscript or another
+      version of the target, a translation of it, or a duplicate publication. What both report is one
+      finding, not a replication; the evidence cites the version that was read (its text_version).
+      Versions of a publication are linked here; REVISES is for versions of graph records.
+    from:
+    - Source
+    to:
+    - Source
+    required:
+    - relation
+    properties:
+      relation:
+        type: enum
+        values:
+        - preprint_of
+        - accepted_manuscript_of
+        - version_of
+        - translation_of
+        - duplicate_of
+        description: How the source relates to the target (source relation target).
+    maturity: provisional
+rules:
+- A TESTS link whose outcome is supports, disputes or refutes carries evidence or result_refs.
+- A Prediction tested by an experiment that started before the prediction's proposed_at is flagged post
+  hoc (only when both dates are known).
+- A TESTS supports outcome that rests on a fitted value is flagged (a fit does not confirm its own data).
+- A validation or benchmark (EVALUATES) of a model is flagged (advisory) when its experiment uses data the model was
+  fitted to (what an experiment that calibrates the model, or outputs it, HAS_INPUT as training_data or calibration_data,
+  and the records a dataset among them INCLUDES), or when its passing outcome rests on a fitted value; a fit to its own
+  data is a calibration, never independent predictive validation.
+- A predicted value that does not sit on the experiment that predicted it names that experiment (produced_by)
+  (advisory).
+- A Hypothesis with hypothesis_status supported needs a supports outcome or a SUPPORTS link; refuted needs
+  a refutes outcome or a CONTRADICTS link; disputed needs a disputes or refutes outcome or a CONTRADICTS
+  link.
+- An Experiment with approach hypothesis_driven TESTS or AIMS_TO_TEST a hypothesis or prediction (advisory).
+- A Prediction has a statement or an expected value; its variable and expected.variable agree.
+- A quantitative Variable has a quantity_kind; a value of a nominal or ordinal variable is a text_value,
+  one of its categories.
+- A value bound to a quantity contract (its property's quantity, or its Variable's quantity_kind) is in a unit of
+  its kind's dimensions (an error otherwise; a unit the vocabulary cannot read is reported, not checked); the
+  contexts it is compared by, read from the value and its record, agree unless the value is an evidenced conversion
+  (advisory); a share above 100 % or below zero is flagged (advisory). Nothing is converted.
+- CONTROL_FOR names at least one variable in differs_in (advisory). No confounding verdict is drawn from
+  the count.
+- REPLICATES with level reproduce lists what changed (advisory).
+- A dynamic Operation names its varied_quantities and says how they vary (segments, period or frequency);
+  a static one has time_pattern constant (or none).
+- PART_OF, PRECEDES, HAS_PART and REVISES are acyclic; no kernel edge joins a record to itself; REVISES
+  joins records of the same label.
+- A record_ref resolves to a node or link, and its path to a property of it; evidence_ids name evidence
+  of the owning record. A record_ref into result_values names the entry by its id, never by its position.
+- An entry of result_values names its variable and has an id; one that states a number or a text names the evidence
+  that states it (evidence_ids); one of a kind counted for a species names its target or says the product is not
+  identified (unresolved_target). Two entries of one record that nothing tells apart (one variable, target, producer,
+  phase, stream, basis, definition and normalization) are flagged as an ambiguous repetition (advisory), never
+  averaged.
+- A balance (a quantity kind that closes, quantities.kinds closure) above 100 % is kept as reported and flagged
+  (advisory), saying whether 100 % lies within its stated uncertainty.
+- An experiment that used an input at input_version lower than the input's current record_version is flagged
+  inputs_revised (advisory).
+- A RETRACTS link from a notice Source is authoritative. A source's publication status is derived from
+  the RETRACTS and UPDATES links that reach it (retracted; withdrawn for a withdrawal or removal; partially
+  retracted; expression of concern; corrected; updated; otherwise current or unknown), never typed by
+  hand; status_check records only that someone looked.
+- A retracted (or withdrawn) source does not make its claims false. Tools flag the records whose evidence
+  rests on retracted sources (one hop along HAS_INPUT and produced_by; records a retracted dataset includes
+  count too) and leave them out of query answers by default (include_retracted keeps them, labelled);
+  they never rewrite or delete a record.
+- UPDATES cites its notice as evidence; RETRACTS states retracted_on (advisory); scope_locators go only
+  with scope partial.
+- A claim_status or hypothesis_status retracted is backed by a RETRACTS link to the record or by a retracted
+  source (advisory); a supported claim resting only on retracted sources is flagged (advisory).
+status_check:
+  maturity: provisional
+  description: |
+    That someone looked for notices about a source or dataset (a retraction, a withdrawal, an
+    expression of concern, a correction), when and how. Record it only when a person or a tool actually
+    checked; never fill it in as a default. Absent means never checked. It does not set the
+    publication status, which follows from the notice links that reach the source (RETRACTS, UPDATES):
+    a check that found a notice is followed by recording that notice as a Source with its link.
+  required:
+  - checked_on
+  - checked_via
+  - result
+  fields:
+    checked_on:
+      type: date
+      description: When the check was made, at the precision known.
+    checked_via:
+      type: text
+      description: Where and how (the publisher's article page, a registry's update metadata of a given
+        date, a retraction database, a library service), and by whom when it matters.
+    result:
+      type: enum
+      values:
+      - no_notice_found
+      - notice_found
+      description: no_notice_found = nothing was found on that date by that means (not a proof that none
+        exists); notice_found = a notice was found, and is recorded as a Source that RETRACTS or UPDATES
+        this one.
+  rules:
+  - status_check is recorded only for a check that was made; its absence means never checked.
+  - It never sets a publication status; the status follows from the notice links.
+quantities:
+  maturity: provisional
+  description: |
+    Quantity contracts: the kind of quantity a value property holds, the units that can state it, what a
+    normalized quantity is divided by (its denominator) and the context without which two of its values are not
+    comparable. A property names its contract with `quantity:` and, with `context:`, the sibling property of its
+    record that states a context; a value names one through its Variable's quantity_kind. Quantities of one kind
+    share a dimension, but one dimension does not make one kind (VIM 1.2, 1.7): an electrode potential and a cell
+    voltage are both in volts, a GHSV and a WHSV both in reciprocal hours, so a kind also says which context
+    (`compare_by`) two values must share. The validator reads a value's unit for its dimension and never converts
+    it: a unit of another dimension is an error, a unit it cannot read is reported and not checked. A context is
+    read from what the value states (its unit, basis, definition, target or normalized_by) and from the sibling
+    property; disagreeing statements are reported, except that a value derived from the record's own (origin
+    derived or computed, with produced_by: an evidenced conversion) keeps its own. A context may also be read from the
+    record that holds the value (an elementary step's activation energy is of that step) or from the experiment that
+    produced it (a computed energy's level of theory and charge treatment); a context that compares the values that do
+    not state it apart from the others (`unstated: group`) never leaves one out. A kind may show what the value's
+    producer states of other properties (`shows`: a free energy's temperature, a calculation's dispersion correction),
+    which a comparison shows in each row and never groups by. `scale graph query` with `comparison: scientific` compares
+    and ranks values of a kind only with values of that kind, in one unit and one context (docs/querying.md); without
+    it, values are compared as reported, as before. A domain says which records a context
+    read from a target may name (context_targets: in catalysis, a species is a ChemicalSpecies). A kind that closes
+    (closure: a balance) is kept as reported above 100 % and flagged with what its uncertainty says.
+  basis:
+  - JCGM 200:2012, International vocabulary of metrology (VIM), doi:10.59161/JCGM200-2012 (kind of quantity, quantity dimension, measurement unit, measurand).
+  - JCGM 100:2008, Guide to the expression of uncertainty in measurement (GUM), doi:10.59161/JCGM100-2008E (an uncertainty is kept as reported; none is propagated).
+  - IUPAC Gold Book, mean current density, doi:10.1351/goldbook.M03776 (a current divided by the area of the electrode it flows through).
+  - IUPAC Gold Book, quantum yield, doi:10.1351/goldbook.Q04991 (events per photon absorbed).
+  - IUPAC Gold Book, photonic yield, doi:10.1351/goldbook.14058 (events per photon incident).
+  - IUPAC Gold Book, space velocity, doi:10.1351/goldbook.S05779 (the feed's volumetric flow at stated conditions divided by the catalyst volume).
+  - Clark et al., Standards and protocols for data acquisition and reporting for studies of the electrochemical reduction of carbon dioxide, ACS Catal. 2018, 8, 6560, doi:10.1021/acscatal.8b01340 (Faradaic efficiency, the share of the charge that makes a given product; it and that product's rate, its partial current density, say different things; rates normalized by the geometric and by the electrochemically active area).
+  - Kearnes et al., The Open Reaction Database, J. Am. Chem. Soc. 2021, 143, 18820, doi:10.1021/jacs.1c09820 (each measurement of a product names its type (identity, yield, selectivity, amount), the analysis it comes from and any standard used; the conversion and the reaction time belong to the outcome).
+  - Bonchio et al., Best practices for experiments and reporting in photocatalytic CO2 reduction, Nat. Catal. 2023, 6, 657, doi:10.1038/s41929-023-00992-7 (gas and liquid products identified and quantified by their own analyses, each calibrated; control experiments; detection limits; selectivity as one product's amount over all products'; uncertainties from repeated measurements).
+  - Winther et al., Catalysis-Hub.org, an open electronic structure database for surface reactions, Sci. Data 2019, 6, 75, doi:10.1038/s41597-019-0081-y (an adsorption energy is the energy of a reaction with gas-phase references, H2O(g) - H2(g) + * -> O*; reaction energies from different DFT codes and exchange-correlation functionals are not necessarily directly comparable, so the code and the functional are tracked with every energy; lattice constants, sites, layers, cutoff, k-points and U-values also affect the energetics; the structures are stored with the energies).
+  - Mamun et al., High-throughput calculations of catalytic properties of bimetallic alloy surfaces, Sci. Data 2019, 6, 76, doi:10.1038/s41597-019-0080-z (an adsorption energy is E(slab+adsorbate) - E(slab) - the gas-phase references, chosen among CH4, H2, N2, H2O and H2S).
+  - Melander, Wu, Weckman and Honkala, Constant inner potential DFT for modelling electrochemical systems under constant potential and bias, npj Comput. Mater. 2024, 10, 5, doi:10.1038/s41524-023-01184-4 (constant-charge, canonical, and constant-potential, grand-canonical, calculations; grand free energies are a Legendre transform of canonical ones, and the two ensembles are equivalent only under stated conditions; at least four definitions of a single electrode potential, with different scales and references).
+  - Allam et al., AQCat25, unlocking spin-aware, high-fidelity machine learning potentials for heterogeneous catalysis, npj Comput. Mater. 2026, 12, 226, doi:10.1038/s41524-026-02099-6 (spin-polarized and unpolarized calculations, and calculations of different fidelity, give different energies, by up to about 1 eV for an adsorbate on a magnetic surface; adsorbate references CO, H2, H2O and N2; models evaluated on validation and test splits not seen in training).
+  - Cantera 3.2 documentation, Reactions and General Structure (Units), cantera.org/stable/yaml (a reaction equation names each participant with its stoichiometric coefficient; Ea is a parameter of a rate expression, given in an energy, an energy per quantity or K; a reaction is checked to balance in elements, and on surfaces in sites).
+  dimensions:
+    dimensionless: '1'
+    length: L
+    area: L2
+    volume: L3
+    mass: M
+    time: T
+    frequency: T-1
+    amount: 'N'
+    temperature: Θ
+    electric_current: I
+    electric_potential: M L2 T-3 I-1
+    pressure: M L-1 T-2
+    force: M L T-2
+    energy: M L2 T-2
+    molar_energy: M L2 T-2 N-1
+    power: M L2 T-3
+    current_density: I L-2
+    specific_current: I M-1
+    amount_concentration: N L-3
+    mass_concentration: M L-3
+    amount_per_mass: N M-1
+    mass_per_area: M L-2
+    amount_per_area: N L-2
+    number_per_area: L-2
+    number_per_mass: M-1
+    volumetric_flow: L3 T-1
+    molar_flow: N T-1
+    mass_flow: M T-1
+    volume_per_mass_time: L3 M-1 T-1
+    amount_per_energy: N M-1 L-2 T2
+    mass_per_energy: L-2 T2
+    amount_per_mass_time: N M-1 T-1
+    amount_per_volume_time: N L-3 T-1
+    amount_per_area_time: N L-2 T-1
+    mass_per_volume_time: M L-3 T-1
+  units:
+    description: |
+      The symbols a unit is read from. A unit is read as the source prints it: SI prefixes before the prefixed
+      symbols (mA, kPa, µmol, mL), products (space, *, ·), quotients (/ and per, left to right: mol/g/h is
+      mol/(g h)), exponents (cm2, cm-2, cm^2, cm²) and parentheses. A spelling is a whole unit read as written
+      (kg/cm2 is a pressure in kilograms-force, not a mass per area). A word the vocabulary does not hold (catalyst,
+      exit gas) leaves the unit unread: its dimension is then not checked, and a comparison leaves it out.
+    prefixes: [p, 'n', μ, u, m, c, d, h, k, M, G]
+    prefixed:
+      m: length
+      g: mass
+      s: time
+      A: electric_current
+      K: temperature
+      mol: amount
+      L: volume
+      l: volume
+      Pa: pressure
+      bar: pressure
+      Torr: pressure
+      torr: pressure
+      V: electric_potential
+      W: power
+      J: energy
+      eV: energy
+      Wh: energy
+      cal: energy
+      Hz: frequency
+      M: amount_concentration
+    unprefixed:
+      °C: temperature
+      °F: temperature
+      °R: temperature
+      °K: temperature
+      degC: temperature
+      degF: temperature
+      min: time
+      minute: time
+      minutes: time
+      h: time
+      hr: time
+      hrs: time
+      hour: time
+      hours: time
+      sec: time
+      d: time
+      day: time
+      days: time
+      week: time
+      weeks: time
+      yr: time
+      year: time
+      in: length
+      inch: length
+      ft: length
+      foot: length
+      feet: length
+      Å: length
+      cc: volume
+      gal: volume
+      lb: mass
+      lbs: mass
+      ton: mass
+      tonne: mass
+      lbmol: amount
+      kgf: force
+      lbf: force
+      atm: pressure
+      at: pressure
+      psi: pressure
+      mmHg: pressure
+      cmHg: pressure
+      inHg: pressure
+      Btu: energy
+      BTU: energy
+      Ha: energy
+      hartree: energy
+      Ry: energy
+      '%': dimensionless
+      ‰: dimensionless
+      ppm: dimensionless
+      ppmv: dimensionless
+      ppb: dimensionless
+      ppbv: dimensionless
+      atom: dimensionless
+      atoms: dimensionless
+      molecule: dimensionless
+      molecules: dimensionless
+      site: dimensionless
+      sites: dimensionless
+      ion: dimensionless
+      ions: dimensionless
+      photon: dimensionless
+      photons: dimensionless
+      electron: dimensionless
+      electrons: dimensionless
+    spellings:
+      temperature:
+      - C
+      - F
+      - degrees C
+      - degrees F
+      pressure:
+      - kg/cm2
+      - kg cm-2
+      - kg/cm^2
+      - lb/in2
+      - lbs/in2
+      - lb in-2
+      - pounds per square inch
+      dimensionless:
+      - '1'
+      - M%
+      - C%
+      - parts
+      - part
+    stating:
+      barg:
+        dimension: pressure
+        pressure_convention: gauge
+      psig:
+        dimension: pressure
+        pressure_convention: gauge
+      atü:
+        dimension: pressure
+        pressure_convention: gauge
+      atu:
+        dimension: pressure
+        pressure_convention: gauge
+      kg/cm2g:
+        dimension: pressure
+        pressure_convention: gauge
+      bara:
+        dimension: pressure
+        pressure_convention: absolute
+      psia:
+        dimension: pressure
+        pressure_convention: absolute
+      ata:
+        dimension: pressure
+        pressure_convention: absolute
+      sccm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      slm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      slpm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      SLPM:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scfh:
+        dimension: volumetric_flow
+        flow_reference: standard
+      SCFH:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scfm:
+        dimension: volumetric_flow
+        flow_reference: standard
+      scf:
+        dimension: volume
+        flow_reference: standard
+      Nm3:
+        dimension: volume
+        flow_reference: normal
+      NL:
+        dimension: volume
+        flow_reference: normal
+      Nl:
+        dimension: volume
+        flow_reference: normal
+      NmL:
+        dimension: volume
+        flow_reference: normal
+      Nml:
+        dimension: volume
+        flow_reference: normal
+      wt%:
+        dimension: dimensionless
+        fraction_basis: mass
+      mass%:
+        dimension: dimensionless
+        fraction_basis: mass
+      mol%:
+        dimension: dimensionless
+        fraction_basis: mole
+      vol%:
+        dimension: dimensionless
+        fraction_basis: volume
+      at%:
+        dimension: dimensionless
+        fraction_basis: atom
+      parts by weight:
+        dimension: dimensionless
+        fraction_basis: mass
+      part by weight:
+        dimension: dimensionless
+        fraction_basis: mass
+      parts by volume:
+        dimension: dimensionless
+        fraction_basis: volume
+      volumes:
+        dimension: dimensionless
+        fraction_basis: volume
+      vol:
+        dimension: dimensionless
+        fraction_basis: volume
+      v/v/h:
+        dimension: frequency
+      vol gas/vol catalyst/h:
+        dimension: frequency
+        space_velocity_basis: ghsv
+      vol/(h·vol catalyst):
+        dimension: frequency
+        space_velocity_basis: ghsv
+      ft3 gas/(ft3 catalyst h):
+        dimension: frequency
+        space_velocity_basis: ghsv
+      ft3 gas/(ft3 catalyst·h):
+        dimension: frequency
+        space_velocity_basis: ghsv
+  contexts:
+    potential_reference:
+      description: The scale an electrode potential is stated on, named by its reference electrode. Potentials on two
+        scales differ by an offset that depends on the electrolyte's pH, the reference's filling and the temperature;
+        a comparison never assumes one.
+      read_from: [unit, basis, definition, sibling]
+      values:
+        rhe:
+          terms: [RHE, reversible hydrogen electrode]
+        she:
+          terms: [SHE, standard hydrogen electrode]
+        nhe:
+          terms: [NHE, normal hydrogen electrode]
+        ag_agcl:
+          terms: [Ag/AgCl, Ag|AgCl, silver chloride electrode]
+        sce:
+          terms: [SCE, saturated calomel electrode, calomel electrode]
+        hg_hgo:
+          terms: [Hg/HgO, Hg|HgO, mercury oxide electrode]
+        ferrocene:
+          terms: [Fc/Fc+, Fc+/Fc, ferrocene, ferrocenium]
+      unspecified: [other, not_reported]
+    current_normalization:
+      description: What an electric current is divided by. A current per geometric (projected) electrode area, per
+        electrochemically active surface area (ECSA) and per catalyst mass are three quantities; their numbers are
+        never compared with one another.
+      read_from: [unit, basis, definition, normalized_by, sibling]
+      values:
+        geometric_area:
+          terms: [geometric, geometric area, geometric surface area, projected area, geo, geometric_area]
+          dimensions: [current_density]
+        ecsa:
+          terms: [ECSA, electrochemically active surface area, electrochemically active area, electrochemical surface area, electrochemically_active_area]
+          dimensions: [current_density]
+        mass:
+          terms: [catalyst mass, per gram of catalyst, mass activity, mass-normalized, mass normalized]
+          dimensions: [specific_current]
+        none:
+          terms: [not normalized, unnormalized]
+          dimensions: []
+      unspecified: [other, not_reported]
+    pressure_convention:
+      description: Whether a pressure is absolute or gauge (above the ambient pressure). The two differ by the ambient
+        pressure, about 0.1 MPa, which matters most at low pressure; a unit that does not say (atm, bar, MPa) states
+        neither.
+      read_from: [unit, basis, definition]
+      values:
+        absolute:
+          terms: [absolute, abs, (a)]
+        gauge:
+          terms: [gauge, gage, (g)]
+    flow_reference:
+      description: The conditions a gas volume, and so a volumetric flow or a gas space velocity, is counted at.
+        Volumes at standard, normal and operating conditions differ by the ratio of temperatures and pressures; the
+        conditions must be stated for two such numbers to be compared.
+      read_from: [unit, basis, definition]
+      values:
+        stp:
+          terms: [STP, S.T.P., standard temperature and pressure]
+        ntp:
+          terms: [NTP, N.T.P., normal temperature and pressure]
+        satp:
+          terms: [SATP]
+        normal:
+          terms: [normal conditions, normal state]
+        standard:
+          terms: [standard conditions, std. cond., standard volume]
+        actual:
+          terms: [actual conditions, operating conditions, reaction conditions, reactor conditions]
+    fraction_basis:
+      description: What a fraction or a loading counts, by mass, by amount of substance, by atoms or by volume, or
+        relative to another component rather than to the whole (then refined by the component it is relative to).
+      read_from: [unit, basis, definition, sibling]
+      values:
+        mass:
+          terms: [mass fraction, by mass, by weight, w/w, mass basis, weight basis]
+        mole:
+          terms: [mole fraction, mol fraction, molar fraction, by mole, molar basis, amount fraction]
+        atom:
+          terms: [atom fraction, atomic fraction, atomic basis, atomic ratio]
+        volume:
+          terms: [volume fraction, by volume, v/v, volume basis]
+        relative_to_component:
+          terms: [relative to component]
+      unspecified: [not_reported]
+      refine:
+        relative_to_component: relative_to
+    space_velocity_basis:
+      description: What a space velocity divides by what. A gas (GHSV) or liquid (LHSV) volumetric flow per catalyst
+        volume and a mass flow per catalyst mass (WHSV) are all in reciprocal time; a volumetric flow per catalyst
+        mass is a quantity of its own dimension.
+      read_from: [unit, basis, definition]
+      values:
+        ghsv:
+          terms: [GHSV, gas hourly space velocity]
+          dimensions: [frequency]
+        lhsv:
+          terms: [LHSV, liquid hourly space velocity]
+          dimensions: [frequency]
+        whsv:
+          terms: [WHSV, weight hourly space velocity, mass hourly space velocity]
+          dimensions: [frequency]
+        volume_per_catalyst_mass:
+          terms: [GHSV, per catalyst mass, per gram of catalyst]
+          dimensions: [volume_per_mass_time]
+    species:
+      description: The species a value is counted for, named by its target, the product of a selectivity, a yield, a
+        rate, an amount, a Faradaic efficiency, a quantum yield or a partial current density, the reactant of a
+        conversion. Shares to two species are two quantities. A product the source does not identify (unresolved_target)
+        names no species; a domain says which records a species is (context_targets).
+      read_from: [target]
+      open: true
+    balance_basis:
+      description: What a balance counts, carbon atoms, charge (electrons), another element or the mass. A carbon and a
+        charge balance of one experiment are two quantities, never compared with one another.
+      read_from: [basis, definition]
+      values:
+        carbon:
+          terms: [carbon balance, carbon basis, C balance, carbon atoms, carbon]
+        charge:
+          terms: [charge balance, Faradaic balance, electron balance, total Faradaic efficiency, sum of Faradaic efficiencies, charge]
+        hydrogen:
+          terms: [hydrogen balance, H balance]
+        oxygen:
+          terms: [oxygen balance, O balance]
+        nitrogen:
+          terms: [nitrogen balance, N balance]
+        mass:
+          terms: [mass balance, total mass]
+    process:
+      description: What an energy change is of, the reaction or elementary step its target names (or that holds it). Its
+        reactants and products, with their coefficients and phases, define the energy, the reference species included,
+        and its direction gives the sign (products minus reactants). An O adsorption energy relative to H2O and H2 and one
+        relative to O2 are energies of two reactions, never compared with one another; a binding energy that a source
+        reports as positive for stronger binding is the energy of the reverse reaction, a desorption. A domain says which
+        records a process is (context_targets).
+      read_from: [target, record]
+      open: true
+    structure:
+      description: The structure model a total energy is of, its target or the record that holds it. Total energies of two
+        structures are two quantities; their difference is a reaction energy. A domain says which records a structure is
+        (context_targets).
+      read_from: [target, record]
+      open: true
+    level_of_theory:
+      description: The electronic-structure method a computed energy comes from, as the experiment that produced it states
+        it in its level_of_theory (the exchange-correlation functional of a DFT calculation, such as RPBE or BEEF-vdW;
+        another method by its name; a machine-learned model by its name and checkpoint). Energies from two methods are
+        never compared with one another. It is read from the producer (the experiment the value's produced_by names, then
+        the experiment that holds it); a producer whose label has no level_of_theory (a measurement, a fit) has none to
+        state, and its values are compared apart from computed ones, never left out.
+      read_from: [producer]
+      property: level_of_theory
+      open: true
+    charge_treatment:
+      description: Whether a computed energy holds the number of electrons fixed (constant charge, as in an ordinary
+        calculation of a neutral or charged cell) or holds the electrode potential while the number of electrons varies
+        (constant potential, a grand-canonical energy). The two are different energies, compared only when the source
+        converts one into the other (an evidenced conversion whose produced_by names the conversion). A value whose
+        producer does not state it is compared only with others that do not state it either.
+      read_from: [basis, definition, producer]
+      property: charge_treatment
+      values:
+        constant_charge:
+          terms: [constant charge, constant-charge, fixed charge, fixed number of electrons, constant number of electrons]
+        constant_potential:
+          terms: [constant potential, constant-potential, constant electrode potential, constant inner potential, grand canonical, grand-canonical, grand potential, fixed potential]
+        other:
+          terms: []
+      unspecified: [not_reported]
+      unstated: group
+  kinds:
+    temperature:
+      description: A thermodynamic temperature, or a difference of temperatures, as reported.
+      dimensions: [temperature]
+    pressure:
+      description: A pressure, absolute or gauge as stated.
+      dimensions: [pressure]
+      compare_by: [pressure_convention]
+    electrode_potential:
+      description: The potential of an electrode measured against a reference electrode; it is comparable only on one
+        reference scale, stated or converted with evidence.
+      dimensions: [electric_potential]
+      compare_by: [potential_reference]
+    electric_potential:
+      description: An electric potential difference between two stated points (a cell voltage, an applied or a heating
+        voltage, a photovoltage), with no reference scale.
+      dimensions: [electric_potential]
+    electric_current:
+      description: An electric current.
+      dimensions: [electric_current]
+    current_density:
+      description: An electric current divided by an electrode area or a catalyst mass (IUPAC mean current density); the
+        denominator decides the quantity.
+      dimensions: [current_density, specific_current]
+      compare_by: [current_normalization]
+      denominator:
+        description: The electrode area (geometric or electrochemically active) or the catalyst mass the current is divided by.
+        dimensions: [area, mass]
+    partial_current_density:
+      description: The part of a current density that forms one product (its target), divided as the current density is.
+      dimensions: [current_density, specific_current]
+      compare_by: [current_normalization, species]
+      denominator:
+        description: The electrode area (geometric or electrochemically active) or the catalyst mass the current is divided by.
+        dimensions: [area, mass]
+    fraction:
+      description: A part of a whole (a duty cycle), dimensionless; a basis the value states is compared as text.
+      dimensions: [dimensionless]
+      share: true
+    species_fraction:
+      description: A share counted for one species, its target, that is not one of the shares below (a conversion, a
+        yield or a selectivity is its own kind), dimensionless; a basis (carbon, molar) the value states is compared as
+        text.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+    conversion:
+      description: The share of a reactant (its target) that was converted, on the basis the value states (per pass or
+        overall; carbon or molar), dimensionless. A conversion is of a reactant, a yield and a selectivity are of a
+        product; the three are never compared with one another.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    product_yield:
+      description: The amount of one product (its target) formed relative to the amount of a reactant fed, on the basis
+        the value states (carbon, molar, mass), dimensionless. A yield counts what was fed; it is a conversion times a
+        selectivity, never a selectivity.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    selectivity:
+      description: The share of the reactant converted, or of the products formed, that is one product (its target), on
+        the basis the value states (carbon, molar, mass), dimensionless. A selectivity counts what was converted, not
+        what was fed.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+      maturity: provisional
+    production_rate:
+      description: The amount, mass or gas volume of one species (its target) formed per time, or consumed for a reactant
+        (its definition says so), alone or divided by the amount of catalyst, a volume or an electrode or illuminated
+        area (a space-time yield, a mass-normalized rate); the unit's dimension and the denominator decide the quantity,
+        and a volumetric rate is comparable only at one stated reference condition.
+      dimensions: [molar_flow, mass_flow, volumetric_flow, frequency, amount_per_mass_time, amount_per_volume_time, amount_per_area_time, mass_per_volume_time]
+      compare_by:
+      - species
+      - context: flow_reference
+        when_dimension: [volumetric_flow]
+      denominator:
+        description: The catalyst mass, the catalyst or reactor volume, or the electrode or illuminated area the rate is
+          divided by.
+        dimensions: [mass, volume, area]
+      maturity: provisional
+    product_amount:
+      description: The amount, mass or gas volume of one species (its target) formed, or consumed, over the interval of its
+        producer or experiment, alone or per catalyst mass or area (µmol, µmol/g). An amount is not a rate, and amounts
+        over two intervals are two results.
+      dimensions: [amount, mass, volume, amount_per_mass, amount_per_area]
+      compare_by:
+      - species
+      - context: flow_reference
+        when_dimension: [volume]
+      denominator:
+        description: The catalyst mass or the electrode or illuminated area the amount is divided by.
+        dimensions: [mass, area]
+      maturity: provisional
+    balance:
+      description: A closure, what a balance finds of an element or of charge in what it counts (the products, and the
+        unconverted reactant when it is included) divided by what went in (fed, converted or passed), over the
+        streams, phases and interval its producer includes; dimensionless. It is kept as reported, above 100 % too, as
+        a measured closure whose uncertainty may include 100 %, never capped or forced to close. What a balance leaves
+        unmeasured is recorded as such (unresolved_target), never computed.
+      dimensions: [dimensionless]
+      compare_by: [balance_basis]
+      closure: true
+      maturity: provisional
+    composition_fraction:
+      description: The share of a component in a sample, a catalyst, a mixture or a phase (mass, mole, atom or volume
+        fraction), dimensionless; an amount, a concentration or a loading is a quantity of its own.
+      dimensions: [dimensionless]
+      compare_by: [fraction_basis]
+      share: true
+    loading:
+      description: The amount of an active component on its support or electrode, as a share (wt%), per mass of
+        support (mmol/g) or per area (mg/cm2).
+      dimensions: [dimensionless, amount_per_mass, mass_per_area, amount_per_area]
+      compare_by:
+      - context: fraction_basis
+        when_dimension: [dimensionless]
+    concentration:
+      description: The amount (mol/L) or mass (g/L) of a component per volume of its mixture, or its amount per mass of
+        solvent (molality, mol/kg), kept apart by its unit.
+      dimensions: [amount_concentration, mass_concentration, amount_per_mass]
+    flow_rate:
+      description: A volumetric, molar or mass flow rate; a volumetric flow is comparable only at one stated reference
+        condition.
+      dimensions: [volumetric_flow, molar_flow, mass_flow]
+      compare_by:
+      - context: flow_reference
+        when_dimension: [volumetric_flow]
+    space_velocity:
+      description: A feed flow divided by the amount of catalyst (IUPAC space velocity); what is divided by what, and
+        at which conditions a gas volume is counted, decide the quantity.
+      dimensions: [frequency, volume_per_mass_time]
+      compare_by:
+      - space_velocity_basis
+      - context: flow_reference
+        when:
+          space_velocity_basis: [ghsv, volume_per_catalyst_mass]
+      denominator:
+        description: The catalyst bed volume or catalyst mass the flow is divided by.
+        dimensions: [volume, mass]
+    faradaic_efficiency:
+      description: The share of the charge passed that forms one product (its target), dimensionless.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      share: true
+    quantum_yield:
+      description: Events (product formed, reactant consumed) per photon absorbed, for one product (IUPAC quantum yield);
+        it can exceed one in a chain reaction.
+      dimensions: [dimensionless]
+      compare_by: [species]
+    photonic_yield:
+      description: Events per photon incident on the system, for one product (IUPAC photonic yield; what many sources
+        call an apparent quantum yield); a lower bound of the quantum yield.
+      dimensions: [dimensionless]
+      compare_by: [species]
+    energy_yield:
+      description: Amount or mass of one product per energy supplied (g/kWh, mol/kJ).
+      dimensions: [amount_per_energy, mass_per_energy]
+      compare_by: [species]
+    efficiency:
+      description: A dimensionless efficiency of energy or charge conversion (IPCE, ABPE, plasma energy efficiency).
+      dimensions: [dimensionless]
+      share: true
+    site_fraction:
+      description: The share of a stated whole that a population of sites makes up (of the exposed atoms of an element, of
+        all its atoms, of the sites of a kind), dimensionless; the value's basis names the whole and is compared as text.
+        A share is not a count of sites, so no rate is divided by it.
+      dimensions: [dimensionless]
+      share: true
+      maturity: provisional
+    site_density:
+      description: The sites of a population per surface area or per mass of the material or catalyst they belong to
+        (µmol/m2, sites/nm2, µmol/g), counted or estimated by a stated method.
+      dimensions: [amount_per_area, number_per_area, amount_per_mass, number_per_mass]
+      maturity: provisional
+    site_count:
+      description: A number of sites, or of exposed atoms taken as sites, absolute (µmol, a number of sites) or per mass
+        of catalyst (µmol/g), counted, estimated or assumed by a stated method; never a share (site_fraction).
+      dimensions: [amount, dimensionless, amount_per_mass, number_per_mass]
+      maturity: provisional
+    turnover_frequency:
+      description: Events (one product formed or one reactant converted, its target) per site per time, as reported. How
+        it was calculated is recorded with it, never inferred, in the count of sites it is divided by (normalized_by, a
+        value that keeps its own method, origin and assumptions) and, in its basis or definition, in what was counted as
+        sites (the exposed atoms, the sites of one kind, every atom) and how. Rates of two species are never compared with one
+        another; rates calculated on different counts are compared as reported, each with its denominator.
+      dimensions: [frequency]
+      compare_by: [species]
+      denominator:
+        description: The count of sites the rate is divided by (sites counted by chemisorption, titration or a model),
+          absolute or per catalyst mass, or a density of sites per area for a rate per area; a site count or a site
+          density, never a share.
+        dimensions: [dimensionless, amount, amount_per_mass, number_per_mass, amount_per_area, number_per_area]
+        kinds: [site_count, site_density]
+        unstated: warning
+    electronic_energy:
+      description: The total electronic energy of one structure model, as an electronic-structure calculation reports it (a
+        DFT total energy). Its zero depends on the method, the code and its pseudopotentials or basis set, so totals are
+        compared only for one structure (its target, or the model that holds it) under one level of theory; a difference
+        of totals, such as an adsorption energy, is a reaction energy.
+      dimensions: [energy]
+      compare_by: [structure, level_of_theory, charge_treatment]
+      shows: [dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    reaction_energy:
+      description: The electronic energy change of a reaction or an elementary step, products minus reactants; an
+        adsorption energy is the reaction energy of an adsorption. Its target, or the step that holds it, names the
+        process, whose participants are the reference states. Kept as reported, with or without zero-point energy as its
+        definition says; never an enthalpy or a free energy.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    reaction_enthalpy:
+      description: The enthalpy change of a reaction or an elementary step at the temperature its producer states,
+        products minus reactants, as reported (computed with thermal corrections, or measured). It depends on the
+        temperature, which a value states.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    reaction_free_energy:
+      description: The free energy change of a reaction or an elementary step (a Gibbs energy, or a grand-canonical one at
+        constant potential), products minus reactants, at the temperature, pressures and electrode potential its producer
+        states; an adsorption free energy is the reaction free energy of an adsorption. Never compared with an electronic
+        energy change, even in the same unit.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    activation_energy:
+      description: The activation energy of one elementary step, the step that holds it or its target (its process). It is
+        either the energy of the step's transition state above its initial state (a computed barrier) or the activation
+        energy of its rate constant (the Ea of an Arrhenius expression in a mechanism), as its definition says. It is
+        never the apparent activation energy of an overall rate (apparent_activation_energy). A mechanism file may give it
+        divided by the gas constant, in kelvin; it is kept so, and compared only with values in that unit.
+      dimensions: [energy, molar_energy, temperature]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows: [electrode_potential, dispersion, hubbard_u, spin_treatment, solvation]
+      maturity: provisional
+    activation_free_energy:
+      description: The free energy of one elementary step's transition state above its initial state, at the temperature
+        and electrode potential its producer states.
+      dimensions: [energy, molar_energy]
+      compare_by: [process, level_of_theory, charge_treatment]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      - electrode_potential
+      - dispersion
+      - hubbard_u
+      - spin_treatment
+      - solvation
+      maturity: provisional
+    apparent_activation_energy:
+      description: The activation energy of an overall rate (of forming one product or converting one reactant, its target),
+        from the temperature dependence of measured or modelled rates over the range of its fit (an Arrhenius plot). It
+        combines the barriers and adsorption enthalpies of the steps behind the rate, so it is not the activation energy
+        of any one step; the temperature range of the fit is stated with it. A source may give it divided by the gas
+        constant, in kelvin (the slope of the plot); it is kept so, and compared only with values in that unit.
+      dimensions: [energy, molar_energy, temperature]
+      compare_by: [species]
+      shows:
+      - property: temperature
+        warn: true
+      - pressure
+      maturity: provisional
+    degree_of_rate_control:
+      description: How sensitive a rate (of forming one product, its target) is to the rate constant of one step, at the
+        conditions and in the catalyst state of the computation that found it (dimensionless; the degree of rate control).
+        It changes with the conditions, so it is shown with the temperature and pressure it holds at, and it is never a
+        property of the step alone.
+      dimensions: [dimensionless]
+      compare_by: [species]
+      shows: [temperature, pressure]
+      maturity: provisional

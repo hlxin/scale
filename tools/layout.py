@@ -121,6 +121,13 @@ def bundle_ignore(repo: Path):
     return ignore
 
 
+def bundle_ignored(rel: str | PurePath) -> bool:
+    """A repository-relative path the package leaves out (bundle_ignore): local material, caches and tests. A release
+    leaves out the same files, so that the release an installed package carries verifies there."""
+    parts = PurePath(rel).parts
+    return _is_local(parts) or any(fnmatch.fnmatch(n, x) for n in parts for x in BUNDLE_IGNORE)
+
+
 # ---------------------------------------------------------------- discovery
 def is_root(p: Path) -> bool:
     return (p / RELEASE_MANIFEST).exists() and (p / RELEASES).is_dir()

@@ -29,6 +29,18 @@ def test_every_built_release_verifies_and_the_releases_chain(capsys):
     assert [x["release"] for x in res] == RELEASES and all(x["ok"] for x in res), res
 
 
+def test_a_release_holds_only_what_the_package_carries():
+    # an installed package carries every release without its tests (layout.bundle_ignored), and verifies them there
+    # (CI's package job), so a release built from the head holds no file the package leaves out
+    from scale import layout
+    for r in RELEASES:
+        root = release_root(REPO, r)
+        left_out = [f for f in (load_yaml(root / "RELEASE.yaml").get("digests") or {}) if layout.bundle_ignored(f)]
+        assert not left_out, (r, left_out)
+    assert layout.bundle_ignored("skills/index-sources/tests/test_vectors.py") and layout.bundle_ignored("a/__pycache__/x.pyc")
+    assert not layout.bundle_ignored("skills/index-sources/SKILL.md")
+
+
 def test_release_ids_normalize_and_order():
     assert normalize_release_id("0.1.0") == normalize_release_id("v0.1.0") == normalize_release_id("/v0.1.0/") == "v0.1.0"
     for bad in ("legacy/v0.1.0", "other/v0.1.0", "v0.1"):
