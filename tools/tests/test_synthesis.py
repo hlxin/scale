@@ -341,3 +341,115 @@ def test_the_command_and_the_agent_tool_give_the_recipe(capsys):
     assert f"Variant of `{C}/preparation/pt-sea-11`: ph" in out and "| 9.0 |" in out
     res = ScaleToolkit(repo=REPO).call("recipe", {"path": str(CONDITIONS)})
     assert "error" not in res and len(res["recipes"]) == 4 and json.dumps(res)
+
+
+# ---------------------------------------------------------------- 0.7.9: what curating nanoparticle-synthesis recipes
+# asked for: an anneal, the functions of an isolating medium, a phase-transfer agent and an antisolvent, how an input
+# went in, and a dispersion
+SALT = EXAMPLES / "scale-catal/synthesis-examples/salt-matrix-anneal.json"
+A = "ex:anl"
+
+
+@pytest.fixture()
+def salt():
+    return copy.deepcopy(load_doc(SALT))
+
+
+def anode(d: dict, local: str) -> dict:
+    return next(n for n in d["nodes"] if n["id"] == f"{A}/{local}")["props"]
+
+
+def ainput(d: dict, step: str, target: str) -> dict:
+    return next(e for e in d["links"] if e["type"] == "HAS_INPUT" and e["source"] == f"{A}/step/{step}"
+                and e["target"] == f"{A}/{target}")["props"]
+
+
+def test_the_salt_matrix_example_is_valid_and_finds_every_piece_of_evidence(salt):
+    rep = pgraph.validate(salt, spec_of(salt))
+    assert rep.ok and rep.warnings == [], rep.warnings
+    assert evidence_missing(salt) == {}
+    assert all(not r.get("missing") for r in catalysis(salt)["records"].values())
+
+
+def test_an_anneal_is_asked_its_temperature_time_gas_ramp_and_flow(salt):
+    """An anneal changes the solid's structure by heat, so it is asked what a calcination or a reduction is asked: its
+    temperature and time, its gas and ramp, and whether the gas flowed."""
+    step = anode(salt, "step/ptfe-anneal")
+    assert step["action"] == "anneal" and step["gas_flow_mode"] == "flowing"
+    rec = catalysis(salt)["records"][f"{A}/step/ptfe-anneal"]
+    assert rec["missing"] == {} and rec["expected"] == 5
+    del step["ramp_rate"], step["gas_flow_mode"]
+    assert catalysis(salt)["records"][f"{A}/step/ptfe-anneal"]["missing"] == {
+        "ProcedureStep.ramp_rate": 1, "ProcedureStep.gas_flow_mode": 1}
+
+
+def test_an_isolating_medium_an_antisolvent_and_a_phase_transfer_agent_are_functions_of_inputs(salt):
+    """The salt that keeps the particles apart while they are annealed is not a support; the ethanol that precipitates
+    them and the hydroxide that carries them into water are what they do in their steps, not the steps' actions."""
+    assert ainput(salt, "ptfe-salt-mix", "species/nacl")["synthesis_function"] == ["isolating_medium"]
+    assert ainput(salt, "ptfe-precipitate", "species/ethanol")["synthesis_function"] == ["antisolvent"]
+    assert ainput(salt, "ptfe-transfer", "species/tmah")["synthesis_function"] == ["phase_transfer_agent"]
+    ainput(salt, "ptfe-salt-mix", "species/nacl")["synthesis_function"] = ["anneal"]   # an action is no function
+    errors = [e["message"] for e in pgraph.validate(salt, spec_of(salt)).errors]
+    assert any("is not one of" in m for m in errors), errors
+
+
+def test_how_an_input_went_in_is_on_its_link(salt):
+    assert ainput(salt, "ptfe-add-fe", "species/feacac3")["addition_mode"] == "dropwise"
+    assert ainput(salt, "ptfe-mix", "species/hdd")["addition_mode"] == "all_at_once"
+    assert ainput(salt, "ptfe-salt-mix", "species/nacl")["addition_mode"] == "portionwise"
+    assert not any("addition_mode" in n["props"] for n in salt["nodes"])     # an input's, never a step's
+
+
+def test_a_colloid_is_a_dispersion_and_an_annealing_is_a_treatment(salt):
+    assert anode(salt, "sample/ptfe-crude")["sample_kind"] == "dispersion"
+    assert anode(salt, "sample/ptfe-water")["sample_kind"] == "dispersion"
+    treat = anode(salt, "treatment/ptfe-anneal-again")
+    assert treat["treatment_kind"] == "annealing" and treat["temperature"]["unit"] == "K"
+    assert any(e["type"] == "TREATED_BY" and e["target"] == f"{A}/treatment/ptfe-anneal-again" for e in salt["links"])
+
+
+def test_a_document_pinning_078_holds_none_of_it(salt):
+    salt["graph"]["schema_version"] = "0.7.8"
+    errors = [e["message"] for e in pgraph.validate(salt, spec_of(salt)).errors]
+    for term in ("anneal", "annealing", "dispersion", "isolating_medium", "phase_transfer_agent", "antisolvent",
+                 "addition_mode"):
+        assert any(term in m for m in errors), (term, errors)
+
+
+def test_a_stage_that_treats_particles_made_earlier_states_them_not_precursors(salt):
+    """The anneal takes the particles the colloidal stage made: that sample, its input, is what it is made from, so it
+    is not asked for a precursor it does not have."""
+    ev = catalysis(salt)["records"][f"{A}/preparation/ptfe-salt-anneal"]["evidence"]
+    assert ev["precursors"]["found"]
+    salt["links"] = [e for e in salt["links"] if not (e["type"] == "HAS_INPUT"
+                     and e["source"] == f"{A}/preparation/ptfe-salt-anneal")]
+    assert evidence_missing(salt) == {"precursors": [f"{A}/preparation/ptfe-salt-anneal"]}
+
+
+def test_a_size_is_a_length_whose_unit_is_checked(salt):
+    tem = anode(salt, "characterization/ptfe-tem")
+    assert anode(salt, "variable/ptfe-size")["quantity_kind"] == "microscopy_particle_size"
+    tem["result_values"][0]["unit"] = "K"
+
+    def tem_errors() -> list:
+        return [e["message"] for e in pgraph.validate(salt, spec_of(salt)).errors
+                if e.get("record") == f"{A}/characterization/ptfe-tem"]
+    assert tem_errors(), "a declared length refuses a temperature"
+    salt["graph"]["schema_version"] = "0.7.8"                   # before it, the kind was a name only
+    assert tem_errors() == []
+
+
+def test_more_method_families_a_bulk_solid_and_the_layer_of_a_phase(salt):
+    families = ["impregnation", "chemical_vapor_impregnation", "photochemical_reduction", "radiolytic_reduction",
+                "spark_ablation", "arc_melting"]
+    anode(salt, "preparation/ptfe")["preparation_methods"] = families
+    anode(salt, "state/ptfe")["architecture"] = ["bulk"]
+    salt["links"].append({"id": f"{A}/link/layer", "type": "HAS_PHASE", "source": f"{A}/state/ptfe",
+                          "target": f"{A}/material/ptfe-l10", "props": {"origin": "synthetic", "layer": 1}})
+    rep = pgraph.validate(salt, spec_of(salt))
+    assert rep.ok, [e.message for e in rep.errors]
+    salt["graph"]["schema_version"] = "0.7.8"
+    errors = [e["message"] for e in pgraph.validate(salt, spec_of(salt)).errors]
+    for term in families + ["bulk", "layer"]:
+        assert any(term in m for m in errors), (term, errors)

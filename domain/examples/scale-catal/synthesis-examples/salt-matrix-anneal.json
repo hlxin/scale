@@ -1,0 +1,1911 @@
+{
+  "nodes": [
+    {
+      "id": "ex:anl/source/ptfe-salt",
+      "label": "Source",
+      "props": {
+        "name": "Invented paper: Ordered PtFe nanoparticles by annealing colloidal particles in a NaCl matrix",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Ordered PtFe nanoparticles by annealing colloidal particles in a NaCl matrix (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:anl/material/ptfe-l10",
+      "label": "Material",
+      "props": {
+        "name": "ordered L1_0 PtFe",
+        "crystallinity": "crystalline",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results, XRD",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "formula": "PtFe",
+        "material_family": "alloy",
+        "origin": "synthetic",
+        "structure_type": "L1_0"
+      }
+    },
+    {
+      "id": "ex:anl/species/ptacac2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "platinum(II) acetylacetonate",
+        "elemental_composition": {
+          "C": 10,
+          "H": 14,
+          "O": 4,
+          "Pt": 1
+        },
+        "formula": "Pt(C5H7O2)2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/feacac3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron(III) acetylacetonate",
+        "elemental_composition": {
+          "C": 15,
+          "Fe": 1,
+          "H": 21,
+          "O": 6
+        },
+        "formula": "Fe(C5H7O2)3",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/oleylamine",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "oleylamine",
+        "elemental_composition": {
+          "C": 18,
+          "H": 37,
+          "N": 1
+        },
+        "formula": "C18H37N",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/hdd",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "1,2-hexadecanediol",
+        "elemental_composition": {
+          "C": 16,
+          "H": 34,
+          "O": 2
+        },
+        "formula": "C16H34O2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/ethanol",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ethanol",
+        "elemental_composition": {
+          "C": 2,
+          "H": 6,
+          "O": 1
+        },
+        "formula": "C2H6O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/hexane",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hexane",
+        "elemental_composition": {
+          "C": 6,
+          "H": 14
+        },
+        "formula": "C6H14",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/tmah",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "tetramethylammonium hydroxide",
+        "elemental_composition": {
+          "C": 4,
+          "H": 13,
+          "N": 1,
+          "O": 1
+        },
+        "formula": "C4H13NO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/water",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "water",
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/nacl",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "sodium chloride",
+        "elemental_composition": {
+          "Cl": 1,
+          "Na": 1
+        },
+        "formula": "NaCl",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/species/ar",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "argon",
+        "elemental_composition": {
+          "Ar": 1
+        },
+        "formula": "Ar",
+        "origin": "synthetic",
+        "species_kind": "element"
+      }
+    },
+    {
+      "id": "ex:anl/catalyst/ptfe",
+      "label": "Catalyst",
+      "props": {
+        "name": "PtFe nanoparticles",
+        "catalyst_family": "alloy",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "nominal_formula": "PtFe",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe",
+      "label": "CatalystSample",
+      "props": {
+        "name": "PtFe nanoparticles, annealed and washed",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe-crude",
+      "label": "Sample",
+      "props": {
+        "name": "PtFe colloid in oleylamine",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "dispersion"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe-hexane",
+      "label": "Sample",
+      "props": {
+        "name": "PtFe nanoparticles in hexane",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "dispersion"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe-water",
+      "label": "Sample",
+      "props": {
+        "name": "PtFe nanoparticles in water",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "dispersion"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe-salt",
+      "label": "Sample",
+      "props": {
+        "name": "PtFe nanoparticles dried in NaCl",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:anl/sample/ptfe-annealed",
+      "label": "Sample",
+      "props": {
+        "name": "PtFe nanoparticles annealed in NaCl",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "preparation_status": "prepared",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:anl/preparation/ptfe",
+      "label": "Preparation",
+      "props": {
+        "name": "PtFe: colloidal particles, then annealed in a salt matrix",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "method": "colloidal co-reduction in oleylamine, then an anneal in NaCl and the salt washed out",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "colloidal_reduction",
+          "other"
+        ]
+      }
+    },
+    {
+      "id": "ex:anl/preparation/ptfe-colloid",
+      "label": "Preparation",
+      "props": {
+        "name": "PtFe nanoparticles in hexane",
+        "design_aims": [
+          "particle_size",
+          "composition"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "method": "reduction of the acetylacetonates by the diol in oleylamine",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "colloidal_reduction"
+        ]
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-mix",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mix Pt(acac)2 and the diol in oleylamine",
+        "action": "mix",
+        "energy_input": [
+          "none"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-add-fe",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Add the Fe(acac)3 solution dropwise at 393 K",
+        "action": "add",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 393
+        }
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-heat",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Heat to 573 K",
+        "action": "heat",
+        "atmosphere": "N2",
+        "duration": {
+          "status": "present",
+          "unit": "min",
+          "value": 36
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 5
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-hold",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Hold at 573 K",
+        "action": "hold",
+        "atmosphere": "N2",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 573
+        }
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-precipitate",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Precipitate the particles with ethanol",
+        "action": "precipitate",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-redisperse",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Disperse the particles in hexane",
+        "action": "disperse",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/variable/ptfe-size",
+      "label": "Variable",
+      "props": {
+        "name": "mean PtFe particle diameter (TEM)",
+        "definition": "number mean of the projected-area-equivalent diameters of 200 particles",
+        "origin": "synthetic",
+        "quantity_kind": "microscopy_particle_size",
+        "scale": "quantitative",
+        "unit": "nm"
+      }
+    },
+    {
+      "id": "ex:anl/characterization/ptfe-tem",
+      "label": "Characterization",
+      "props": {
+        "name": "TEM of the particles in hexane",
+        "evidence": [
+          {
+            "id": "f1",
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "experiment_kind": "physical",
+        "observation_mode": "ex_situ",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "mean_diameter",
+            "status": "present",
+            "evidence_ids": [
+              "f1"
+            ],
+            "target": "ex:anl/material/ptfe-l10",
+            "unit": "nm",
+            "value": 4.2,
+            "variable": "ex:anl/variable/ptfe-size"
+          }
+        ],
+        "sampling": "ensemble",
+        "technique": "transmission electron microscopy"
+      }
+    },
+    {
+      "id": "ex:anl/state/ptfe-colloid",
+      "label": "CatalystState",
+      "props": {
+        "name": "PtFe nanoparticles as made",
+        "architecture": [
+          "nanoparticles",
+          "alloy"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 1",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "particle_shape": [
+          "sphere"
+        ],
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:anl/preparation/ptfe-salt-anneal",
+      "label": "Preparation",
+      "props": {
+        "name": "Annealing the particles in a NaCl matrix",
+        "design_aims": [
+          "atomic_ordering",
+          "particle_size"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "method": "phase transfer into water, drying in NaCl, an anneal under H2/Ar and the salt washed out",
+        "origin": "synthetic",
+        "preparation_methods": [
+          "other"
+        ]
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-transfer",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Carry the particles into water with TMAH",
+        "action": "mix",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "method": "stirred until the hexane phase is clear",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-salt-mix",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Mix the aqueous particles with NaCl",
+        "action": "mix",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-salt-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry the mixture",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 353
+        }
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-anneal",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Anneal at 973 K under 5% H2 in Ar",
+        "action": "anneal",
+        "atmosphere": "5% H2 in Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 6
+        },
+        "energy_input": [
+          "thermal"
+        ],
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "ramp_rate": {
+          "status": "present",
+          "unit": "K/min",
+          "value": 10
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 973
+        }
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-wash",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Wash out the NaCl with water",
+        "action": "wash",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:anl/step/ptfe-dry",
+      "label": "ProcedureStep",
+      "props": {
+        "name": "Dry the washed particles",
+        "action": "dry",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 12
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 333
+        }
+      }
+    },
+    {
+      "id": "ex:anl/treatment/ptfe-anneal-again",
+      "label": "Treatment",
+      "props": {
+        "name": "Annealed again under Ar before examination",
+        "atmosphere": "Ar",
+        "duration": {
+          "status": "present",
+          "unit": "h",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Characterization",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "gas_flow_mode": "flowing",
+        "origin": "synthetic",
+        "temperature": {
+          "status": "present",
+          "unit": "K",
+          "value": 773
+        },
+        "treatment_kind": "annealing"
+      }
+    },
+    {
+      "id": "ex:anl/characterization/ptfe-xrd",
+      "label": "Characterization",
+      "props": {
+        "name": "XRD of the annealed particles",
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "experiment_kind": "physical",
+        "information_depth": "bulk",
+        "origin": "synthetic",
+        "sampling": "ensemble",
+        "technique": "powder X-ray diffraction"
+      }
+    },
+    {
+      "id": "ex:anl/state/ptfe",
+      "label": "CatalystState",
+      "props": {
+        "name": "PtFe nanoparticles after the anneal",
+        "architecture": [
+          "nanoparticles",
+          "intermetallic",
+          "unsupported"
+        ],
+        "evidence": [
+          {
+            "kind": "figure",
+            "locator": "Figure 2",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "state_kind": "as_prepared"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:anl/link/1",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by mass",
+          "unit": "%",
+          "value": 100
+        },
+        "origin": "synthetic",
+        "role": "active_phase"
+      },
+      "source": "ex:anl/catalyst/ptfe",
+      "target": "ex:anl/material/ptfe-l10"
+    },
+    {
+      "id": "ex:anl/link/2",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe",
+      "target": "ex:anl/catalyst/ptfe"
+    },
+    {
+      "id": "ex:anl/link/3",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe",
+      "target": "ex:anl/sample/ptfe"
+    },
+    {
+      "id": "ex:anl/link/4",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-colloid",
+      "target": "ex:anl/preparation/ptfe"
+    },
+    {
+      "id": "ex:anl/link/5",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-colloid",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/6",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-mix",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/7",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-mix",
+      "target": "ex:anl/species/ptacac2"
+    },
+    {
+      "id": "ex:anl/link/8",
+      "type": "HAS_INPUT",
+      "props": {
+        "addition_mode": "all_at_once",
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 2.0
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-mix",
+      "target": "ex:anl/species/hdd"
+    },
+    {
+      "id": "ex:anl/link/9",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 20
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent",
+          "capping_agent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-mix",
+      "target": "ex:anl/species/oleylamine"
+    },
+    {
+      "id": "ex:anl/link/10",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-add-fe",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/11",
+      "type": "HAS_INPUT",
+      "props": {
+        "addition_mode": "dropwise",
+        "amount": {
+          "status": "present",
+          "unit": "mmol",
+          "value": 0.5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "metal_precursor"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-add-fe",
+      "target": "ex:anl/species/feacac3"
+    },
+    {
+      "id": "ex:anl/link/12",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-add-fe",
+      "target": "ex:anl/species/oleylamine"
+    },
+    {
+      "id": "ex:anl/link/13",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-heat",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/14",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-hold",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/15",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-hold",
+      "target": "ex:anl/sample/ptfe-crude"
+    },
+    {
+      "id": "ex:anl/link/16",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-precipitate",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/17",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/step/ptfe-precipitate",
+      "target": "ex:anl/sample/ptfe-crude"
+    },
+    {
+      "id": "ex:anl/link/18",
+      "type": "HAS_INPUT",
+      "props": {
+        "addition_mode": "all_at_once",
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 40
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "antisolvent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-precipitate",
+      "target": "ex:anl/species/ethanol"
+    },
+    {
+      "id": "ex:anl/link/19",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-redisperse",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/20",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-redisperse",
+      "target": "ex:anl/species/hexane"
+    },
+    {
+      "id": "ex:anl/link/21",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-redisperse",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/22",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:anl/characterization/ptfe-tem",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/23",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe-colloid",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/24",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:anl/state/ptfe-colloid",
+      "target": "ex:anl/preparation/ptfe-colloid"
+    },
+    {
+      "id": "ex:anl/link/25",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe-colloid",
+      "target": "ex:anl/characterization/ptfe-tem"
+    },
+    {
+      "id": "ex:anl/link/26",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-salt-anneal",
+      "target": "ex:anl/preparation/ptfe"
+    },
+    {
+      "id": "ex:anl/link/27",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/preparation/ptfe-salt-anneal",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/28",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-salt-anneal",
+      "target": "ex:anl/sample/ptfe"
+    },
+    {
+      "id": "ex:anl/link/29",
+      "type": "PART_OF",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/30",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/sample/ptfe-hexane"
+    },
+    {
+      "id": "ex:anl/link/31",
+      "type": "HAS_INPUT",
+      "props": {
+        "addition_mode": "all_at_once",
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 1
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "phase_transfer_agent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/species/tmah"
+    },
+    {
+      "id": "ex:anl/link/32",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/species/water"
+    },
+    {
+      "id": "ex:anl/link/33",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/sample/ptfe-water"
+    },
+    {
+      "id": "ex:anl/link/34",
+      "type": "PART_OF",
+      "props": {
+        "order": 2,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-salt-mix",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/35",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 10
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/step/ptfe-salt-mix",
+      "target": "ex:anl/sample/ptfe-water"
+    },
+    {
+      "id": "ex:anl/link/36",
+      "type": "HAS_INPUT",
+      "props": {
+        "addition_mode": "portionwise",
+        "amount": {
+          "status": "present",
+          "unit": "g",
+          "value": 5
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "isolating_medium"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-salt-mix",
+      "target": "ex:anl/species/nacl"
+    },
+    {
+      "id": "ex:anl/link/37",
+      "type": "PART_OF",
+      "props": {
+        "order": 3,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-salt-dry",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/38",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-salt-dry",
+      "target": "ex:anl/sample/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/link/39",
+      "type": "PART_OF",
+      "props": {
+        "order": 4,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/40",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/sample/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/link/41",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "fraction": {
+          "status": "present",
+          "basis": "by volume",
+          "unit": "%",
+          "value": 5
+        },
+        "origin": "synthetic",
+        "role": "reagent",
+        "synthesis_function": [
+          "reducing_agent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/species/h2"
+    },
+    {
+      "id": "ex:anl/link/42",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "protective_gas"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/species/ar"
+    },
+    {
+      "id": "ex:anl/link/43",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/sample/ptfe-annealed"
+    },
+    {
+      "id": "ex:anl/link/44",
+      "type": "PART_OF",
+      "props": {
+        "order": 5,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-wash",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/45",
+      "type": "HAS_INPUT",
+      "props": {
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material"
+      },
+      "source": "ex:anl/step/ptfe-wash",
+      "target": "ex:anl/sample/ptfe-annealed"
+    },
+    {
+      "id": "ex:anl/link/46",
+      "type": "HAS_INPUT",
+      "props": {
+        "amount": {
+          "status": "present",
+          "unit": "mL",
+          "value": 50
+        },
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Experimental, Synthesis",
+            "source": "ex:anl/source/ptfe-salt"
+          }
+        ],
+        "origin": "synthetic",
+        "role": "material",
+        "synthesis_function": [
+          "solvent"
+        ]
+      },
+      "source": "ex:anl/step/ptfe-wash",
+      "target": "ex:anl/species/water"
+    },
+    {
+      "id": "ex:anl/link/47",
+      "type": "PART_OF",
+      "props": {
+        "order": 6,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-dry",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/48",
+      "type": "HAS_OUTPUT",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-dry",
+      "target": "ex:anl/sample/ptfe"
+    },
+    {
+      "id": "ex:anl/link/49",
+      "type": "TREATED_BY",
+      "props": {
+        "order": 1,
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe",
+      "target": "ex:anl/treatment/ptfe-anneal-again"
+    },
+    {
+      "id": "ex:anl/link/50",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:anl/characterization/ptfe-xrd",
+      "target": "ex:anl/sample/ptfe"
+    },
+    {
+      "id": "ex:anl/link/51",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe",
+      "target": "ex:anl/sample/ptfe"
+    },
+    {
+      "id": "ex:anl/link/52",
+      "type": "REACHED_BY",
+      "props": {
+        "origin": "synthetic",
+        "timing": "after"
+      },
+      "source": "ex:anl/state/ptfe",
+      "target": "ex:anl/preparation/ptfe-salt-anneal"
+    },
+    {
+      "id": "ex:anl/link/53",
+      "type": "DETERMINED_BY",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe",
+      "target": "ex:anl/characterization/ptfe-xrd"
+    },
+    {
+      "id": "ex:anl/catalyst/ptfe/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/catalyst/ptfe",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/characterization/ptfe-tem/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/characterization/ptfe-tem",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/characterization/ptfe-xrd/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/characterization/ptfe-xrd",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/material/ptfe-l10/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results, XRD"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/material/ptfe-l10",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/preparation/ptfe/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/preparation/ptfe-colloid/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-colloid",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/preparation/ptfe-salt-anneal/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/preparation/ptfe-salt-anneal",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe-annealed/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe-annealed",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe-crude/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe-crude",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe-hexane/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe-hexane",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe-salt/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe-salt",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/sample/ptfe-water/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/sample/ptfe-water",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/state/ptfe/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/state/ptfe-colloid/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Figure 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/state/ptfe-colloid",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-add-fe/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-add-fe",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-anneal/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-anneal",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-dry/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-dry",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-heat/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-heat",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-hold/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-hold",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-mix/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-mix",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-precipitate/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-precipitate",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-redisperse/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-redisperse",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-salt-dry/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-salt-dry",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-salt-mix/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-salt-mix",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-transfer/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-transfer",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/step/ptfe-wash/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Synthesis"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/step/ptfe-wash",
+      "target": "ex:anl/source/ptfe-salt"
+    },
+    {
+      "id": "ex:anl/treatment/ptfe-anneal-again/reported-in/ptfe-salt",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Experimental, Characterization"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:anl/treatment/ptfe-anneal-again",
+      "target": "ex:anl/source/ptfe-salt"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:anl/graph",
+    "schema": "scale-catal",
+    "schema_version": "0.7.9",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "A colloid annealed in a salt matrix: dropwise and one-shot additions, an antisolvent, a phase transfer and an anneal (synthetic)"
+  },
+  "multigraph": true
+}

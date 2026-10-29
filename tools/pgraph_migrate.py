@@ -38,6 +38,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.5": ("0.7.6", 'syntheses of any method: preparation methods, design aims and strategy; the function of each input; energy input and repetitions of a step; particle shape, architecture and facets of a state'),
     "0.7.6": ("0.7.7", "ligand removal (an action and the agent's function), a hold step; checklist: a stage of a family counts for growth_control and co_reactant, a fit is asked its result_values"),
     "0.7.7": ("0.7.8", 'Synthesis conditions: pH, stirring, fill fraction, gas flow mode and cooling of a step; concentration, stock concentration, fraction, ratio and flow rate of an input; protective_gas; VARIANT_OF between procedures (additive)'),
+    "0.7.8": ("0.7.9", 'What curated nanoparticle-synthesis recipes asked for: an anneal step and an annealing treatment; the functions isolating_medium, phase_transfer_agent and antisolvent; HAS_INPUT.addition_mode; sample_kind dispersion; six method families; architecture bulk; HAS_PHASE.layer; size quantity kinds; checklist: an anneal asked like a calcination, a stage that treats a sample asked that sample (additive)'),
 }
 
 

@@ -427,6 +427,50 @@ kinds:
   - match: close
     term: quantitykind:RotationalFrequency
     label: Rotational Frequency
+  particle_size:
+  - match: close
+    term: quantitykind:Diameter
+    label: Diameter
+  crystallite_size:
+  - match: broad
+    term: quantitykind:Length
+    label: Length
+  microscopy_particle_size:
+  - match: close
+    term: quantitykind:Diameter
+    label: Diameter
+  microscopy_particle_size_spread:
+  - match: broad
+    term: quantitykind:Length
+    label: Length
+  hydrodynamic_size:
+  - match: close
+    term: quantitykind:Diameter
+    label: Diameter
+  dispersion_equivalent_size:
+  - match: close
+    term: quantitykind:Diameter
+    label: Diameter
+  particle_edge_length:
+  - match: close
+    term: quantitykind:Length
+    label: Length
+  shell_thickness:
+  - match: close
+    term: quantitykind:Thickness
+    label: Thickness
+  wire_diameter:
+  - match: close
+    term: quantitykind:Diameter
+    label: Diameter
+  film_thickness:
+  - match: close
+    term: quantitykind:Thickness
+    label: Thickness
+  aspect_ratio:
+  - match: close
+    term: quantitykind:DimensionlessRatio
+    label: Dimensionless Ratio
 units:
   "°C":
   - match: exact
