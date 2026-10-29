@@ -231,15 +231,42 @@ def test_a_relative_to_that_names_no_record_is_an_error(doc):
 
 # ------------------------------------------------------------------------------------------ as reported is unchanged
 def test_an_as_reported_query_still_compares_the_basis_as_text(doc):
-    """Expected: without comparison: scientific, a filter on basis 'carbon' returns the values that state it and leaves out,
+    """Expected: without comparison: scientific, a filter on basis "carbon basis" returns the values that state it and leaves out,
     as before, the value that states no basis (other_basis) and the wt% value (incompatible_unit); no comparison block, no
     group, and the new contexts never filter it."""
     plan = {"match": {"label": "CatalyticTest", "as": "t"},
             "steps": [{"from": "t", "entries": "result_values", "kind": "selectivity", "as": "r"}],
-            "where": [{"var": "r", "prop": "value", "op": "ge", "value": 0, "unit": "%", "basis": "carbon"}],
+            "where": [{"var": "r", "prop": "value", "op": "ge", "value": 0, "unit": "%", "basis": "carbon basis"}],
             "return": ["t.name", "r"]}
     res = _run(doc, plan)
     assert res["status"] == "answered" and res["row_count"] == 7 and res.get("comparison") is None
     assert _left_out(res)["plain_ch4"].startswith("other_basis")
     assert _left_out(res)["aldehydes_in_oxygenates"].startswith("incompatible_unit")
     assert all("comparison_group" not in r for r in res["rows"])
+
+
+# ------------------------------------------------------------------------------------------ the term lists read no negation
+@pytest.mark.parametrize("context, text, expected", [
+    ("selectivity_whole", "share of the products, not including CO2", []),
+    ("selectivity_whole", "CO2 not included in the denominator", []),
+    ("selectivity_whole", "CO2 is included in the sum", []),
+    ("selectivity_whole", "selectivity including CO2", []),
+    ("selectivity_whole", "CO2-inclusive selectivity", []),
+    ("selectivity_whole", "carbon basis", []),
+    ("selectivity_whole", "converted carbon basis", []),
+    ("selectivity_whole", "share of the converted CO", ["converted_reactant_incl_co2"]),
+    ("selectivity_whole", "CO2 in the denominator", ["converted_reactant_incl_co2"]),
+    ("selectivity_whole", "CO2-free, among the hydrocarbons", ["products_excl_co2"]),
+    ("selectivity_count", "carbon monoxide selectivity", []),
+    ("selectivity_count", "selectivity to the carbon number C5+", []),
+    ("selectivity_count", "carbon-based catalyst", []),
+    ("selectivity_count", "carbon", []),
+    ("selectivity_count", "carbon basis", ["carbon_atoms"]),
+    ("selectivity_count", "C-mol%", ["carbon_atoms"]),
+])
+def test_a_term_never_reads_a_negation_or_another_word_as_a_statement(context, text, expected):
+    """Expected: a phrase that negates (not including CO2, CO2 not included) or only shares a word (carbon monoxide, a
+    carbon number, bare carbon) states nothing, so the value stays 'not stated' (compared apart), never read as the
+    opposite or as a carbon count; the unambiguous phrases are read."""
+    qc = quantities.contracts(pgraph.load_spec(GRAPH_MANIFEST))
+    assert qc.statements_in_text(context, text, None) == expected

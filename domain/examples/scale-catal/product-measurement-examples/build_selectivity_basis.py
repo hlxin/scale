@@ -113,19 +113,19 @@ def build() -> dict:
 
     # a Lyu-like row: CO2 as a share of the converted CO, the hydrocarbons as shares of the hydrocarbons (CO2 excluded)
     test("lyu-like", "Syngas conversion, CO2 beside the hydrocarbons", [("lyu", "Table 1")], [
-        sel("lyu_co2", co2, 20.3, "lyu", basis="carbon", definition="CO2 selectivity, as a share of the converted CO"),
-        sel("lyu_ch4", ch4, 2.6, "lyu", basis="carbon", definition="selectivity among the hydrocarbons, CO2 not included"),
-        sel("lyu_c24", l_c24, 31.6, "lyu", basis="carbon", definition="selectivity among the hydrocarbons, CO2 not included"),
-        sel("lyu_c5", l_c5, 65.8, "lyu", basis="carbon", definition="selectivity among the hydrocarbons, CO2 not included"),
+        sel("lyu_co2", co2, 20.3, "lyu", basis="carbon basis", definition="CO2 selectivity, as a share of the converted CO"),
+        sel("lyu_ch4", ch4, 2.6, "lyu", basis="carbon basis", definition="selectivity among the hydrocarbons, CO2 not included"),
+        sel("lyu_c24", l_c24, 31.6, "lyu", basis="carbon basis", definition="selectivity among the hydrocarbons, CO2 not included"),
+        sel("lyu_c5", l_c5, 65.8, "lyu", basis="carbon basis", definition="selectivity among the hydrocarbons, CO2 not included"),
     ])
     # a Xie-like test: the products as shares of the converted CO, CO2 included
     test("xie-like", "Syngas conversion, shares of the converted CO", [("xie", "Table 2")], [
-        sel("xie_ch4", ch4, 9, "xie", basis="carbon", definition="share of the converted CO, CO2 included in the denominator"),
-        sel("xie_c5", l_c5, 28, "xie", basis="carbon", definition="share of the converted CO, CO2 included in the denominator"),
+        sel("xie_ch4", ch4, 9, "xie", basis="carbon basis", definition="share of the converted CO, CO2 included in the denominator"),
+        sel("xie_c5", l_c5, 28, "xie", basis="carbon basis", definition="share of the converted CO, CO2 included in the denominator"),
     ])
     # shares within one record: a pool of olefins (carbon atoms), the oxygenates (mass)
     test("within-pool", "Olefin and oxygenate distributions", [("pool", "Table 3")], [
-        sel("c5_olefins_in_olefins", l_c5_olefins, 74.5, "pool", basis="carbon", relative_to=l_olefins,
+        sel("c5_olefins_in_olefins", l_c5_olefins, 74.5, "pool", basis="carbon basis", relative_to=l_olefins,
             definition="share within the olefins distribution"),
         sel("aldehydes_in_oxygenates", l_ald, 97, "pool", unit="wt%", relative_to=l_oxy,
             definition="share within the oxygenates, by mass"),
