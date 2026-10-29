@@ -1,0 +1,1090 @@
+distribution: scale-catal
+framework: SCALE — Shared Concepts, Attributes, and Links with Evidence
+release: v0.3.0
+status: released
+schema_version: 0.7.8
+core: core/CORE.yaml
+domain_profiles:
+- domain/DOMAIN.yaml
+skills:
+- skills/index-sources
+- skills/fetch-corpus
+- skills/curate-corpus
+- skills/query-graph
+- skills/map-coverage
+- skills/scan-conflicts
+- skills/export-graph
+- skills/evolve-schema
+- skills/triage-feedback
+date: '2026-10-29'
+previous: v0.2.0
+comparison_to_previous:
+  kernel:
+    classification: breaking
+    from: 0.2.0
+    to: 0.7.8
+    added:
+    - value.id
+    - value.identifiability
+    - value.interval_method
+    - value.normalized_by
+    - value.phase
+    - value.stream
+    - value.unresolved_target
+    - quantities
+    - nodes.Dataset.data_kind = notebook
+    - nodes.Design.agent_policy
+    - nodes.Design.autonomy_level
+    - nodes.Design.excluded_count
+    - nodes.Design.human_oversight
+    - nodes.Design.intervention_count
+    - nodes.Design.interventions
+    - nodes.Design.negative_results_policy
+    - nodes.Design.objectives
+    - nodes.Design.post_hoc_changes
+    - nodes.Design.safety_bounds
+    - nodes.Design.safety_measures
+    - nodes.Design.stop_reason
+    - nodes.Experiment.result_values
+    - nodes.Experiment.status_reason
+    - nodes.Method
+    - nodes.Model.architecture
+    - nodes.Model.hyperparameters
+    - nodes.Model.pretraining
+    - nodes.Model.stored_in
+    - nodes.Model.training_objective
+    - nodes.Model.uncertainty_calibration
+    - nodes.Model.uncertainty_components
+    - nodes.Model.uncertainty_method
+    - nodes.Model.uncertainty_use
+    - nodes.Operation.amplitude
+    - nodes.Operation.bit_duration
+    - nodes.Operation.levels
+    - nodes.Operation.program_detail
+    - nodes.Operation.pulse_amount
+    - nodes.Operation.pulse_width
+    - nodes.Operation.sequence_length
+    - nodes.Operation.time_origin
+    - nodes.Operation.waveform
+    - edges.EVALUATES.folds
+    - edges.EVALUATES.generalization
+    - edges.EVALUATES.grouped_by
+    - edges.EVALUATES.preprocessing_within_split
+    - edges.EVALUATES.split_seed
+    - edges.EVALUATES.split_strategy
+    - edges.PROPOSED_BY.human_decision
+    - edges.REPRESENTS.aspect
+    - edges.REPRESENTS.assumptions
+    - edges.USES_METHOD
+    - edges.VARIANT_OF
+    narrowed:
+    - 'quantities: units are checked against each bound property''s kind'
+    - nodes.Operation.duty_cycle holds quantity fraction (its unit must be of that kind's dimensions)
+    loosened:
+    - value.ref_value may target Method
+    - value.target may target Method
+    - nodes.Variable.of may target Method
+    - edges.ABOUT.to + Method
+    - edges.EVALUATES.to + Method
+    - edges.HAS_INPUT.to + Method
+    - edges.HAS_OUTPUT.to + Method
+    - edges.INCLUDES.to + Method
+    - edges.PART_OF_DESIGN.experimental_unit may target Method
+    - edges.REPORTED_IN.from + Method
+    - edges.REVISES.from + Method
+    - edges.REVISES.to + Method
+  domains:
+    catalysis:
+      classification: breaking
+      from: 0.2.0
+      to: 0.7.8
+      added:
+      - value.id
+      - value.identifiability
+      - value.interval_method
+      - value.normalized_by
+      - value.phase
+      - value.stream
+      - value.unresolved_target
+      - quantities
+      - nodes.Analysis.analysis_kind = balance
+      - nodes.Analysis.analysis_kind = frequency_response
+      - nodes.Analysis.analysis_kind = isotopic_transient
+      - nodes.Analysis.analysis_kind = modulation_excitation
+      - nodes.Analysis.analysis_kind = pulse_response
+      - nodes.Analysis.analysis_kind = spectral_fit
+      - nodes.Analysis.analysis_kind = step_response
+      - nodes.Analysis.analysis_kind = thermal_contribution
+      - nodes.Analysis.concentration_measure
+      - nodes.Analysis.demodulation_harmonic
+      - nodes.Analysis.evaluation_basis
+      - nodes.Analysis.limitations
+      - nodes.Analysis.modulation_period
+      - nodes.Analysis.partition_method
+      - nodes.Analysis.phase_reference
+      - nodes.Analysis.phase_reference_species
+      - nodes.Analysis.power_supply_input
+      - nodes.Analysis.rate_basis
+      - nodes.Analysis.reactor_model
+      - nodes.Analysis.result_values
+      - nodes.Analysis.standard_pressure
+      - nodes.Analysis.status_reason
+      - nodes.Analysis.thermodynamic_consistency
+      - nodes.Catalyst.catalyst_family = enzyme
+      - nodes.Catalyst.catalyst_family = whole_cell
+      - nodes.Catalyst.integration_mode
+      - nodes.Catalyst.integration_scale
+      - nodes.Catalyst.site_proximity
+      - nodes.CatalystState.architecture
+      - nodes.CatalystState.dimensionality
+      - nodes.CatalystState.exposed_facets
+      - nodes.CatalystState.particle_shape
+      - nodes.CatalyticTest.catalysis_mode
+      - nodes.CatalyticTest.interpretations
+      - nodes.CatalyticTest.power_supply_input
+      - nodes.CatalyticTest.result_values
+      - nodes.CatalyticTest.status_reason
+      - nodes.Characterization.power_supply_input
+      - nodes.Characterization.result_values
+      - nodes.Characterization.status_reason
+      - nodes.ChemicalSpecies.species_kind = macromolecule
+      - nodes.Computation.charge_treatment
+      - nodes.Computation.computation_kind
+      - nodes.Computation.dispersion
+      - nodes.Computation.failure_kind
+      - nodes.Computation.hubbard_u
+      - nodes.Computation.level_of_theory
+      - nodes.Computation.power_supply_input
+      - nodes.Computation.result_values
+      - nodes.Computation.settings
+      - nodes.Computation.solvation
+      - nodes.Computation.spin_treatment
+      - nodes.Computation.status_reason
+      - nodes.Dataset.data_kind = notebook
+      - nodes.Design.agent_policy
+      - nodes.Design.autonomy_level
+      - nodes.Design.excluded_count
+      - nodes.Design.human_oversight
+      - nodes.Design.intervention_count
+      - nodes.Design.interventions
+      - nodes.Design.negative_results_policy
+      - nodes.Design.objectives
+      - nodes.Design.post_hoc_changes
+      - nodes.Design.safety_bounds
+      - nodes.Design.safety_measures
+      - nodes.Design.stop_reason
+      - nodes.ElementaryStep.activation_free_energy
+      - nodes.ElementaryStep.reaction_free_energy
+      - nodes.Experiment.power_supply_input
+      - nodes.Experiment.result_values
+      - nodes.Experiment.status_reason
+      - nodes.Method
+      - nodes.Model.architecture
+      - nodes.Model.hyperparameters
+      - nodes.Model.pretraining
+      - nodes.Model.stored_in
+      - nodes.Model.training_objective
+      - nodes.Model.uncertainty_calibration
+      - nodes.Model.uncertainty_components
+      - nodes.Model.uncertainty_method
+      - nodes.Model.uncertainty_use
+      - nodes.Operation.amplitude
+      - nodes.Operation.bit_duration
+      - nodes.Operation.levels
+      - nodes.Operation.program_detail
+      - nodes.Operation.pulse_amount
+      - nodes.Operation.pulse_width
+      - nodes.Operation.sequence_length
+      - nodes.Operation.time_origin
+      - nodes.Operation.waveform
+      - nodes.Preparation.batch_scale
+      - nodes.Preparation.design_aims
+      - nodes.Preparation.outcomes
+      - nodes.Preparation.preparation_methods
+      - nodes.Preparation.strategy
+      - nodes.ProcedureStep.action = carburize
+      - nodes.ProcedureStep.action = centrifuge
+      - nodes.ProcedureStep.action = coat
+      - nodes.ProcedureStep.action = crystallize
+      - nodes.ProcedureStep.action = deposit
+      - nodes.ProcedureStep.action = dilute
+      - nodes.ProcedureStep.action = disperse
+      - nodes.ProcedureStep.action = dose
+      - nodes.ProcedureStep.action = etch
+      - nodes.ProcedureStep.action = evaporate
+      - nodes.ProcedureStep.action = exchange
+      - nodes.ProcedureStep.action = freeze_dry
+      - nodes.ProcedureStep.action = hold
+      - nodes.ProcedureStep.action = inject
+      - nodes.ProcedureStep.action = irradiate
+      - nodes.ProcedureStep.action = leach
+      - nodes.ProcedureStep.action = ligand_exchange
+      - nodes.ProcedureStep.action = mill
+      - nodes.ProcedureStep.action = nitridize
+      - nodes.ProcedureStep.action = phosphidize
+      - nodes.ProcedureStep.action = purge
+      - nodes.ProcedureStep.action = pyrolyze
+      - nodes.ProcedureStep.action = quench
+      - nodes.ProcedureStep.action = reflux
+      - nodes.ProcedureStep.action = remove_ligands
+      - nodes.ProcedureStep.action = replace
+      - nodes.ProcedureStep.action = shape
+      - nodes.ProcedureStep.action = sonicate
+      - nodes.ProcedureStep.action = spray
+      - nodes.ProcedureStep.action = sulfidize
+      - nodes.ProcedureStep.agitation
+      - nodes.ProcedureStep.cooling_mode
+      - nodes.ProcedureStep.energy_input
+      - nodes.ProcedureStep.fill_fraction
+      - nodes.ProcedureStep.gas_flow_mode
+      - nodes.ProcedureStep.ph
+      - nodes.ProcedureStep.repetitions
+      - nodes.ProcedureStep.stirring_rate
+      - nodes.ProductLump
+      - nodes.StructureModel.architecture
+      - nodes.StructureModel.hyperparameters
+      - nodes.StructureModel.pretraining
+      - nodes.StructureModel.stored_in
+      - nodes.StructureModel.training_objective
+      - nodes.StructureModel.uncertainty_calibration
+      - nodes.StructureModel.uncertainty_components
+      - nodes.StructureModel.uncertainty_method
+      - nodes.StructureModel.uncertainty_use
+      - nodes.ThermalContributionAnalysis.analysis_kind = balance
+      - nodes.ThermalContributionAnalysis.analysis_kind = frequency_response
+      - nodes.ThermalContributionAnalysis.analysis_kind = isotopic_transient
+      - nodes.ThermalContributionAnalysis.analysis_kind = modulation_excitation
+      - nodes.ThermalContributionAnalysis.analysis_kind = pulse_response
+      - nodes.ThermalContributionAnalysis.analysis_kind = spectral_fit
+      - nodes.ThermalContributionAnalysis.analysis_kind = step_response
+      - nodes.ThermalContributionAnalysis.analysis_kind = thermal_contribution
+      - nodes.ThermalContributionAnalysis.concentration_measure
+      - nodes.ThermalContributionAnalysis.demodulation_harmonic
+      - nodes.ThermalContributionAnalysis.evaluation_basis
+      - nodes.ThermalContributionAnalysis.limitations
+      - nodes.ThermalContributionAnalysis.modulation_period
+      - nodes.ThermalContributionAnalysis.partition_method = control_at_matched_temperature
+      - nodes.ThermalContributionAnalysis.phase_reference
+      - nodes.ThermalContributionAnalysis.phase_reference_species
+      - nodes.ThermalContributionAnalysis.power_supply_input
+      - nodes.ThermalContributionAnalysis.rate_basis
+      - nodes.ThermalContributionAnalysis.reactor_model
+      - nodes.ThermalContributionAnalysis.result_values
+      - nodes.ThermalContributionAnalysis.standard_pressure
+      - nodes.ThermalContributionAnalysis.status_reason
+      - nodes.ThermalContributionAnalysis.thermodynamic_consistency
+      - nodes.TimeSeries.data_kind = notebook
+      - nodes.TimeSeries.delay
+      - nodes.TimeSeries.delay_corrected
+      - nodes.TimeSeries.time_origin
+      - nodes.TimeSeries.time_resolution
+      - nodes.Treatment.gas_flow_mode
+      - edges.DARK_CONTROL_FOR.control_kind
+      - edges.DARK_CONTROL_FOR.differs_in
+      - edges.DARK_CONTROL_FOR.temperature_matched_at
+      - edges.DARK_CONTROL_FOR.temperature_matched_over
+      - edges.DURING.benchmark
+      - edges.DURING.kinetics
+      - edges.DURING.specimen
+      - edges.DURING.synchronization
+      - edges.DURING.timing
+      - edges.EVALUATES.folds
+      - edges.EVALUATES.generalization
+      - edges.EVALUATES.grouped_by
+      - edges.EVALUATES.preprocessing_within_split
+      - edges.EVALUATES.split_seed
+      - edges.EVALUATES.split_strategy
+      - edges.HAS_COMPONENT.concentration
+      - edges.HAS_COMPONENT.function
+      - edges.HAS_COMPONENT.role = cocatalyst
+      - edges.HAS_COMPONENT.role = cofactor
+      - edges.HAS_COMPONENT.role = ligand
+      - edges.HAS_COMPONENT.role = solvent
+      - edges.HAS_INPUT.concentration
+      - edges.HAS_INPUT.flow_rate
+      - edges.HAS_INPUT.fraction
+      - edges.HAS_INPUT.ratio
+      - edges.HAS_INPUT.stock_concentration
+      - edges.HAS_INPUT.synthesis_function
+      - edges.HAS_SITE.exposed_metal_count
+      - edges.HAS_SITE.population_fraction
+      - edges.HAS_SITE.site_density
+      - edges.HAS_SITE.site_inventory
+      - edges.PROPOSED_BY.human_decision
+      - edges.REPRESENTS.aspect
+      - edges.REPRESENTS.assumptions
+      - edges.SUBSET_OF
+      - edges.USES_METHOD
+      - edges.VARIANT_OF
+      narrowed:
+      - 'quantities: units are checked against each bound property''s kind'
+      - 'context_targets.process: a value''s target read as its process names a ElementaryStep or Reaction'
+      - 'context_targets.species: a value''s target read as its species names a ChemicalSpecies or ProductLump'
+      - 'context_targets.structure: a value''s target read as its structure names a StructureModel'
+      - nodes.Analysis.abpe holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Analysis.apparent_quantum_yield holds quantity photonic_yield (its unit must be of that
+        kind's dimensions)
+      - nodes.Analysis.applied_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.cell_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.current holds quantity electric_current (its unit must be of that kind's dimensions)
+      - nodes.Analysis.current_density holds quantity current_density (its unit must be of that kind's
+        dimensions)
+      - 'nodes.Analysis.current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Analysis.electrode_potential holds quantity electrode_potential (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Analysis.electrode_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Analysis.energy_yield holds quantity energy_yield (its unit must be of that kind's dimensions)
+      - nodes.Analysis.faradaic_efficiency holds quantity faradaic_efficiency (its unit must be of that
+        kind's dimensions)
+      - nodes.Analysis.heating_current holds quantity electric_current (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.heating_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.hot_spot holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.Analysis.ipce holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Analysis.light_induced_temperature_rise holds quantity temperature (its unit must be of
+        that kind's dimensions)
+      - nodes.Analysis.onset_potential holds quantity electrode_potential (its unit must be of that kind's
+        dimensions)
+      - 'nodes.Analysis.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Analysis.partial_current_density holds quantity partial_current_density (its unit must be
+        of that kind's dimensions)
+      - 'nodes.Analysis.partial_current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Analysis.photocurrent_density holds quantity current_density (its unit must be of that kind's
+        dimensions)
+      - 'nodes.Analysis.photocurrent_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Analysis.photovoltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.plasma_energy_efficiency holds quantity efficiency (its unit must be of that kind's
+        dimensions)
+      - nodes.Analysis.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.Analysis.quantum_yield holds quantity quantum_yield (its unit must be of that kind's dimensions)
+      - nodes.Analysis.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.abpe holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.apparent_quantum_yield holds quantity photonic_yield (its unit must be of
+        that kind's dimensions)
+      - nodes.CatalyticTest.applied_voltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.CatalyticTest.cell_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.CatalyticTest.conversion holds quantity conversion (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.current holds quantity electric_current (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.current_density holds quantity current_density (its unit must be of that kind's
+        dimensions)
+      - 'nodes.CatalyticTest.current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.CatalyticTest.electrode_potential holds quantity electrode_potential (its unit must be of
+        that kind's dimensions)
+      - 'nodes.CatalyticTest.electrode_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.CatalyticTest.energy_yield holds quantity energy_yield (its unit must be of that kind's
+        dimensions)
+      - nodes.CatalyticTest.faradaic_efficiency holds quantity faradaic_efficiency (its unit must be of
+        that kind's dimensions)
+      - nodes.CatalyticTest.flow_rate holds quantity flow_rate (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.heating_current holds quantity electric_current (its unit must be of that
+        kind's dimensions)
+      - nodes.CatalyticTest.heating_voltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.CatalyticTest.hot_spot holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.ipce holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.light_induced_temperature_rise holds quantity temperature (its unit must be
+        of that kind's dimensions)
+      - nodes.CatalyticTest.onset_potential holds quantity electrode_potential (its unit must be of that
+        kind's dimensions)
+      - 'nodes.CatalyticTest.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.CatalyticTest.partial_current_density holds quantity partial_current_density (its unit must
+        be of that kind's dimensions)
+      - 'nodes.CatalyticTest.partial_current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.CatalyticTest.photocurrent_density holds quantity current_density (its unit must be of that
+        kind's dimensions)
+      - 'nodes.CatalyticTest.photocurrent_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.CatalyticTest.photovoltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.CatalyticTest.plasma_energy_efficiency holds quantity efficiency (its unit must be of that
+        kind's dimensions)
+      - nodes.CatalyticTest.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.quantum_yield holds quantity quantum_yield (its unit must be of that kind's
+        dimensions)
+      - nodes.CatalyticTest.selectivity holds quantity selectivity (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.space_velocity holds quantity space_velocity (its unit must be of that kind's
+        dimensions)
+      - nodes.CatalyticTest.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.CatalyticTest.yield holds quantity product_yield (its unit must be of that kind's dimensions)
+      - nodes.Characterization.abpe holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Characterization.apparent_quantum_yield holds quantity photonic_yield (its unit must be
+        of that kind's dimensions)
+      - nodes.Characterization.applied_voltage holds quantity electric_potential (its unit must be of
+        that kind's dimensions)
+      - nodes.Characterization.cell_voltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.Characterization.current holds quantity electric_current (its unit must be of that kind's
+        dimensions)
+      - nodes.Characterization.current_density holds quantity current_density (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Characterization.current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Characterization.electrode_potential holds quantity electrode_potential (its unit must be
+        of that kind's dimensions)
+      - 'nodes.Characterization.electrode_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Characterization.energy_yield holds quantity energy_yield (its unit must be of that kind's
+        dimensions)
+      - nodes.Characterization.faradaic_efficiency holds quantity faradaic_efficiency (its unit must be
+        of that kind's dimensions)
+      - nodes.Characterization.heating_current holds quantity electric_current (its unit must be of that
+        kind's dimensions)
+      - nodes.Characterization.heating_voltage holds quantity electric_potential (its unit must be of
+        that kind's dimensions)
+      - nodes.Characterization.hot_spot holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.Characterization.ipce holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Characterization.light_induced_temperature_rise holds quantity temperature (its unit must
+        be of that kind's dimensions)
+      - nodes.Characterization.onset_potential holds quantity electrode_potential (its unit must be of
+        that kind's dimensions)
+      - 'nodes.Characterization.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Characterization.partial_current_density holds quantity partial_current_density (its unit
+        must be of that kind's dimensions)
+      - 'nodes.Characterization.partial_current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Characterization.photocurrent_density holds quantity current_density (its unit must be of
+        that kind's dimensions)
+      - 'nodes.Characterization.photocurrent_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Characterization.photovoltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.Characterization.plasma_energy_efficiency holds quantity efficiency (its unit must be of
+        that kind's dimensions)
+      - nodes.Characterization.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.Characterization.quantum_yield holds quantity quantum_yield (its unit must be of that kind's
+        dimensions)
+      - nodes.Characterization.temperature holds quantity temperature (its unit must be of that kind's
+        dimensions)
+      - nodes.Computation.abpe holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Computation.apparent_quantum_yield holds quantity photonic_yield (its unit must be of that
+        kind's dimensions)
+      - nodes.Computation.applied_voltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.Computation.cell_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Computation.current holds quantity electric_current (its unit must be of that kind's dimensions)
+      - nodes.Computation.current_density holds quantity current_density (its unit must be of that kind's
+        dimensions)
+      - 'nodes.Computation.current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Computation.electrode_potential holds quantity electrode_potential (its unit must be of
+        that kind's dimensions)
+      - 'nodes.Computation.electrode_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Computation.energy_yield holds quantity energy_yield (its unit must be of that kind's dimensions)
+      - nodes.Computation.faradaic_efficiency holds quantity faradaic_efficiency (its unit must be of
+        that kind's dimensions)
+      - nodes.Computation.heating_current holds quantity electric_current (its unit must be of that kind's
+        dimensions)
+      - nodes.Computation.heating_voltage holds quantity electric_potential (its unit must be of that
+        kind's dimensions)
+      - nodes.Computation.hot_spot holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.Computation.ipce holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Computation.light_induced_temperature_rise holds quantity temperature (its unit must be
+        of that kind's dimensions)
+      - nodes.Computation.onset_potential holds quantity electrode_potential (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Computation.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Computation.partial_current_density holds quantity partial_current_density (its unit must
+        be of that kind's dimensions)
+      - 'nodes.Computation.partial_current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Computation.photocurrent_density holds quantity current_density (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Computation.photocurrent_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Computation.photovoltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Computation.plasma_energy_efficiency holds quantity efficiency (its unit must be of that
+        kind's dimensions)
+      - nodes.Computation.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.Computation.quantum_yield holds quantity quantum_yield (its unit must be of that kind's
+        dimensions)
+      - nodes.Computation.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.ElectricHeater.maximum_temperature holds quantity temperature (its unit must be of that
+        kind's dimensions)
+      - nodes.Electrode.catalyst_loading holds quantity loading (its unit must be of that kind's dimensions)
+      - nodes.ElementaryStep.activation_energy holds quantity activation_energy (its unit must be of that
+        kind's dimensions)
+      - nodes.ElementaryStep.reaction_energy holds quantity reaction_energy (its unit must be of that
+        kind's dimensions)
+      - nodes.Experiment.abpe holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Experiment.apparent_quantum_yield holds quantity photonic_yield (its unit must be of that
+        kind's dimensions)
+      - nodes.Experiment.applied_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Experiment.cell_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Experiment.current holds quantity electric_current (its unit must be of that kind's dimensions)
+      - nodes.Experiment.current_density holds quantity current_density (its unit must be of that kind's
+        dimensions)
+      - 'nodes.Experiment.current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Experiment.electrode_potential holds quantity electrode_potential (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Experiment.electrode_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Experiment.energy_yield holds quantity energy_yield (its unit must be of that kind's dimensions)
+      - nodes.Experiment.faradaic_efficiency holds quantity faradaic_efficiency (its unit must be of that
+        kind's dimensions)
+      - nodes.Experiment.heating_current holds quantity electric_current (its unit must be of that kind's
+        dimensions)
+      - nodes.Experiment.heating_voltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Experiment.hot_spot holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.Experiment.ipce holds quantity efficiency (its unit must be of that kind's dimensions)
+      - nodes.Experiment.light_induced_temperature_rise holds quantity temperature (its unit must be of
+        that kind's dimensions)
+      - nodes.Experiment.onset_potential holds quantity electrode_potential (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Experiment.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.Experiment.partial_current_density holds quantity partial_current_density (its unit must
+        be of that kind's dimensions)
+      - 'nodes.Experiment.partial_current_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Experiment.photocurrent_density holds quantity current_density (its unit must be of that
+        kind's dimensions)
+      - 'nodes.Experiment.photocurrent_density: context current_normalization from None -> ''current_normalization'''
+      - nodes.Experiment.photovoltage holds quantity electric_potential (its unit must be of that kind's
+        dimensions)
+      - nodes.Experiment.plasma_energy_efficiency holds quantity efficiency (its unit must be of that
+        kind's dimensions)
+      - nodes.Experiment.quantum_yield holds quantity quantum_yield (its unit must be of that kind's dimensions)
+      - nodes.Heater.maximum_temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.Operation.duty_cycle holds quantity fraction (its unit must be of that kind's dimensions)
+      - nodes.Photoelectrode.catalyst_loading holds quantity loading (its unit must be of that kind's
+        dimensions)
+      - nodes.Preparation.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.Preparation.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.ProcedureStep.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.ProcedureStep.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - nodes.ReferenceElectrode.potential_vs_she holds quantity electric_potential (its unit must be
+        of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.abpe holds quantity efficiency (its unit must be of that kind's
+        dimensions)
+      - nodes.ThermalContributionAnalysis.apparent_quantum_yield holds quantity photonic_yield (its unit
+        must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.applied_voltage holds quantity electric_potential (its unit
+        must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.cell_voltage holds quantity electric_potential (its unit must
+        be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.current holds quantity electric_current (its unit must be of
+        that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.current_density holds quantity current_density (its unit must
+        be of that kind's dimensions)
+      - 'nodes.ThermalContributionAnalysis.current_density: context current_normalization from None ->
+        ''current_normalization'''
+      - nodes.ThermalContributionAnalysis.electrode_potential holds quantity electrode_potential (its
+        unit must be of that kind's dimensions)
+      - 'nodes.ThermalContributionAnalysis.electrode_potential: context potential_reference from None
+        -> ''reference_scale'''
+      - nodes.ThermalContributionAnalysis.energy_yield holds quantity energy_yield (its unit must be of
+        that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.faradaic_efficiency holds quantity faradaic_efficiency (its
+        unit must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.heating_current holds quantity electric_current (its unit must
+        be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.heating_voltage holds quantity electric_potential (its unit
+        must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.hot_spot holds quantity temperature (its unit must be of that
+        kind's dimensions)
+      - nodes.ThermalContributionAnalysis.ipce holds quantity efficiency (its unit must be of that kind's
+        dimensions)
+      - nodes.ThermalContributionAnalysis.light_induced_temperature_rise holds quantity temperature (its
+        unit must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.onset_potential holds quantity electrode_potential (its unit
+        must be of that kind's dimensions)
+      - 'nodes.ThermalContributionAnalysis.onset_potential: context potential_reference from None -> ''reference_scale'''
+      - nodes.ThermalContributionAnalysis.partial_current_density holds quantity partial_current_density
+        (its unit must be of that kind's dimensions)
+      - 'nodes.ThermalContributionAnalysis.partial_current_density: context current_normalization from
+        None -> ''current_normalization'''
+      - nodes.ThermalContributionAnalysis.photocurrent_density holds quantity current_density (its unit
+        must be of that kind's dimensions)
+      - 'nodes.ThermalContributionAnalysis.photocurrent_density: context current_normalization from None
+        -> ''current_normalization'''
+      - nodes.ThermalContributionAnalysis.photovoltage holds quantity electric_potential (its unit must
+        be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.plasma_energy_efficiency holds quantity efficiency (its unit
+        must be of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.pressure holds quantity pressure (its unit must be of that kind's
+        dimensions)
+      - nodes.ThermalContributionAnalysis.quantum_yield holds quantity quantum_yield (its unit must be
+        of that kind's dimensions)
+      - nodes.ThermalContributionAnalysis.temperature holds quantity temperature (its unit must be of
+        that kind's dimensions)
+      - nodes.Treatment.pressure holds quantity pressure (its unit must be of that kind's dimensions)
+      - nodes.Treatment.temperature holds quantity temperature (its unit must be of that kind's dimensions)
+      - edges.DARK_CONTROL_FOR.temperature_difference holds quantity temperature (its unit must be of
+        that kind's dimensions)
+      - edges.DETECTS.fraction holds quantity composition_fraction (its unit must be of that kind's dimensions)
+      - edges.HAS_COMPONENT.fraction holds quantity composition_fraction (its unit must be of that kind's
+        dimensions)
+      - 'edges.HAS_COMPONENT.fraction: context fraction_basis from None -> ''fraction_basis'''
+      - edges.HAS_COMPONENT.loading holds quantity loading (its unit must be of that kind's dimensions)
+      - 'edges.HAS_COMPONENT.loading: context fraction_basis from None -> ''loading_basis'''
+      - edges.HAS_PHASE.fraction holds quantity composition_fraction (its unit must be of that kind's
+        dimensions)
+      - 'edges.HAS_PHASE.fraction: context fraction_basis from None -> ''fraction_basis'''
+      - edges.RATE_CONTROL.degree_of_rate_control holds quantity degree_of_rate_control (its unit must
+        be of that kind's dimensions)
+      - profiles.catalysis CatalyticTest applies its cases by driving_forces (a record that states none
+        is unknown)
+      loosened:
+      - value.ref_value may target Method
+      - value.ref_value may target ProductLump
+      - value.target may target Method
+      - value.target may target ProductLump
+      - nodes.Variable.of may target Method
+      - nodes.Variable.of may target ProductLump
+      - edges.ABOUT.to + Method
+      - edges.ABOUT.to + ProductLump
+      - edges.EVALUATES.to + Method
+      - edges.EXAMINES.to + ProductLump
+      - edges.HAS_INPUT.to + Method
+      - edges.HAS_INPUT.to + ProductLump
+      - edges.HAS_OUTPUT.to + Method
+      - edges.HAS_OUTPUT.to + ProductLump
+      - edges.HAS_PART.from + ProductLump
+      - edges.HAS_PART.to + ProductLump
+      - edges.HAS_SITE.from + CatalystState
+      - edges.INCLUDES.to + Method
+      - edges.INCLUDES.to + ProductLump
+      - edges.PART_OF_DESIGN.experimental_unit may target Method
+      - edges.PART_OF_DESIGN.experimental_unit may target ProductLump
+      - edges.PRODUCES.to + ProductLump
+      - edges.REPORTED_IN.from + Method
+      - edges.REPORTED_IN.from + ProductLump
+      - edges.REPRESENTS.to + ProductLump
+      - edges.REVISES.from + Method
+      - edges.REVISES.from + ProductLump
+      - edges.REVISES.to + Method
+      - edges.REVISES.to + ProductLump
+  classification: breaking
+  files:
+    added:
+    - core/graph/frozen/kernel-0.2.0.yaml
+    - core/graph/frozen/kernel-0.2.1.yaml
+    - core/graph/frozen/kernel-0.3.0.yaml
+    - core/graph/frozen/kernel-0.4.0.yaml
+    - core/graph/frozen/kernel-0.5.0.yaml
+    - core/graph/frozen/kernel-0.5.1.yaml
+    - core/graph/frozen/kernel-0.5.2.yaml
+    - core/graph/frozen/kernel-0.6.0.yaml
+    - core/graph/frozen/kernel-0.7.0.yaml
+    - core/graph/frozen/kernel-0.7.1.yaml
+    - core/graph/frozen/kernel-0.7.2.yaml
+    - core/graph/frozen/kernel-0.7.3.yaml
+    - core/graph/frozen/kernel-0.7.4.yaml
+    - core/graph/frozen/kernel-0.7.5.yaml
+    - core/graph/frozen/kernel-0.7.6.yaml
+    - core/graph/frozen/kernel-0.7.7.yaml
+    - domain/graph/frozen/scale-catal-0.2.0.yaml
+    - domain/graph/frozen/scale-catal-0.2.1.yaml
+    - domain/graph/frozen/scale-catal-0.3.0.yaml
+    - domain/graph/frozen/scale-catal-0.4.0.yaml
+    - domain/graph/frozen/scale-catal-0.5.0.yaml
+    - domain/graph/frozen/scale-catal-0.5.1.yaml
+    - domain/graph/frozen/scale-catal-0.5.2.yaml
+    - domain/graph/frozen/scale-catal-0.6.0.yaml
+    - domain/graph/frozen/scale-catal-0.7.0.yaml
+    - domain/graph/frozen/scale-catal-0.7.1.yaml
+    - domain/graph/frozen/scale-catal-0.7.2.yaml
+    - domain/graph/frozen/scale-catal-0.7.3.yaml
+    - domain/graph/frozen/scale-catal-0.7.4.yaml
+    - domain/graph/frozen/scale-catal-0.7.5.yaml
+    - domain/graph/frozen/scale-catal-0.7.6.yaml
+    - domain/graph/frozen/scale-catal-0.7.7.yaml
+    - domain/graph/frozen/v0.2.0/catalysis.yaml
+    - domain/graph/frozen/v0.2.1/catalysis.yaml
+    - domain/graph/frozen/v0.3.0/catalysis.yaml
+    - domain/graph/frozen/v0.4.0/catalysis.yaml
+    - domain/graph/frozen/v0.5.0/catalysis.yaml
+    - domain/graph/frozen/v0.5.1/catalysis.yaml
+    - domain/graph/frozen/v0.5.2/catalysis.yaml
+    - domain/graph/frozen/v0.6.0/catalysis.yaml
+    - domain/graph/frozen/v0.7.0/catalysis.yaml
+    - domain/graph/frozen/v0.7.1/catalysis.yaml
+    - domain/graph/frozen/v0.7.2/catalysis.yaml
+    - domain/graph/frozen/v0.7.3/catalysis.yaml
+    - domain/graph/frozen/v0.7.4/catalysis.yaml
+    - domain/graph/frozen/v0.7.5/catalysis.yaml
+    - domain/graph/frozen/v0.7.6/catalysis.yaml
+    - domain/graph/frozen/v0.7.7/catalysis.yaml
+    - skills/curate-corpus/SKILL.md
+    - skills/curate-corpus/references/batches.md
+    - skills/curate-corpus/references/recipes.md
+    - skills/curate-corpus/references/runs.md
+    - skills/curate-corpus/scripts/curate_run.py
+    - skills/curate-corpus/scripts/si_pages.py
+    - skills/curate-corpus/templates/curate.md
+    - skills/curate-corpus/templates/fix.md
+    - skills/curate-corpus/templates/review.md
+    - skills/fetch-corpus/README.md
+    - skills/fetch-corpus/SKILL.md
+    - skills/fetch-corpus/references/paywalled.md
+    - skills/fetch-corpus/scripts/_core.py
+    - skills/fetch-corpus/scripts/_corpus.py
+    - skills/fetch-corpus/scripts/_ezlimit.py
+    - skills/fetch-corpus/scripts/_ezproxy.py
+    - skills/fetch-corpus/scripts/check_paywalled_access.py
+    - skills/fetch-corpus/scripts/download_open.py
+    - skills/fetch-corpus/scripts/download_paywalled.py
+    - skills/fetch-corpus/scripts/fetch_si.py
+    - skills/fetch-corpus/scripts/run_paywalled.sh
+    - skills/fetch-corpus/scripts/settle_corpus.py
+    - skills/index-sources/README.md
+    - skills/index-sources/SKILL.md
+    - skills/index-sources/evals/evals.json
+    - skills/index-sources/keys.example.txt
+    - skills/index-sources/references/database.md
+    - skills/index-sources/references/databases.md
+    - skills/index-sources/references/queries.md
+    - skills/index-sources/references/screening.md
+    - skills/index-sources/references/topics.md
+    - skills/index-sources/references/troubleshooting.md
+    - skills/index-sources/scripts/_cache.py
+    - skills/index-sources/scripts/_common.py
+    - skills/index-sources/scripts/_databases.py
+    - skills/index-sources/scripts/_download.py
+    - skills/index-sources/scripts/_filters.py
+    - skills/index-sources/scripts/_ledger.py
+    - skills/index-sources/scripts/_mdpi.py
+    - skills/index-sources/scripts/_pdf.py
+    - skills/index-sources/scripts/_publish.py
+    - skills/index-sources/scripts/_topics.py
+    - skills/index-sources/scripts/_upgrade.py
+    - skills/index-sources/scripts/_vectors.py
+    - skills/index-sources/scripts/build_list.py
+    - skills/index-sources/scripts/classify_access.py
+    - skills/index-sources/scripts/dedup.py
+    - skills/index-sources/scripts/export.py
+    - skills/index-sources/scripts/fill_abstracts.py
+    - skills/index-sources/scripts/filters.py
+    - skills/index-sources/scripts/find_si.py
+    - skills/index-sources/scripts/freeze_corpus.py
+    - skills/index-sources/scripts/import_list.py
+    - skills/index-sources/scripts/init_topic.py
+    - skills/index-sources/scripts/keys.py
+    - skills/index-sources/scripts/merge_db.py
+    - skills/index-sources/scripts/repair.py
+    - skills/index-sources/scripts/screen.py
+    - skills/index-sources/scripts/search.py
+    - skills/index-sources/scripts/status.py
+    - skills/index-sources/scripts/topics.py
+    - skills/index-sources/scripts/upgrade.py
+    - skills/index-sources/scripts/vectors.py
+    - skills/index-sources/templates/screen_instructions.md
+    - specs/catalysis/scale-catal-0.2.1.json
+    - specs/catalysis/scale-catal-0.3.0.json
+    - specs/catalysis/scale-catal-0.4.0.json
+    - specs/catalysis/scale-catal-0.5.0.json
+    - specs/catalysis/scale-catal-0.5.1.json
+    - specs/catalysis/scale-catal-0.5.2.json
+    - specs/catalysis/scale-catal-0.6.0.json
+    - specs/catalysis/scale-catal-0.7.0.json
+    - specs/catalysis/scale-catal-0.7.1.json
+    - specs/catalysis/scale-catal-0.7.2.json
+    - specs/catalysis/scale-catal-0.7.3.json
+    - specs/catalysis/scale-catal-0.7.4.json
+    - specs/catalysis/scale-catal-0.7.5.json
+    - specs/catalysis/scale-catal-0.7.6.json
+    - specs/catalysis/scale-catal-0.7.7.json
+    - specs/catalysis/scale-catal-0.7.8.json
+    removed:
+    - skills/curate-dataset/SKILL.md
+    - skills/curate-source/SKILL.md
+    - skills/curate-source/references/recipes.md
+    changed:
+    - core/CORE.yaml
+    - core/graph/frozen/SHA256SUMS
+    - core/graph/kernel.yaml
+    - domain/DOMAIN.yaml
+    - domain/graph/catalysis.yaml
+    - domain/graph/frozen/SHA256SUMS
+    - domain/graph/scale-catal.yaml
+    - skills/evolve-schema/SKILL.md
+    - skills/query-graph/SKILL.md
+built_with:
+  tool: scale
+  version: 0.3.0
+source:
+  repository: https://github.com/hlxin/scale
+  tag: v0.3.0
+component_versions:
+  schema:
+    version: 0.7.8
+  core:
+    name: scale-core
+    version: 0.7.8
+  kernel:
+    file: core/graph/kernel.yaml
+    version: 0.7.8
+  domains:
+  - domain: catalysis
+    version: 0.7.8
+    status: stable
+    scale_graph:
+      manifest: domain/graph/scale-catal.yaml
+      version: 0.7.8
+      status: candidate
+  tool:
+    package: scale-catal
+    version: 0.3.0
+  skills:
+  - name: index-sources
+    version: 4.0.0
+  - name: fetch-corpus
+    version: 1.0.0
+  - name: curate-corpus
+    version: 0.3.0
+  - name: query-graph
+    version: 0.1.0
+  - name: map-coverage
+    version: 0.1.0
+  - name: scan-conflicts
+    version: 0.1.0
+  - name: export-graph
+    version: 0.1.0
+  - name: evolve-schema
+    version: 0.2.0
+  - name: triage-feedback
+    version: 0.1.0
+contributors:
+- name: Hongliang Xin
+  github: hlxin
+  roles:
+  - steward
+  scopes:
+  - core
+  - catalysis
+- name: Tianyou Mou
+  github: mutianyou2013
+  roles:
+  - maintainer
+  scopes:
+  - core
+  - catalysis
+- name: Raul Diaz
+  github: diazr04
+  roles:
+  - maintainer
+  scopes:
+  - core
+  - catalysis
+excluded_domains: []
+spec_documents:
+- domain: catalysis
+  version: 0.1.0
+  file: specs/catalysis/scale-catal-0.1.0.json
+  sha256: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+- domain: catalysis
+  version: 0.2.0
+  file: specs/catalysis/scale-catal-0.2.0.json
+  sha256: 166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714
+- domain: catalysis
+  version: 0.2.1
+  file: specs/catalysis/scale-catal-0.2.1.json
+  sha256: f14b9a0146e5c42cd1ec573d3695fc517ffa8b9042ff062da64853f6e188fb09
+- domain: catalysis
+  version: 0.3.0
+  file: specs/catalysis/scale-catal-0.3.0.json
+  sha256: 46983cc2151b46cb7fcd5ec15ee9b4b6168cfc22d083fade48895a0de75aa4e1
+- domain: catalysis
+  version: 0.4.0
+  file: specs/catalysis/scale-catal-0.4.0.json
+  sha256: c747fbb6308d0c404076b1a23b2f8d992d8659101cbfb3d101d7235ee7b2dba3
+- domain: catalysis
+  version: 0.5.0
+  file: specs/catalysis/scale-catal-0.5.0.json
+  sha256: 704a4b511ac841c8e0254b25530c5172f4945b9268a8dcb34e7c088d85419b58
+- domain: catalysis
+  version: 0.5.1
+  file: specs/catalysis/scale-catal-0.5.1.json
+  sha256: 4a95e26b4f8c65c30c0a0657c6cd40134bd98dce41be941dd597d035907f8a53
+- domain: catalysis
+  version: 0.5.2
+  file: specs/catalysis/scale-catal-0.5.2.json
+  sha256: 753659c27dfbe30c7946f3915b06474cc14275cdc04c75cd8e5672e8183e6207
+- domain: catalysis
+  version: 0.6.0
+  file: specs/catalysis/scale-catal-0.6.0.json
+  sha256: 19dec18ed1b90cdd13f695c2da6ba5401b1054ac90f1b94925ca930a6c565035
+- domain: catalysis
+  version: 0.7.0
+  file: specs/catalysis/scale-catal-0.7.0.json
+  sha256: 37dc3aa00f769f4282173211830eab40b18015e54731ab189554e60e8895c2be
+- domain: catalysis
+  version: 0.7.1
+  file: specs/catalysis/scale-catal-0.7.1.json
+  sha256: b4ffe60d58b717196cf729b5806941b7cfc3b9337fc5c7c281b22e36591c706f
+- domain: catalysis
+  version: 0.7.2
+  file: specs/catalysis/scale-catal-0.7.2.json
+  sha256: dfe75643daf531d2a18e0c9d87187eab99965115e1801814d4a5c4053d6706ce
+- domain: catalysis
+  version: 0.7.3
+  file: specs/catalysis/scale-catal-0.7.3.json
+  sha256: 9a130df582c6696b4d6a302a84c1d44d6f2eaa90ff6886c9ecd76822f7d6c27d
+- domain: catalysis
+  version: 0.7.4
+  file: specs/catalysis/scale-catal-0.7.4.json
+  sha256: 6d266815385765e2f3cbc7b81ccc433ba9b9d65ba58cfc1438025b7ab7ff6533
+- domain: catalysis
+  version: 0.7.5
+  file: specs/catalysis/scale-catal-0.7.5.json
+  sha256: 704b56a2c8baa40d21b4521fc1cbc4e9aca5530e85d04db2be0995351dcc4d63
+- domain: catalysis
+  version: 0.7.6
+  file: specs/catalysis/scale-catal-0.7.6.json
+  sha256: 08d1813af14e741874046a47ebeef1309fbc5c5e3f1826ddfaf0c4471e6620fb
+- domain: catalysis
+  version: 0.7.7
+  file: specs/catalysis/scale-catal-0.7.7.json
+  sha256: ca78352410ccc5fadc4ebec58c62f074c2e8b46164a0139ed723768ff7f0c286
+- domain: catalysis
+  version: 0.7.8
+  file: specs/catalysis/scale-catal-0.7.8.json
+  sha256: 135f9a2b5a5d238b91d733a119516ba67b72863cf117d99b854a22cff4507c1e
+digests:
+  core/CORE.yaml: e536521c5c8e7323f4d70a8e6de4c9d49440290c48c19ff4d136ad734fa42c52
+  core/graph/frozen/SHA256SUMS: 2ae98a080cdee02455692e7e303a52244df99a19139488918112f94b360e26f1
+  core/graph/frozen/kernel-0.1.0.yaml: c15027db4aac5bc339a0bc5cc0f47d740225f49503a76ac64a0f9a03dd21a31b
+  core/graph/frozen/kernel-0.2.0.yaml: 4f5ac82ddd97ee533b54e20e10e50be6c8c7b992d3b6796dd70d184f31ac3323
+  core/graph/frozen/kernel-0.2.1.yaml: 4f5ac82ddd97ee533b54e20e10e50be6c8c7b992d3b6796dd70d184f31ac3323
+  core/graph/frozen/kernel-0.3.0.yaml: 146095f59e719fa6e7202e3d51ef5b51629ad9fa9409071076389e41a37fc734
+  core/graph/frozen/kernel-0.4.0.yaml: 96b348086ddb2a9e4450e57d3fe8f47997a1b9a51e4169ab66248c612ae45023
+  core/graph/frozen/kernel-0.5.0.yaml: 96b348086ddb2a9e4450e57d3fe8f47997a1b9a51e4169ab66248c612ae45023
+  core/graph/frozen/kernel-0.5.1.yaml: 96b348086ddb2a9e4450e57d3fe8f47997a1b9a51e4169ab66248c612ae45023
+  core/graph/frozen/kernel-0.5.2.yaml: 96b348086ddb2a9e4450e57d3fe8f47997a1b9a51e4169ab66248c612ae45023
+  core/graph/frozen/kernel-0.6.0.yaml: cb1f504556a9380f5e1b4efba3d35741fab9b56e1af5bac8c7b9831feec6889c
+  core/graph/frozen/kernel-0.7.0.yaml: b54bac75f7c8262d8f2d42ba378b62ee90f66ecdd0612aaf57bc530ab4cf6150
+  core/graph/frozen/kernel-0.7.1.yaml: 2cbd318c3c63e4d12a2faa4a5f8351b5b98071815f4488a6ede47e77da1a9c46
+  core/graph/frozen/kernel-0.7.2.yaml: a81f998771fd71754accbac591cf5f0d03d92481983c233de11cf1b4e3677a31
+  core/graph/frozen/kernel-0.7.3.yaml: ad900b6760ab1ec10a6042f17d54285816d71c4c521261f05dee30aa27a500df
+  core/graph/frozen/kernel-0.7.4.yaml: ad900b6760ab1ec10a6042f17d54285816d71c4c521261f05dee30aa27a500df
+  core/graph/frozen/kernel-0.7.5.yaml: f8f0327a0598fae8aba09cf7a676d9fde0fa051133b0e0a0ef055598acce9bad
+  core/graph/frozen/kernel-0.7.6.yaml: f8f0327a0598fae8aba09cf7a676d9fde0fa051133b0e0a0ef055598acce9bad
+  core/graph/frozen/kernel-0.7.7.yaml: f8f0327a0598fae8aba09cf7a676d9fde0fa051133b0e0a0ef055598acce9bad
+  core/graph/kernel.yaml: 9d7d020a6abe7bf5b181ed0cf7984f7bd11c1643157558a28fdec9a0fd7a8927
+  domain/DOMAIN.yaml: 74169594e45a535361db56c98a1029e0ac236222abab4843c69daab8eb66b733
+  domain/graph/catalysis.yaml: ffb9b58c41a9b88533759ce945ad1024008e5becc3ad1cc4fae9547129d81b9b
+  domain/graph/frozen/SHA256SUMS: 134755c00c9fe596c261ddb162cfad5965f009dfdffdc25126ef56934b22e971
+  domain/graph/frozen/scale-catal-0.1.0.yaml: 28007408d4d3610d6ae6efd06516c19209e8b412104705f5988d900c471542d8
+  domain/graph/frozen/scale-catal-0.2.0.yaml: 17b6cffcff1d694d4496e5fcdc00b426be006a4e39c336a5999b9da03cd234c2
+  domain/graph/frozen/scale-catal-0.2.1.yaml: 90d547ff1073999495b91504c46d91c336fa889bebacafd4dd45eaa69b62d910
+  domain/graph/frozen/scale-catal-0.3.0.yaml: d40eb416e6ab40bf812af1ce948e4abf0b40d34320a8f9a318998157bdce98b2
+  domain/graph/frozen/scale-catal-0.4.0.yaml: 9022cc6ade9d99ab2f58cac4d9b1393e397b01d93e7c539d33b7297792f27ed6
+  domain/graph/frozen/scale-catal-0.5.0.yaml: c1890a0e3bca88d30612dcb0f8fda77f5f9517290353f209a0582973cd25b386
+  domain/graph/frozen/scale-catal-0.5.1.yaml: 28e07ee900320330edb992440854461a4dd0003e0819d42953fe8a34977d5f41
+  domain/graph/frozen/scale-catal-0.5.2.yaml: a99525870f7b3b914e25f2a88fadc649a8834538d6697173b168199c5479c70d
+  domain/graph/frozen/scale-catal-0.6.0.yaml: c17f97e62403f4df61dd8d3814889f58870aa8b6b2739d43b5f7f11ddc0cc1c8
+  domain/graph/frozen/scale-catal-0.7.0.yaml: 2c8f0d7d6d9834a91164552c43655872f8cddfc7ff23e169de7ba8d5150f024e
+  domain/graph/frozen/scale-catal-0.7.1.yaml: dbe2bb5aecc87cba65288456bb62fa36a3b65f2adc94ff07760a93642d0131c6
+  domain/graph/frozen/scale-catal-0.7.2.yaml: eadd77a55d86e86fcbd0cf3e679aec1cb78a51229eee9fff9d36500bb2e75826
+  domain/graph/frozen/scale-catal-0.7.3.yaml: fd27f2c26967ecbfc2e880627b30e872601763585d39fa013d6b09630850abf3
+  domain/graph/frozen/scale-catal-0.7.4.yaml: 9e8332753143097a663d52ad74228cfb9e8c8d92f595b61f8c85df80252ce147
+  domain/graph/frozen/scale-catal-0.7.5.yaml: 0b1b975ba125505d3d92efed0652deec91c63aa99bbe2d232894601cd892510c
+  domain/graph/frozen/scale-catal-0.7.6.yaml: 66f1292afd4d91b59e019f3c6396052beb44005e84074b3fb59e9bb92da7a5f8
+  domain/graph/frozen/scale-catal-0.7.7.yaml: eed8508c6b9eb19b893efbda42a48f93094a627d11eb2780cb491e66544da0df
+  domain/graph/frozen/v0.1.0/catalysis.yaml: 6b2d3e6a93e1fd0502b14db57b8a5e76f7194ca5d19be7f97e7f4a660909e630
+  domain/graph/frozen/v0.2.0/catalysis.yaml: 6b2d3e6a93e1fd0502b14db57b8a5e76f7194ca5d19be7f97e7f4a660909e630
+  domain/graph/frozen/v0.2.1/catalysis.yaml: e512db35416d250111e5674e1402cdd933410cfa7a94f2e5baa43f13779d9739
+  domain/graph/frozen/v0.3.0/catalysis.yaml: 0576012cdc2118e0f216363bfe63441f5bbe4796f9564450fcca178f5470310d
+  domain/graph/frozen/v0.4.0/catalysis.yaml: c9af67dedfdaf028bddf44fa5f2f606d95941877264ade2a64ad3bcae81bdaca
+  domain/graph/frozen/v0.5.0/catalysis.yaml: 5523f4127eaf5f3bc0de05a7b2b62a4260245c345709c701ad623141360d8370
+  domain/graph/frozen/v0.5.1/catalysis.yaml: cc4b0da2ac65343bdf98ad24d40241fbebac534f6db6f3098b0350ff53f525e0
+  domain/graph/frozen/v0.5.2/catalysis.yaml: b3e096b5ade3995d64ce3ee5fa856c46a689727f059ab4eb8cb04e81d20d59e0
+  domain/graph/frozen/v0.6.0/catalysis.yaml: 78c37e0a2f081194e515bd99fbc63892f054aac9c1c5d2233e357cd2ceeeafbf
+  domain/graph/frozen/v0.7.0/catalysis.yaml: 95285d6efeead8628c1a353c72515fb928fe28155e57527ec7d7200ec029b97f
+  domain/graph/frozen/v0.7.1/catalysis.yaml: e03fd2ff55885e7e028be54b3705dd6ee58b42b8e5bfd81140dac81c14a5dd48
+  domain/graph/frozen/v0.7.2/catalysis.yaml: 16cdf78b5446653b6cc1b8f36c0872431f8b1bd9ddbd5657dc6fc8ac21cab7db
+  domain/graph/frozen/v0.7.3/catalysis.yaml: d6e9ae48ef08084a9b7e96482191db5d819311c042ed49b3da1fde5143fd8020
+  domain/graph/frozen/v0.7.4/catalysis.yaml: 120b794c0474904c9b22c04af92ad8cff15394312587e91d86c44e4fb7191002
+  domain/graph/frozen/v0.7.5/catalysis.yaml: b02bfd8994320d07512d602773db5fb3f5e989556bd582706ed3a4bc4c6d97cb
+  domain/graph/frozen/v0.7.6/catalysis.yaml: 965ed4daf3de2a299dbe6e202297bda285d16dd7d3281a117c0816ef08d7c649
+  domain/graph/frozen/v0.7.7/catalysis.yaml: 0d4b6ef4b2876d517557929ed9e06f504efb4cdf690d5b150388cab3a85ce2ba
+  domain/graph/scale-catal.yaml: aa5926c46ac307d35713f098dfff944d88c1398f4317f361606982858e87b369
+  skills/curate-corpus/SKILL.md: 916efa96255592da8b74956fc970a640b1ccd79b80667e68ce7db0a14bdcd518
+  skills/curate-corpus/references/batches.md: caee4bd2aa94b31b582a0223693eaa4afbc1e7e955f79873ee8ff15056002561
+  skills/curate-corpus/references/recipes.md: a415e165c06a9f93703345200f89749b260557da9ce3613eeeff53918a5d6101
+  skills/curate-corpus/references/runs.md: 685f74b75d08ba6848631bb24a6b7683d4f96dae51ae69abcbcecfa2accccdb7
+  skills/curate-corpus/scripts/curate_run.py: 9e1ed85c829fee952e577febc439f6d0513f490049aedbf500e2576c35f1ccba
+  skills/curate-corpus/scripts/si_pages.py: 6371a882a5084cebd56b86dbae8a88842f4ba6fe6455d0713c44e43b59205e8a
+  skills/curate-corpus/templates/curate.md: 7bd30fc2b841791b660441e3896f34baf91c1bcdef6f3b6e131d1e134e7d9c74
+  skills/curate-corpus/templates/fix.md: beebcd7de11f244a07743dcb6da288209da3d86498294e50b436bc57481ad158
+  skills/curate-corpus/templates/review.md: 8c4c1a4a7a6fae0103d994d3b79a88d0370eadbed28bb63bee46c4ee580aed81
+  skills/evolve-schema/SKILL.md: d553ab9f3e500cd573d34d283c0d22e29cb6c17836b23af98e5a7097200f4cc1
+  skills/export-graph/SKILL.md: bdc57c704fb5b7c2c2824b604d49747ff1904672241d543666514d1823268d87
+  skills/fetch-corpus/README.md: 7a0834837ad3e2bb7e75c1d9c76c21cd2f8e53d4eee8c321cc5bc59f49be0062
+  skills/fetch-corpus/SKILL.md: ac48703ec228f6406c450ca71bcb89d674d2d37178204e9c7ebad702e8250571
+  skills/fetch-corpus/references/paywalled.md: 124ea4c2bbc9e012f12806b38211bb117bbd7d5e9bea639df03282742145ea12
+  skills/fetch-corpus/scripts/_core.py: 47e38b36453fa733fd40a841094cb1573d60f00f5b1471c61f61754d067d0a0a
+  skills/fetch-corpus/scripts/_corpus.py: 753bfff01765b0240824920d371c52da80e21424316d96fa691f6bb76b9d5026
+  skills/fetch-corpus/scripts/_ezlimit.py: 58af850384a2c66fd35a34c32269c550f7adb14ac16843b86f0f7e7eb1d1ed2f
+  skills/fetch-corpus/scripts/_ezproxy.py: adc7f5b59207a5c9d42aa1295ea040f7a3731f8560d04a0c4fd3b6f900799ead
+  skills/fetch-corpus/scripts/check_paywalled_access.py: 33d0510005663ccdc71e18fd278ef01029d92b44b75412e7a13807ed74d1cb70
+  skills/fetch-corpus/scripts/download_open.py: e6309f1e4fb08f0a7c57877a99056532152d34b5737d7ee31ca8591ee2232454
+  skills/fetch-corpus/scripts/download_paywalled.py: ddfc836116b3ecaf577206f0189176a7181792d4c66a8714469a75de8242b80c
+  skills/fetch-corpus/scripts/fetch_si.py: ace1d7187fd11d0179fa705b5393ec434d6fad2f4ddba454e32b5e5fb276d9b3
+  skills/fetch-corpus/scripts/run_paywalled.sh: c02d22f87b7a075888b459edce9ec5da66d94a0aa6b0ac253b35608b9d666ed7
+  skills/fetch-corpus/scripts/settle_corpus.py: 663a9958834cbf14927f802691dcea7c9eef8546ce7e6abfc4b2572a9bf73ed9
+  skills/index-sources/README.md: 4a2f88ff70ac2bfb8c5726ba717d1b10d5bad88daa39d1b67184c1d696c7f588
+  skills/index-sources/SKILL.md: 2e803d932826bcd9202a92c68fb3b11afdb2752e6adb6cd3917d33727cb3e5b3
+  skills/index-sources/evals/evals.json: e9a0f43e3c9067027e0b7f86ff3eb24e1fcf25371cf3c2123fcd98be4d1f3afa
+  skills/index-sources/keys.example.txt: 63bec8aca4f0654fc17975f5cdc90ab41f9ebb19b970815f41fd915c38bca1d4
+  skills/index-sources/references/database.md: 2d0333c839c072a78fe9c418a4ff6f463e1f7a9b5c60ba5ac1d410f3222032bc
+  skills/index-sources/references/databases.md: faa29dde4e9b69bac89b606cef086bb3aa6d17a600d9e507efa90979a13bc4a2
+  skills/index-sources/references/queries.md: e2acadfb374601928da0c06e527ad52148642b42515eca2af74347602bcf8525
+  skills/index-sources/references/screening.md: 68e78d8689f245e6eb3d6b8027b678d36b3295e7381773a917977a76c84b5580
+  skills/index-sources/references/topics.md: 35d3a95dd55ae71e80fb64f4b710aa513969b8c4e7a63f3ffd55431abe775090
+  skills/index-sources/references/troubleshooting.md: fc9f2d1a53d6d177a90eee02b11799c528baa6860929c3100112c8ef386d5be7
+  skills/index-sources/scripts/_cache.py: f31f809dcc4832a413b76f250d5d659afccaf9e157a4a195fb86763aef13255a
+  skills/index-sources/scripts/_common.py: 9bbaa42a3a78113b4dc7a97aed273e9ad7859ca7b7f2c96c6a8c3a75baa574b0
+  skills/index-sources/scripts/_databases.py: f7af910ced3a987f51501ce130c4fd2b8c6e91cde62a47d0c7d227c4b64240d3
+  skills/index-sources/scripts/_download.py: 0c18bc04d661c960a7dd88f5c51d233a14cdaa2fe0c70f7703f3c62ad93b104d
+  skills/index-sources/scripts/_filters.py: 103efa5081e4cfd98d3e868d3482c889e7dae1143a8167d04c900c2983584c87
+  skills/index-sources/scripts/_ledger.py: 6f28a105808198b5884eafe2907fc67f5081345919559a43848a706972dd2adf
+  skills/index-sources/scripts/_mdpi.py: 872ae1562bc715e7db0c978e7ba39f8ddfcdea923e5a80677fe7d4b278446459
+  skills/index-sources/scripts/_pdf.py: 714e15893bf2f046cfce7403cd91c9fb3da4cd457c87d87e5421007ce4615f25
+  skills/index-sources/scripts/_publish.py: dfa7e70bee4de402d5f782541f94373da1148db28454deb1b5ba85f120d56443
+  skills/index-sources/scripts/_topics.py: b894b517ea2856afde44189b5888d46a95ea315e8ed842921412a7c840192b96
+  skills/index-sources/scripts/_upgrade.py: a27dcdaf7e6f98103e244ad82312a369752bd81b7ed19cdaccd3a7e9e59eeb31
+  skills/index-sources/scripts/_vectors.py: 5081d21923e56eb4c6dd2bdc3d9a12bc30294c684e91ce9471f7ad03c97ea114
+  skills/index-sources/scripts/build_list.py: df313ca205cc03fb7456722a59cbb000fa648cf4ae498ea2232e58c2b758d76c
+  skills/index-sources/scripts/classify_access.py: ac5dea79c176784fc8ceab6f48bda3c1491ed71b05bf36f411cee49380e80463
+  skills/index-sources/scripts/dedup.py: 4434d468ebe17e3cacf0d57a2c8858baf5a3ce3935cee3b04130b933c418863b
+  skills/index-sources/scripts/export.py: b4d56496a235aaa9c650189358ebada2619681613a131225a65e3f103970dce8
+  skills/index-sources/scripts/fill_abstracts.py: 4d138b1ddfe85f028c96ff274990847362f9c5ef8c9e5a0aace1bb7444a2ab09
+  skills/index-sources/scripts/filters.py: b62a4dbdf496d16885c6867f8fc5738312b10d6d76f762dd1909d7c60f036e60
+  skills/index-sources/scripts/find_si.py: a03ed81f0df61e053a9c2bbe63ac3721e9500d41a5c7dc001f07c332f7471770
+  skills/index-sources/scripts/freeze_corpus.py: a65353c8bc32c251922c34bde4116d2c708fc39d17f8d9397706b3d8e6655d60
+  skills/index-sources/scripts/import_list.py: eb7644b4a69b1016157949642616f245bdfd5bf76c1982f0ec24dfc029af12bb
+  skills/index-sources/scripts/init_topic.py: b31b4f44f1f8d08f325bf1820ba7352153bae26f9d072a20177e060708c8ad76
+  skills/index-sources/scripts/keys.py: dda5166271c6ca83c87c5f2356ee27c9c22d93ff252ca97e314f1782ca597d17
+  skills/index-sources/scripts/merge_db.py: 182d5f7b7113700ea1fe9477853db359383179e229fa8a8ff18991a907fef7b6
+  skills/index-sources/scripts/repair.py: e670bc83531114d3bc8a88589935db3c9e03a548bb107e9930f6de2ee6d44ab4
+  skills/index-sources/scripts/screen.py: d07400643e45abb8a9b21e0e837b5314b84c1e5b36f15793bd023032d889bc06
+  skills/index-sources/scripts/search.py: e130db4502be542621e25c80f277166270e1ab55da3c2156d506166dbd16a708
+  skills/index-sources/scripts/status.py: b4ef6fd13cdc2ea801dfe7530ebc620bd76a7718e4be8a3e98c67595fa7f80cb
+  skills/index-sources/scripts/topics.py: ee597d74fb986d0a72965eb1a66aa317e85d7bfd0a3577e93074174f17b94401
+  skills/index-sources/scripts/upgrade.py: 5b40c4402389264129f1756b4ecb049f6055e694d4027038bdde2aac1c074c99
+  skills/index-sources/scripts/vectors.py: 169ea0ae8228f2cfb2a44c2db9094b291c2f2c1253f52e9292ace4cfdc1876f7
+  skills/index-sources/templates/screen_instructions.md: ab043df0beb5f014951313844113d3313e4e812beba58b1d8c57816143743854
+  skills/map-coverage/SKILL.md: 1ebff2586cdb361eaa6085a2a39302521e51a52c53f55073c715e2a2139224e2
+  skills/query-graph/SKILL.md: 644ed44ba5dab1ea6dad7d42aa744ec3a286e47d1943849fadf635ec7bb7baf4
+  skills/scan-conflicts/SKILL.md: ace891f7bd6bce78e8115b1830b496a53ef16f4b4761cf2bd86ac2c197b0d72e
+  skills/triage-feedback/SKILL.md: f08dbcb1227e1c03ffd6d515b20db8307060a3862f2a51d7727e0cb89a573b4d
+  skills/triage-feedback/proposal.schema.json: b4c4044b8c0ae8ac97181ce2921ec0fdf4297d1ca7a72e5695df236d8951fd33
+  specs/catalysis/scale-catal-0.1.0.json: 3c2fa7205a7bae5e0bbfa7d87826ff7ab7803e78536129064101c7d5a2c02006
+  specs/catalysis/scale-catal-0.2.0.json: 166bfc5539df7f44de075a4fb504c54170af32d6b3a01a916d6171bfcecec714
+  specs/catalysis/scale-catal-0.2.1.json: f14b9a0146e5c42cd1ec573d3695fc517ffa8b9042ff062da64853f6e188fb09
+  specs/catalysis/scale-catal-0.3.0.json: 46983cc2151b46cb7fcd5ec15ee9b4b6168cfc22d083fade48895a0de75aa4e1
+  specs/catalysis/scale-catal-0.4.0.json: c747fbb6308d0c404076b1a23b2f8d992d8659101cbfb3d101d7235ee7b2dba3
+  specs/catalysis/scale-catal-0.5.0.json: 704a4b511ac841c8e0254b25530c5172f4945b9268a8dcb34e7c088d85419b58
+  specs/catalysis/scale-catal-0.5.1.json: 4a95e26b4f8c65c30c0a0657c6cd40134bd98dce41be941dd597d035907f8a53
+  specs/catalysis/scale-catal-0.5.2.json: 753659c27dfbe30c7946f3915b06474cc14275cdc04c75cd8e5672e8183e6207
+  specs/catalysis/scale-catal-0.6.0.json: 19dec18ed1b90cdd13f695c2da6ba5401b1054ac90f1b94925ca930a6c565035
+  specs/catalysis/scale-catal-0.7.0.json: 37dc3aa00f769f4282173211830eab40b18015e54731ab189554e60e8895c2be
+  specs/catalysis/scale-catal-0.7.1.json: b4ffe60d58b717196cf729b5806941b7cfc3b9337fc5c7c281b22e36591c706f
+  specs/catalysis/scale-catal-0.7.2.json: dfe75643daf531d2a18e0c9d87187eab99965115e1801814d4a5c4053d6706ce
+  specs/catalysis/scale-catal-0.7.3.json: 9a130df582c6696b4d6a302a84c1d44d6f2eaa90ff6886c9ecd76822f7d6c27d
+  specs/catalysis/scale-catal-0.7.4.json: 6d266815385765e2f3cbc7b81ccc433ba9b9d65ba58cfc1438025b7ab7ff6533
+  specs/catalysis/scale-catal-0.7.5.json: 704b56a2c8baa40d21b4521fc1cbc4e9aca5530e85d04db2be0995351dcc4d63
+  specs/catalysis/scale-catal-0.7.6.json: 08d1813af14e741874046a47ebeef1309fbc5c5e3f1826ddfaf0c4471e6620fb
+  specs/catalysis/scale-catal-0.7.7.json: ca78352410ccc5fadc4ebec58c62f074c2e8b46164a0139ed723768ff7f0c286
+  specs/catalysis/scale-catal-0.7.8.json: 135f9a2b5a5d238b91d733a119516ba67b72863cf117d99b854a22cff4507c1e
