@@ -49,7 +49,6 @@ class Config:
     inbox_minutes: int = 90                  # and its time
     inbox_workers: int = 1                   # publications Claude Code curates at once in the inbox
     ask: str = ""                            # "claude-code": questions answered here by Claude Code (runner.answer)
-    ask_workers: int = 2                     # and how many at once; the others wait in line (asks.py)
 
     @classmethod
     def from_env(cls) -> Config:
@@ -87,5 +86,4 @@ class Config:
             inbox_minutes=_int("SCALE_WEB_INBOX_MINUTES", 90),
             inbox_workers=_int("SCALE_WEB_INBOX_WORKERS", 1),
             ask=os.environ.get("SCALE_WEB_ASK", "").strip().lower(),
-            ask_workers=_int("SCALE_WEB_ASK_WORKERS", 2),
         )

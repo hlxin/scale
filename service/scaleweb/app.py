@@ -23,10 +23,7 @@
 * ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the paper goes when none is left
 * ``POST /query``                  ``{"graph": doc, "plan": plan}``: ``scale query``, no model, no sign-in
 * ``POST /search``                 ``{"graph": doc, "query": text, "k": n}``: ``scale search``, no sign-in
-* ``POST /ask``                    ``{"graph": doc, "question": text}``: the question loop; signed in. With
-                                   ``SCALE_WEB_ASK=claude-code`` the question joins the line of those Claude Code
-                                   answers here (asks.py); ``"wait": false`` answers at once with its id and place
-* ``GET  /ask/{id}``               that question as its reader follows it: its place in the line, then its answer
+* ``POST /ask``                    ``{"graph": doc, "question": text}``: the question loop; signed in
   (a signed-in query, search or question credits the catal-commons sources its answer uses: usage.py)
 * ``POST /contribute/check``       ``{"graph": doc, "receipt": r}``: is its source in catal-commons on main, or in an
                                    open contribution, and what adding it would change; signed in
@@ -42,6 +39,7 @@ import json
 import shutil
 import sys
 import tempfile
+import threading
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -52,7 +50,6 @@ from scale.api import ScaleToolkit
 from scale.util import ScaleError, find_repo_root, load_doc, write_canonical
 
 from . import agent, auth, fetch, github
-from .asks import Asks
 from .config import Config
 from .inbox import Inbox
 from .jobs import Jobs
@@ -75,7 +72,7 @@ class Service:
         self.states = auth.Once()                     # OAuth states already used
         self.jobs = Jobs(cfg, self.budget, lambda: self.client_factory(), self.repo, run_inline=run_inline)
         self.inbox = Inbox(cfg.inbox) if cfg.inbox else None
-        self.asks = Asks(cfg.ask_workers, self._answer_here) if cfg.ask == "claude-code" else None   # asks.py
+        self.asking = threading.BoundedSemaphore(2)        # questions Claude Code answers here at once (SCALE_WEB_ASK)
         self.kit = ScaleToolkit(workspace=tempfile.mkdtemp(prefix="scale-web-kit-"), repo=self.repo)
         self.schema_version = pgraph.load_spec(pgraph.spec_for(self.repo, None))["version"]
         header = self.repo / cfg.commons / "parts" / "header.json"
@@ -127,11 +124,6 @@ class Service:
             if not self.inbox:
                 return 404, {"error": "this service has no inbox"}, {}
             return 200, {"jobs": self.inbox.mine(user)}, {}
-        if method == "GET" and path.startswith("/ask/"):
-            if not user:
-                return 401, {"error": "sign in"}, {}
-            view = self.asks.view(path.removeprefix("/ask/"), user) if self.asks else None
-            return (200, view, {}) if view else (404, {"error": "no such question (an answer is kept for an hour)"}, {})
         if method == "GET" and path.startswith("/jobs/"):
             if not user:
                 return 401, {"error": "sign in"}, {}
@@ -164,8 +156,6 @@ class Service:
             refused = self.budget.take("question", user)
             if refused:
                 return 429, {"error": refused}, {}
-            if self.asks:                                  # answered here by Claude Code, in the line (asks.py)
-                return self._ask_here(user, req)
             return self._used(user, self._with_file(req["graph"], lambda p, kit: self._ask(p, str(req.get("question") or ""))))
         return 404, {"error": "not found"}, {}
 
@@ -345,25 +335,17 @@ class Service:
         finally:
             shutil.rmtree(d, ignore_errors=True)
 
-    def _ask_here(self, user: str, req: dict):
-        """A question for Claude Code on this computer joins the line (asks.py) and is never turned away: with
-        ``"wait": false`` (the page, which follows it) the answer is its id and place, else the answer once it comes."""
-        question = str(req.get("question") or "")
-        if not question.strip():
-            return 400, {"error": "ask a question"}, {}
-        qid = self.asks.add(user, req["graph"], question, done=lambda res: self.usage.record(user, res))
-        if req.get("wait") is False:
-            return 202, self.asks.view(qid, user), {}
-        res = self.asks.wait(qid)
-        return (500, res, {}) if "error" in res else (200, res, {})
-
-    def _answer_here(self, path: Path, question: str) -> dict:
-        from . import runner                               # runner imports this module
-        return runner.answer(path, question, self.cfg, self.repo)
-
     def _ask(self, path: Path, question: str):
         if not question.strip():
             return 400, {"error": "ask a question"}, {}
+        if self.cfg.ask == "claude-code":                  # answered on this computer by Claude Code (runner.answer)
+            from . import runner
+            if not self.asking.acquire(timeout=120):
+                return 429, {"error": "the service is answering other questions; ask again in a minute"}, {}
+            try:
+                return 200, runner.answer(path, question, self.cfg, self.repo), {}
+            finally:
+                self.asking.release()
         res = agent.answer(path, question, self.client_factory(), self.cfg.model, 30,
                            min(200_000, self.budget.left()), repo=self.repo)
         self.budget.spend(res["tokens"])

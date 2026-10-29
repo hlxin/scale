@@ -152,8 +152,7 @@ members.
 | `SCALE_WEB_CLAUDE` | the Claude Code command the inbox runner starts (its full path when launchd starts the runner; a release recent enough for `SCALE_WEB_MODEL`, since an older one refuses a newer model) | `claude` |
 | `SCALE_WEB_INBOX_TURNS`, `SCALE_WEB_INBOX_MINUTES` | Claude Code's turns and minutes for one publication | 200, 90 |
 | `SCALE_WEB_INBOX_WORKERS` | publications Claude Code curates at once in the inbox, each in its own folder | 1 |
-| `SCALE_WEB_ASK` | `claude-code`: questions in words are answered on the service's computer by Claude Code, confined as the inbox's curation is, in one line ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model (the API key) |
-| `SCALE_WEB_ASK_WORKERS` | with `SCALE_WEB_ASK=claude-code`, questions Claude Code answers at once; the others wait their turn | 2 |
+| `SCALE_WEB_ASK` | `claude-code`: questions in words are answered on the service's computer by Claude Code, confined as the inbox's curation is, two at a time ([The inbox](#the-inbox-claude-code-on-a-computer-of-your-own)) | empty: the service's model (the API key) |
 | `SCALE_WEB_PYTHON`, `SCALE_WEB_PORT` | for `service/launchd/scale-web.sh`: the Python with scale-catal's dependencies, and the service's port | `python3`, 8080 |
 
 ## The inbox: Claude Code on a computer of your own
@@ -198,12 +197,8 @@ Everything the Curate dialog says holds as it does for the model loop:
 - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words (`/ask`) is answered on the
   service's computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only
   `scale graph query`, `search`, `describe` and `stats`. The plans it wrote run again through `scale query` for the
-  page, and the records they return credit the commons sources the answer used (usage.py). The questions join one
-  line ([`scaleweb/asks.py`](scaleweb/asks.py)): `SCALE_WEB_ASK_WORKERS` are answered at once (two by default), the
-  oldest first, and the others wait their turn, none turned away. The page sends `"wait": false`, gets its question's
-  place at once and follows it (`GET /ask/{id}`, readable by the reader who asked, for an hour once answered), showing
-  how many questions wait before it; a client that does not send it waits for the answer. Without the setting,
-  questions use the service's model and its API key.
+  page, and the records they return credit the commons sources the answer used (usage.py). Two questions are answered
+  at a time; without the setting, questions use the service's model and its API key.
 - **Claude Code's sign-in.** The runner's Claude Code signs in on its own: with a Claude plan (`claude setup-token`,
   its token set as `CLAUDE_CODE_OAUTH_TOKEN`) or with an API key (`ANTHROPIC_API_KEY`).
 
