@@ -96,7 +96,7 @@ only "set (…last 4)" or "missing").
 | `springer` | free — dev.springernature.com | Springer Nature metadata incl. Nature, BMC, SpringerOpen |
 | `ieee` | free (limited) — developer.ieee.org | IEEE Xplore |
 | `ads` | free — ui.adsabs.harvard.edu → Settings → API Token | NASA ADS |
-| `scopus` (+ optional `scopus_insttoken`) | dev.elsevier.com; works with the library's Scopus subscription (campus network or VPN; the institutional token lets it work off campus) | Scopus |
+| `scopus` (+ optional `scopus_insttoken`) | dev.elsevier.com; works with the library's Scopus subscription (campus network or VPN; the institutional token lets it work off campus) | Scopus; Elsevier's open-access full text for fetch-corpus's download_open.py (ScienceDirect blocks scripts) |
 | `wos` | developer.clarivate.com (Web of Science Starter API; institutional) | Web of Science |
 | `zenodo`, `ncbi`, `cinii` | optional tokens for higher rate limits | Zenodo, PubMed Central, CiNii |
 | `llm_api_key` | your institution's OpenAI-compatible LLM service | relevance screening through that API instead of Claude |

@@ -23,6 +23,20 @@
   preparation once loaded). It now reuses the loaded document, as `scale_query` and `scale_search` do, with its
   recipes' index and checklist findings made once per schema; the answer is the same and shares nothing with it.
 
+- **index-sources 4.2.0 and fetch-corpus 1.2.0: Elsevier's article API, a pause through EZproxy outages, and one
+  vector-store update at a time (no schema change).** Requested by @diazr04: the last fixes of the local
+  paper-acquisition. download_open.py fetches Elsevier's open articles (ScienceDirect blocks scripted clients, and
+  Elsevier is never fetched through EZproxy) from Elsevier's article API when a developer key is in keys.txt
+  (`scopus:`): the key goes in a header to `api.elsevier.com` alone, never to a host a redirect leads to, and is never
+  logged; requests stay at most 2.5 a second (Elsevier allows 10 a second and 50,000 a week); a one-page reply is no
+  full text and is not kept; a 429 (the rate or the week's quota), 401 or 403 ends the route for the run and leaves its
+  sources as they were. `api.elsevier.com` is exempt from the blocked Elsevier hosts. download_paywalled.py reads three
+  network or proxy errors in a row as an outage: no source loses a try, in the run or in the outcomes log, and the
+  runner waits 15 min, then 30, then an hour each time instead of spending the day's visits on it. The vector store is
+  updated by one process at a time (a step that finds another one at it leaves the update to that one), and a
+  sentence-transformers model on an Apple GPU gives its memory back after each batch: two downloads updating the store
+  at once had each grown past 20 GB on a computer with 16 GB.
+
 - **A selectivity says what it counts and what it is a share of (breaking, schema 0.7.8 -> 0.8.0).** Answers #82.
   Selectivities of one product on different wholes (a share of converted CO with CO2 inside, of the hydrocarbons
   alone, of one pool such as the olefins) or counted differently (carbon atoms, moles, mass) are no longer put in one

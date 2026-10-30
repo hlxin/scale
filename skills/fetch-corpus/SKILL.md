@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks the settled corpus
-version: 1.1.0
+version: 1.2.0
 scale_release: ">v0.2.0"
 inputs:
   - A frozen corpus (sources/<topic>/corpora/<name>/sources.json, from index-sources' freeze_corpus.py), or a whole topic
@@ -86,7 +86,13 @@ nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/download_open.py --corpus <manifest
 Every known open copy is tried, most open first (repositories, the PMC open-data mirror, arXiv, publisher CDNs, the
 landing page's PDF link), never hosts that block scripted clients. Each PDF is validated, checked against the
 source's title, and filed by the licence printed in it. Datasets and software are never downloaded; US patents come
-from the USPTO image server. A source in two topics is fetched once (the copy in the other topic's folder is a
+from the USPTO image server. Elsevier's open articles (ScienceDirect blocks scripted clients, and Elsevier is never
+fetched through EZproxy) come through Elsevier's article API once a developer key is in keys.txt (`scopus:` line,
+dev.elsevier.com; index-sources' README): tell the user which line to add, never ask for the key. The key goes in a
+header to the API alone and is never logged; requests stay far below Elsevier's limits (at most 2.5 a second; it
+allows 10 a second and 50,000 a week); a one-page reply (the first page only) is no full text and is not kept; a
+429 (the rate or the week's quota), 401 or 403 ends the API route for the run and leaves its sources as they were
+(`--retry-failed` later). A source in two topics is fetched once (the copy in the other topic's folder is a
 clone). `--access` and `--ids FILE` (one source ID per line) narrow a run without touching the rest: a source of
 another access type keeps the status it has (an open-access-only run never takes sources out of the EZproxy queue), and
 only one never tried yet is marked as of a type not fetched. PDFs an earlier project (or a colleague's copy, made by
@@ -108,7 +114,9 @@ nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh "$PWD" --corpus <manifest
 publisher that keeps answering with a login page or a block while the others download is left out with
 `--skip-publishers <keys>` (its sources stay queued; tell the user which and why). Open licences only (the user chose
 "open access" = OA + OA+ND): add `--access OA,OA+ND` (the other sources stay queued); `download_paywalled.py --corpus
-<manifest> --access OA,OA+ND --dry-run` shows that queue per publisher first and contacts nothing.
+<manifest> --access OA,OA+ND --dry-run` shows that queue per publisher first and contacts nothing. Three network or
+proxy errors in a row are an outage (the computer offline, DNS or the proxy down), not the sources' fault: no source
+loses a try, and the runner waits 15 min, then 30, then an hour each time instead of spending the day's visits.
 
 **SI.** `fetch_si.py --corpus <manifest>` after the open downloads: it fetches the SI the index lists (index-sources'
 find_si) first, then looks for more on the source's own page.
@@ -138,7 +146,7 @@ settle again.
 
 | Script | What it does |
 |---|---|
-| `download_open.py` | open-route downloads, PDF title and licence check, folder routing; `--corpus` or `--topic`, `--access`, `--ids`, `--max`, `--retry-failed`, `--added-since` |
+| `download_open.py` | open-route downloads (Elsevier's open articles through its article API, with a key), PDF title and licence check, folder routing; `--corpus` or `--topic`, `--access`, `--ids`, `--max`, `--retry-failed`, `--added-since` |
 | `import_pdfs.py` | `--from <other project>`: copies in the PDFs another project already downloaded (matched by DOI, checked and filed like downloads; `--access`, `--topic`, `--dry-run`; no network) |
 | `accept_pdf.py` | files a rejected PDF after someone looked at it and confirmed it is the source (`--reason` logged) |
 | `check_paywalled_access.py` | checks the library's EZproxy with one of the topic's paywalled sources and saves the verdict (machine-wide) |
