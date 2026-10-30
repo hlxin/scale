@@ -165,16 +165,22 @@ def _summary(steps: list[dict]) -> dict:
             "gases": gases, "ph": ph}
 
 
-def recipe(doc: dict, spec: dict, preparation: str | None = None) -> dict:
-    """The recipes of a document's preparations (each that is not a stage of another), or of one."""
-    g = _Graph(doc)
+def recipe_context(doc: dict, spec: dict) -> tuple:
+    """What every recipe of a document reads: its records indexed, and its checklists' findings by record. Made once,
+    it serves every preparation of the document (a toolkit that keeps the document loaded keeps it too)."""
+    return _Graph(doc), _missing(doc, spec)
+
+
+def recipe(doc: dict, spec: dict, preparation: str | None = None, context: tuple | None = None) -> dict:
+    """The recipes of a document's preparations (each that is not a stage of another), or of one. ``context`` is
+    :func:`recipe_context` of this document and schema, made here when not given."""
+    g, missing = context or recipe_context(doc, spec)
     if preparation is not None and g.label(preparation) != "Preparation":
         return {"recipes": [], "status": "no_matching_record",
                 "reason": f"{preparation} is not a Preparation of this document"}
     tops = [preparation] if preparation else sorted(
         nid for nid, n in g.nodes.items() if n.get("label") == "Preparation"
         and not any(e.get("type") == "PART_OF" and g.label(e["target"]) == "Preparation" for e in g.out.get(nid, [])))
-    missing = _missing(doc, spec)
     out = []
     for pid in tops:
         p = g.props(pid)

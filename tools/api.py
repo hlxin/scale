@@ -346,7 +346,8 @@ class ScaleToolkit:
         raise ScaleError("give a document (inline) or a path")
 
     def _load(self, path: str) -> dict:
-        """The document at ``path`` with what its queries reuse: ``{doc, graphs (a query Graph per schema), index}``,
+        """The document at ``path`` with what its queries and recipes reuse: ``{doc, graphs (a query Graph per schema),
+        recipes (a recipe context per schema), index}``,
         kept while the file is unchanged (:func:`_file_key`: its identity, change and modification times and size; a
         long-running server loads a large graph and indexes it once). The tools never change a loaded document; a few recent documents are kept."""
         p = self._path(path).resolve()
@@ -354,7 +355,7 @@ class ScaleToolkit:
         key = _file_key(st)
         hit = self._loaded.get(str(p))
         if hit is None or hit["key"] != key:
-            hit = {"key": key, "doc": load_doc(p), "graphs": {}, "index": None, "index_key": None}
+            hit = {"key": key, "doc": load_doc(p), "graphs": {}, "recipes": {}, "index": None, "index_key": None}
             self._loaded.pop(str(p), None)
             self._loaded[str(p)] = hit
             while len(self._loaded) > 4:
@@ -571,9 +572,21 @@ class ScaleToolkit:
 
     def _scale_recipe(self, document: dict | None = None, path: str | None = None, domain: str | None = None,
                       preparation: str | None = None, format: str = "json") -> dict:
-        from .recipes import recipe, render_markdown
-        doc = self._doc(document, path)
-        res = recipe(doc, self._doc_spec(doc, domain), preparation)
+        from .pgraph_query import detached
+        from .recipes import recipe, recipe_context, render_markdown
+        if document is None and path:
+            # the loaded document, with what its recipes read made once per schema: a served graph is not read
+            # again, nor its checklists run again, for each preparation; the answer shares nothing with it
+            hit = self._load(path)
+            doc = hit["doc"]
+            spec = self._doc_spec(doc, domain)
+            ctx = hit["recipes"].get(id(spec))
+            if ctx is None:
+                ctx = hit["recipes"][id(spec)] = recipe_context(doc, spec)
+            res = detached(recipe(doc, spec, preparation, ctx))
+        else:
+            doc = self._doc(document, path)
+            res = recipe(doc, self._doc_spec(doc, domain), preparation)
         if format == "markdown":
             res["markdown"] = render_markdown(res)
         return res

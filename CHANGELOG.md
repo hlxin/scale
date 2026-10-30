@@ -2,6 +2,27 @@
 
 ## Unreleased
 
+- **query-graph 0.2.0 answers a question that asks what to do with a proposal built from the graph (no schema
+  change).** Requested by @diazr04, from a skill that planned nanoparticle syntheses from a graph of 20,979 curated
+  recipes, so that one general skill keeps what worked there. A question with several requirements (a composition,
+  a phase, a size) takes one plan for them all and one per requirement, so the record that reaches one with other
+  elements is found too. When the question asks how to make or run something, `scripts/precedents.py` runs one plan
+  (`references/precedents-plan.json`: every preparation with its catalyst, composition, class, shape, size, phases
+  and components) and ranks the preparations by the requirements they meet, hardest first, with the closest records
+  for each requirement. A base gives the skeleton (solvent, temperatures, atmosphere, work-up) and each aspect it
+  misses comes from the closest record that controls it (precursors, a capping agent, an ordering treatment),
+  compatible with the skeleton and cited; only those records and the base's own variants are read whole
+  (`scale graph recipe`). Each step cites a record's step and quote or is a labelled hypothesis; a composition is
+  read on its stated basis before any computation; `scripts/check_quotes.py` looks every quotation up in the records
+  named and lists their compositions with unit and basis; one light review by a second agent (at most five
+  findings) looks for what the check cannot see, and what stays open goes in the Limits. The proposal fits in two
+  pages, with the candidates considered, for a person to review before anything is run.
+
+- **`scale_recipe` reads the document a toolkit keeps loaded (no schema change).** Requested by @diazr04: on a
+  served graph of 1.5 GB each call read the file again and ran the checklists of the whole document (about 18 s per
+  preparation once loaded). It now reuses the loaded document, as `scale_query` and `scale_search` do, with its
+  recipes' index and checklist findings made once per schema; the answer is the same and shares nothing with it.
+
 - **index-sources 4.2.0 and fetch-corpus 1.2.0: Elsevier's article API, a pause through EZproxy outages, and one
   vector-store update at a time (no schema change).** Requested by @diazr04: the last fixes of the local
   paper-acquisition. download_open.py fetches Elsevier's open articles (ScienceDirect blocks scripted clients, and

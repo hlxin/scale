@@ -13,7 +13,7 @@ answers:
 | [index-sources](index-sources/SKILL.md) | find and index the sources of a topic (papers, preprints, patents, theses, reports, and the datasets found with them) into an index that keeps their access, licence and supporting information, and freeze the corpus a question needs |
 | [fetch-corpus](fetch-corpus/SKILL.md) | fetch a frozen corpus's files (PDFs and supporting information; paywalled ones only through the library's proxy) and record in the corpus what was fetched and what was not |
 | [curate-corpus](curate-corpus/SKILL.md) | curate one publication, one data file or a frozen corpus into scale-catal documents, with evidence on every statement and typed absences |
-| [query-graph](query-graph/SKILL.md) | answer a question with a graph query plan, rows as reported with their evidence |
+| [query-graph](query-graph/SKILL.md) | answer a question with a graph query plan, rows as reported with their evidence; a question that asks what to do gets a proposal built from the closest records, each step citing one, checked (and reviewed when asked) |
 | [map-coverage](map-coverage/SKILL.md) | map what the documents cover (materials by properties by conditions) and each kind of absence |
 | [scan-conflicts](scan-conflicts/SKILL.md) | find values that seem to disagree and classify each pair as genuine, apparent or not comparable |
 | [export-graph](export-graph/SKILL.md) | hand a document to another system, validated, capped and filtered for its audience |
