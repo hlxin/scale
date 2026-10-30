@@ -183,6 +183,9 @@ nodes:
         - electrode
         - reactor_charge
         - other
+        - dispersion
+        description: The physical form of the specimen; a dispersion is particles held in a liquid (a colloid as
+          made, before it is dried or put on a support), whose liquid is an input of the step that made it.
       batch_identifier:
         type: string
       preparation_status:
@@ -351,6 +354,12 @@ nodes:
           - arc_discharge
           - plasma_synthesis
           - biological
+          - impregnation
+          - chemical_vapor_impregnation
+          - photochemical_reduction
+          - radiolytic_reduction
+          - spark_ablation
+          - arc_melting
           - other
           - not_reported
         description: |-
@@ -358,7 +367,9 @@ nodes:
           several (a hydrothermal support impregnated, a MOF pyrolysed, a seeded growth on a colloidal deposit) lists
           each, and its stages may be Preparations of their own. `method` keeps the source's name ("modified polyol
           route", "SEA at pH 11"). On a support from a liquid: incipient_wetness_impregnation (a solution of the pore
-          volume), wet_impregnation (an excess of solution), ion_exchange, strong_electrostatic_adsorption (uptake
+          volume), wet_impregnation (an excess of solution), impregnation (either, when the source does not say
+          which; the volume is never inferred), chemical_vapor_impregnation (a volatile precursor taken up from the
+          vapour), ion_exchange, strong_electrostatic_adsorption (uptake
           set by the pH against the support's point of zero charge), deposition_precipitation, colloidal_deposition
           (particles made first, then deposited), grafting (a molecular precursor bound to surface groups, surface
           organometallic chemistry), photodeposition (a metal reduced on a photoexcited semiconductor),
@@ -366,7 +377,9 @@ nodes:
           one). From solution: precipitation, coprecipitation, sol_gel, polymerized_complex (citrate or Pechini
           complexation and gelation), hydrothermal and solvothermal (in a closed vessel above the solvent's boiling
           point; a zeolite or a framework crystallized so), molten_salt, colloidal_reduction (metal ions reduced in
-          solution with a stabilizer), polyol (the polyol both solvent and reductant), seeded_growth, hot_injection,
+          solution with a stabilizer), photochemical_reduction and radiolytic_reduction (metal ions reduced in
+          solution by light or by ionizing radiation; photodeposition is a reduction on a photoexcited
+          semiconductor), polyol (the polyol both solvent and reductant), seeded_growth, hot_injection,
           thermal_decomposition (of a molecular precursor), microemulsion, solution_combustion (a precursor with a
           fuel), post_synthetic_modification (of a zeolite, framework or support after it was made: dealumination,
           desilication, linker exchange). Solid and thermal: solid_state_reaction, mechanochemical (milling that
@@ -381,7 +394,8 @@ nodes:
           exfoliation, hard_templating (nanocasting in a solid template removed afterwards), soft_templating (micelles
           or block copolymers), coating (dip, spin or washcoating onto a body), shaping (extrusion, pelletizing,
           granulation with a binder), additive_manufacturing. Physical: laser_ablation, arc_discharge,
-          plasma_synthesis. biological (an organism, enzyme or biomolecular template makes or shapes the solid).
+          spark_ablation (particles from a spark between two electrodes), arc_melting (an alloy melted from its
+          metals in an arc furnace), plasma_synthesis. biological (an organism, enzyme or biomolecular template makes or shapes the solid).
           other (say which in method).
       design_aims:
         type: list
@@ -449,7 +463,7 @@ nodes:
           product (a loading, a size) is a characterization result of the product, not an outcome.'
   Treatment:
     is_a: Procedure
-    description: A change applied to a sample (drying, calcination, reduction, activation, poisoning,
+    description: A change applied to a sample (drying, calcination, reduction, activation, annealing, poisoning,
       regeneration).
     required:
     - treatment_kind
@@ -468,6 +482,10 @@ nodes:
         - other
         - purification
         - exposure
+        - annealing
+        description: What the treatment does, as the source names it; annealing is a heat treatment held to change
+          the solid's structure (ordering an alloy into an intermetallic, alloying, crystallizing), which a
+          calcination, a reduction or an oxidation does by its chemistry.
       temperature:
         type: value
         quantity: temperature
@@ -550,6 +568,7 @@ nodes:
         - phosphidize
         - hold
         - remove_ligands
+        - anneal
         description: 'What the step does, as the source does it; `method` says how in its words. Besides the first
           actions: inject (a solution added at once, hot injection), reflux, crystallize (a closed-vessel or aging
           crystallization), centrifuge, sonicate, exchange (ion exchange), ligand_exchange, deposit (from a vapour,
@@ -559,7 +578,9 @@ nodes:
           laser, an electron or ion beam), shape (extrude, pelletize, granulate), carburize, nitridize, sulfidize,
           phosphidize, hold (kept at a temperature already reached, for a time: no ramp), remove_ligands (capping
           ligands or surfactants taken off a particle surface, by an acid or solvent soak, UV-ozone, a plasma or
-          heating; method says how).'
+          heating; method says how), anneal (a heat treatment the source calls an anneal, held to change the
+          solid''s structure: an alloy ordered into an intermetallic, alloyed or crystallized; a calcination, a
+          reduction and an oxidation keep their own actions, and the step''s gas is its atmosphere).'
       temperature:
         type: value
         quantity: temperature
@@ -1620,6 +1641,7 @@ nodes:
           - egg_shell
           - egg_yolk
           - uniform_distribution
+          - bulk
           - other
           - not_reported
         description: 'How the active solid is built in this state, as the source reports it: single_atoms (isolated
@@ -1627,9 +1649,10 @@ nodes:
           porous_particle, janus (two faces of different composition), alloy (a random solid solution) and
           intermetallic (an ordered compound), segregated (one element enriched at the surface or in domains),
           overlayer, encapsulated (in pores, a shell or a framework), framework (a zeolite, MOF or COF), layered,
-          thin_film, supported and unsupported; egg_shell, egg_yolk and uniform_distribution say where the active
-          phase is across a support body. Which phase is where is HAS_PHASE with its location; a single atom''s
-          coordination is a site (HAS_SITE).'
+          thin_film, bulk (a massive solid: an ingot, a foil, a single crystal), supported and unsupported;
+          egg_shell, egg_yolk and uniform_distribution say where the active phase is across a support body. Which
+          phase is where is HAS_PHASE with its location and, in a particle of several layers, its layer; a single
+          atom''s coordination is a site (HAS_SITE).'
       exposed_facets:
         type: list
         maturity: provisional
@@ -2070,7 +2093,9 @@ edges:
         quantity: loading
         context:
           fraction_basis: loading_basis
-        description: 'For a support: the loading of the active phase on it, as stated.'
+        description: The loading of this component (an active phase or component) on the catalyst's support, as
+          stated, on the link to that component; loading_basis says by what. The support's own share is its
+          fraction.
       loading_basis:
         type: enum
         values:
@@ -2377,6 +2402,12 @@ edges:
         description: Where the phase is. overlayer = a layer covering another phase; separate_domain =
           in particles or regions apart from the other phases.
         maturity: provisional
+      layer:
+        type: integer
+        maturity: provisional
+        description: In a particle built in layers, which layer the phase forms, counted from the inside out as the
+          source orders them (1 the core, 2 the first shell, 3 the next; Au@Pd@Pt is Au 1, Pd 2, Pt 3); a phase
+          that is a whole particle or a domain apart has none.
       dominance:
         type: enum
         values:
@@ -3430,6 +3461,9 @@ adds_properties:
         - ligand
         - ligand_removal_agent
         - protective_gas
+        - isolating_medium
+        - phase_transfer_agent
+        - antisolvent
         - other
       description: 'The function an input serves in a preparation or one of its steps, as the source states it: one
         input may serve several (ethylene glycol solvent and reducing_agent; PVP capping_agent and reducing_agent;
@@ -3445,7 +3479,12 @@ adds_properties:
         binder; substrate (a body, an electrode or a crystal grown or deposited on); ligand; ligand_removal_agent
         (what takes capping ligands or surfactants off the surface: acetic acid, an amine wash, ozone); protective_gas
         (an inert gas a step is kept under: N2, Ar; a gas that reacts is a reducing_agent, an oxidizing_agent or a
-        source). The kernel''s role
+        source); isolating_medium (a solid the particles are dispersed in so that they do not sinter while they are
+        heated, and which is removed afterwards: NaCl, KCl, a salt or an oxide matrix; it is not a support);
+        phase_transfer_agent (what carries particles or a precursor from one liquid phase into another:
+        tetraoctylammonium bromide in a two-phase synthesis, a thiol or an amine moving particles into water);
+        antisolvent (a liquid added to precipitate the particles from their dispersion: ethanol into hexane). The
+        kernel''s role
         (reagent, material) stays what it says: what is added and what it is added to. A function the source does
         not state is not inferred from the chemical.'
     concentration:
@@ -3484,6 +3523,18 @@ adds_properties:
       description: The flow of a gas or liquid fed through the step (50 sccm of 10% H2/Ar during a reduction), as
         stated; a volumetric flow states the conditions it is counted at in its unit (sccm, mL(STP)/min) or basis. A
         gas a step is merely kept under has none (gas_flow_mode static).
+    addition_mode:
+      type: enum
+      maturity: provisional
+      values:
+      - all_at_once
+      - portionwise
+      - dropwise
+      - continuous
+      - not_reported
+      description: How the input went into the step's mixture, as the source says it (poured or injected at once, in
+        portions, dropwise, or fed continuously by a pump or a burette, its rate then the input's flow_rate). A hot
+        injection is the step's action inject, with this input all_at_once; the order of the inputs is the steps'.
 context_targets:
   species:
     maturity: provisional
@@ -4363,12 +4414,17 @@ checklist:
               label: Preparation
         - name: precursors
           description: what the solid was made from (an input of the preparation or of one of its steps whose
-            synthesis_function names a precursor, a source or the support), or its stages, each stating its own
+            synthesis_function names a precursor, a source or the support), or its stages, each stating its own,
+            or, for a preparation that treats a solid made earlier (an anneal, a ligand removal), that sample as
+            its input
           any_of:
           - path:
             - edge: PART_OF
               direction: in
               label: Preparation
+          - path:
+            - edge: HAS_INPUT
+              label: Sample
           - path:
             - edge: HAS_INPUT
               edge_where:
@@ -4589,6 +4645,7 @@ checklist:
           - nitridize
           - sulfidize
           - phosphidize
+          - anneal
         maturity: provisional
         basis:
         - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
@@ -4609,6 +4666,7 @@ checklist:
           - nitridize
           - sulfidize
           - phosphidize
+          - anneal
         maturity: provisional
         basis:
         - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,
@@ -4627,6 +4685,7 @@ checklist:
           - nitridize
           - sulfidize
           - phosphidize
+          - anneal
         maturity: provisional
         basis:
         - Addressing Rigor and Reproducibility in Thermal, Heterogeneous Catalysis, workshop report, v1.00, 2023,

@@ -182,6 +182,8 @@ def _head_ok(url):
 
 
 def route_elsevier(cr):
+    if is_blocked("ars.els-cdn.com"):          # a project that keeps Elsevier out lists its CDN in blocked_hosts.json
+        return []
     pii = None
     for a in (cr or {}).get("alternative_id") or []:
         x = a.replace("-", "").replace("(", "").replace(")", "").upper()

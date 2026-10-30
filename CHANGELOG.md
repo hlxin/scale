@@ -10,6 +10,60 @@
   value that states neither is compared only with such values (`not stated`); `mol%` is left unread, never guessed.
   No document needs rewriting (the migration step changes nothing); as-reported comparison is unchanged. Example,
   counterexample and competency question CQ-41 added.
+
+- **index-sources 4.1.0 and fetch-corpus 1.1.0 take the fixes made to a local paper-acquisition after the split (no
+  schema change).** Requested by @diazr04, so that one copy of the skills is kept. The topic gate's `english_only`
+  turns away records in another language (`_lang.py`: only on clear evidence, never on Greek letters, formulas or
+  element symbols) and `remove_sources.py` takes sources out on request (`--non-english`, `--ids`), each logged in full,
+  its files kept under `.scripts/removed/`. Gate rescue rules (`title_any`, `journal_any`, `journal_not`) let in sources
+  of the topic that never write its anchor word, and keyword screening keeps them in scope. search.py stops a secondary
+  OpenAlex query early only after 25 pages in a row with nothing new (one such page used to stop it at its first
+  results), asks OpenAlex for pages of 200, and takes `--queries` and `--label` for a run of its own; raw hits may be
+  kept as `.jsonl.gz`, and build_list.py cuts a raw file larger than a batch at line breaks. The same-source check of a
+  PDF reads it a second time with poppler's `pdftotext`, accepts the source's own DOI printed in a PDF of 3+ pages and
+  names pages that are only images; fetch-corpus's `accept_pdf.py` files a rejected PDF someone has checked, and
+  `import_pdfs.py` copies in the PDFs another project downloaded (one made before the rename is read as it is, never
+  upgraded). download_open.py takes `--ids`, and a narrowed `--access` leaves a source with a status of its own as it
+  is (an open-access-only run no longer takes sources out of the EZproxy queue); download_paywalled.py takes `--access`
+  and `--dry-run` (the queue per publisher, nothing contacted); run_paywalled.sh stops on bad arguments; a run that adds
+  a host to `.scripts/blocked_hosts.json` keeps the ones listed meanwhile, and listing Elsevier's SI CDN there keeps
+  find_si.py and fetch_si.py off it. Not taken: the local copy's Elsevier article-API route.
+
+- **Schema 0.7.9 (additive): what 20,979 curated nanoparticle-synthesis recipes asked for.** Requested by @diazr04:
+  converting the SynthesisProtocol V3.1 dataset (20,979 LLM-extracted, curated recipes of metal and alloy nanoparticle
+  syntheses from 10,893 open-access papers) to scale-catal 0.7.8 kept part of what the recipes say as text, notes or
+  `unmodeled`, and recorded a salt matrix as a support. All new terms are provisional.
+  - **An anneal.** A heat treatment the source calls an anneal, held to change the solid's structure (an alloy ordered
+    into an intermetallic, alloyed or crystallized), is `action: anneal`; the checklist asks it what a calcination is
+    asked (temperature, time, gas, ramp and gas flow). A sample annealed apart from its preparation is a Treatment with
+    `treatment_kind: annealing`. The recipes hold 1,915 such steps, in 1,582 recipes.
+  - **Three functions of an input.** `isolating_medium` (a salt or an oxide the particles are dispersed in so that they
+    do not sinter while they are heated, washed out afterwards; it is not the support), `phase_transfer_agent` (what
+    carries particles or a precursor into another liquid phase) and `antisolvent` (a liquid added to precipitate
+    particles from their dispersion).
+  - **How an input went in.** `HAS_INPUT.addition_mode`: `all_at_once`, `portionwise`, `dropwise` or `continuous` (its
+    rate then the input's `flow_rate`); the recipes state it in words in 23,073 steps of 12,627 recipes.
+  - **A dispersion.** `sample_kind: dispersion`, for a colloid kept as a liquid.
+  - **Six method families.** `impregnation` (the source does not say pore volume or excess; 2,027 recipes, which SCALE
+    forbids guessing into one of the two), `chemical_vapor_impregnation`, `photochemical_reduction` and
+    `radiolytic_reduction` (in solution; `photodeposition` is on a photoexcited semiconductor), `spark_ablation` and
+    `arc_melting`.
+  - **The structure obtained.** `architecture: bulk` (an ingot, a foil, a single crystal), and `HAS_PHASE.layer`, the
+    layer a phase forms in a particle of several layers, counted from the core outward (1,215 recipes give a core,
+    shells or an alloy shell per element). The recipes add how a single-atom alloy is recorded (`single_atoms`, the
+    isolated metal `bound_to` the host).
+  - **Sizes are quantity kinds.** The kernel declares `particle_size`, `crystallite_size`, `microscopy_particle_size`
+    and its spread, `hydrodynamic_size`, `dispersion_equivalent_size`, `particle_edge_length`, `shell_thickness`,
+    `wire_diameter` and `film_thickness` (lengths) and `aspect_ratio`, which #64 left for when curated records used
+    them (the recipes give a size for 9,019), each mapped to QUDT; their units are now checked.
+  - **Two fixes.** A loading is described on the link to the component it measures, as the recipes and the examples
+    record it (the description put it on the support link). The checklist counts the sample a preparation treats (an
+    anneal of particles made in an earlier stage) as what it was made from, instead of asking it for precursors it
+    does not have.
+  - An example (salt-matrix-anneal: invented PtFe nanoparticles made in one stage and annealed in NaCl in another), a
+    counterexample (an addition mode in other words), tests, the recipes. Existing documents keep their version; the
+    migration step rewrites nothing.
+
 - **Queries about four times faster, with the same answers (no schema change).** Requested by @hlxin. A query
   re-hashed the schema's quantity contracts twice, rebuilt a table of every link, labelled the same evidence again in
   every row, and copied its answer with `copy.deepcopy`. Now the contracts are compiled once per loaded schema, the
@@ -17,6 +71,7 @@
   copied as plain data (`pgraph_query.detached`), still sharing no object with the document. The competency questions
   on their documents (62 runs) take 18 ms instead of 73 ms, and three broad plans on the public methanol graph (1,494
   rows) 19 ms instead of 31 ms; every answer is identical.
+
 - **A large knowledge-graph bundle opens in the explorer a window at a time, and is searched whole (no schema
   change).** Requested by @diazr04: a bundle whose graph is larger than a browser holds as one text (the train split of
   a recipes dataset, 899 MB and 542,226 records) failed with "Failed to fetch", and a graph of 40,000 records took about

@@ -107,7 +107,7 @@ def fetch_openalex(query, cursor, since, ctx):
     if since:
         flt += f",from_publication_date:{since}"
     key = ctx.get("keys", {}).get("openalex")
-    params = {"per_page": 100, "select": OALEX_SELECT, "filter": flt}
+    params = {"per_page": 200, "select": OALEX_SELECT, "filter": flt}   # OpenAlex maximum: half the requests
     # Without a key OpenAlex pages only with page= (cursor paging past the first page needs a free key: HTTP 401), and
     # page= stops at 10,000 results per query. The resume token is then "page:<n>".
     page = int(str(cursor)[5:]) if str(cursor or "").startswith("page:") else None

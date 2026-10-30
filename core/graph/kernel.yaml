@@ -3545,6 +3545,54 @@ quantities:
       description: Revolutions per time of a stirrer, a tumbling vessel or a mill (rpm, Hz); its definition says of
         what.
       dimensions: [frequency]
+    particle_size:
+      maturity: provisional
+      description: A size of particles as the source gives it, when it names no technique or statistic; a size
+        measured by a named technique has that technique's kind.
+      dimensions: [length]
+    crystallite_size:
+      maturity: provisional
+      description: The size of coherently diffracting domains from the broadening of a diffraction line (Scherrer),
+        its reflection and phase in the definition.
+      dimensions: [length]
+    microscopy_particle_size:
+      maturity: provisional
+      description: The mean or median of a particle-size distribution counted by microscopy; the definition says
+        which, and the count is its own value.
+      dimensions: [length]
+    microscopy_particle_size_spread:
+      maturity: provisional
+      description: The spread of that distribution (a standard deviation or a range), as the definition says.
+      dimensions: [length]
+    hydrodynamic_size:
+      maturity: provisional
+      description: The size of particles in a liquid from light scattering (a DLS Z-average), with its solvent in the
+        definition.
+      dimensions: [length]
+    dispersion_equivalent_size:
+      maturity: provisional
+      description: The size a measured dispersion gives for an assumed particle shape, the shape in the definition.
+      dimensions: [length]
+    particle_edge_length:
+      maturity: provisional
+      description: The edge of a polyhedral particle (a cube, an octahedron, a plate's side).
+      dimensions: [length]
+    shell_thickness:
+      maturity: provisional
+      description: The thickness of a particle's shell or of one of its layers.
+      dimensions: [length]
+    wire_diameter:
+      maturity: provisional
+      description: The diameter of a wire or a rod.
+      dimensions: [length]
+    film_thickness:
+      maturity: provisional
+      description: The thickness of a film or an overlayer.
+      dimensions: [length]
+    aspect_ratio:
+      maturity: provisional
+      description: A particle's length to its width (a rod, a wire, a plate), dimensionless.
+      dimensions: [dimensionless]
     flow_rate:
       description: A volumetric, molar or mass flow rate; a volumetric flow is comparable only at one stated reference
         condition.

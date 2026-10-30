@@ -342,8 +342,8 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 Record a characterization's results as result entries (`result_values`), each naming the Variable of what it
 measured, with its `definition` (the method and its range) and, where it is about one phase, species or element, its
 `target` (below, "Characterization recipes"). The keys below are the names to give those Variables' `quantity_kind`,
-so that one measurand has one name across documents; until the kernel declares them they are recorded as stated, and
-their units are not checked. An older document may hold the same values in the Characterization's `results` map under
+so that one measurand has one name across documents. Those marked (declared) are quantity kinds of the kernel, whose
+units are checked; the others are recorded as stated, their units not checked until the kernel declares them. An older document may hold the same values in the Characterization's `results` map under
 these keys; both read the same way.
 
 | quantity_kind | unit as printed | definition (example) |
@@ -353,10 +353,11 @@ these keys; both read the same way.
 | `metal_surface_area` | m2/g | N2O titration, stoichiometry Cu:O = 2 |
 | `site_fraction` (declared) | % | a dispersion: exposed atoms as a share of all atoms of the metal |
 | `gas_uptake` | µmol/g | H2 chemisorption at 308 K (`target`: the gas) |
-| `crystallite_size` | nm | Scherrer, (111) reflection (`target`: the phase) |
-| `microscopy_particle_size`, `microscopy_particle_size_spread`, `count` | nm, nm, 1 | a microscopy distribution's mean (or median), its standard deviation, the particles counted |
-| `hydrodynamic_size`, `polydispersity_index` | nm, 1 | DLS Z-average and PDI of a colloid |
-| `dispersion_equivalent_size` | nm | the size a dispersion gives for an assumed particle shape |
+| `crystallite_size` (declared) | nm | Scherrer, (111) reflection (`target`: the phase) |
+| `microscopy_particle_size`, `microscopy_particle_size_spread` (declared), `count` | nm, nm, 1 | a microscopy distribution's mean (or median), its standard deviation, the particles counted |
+| `hydrodynamic_size` (declared), `polydispersity_index` | nm, 1 | DLS Z-average and PDI of a colloid |
+| `dispersion_equivalent_size` (declared) | nm | the size a dispersion gives for an assumed particle shape |
+| `particle_size` (declared) | nm | a size the source gives with no technique or statistic |
 | `coordination_number` | 1 | a fitted EXAFS coordination number (an Analysis result) |
 | `composition_fraction`, `loading` (declared) | at%, wt% | a measured metal fraction or loading (`target`: the element) |
 | `lattice_parameter` | Å | Rietveld, axis a (`target`: the phase) |
@@ -545,8 +546,10 @@ an aim, a shape or a mechanism is never inferred from the chemical or from a typ
 
 - **The method.** `Preparation.method` keeps the source's name ("modified polyol route", "SEA at pH 11.5");
   `preparation_methods` lists the families it belongs to, each once (a hydrothermal support then impregnated is
-  `hydrothermal` and `incipient_wetness_impregnation`). A method none of the families names is `other`, with its name
-  in `method`; a family that recurs in curated sources is a schema change (`evolve-schema`), not a new spelling.
+  `hydrothermal` and `incipient_wetness_impregnation`). An impregnation the source does not say was of the pore
+  volume or of an excess of solution is `impregnation`, never one of the two by guess. A method none of the families
+  names is `other`, with its name in `method`; a family that recurs in curated sources is a schema change
+  (`evolve-schema`), not a new spelling.
 - **The stages.** A synthesis whose stages are made by methods of their own (the support, then the metal on it; a
   zeolite, then its ion exchange; a MOF, then its pyrolysis) can be one Preparation with all the steps or a
   Preparation per stage, `PART_OF` the whole with `order`; each stage `HAS_OUTPUT` what it made, which the next stage
@@ -579,6 +582,16 @@ an aim, a shape or a mechanism is never inferred from the chemical or from a typ
   own, `action: remove_ligands`, its `method` saying how and its agent `ligand_removal_agent`; the stage it belongs to
   aims at `surface_ligands`, and the observation that shows the ligands gone (FTIR, TGA, XPS) determines the state it
   reaches.
+- **An anneal, an isolating medium and how an input went in** (0.7.9). A heat treatment the source calls an anneal,
+  held to change the solid's structure (an alloy ordered into an intermetallic, alloyed or crystallized), is `action:
+  anneal`, asked its temperature, time, gas, ramp and gas flow as a calcination is; an anneal of a sample made earlier,
+  apart from its preparation, is a Treatment with `treatment_kind: annealing`. A salt or an oxide the particles are
+  dispersed in so that they do not sinter while they are heated, and which is washed out afterwards, serves
+  `isolating_medium` (it is not the `support`); a liquid added to precipitate particles from their dispersion serves
+  `antisolvent`; what carries particles or a precursor from one liquid phase into another serves
+  `phase_transfer_agent`. How an input went into its step is its `HAS_INPUT.addition_mode` (`all_at_once`,
+  `portionwise`, `dropwise`, `continuous`, the rate then the input's `flow_rate`); a hot injection is `action: inject`
+  with its solution `all_at_once`. A colloid kept as a liquid is a Sample of `sample_kind: dispersion`.
 - **A step repeated as a block.** `repetitions` says how many times a step is carried out, with the sub-steps `PART_OF`
   it in order (the dose, purge, dose and purge of one ALD cycle; the sputter and anneal of one cleaning cycle); the
   block `HAS_INPUT` what its cycle uses, with the function each serves. A step whose repeats differ (a second
@@ -588,10 +601,14 @@ an aim, a shape or a mechanism is never inferred from the chemical or from a typ
   `DETERMINED_BY` the characterization that shows it, with `particle_shape` (each shape the source reports, once; the
   share of each in `properties.shape_fraction`, with its count), `architecture` (single_atoms, clusters, core_shell,
   yolk_shell, hollow, intermetallic, encapsulated, egg_shell, …), `exposed_facets` in Miller indices as printed,
-  `dimensionality` and `morphology` in words. Which phase is where is `HAS_PHASE` with its `location`; a single atom's
-  coordination is a site (`HAS_SITE`). Sizes that go with a shape are characterization results under their own names
-  (`particle_edge_length`, `aspect_ratio`, `shell_thickness`, `wire_diameter`, `film_thickness`), as the other sizes
-  are (Characterization results, above); their units are not checked until the kernel declares them.
+  `dimensionality` and `morphology` in words; a massive solid (an ingot, a foil) is `bulk`. Which phase is where is
+  `HAS_PHASE` with its `location`, and in a particle of several layers its `layer`, counted from the core outward as
+  the source orders them (Au@Pd@Pt: Au 1, Pd 2, Pt 3). A single atom's coordination is a site (`HAS_SITE`); a
+  single-atom alloy (isolated atoms of one metal in the surface of another) is `architecture: single_atoms` on the
+  state, with the isolated metal a `HAS_COMPONENT` of the catalyst `bound_to` the host Material. Sizes that go with a
+  shape are characterization results under their own names (`particle_edge_length`, `aspect_ratio`,
+  `shell_thickness`, `wire_diameter`, `film_thickness`), as the other sizes are (Characterization results, above);
+  since 0.7.9 they are quantity kinds of the kernel, so their units are checked.
 - **What it gave** besides the structure is in `outcomes` (`product_yield`, `metal_uptake`, `deposition_per_cycle`,
   each with its definition) and `batch_scale` (how much one run made); a loading or a size measured on the product is a
   characterization result of the product.
@@ -601,9 +618,9 @@ the source does not give is a typed absence):
 
 | families | the steps and inputs | the conditions and outcomes |
 |---|---|---|
-| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the heating and the hold (`heat`, then `hold`); the collection (`centrifuge`, washes); a ligand exchange (`ligand_exchange`) or removal (`remove_ligands`, its `ligand_removal_agent`) | temperature, time and atmosphere; `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated (`HAS_INPUT.ratio`); for a microemulsion the water-to-surfactant ratio |
+| colloidal_reduction, polyol, seeded_growth, hot_injection, thermal_decomposition, microemulsion, photochemical_reduction, radiolytic_reduction | the metal_precursor, reducing_agent, capping_agent or stabilizer, surfactant, shape_directing_agent; the seed (an input made by an earlier stage); an injection (`action: inject`); the heating and the hold (`heat`, then `hold`); the collection (`centrifuge`, washes, the `antisolvent`); a ligand exchange (`ligand_exchange`) or removal (`remove_ligands`, its `ligand_removal_agent`); an anneal of the particles (`anneal`, in an `isolating_medium` when one keeps them apart) | temperature, time and atmosphere; how each input went in (`HAS_INPUT.addition_mode`); `injection_rate`, `stirring_rate`; the precursor-to-capping ratio as stated (`HAS_INPUT.ratio`); for a microemulsion the water-to-surfactant ratio |
 | colloidal_deposition | the colloid as `material`, the support as `support` | the solvent, time, the loading aimed at |
-| incipient_wetness_impregnation, wet_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` (the step's) and how it was held; the precursor's `stock_concentration` and `concentration`; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
+| incipient_wetness_impregnation, wet_impregnation, impregnation, chemical_vapor_impregnation, ion_exchange, strong_electrostatic_adsorption, deposition_precipitation, grafting | the precursor, the support (Impregnation and Precipitation above) | `ph` (the step's) and how it was held; the precursor's `stock_concentration` and `concentration`; the `point_of_zero_charge` of the support, from the source, in the support lot's `properties`; `liquid_to_solid_ratio`; `metal_uptake` as an outcome; for grafting, the surface groups and the solvent's dryness in `method` |
 | precipitation, coprecipitation, sol_gel, polymerized_complex, solution_combustion | the precipitating_agent, chelating_agent, fuel, the gel or the ignited mixture as a Sample | the order of addition (Precipitation above), `ph`, aging; the gel's `drying` and the `fuel_to_oxidizer_ratio` with its definition; the ignition temperature |
 | hydrothermal, solvothermal, molten_salt, post_synthetic_modification | the gel as a Sample with its molar composition (`HAS_COMPONENT.fraction`, `basis` naming the reference: "per SiO2"); the structure_directing_agent, mineralizer, seed, linker, modulator; the template's removal (a `calcine` step or a treatment) | `crystallize` with its temperature and time; `fill_fraction`, `agitation` (static or tumbled) and `stirring_rate`, `gas_flow_mode: sealed`, the autogenous pressure as a typed absence with a `note` when not measured; the autoclave and its liner as an Instrument |
 | solid_state_reaction, mechanochemical | the oxides, carbonates or salts and their amounts; the milling (`action: mill`, `energy_input: mechanical`) | `milling_frequency`, `ball_to_powder_ratio`, the jar and balls in `method`, the milling time with its pauses; each calcination and regrinding as steps |
@@ -614,7 +631,7 @@ the source does not give is a typed absence):
 | electrodeposition, anodization, electrospinning | the electrolyte as a Sample, the substrate (`substrate`); `energy_input: electrochemical` | the `potential` (with its reference scale in the definition) or `current_density`, the charge passed, the time; for electrospinning the voltage, feed rate and distance |
 | galvanic_replacement, dealloying, etching, hard_templating, soft_templating, photodeposition, electroless_deposition | the template (`template`, `porogen`) and the step that removes it; the etchant; the sacrificial component; for photodeposition the light source (a LightSource the step `USES_INSTRUMENT`) and the electron donor | the concentration and time of the etch; the potential of an electrochemical dealloying; the irradiance and wavelength |
 | coating, shaping, additive_manufacturing | the binder, the body (`substrate`) | the washcoat loading as an outcome; the extrusion or pellet dimensions; the printing settings in `method` |
-| laser_ablation, arc_discharge, plasma_synthesis, biological | the target, the liquid or gas, the organism or biomolecule (`template`, `reducing_agent`) | the laser's wavelength, pulse energy and repetition rate; the arc current; the plasma power |
+| laser_ablation, arc_discharge, spark_ablation, arc_melting, plasma_synthesis, biological | the target, the liquid or gas, the organism or biomolecule (`template`, `reducing_agent`) | the laser's wavelength, pulse energy and repetition rate; the arc current; the plasma power |
 
 To find syntheses by a value of one of these lists, a plan filters on the list's entries (`preparation_methods.*`,
 `synthesis_function.*`, `particle_shape.*`) with `eq` or `in`, which match a value exactly; `contains` on the list

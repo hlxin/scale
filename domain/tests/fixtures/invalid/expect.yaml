@@ -254,3 +254,8 @@ fixtures:
     base: domain/examples/scale-catal/product-measurement-examples/selectivity-basis.json
     error: "relative_to: reference 'ex:sb/lump/missing' does not resolve"
     reason: A share within a pool names the pool as a record of the document (relative_to); a pool that is no record leaves the share's whole unknown, and a comparison would group by a name that points nowhere.
+  - file: addition-mode-in-words.json
+    base: domain/examples/scale-catal/synthesis-examples/salt-matrix-anneal.json
+    error: "is not one of"
+    reason: How an input went into a step is one of the listed modes, so that dropwise and one-shot additions are found
+      apart; the source's words (a time, a rate) stay in the step's method and the input's flow_rate.

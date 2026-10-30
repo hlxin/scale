@@ -113,6 +113,17 @@ Applied by `build_list.py` to title + abstract; sources that fail never enter th
 
 - A source passes if any `any` term matches, OR at least one term of EVERY `all_groups` group matches, OR (sources with
   no usable abstract) a `title_only` pattern matches the title.
+- Rescue rules, for sources of the topic that never write the anchor word (catalysis titles without "cataly", often
+  with no abstract in the record): `title_any` terms matched in the title alone (catalytic reactions: "Heck",
+  "hydroformylation", "... over Pt/Al2O3"; a `^(?!.*(?:storage|alloy)).*hydrogenation` lookahead vetoes contexts) and
+  `journal_any` terms matched in the venue (catalysis journals; only for titles of four words or more, not news
+  briefs), `journal_not` vetoing venues (news digests, mixed kinetics journals). Keyword screening keeps such sources in
+  scope (score 4, note "rescued by the topic gate (...)"). Measure each rule on raw hits that fail the plain gate and
+  read samples before adding it: only rules whose matches are topic sources.
+- `"english_only": true` (in the gate) turns away every record whose title or abstract is in another language,
+  whatever its terms (on clear evidence only: never on Greek letters, formulas, element symbols, names or a translated
+  abstract under an English title; a bilingual title with an English part stays). Records already in the index leave
+  only on request: `remove_sources.py --non-english`.
 - Terms are case-insensitive phrases; a space also matches a hyphen. Prefix `re:` for a regular expression.
 - Typical design: group 1 = the subject (material/organism/system names and acronyms), group 2 = the process or
   property; put unambiguous acronyms in `any`.
