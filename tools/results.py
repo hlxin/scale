@@ -33,9 +33,9 @@ VALUE_STATUS = ("present", "not_reported", "not_measured", "not_applicable", "be
 STATED = ("present", "below_detection_limit", "below_quantification_limit")      # an entry that states something
 # what tells two results of one record apart (the interval is the producer's timing, else the record's own)
 IDENTITY = ("variable", "target", "unresolved_target", "produced_by", "phase", "stream", "basis", "definition",
-            "normalized_by")
+            "normalized_by", "relative_to")
 # the fields of an entry that name a record, which a query's field step follows (normalized_by names one as a record_ref)
-REF_FIELDS = ("target", "variable", "produced_by", "calibration", "ref_value", "normalized_by")
+REF_FIELDS = ("target", "variable", "produced_by", "calibration", "ref_value", "normalized_by", "relative_to")
 
 
 # ------------------------------------------------------------------------------------------ pointers

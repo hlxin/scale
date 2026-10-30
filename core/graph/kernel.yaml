@@ -228,6 +228,15 @@ value:
         "unidentified oxygenates" or "unaccounted"). It goes without target, so that a value whose product is unknown
         stays explicit;
         it is never read as any one species, and a comparison of species leaves it out.
+    relative_to:
+      type: ref
+      targets: ANY
+      maturity: provisional
+      description: The record a share is taken within, when its whole is that record and not everything formed or
+        converted (the product lump or species a selectivity is a share of, C5+ olefins as a share of all olefins,
+        aldehydes within the oxygenates). A context that reads it (selectivity_whole within_lump) names it, so that
+        shares within two records are two quantities. It goes with a share, never as the target (the numerator); a
+        domain says which records it names.
     id:
       type: string
       maturity: provisional
@@ -3007,9 +3016,11 @@ quantities:
       wt%:
         dimension: dimensionless
         fraction_basis: mass
+        selectivity_count: mass
       mass%:
         dimension: dimensionless
         fraction_basis: mass
+        selectivity_count: mass
       mol%:
         dimension: dimensionless
         fraction_basis: mole
@@ -3177,6 +3188,42 @@ quantities:
           terms: [nitrogen balance, N balance]
         mass:
           terms: [mass balance, total mass]
+    selectivity_count:
+      description: What a selectivity counts, carbon atoms (C-mol, carbon basis), moles of product or mass (wt%). The
+        same product share counted by carbon atoms, by moles and by mass are three quantities (a C2 and a C5 product
+        weigh differently per carbon), never compared with one another. A value that states none is compared only with
+        those that state none either.
+      read_from: [unit, basis, definition]
+      values:
+        carbon_atoms:
+          terms: [carbon basis, carbon atoms, carbon atom basis, carbon balance, C-mol, C mol, C-basis, C%, C-atom basis, C atom basis, carbon selectivity]
+        mole:
+          terms: [mole basis, molar basis, mol basis, mole percent, mole selectivity, molar selectivity, by mole]
+        mass:
+          terms: [mass basis, weight basis, weight percent, mass percent, by mass, by weight]
+      unspecified: [not_reported]
+      unstated: group
+    selectivity_whole:
+      description: What a selectivity is a share of, the whole its denominator counts. Three wholes are in use, and a
+        share of one is never compared with a share of another. converted_reactant_incl_co2 is the carbon (or amount)
+        of the reactant converted, CO2 and every other product included, so the shares of the products and of CO2
+        sum to 100. products_excl_co2 is the products formed other than CO2 (the hydrocarbons, or the hydrocarbons and
+        the oxygenates, as the source says), so that CH4 + C2-C4 + C5+ = 100 and a CO2 selectivity is not among them.
+        within_lump is a share inside one pool of products (C5+ olefins of all olefins, aldehydes of the
+        oxygenates), refined by the record of that pool (the value's relative_to); the shares of two pools are two
+        quantities. A value that states none is compared only with those that state none either; no whole is assumed.
+      read_from: [basis, definition, relative_to]
+      values:
+        converted_reactant_incl_co2:
+          terms: [of converted CO, of the converted CO, of converted CO2, of the converted CO2, of converted carbon, of the converted carbon, of the reactant converted, total carbon converted, CO2 in the denominator]
+        products_excl_co2:
+          terms: [CO2-free, CO2 free, excluding CO2, excluded CO2, CO2 excluded, without CO2, free of CO2, hydrocarbon basis, hydrocarbons basis, hydrocarbons only, among hydrocarbons, among the hydrocarbons, within the hydrocarbons]
+        within_lump:
+          terms: [within the lump, within lump, within the pool, within pool, within the sub-pool, within olefins, within the olefins, within oxygenates, within the oxygenates, in the olefins distribution, in the olefin distribution, within paraffins, within the paraffins]
+      unspecified: [not_reported, other]
+      refine:
+        within_lump: relative_to
+      unstated: group
     transport_criterion:
       description: Which criterion a transport check computed. The Weisz-Prater criterion judges diffusion in the pores,
         the Carberry number mass transfer to the particle, the Anderson criterion heat in the particle, and Mears gave
@@ -3417,9 +3464,12 @@ quantities:
     selectivity:
       description: The share of the reactant converted, or of the products formed, that is one product (its target), on
         the basis the value states (carbon, molar, mass), dimensionless. A selectivity counts what was converted, not
-        what was fed.
+        what was fed. Two selectivities of one product are comparable only if they count the same way
+        (selectivity_count) and are shares of the same whole (selectivity_whole, all the reactant converted, CO2
+        included; the products other than CO2; one pool of products, named by the value's relative_to); a value that
+        states either is compared apart from one that does not, and none is assumed.
       dimensions: [dimensionless]
-      compare_by: [species]
+      compare_by: [species, selectivity_count, selectivity_whole]
       share: true
       maturity: provisional
     production_rate:

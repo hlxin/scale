@@ -36,7 +36,7 @@ from . import results
 from .util import ScaleError
 
 BASES = ("L", "M", "T", "I", "Θ", "N")
-READ_FROM = ("unit", "basis", "definition", "target", "normalized_by", "sibling", "record", "producer")
+READ_FROM = ("unit", "basis", "definition", "target", "normalized_by", "sibling", "record", "producer", "relative_to")
 OPEN_READ = ("target", "record", "producer")      # what an open context (no list of values) is read from
 UNSTATED_CONTEXT = ("exclude", "group")  # a value that does not state a context: left out (exclude), or compared apart
 # a producer whose label has no such property: its values compared apart (apart), or read as stating none (unstated)
@@ -500,6 +500,9 @@ class Contracts:
                                                                          f"{prop}", none=True))
                 else:
                     why.append("nothing names what produced it (no produced_by, and it does not sit on an experiment)")
+            elif src == "relative_to":
+                if isinstance(v.get("relative_to"), str) and v["relative_to"].strip():
+                    st.append(Statement("relative_to", "within_lump", v["relative_to"]))   # a share within one record
             elif src == "normalized_by" and den:
                 hits = self.statements_in_text(name, den.replace("_", " "), None)
                 if len(hits) == 1:
@@ -552,6 +555,8 @@ class Contracts:
             fld = c["refine"].get(ctx.value)
             if fld:
                 ref = (sibling.get(f"refine:{fld}") or (None, None))[1]
+                if not ref and "relative_to" in c["read_from"] and fld == "relative_to":
+                    ref = v.get("relative_to")            # a share within a record: the value's own relative_to
                 if not isinstance(ref, str) or not ref:
                     ctx.missing, ctx.value = f"{ctx.value} names no {fld} (what it is relative to)", None
                     return ctx

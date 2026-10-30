@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **A selectivity says what it counts and what it is a share of (breaking, schema 0.7.8 -> 0.8.0).** Answers #82.
+  Selectivities of one product on different wholes (a share of converted CO with CO2 inside, of the hydrocarbons
+  alone, of one pool such as the olefins) or counted differently (carbon atoms, moles, mass) are no longer put in one
+  group by a scientific comparison. New contexts `selectivity_count` and `selectivity_whole`, both in the selectivity
+  kind's `compare_by`, and the provisional value field `relative_to` naming the pool; `wt%` and `mass%` state mass. A
+  value that states neither is compared only with such values (`not stated`); `mol%` is left unread, never guessed.
+  No document needs rewriting (the migration step changes nothing); as-reported comparison is unchanged. Example,
+  counterexample and competency question CQ-41 added.
+
 - **index-sources 4.1.0 and fetch-corpus 1.1.0 take the fixes made to a local paper-acquisition after the split (no
   schema change).** Requested by @diazr04, so that one copy of the skills is kept. The topic gate's `english_only`
   turns away records in another language (`_lang.py`: only on clear evidence, never on Greek letters, formulas or
