@@ -11,12 +11,17 @@
                                    ``?doi=``), or JSON ``{"doi": …}`` or ``{"url": …}``; signed in. A DOI catal-commons
                                    already holds, or an open contribution adds, is answered ``{"known": …}`` without
                                    curating (``?again=1`` curates it all the same). ``?keep=1`` (or ``keep_text``)
-                                   records the user's agreement to keep the paper (archive.py). A PDF needs
+                                   records the user's agreement to keep the source (archive.py). A PDF needs
                                    ``?attest=1``: the user states they have lawful access to it and that, as far as
-                                   they know, their licence allows mining it with an AI tool
-* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (read once, then forgotten)
-* ``GET  /kept``                   the papers kept because the signed-in user agreed (archive.py)
-* ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the paper goes when none is left
+                                   they know, their licence allows mining it with an AI tool. With an inbox
+                                   (``SCALE_WEB_INBOX``, inbox.py) the source waits there for Claude Code, which
+                                   curates it on the service's computer (runner.py)
+* ``GET  /jobs/{id}``              the job's state and log; when done, the graph (again on asking, for an hour; an inbox
+                                   job stays readable, its graph signed for its owner each time, until it is forgotten)
+* ``POST /jobs/{id}/done``         the page has the finished job's result: the service forgets it now (not an inbox job)
+* ``GET  /inbox``                  the signed-in user's sources in the inbox, newest first
+* ``GET  /kept``                   the sources kept because the signed-in user agreed (archive.py)
+* ``POST /kept/forget``            ``{"sha256": key}``: withdraw that agreement; the source goes when none is left
 * ``POST /query``                  ``{"graph": doc, "plan": plan}``: ``scale query``, no model, no sign-in
 * ``POST /search``                 ``{"graph": doc, "query": text, "k": n}``: ``scale search``, no sign-in
 * ``POST /ask``                    ``{"graph": doc, "question": text}``: the question loop; signed in
@@ -35,6 +40,7 @@ import json
 import shutil
 import sys
 import tempfile
+import threading
 import time
 import urllib.parse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -46,6 +52,7 @@ from scale.util import ScaleError, find_repo_root, load_doc, write_canonical
 
 from . import agent, auth, fetch, github
 from .config import Config
+from .inbox import Inbox
 from .jobs import Jobs
 from .usage import Usage
 
@@ -65,6 +72,8 @@ class Service:
         self.budget = auth.Budget(cfg)
         self.states = auth.Once()                     # OAuth states already used
         self.jobs = Jobs(cfg, self.budget, lambda: self.client_factory(), self.repo, run_inline=run_inline)
+        self.inbox = Inbox(cfg.inbox) if cfg.inbox else None
+        self.asking = threading.BoundedSemaphore(2)        # questions Claude Code answers here at once (SCALE_WEB_ASK)
         self.kit = ScaleToolkit(workspace=tempfile.mkdtemp(prefix="scale-web-kit-"), repo=self.repo)
         self.schema_version = pgraph.load_spec(pgraph.spec_for(self.repo, None))["version"]
         header = self.repo / cfg.commons / "parts" / "header.json"
@@ -78,7 +87,7 @@ class Service:
         if method == "GET" and path == "/health":
             return 200, {"ok": True, "scale_catal": __version__, "schema_version": self.schema_version,
                          "sign_in": bool(self.cfg.github_client_id), "keeps_texts": self.jobs.archive.on,
-                         "contact": self.cfg.contact_email or None}, {}
+                         "inbox": bool(self.inbox), "contact": self.cfg.contact_email or None}, {}
         if method == "GET" and path == "/leaderboard":
             return 200, self._leaderboard(), {}
         if method == "GET" and path == "/example":
@@ -110,11 +119,26 @@ class Service:
                 return 401, {"error": "sign in"}, {}
             sha = str(json.loads(body or b"{}").get("sha256") or "")
             return (200, {"forgotten": sha}, {}) if self.jobs.archive.forget(sha, user) else (404, {"error": "nothing kept by your agreement under that key"}, {})
+        if method == "GET" and path == "/inbox":
+            if not user:
+                return 401, {"error": "sign in"}, {}
+            if not self.inbox:
+                return 404, {"error": "this service has no inbox"}, {}
+            return 200, {"jobs": self.inbox.mine(user)}, {}
         if method == "GET" and path.startswith("/jobs/"):
             if not user:
                 return 401, {"error": "sign in"}, {}
-            view = self.jobs.view(path.removeprefix("/jobs/"), user)
-            return (200, view, {}) if view else (404, {"error": "no such job (a finished job is read once)"}, {})
+            jid = path.removeprefix("/jobs/")
+            view = self.inbox.view(jid, user) if self.inbox else None
+            if view and view.get("graph") and view.get("rights"):       # curated here: signed for its owner, as a job's
+                view["receipt"] = auth.receipt(self.cfg, user, view["graph"], view["rights"])
+            view = view or self.jobs.view(jid, user)
+            return (200, view, {}) if view else (404, {"error": "no such job (its result was collected, or it expired)"}, {})
+        if method == "POST" and path.startswith("/jobs/") and path.endswith("/done"):
+            if not user:
+                return 401, {"error": "sign in"}, {}
+            jid = path.removeprefix("/jobs/").removesuffix("/done")
+            return (200, {"forgotten": jid}, {}) if self.jobs.done(jid, user) else (404, {"error": "no finished job of yours under that id"}, {})
         if method == "POST" and path in ("/query", "/search", "/ask", "/contribute/check", "/contribute"):
             if len(body) > GRAPH_MAX:
                 return 413, {"error": "the graph is too large for the service"}, {}
@@ -195,7 +219,7 @@ class Service:
                 if query.get("attest") != "1":
                     return 400, {"error": "confirm that you have lawful access to this PDF and that, as far as you "
                                           "know, its licence allows text mining with an AI tool"}, {}
-                pdf, name = body, query.get("filename") or "paper.pdf"
+                pdf, name = body, query.get("filename") or "source.pdf"
                 doi = fetch.doi_in(query.get("doi", "")) if query.get("doi") else None
             else:
                 req = json.loads(body or b"{}")
@@ -219,32 +243,13 @@ class Service:
         if refused:
             return 429, {"error": refused}, {}
         keep = query.get("keep") == "1" or (ctype != "application/pdf" and bool(json.loads(body or b"{}").get("keep_text")))
+        if self.inbox:                                     # Claude Code curates it on this computer (runner.py)
+            jid = self.inbox.add(user, doi=doi, pdf=pdf, filename=name, again=query.get("again") == "1", keep=keep)
+            return 202, {"job": jid, "inbox": True, "position": self.inbox.position(jid)}, {}
         return 202, {"job": self.jobs.submit(user, doi=doi, pdf=pdf, filename=name, keep_text=keep)}, {}
 
     def _known(self, doi: str) -> dict | None:
-        """The commons' record of a DOI, before any model is spent on it: ``{"in_commons": [...]}`` when a source on
-        main is that DOI, ``{"proposed": {...}}`` when an open contribution adds it, else None. Read from GitHub when
-        contributions are set up, else from the service's own copy of the commons; a lookup that fails is no hit."""
-        probe = {"nodes": [{"id": "probe/source/doi", "label": "Source", "props": {"doi": doi}}]}
-        base = f"https://github.com/{self.cfg.repo}/blob/main/{self.cfg.commons}/"
-        repo, d = None, self.repo / self.cfg.commons
-        try:
-            if self.cfg.github_token:
-                d = Path(tempfile.mkdtemp(prefix="scale-web-k-"))
-                repo = github.Repo(self.cfg.repo, self.cfg.github_token, self.cfg.commons, request=self.github_request)
-                repo.fetch_folder(d)
-            hits = commons.find(probe, graphparts.read_parts(d))
-            if hits:
-                return {"in_commons": [{**h, "url": base + h["file"]} for h in hits]}
-            for pr in repo.open_contributions() if repo else []:
-                if commons.find(probe, {"sources": pr["sources"]}):
-                    return {"proposed": {"number": pr["number"], "url": pr["url"], "title": pr["title"]}}
-            return None
-        except (OSError, ValueError, KeyError, ScaleError):
-            return None
-        finally:
-            if self.cfg.github_token:
-                shutil.rmtree(d, ignore_errors=True)
+        return known(self.cfg, self.repo, doi, self.github_request)
 
     def _contribute(self, user: str, req: dict, open_pr: bool):
         """Is the graph's source in the commons (on main, or in an open contribution)? If not, what adding it changes,
@@ -339,10 +344,50 @@ class Service:
     def _ask(self, path: Path, question: str):
         if not question.strip():
             return 400, {"error": "ask a question"}, {}
+        if self.cfg.ask == "claude-code":                  # answered on this computer by Claude Code (runner.answer)
+            from . import runner
+            if not self.asking.acquire(timeout=120):
+                return 429, {"error": "the service is answering other questions; ask again in a minute"}, {}
+            try:
+                return 200, runner.answer(path, question, self.cfg, self.repo), {}
+            finally:
+                self.asking.release()
         res = agent.answer(path, question, self.client_factory(), self.cfg.model, 30,
                            min(200_000, self.budget.left()), repo=self.repo)
         self.budget.spend(res["tokens"])
         return 200, res, {}
+
+
+def known(cfg: Config, repo_path: Path, doi: str, request=github.http) -> dict | None:
+    """The commons' record of a DOI, before any model is spent on it (known_source)."""
+    return known_source(cfg, repo_path, {"nodes": [{"id": "probe/source/doi", "label": "Source", "props": {"doi": doi}}]},
+                        request)
+
+
+def known_source(cfg: Config, repo_path: Path, probe: dict, request=github.http) -> dict | None:
+    """The commons' record of the probe's one Source (its DOI, identifiers, text digest, or title and year), before any
+    model is spent on it: ``{"in_commons": [...]}`` when a source on main is that one, ``{"proposed": {...}}`` when an
+    open contribution adds it, else None. Read from GitHub when contributions are set up, else from the service's own
+    copy of the commons; a lookup that fails is no hit."""
+    base = f"https://github.com/{cfg.repo}/blob/main/{cfg.commons}/"
+    repo, d = None, repo_path / cfg.commons
+    try:
+        if cfg.github_token:
+            d = Path(tempfile.mkdtemp(prefix="scale-web-k-"))
+            repo = github.Repo(cfg.repo, cfg.github_token, cfg.commons, request=request)
+            repo.fetch_folder(d)
+        hits = commons.find(probe, graphparts.read_parts(d))
+        if hits:
+            return {"in_commons": [{**h, "url": base + h["file"]} for h in hits]}
+        for pr in repo.open_contributions() if repo else []:
+            if commons.find(probe, {"sources": pr["sources"]}):
+                return {"proposed": {"number": pr["number"], "url": pr["url"], "title": pr["title"]}}
+        return None
+    except (OSError, ValueError, KeyError, ScaleError):
+        return None
+    finally:
+        if cfg.github_token:
+            shutil.rmtree(d, ignore_errors=True)
 
 
 def make_handler(svc: Service):
@@ -401,7 +446,7 @@ def make_handler(svc: Service):
 
 
 def recurate(svc: Service, only: str | None = None, dry_run: bool = False) -> list[dict]:
-    """Curate the kept papers again under the commons' schema version: each paper whose latest curation is under
+    """Curate the kept sources again under the commons' schema version: each source whose latest curation is under
     another version (or the one named), as a job from its kept PDF (else its texts), within the service's budget. Each graph is kept in the
     archive beside its text; contributing it is a person's step (the pull request that updates the commons)."""
     version = svc.jobs.version()
@@ -419,12 +464,13 @@ def recurate(svc: Service, only: str | None = None, dry_run: bool = False) -> li
         tmp = Path(tempfile.mkdtemp(prefix="scale-web-r-"))
         try:
             kept_pdf = svc.jobs.archive.pdf(m["sha256"])
-            source = ({"pdf": kept_pdf.read_bytes(), "filename": f"{m.get('slug') or 'paper'}.pdf"} if kept_pdf else
+            source = ({"pdf": kept_pdf.read_bytes(), "filename": f"{m.get('slug') or 'source'}.pdf"} if kept_pdf else
                       {"text": svc.jobs.archive.pages(m["sha256"], tmp)})
             jid = svc.jobs.submit("scale-recurate", doi=m.get("doi"), recurating=True, **source)
             while svc.jobs.jobs.get(jid, {}).get("state") not in ("done", "failed", None):
                 time.sleep(2)
             job = svc.jobs.view(jid, "scale-recurate")
+            svc.jobs.done(jid, "scale-recurate")
         finally:
             shutil.rmtree(tmp, ignore_errors=True)
         row = {"sha256": m["sha256"], "doi": m.get("doi"), "to": version, "state": job["state"],
@@ -440,9 +486,9 @@ def main(argv: list[str] | None = None) -> None:
     p = argparse.ArgumentParser(prog="python -m scaleweb", description="The SCALE web service")
     p.add_argument("--host", default="0.0.0.0")
     p.add_argument("--port", type=int, default=8080)
-    p.add_argument("--recurate", action="store_true", help="curate the kept papers again under the commons' schema "
+    p.add_argument("--recurate", action="store_true", help="curate the kept sources again under the commons' schema "
                    "version, then exit (instead of serving)")
-    p.add_argument("--only", metavar="SHA256", help="with --recurate: only this kept paper")
+    p.add_argument("--only", metavar="SHA256", help="with --recurate: only this kept source")
     p.add_argument("--dry-run", action="store_true", help="with --recurate: list what would be curated again")
     a = p.parse_args(argv)
     svc = Service(Config.from_env())

@@ -359,7 +359,7 @@ def build_release(repo: Path, version: str, out_root: Path | None = None,
     for s in manifest.get("skills") or []:
         sp = repo / s
         files += [p.relative_to(repo).as_posix() for p in sorted(sp.rglob("*")) if p.is_file()] if sp.is_dir() else [s]
-    files = [f for f in dict.fromkeys(files) if "__pycache__" not in f and not f.endswith(".DS_Store")]
+    files = [f for f in dict.fromkeys(files) if not layout.bundle_ignored(f)]     # what the package carries, no tests
     earlier = [r for r in main_releases(repo) if release_key(r) < release_key(v)]
     previous = earlier[-1] if earlier else None
     prev_root = release_root(repo, previous) if previous else None

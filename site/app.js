@@ -1,4 +1,4 @@
-// The page of the SCALE web service: send a publication, follow the job, show the graph, ask it questions.
+// The page of the SCALE web service: send a source, follow the job, show the graph, ask it questions.
 // Everything the page computes is display; validation, queries and search run in the service (scale-catal itself).
 "use strict";
 
@@ -28,7 +28,7 @@ async function call(method, path, body, headers = {}) {
   const r = await fetch(SERVICE + path, { method, headers: h, body });
   const data = await r.json().catch(() => ({}));
   if (r.status === 401) { token = null; store.set("scale-token", null); account(); }
-  if (!r.ok) throw new Error(data.error || `the service answered ${r.status}`);
+  if (!r.ok) throw Object.assign(new Error(data.error || `the service answered ${r.status}`), { status: r.status });
   return data;
 }
 
@@ -104,11 +104,24 @@ $("start").onclick = async () => {
   }
 };
 
+// A job under way is kept in this tab (its id), so that following it survives a reload or a sign-in; a reply lost on
+// the way is asked for again, and the service forgets the result only when the page says it has it.
 async function follow(id) {
   const job = $("job");
-  for (;;) {
+  job.classList.remove("hidden");
+  store.set("scale-job", id);
+  for (let misses = 0; ;) {
     let j;
-    try { j = await call("GET", `/jobs/${id}`); } catch (e) { job.innerHTML = `<span class="err">${esc(e.message)}</span>`; break; }
+    try { j = await call("GET", `/jobs/${id}`); misses = 0; } catch (e) {
+      if (e.status === 404) store.set("scale-job", null);
+      if (e.status === 404 || e.status === 401 || ++misses > 10) {
+        job.innerHTML = `<span class="err">${esc(e.message)}${e.status === 401 ? "; sign in again to see the job" : ""}</span>`;
+        break;
+      }
+      job.innerHTML = `<div class="small muted">The service did not answer (${esc(e.message)}); asking again…</div>`;
+      await new Promise((r) => setTimeout(r, Math.min(3000 * misses, 30000)));
+      continue;
+    }
     const log = (j.log || []).slice(-12).map((l) => `<li>${esc(l.t)} s · ${esc(l.msg)}</li>`).join("");
     const src = j.source ? `<div class="small muted">${esc(j.source.pages)} pages · rights: ${esc(j.source.rights_class)} · schema ${esc(j.source.schema_version)}</div>` : "";
     job.innerHTML = `<div class="state">${esc(j.state)}</div>${src}<ol>${log}</ol>`;
@@ -116,16 +129,22 @@ async function follow(id) {
       job.innerHTML += `<div class="small">${esc(j.summary || "")}</div>` +
         (j.withheld ? `<div class="small muted">${j.withheld} quotes withheld for the source's rights (sha256 kept).</div>` : "");
       show(j.graph, j.receipt);
+      collected(id);
       break;
     }
     if (j.state === "failed") {
       job.innerHTML += `<div class="err">${esc(j.error)}</div>`;
       if (j.check && j.check.errors) job.innerHTML += `<details><summary>check errors</summary><pre>${esc(JSON.stringify(j.check.errors, null, 1))}</pre></details>`;
+      collected(id);
       break;
     }
     await new Promise((r) => setTimeout(r, 3000));
   }
   $("start").disabled = false;
+}
+function collected(id) {
+  store.set("scale-job", null);
+  call("POST", `/jobs/${id}/done`).catch(() => { /* the service forgets it within the hour anyway */ });
 }
 
 $("graph-file").onchange = async (e) => {
@@ -168,6 +187,10 @@ function show(doc, signed = null) {
   });
   cy.on("tap", "node, edge", (ev) => details(ev.target.id()));
   $("details").innerHTML = "Click a record to see its values and evidence.";
+  // kept in this tab with its receipt, so that a sign-in (which leaves the page) or a reload shows it again
+  store.set("scale-own", null);
+  store.set("scale-own", JSON.stringify({ doc, receipt }));
+  if (store.get("scale-own") === null) $("details").textContent = "This graph is too large to keep in this tab: download it before you sign in or reload.";
 }
 
 function valueText(v) {
@@ -247,6 +270,7 @@ $("contribute").onclick = async () => {
         const o = await call("POST", "/contribute", { graph, receipt });
         box.innerHTML = `Opened <a href="${esc(o.pull_request.url)}" target="_blank" rel="noopener">pull request #${esc(o.pull_request.number)}</a>. Thank you.`;
         receipt = null;
+        store.set("scale-own", JSON.stringify({ doc: graph, receipt }));
         $("contribute").classList.add("hidden");
       } catch (e) {
         box.innerHTML += `<div class="err">${esc(e.message)}</div>`;
@@ -297,3 +321,5 @@ $("search-btn").onclick = async () => {
 
 readFragment();
 account();
+try { const kept = JSON.parse(store.get("scale-own") || "null"); if (kept) show(kept.doc, kept.receipt); } catch { /* none kept */ }
+if (store.get("scale-job") && token && SERVICE) follow(store.get("scale-job"));

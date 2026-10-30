@@ -40,8 +40,15 @@ class Config:
     commons: str = "graphs/catal-commons"
     reviewers: list[str] = field(default_factory=list)      # asked to review each contribution
     contributions_per_user_per_day: int = 5
-    archive: str = ""                        # where kept papers live (scaleweb/archive.py); empty: none kept
+    archive: str = ""                        # where kept sources live (scaleweb/archive.py); empty: none kept
     usage: str = ""                          # the use counts of the leaderboard (scaleweb/usage.py); empty: in memory
+    inbox: str = ""                          # the inbox (scaleweb/inbox.py): Claude Code curates there; empty: the model here
+    inbox_login: str = ""                    # who a PDF dropped into the inbox by hand is credited to
+    claude: str = "claude"                   # the Claude Code command the inbox runner starts
+    inbox_turns: int = 200                   # Claude Code's turns for one source
+    inbox_minutes: int = 90                  # and its time
+    inbox_workers: int = 1                   # sources Claude Code curates at once in the inbox
+    ask: str = ""                            # "claude-code": questions answered here by Claude Code (runner.answer)
 
     @classmethod
     def from_env(cls) -> Config:
@@ -72,4 +79,11 @@ class Config:
             contributions_per_user_per_day=_int("SCALE_WEB_CONTRIBUTIONS_PER_USER", 5),
             archive=os.environ.get("SCALE_WEB_ARCHIVE", ""),
             usage=os.environ.get("SCALE_WEB_USAGE", ""),
+            inbox=os.environ.get("SCALE_WEB_INBOX", ""),
+            inbox_login=os.environ.get("SCALE_WEB_INBOX_LOGIN", "").lower(),
+            claude=os.environ.get("SCALE_WEB_CLAUDE", "claude"),
+            inbox_turns=_int("SCALE_WEB_INBOX_TURNS", 200),
+            inbox_minutes=_int("SCALE_WEB_INBOX_MINUTES", 90),
+            inbox_workers=_int("SCALE_WEB_INBOX_WORKERS", 1),
+            ask=os.environ.get("SCALE_WEB_ASK", "").strip().lower(),
         )

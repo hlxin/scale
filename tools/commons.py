@@ -1,4 +1,4 @@
-"""One publication's graph into a graph kept as parts (catal-commons): is it there already, and the files that add it.
+"""One source's graph into a graph kept as parts (catal-commons): is it there already, and the files that add it.
 
 A graph of one source (``scale source start | check | finish``, or any scale-catal document with one Source record)
 is contributed to a parts folder (docs/graph-parts.md) in four steps, all deterministic:
@@ -205,14 +205,14 @@ SCORING = {
     "triples": "evidence-backed statements: each link between two records and each value a record or link states, "
                "when it cites evidence, and only what the merge adds: a repeat of what catal-commons holds (a shared "
                "record, a value or a link it has already) is discarded on merge and never counted; evidence, notes, "
-               "provenance, values not reported and a paper's bibliographic details do not count",
+               "provenance, values not reported and a source's bibliographic details do not count",
     "use_weight": "1 + log2(1 + reach): 1 when no one has used it yet, 2 at one use, 3 at three, 4 at seven, so that "
                   "use counts but never swamps the knowledge added",
     "reach": "the distinct (person, day) pairs in which a signed-in person other than its contributor asked a "
              "question, ran a query or searched and the answer used one of its records; counted by the web service, "
              "which keeps no question and only a keyed digest of the login",
     "completeness": "shown beside the score, never mixed into it: the checklist's should items and evidence patterns "
-                    "filled, of those the paper's records call for, weighted by triples",
+                    "filled, of those the source's records call for, weighted by triples",
     "levels": "by score: Contributor (a merged contribution), Curator (1,000), Senior curator (10,000), Fellow "
               "(100,000)",
     "recent": "the last 90 days: contributions merged in that time",

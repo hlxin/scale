@@ -1,0 +1,410 @@
+---
+name: curate-corpus
+version: 0.3.0
+description: Curate a corpus into scale-catal documents (node-link JSON) under the schema version they pin — one publication, one data file, or many sources frozen together — preserving source locations, reported values, units, explicit missingness and evidential status, with verbatim evidence on every statement; many sources run one subagent per source with a second reading and resumable state; record gaps instead of changing the schema.
+scale_release: ">v0.2.0"
+inputs:
+  - The corpus - one publication (a DOI, a PDF, a text), one data file (a CSV, an instrument or lab-notebook export) with its column dictionary, or a frozen corpus manifest whose included sources have their PDF (and SI) on disk (index-sources' freeze_corpus.py freezes one; fetch-corpus fetches its files)
+  - Where licensing permits, each source's text for verbatim checks
+  - The checklist the documents follow (catalysis - the catalysis schema and its one checklist) and the schema version to pin
+  - For project data, who owns it and who may see it (the project and the access level its owners set)
+  - For many sources - which to curate, who curates (a stewardship registry id) for which project, and which model curates and who reads each document a second time, asked before the run
+allowed-tools:
+  - "scale source start --doi <doi> | --pdf <file> | --text <file> | check <dir> [--derive-links] | finish <dir> [--public] [--bundle]"   # one publication: its working folder, the check, what can be shared
+  - "scale graph describe [labels] --domain <domain>"   # the labels and edges you may use, with the checklist and its cases
+  - "scale graph validate <doc> --source-text <id>=<file>"   # quotes (or a data file's rows) found verbatim
+  - "scale graph index | search"            # vectors and term statistics for the evidence quotes
+  - "scale graph filter <doc> --as <id> | --public"   # what each audience may see
+  - "scale evidence report | cap | rehydrate | access"   # the copyright cap; withheld quotes; access before a commit
+  - "scale call template | describe | validate | skills"   # the same through the agent tools
+  - "scale gap list | issue (dry run)"
+  - "scale corpus check <manifest>"           # every candidate source has a status and the counts add up
+  - "scale pages render | region | agree | check | pending | merge-second | import"   # scanned pages: page images checked against OCR, second readings
+  - "scale graph contribute <graph> --to <folder>"   # a dry run; --write only into a run's local graph, or after a person's review
+  - "scale graph build <folder>"             # a run's local graph, to query
+  - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)   # many sources - the run's bookkeeping (references/runs.md)
+  - read access to the sources' texts, PDFs, SI and data files
+  - write access to the working directory (or the run folder) only
+outputs:
+  - One scale-catal document per source (graph header, nodes, links) that pins the schema version and follows its checklist; for a data file, a Dataset for the file and records citing its rows
+  - The validation report (errors, warnings, checklist conformance)
+  - Gaps classified as missing_concept, extraction_error, absent_source_information, ambiguous_source_information
+  - The frozen corpus manifest (every candidate source with its status, and a reason when it is left out)
+  - For many sources - one working folder per source, the curator's report and the second reading of each, the run's settled states (state.jsonl), and each source's result handed back to the index
+validation:
+  - "`scale graph validate <doc> --source-text <source-id>=<file>` (or `scale source check <dir>`) reports zero errors"
+  - Every node and link that states something carries evidence (source, locator, kind, quote); a data file's records cite their rows (kind dataset_row)
+  - Every quote is found verbatim in the source text (whitespace, case and dash variants ignored)
+  - Every reported value appears in at least one cited quote (the curator checks this; the tools compare values with the text only for readings of page images, `scale pages check`)
+  - A data file's Dataset carries the sha256 of the file that was read, and every empty or flagged cell has a typed absence
+  - "`scale corpus check <manifest>` reports ok: every candidate source accounted for once, the counts adding up"
+  - "`scale evidence report <doc>` lists no violation and no source without a rights entry (rights.yaml)"
+  - For many sources - every passed document had a second reading after its last change, unless the run was prepared with --reviewer skip (which the run and the index record), and `curate_run.py status` accounts for every source picked
+human-review:
+  - Always before a document is treated as reviewed, shared beyond its owners or its run folder, or contributed
+  - Whenever entity resolution merges two records, or a sample or batch identity would be asserted
+  - Whenever evidence is second-hand (a review reporting another group's result)
+  - Whenever a gap of kind missing_concept is raised
+  - For a data file, whenever a column's meaning, unit or basis is inferred rather than stated in the column dictionary
+  - For many sources, before the run starts (the corpus, how many sources, the cost), after the pilot of 5 sources, and whenever the second reading rejects a source or a source fails after three fixes
+---
+
+# Curate a corpus into scale-catal documents
+
+To curate a source is to read it and record what it reports as a scale-catal document: its records and links in the
+schema, every value as printed, every statement with its verbatim evidence, every unknown as a typed absence, and what
+the schema cannot express as a gap. A corpus is what you curate: one publication (an article, a patent, a report, a
+thesis), one data file, or many sources frozen together.
+
+| You have | Follow |
+|---|---|
+| one publication (a DOI, a PDF, a text) | **Procedure: one source**, and the sections after it |
+| a data table or a lab file | **A data file**, with the rules of the procedure |
+| many sources (a frozen corpus) | **Many sources**: a run applies the procedure to each source |
+
+The schema constrains what a completed record means; the source determines which parts can
+actually be populated. The extraction model is not the authority that defines the target concepts.
+Worked examples of what it produces are the synthetic documents in `domain/examples/scale-catal/`
+(one per driving force and combination). Short recording recipes for
+situations the schema covers less obviously (set and nominal values, conflicts, kinetics,
+thermochemistry, computations, reactor and bed keys, ratios, commercial catalysts, balances and
+impurities, driving forces outside the list, characterization results, sites in a catalyst state, assignments,
+operando observations and fits, preparations (impregnation, coprecipitation, activation, storage and transfer,
+and syntheses by any method),
+characterizations (XAS, electron microscopy, chemisorption, physisorption, sizes, composition), digitizing a figure)
+are in `references/recipes.md` beside this file (through the agent tools:
+`scale call skills '{"name": "curate-corpus", "reference": "references/recipes.md"}'`).
+
+## Procedure: one source
+
+1. **Freeze the source set** before curating: which sources, by what rule (e.g. published before a
+   cutoff date; a patent by its grant date, not its priority date), with the texts used. Record it
+   (`sources.json` in the methanol example) so the corpus can be audited: every candidate source gets
+   a `status` (included, or the reason it is left out: not retrieved, off scope, after the cutoff;
+   a bare `excluded` needs a `status_reason`), and the `counts` add up to the candidates. Check it
+   with `scale corpus check <manifest>`. A declared corpus is not a database search: there are no
+   PRISMA identities (identified, screened) to report, only every candidate accounted for once.
+2. **Get the text.** Quotes are checked against page texts: the PDF's text layer, or OCR where it
+   has none (`scale.sourcetext`; each page records which). Quote OCR text as it is. For a scanned page
+   whose values the text loses, read the page image too and let OCR check it (`scale pages`: the
+   reading's region and transcription on the evidence, the tool's agreement, an independent second
+   reading where OCR does not confirm it; docs/curation.md, "Reading scanned pages: two readers").
+3. **Read the schema, not your memory of it:** `scale graph describe <Label> --domain catalysis`
+   (the schema is the catalysis graph schema manifest, `domain/graph/scale-catal.yaml`: the
+   science kernel plus the catalysis file (`catalysis.yaml`) with its one checklist). What a catalytic test must
+   and should report depends on the driving forces it lists (`driving_forces`: the checklist's `when`
+   cases), so record the forces the source describes; never add a force to satisfy a checklist.
+4. **Start from a template:** for one publication, `scale source start --doi <doi>` (or `--pdf <file>`, or both)
+   writes a working folder: the graph to fill, already pinned to the schema with its Source, steward and project,
+   the page texts (`work/texts/`), the source's rights and a `BRIEF.md`; check it with `scale source check <dir>
+   --derive-links` and finish with `scale source finish <dir>` (`--public` for a copy to share, `--bundle` for a
+   kg-bundle). Otherwise `scale call template '{"domain": "catalysis"}'` returns a minimal valid
+   document. The header pins `schema_version`, names a `graph_id` and a `title` that states the scope
+   as a short name, at most 40 characters, since a platform shows it as the graph's name (e.g. "Nitrate
+   to Ammonia on Cu"); the scope's details go in `description` (e.g. "SI and Source Data not examined"), sets `data_status` (`research_data` for
+   sources; `synthetic_example` only for invented examples), follows the checklist
+   (`follows_domains: ["catalysis"]`) and, for research data, gives the stewardship (`contributed_by`,
+   `project`, `access`).
+5. **Records.** Nodes `{id, label, props}`, links `{id, source, target, type, props}`; ids are
+   CURIE-like (`prefix:path`) and unique across nodes and links. Roles are on links
+   (`HAS_COMPONENT {role: support}`), not labels. A run is a CatalyticTest with its conditions and
+   results as value objects in the printed unit, linked to the catalyst sample, feed, reactor and
+   reaction. A catalyst (the formulation) is not a catalyst sample (a physical specimen); never
+   infer batch or replicate identity. Interpretations are Claims, proposals Hypotheses; never write
+   an interpretation as a property of a material.
+6. **Values** are `{status, value, unit, …}` in the unit the source printed; keep the printed text in
+   `as_reported` (or `note`) when it differs ("~", "> 85", "0.05 m"). The schema performs no unit
+   conversion. A number printed without a unit keeps `unit: "not stated"` with its printed text in
+   `as_reported`, and the note says the source states no unit (until the units change gives values
+   a unit status). `not stated` is no unit: a query leaves such values out as `unit_unstated`, `scale
+   graph stats` counts them under `(no unit)`, and no plan filters in it. Record uncertainty only as the source states it (below, **Uncertainty**).
+   A bound property holds one kind of quantity (`scale graph describe` prints its contract; scale-catal 0.3.0 on): its
+   unit must be of that kind's dimensions (a temperature is never in kg), and `scale graph validate` rejects another. A
+   component's concentration (mol/L) is `HAS_COMPONENT.concentration`, never a `fraction`; an absolute amount is `amount`.
+7. **Evidence on every stating record and every link:** `{source, locator, kind, quote}` with a
+   short verbatim quote, within the source's rights (step 8). Derive the REPORTED_IN
+   links from the evidence. `scale graph index` then gives each quote a vector (deterministic
+   `scale-hash-v1` by default) and term statistics, and each quote records the source passage it
+   was found in (`evidence.passage`), so search later finds records by meaning.
+8. **Rights and the copyright cap.** Record each source's rights in the folder's `rights.yaml`:
+   `sources: {<source id>: {class, licence, basis, text_chars}}` with `class` one of `public_domain`, `open`,
+   `restricted`, `in_copyright` or `synthetic`, `licence` an SPDX id (e.g. `CC-BY-4.0`) or a text, `basis` why
+   (e.g. "US patent", "published under CC BY 4.0 (publisher page)"), and `text_chars` the length of its text when
+   known. A source you cannot place is `in_copyright`. For `restricted` and `in_copyright` sources each quote,
+   transcription and second reading is at most **300 characters**, and one source's distinct quoted characters
+   are at most **4,000** and at most **10 %** of `text_chars`; public-domain, open and synthetic sources have
+   no cap (still only text found verbatim). Claim statements, names and notes are your own words: never copy an
+   in-copyright source beyond a short phrase (this is not machine-checked). Check with
+   `scale evidence report <doc>`; `scale evidence cap <doc> -o <out>` keeps the texts that fit (evidence of
+   quantitative values first, then the shorter) and **withholds** the rest: the item keeps its source,
+   locator, kind (and passage, region), the text is removed and `note` records
+   `quote withheld: sha256:<hex> chars:<n>` (or `transcription withheld: …`), the digest and length under the
+   verbatim checker's normalization. Anyone holding the source restores them with
+   `scale evidence rehydrate <doc> --texts <dir> -o <out>`; a reading of a page image is not in the text
+   layer and cannot be restored that way. `scale check` runs the report on every committed document that is
+   not a synthetic example (`research_data` or `mixed`) and requires every committed document to be public
+   (project data not cleared for publication stays out of the repository).
+9. **Missingness.** An unknown value is `{status: not_reported, missing_reason: …}`:
+   `not_stated_in_source` when the source is silent, `not_curated` when you did not look,
+   `ambiguous_in_source` when the source conflicts (keep every variant in `note` and the passages in
+   `evidence`). `not_measured` and `not_applicable` are statuses of their own.
+   `below_detection_limit` needs the limit and the unit.
+10. **Never extend the schema during curation.** Context the schema cannot express goes in the
+   record's `unmodeled` list; it is raised as a gap (`missing_concept`).
+11. **Validate** with the source text: `scale graph validate <doc> --source-text <source-id>=<file>`
+    (or `scale call validate`); zero errors before the record counts. A checklist item that the
+    source does not report makes the record non-conformant, not invalid: declare it missing with its
+    reason.
+12. **Route gaps** (`scale gap issue <gap.json>`, a dry run): only `missing_concept` goes to schema
+    evolution (the `evolve-schema` skill). A gap you write by hand states its `access` (`{level, note}`):
+    one with none reads as institution, failing closed, and `--submit` files only a gap whose
+    `access.level` is `public`, so give that only when its record ids, fields and question may all be
+    public.
+
+## Reading runs, tables and figures
+
+- **Pair conditions and results from the same run.** A condition stated once (in Methods, a caption,
+  "unless noted") goes on every run it covers, with its own evidence item for that locator, listed in
+  the value's `evidence_ids`. When the source does not make the pairing clear, do not pair: the value
+  is `not_reported` with `missing_reason: ambiguous_in_source`.
+- **Tie each value to its evidence when a record cites several sources.** Give every value of such a
+  record its `evidence_ids`, the evidence items that state it. Only they tie a value to its source.
+  When `scale graph filter` or an export leaves out a source the audience may not see, a value whose
+  `evidence_ids` name evidence that remains stays, cited to it. A value whose ids name only the
+  withheld source's items is withheld in its place, and so is a value without `evidence_ids` on a
+  record that lost evidence (fail closed). Give them so that values stated by a source the audience
+  may see are kept.
+- **Read tables cell by cell.** One cell is one value; the locator gives the table, row and column
+  ("p. 4, Table 2, row 3, column 'CO conv.'"); the unit comes from the column header; read the
+  footnotes; a number in parentheses after a value is its uncertainty when a footnote or the methods
+  say so (`1.234(5)` is ± 0.005 in the last digits), and otherwise stays in `as_reported`.
+- **Take only the source's own results.** A result the source reports from another work (a comparison
+  table, a review) is second-hand: if you record it, give its evidence `evidence_type: ECO:0000033`
+  and name the cited work in the locator or note; the source's own work is ECO:0000006 (experimental)
+  or ECO:0007672 (computational). When the cited work is in the corpus, curate the value from it
+  instead, and never record a cited result as a run of this source.
+- **One value, several printed forms.** When text, a table and a figure give the same value, the most
+  precise explicit form carries it and the others stay as evidence; forms that disagree are
+  `ambiguous_in_source` with every variant in `note`.
+- **Read figures against their axes.** Calibrate on at least two ticks per axis and say whether the
+  axis is linear or logarithmic. A value read off a plot is `qualifier: approximate` with `uncertainty`
+  (`uncertainty_kind: standard_uncertainty`, `uncertainty_evaluation: type_b`: from the reading
+  resolution, a half-width a giving a/√3, or the spread of two readings, whichever is larger); put the
+  axis scale and the ticks used in the evidence `note`, and keep the second reading. A tool's
+  digitization is a computational Experiment (`USES_SOFTWARE`, the value's `produced_by`). Never
+  record a value read off a plot without an uncertainty (`references/recipes.md`, "Digitizing a
+  figure").
+
+## Uncertainty
+
+| the source prints | record |
+|---|---|
+| ± of unstated meaning | `uncertainty`, `uncertainty_kind: plus_minus_unspecified` |
+| a standard deviation, a standard error | `standard_deviation` or `standard_error`; `replicates` when n is stated |
+| a confidence interval | `interval_lower`/`interval_upper` (or a symmetric `uncertainty`), `confidence_interval`, `confidence_level` |
+| a coverage interval (Monte Carlo, bootstrap, Bayesian; 5–95 %) | `confidence_interval` with its bounds and `confidence_level` (0.9 for 5–95 %); there is no percentile kind |
+| an expanded uncertainty | `expanded_uncertainty` with `coverage_factor` or `confidence_level` |
+| a relative uncertainty ("± 5 %" of the value, RSD) | `as_reported` and `note` only, until the schema has a relative form (planned: domain/ROADMAP.md); never convert it to an absolute one |
+| an interquartile range | Q1 and Q3 in `note`, until the schema has the kind (planned: domain/ROADMAP.md); never as a confidence interval |
+
+Never record `± 0`: keep the printed text in `as_reported` and leave `uncertainty` out.
+
+## Records that need care
+
+- **Statement kind.** An interpretation is a Claim (`CONCLUDES`, `ABOUT`) and a proposal a Hypothesis
+  with `status: hypothesized` links. Once the pinned schema declares `statement_kind` on links
+  (`scale graph describe`; planned: domain/ROADMAP.md), set it on interpretive links (HAS_SITE, INHIBITED_BY,
+  IDENTIFIED_AS, and CATALYZES when the source infers it) and mark links taken as given as
+  `assumption`; never before the schema has it.
+- **Comparison context.** Record the context a comparison needs where the source states it, and never assume it: a
+  potential's scale (`reference_scale`, or the unit `V vs RHE`), a current density's normalization
+  (`current_normalization`, or `basis`), a pressure's gauge or absolute convention (`barg`, `basis: gauge`), the
+  conditions a gas volume is counted at (`sccm`, `basis: STP`), the product of a selectivity or efficiency (`target`).
+  A value whose statements disagree with its record's is reported. A value you convert (a potential to RHE) is
+  `origin: derived` with `produced_by` the Analysis that converts it and the printed number in `as_reported`. Name the
+  denominator a normalized value is divided by, when the source identifies it, with `normalized_by` (`{record, path}`).
+- **Product measurements** (scale-catal 0.4.0 on). A result the source identifies by its product, assay, phase or
+  interval goes in the test's `result_values`: one value object per result with an `id`, its `variable` (a Variable
+  whose `quantity_kind` says what it is: `product_yield`, `selectivity`, `conversion`, `faradaic_efficiency`, …; a
+  yield is never a selectivity), the `evidence_ids` of the item that states it, its product in `target` (a
+  ChemicalSpecies), and where the source says so its assay in `produced_by` (a Characterization, with its time on
+  stream in `conditions` and its standards as `HAS_INPUT` role `reference_standard`), `calibration`, `phase`, `stream`
+  and `basis`. One product by two assays, at two times or in two phases is two results. A product the source does not
+  identify is an `unresolved_target` in its words; one below the detection limit is `below_detection_limit` with the
+  limit; a carbon or charge balance is a `balance` result `produced_by` an Analysis (`analysis_kind: balance`), kept as
+  reported, never computed or capped. A reference names a result by its id (`/result_values/<id>`), never by position.
+- **Driving forces and readings** (scale-catal 0.5.0 on). List every driving force of a test; one that lists none has
+  unknown applicability and is never complete. Record what the source reads a test as showing in `interpretations`
+  (`intrinsic_kinetics`, `system_performance`, `photothermal_effect`, `nonthermal_light_effect`,
+  `plasma_catalyst_synergy`, `performance_stability`, `material_stability`), never your own reading. Then link the
+  evidence the source gives, so the checklist finds it:
+  - a transport check: an Analysis (`transport_check`) that `HAS_INPUT` the test, with `evaluation_basis` asserted,
+    numerical or experimental;
+  - a dark control: `DARK_CONTROL_FOR`, with `differs_in`, `temperature_matched_at` and `temperature_matched_over`;
+    or an Analysis with `analysis_kind: thermal_contribution` instead (0.7.4 on; earlier versions, a
+    `ThermalContributionAnalysis`);
+  - plasma synergy: a plasma-alone control and a catalyst-alone control, each `CONTROL_FOR` the test; the plasma
+    power (`discharge_power`) apart from what the supply draws (`power_supply_input`);
+  - stability: a `TimeSeries` for performance; for the material, a `CatalystState` `REACHED_BY` the test and
+    `DETERMINED_BY` a characterization;
+  - dynamic operation: an `Operation` with `time_pattern`, `varied_quantities` and `segments`.
+
+  docs/curation.md has the details. Never add a criterion value, a conversion level or a control the source does not
+  report.
+- **Computed energies** (scale-catal 0.7.0 on). Record each as a value of its kind (`reaction_energy` for an
+  adsorption or reaction energy, `reaction_free_energy`, `activation_energy` for an elementary step's barrier,
+  `apparent_activation_energy` for the fit of an overall rate, …), never a bare number in eV. An adsorption or reaction
+  energy names the Reaction it is the energy change of (its `target`), whose participants and coefficients are the
+  reference states. When the source does not say what it is relative to, write its words in `unresolved_target`. State
+  the computation's `level_of_theory` and `charge_treatment` (constant charge or constant potential) as the source
+  gives them, `not_reported` when it does not, and its dispersion, +U, spin, solvation and settings. Keep files in
+  checksummed Datasets. For a machine-learned prediction, name the model, its checkpoint and the data it was fitted to.
+  Never flip a sign, fill in a method or read a method text into these fields; the recipes (Computational details)
+  say where each goes. From scale-catal 0.7.5, each method a calculation applies (its functional, its dispersion
+  correction) is a Method record it `USES_METHOD`, a benchmark of a method `EVALUATES` it, and a failed calculation
+  says what stopped it (`failure_kind`, `status_reason`) when the source reports it.
+- **Syntheses by any method** (scale-catal 0.7.6 on). Record how each catalyst, support, precursor solid or colloid
+  was made as the source tells it, whatever the method: a Preparation with the source's name for the method
+  (`method`) and the families it belongs to (`preparation_methods`), what the source says it is designed to control
+  (`design_aims`) with its strategy in the source's words (`strategy`), and its steps in order, each with the function
+  every input serves (`HAS_INPUT.synthesis_function`: reducing agent, capping agent, structure-directing agent,
+  linker, fuel, co-reactant, …), what drives it (`energy_input`) and how often it is repeated (`repetitions`). A stage
+  made by a method of its own is a Preparation `PART_OF` the whole. The structure obtained (shape, architecture,
+  facets) is a CatalystState of what was made, `REACHED_BY` the preparation and `DETERMINED_BY` the characterization
+  that shows it; that the aim was reached, or how the structure formed, is the authors' Claim. Never infer a function,
+  an aim or a shape the source does not state; the recipes (Syntheses by any method) say where each goes.
+- **Agentic campaigns and their models** (scale-catal 0.7.2 on). A campaign in which an agent chooses the next
+  experiments is a Design of kind `adaptive`: record, as the source states them, its `autonomy_level` (TRACE-AI's
+  A0-A5; `not_reported` when the source names none, never read off the workflow), `human_oversight`, `interventions`,
+  `agent_policy`, `objectives`, safety bounds and measures, the stopping criterion and why it stopped, and what it did
+  with failed or excluded runs. Each run is `PART_OF_DESIGN` with its `iteration` and `PROPOSED_BY` the agent (a
+  Software of kind `agent`, with its version), with the `human_decision`; a rejected proposal is a record too. A
+  machine-learned model states its architecture, hyperparameters, training objective and uncertainty method; each
+  validation its `split_strategy`. `scale trace-ai <doc>` shows what TRACE-AI asks that the records do not hold
+  (docs/trace-ai.md).
+- **Say how you curated.** An agent names itself in the graph's stewardship (`curated_by`: a Software of kind `agent`,
+  with its version) and states the `autonomy_level` of the curation: A2 when a person approves each record, A3 when
+  people check a sample and the flagged records (governance/review-policy.yaml), A4 when nobody checks them. A person's
+  check is written into `graph.checks` after it was made, with what it found, never before (`scale review sample`
+  returns what to fill in).
+- **Keys and qualifiers.** Use one key per quantity and put what the value is about in its fields:
+  the species or product in `target`, the basis in `basis`, the measurand in `variable` (a Variable)
+  and how it was defined or measured in `definition`. When a source gives several values of one
+  quantity, each map key may carry a short suffix (`crystallite_size_cu`), but the `target` still
+  says which. Each operating point is its own CatalyticTest, `PART_OF` the run; repeats are linked by
+  `REPLICATES`. A product the source does not report is `not_reported`, never 0.
+- **Entity resolution.** Never merge catalysts, samples or tests across sources. Share a species only
+  when its identity is unambiguous (the formula fixes it, or the InChIKey or InChI matches); a
+  different polymorph or phase is a different Material. Uncertain matches stay separate records.
+  When the schema has `former_ids` (planned: domain/ROADMAP.md), the surviving record of a merge lists the
+  retired ids there; until then the merge map is kept beside the document (the kg-bundle export's
+  `--replaced`).
+- **Rights follow the copy read.** Read the licence from the copy you read (its first page, the
+  publisher's article page), never from aggregator metadata or open-access colour, and say where in
+  `rights.yaml` `basis`. Rights follow the text version read (`text_version`). Supporting information
+  belongs to its source's Source.
+- **Reinstatement.** A notice that reverses a retraction or an expression of concern is a Source of
+  its own with an `UPDATES` link once the schema has `update_type: reinstatement` (planned: domain/ROADMAP.md);
+  until then, record it in the retracted source's `unmodeled` list (with the notice's date and
+  locator) and never delete the retraction.
+- **Personal data.** A graph of project data names people who are not authors of a source by opaque
+  ids only (`ex:<project>/person/p01`), never by name.
+
+## Retractions, corrections and other notices
+
+When you know of a notice about a source (a retraction, a withdrawal, an expression of concern, a
+correction), record it as a Source of its own and link it, citing the notice as evidence: a
+retraction is `RETRACTS` (`reason`, `retracted_on`, `scope` and, for a partial one, `scope_locators`),
+any other notice an `UPDATES` link (`update_type`,
+`updated_on`, `reason`; evidence required). A partial retraction can also be a Dataset that
+`INCLUDES` the affected records, which the notice `RETRACTS`. The publication status is derived from
+these links; never type it, and set `claim_status: retracted` only with the notice recorded. Never
+delete or rewrite the records of a retracted source: the validator flags them and queries leave them
+out unless asked. Record `status_check` (`checked_on`, `checked_via`, `result`) only when
+someone actually checked for notices; no tool checks registries yet. Also say which text
+version was read (`text_version`, with `text_sha256`, `retrieved_from`, `retrieved_on` where useful) and
+link versions, translations and duplicates of one work with `SAME_WORK_AS` (docs/curation.md).
+
+A document pinned to an earlier schema version stays valid under that version; `scale graph migrate`
+moves it to the current one when asked.
+
+## A data file
+
+A data file is a source like a source, with two differences: its rows are the evidence, and its owners,
+not a publisher, decide who may see it. The schema defines what a completed record means; the file
+and its column dictionary determine which parts can be populated.
+
+1. **Describe the file as a Dataset.** `data_kind` (`table`, `raw`, `processed`, `time_series`, …),
+   `availability`, `version`, `uri` (where it lives), `sha256` (of the exact file read), `media_type`,
+   `data_schema` (the column dictionary: each column, its meaning, unit and how a missing value is
+   written; or where that dictionary is and its digest) and `licence`. A published dataset may also be
+   reported in a Source (its data source): give the Dataset an evidence item citing that Source (`source`,
+   a `locator` such as its data availability statement, a short `quote`), and derive its `REPORTED_IN`
+   link from that evidence, as for any other record; a `REPORTED_IN` link that no evidence item backs
+   is a validation error.
+2. **Set the stewardship.** The graph header's `stewardship` names who contributed it
+   (`contributed_by`), the `project` and the `access` its owners set (`project`, `institution`,
+   `consortium`, `embargoed` with its date, or `public` only when they cleared it). Project data stays
+   in the project's own data repository, never in the public one. Do not
+   fill `curated_by`: SCALE records no curator attribution.
+3. **Map the columns** to labels and properties with `scale graph describe <Label> --domain
+   catalysis`: a row is usually a run (a CatalyticTest, a Characterization) with its catalyst sample,
+   feed and reactor; repeated entities (one catalyst in many rows) are one record. A column the schema
+   cannot express goes in the records' `unmodeled` list and is raised as a gap; never invent a
+   property.
+4. **Write the values** in the file's units, as the column dictionary defines them: `origin: measured`
+   for a measurement, `origin: assumed` for a set or nominal value, `computed` or `derived` (with
+   `produced_by`) for a value the file computed. A unit the dictionary does not state is `"not
+   stated"` with a note: a placeholder, not a unit, which queries leave out as `unit_unstated` and no
+   plan filters in. An empty cell, a "n.d." or a flagged value is a typed absence
+   (`not_reported` with `missing_reason`, `not_measured`, `below_detection_limit` with the limit),
+   never 0 and never a typical value. Keys and qualifiers follow the procedure's rules (**Records that need care**: one key
+   per quantity, the species in `target`, the basis in `basis`).
+5. **Cite the rows.** Evidence is `{source: <dataset id>, kind: dataset_row, locator: "row 12" (and
+   the column), quote: the row's cells as they appear in the file}` so the verbatim check can find it;
+   a condition stated once for the whole file (a header line, the dictionary) gets its own evidence
+   item. Derive the REPORTED_IN links to the Dataset from the evidence.
+6. **Mark the records as first-hand** when the data are the owners' own: `origin: recorded` with
+   `recorded_at` on the records written from the file; a third-party dataset's records are
+   `origin: reported`.
+7. **Validate** with the file as the source text:
+   `scale graph validate <doc> --source-text <dataset id>=<file>`; zero errors. A checklist item the
+   file does not give makes a record non-conformant, not invalid: declare it missing with its reason.
+8. **Check what each audience sees** before sharing: `scale graph filter <doc> --as <project or
+   institution id>` (or `--public`), and `scale evidence access <doc>` before anything is committed to
+   the public repository.
+
+The steps carry over to any table: the file's digest, the column dictionary, a row per run, the missing
+and estimated fields typed.
+
+## Many sources
+
+A run curates every included source of a frozen corpus (index-sources' `freeze_corpus.py`, its files fetched by
+fetch-corpus, or any manifest `scale corpus check` accepts) by the procedure above, one subagent per source, with a second reading of each document by
+another model and scripts that keep the books (`scripts/curate_run.py`): ask which model curates and who reads, prepare
+one `scale source start` folder per source, pilot 5 sources, then curate, check, read a second time and fix until every
+source is settled, record the results in the index, and finish. Read [references/runs.md](references/runs.md) before
+starting a run, and [references/batches.md](references/batches.md) for batch sizes and the states. A subagent that
+curates one source of a run follows this file; the prompt the run gives it says where that source's files are.
+
+- **A second reading is not a review.** No agent is an independent reviewer: a person reviews a document before it
+  counts as reviewed. Skipping the second reading is the user's choice, never yours, and always advised against.
+- **Scripts keep the books; subagents read.** Never write a document, a report, a second reading or a state line
+  yourself, and never fix a subagent's document by hand.
+- **People decide.** Documents stay in the run folder. Agents never commit them to hlxin/scale, push to `main`, approve
+  or merge; a contribution is `scale graph contribute --write` on an `agent/…` branch, then a pull request a person
+  approves.
+
+## What must never happen
+
+- A plausible value filled in for a missing one (typical pH, room temperature, a reference potential), or a missing cell filled.
+- A converted value replacing the reported one, or a value converted to another unit without the source saying so.
+- A record deleted or rewritten because its source was retracted, or a publication status typed by hand.
+- Two catalyst names merged without recorded evidence for the merge, or a record of one source merged with another's.
+- A figure-only value presented as read from text without saying so, or recorded without an uncertainty.
+- A result the source cites from another work recorded as the source's own run.
+- A product the source does not report recorded as 0, or `± 0` recorded as an uncertainty.
+- A column given a meaning, unit or basis its owners did not state, without a person checking it.
+- Quoted text beyond a source's cap, or a claim statement that copies an in-copyright source beyond a short phrase.
+- Project data (stewardship access other than `public`) shared beyond the access its owners set, or committed to the public repository.
+- A curator named in the records (`curated_by`), or review and curation-run fields invented for them.

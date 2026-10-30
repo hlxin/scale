@@ -52,10 +52,10 @@
           <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6 L9 12 L15 18"/></svg>
         </button>
       </header>
-      <label class="gx-add-graph" title="Open a scale-catal graph file from this computer">
+      <label class="gx-add-graph" title="Open a scale-catal graph (.json) or a knowledge-graph bundle (.zip) from this computer">
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5 V19 M5 12 H19"/></svg>
-        <span>Open a graph file</span>
-        <input type="file" id="graph-file" accept=".json,application/json" hidden>
+        <span>Open a graph or bundle</span>
+        <input type="file" id="graph-file" accept=".json,application/json,.zip,application/zip" hidden>
       </label>
       <div class="gx-graphs" id="graphs" role="list" aria-label="Graphs"></div>
       <footer class="gx-rail-summary"><button type="button" class="gx-link-btn" id="board-open">Contributors to catal-commons</button><div id="summary">Displaying 0 nodes, 0 relationships.</div><div class="gx-status" id="status" aria-live="polite">Starting…</div></footer>
@@ -130,6 +130,7 @@
         <defs id="gx-defs"></defs>
         <g id="zoom-layer"><g class="gx-links" id="links"></g><g class="gx-nodes" id="nodes"></g></g>
       </svg>
+      <canvas class="gx-big" id="gx-canvas" hidden></canvas>
       <div class="gx-empty" id="empty"><p>Loading graph…</p></div>
       <div class="gx-hint">Circle area scales with connectivity · drag nodes to rearrange · scroll to zoom · double-click a node to expand its neighbourhood</div>
 
@@ -173,7 +174,7 @@
   <form method="dialog">
     <h2>Curate a source</h2>
     <p class="gx-muted">A paper, patent or report, as a PDF or a DOI. SCALE turns it into a graph and checks every quote
-      against the source. It takes a few minutes.</p>
+      against the source. <span id="curate-time">It takes a few minutes.</span></p>
     <label class="gx-drop" id="curate-drop">
       <input type="file" id="curate-pdf" accept="application/pdf,.pdf">
       <span id="curate-pdf-name">Drop a PDF here, or choose one</span>
@@ -210,6 +211,7 @@
       SCALE can curate it again after a schema change</label>
     <div class="gx-curate-account" id="curate-account"></div>
     <div class="gx-kept" id="curate-kept"></div>
+    <div class="gx-kept" id="curate-inbox"></div>
     <div class="gx-curate-job" id="curate-job" hidden></div>
     <p class="gx-subtle" id="curate-schema"></p>
     <menu><button class="gx-btn" value="cancel">Close</button><button type="button" class="gx-btn gx-btn-primary" id="curate-start">Curate</button></menu>

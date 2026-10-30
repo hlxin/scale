@@ -38,6 +38,8 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.5": ("0.7.6", 'syntheses of any method: preparation methods, design aims and strategy; the function of each input; energy input and repetitions of a step; particle shape, architecture and facets of a state'),
     "0.7.6": ("0.7.7", "ligand removal (an action and the agent's function), a hold step; checklist: a stage of a family counts for growth_control and co_reactant, a fit is asked its result_values"),
     "0.7.7": ("0.7.8", 'Synthesis conditions: pH, stirring, fill fraction, gas flow mode and cooling of a step; concentration, stock concentration, fraction, ratio and flow rate of an input; protective_gas; VARIANT_OF between procedures (additive)'),
+    "0.7.8": ("0.7.9", 'What curated nanoparticle-synthesis recipes asked for: an anneal step and an annealing treatment; the functions isolating_medium, phase_transfer_agent and antisolvent; HAS_INPUT.addition_mode; sample_kind dispersion; six method families; architecture bulk; HAS_PHASE.layer; size quantity kinds; checklist: an anneal asked like a calcination, a stage that treats a sample asked that sample (additive)'),
+    "0.7.9": ("0.8.0", 'breaking: a selectivity is compared by what it counts (selectivity_count: carbon atoms, mole, mass) and what it is a share of (selectivity_whole: converted reactant, products without CO2, a pool named by the new value field relative_to); a value that states neither is compared only with such values (provisional)'),
 }
 
 
@@ -126,6 +128,15 @@ def _computed_energies(doc: dict, spec: dict | None) -> list:
     return []
 
 
+def _selectivity_basis(doc: dict, spec: dict | None) -> list:
+    """0.7.8 -> 0.8.0: a selectivity compared by what it counts and what it is a share of. Nothing a 0.7.8 document
+    holds is rewritten and nothing stops the step: no basis or definition text is read into a count or a whole, no
+    relative_to is filled in, and a value that states neither stays valid. Only a scientific comparison changes: values
+    of one product split by count and whole, and those that state neither stay one group, the old single group.
+    ``spec`` is the target schema."""
+    return []
+
+
 STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
     "0.1.0": ("graph.schema renamed scale-graph -> scale-catal; every record, id and value kept", _rename_schema),
     "0.2.1": ("quantity contracts: a HAS_COMPONENT fraction in an amount unit moves to amount, one in a concentration unit "
@@ -145,6 +156,9 @@ STEP_RULES: dict[str, tuple[str, Callable[[dict, dict | None], list]]] = {
               "no reaction, charge treatment or setting filled in, balance_status kept); a value whose unit is of another "
               "dimension than its kind's, or whose target is not a record its kind's context names, stops the step; every "
               "record, id and value kept", _computed_energies),
+    "0.7.9": ("selectivity basis: nothing is rewritten (no basis or definition text is read into a count or a whole, no "
+              "relative_to is filled in) and nothing stops the step; every record, id and value kept",
+              _selectivity_basis),
 }
 
 

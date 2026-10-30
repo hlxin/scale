@@ -2,6 +2,7 @@
 explorer runs in the browser, which works from its bundled data alone (no checkout), as a wheel does."""
 
 import json
+import shutil
 import subprocess
 import sys
 import zipfile
@@ -74,6 +75,139 @@ def test_the_cli_builds_the_site(tmp_path, capsys):
     assert main(["--repo", str(REPO), "site", "build", "--out", str(tmp_path / "s")]) == 0
     assert json.loads(capsys.readouterr().out)["graphs"]
     assert (tmp_path / "s/index.html").is_file() and (tmp_path / "s/.nojekyll").is_file()
+    assert (tmp_path / "s/bundle.js").is_file()
+
+
+# A small knowledge-graph bundle, as `scale graph export --to kg-bundle` writes one (docs/kg-bundle-format.md).
+BUNDLE_GRAPH = {
+    "directed": True, "multigraph": True, "graph": {"bundle_id": "tiny", "topic": "Tiny bundle", "version": "1.0.0"},
+    "nodes": [
+        {"id": "Publication:10.1/x", "label": "Publication", "props": {"title": "A paper", "year": 1930}},
+        {"id": "CatalyticTest:t-1", "label": "CatalyticTest", "props": {
+            "name": "test 1", "temperature": {"value": 573.15, "unit": "K", "as_reported": "300 °C"},
+            "conditions": json.dumps({"operation": {"status": "present", "text_value": "closed circuit"}}),
+            "_value_status": {"pressure": {"status": "not_reported", "missing_reason": "not_stated_in_source"}},
+            "_evidence": [{"quote": "at 300 °C", "locator": {"page": 3, "section": "Figure 3", "figure": "Figure 3"},
+                           "source_id": "10.1/x"}]}},
+    ],
+    "links": [{"id": "e:1", "source": "CatalyticTest:t-1", "target": "Publication:10.1/x", "type": "REPORTED_IN", "props": {}}],
+}
+
+
+def test_the_explorer_opens_a_knowledge_graph_bundle_zip(tmp_path):
+    page = (REPO / "site/index.html").read_text()
+    js = (REPO / "site/explorer.js").read_text()
+    # the file button takes a bundle's zip as well as a graph file, and reads it with the page's bundle reader
+    assert 'accept=".json,application/json,.zip,application/zip"' in page and "Open a graph or bundle" in page
+    assert 'import { readBundle } from "./bundle.js";' in js and "bundle.js" in site.PAGES
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node is not installed")
+    z = tmp_path / "tiny_v1.0.0.zip"
+    with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as f:      # the folder at the top, as the format ships it
+        f.writestr("tiny_v1.0.0/bundle.json", json.dumps({"bundle_id": "tiny", "version": "1.0.0", "topic": "Tiny bundle",
+                                                          "graph_file": "kg/graph.json"}))
+        f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(BUNDLE_GRAPH))
+        f.writestr("__MACOSX/tiny_v1.0.0/._bundle.json", "")
+    script = (f"import {{ readBundle }} from {json.dumps((REPO / 'site/bundle.js').as_uri())};\n"
+              f"import {{ readFileSync }} from 'node:fs';\n"
+              f"const buf = readFileSync({json.dumps(str(z))});\n"
+              "const file = { name: 'tiny_v1.0.0.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
+              "console.log(JSON.stringify(await readBundle(file)));")
+    run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stderr
+    b = json.loads(run.stdout)
+    assert (b["title"], b["version"]) == ("Tiny bundle", "1.0.0")
+    src, test = b["doc"]["nodes"]
+    # a Publication is a source, hidden until asked for like any graph's sources; a value reads as reported
+    assert src["label"] == "Source" and test["label"] == "CatalyticTest"
+    p = test["props"]
+    assert p["temperature"] == {"status": "present", "value": 573.15, "unit": "K", "as_reported": "300 °C"}
+    assert p["conditions"] == {"operation": {"status": "present", "text_value": "closed circuit"}}
+    assert p["pressure"] == {"status": "not_reported", "missing_reason": "not_stated_in_source"}
+    assert p["evidence"] == [{"quote": "at 300 °C", "locator": "p. 3, section Figure 3", "source": "Publication:10.1/x"}]
+    assert b["doc"]["links"][0]["type"] == "REPORTED_IN"
+    # a zip that holds no bundle is refused, saying why
+    with zipfile.ZipFile(tmp_path / "other.zip", "w") as f:
+        f.writestr("notes.txt", "hello")
+    run = subprocess.run([node, "--input-type=module", "-e", script.replace(str(z), str(tmp_path / "other.zip"))],
+                         capture_output=True, text=True, timeout=60)
+    assert run.returncode != 0 and "no bundle.json" in run.stderr
+
+
+def parts_bundle(path):
+    """Six sources of two samples each, every sample made from the one species they all report; links before nodes,
+    and a quote with braces and quotes in it, as the reader must take them."""
+    nodes, links = [{"id": "ChemicalSpecies:water", "label": "ChemicalSpecies", "props": {"name": "water"}}], []
+    for s in range(6):
+        pub = f"Publication:10.1/s{s}"
+        nodes.append({"id": pub, "label": "Publication", "props": {"title": f'Paper {s}: "{{a}} [b]"', "year": str(2000 + s)}})
+        links.append({"id": f"w:{s}", "source": "ChemicalSpecies:water", "target": pub, "type": "REPORTED_IN", "props": {}})
+        for r in range(2):
+            rid = f"Sample:s{s}-{r}"
+            nodes.append({"id": rid, "label": "Sample", "props": {"name": f"sample {s}.{r}"}})
+            links += [{"id": f"r:{rid}", "source": rid, "target": pub, "type": "REPORTED_IN", "props": {}},
+                      {"id": f"u:{rid}", "source": rid, "target": "ChemicalSpecies:water", "type": "HAS_INPUT", "props": {}}]
+    graph = {"directed": True, "multigraph": True, "graph": {"topic": "Tiny bundle"}, "links": links, "nodes": nodes}
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as f:
+        f.writestr("tiny_v1.0.0/bundle.json", json.dumps({"bundle_id": "tiny", "version": "1.0.0", "topic": "Tiny bundle"}))
+        f.writestr("tiny_v1.0.0/kg/graph.json", json.dumps(graph, indent=1))
+
+
+def test_a_bundle_too_large_to_draw_at_once_is_drawn_a_window_at_a_time_and_searched_whole(tmp_path):
+    js, page = (REPO / "site/explorer.js").read_text(), (REPO / "site/index.html").read_text()
+    # the explorer draws a large bundle a window at a time (the arrows step through the whole graph, the width is the
+    # reader's) and searches it whole; a large graph is drawn on a canvas and laid out off the page's thread
+    assert "drawWindow" in js and 'id="window-next"' in js and 'id="window-width"' in js and "searchBundle" in js
+    assert 'id="gx-canvas"' in page
+    assert 'new Worker("layout.js")' in js and "layout.js" in site.PAGES
+    assert "d3/7.9.0/" in (REPO / "site/layout.js").read_text()
+    node = shutil.which("node")
+    if not node:
+        pytest.skip("node is not installed")
+    parts_bundle(tmp_path / "tiny.zip")
+    script = (f"import {{ readBundle }} from {json.dumps((REPO / 'site/bundle.js').as_uri())};\n"
+              f"import {{ readFileSync }} from 'node:fs';\n"
+              f"const buf = readFileSync({json.dumps(str(tmp_path / 'tiny.zip'))});\n"
+              "const file = { name: 'tiny.zip', arrayBuffer: async () => buf.buffer.slice(buf.byteOffset, buf.byteOffset + buf.length) };\n"
+              "const b = await readBundle(file, () => {}, { whole: 10 });\n"
+              "console.log(JSON.stringify({ records: b.records, sources: b.sources, years: b.years, start: b.start,\n"
+              "  near: b.around(b.start, 7), all: b.around(b.start, 100).records, hits: b.search('sample 3.1', 5),\n"
+              "  windows: [0, 7, 13, 999].map((f) => { const w = b.view(null, f, 7); return [w.from, w.to, w.total, w.records, w.years]; }),\n"
+              "  y2004: b.startOf(2004),\n"
+              "  of: b.sourceOf('Sample:s3-1'), main: b.mainOf(2004) }));")
+    run = subprocess.run([node, "--input-type=module", "-e", script], capture_output=True, text=True, timeout=60)
+    assert run.returncode == 0, run.stderr
+    b = json.loads(run.stdout)
+    # 19 records, more than the 10 drawn at once: kept whole, each source with its records and year
+    assert b["records"] == 19 and [s["year"] for s in b["sources"]] == list(range(2000, 2006)) and b["years"] == list(range(2000, 2006))
+    assert b["sources"][0] == {"title": 'Paper 0: "{a} [b]"', "year": 2000, "records": 3}
+    # around a source, up to 7 records: it and the source most like it (the same species, the nearest year); the
+    # species every source reports brings in no sample of another source
+    near = b["near"]
+    assert (near["records"], near["sources"]) == (7, 2)
+    assert sorted(n["id"] for n in near["doc"]["nodes"]) == ["ChemicalSpecies:water", "Publication:10.1/s0", "Publication:10.1/s1",
+                                                             "Sample:s0-0", "Sample:s0-1", "Sample:s1-0", "Sample:s1-1"]
+    assert len(near["doc"]["links"]) == 10              # four REPORTED_IN, four HAS_INPUT, the species in its two sources
+    assert near["doc"]["graph"]["window"] == {"order": "around", "from": 0, "to": 7, "total": 19, "sources": 2, "records": 7,
+                                              "years": [2000, 2001], "source": "Publication:10.1/s0",
+                                              "title": 'Paper 0: "{a} [b]"', "year": 2000}
+    assert {n["label"] for n in near["doc"]["nodes"] if n["id"].startswith("Publication:")} == {"Source"}
+    assert b["all"] == 19                                # far enough, the whole graph
+    # by year, windows of 7 records one after the other cover the whole graph; the species comes with each, as its
+    # sources' samples use it; past the end, the last window
+    assert b["windows"] == [[0, 7, 19, 7, [2000, 2001]], [7, 13, 19, 7, [2002, 2003]], [13, 19, 19, 7, [2004, 2005]],
+                            [16, 19, 19, 4, [2005, 2005]]]
+    assert b["y2004"] == 13
+    # the search reads every record, drawn or not, and names each match's source
+    assert b["hits"] == [{"record": "Sample:s3-1", "label": "Sample", "name": "sample 3.1", "text": "sample 3.1",
+                          "source": 3, "sourceTitle": 'Paper 3: "{a} [b]"', "year": 2003}]
+    assert (b["of"], b["main"]) == (3, 4)
+    # read whole, the same bundle is one graph
+    whole = subprocess.run([node, "--input-type=module", "-e", script.replace("{ whole: 10 }", "{}").replace(
+        script[script.index("console.log"):], "console.log(JSON.stringify(b.doc.nodes.length));")], capture_output=True, text=True, timeout=60)
+    assert whole.returncode == 0, whole.stderr
+    assert json.loads(whole.stdout) == 19
 
 
 def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
@@ -91,6 +225,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     assert 'id="curate-open"' in page and "Upload, curate, and explore" in page and "viz-btn" not in page and "plotly" not in page.lower() and "Plotly" not in js
     # the Curate dialog is about a source (a paper, patent or report) and says what happens in four short points
     assert "<h2>Curate a source</h2>" in page and "Curate a publication" not in page and "<summary>More details</summary>" in page
+    # the one-source page says "source" too
+    one = (REPO / "site/publication.html").read_text()
+    assert "<title>SCALE One Source</title>" in one and "publication" not in one.replace("publication.html", "").lower()
     # GitHub sign-in sits in the toolbar for every reader; viewing never needs it
     assert 'id="account-btn"' in page and "function renderAccount()" in js and "/auth/login?return=" in js
     assert "need no account" in js
@@ -98,6 +235,9 @@ def test_the_explorer_runs_scales_own_tools_and_asks_no_reader_for_a_key():
     # own address (its open graph, #g=…, included) and a nonce; a token is taken only with that tab's nonce
     for page_js in (js, (REPO / "site/app.js").read_text()):
         assert page_js.count("/auth/login?return=") == 1 and "&nonce=${n}" in page_js and "crypto.getRandomValues" in page_js
+        # the reader's own graph and a job under way are kept in the tab, so a sign-in or a reload loses neither; the
+        # service forgets a job's result only when the page says it has it
+        assert '"scale-own"' in page_js and '"scale-job"' in page_js and "/done`" in page_js
         assert "tx.n !==" in page_js and "scale-signin-hash" not in page_js and "scale-signin-from" not in page_js
     assert "location.search + location.hash" in js and all(f'data-signin="{w}"' in js for w in ("toolbar", "curate", "search"))
     assert 'id="graph-show"' in js and "function showGraph()" in js and 'id="schema-toggle"' in js

@@ -1,0 +1,102 @@
+{
+  "skill_name": "index-sources",
+  "evals": [
+    {
+      "id": 1,
+      "name": "index-new-topic",
+      "prompt": "Index the literature on single-atom catalysts for electrochemical nitrate reduction to ammonia, sources from 2024 onwards only. Don't download anything yet. Use a keyword filter for relevance.",
+      "expected_output": "Index mode only: plan + queries over many database groups (aggregators, preprints, datasets, patents, regional), search, build, citation chasing, classify, keyword screening, automatic dedup (no question for safe merges); per-topic index CSVs split by access type + merged + excluded with the 32 v3 columns; sources/index.db; no PDFs; report gives the index and database paths.",
+      "files": [],
+      "expectations": [
+        "Index files exist: sources/<slug>/index/{OA,OA+ND,Free-to-read,Paywalled,merged,excluded}.csv",
+        "merged.csv has the v3 columns (Abstract, Topic A, Topic B, Topic C, Related topics, Licence, Licence URL, Licence source, Doc type, Venue ...)",
+        "sources/index.db exists with sources, source_subjects, source_authors and collections tables",
+        "At least 30 sources indexed",
+        "Nothing downloaded (no PDF under sources/<slug>/files/)",
+        "At least 6 distinct databases in the Database column, beyond the big aggregators",
+        "Topic A filled for at least 80% of rows",
+        "License filled for at least 80% of rows",
+        "Abstract filled for at least 60% of rows",
+        "Keyword screening used (keywords.json written, Relevance filled for most rows)",
+        "Citation chasing ran (raw/citing* exists)",
+        "Project root holds only sources/ and .scripts/",
+        "Report mentions the index folder and sources/index.db",
+        "Duplicates handled automatically: dedup.py --apply ran and no question was asked about merging the safe cases",
+        "No abstract in index.db starts with an 'Abstract' heading or ACS image text",
+        "SI deposits are SI links, not sources (no Figshare SI row or alias with supplement_to)"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "update-existing-topic",
+      "prompt": "Update the mxene-no3 topic with anything new since the last run and re-check the access of the older sources. Don't download anything this time.",
+      "expected_output": "Update mode: since-date from the last run minus 30 days, search --since on every database, citation chasing since that date, build_list on those runs only, classify_access --recheck-older-than, screening of new sources, automatic dedup, refreshed index; no download; report with new-source counts.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "A dated incremental search ran (raw/since-<date> exists)",
+        "Citation chasing for the update ran (raw/citing-since-<date> or raw/citing* updated)",
+        "No new full re-search (no second full run started)",
+        "Access re-check ran (classify_access with --recheck-older-than in the commands)",
+        "Index CSVs and index.db were refreshed during the run",
+        "No PDF downloaded during the run",
+        "Report states how many new sources were added",
+        "Duplicates handled automatically: dedup.py --apply ran and no question was asked about merging the safe cases"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "export-filtered-bibtex",
+      "prompt": "From the mxene-no3 index, give me a BibTeX file of the open-access sources (OA or OA+ND) on nitrate reduction published in 2023 or later.",
+      "expected_output": "Answered directly, no mode menu: export.py with subject/text filter for nitrate reduction, access OA,OA+ND, year 2023-, format bib, into sources/exports/; no new searches or downloads; report gives path and count.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "A .bib file exists under sources/exports/",
+        "Every exported entry is OA or OA+ND and from 2023 or later",
+        "Exported entries are about nitrate reduction",
+        "No new search or download ran",
+        "Report gives the file path and the number of sources",
+        "No mode menu was put to the user (Download / Update / New index / Status)"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "import-wos-export",
+      "prompt": "Add the sources in my Web of Science export to the mxene-no3 index: ~/Downloads/wos-export/savedrecs.txt — don't download anything.",
+      "expected_output": "import_list.py on the WoS Plain-text export, build_list --run manual, classify_access, screening, dedup.py --apply: the four missing sources are added with the export's abstracts (abstract_source = Web of Science export) and Web of Science in the Database column; the DOI-less copy of an indexed source is merged without a question; only the uncertain same-title/second-DOI pair is put to the user and is not merged without them; no search, no download; report with counts.",
+      "files": [
+        "fixtures/v3-mxene-import-project"
+      ],
+      "expectations": [
+        "The four sources of the export that were missing from the index are now in the mxene-no3 topic",
+        "Their abstracts come from the export (abstract_source = Web of Science export) for at least 3 of the 4",
+        "The Database column of the imported sources lists Web of Science",
+        "The DOI-less copy of an indexed source was merged automatically (dedup log, no DOI-less duplicate row left)",
+        "No question about merging the safe duplicates; the uncertain pair (same title, second DOI) was put to the user",
+        "The uncertain pair was not merged without the user",
+        "No search and no download ran",
+        "Report gives the number of sources added and mentions the abstracts kept from the export",
+        "No abstract in index.db starts with an 'Abstract' heading or ACS image text"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "corpus-question",
+      "prompt": "How many sources does the mxene-no3 index have, how many of them are open access (OA or OA+ND), and how many PDFs have been downloaded? Just tell me the numbers.",
+      "expected_output": "Answered directly from status.py or index.db with correct numbers; no menu, no question, no file written, nothing searched or downloaded.",
+      "files": [
+        "fixtures/v3-mxene-project"
+      ],
+      "expectations": [
+        "The answer gives the number of sources in the index (identified or in the index CSV)",
+        "The answer gives the number of open-access sources (OA + OA+ND)",
+        "The answer gives the number of downloaded PDFs",
+        "No question or menu was put to the user",
+        "Nothing was written under sources/ and nothing was searched or downloaded"
+      ]
+    }
+  ]
+}

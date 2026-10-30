@@ -150,7 +150,10 @@ the schema; `scale graph describe` shows it), or the `quantity_kind` of the Vari
   velocity their `flow_reference` (STP, NTP, normal, standard, operating conditions), a space velocity its
   `space_velocity_basis` (GHSV, LHSV, WHSV, per catalyst mass), a composition fraction its `fraction_basis`, and a
   selectivity, yield, conversion, Faradaic efficiency, quantum or photonic yield, energy yield or partial current
-  density, and a turnover frequency (scale-catal 0.6.0), the `species` its target names. A context is read from what
+  density, and a turnover frequency (scale-catal 0.6.0), the `species` its target names; a selectivity also what it
+  counts (`selectivity_count`: carbon atoms, moles, mass) and what it is a share of (`selectivity_whole`: all the
+  reactant converted with CO2 included, the products other than CO2, or one pool of products named by the value's
+  `relative_to`), a value that states either kept apart from the others as `not stated`, never assumed. A context is read from what
   the value states (its unit: `V vs RHE`, `barg`,
   `sccm`; its `basis` and `definition`; its `target`; the property its `normalized_by` names) and from the sibling
   property its binding names (`reference_scale`, `current_normalization`, `fraction_basis`). The statements must agree.

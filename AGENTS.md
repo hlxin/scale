@@ -11,7 +11,7 @@ follows (`graph.schema_version`). There is no workspace lock and nothing to upgr
 working directory (`$SCALE_WORKSPACE`, default `~/.scale/workspace`).
 
 **scale-catal is on PyPI** (from release v0.2.0): `uvx scale-catal …` runs the latest release, `uvx
-scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv run scale call <tool> '<json>'` (MCP:
+scale-catal@0.3.0 …` a pinned one. In a checkout of this repository run `uv run scale call <tool> '<json>'` (MCP:
 `uv run scale mcp`) to use the code as it is on the branch.
 
 - **The schema** has two layers, the science kernel (`core/graph/kernel.yaml`) and the catalysis domain,
@@ -61,7 +61,7 @@ scale-catal@0.2.0 …` a pinned one. In a checkout of this repository run `uv ru
   document that pins a version the tools do not hold is reported as such; never read it under another version of
   the same number ([README.md](README.md#schema-versions)).
 - **Release ids:** releases are `v0.1.0` onward; `v0.1.0` (schema 0.1.0) is the first, `v0.2.0` (schema 0.2.0,
-  `scale-catal`) the latest.
+  `scale-catal`), `v0.3.0` (schema 0.7.8) the latest.
 - **Pull requests:** anyone, a person or an agent, may suggest a change or open a pull request; one person approves
   it and merges it. An agent opens it under its own GitHub identity (the Claude GitHub App, or a bot account),
   never under the user's account: GitHub does not let an author approve their own pull request, so the user who

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SCALE One Publication</title>
-  <meta name="description" content="Curate one catalysis publication into an evidence-backed SCALE graph, see it and ask it questions.">
+  <title>SCALE One Source</title>
+  <meta name="description" content="Curate one catalysis source (a paper, patent or report) into an evidence-backed SCALE graph, see it and ask it questions.">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
@@ -14,7 +14,7 @@
 <body>
 <header class="top">
   <div>
-    <h1>SCALE <span class="muted">· one publication, one graph</span></h1>
+    <h1>SCALE <span class="muted">· one source, one graph</span></h1>
     <p class="muted small">A paper, patent or report curated into a <a href="https://github.com/hlxin/scale">scale-catal</a>
       graph by the catalysis schema and the curate-corpus skill, every statement with its verbatim evidence.</p>
   </div>
@@ -23,7 +23,7 @@
 
 <main class="layout">
   <section class="panel" id="input">
-    <h2>1 · The publication</h2>
+    <h2>1 · The source</h2>
     <div class="tabs" role="tablist">
       <button class="tab active" data-tab="pdf" role="tab">Upload a PDF</button>
       <button class="tab" data-tab="doi" role="tab">DOI</button>
@@ -64,7 +64,7 @@
       </div>
     </div>
     <div id="contribution" class="job hidden"></div>
-    <div id="cy" class="cy"><p class="empty muted">No graph yet: curate a publication or open a graph.</p></div>
+    <div id="cy" class="cy"><p class="empty muted">No graph yet: curate a source or open a graph.</p></div>
     <div id="legend" class="legend"></div>
     <div id="details" class="details muted">Click a record to see its values and evidence.</div>
   </section>

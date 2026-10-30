@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- The SCALE web service, always on, on 127.0.0.1 (a tunnel gives it its public HTTPS name). install.sh fills the
+     @...@ paths; caffeinate keeps the computer awake while the service runs. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>scale-catal.web</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/caffeinate</string>
+    <string>-is</string>
+    <string>@CHECKOUT@/service/launchd/scale-web.sh</string>
+    <string>serve</string>
+  </array>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>SCALE_WEB_ENV</key>
+    <string>@ENV@</string>
+  </dict>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>StandardOutPath</key>
+  <string>@LOGS@/service.log</string>
+  <key>StandardErrorPath</key>
+  <string>@LOGS@/service.log</string>
+</dict>
+</plist>

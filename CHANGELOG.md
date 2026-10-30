@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **A selectivity says what it counts and what it is a share of (breaking, schema 0.7.8 -> 0.8.0).** Answers #82.
+  Selectivities of one product on different wholes (a share of converted CO with CO2 inside, of the hydrocarbons
+  alone, of one pool such as the olefins) or counted differently (carbon atoms, moles, mass) are no longer put in one
+  group by a scientific comparison. New contexts `selectivity_count` and `selectivity_whole`, both in the selectivity
+  kind's `compare_by`, and the provisional value field `relative_to` naming the pool; `wt%` and `mass%` state mass. A
+  value that states neither is compared only with such values (`not stated`); `mol%` is left unread, never guessed.
+  No document needs rewriting (the migration step changes nothing); as-reported comparison is unchanged. Example,
+  counterexample and competency question CQ-41 added.
+
 - **index-sources 4.1.0 and fetch-corpus 1.1.0 take the fixes made to a local paper-acquisition after the split (no
   schema change).** Requested by @diazr04, so that one copy of the skills is kept. The topic gate's `english_only`
   turns away records in another language (`_lang.py`: only on clear evidence, never on Greek letters, formulas or
@@ -19,6 +28,131 @@
   and `--dry-run` (the queue per publisher, nothing contacted); run_paywalled.sh stops on bad arguments; a run that adds
   a host to `.scripts/blocked_hosts.json` keeps the ones listed meanwhile, and listing Elsevier's SI CDN there keeps
   find_si.py and fetch_si.py off it. Not taken: the local copy's Elsevier article-API route.
+
+- **Schema 0.7.9 (additive): what 20,979 curated nanoparticle-synthesis recipes asked for.** Requested by @diazr04:
+  converting the SynthesisProtocol V3.1 dataset (20,979 LLM-extracted, curated recipes of metal and alloy nanoparticle
+  syntheses from 10,893 open-access papers) to scale-catal 0.7.8 kept part of what the recipes say as text, notes or
+  `unmodeled`, and recorded a salt matrix as a support. All new terms are provisional.
+  - **An anneal.** A heat treatment the source calls an anneal, held to change the solid's structure (an alloy ordered
+    into an intermetallic, alloyed or crystallized), is `action: anneal`; the checklist asks it what a calcination is
+    asked (temperature, time, gas, ramp and gas flow). A sample annealed apart from its preparation is a Treatment with
+    `treatment_kind: annealing`. The recipes hold 1,915 such steps, in 1,582 recipes.
+  - **Three functions of an input.** `isolating_medium` (a salt or an oxide the particles are dispersed in so that they
+    do not sinter while they are heated, washed out afterwards; it is not the support), `phase_transfer_agent` (what
+    carries particles or a precursor into another liquid phase) and `antisolvent` (a liquid added to precipitate
+    particles from their dispersion).
+  - **How an input went in.** `HAS_INPUT.addition_mode`: `all_at_once`, `portionwise`, `dropwise` or `continuous` (its
+    rate then the input's `flow_rate`); the recipes state it in words in 23,073 steps of 12,627 recipes.
+  - **A dispersion.** `sample_kind: dispersion`, for a colloid kept as a liquid.
+  - **Six method families.** `impregnation` (the source does not say pore volume or excess; 2,027 recipes, which SCALE
+    forbids guessing into one of the two), `chemical_vapor_impregnation`, `photochemical_reduction` and
+    `radiolytic_reduction` (in solution; `photodeposition` is on a photoexcited semiconductor), `spark_ablation` and
+    `arc_melting`.
+  - **The structure obtained.** `architecture: bulk` (an ingot, a foil, a single crystal), and `HAS_PHASE.layer`, the
+    layer a phase forms in a particle of several layers, counted from the core outward (1,215 recipes give a core,
+    shells or an alloy shell per element). The recipes add how a single-atom alloy is recorded (`single_atoms`, the
+    isolated metal `bound_to` the host).
+  - **Sizes are quantity kinds.** The kernel declares `particle_size`, `crystallite_size`, `microscopy_particle_size`
+    and its spread, `hydrodynamic_size`, `dispersion_equivalent_size`, `particle_edge_length`, `shell_thickness`,
+    `wire_diameter` and `film_thickness` (lengths) and `aspect_ratio`, which #64 left for when curated records used
+    them (the recipes give a size for 9,019), each mapped to QUDT; their units are now checked.
+  - **Two fixes.** A loading is described on the link to the component it measures, as the recipes and the examples
+    record it (the description put it on the support link). The checklist counts the sample a preparation treats (an
+    anneal of particles made in an earlier stage) as what it was made from, instead of asking it for precursors it
+    does not have.
+  - An example (salt-matrix-anneal: invented PtFe nanoparticles made in one stage and annealed in NaCl in another), a
+    counterexample (an addition mode in other words), tests, the recipes. Existing documents keep their version; the
+    migration step rewrites nothing.
+
+- **Queries about four times faster, with the same answers (no schema change).** Requested by @hlxin. A query
+  re-hashed the schema's quantity contracts twice, rebuilt a table of every link, labelled the same evidence again in
+  every row, and copied its answer with `copy.deepcopy`. Now the contracts are compiled once per loaded schema, the
+  links table and each evidence item's source labels are kept with the document's query `Graph`, and the answer is
+  copied as plain data (`pgraph_query.detached`), still sharing no object with the document. The competency questions
+  on their documents (62 runs) take 18 ms instead of 73 ms, and three broad plans on the public methanol graph (1,494
+  rows) 19 ms instead of 31 ms; every answer is identical.
+
+- **A large knowledge-graph bundle opens in the explorer a window at a time, and is searched whole (no schema
+  change).** Requested by @diazr04: a bundle whose graph is larger than a browser holds as one text (the train split of
+  a recipes dataset, 899 MB and 542,226 records) failed with "Failed to fetch", and a graph of 40,000 records took about
+  a minute and a half to lay out, the page frozen meanwhile.
+  - The page reads the zip from the file a slice at a time and the graph a record at a time as it is decompressed
+    (`site/bundle.js`), so it is never one text.
+  - A graph of more than 60,000 records is kept whole, each record as compact text, and drawn a window at a time: its
+    sources in an order (by year, the oldest first; or around a source, the sources most like it first, by what their
+    records share, a thing nearly every source shares not counting) and as many records as the reader sets (the width,
+    5,000 to 80,000; 30,000 to begin with). The graph's card says where the window lies ("records 30,000–60,000 of
+    542,226 · 2016–2017"), and its arrows step from one window to the next, so that the windows cover the whole graph;
+    a slider places the window anywhere, and a year jumps to where its sources begin. A double-click on a record draws
+    around its source. Search covers every record of the bundle, drawn or not, in about a second; a match not drawn is
+    drawn around its source when chosen.
+  - A graph of more than 10,000 records is drawn on a canvas instead of as SVG elements, and laid out off the page's
+    thread with cheaper forces (`site/layout.js`: a repulsion felt within 300 px, no collision, fewer steps), its
+    records starting beside the others of their source: 40,000 records lay out in about 4 s instead of 100 s, and the
+    page stays responsive meanwhile. While the view moves, the last picture moves with it, and the graph is drawn anew
+    when it stops. A click shows a record, a double-click expands it; such a graph exports as PNG. Smaller graphs are
+    drawn as before.
+- **The explorer no longer uses the lab computer's service (no schema change).** Requested by @diazr04: curating a
+  source and answering questions in words on the lab's computer wait for new requirements (a way in without GitHub's
+  authorization page). `site/config.js` names no service again: the page opens, draws and searches graphs in the
+  browser and says the service is not configured, and it shows no Sign in button while there is no service. The
+  service's code stays (the inbox, `SCALE_WEB_INBOX`; questions answered by Claude Code, `SCALE_WEB_ASK`), off unless
+  set.
+
+## v0.3.0 — 2026-10-29
+
+Schema 0.7.8 (from 0.2.0, with breaking changes on the way: a document at an earlier version stays valid under it
+and moves with `scale graph migrate`), the `scale-catal` tools 0.3.0 and nine skills (index-sources, fetch-corpus and
+curate-corpus replace curate-source and curate-dataset). Since v0.2.0: quantity contracts and a scientific comparison
+mode in queries; each result recorded on its own; computed energies compared under explicit definitions; syntheses,
+calculation methods and many catalysis subdomains; mappings to ontology terms and to QUDT; `graphs/` with
+catal-commons and contributions to it; one source into a graph (`scale source`), the web service and the graph
+explorer site.
+
+- **The explorer opens a knowledge-graph bundle (no schema change).** Requested by @hlxin: "Open a graph or bundle" in
+  the explorer takes the zip `scale graph export --to kg-bundle` makes (docs/kg-bundle-format.md) as well as a graph
+  file, and shows its graph like any other: its sources (the bundle's Publications), values as reported, typed
+  absences, and evidence with its source and page; search works on it in the browser. The page reads the zip itself
+  (`site/bundle.js`); it does not validate the bundle or check its digests. A value map (a test's conditions) now reads
+  as "name: value" in a record's details instead of JSON.
+- **Three fixes from a Codex review of the site (no schema change).** Requested by @hlxin: a contribution receipt no
+  longer signs anyone in (each token the service signs names its use, and each check takes only its own); the
+  reader's own graph (curated just now, or opened from a file) and a job under way are kept in the tab, and the address
+  names the graph, so signing in again or reloading loses neither; a finished job's result is kept until the page says
+  it has it (or an hour after the job ends), and the pages ask again when a reply is lost.
+- **"Source", not "paper", on the one-source page and in the service (no schema change).** Requested by @hlxin after
+  #75: the page `site/publication.html` (its title, heading and prompts), the service's messages and help (the
+  inbox's and its runner's included), its README, the leaderboard's "how scoring works" and the code's descriptions
+  say "source" (a paper, patent or report) where they said "paper" or "publication". The page keeps its address, a
+  kept source's folder keeps its file names, and the runner's instructions to Claude Code are unchanged.
+- **The inbox: Claude Code curates on the service's own computer (no schema change).** Requested by @diazr04: a
+  computer of the lab receives the papers the page uploads and Claude Code curates each one under the schema, keeping
+  every promise of the Curate dialog: the graph comes back to its owner only, contributing is a separate click, and a
+  paper is kept only as the page says.
+  - **The inbox** (`SCALE_WEB_INBOX`, `service/scaleweb/inbox.py`): `POST /jobs` queues the publication on the
+    service's computer and answers at once; the job stays readable (`GET /jobs/{id}`, its graph signed for its owner
+    each time it is read) and the page lists the reader's publications (`GET /inbox`). A PDF dropped into the queue by
+    hand is curated for `SCALE_WEB_INBOX_LOGIN`.
+  - **The runner** (`python -m scaleweb.runner`, started by launchd whenever the queue holds something:
+    `service/launchd/`): `scale source start`, then Claude Code (`claude -p`, the curate-corpus skill appended to its
+    system prompt) fills the graph until `scale source check --derive-links` passes, its problems handed back twice at
+    most, then `scale source finish --public`. Claude Code runs restricted to the publication's folder, with only
+    `scale source check` and `scale graph describe`, in its sandbox (which runs no other command on its own) and with no
+    token in its environment. A run that records nothing fails.
+  - **As the page says.** The graph is its owner's, and Contribute, a separate click, opens the bot's pull request. The
+    paper is kept in the archive (`SCALE_WEB_ARCHIVE`) always under an open licence and otherwise only when its owner
+    ticks the box, and leaves the inbox when the job ends; `python -m scaleweb.runner --recurate` sends the kept papers
+    curated under another schema version through the inbox again.
+  - **Several at once, and repeats.** Uploads sent together wait in turn; `SCALE_WEB_INBOX_WORKERS` of them are
+    curated at once, each with its own Claude Code (one by default), asking Crossref for DOIs one at a time and
+    waiting out its 429. Before Claude Code starts, the runner looks for
+    the publication by its DOI or PDF digest in catal-commons, in the open contributions and among the same reader's
+    curated jobs, and a repeat points to it. A Source record for a cited work goes back to Claude Code, since
+    catal-commons takes one Source per contribution.
+  - **Questions here too.** With `SCALE_WEB_ASK=claude-code`, a question in words is answered on the service's
+    computer by Claude Code, by the query-graph skill, in a folder that holds the graph alone and with only the query
+    commands; the plans it wrote run again through `scale query` for the page, and the records they return credit the
+    commons sources, as the dialog says. Two questions are answered at a time.
 - **Sign-in hardened, from an outside review (no schema change).** Requested by @hlxin after a Codex review of #72:
   each sign-in is one transaction of the tab that starts it (a random nonce the service returns, checked by the page),
   so a link carrying another person's token or their unfinished sign-in no longer signs a reader in; the OAuth state is

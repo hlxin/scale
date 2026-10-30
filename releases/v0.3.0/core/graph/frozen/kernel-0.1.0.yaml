@@ -1,0 +1,2070 @@
+kernel: scale-graph-kernel
+status: candidate
+maturity: provisional
+format:
+  description: |
+    Node-link JSON, as written by NetworkX and read by D3:
+      {"directed": true, "multigraph": true, "graph": {...}, "nodes": [...], "links": [...]}
+    A node is {"id", "label", "props"}; a link is {"id", "source", "target", "type", "props"}.
+    Ids are CURIE-like ("prefix:path") and unique across nodes and links. Several links may join
+    the same two nodes (a multigraph): each source's statement is its own link.
+    Endpoint and reference lists name labels; a label stands for itself and every label that is_a
+    it. ANY (a scalar, never inside a list) is every concrete label; {any_except: [...]} every other.
+  graph_props:
+    required:
+    - schema
+    - schema_version
+    - graph_id
+    - title
+    - data_status
+    properties:
+      schema:
+        type: string
+        description: Always "scale-graph".
+      schema_version:
+        type: string
+      graph_id:
+        type: string
+      title:
+        type: text
+        description: What the graph covers and what it leaves out.
+      data_status:
+        type: enum
+        values:
+        - research_data
+        - synthetic_example
+        - mixed
+      domains:
+        type: list
+        items:
+          type: string
+      description:
+        type: text
+      stewardship:
+        type: stewardship
+        description: The default stewardship of every node and link. Required for research_data graphs.
+      filtered_for:
+        type: text
+        description: Set by `scale graph filter`; which viewer the graph was filtered for and what was
+          withheld.
+      follows_domains:
+        type: list
+        items:
+          type: string
+        description: Domains every node follows unless it declares its own, as name or name@version (e.g.
+          thermocatalysis@0.1.0). A node follows a domain's checklist; the domain's vocabulary is available
+          to every document.
+property_types:
+  string: A short string.
+  text: Free text.
+  integer: An integer.
+  number: A number.
+  boolean: true or false.
+  enum: One of the listed values.
+  ref: The id of a node whose label is one of the listed targets (or a label that is_a one of them).
+  list: A list of items of one type.
+  map: An object whose keys are snake_case names and whose values have one type.
+  value: A value object (below).
+  evidence: An evidence item (below).
+  record_ref: A reference to a record or to one property of it (below).
+  stewardship: A stewardship object (below).
+  date: An ISO 8601 calendar date at the precision the source gives — YYYY, YYYY-MM or YYYY-MM-DD.
+  datetime: An ISO 8601 date-time with a time zone, e.g. 2026-09-27T14:05:00Z.
+  status_check: Whether a source or dataset was checked for notices (retraction, correction, concern),
+    when and how (the status_check structure).
+value:
+  fields:
+    status:
+      type: enum
+      values:
+      - present
+      - not_reported
+      - not_measured
+      - not_applicable
+      - below_detection_limit
+      - below_quantification_limit
+      description: Required. Missing values are declared, never filled in.
+    missing_reason:
+      type: enum
+      values:
+      - not_stated_in_source
+      - not_curated
+      - ambiguous_in_source
+      - withheld
+      - not_extractable
+      description: |
+        Why a not_reported value is missing. not_curated = the curator did not look;
+        ambiguous_in_source = the source states it inconsistently (keep the variants in note and
+        the passages in evidence); withheld = known but not shared.
+    value:
+      type: number
+      description: The number in the unit the source used. No unit conversion is implied.
+    lower:
+      type: number
+      description: Lower end of a reported range ("250–260 °C").
+    upper:
+      type: number
+    bound:
+      type: enum
+      values:
+      - upper
+      - lower
+      description: The number is a one-sided bound ("did not exceed 1 %", "at least 2").
+    text_value:
+      type: text
+      description: A category or ordinal level (a reference-electrode type, "high", "amorphous").
+    boolean_value:
+      type: boolean
+    ref_value:
+      type: ref
+      targets: ANY
+      description: A value that is a record (the species that was the major product).
+    unit:
+      type: string
+      description: The unit as reported ("°C", "atm", "%", "1" for dimensionless). Numbers only.
+    qualifier:
+      type: enum
+      values:
+      - exact
+      - approximate
+    uncertainty:
+      type: number
+      description: A symmetric uncertainty (≥ 0) of the kind given in uncertainty_kind.
+    interval_lower:
+      type: number
+      description: Lower end of an uncertainty or confidence interval, when it is asymmetric or stated
+        as an interval.
+    interval_upper:
+      type: number
+    uncertainty_kind:
+      type: enum
+      values:
+      - standard_uncertainty
+      - combined_standard_uncertainty
+      - expanded_uncertainty
+      - standard_deviation
+      - standard_error
+      - confidence_interval
+      - plus_minus_unspecified
+    uncertainty_evaluation:
+      type: enum
+      values:
+      - type_a
+      - type_b
+      - type_a_and_b
+      - not_stated
+      description: GUM evaluation method (statistical analysis of series, other means, or both).
+    coverage_factor:
+      type: number
+      description: k of an expanded uncertainty.
+    confidence_level:
+      type: number
+      description: Between 0 and 1 (0.95 for a 95 % interval).
+    replicates:
+      type: integer
+      description: Number of independent determinations behind the value (n ≥ 1).
+    variable:
+      type: ref
+      targets:
+      - Variable
+      description: The measurand or factor this is a value of.
+    target:
+      type: ref
+      targets: ANY
+      description: The entity the value refers to (the product species of a yield). Profiles may narrow
+        it.
+    as_reported:
+      type: text
+      description: The source's own wording when it differs from the structured value.
+    basis:
+      type: text
+      description: What the value is normalized to or computed on.
+    definition:
+      type: text
+    origin:
+      type: enum
+      values:
+      - reported
+      - measured
+      - derived
+      - computed
+      - fitted
+      - predicted
+      - assumed
+      description: |
+        Set when the value's origin differs from its record's. fitted = obtained by fitting data
+        (it cannot count as a successful prediction of the same data); assumed = set by the author,
+        not measured.
+    produced_by:
+      type: ref
+      targets:
+      - Experiment
+      description: The experiment that produced the value when it sits on another record (a measured,
+        derived, computed or fitted value).
+    calibration:
+      type: ref
+      targets:
+      - Experiment
+      description: The calibration the value depends on (metrological traceability).
+    evidence_ids:
+      type: list
+      items:
+        type: string
+      description: Ids of the owning record's evidence items that state this value.
+    note:
+      type: text
+  rules:
+  - status is required.
+  - present needs exactly one representation — a number (value, or lower and upper) with a unit, text_value,
+    boolean_value or ref_value.
+  - below_detection_limit and below_quantification_limit need value (the limit) and unit.
+  - not_reported, not_measured and not_applicable carry no representation; missing_reason goes only with
+    not_reported.
+  - lower and upper come together, lower ≤ upper, and not together with value; bound needs value.
+  - uncertainty ≥ 0 and needs uncertainty_kind; interval_lower and interval_upper come together, ordered,
+    and need uncertainty_kind.
+  - confidence_interval needs confidence_level; expanded_uncertainty needs coverage_factor or confidence_level;
+    0 < confidence_level < 1; replicates ≥ 1.
+  - origin derived, computed or fitted names produced_by; evidence_ids name evidence items of the owning
+    record.
+evidence:
+  description: Where an assertion comes from. Embedded on nodes and links; quotes are checked verbatim
+    when the source text is supplied.
+  required:
+  - source
+  - locator
+  - kind
+  fields:
+    id:
+      type: string
+      description: Optional; unique within its record. Lets values (evidence_ids) and arguments (record_ref)
+        cite one passage.
+    source:
+      type: ref
+      targets:
+      - Source
+      - Dataset
+    locator:
+      type: text
+      description: Page, section, table, figure or dataset row.
+    kind:
+      type: enum
+      values:
+      - text
+      - table
+      - figure
+      - dataset_row
+      - computation
+      - curation_note
+    evidence_type:
+      type: string
+      description: ECO evidence type (e.g. ECO:0000006 experimental evidence, ECO:0007672 computational
+        evidence).
+    quote:
+      type: text
+      description: A short verbatim excerpt; only text found verbatim in the source goes here.
+    note:
+      type: text
+      description: A reading or remark that is not verbatim.
+    passage:
+      type: string
+      description: |-
+        The id of the source passage the quote was found in (a page or part of a page), as listed
+        in the passage index built by `scale graph index`; lets a search over passages and their
+        vectors return the records that cite them.
+    reading:
+      type: enum
+      values:
+      - text_layer
+      - ocr
+      - vision
+      - vision_ocr
+      description: 'How the evidence was read: from the PDF''s text layer, from OCR, from the page image
+        by a vision-capable curator, or from the image and checked against OCR in the same region (vision_ocr).
+        Absent means text_layer or ocr, as the page text records.'
+    region:
+      type: list
+      items:
+        type: number
+      description: 'Where on the page (the locator''s PDF page) the evidence was read: x0, y0, x1, y1
+        as fractions of the page width and height, origin at the top left.'
+    transcription:
+      type: text
+      description: What the curator read in the region, character for character as printed (a table row,
+        a caption, the numbers of a figure point), for evidence read from the page image. The values of
+        the record must appear in it. It is a reading, not a verbatim text-layer quote.
+    agreement:
+      type: enum
+      values:
+      - agree
+      - partial
+      - disagree
+      - no_ocr
+      description: 'Set by the curation tool, never by the curator: whether the numbers of the transcription
+        are also read by OCR in the same region (look-alike characters allowed). agree confirms the reading;
+        partial, disagree and no_ocr require a second_reading.'
+    second_reading:
+      type: text
+      description: An independent second visual reading of the same region by another curator, who did
+        not see the first transcription; its numbers must agree with the transcription for the evidence
+        to count where OCR does not confirm it.
+record_ref:
+  description: |
+    A reference to a record, or to one part of it: a result of an experiment, a value on a
+    sample, an evidence item. Values and evidence stay on their owning records; arguments and
+    tests point at them.
+  required:
+  - record
+  fields:
+    record:
+      type: string
+      description: The id of a node or link.
+    path:
+      type: string
+      description: JSON pointer into the record's props, e.g. /results/space_time_yield or /evidence/2.
+    record_version:
+      type: integer
+      description: The record_version referred to, when the record may be revised.
+stewardship:
+  description: |
+    Who contributed and curated a record, which project it belongs to and who may see it. The
+    graph header's stewardship is the default for every node and link; a record's own
+    stewardship overrides it field by field.
+  fields:
+    contributed_by:
+      type: list
+      items:
+        type: ref
+        targets:
+        - Institution
+    curated_by:
+      type: list
+      items:
+        type: ref
+        targets:
+        - Person
+        - Software
+    project:
+      type: ref
+      targets:
+      - Project
+    access:
+      type: enum
+      values:
+      - public
+      - consortium
+      - project
+      - institution
+      - embargoed
+      description: |
+        public: anyone. consortium: any institution in a project of the graph. project: the
+        record's project. institution: the contributing institutions. embargoed: the contributing
+        institutions until embargo_until, then access_after_embargo.
+    embargo_until:
+      type: date
+    access_after_embargo:
+      type: enum
+      values:
+      - public
+      - consortium
+      - project
+      - institution
+    licence:
+      type: text
+    note:
+      type: text
+  rules:
+  - A research_data graph declares stewardship with contributed_by, project and access.
+  - embargoed requires embargo_until and access_after_embargo; they are used only with embargoed.
+common:
+  node:
+    required:
+    - name
+    properties:
+      name:
+        type: text
+      origin:
+        type: enum
+        values:
+        - reported
+        - recorded
+        - derived
+        - computed
+        - curated
+        - hypothesized
+        - synthetic
+        description: |
+          reported = taken from a source; recorded = first-hand data written in the project
+          (requires recorded_at); derived = computed or normalized from reported values; curated =
+          added by a curator; hypothesized = proposed by a person or agent, not by a source.
+      evidence:
+        type: list
+        items:
+          type: evidence
+      description:
+        type: text
+      note:
+        type: text
+      unmodeled:
+        type: list
+        items:
+          type: text
+        description: Source context this schema cannot yet express; raised as a gap.
+      stewardship:
+        type: stewardship
+      identifiers:
+        type: map
+        items:
+          type: string
+        description: External identifiers (doi, orcid, ror, inchikey, an ontology IRI).
+      recorded_at:
+        type: datetime
+        description: When this version of the record was written into the graph.
+      record_version:
+        type: integer
+        description: Version of the record, starting at 1; a new version REVISES the previous one.
+      follows_domains:
+        type: list
+        items:
+          type: string
+        description: Domains this node follows, replacing the graph's list; an empty list follows none.
+  link:
+    properties:
+      stewardship:
+        type: stewardship
+      recorded_at:
+        type: datetime
+      status:
+        type: enum
+        values:
+        - asserted
+        - hypothesized
+        - supported
+        - disputed
+        - refuted
+        description: Epistemic status of the relationship as the source states it.
+      origin:
+        type: enum
+        values:
+        - reported
+        - recorded
+        - derived
+        - computed
+        - curated
+        - hypothesized
+        - synthetic
+      evidence:
+        type: list
+        items:
+          type: evidence
+      basis:
+        type: text
+      confidence:
+        type: number
+        description: A curator's confidence in the extraction, 0 to 1. Not a scientific probability.
+      note:
+        type: text
+extensions:
+  key_pattern: ^_[a-z0-9]+_[a-z0-9_]+$
+  registry: registry/extension-prefixes.yaml
+  description: |
+    A property no module declares may appear only as an extension key _<prefix>_<name>, with a
+    registered prefix. Readers keep extension keys; the validator does not check their values. An
+    extension never changes the meaning of a declared property; useful ones graduate into a module.
+nodes:
+  Question:
+    maps_to:
+    - ORKG ResearchProblem
+    - discourse-graph Question
+    description: A research question or problem, with its scope. Designs, experiments, hypotheses and
+      claims address it.
+    required:
+    - statement
+    properties:
+      statement:
+        type: text
+      scope:
+        type: text
+      question_status:
+        type: enum
+        values:
+        - open
+        - addressed
+        - answered
+        - abandoned
+  Hypothesis:
+    maps_to:
+    - EXPO ExperimentalHypothesis
+    - SIO hypothesis
+    - IAO hypothesis textual entity
+    description: |
+      A conjectured, testable statement about how or why the studied system behaves. It is not a
+      finding: experiments TEST it, and its standing follows from the outcomes. Conclusions about it
+      are Claims ABOUT it; accumulating support does not turn it into a Claim.
+    required:
+    - statement
+    - hypothesis_kind
+    properties:
+      statement:
+        type: text
+      formal_statement:
+        type: text
+      hypothesis_kind:
+        type: enum
+        values:
+        - explanatory
+        - mechanistic
+        - causal
+        - descriptive
+        - auxiliary
+        - competing
+        description: auxiliary = an assumption needed to derive predictions; competing = an alternative
+          explanation (a confounder, a bias, a design effect).
+      statistical_role:
+        type: enum
+        values:
+        - 'null'
+        - alternative
+        - not_applicable
+        description: EXPO NullHypothesis H0 / alternative H1, when the hypothesis is tested statistically.
+      refuted_if:
+        type: text
+        description: What observation would refute it, when stated.
+      scope:
+        type: text
+      proposed_at:
+        type: date
+        description: When the hypothesis was first proposed (from the source), not when it was recorded.
+      hypothesis_status:
+        type: enum
+        values:
+        - proposed
+        - under_test
+        - supported
+        - disputed
+        - refuted
+        - superseded
+        - retracted
+  Prediction:
+    maps_to:
+    - EXPO deduced consequence
+    - hypothetico-deductive prediction
+    description: |
+      An expected outcome derived from a hypothesis or a model: an expected value of a variable,
+      or a qualitative expectation. Its proposed_at is compared with the start of the experiment
+      that tests it; a prediction proposed after the result is post hoc.
+    properties:
+      statement:
+        type: text
+      expected:
+        type: value
+      variable:
+        type: ref
+        targets:
+        - Variable
+      direction:
+        type: enum
+        values:
+        - increase
+        - decrease
+        - no_change
+        - value
+        - qualitative
+      proposed_at:
+        type: date
+  Experiment:
+    maps_to:
+    - EXPO ScientificExperiment
+    - OBI planned process
+    - OBI assay
+    - PROV-O Activity
+    description: |
+      A research method carried out to produce information about target variables of a studied
+      system: a laboratory test, a characterization, a field observation, a simulation, a fit or a
+      re-analysis of data. Modules specialize it. Its conditions and results are properties of
+      the node (or of its specialization); a result that is a value of a Variable names it.
+    properties:
+      experiment_kind:
+        type: enum
+        values:
+        - physical
+        - computational
+        description: EXPO. A fit or a re-analysis of existing data is computational.
+      manipulation:
+        type: enum
+        values:
+        - interventional
+        - observational
+        - not_reported
+        description: interventional = the experimenter sets the factors; observational = they vary without
+          intervention.
+      approach:
+        type: enum
+        values:
+        - hypothesis_driven
+        - exploratory
+        - not_reported
+        description: EXPO Galilean (tests a hypothesis) or Baconian (forms hypotheses, e.g. a screen).
+      goal:
+        type: enum
+        values:
+        - confirm
+        - investigate
+        - explain
+        - compute
+        - benchmark
+        - calibrate
+        - validate
+      method_id:
+        type: string
+        description: An identifier of the method or technique (OBI, CHMO, STATO term), when known.
+      experiment_status:
+        type: enum
+        values:
+        - proposed
+        - planned
+        - running
+        - completed
+        - failed
+        - aborted
+        description: The lifecycle of the experiment (proposed = suggested, e.g. by an agent, not yet
+          accepted).
+      freshness_status:
+        type: enum
+        values:
+        - current
+        - inputs_revised
+        - not_assessed
+        description: Separate from the lifecycle. inputs_revised = an input used has a newer version.
+      started_at:
+        type: datetime
+      finished_at:
+        type: datetime
+      performed_on:
+        type: date
+        description: The date the source gives, at its precision, when no datetime is known.
+      conditions:
+        type: map
+        items:
+          type: value
+      results:
+        type: map
+        items:
+          type: value
+      configuration:
+        type: ref
+        targets:
+        - Dataset
+        description: Input files or settings of a computational experiment.
+      execution_environment:
+        type: ref
+        targets:
+        - Dataset
+        description: Container image, environment lock file or hardware description.
+      random_seed:
+        type: integer
+  Procedure:
+    maps_to:
+    - EXPO experimental action
+    - OBI planned process
+    - PROV-O Activity
+    description: |
+      Something carried out on material things that is not itself an experiment: making,
+      treating, conditioning, sampling or disposing of them. Modules specialize it (Preparation,
+      Treatment). Inputs and outputs are HAS_INPUT and HAS_OUTPUT.
+    properties:
+      method:
+        type: text
+      method_id:
+        type: string
+      procedure_status:
+        type: enum
+        values:
+        - proposed
+        - planned
+        - running
+        - completed
+        - failed
+        - aborted
+      started_at:
+        type: datetime
+      finished_at:
+        type: datetime
+      performed_on:
+        type: date
+      conditions:
+        type: map
+        items:
+          type: value
+  Protocol:
+    maps_to:
+    - OBI plan specification
+    - EXPO PlanExperimentalActions
+    description: An intended, reusable plan for experiments or procedures — the plan, not an execution.
+    properties:
+      protocol_kind:
+        type: enum
+        values:
+        - synthesis
+        - treatment
+        - measurement
+        - analysis
+        - computation
+        - sampling
+        - other
+      steps:
+        type: list
+        items:
+          type: text
+      version:
+        type: string
+      uri:
+        type: string
+  Operation:
+    maps_to:
+    - SOSA/SSN Actuation (its time course)
+    - ISA-88 operation (procedural element)
+    - OBI planned process (execution regime)
+    description: |
+      How an experiment or procedure is operated in time. Static: the conditions are held.
+      Dynamic: they are programmed to change (pulses, cycles, ramps, switching, modulation). The
+      driving-force domains say what is driven (a potential, light, heat); the Operation says how
+      it varies. Any experiment or procedure, in any science, can be operated statically or
+      dynamically.
+    required:
+    - operation_mode
+    properties:
+      operation_mode:
+        type: enum
+        values:
+        - static
+        - dynamic
+      time_pattern:
+        type: enum
+        values:
+        - constant
+        - periodic
+        - step
+        - ramp
+        - programmed
+        - transient
+        - not_reported
+      varied_quantities:
+        type: list
+        items:
+          type: text
+        description: The quantities that change in a dynamic operation (e.g. electrode_potential, irradiance,
+          temperature).
+      period:
+        type: value
+      frequency:
+        type: value
+      duty_cycle:
+        type: value
+      cycles:
+        type: integer
+      total_duration:
+        type: value
+      segments:
+        type: list
+        items:
+          type: map
+          items:
+            type: value
+        description: |
+          The program, in order: each segment is a map of the values held in it, including its
+          duration (e.g. {electrode_potential: 0.2 V, duration: 2 s}).
+  Design:
+    maps_to:
+    - EXPO ExperimentalDesign
+    - OBI study design
+    - Fisher design of experiments
+    description: |
+      How a set of experiments is arranged to answer a question: which factors vary and at which
+      levels, which are held fixed, the controls, the experimental units, replication,
+      randomization, blocking and, for adaptive designs, the stopping rule. It states intent;
+      outcomes belong to the experiments (an analysis experiment may pool them).
+    properties:
+      design_kind:
+        type: enum
+        values:
+        - one_factor
+        - full_factorial
+        - fractional_factorial
+        - response_surface
+        - paired_comparison
+        - screening
+        - time_series
+        - adaptive
+        - observational_cohort
+        - meta_analysis
+        - other
+      assignment_method:
+        type: enum
+        values:
+        - randomized
+        - systematic
+        - adaptive
+        - convenience
+        - not_reported
+      randomization_seed:
+        type: integer
+      blocked:
+        type: boolean
+      blinding:
+        type: text
+      planned_replicates:
+        type: integer
+      inclusion_criteria:
+        type: text
+        description: For a meta-analysis or benchmark, which sources or records were admitted.
+      exclusion_criteria:
+        type: text
+      stopping_criterion:
+        type: text
+        description: For adaptive and autonomous campaigns.
+      strategy:
+        type: text
+        description: Normalization and quality-control strategy, in words (EXPO).
+  Variable:
+    maps_to:
+    - EXPO TargetVariable
+    - EXPO Factor
+    - STATO variable
+    - QUDT quantity kind
+    description: |
+      A quantity or quality that can take values in a study (a temperature, a metal loading, a
+      yield, a reference-electrode type). Its role (target, factor, controlled) belongs to a
+      design or an experiment, so it sits on the HAS_VARIABLE edge.
+    required:
+    - scale
+    properties:
+      scale:
+        type: enum
+        values:
+        - quantitative
+        - ordinal
+        - nominal
+        - boolean
+      quantity_kind:
+        type: string
+        description: A kind from the quantity-kind registry; required for quantitative variables.
+      unit:
+        type: string
+      categories:
+        type: list
+        items:
+          type: text
+        description: The allowed levels of an ordinal (in order) or nominal variable.
+      definition:
+        type: text
+      of:
+        type: ref
+        targets: ANY
+        description: What the variable is a property of, when fixed — usually an ObjectOfStudy or a module's
+          specialization of it.
+  Claim:
+    maps_to:
+    - EXPO ExperimentalConclusion
+    - SEPIO assertion
+    - micropublication claim
+    - nanopublication assertion
+    - discourse-graph Claim
+    description: |
+      A scoped statement drawn from evidence: a finding, a conclusion, a generalization, a law or a
+      proposed mechanism, with its epistemic status. Typed edges express most relationships; a
+      Claim is for statements no edge expresses.
+    required:
+    - statement
+    - claim_kind
+    - claim_status
+    properties:
+      statement:
+        type: text
+      claim_kind:
+        type: enum
+        values:
+        - finding
+        - conclusion
+        - generalization
+        - law
+        - mechanism
+        - comparison
+        - causal
+        - structure_property
+        - data_quality
+        - other
+      claim_status:
+        type: enum
+        values:
+        - proposed
+        - supported
+        - disputed
+        - refuted
+        - superseded
+        - retracted
+        - not_evaluated
+      inference_type:
+        type: enum
+        values:
+        - observational
+        - interventional
+        - computational
+        - theoretical
+        - meta_analysis
+        - expert_opinion
+        - not_stated
+      scope:
+        type: text
+        description: The systems and conditions over which the claim is generalized.
+      limitations:
+        type: text
+  ObjectOfStudy:
+    maps_to:
+    - SOSA / ISO 19156 FeatureOfInterest
+    - OBOE Entity (object or phenomenon)
+    - EXPO ObjectOfExperiment
+    - BFO independent continuant (thing, system) / occurrent (phenomenon)
+    description: |
+      What a study is about: a thing, a system of things, a phenomenon or a population. Its
+      properties are Variables (Variable.of); experiments EXAMINE it; models REPRESENT it.
+      Being studied is a role, carried by the edge (EXAMINES), not a kind of thing: the same
+      material is an object of study in one experiment and an input in another. Domain modules
+      specialize it — in catalysis, Material, ChemicalSpecies, Catalyst and ActiveSite are things,
+      Reaction is a phenomenon — and add physical specimens (CatalystSample) of their own.
+    required:
+    - object_kind
+    properties:
+      object_kind:
+        type: enum
+        values:
+        - thing
+        - system
+        - phenomenon
+        - population
+        description: |
+          thing = a material entity or substance that endures; system = an arrangement of things
+          studied together; phenomenon = something that happens (a process, event or effect);
+          population = a collection studied statistically.
+      generality:
+        type: enum
+        values:
+        - kind
+        - particular
+        description: kind = a type (CO2 hydrogenation, Cu/ZnO catalysts); particular = one individual
+          (the reaction in test 12).
+      scope:
+        type: text
+        description: The conditions or boundaries of what is studied.
+  Instrument:
+    maps_to:
+    - EXPO ExperimentalEquipment
+    - OBI device
+    required:
+    - instrument_kind
+    properties:
+      instrument_kind:
+        type: text
+      manufacturer:
+        type: text
+      model:
+        type: text
+      serial_number:
+        type: string
+      settings:
+        type: map
+        items:
+          type: value
+  Model:
+    maps_to:
+    - EXPO ExperimentalModel
+    - SIO model
+    description: A representation of the studied system used to derive predictions or to compute (kinetic,
+      thermodynamic, statistical, machine-learning).
+    properties:
+      model_kind:
+        type: text
+      equations:
+        type: list
+        items:
+          type: text
+      assumptions:
+        type: list
+        items:
+          type: text
+      validity_domain:
+        type: text
+        description: The conditions under which the model is meant to hold.
+      parameters:
+        type: map
+        items:
+          type: value
+      version:
+        type: string
+  Source:
+    maps_to:
+    - IAO document
+    - dcterms BibliographicResource
+    required:
+    - kind
+    - title
+    properties:
+      kind:
+        type: enum
+        values:
+        - article
+        - patent
+        - thesis
+        - report
+        - book
+        - preprint
+        - dataset_paper
+        - review_report
+        - correction
+        - retraction_notice
+        - webpage
+        - lab_notebook
+        - other
+        - expression_of_concern
+        - withdrawal_notice
+        - removal_notice
+        - addendum
+      title:
+        type: text
+      doi:
+        type: string
+      url:
+        type: string
+      year:
+        type: integer
+      venue:
+        type: text
+      licence:
+        type: text
+      peer_reviewed:
+        type: boolean
+      status_check:
+        type: status_check
+        description: That someone checked this source for notices, when and how; absent means never checked.
+          The publication status is derived from the RETRACTS and UPDATES links that reach the source.
+        maturity: provisional
+      text_version:
+        type: enum
+        values:
+        - author_original
+        - submitted_manuscript
+        - accepted_manuscript
+        - proof
+        - version_of_record
+        - corrected_version_of_record
+        - enhanced_version_of_record
+        description: The version of the text that was read for the evidence that cites this source (NISO
+          JAV stages), so that locators and quotes can be found again; the version of record is not assumed.
+        maturity: provisional
+      text_sha256:
+        type: string
+        description: The SHA-256 digest of the file that was read (64 hexadecimal characters).
+        maturity: provisional
+      retrieved_from:
+        type: text
+        description: Where the file that was read came from (a publisher, a preprint server, a repository,
+          a library), as a name or a URL.
+        maturity: provisional
+      retrieved_on:
+        type: date
+        description: When the file that was read was retrieved.
+        maturity: provisional
+      published_on:
+        type: date
+        description: The date of the source at the precision it gives (YYYY, YYYY-MM or YYYY-MM-DD); date_basis
+          says which date it is. year stays the year.
+        maturity: provisional
+      date_basis:
+        type: enum
+        values:
+        - published
+        - issued
+        - granted
+        - priority
+        - accepted
+        - available
+        description: Which date published_on is (a patent's grant or publication, an article's publication
+          or acceptance, a preprint's availability).
+        maturity: provisional
+      priority_date:
+        type: date
+        description: A patent's earliest priority date, at the precision known.
+        maturity: provisional
+  Dataset:
+    maps_to:
+    - DCAT Dataset
+    - IAO data set
+    required:
+    - data_kind
+    - availability
+    properties:
+      data_kind:
+        type: enum
+        values:
+        - table
+        - raw
+        - processed
+        - spectrum
+        - image
+        - structure
+        - model_output
+        - time_series
+        - configuration
+        - environment
+        - other
+      version:
+        type: string
+      uri:
+        type: string
+      sha256:
+        type: string
+      media_type:
+        type: string
+      data_schema:
+        type: text
+      distributions:
+        type: list
+        items:
+          type: string
+        description: Other locations or formats of the same data (DCAT distributions).
+      availability:
+        type: enum
+        values:
+        - available
+        - restricted
+        - not_reported
+      licence:
+        type: text
+      status_check:
+        type: status_check
+        description: That someone checked this dataset for notices (withdrawal, correction, a new version),
+          when and how; absent means never checked.
+        maturity: provisional
+      issued:
+        type: date
+        description: When the dataset (this version) was issued, at the precision known (DataCite dateType
+          Issued).
+        maturity: provisional
+  Person:
+    maps_to:
+    - foaf Person
+    - PROV-O Agent
+    properties:
+      orcid:
+        type: string
+      surname:
+        type: text
+      given_names:
+        type: text
+      name_variants:
+        type: list
+        items:
+          type: text
+  Institution:
+    maps_to:
+    - schema.org Organization
+    - ROR organization
+    properties:
+      institution_kind:
+        type: enum
+        values:
+        - university
+        - company
+        - government_laboratory
+        - research_institute
+        - funding_agency
+        - publisher
+        - unit
+        - other
+        - not_reported
+      ror:
+        type: string
+      url:
+        type: string
+      country:
+        type: string
+  Project:
+    maps_to:
+    - FRAPO Project
+    - schema.org ResearchProject
+    properties:
+      award_id:
+        type: string
+      url:
+        type: string
+      start_date:
+        type: date
+      end_date:
+        type: date
+  Software:
+    maps_to:
+    - schema.org SoftwareApplication
+    - PROV-O SoftwareAgent
+    properties:
+      software_kind:
+        type: enum
+        values:
+        - library
+        - application
+        - agent
+        - service
+        - other
+      version:
+        type: string
+      repository:
+        type: string
+      licence:
+        type: text
+      developer:
+        type: text
+      inputs:
+        type: list
+        items:
+          type: text
+        description: What the software or agent consumes (labels or data kinds), so agents can be discovered
+          and chained.
+      outputs:
+        type: list
+        items:
+          type: text
+      endpoint:
+        type: string
+        description: Where a service or agent can be called.
+edges:
+  ADDRESSES:
+    maps_to:
+    - ORKG addresses research problem
+    from:
+    - Design
+    - Experiment
+    - Hypothesis
+    - Claim
+    - Project
+    to:
+    - Question
+  DERIVES:
+    description: A prediction is derived from a hypothesis or a model (the deductive step).
+    from:
+    - Hypothesis
+    - Model
+    - Claim
+    to:
+    - Prediction
+    properties:
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+        description: Auxiliary hypotheses or claims the derivation relies on.
+  COMPETES_WITH:
+    description: Two hypotheses explain the same observations differently. Symmetric in meaning; stored
+      once, queried both ways.
+    from:
+    - Hypothesis
+    to:
+    - Hypothesis
+  PROPOSED_BY:
+    description: Who or what proposed a hypothesis, a prediction, a design or an experiment (a person,
+      an agent, a model) and why.
+    from:
+    - Hypothesis
+    - Prediction
+    - Design
+    - Experiment
+    - Procedure
+    to:
+    - Person
+    - Institution
+    - Software
+    - Model
+    properties:
+      rationale:
+        type: text
+      proposed_at:
+        type: datetime
+      acquisition_value:
+        type: number
+        description: The score an autonomous agent gave the proposal, when it gives one.
+  AIMS_TO_TEST:
+    description: The intent of a design or a planned experiment to test a hypothesis or prediction (before
+      any outcome).
+    from:
+    - Design
+    - Experiment
+    to:
+    - Hypothesis
+    - Prediction
+  TESTS:
+    maps_to:
+    - EXPO FactSupport
+    - EXPO FactReject
+    - SIO in support of / in dispute of / in refutation of
+    description: A carried-out experiment tests a hypothesis or prediction, and how it came out.
+    from:
+    - Experiment
+    to:
+    - Hypothesis
+    - Prediction
+    properties:
+      outcome:
+        type: enum
+        values:
+        - supports
+        - disputes
+        - refutes
+        - inconclusive
+        - not_reported
+      statistical_decision:
+        type: enum
+        values:
+        - reject_null
+        - fail_to_reject_null
+        - not_applicable
+        description: Failing to reject a null hypothesis is not support for it.
+      result_refs:
+        type: list
+        items:
+          type: record_ref
+        description: The results the outcome rests on.
+      error:
+        type: enum
+        values:
+        - none_reported
+        - false_positive_suspected
+        - false_negative_suspected
+        - faulty_comparison
+        - incomplete_data
+        - confounded
+        description: EXPO ResultError, as stated by the source or judged by the assessor.
+      warrant:
+        type: text
+        description: Why the result bears on the hypothesis.
+      severity:
+        type: enum
+        values:
+        - low
+        - moderate
+        - high
+        - not_assessed
+        description: As stated or judged; not computed by the tools.
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  SUPPORTS:
+    maps_to:
+    - SEPIO has evidence line
+    - micropublication supports
+    - discourse-graph supports
+    description: Evidence for a claim or hypothesis. Not independent of a TESTS link it restates (premise_refs
+      names that link).
+    from:
+    - Experiment
+    - Claim
+    - Dataset
+    - Source
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      warrant:
+        type: text
+      premise_refs:
+        type: list
+        items:
+          type: record_ref
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  CONTRADICTS:
+    maps_to:
+    - micropublication challenges
+    - discourse-graph opposes
+    from:
+    - Experiment
+    - Claim
+    - Dataset
+    - Source
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      warrant:
+        type: text
+      premise_refs:
+        type: list
+        items:
+          type: record_ref
+      assumptions:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Hypothesis
+          - Claim
+      assessed_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Software
+        - Source
+      assessed_at:
+        type: date
+  CONCLUDES:
+    maps_to:
+    - EXPO ExperimentalConclusion
+    description: The conclusion an experiment reaches. It records the conclusion, not support for it.
+    from:
+    - Experiment
+    to:
+    - Claim
+  ABOUT:
+    from:
+    - Question
+    - Hypothesis
+    - Claim
+    - Prediction
+    to: ANY
+    properties:
+      role:
+        type: text
+  EVALUATES:
+    description: An experiment verifies, validates, calibrates or benchmarks a model, software, prediction
+      or method.
+    from:
+    - Experiment
+    to:
+    - Model
+    - Software
+    - Prediction
+    - Experiment
+    - Protocol
+    properties:
+      evaluation_kind:
+        type: enum
+        values:
+        - verification
+        - validation
+        - calibration
+        - benchmark
+        description: verification = solved or implemented correctly; validation = agrees with the real
+          system within a stated criterion.
+      criterion:
+        type: text
+      outcome:
+        type: enum
+        values:
+        - passes
+        - fails
+        - partial
+        - inconclusive
+        - not_reported
+      result_refs:
+        type: list
+        items:
+          type: record_ref
+      scope:
+        type: text
+  CALIBRATED_BY:
+    maps_to:
+    - VIM calibration
+    description: An instrument was calibrated by an experiment (which HAS_INPUT its reference standards).
+    from:
+    - Instrument
+    to:
+    - Experiment
+    properties:
+      valid_until:
+        type: date
+  SUPERSEDES:
+    description: A newer claim or hypothesis replaces an older one; the older one is kept.
+    from:
+    - Claim
+    - Hypothesis
+    to:
+    - Claim
+    - Hypothesis
+    properties:
+      judged_by:
+        type: ref
+        targets:
+        - Person
+        - Institution
+        - Source
+      judged_at:
+        type: date
+      reason:
+        type: text
+  RETRACTS:
+    from:
+    - Source
+    - Claim
+    to:
+    - Source
+    - Claim
+    - Hypothesis
+    - Dataset
+    properties:
+      reason:
+        type: text
+      retracted_on:
+        type: date
+      scope:
+        type: enum
+        values:
+        - full
+        - partial
+        description: full = the whole source (or dataset, claim) is retracted, which is also what a link
+          without scope means; partial = only the parts named in scope_locators.
+        maturity: provisional
+      scope_locators:
+        type: list
+        items:
+          type: text
+        description: The retracted parts of a partial retraction, as the notice names them ("Table 2",
+          "Figure 3", "section 3.2"). Only with scope partial.
+        maturity: provisional
+    description: |
+      A notice, a source or a claim retracts a source, a claim, a hypothesis or a dataset. A RETRACTS link
+      from a notice Source (kind retraction_notice) is authoritative: the retracted source's publication
+      status is derived from it, never typed by hand, and the link cites the notice as evidence. scope says
+      whether the whole source is retracted (full, the default) or part of it (partial, the parts named in
+      scope_locators). A partial retraction can also be recorded record by record: a Dataset for the
+      retracted part (a table, a figure) INCLUDES the affected records, and the notice RETRACTS that
+      Dataset with scope full. A retraction does not make what the source reported false and removes no
+      record: tools flag the records that rest on retracted sources and leave them out of query answers by
+      default.
+  REVIEWS:
+    description: A review report or a person reviews a source, claim or dataset.
+    from:
+    - Source
+    - Person
+    to:
+    - Source
+    - Claim
+    - Dataset
+    - Hypothesis
+    properties:
+      outcome:
+        type: enum
+        values:
+        - accept
+        - minor_revision
+        - major_revision
+        - reject
+        - commentary
+        - not_reported
+      reviewed_on:
+        type: date
+  PART_OF_DESIGN:
+    description: An experiment realizes a design, as one unit, block, arm, replicate or iteration of it.
+    from:
+    - Experiment
+    to:
+    - Design
+    properties:
+      experimental_unit:
+        type: ref
+        targets: ANY
+        description: The independent unit the treatment is applied to (a specimen, a reactor charge, a
+          subject); replicates are counted over units.
+      block:
+        type: string
+      arm:
+        type: string
+        description: The treatment or control group.
+      replicate_group:
+        type: string
+      run_order:
+        type: integer
+      iteration:
+        type: integer
+        description: The round of an adaptive or autonomous campaign.
+  HAS_VARIABLE:
+    maps_to:
+    - EXPO TargetVariable / Factor / FactorLevel
+    description: A variable of a design or experiment, with its role there; for an experiment, the level
+      it took.
+    from:
+    - Design
+    - Experiment
+    to:
+    - Variable
+    properties:
+      role:
+        type: enum
+        values:
+        - target
+        - factor
+        - controlled
+        - covariate
+        - nuisance
+      levels:
+        type: list
+        items:
+          type: value
+        description: For a design, the planned levels.
+      level:
+        type: value
+        description: For an experiment, the value the factor or controlled variable took. If the same
+          value is also in conditions, they must agree.
+  CONTROL_FOR:
+    maps_to:
+    - EXPO ComparisonControl / TargetGroups
+    - Mill's method of difference
+    description: The source experiment serves as a control for the target experiment.
+    from:
+    - Experiment
+    to:
+    - Experiment
+    properties:
+      control_kind:
+        type: enum
+        values:
+        - negative
+        - positive
+        - blank
+        - baseline
+        - reference
+        - sham
+      differs_in:
+        type: list
+        items:
+          type: ref
+          targets:
+          - Variable
+        description: The variables in which the two differ.
+  REPLICATES:
+    description: The source experiment repeats the target one; changed says what differs.
+    from:
+    - Experiment
+    to:
+    - Experiment
+    properties:
+      level:
+        type: enum
+        values:
+        - repeat
+        - replicate
+        - reproduce
+        description: repeat = same setup, people and sample; replicate = new data, same method; reproduce
+          = independently, by other means or people.
+      changed:
+        type: list
+        items:
+          type: enum
+          values:
+          - data
+          - sample
+          - method
+          - instrument
+          - software
+          - team
+          - site
+          - time
+      agreement:
+        type: enum
+        values:
+        - agrees
+        - partly_agrees
+        - disagrees
+        - not_stated
+      criterion:
+        type: text
+        description: How agreement was judged.
+  EXAMINES:
+    maps_to:
+    - EXPO ObjectOfExperiment
+    - OBI has evaluant (role)
+    - SOSA hasFeatureOfInterest
+    description: |
+      What an experiment studies, in the role of its object of study. Modules add the physical
+      specimens that are examined (catalysis extends it to CatalystSample) and their own specific
+      edges (USES_CATALYST).
+    from:
+    - Experiment
+    to:
+    - ObjectOfStudy
+    properties:
+      role:
+        type: text
+      state:
+        type: text
+  REPRESENTS:
+    description: A model represents an object of study (a modelling correspondence, not identity).
+    from:
+    - Model
+    to:
+    - ObjectOfStudy
+  HAS_PART:
+    maps_to:
+    - BFO has part
+    description: A system or phenomenon has a part (a catalytic system has its catalyst; a mechanism its
+      steps). Acyclic.
+    from:
+    - ObjectOfStudy
+    to:
+    - ObjectOfStudy
+    properties:
+      role:
+        type: text
+  HAS_INPUT:
+    maps_to:
+    - OBI has specified input
+    - PROV-O used
+    from:
+    - Experiment
+    - Procedure
+    to: ANY
+    properties:
+      role:
+        type: enum
+        values:
+        - material
+        - sample
+        - reagent
+        - reference_standard
+        - data
+        - training_data
+        - calibration_data
+        - validation_data
+        - test_data
+        - parameter
+        - other
+      amount:
+        type: value
+      input_version:
+        type: integer
+        description: The record_version of the input that was used.
+      sha256:
+        type: string
+      used_at:
+        type: datetime
+  HAS_OUTPUT:
+    maps_to:
+    - OBI has specified output
+    - PROV-O wasGeneratedBy (inverse)
+    from:
+    - Experiment
+    - Procedure
+    to: ANY
+  FOLLOWS_PROTOCOL:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Protocol
+    properties:
+      deviations:
+        type: text
+  USES_INSTRUMENT:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Instrument
+    properties:
+      role:
+        type: enum
+        values:
+        - measurement
+        - sensor
+        - actuator
+        - analysis
+        - other
+  USES_MODEL:
+    from:
+    - Experiment
+    to:
+    - Model
+  USES_SOFTWARE:
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Software
+    properties:
+      version:
+        type: string
+  PART_OF:
+    description: A step of a larger experiment or procedure. Acyclic.
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Experiment
+    - Procedure
+    properties:
+      order:
+        type: integer
+  PRECEDES:
+    description: Order between experiments or procedures. Acyclic.
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Experiment
+    - Procedure
+  HAS_OPERATION:
+    description: How an experiment or procedure is operated in time (static or dynamic).
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Operation
+  PERFORMED_BY:
+    maps_to:
+    - PROV-O wasAssociatedWith
+    from:
+    - Experiment
+    - Procedure
+    to:
+    - Person
+    - Institution
+    - Software
+    properties:
+      role:
+        type: text
+  REPORTED_IN:
+    description: A record is reported in a source or dataset; derived from its evidence and checked against
+      it.
+    from:
+      any_except:
+      - Source
+    to:
+    - Source
+    - Dataset
+    properties:
+      locators:
+        type: list
+        items:
+          type: text
+  AUTHORED_BY:
+    from:
+    - Source
+    - Dataset
+    to:
+    - Person
+    - Institution
+    properties:
+      role:
+        type: enum
+        values:
+        - author
+        - author_affiliation
+        - inventor
+        - assignee
+        - publisher
+        - creator
+      position:
+        type: integer
+  MEMBER_OF:
+    from:
+    - Person
+    - Institution
+    to:
+    - Institution
+    properties:
+      role:
+        type: text
+  PARTICIPATES_IN:
+    from:
+    - Institution
+    - Person
+    to:
+    - Project
+    properties:
+      role:
+        type: enum
+        values:
+        - lead
+        - partner
+        - data_provider
+        - curator
+        - other
+  FUNDED_BY:
+    from:
+    - Project
+    - Experiment
+    - Source
+    to:
+    - Institution
+    properties:
+      award_id:
+        type: string
+  INCLUDES:
+    description: A project, design or dataset aggregates records (a research object).
+    from:
+    - Project
+    - Design
+    - Dataset
+    to: ANY
+  REVISES:
+    description: A new version of a graph record replaces an earlier one of the same label; the earlier
+      one is kept. Acyclic. For graph records only; versions of a publication (preprint, accepted manuscript,
+      version of record), its translations and duplicate publications are SAME_WORK_AS between Sources.
+    from: ANY
+    to: ANY
+  UPDATES:
+    maps_to:
+    - Crossref update types (Crossmark)
+    - PROV-O wasRevisionOf
+    description: |
+      A notice updates a published source or dataset without retracting it: a correction (erratum,
+      corrigendum), an expression of concern, an addendum or clarification, a withdrawal or removal, a new
+      version or edition. The notice is a Source of its own (kind correction, expression_of_concern,
+      addendum, withdrawal_notice, removal_notice, or the new version itself) and the link cites it as
+      evidence. A retraction is RETRACTS, not an update. The updated source's publication status is
+      derived from these links and RETRACTS (withdrawal and removal count as retraction), never typed by
+      hand; the records it supports are kept.
+    from:
+    - Source
+    to:
+    - Source
+    - Dataset
+    required:
+    - update_type
+    - evidence
+    properties:
+      update_type:
+        type: enum
+        values:
+        - correction
+        - erratum
+        - corrigendum
+        - expression_of_concern
+        - addendum
+        - clarification
+        - withdrawal
+        - removal
+        - new_version
+        - new_edition
+        description: What the notice does, in Crossref's terms (correction, erratum and corrigendum correct
+          errors; withdrawal and removal take the source out of the record; new_version and new_edition
+          supersede it).
+      updated_on:
+        type: date
+        description: When the notice was issued, at the precision known.
+      reason:
+        type: text
+        description: The reason the notice gives, in a short paraphrase or quote.
+    maturity: provisional
+  SAME_WORK_AS:
+    maps_to:
+    - Crossref relation types (preprint, manuscript, version, translation, identical)
+    - DataCite relationType IsVersionOf, IsTranslationOf, IsIdenticalTo
+    description: |
+      Two sources report the same work: the source is the preprint, the accepted manuscript or another
+      version of the target, a translation of it, or a duplicate publication. What both report is one
+      finding, not a replication; the evidence cites the version that was read (its text_version).
+      Versions of a publication are linked here; REVISES is for versions of graph records.
+    from:
+    - Source
+    to:
+    - Source
+    required:
+    - relation
+    properties:
+      relation:
+        type: enum
+        values:
+        - preprint_of
+        - accepted_manuscript_of
+        - version_of
+        - translation_of
+        - duplicate_of
+        description: How the source relates to the target (source relation target).
+    maturity: provisional
+rules:
+- A TESTS link whose outcome is supports, disputes or refutes carries evidence or result_refs.
+- A Prediction tested by an experiment that started before the prediction's proposed_at is flagged post
+  hoc (only when both dates are known).
+- A TESTS supports outcome that rests on a fitted value is flagged (a fit does not confirm its own data).
+- A Hypothesis with hypothesis_status supported needs a supports outcome or a SUPPORTS link; refuted needs
+  a refutes outcome or a CONTRADICTS link; disputed needs a disputes or refutes outcome or a CONTRADICTS
+  link.
+- An Experiment with approach hypothesis_driven TESTS or AIMS_TO_TEST a hypothesis or prediction (advisory).
+- A Prediction has a statement or an expected value; its variable and expected.variable agree.
+- A quantitative Variable has a quantity_kind; a value of a nominal or ordinal variable is a text_value,
+  one of its categories.
+- CONTROL_FOR names at least one variable in differs_in (advisory). No confounding verdict is drawn from
+  the count.
+- REPLICATES with level reproduce lists what changed (advisory).
+- A dynamic Operation names its varied_quantities and says how they vary (segments, period or frequency);
+  a static one has time_pattern constant (or none).
+- PART_OF, PRECEDES, HAS_PART and REVISES are acyclic; no kernel edge joins a record to itself; REVISES
+  joins records of the same label.
+- A record_ref resolves to a node or link, and its path to a property of it; evidence_ids name evidence
+  of the owning record.
+- An experiment that used an input at input_version lower than the input's current record_version is flagged
+  inputs_revised (advisory).
+- A RETRACTS link from a notice Source is authoritative. A source's publication status is derived from
+  the RETRACTS and UPDATES links that reach it (retracted; withdrawn for a withdrawal or removal; partially
+  retracted; expression of concern; corrected; updated; otherwise current or unknown), never typed by
+  hand; status_check records only that someone looked.
+- A retracted (or withdrawn) source does not make its claims false. Tools flag the records whose evidence
+  rests on retracted sources (one hop along HAS_INPUT and produced_by; records a retracted dataset includes
+  count too) and leave them out of query answers by default (include_retracted keeps them, labelled);
+  they never rewrite or delete a record.
+- UPDATES cites its notice as evidence; RETRACTS states retracted_on (advisory); scope_locators go only
+  with scope partial.
+- A claim_status or hypothesis_status retracted is backed by a RETRACTS link to the record or by a retracted
+  source (advisory); a supported claim resting only on retracted sources is flagged (advisory).
+status_check:
+  maturity: provisional
+  description: |
+    That someone looked for notices about a source or dataset (a retraction, a withdrawal, an
+    expression of concern, a correction), when and how. Record it only when a person or a tool actually
+    checked; never fill it in as a default. Absent means never checked. It does not set the
+    publication status, which follows from the notice links that reach the source (RETRACTS, UPDATES):
+    a check that found a notice is followed by recording that notice as a Source with its link.
+  required:
+  - checked_on
+  - checked_via
+  - result
+  fields:
+    checked_on:
+      type: date
+      description: When the check was made, at the precision known.
+    checked_via:
+      type: text
+      description: Where and how (the publisher's article page, a registry's update metadata of a given
+        date, a retraction database, a library service), and by whom when it matters.
+    result:
+      type: enum
+      values:
+      - no_notice_found
+      - notice_found
+      description: no_notice_found = nothing was found on that date by that means (not a proof that none
+        exists); notice_found = a notice was found, and is recorded as a Source that RETRACTS or UPDATES
+        this one.
+  rules:
+  - status_check is recorded only for a check that was made; its absence means never checked.
+  - It never sets a publication status; the status follows from the notice links.
