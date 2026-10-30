@@ -174,6 +174,19 @@ def test_every_download_step_keeps_the_store_in_step(project):
     assert len(hooked) == 5
 
 
+def test_one_process_at_a_time_updates_the_store(project):
+    import fcntl
+    import _vectors as V
+    from _ledger import Ledger
+    proj = project
+    run(proj, "init")
+    led = Ledger(proj)
+    with open(str(V.store_path(proj)) + ".lock", "w") as fh:          # another step is updating the store
+        fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        assert V.update(proj, led, progress=None) == {"skipped": "another process is updating the store"}
+    assert V.update(proj, led, progress=None)["sources"] == 3            # free again: this one runs
+
+
 def test_a_second_embedder_is_kept_apart_and_can_be_dropped(project, monkeypatch):
     import numpy as np
     import _vectors as V

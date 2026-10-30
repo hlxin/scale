@@ -76,13 +76,50 @@ def queues(proj, led, topic, with_si, tries, skip=frozenset(), ids=None, access=
     return q
 
 
+NET_ERRORS = ("network_error", "ez_server_error")
+OUTAGE_RUN = 3          # this many network or proxy errors in a row: an outage, not the sources' fault
+
+
 def retry_counts(proj):
-    """Failed tries so far per source (and per source's SI), from the outcomes log."""
+    """Failed tries so far per source (and per source's SI), from the outcomes log. Network or proxy errors in a run
+    of OUTAGE_RUN or more in a row were an outage (the computer offline, DNS down, the proxy down): they do not
+    count."""
+    rows = list(jsonl_iter(proj.ez / "outcomes.jsonl"))
+    outage, i = set(), 0
+    while i < len(rows):
+        j = i
+        while j < len(rows) and rows[j].get("outcome") in NET_ERRORS:
+            j += 1
+        if j - i >= OUTAGE_RUN:
+            outage.update(range(i, j))
+        i = max(j, i + 1)
     tries = Counter()
-    for r in jsonl_iter(proj.ez / "outcomes.jsonl"):
-        if r.get("outcome") in EZ.RETRYABLE:
+    for k, r in enumerate(rows):
+        if r.get("outcome") in EZ.RETRYABLE and k not in outage:
             tries[(r.get("kind") == "si" and ("si", r["id"])) or r["id"]] += 1
     return tries
+
+
+class Outage:
+    """The run of network or proxy errors in progress. OUTAGE_RUN in a row are an outage: their tries are given back
+    and the next visit waits 15 min, then 30, then an hour each time while it lasts; any other outcome ends it."""
+
+    def __init__(self):
+        self.keys, self.pauses = [], 0
+
+    def note(self, outcome, key, tries):
+        """After a visit (its try already counted in `tries`): the seconds to wait before the next one, 0 for none."""
+        if outcome not in NET_ERRORS:
+            self.keys, self.pauses = [], 0
+            return 0
+        self.keys.append(key)
+        if len(self.keys) < OUTAGE_RUN:
+            return 0
+        for k in self.keys:
+            tries[k] -= 1
+        pause = min(3600, 900 * 2 ** self.pauses)
+        self.keys, self.pauses = [], self.pauses + 1
+        return pause
 
 
 def main():
@@ -141,6 +178,7 @@ def main():
         + (f" | skipped publishers: {','.join(sorted(skip))}" if skip else "")
         + (f" | access: {','.join(sorted(access))}" if access else ""))
     unsupported, rr_order, handled, since_export = set(), [], 0, 0
+    outage = Outage()                     # an outage costs no source a try, and visits wait for it to end
     try:
         while True:
             if time.time() - reloaded > 1800:
@@ -207,9 +245,14 @@ def main():
                 lim.event("publisher_not_configured_in_ezproxy", publisher=chosen)
                 lim.save()
                 log(f"{chosen} is not configured in this EZproxy — skipping that publisher")
-            elif outcome in ("network_error", "ez_server_error"):
+            elif outcome in NET_ERRORS:
                 tries[p["id"] if kind == "pdf" else ("si", p["id"])] += 1
                 q[chosen].append((prio, kind, p))
+            pause = outage.note(outcome, p["id"] if kind == "pdf" else ("si", p["id"]), tries)
+            if pause:
+                log(f"{OUTAGE_RUN} network or proxy errors in a row: the network or the proxy is down — pausing "
+                    f"{pause // 60} min (no source loses a try)")
+                time.sleep(pause)
             handled += 1
             since_export += 1
             if since_export >= 10:
