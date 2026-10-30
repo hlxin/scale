@@ -86,8 +86,8 @@ capabilities:
 # ------------------------------------------------------------------ query
 - name: Natural-language to query-plan translation
   status: mocked
-  where: skills/query-graph/SKILL.md
-  notes: Performed by whichever agent host follows the skill (with the reading rules on link types not queried, listings, absences after a second plan, source kinds and second-hand evidence, independent works, conflicts, disputes, units in use and the Limits line, equilibrium constants and access); no model is bundled. The competency plans in domain/competency/ are hand-written.
+  where: skills/query-graph/SKILL.md, skills/query-graph/scripts/ (precedents.py, check_quotes.py), skills/query-graph/references/precedents-plan.json
+  notes: Performed by whichever agent host follows the skill (with the reading rules on link types not queried, listings, absences after a second plan, source kinds and second-hand evidence, independent works, conflicts, disputes, units in use and the Limits line, equilibrium constants and access); no model is bundled. The competency plans in domain/competency/ are hand-written. A question that asks what to do gets a proposal (query-graph 0.2.0) - precedents.py runs one plan over every preparation and ranks them by the requirements they meet, the hardest first; check_quotes.py looks every quotation up in the records a proposal names and lists their compositions with unit and basis (both deterministic, tested on the public synthesis examples, skills/query-graph/tests); the base, the transfers, the review by a second agent and the fix are the host's.
 # ------------------------------------------------------------------ evolution
 - name: Gap routing to GitHub issues (missing concept vs extraction error vs source information), from scale-catal query results (a value not curated, withheld from the view queried or not extractable is no gap; each gap keeps the answer's access, and scale gap issue warns on, and --submit refuses, a gap that is not public or states no access, read as institution)
   status: functioning

@@ -302,6 +302,34 @@ def test_a_loaded_document_is_reused_until_its_file_changes(tk):
     assert tk.call("scale_query", {"path": "electro.json", "plan": plan})["row_count"] == 0
 
 
+def test_a_recipe_reads_the_loaded_document_and_shares_nothing_with_it(tk):
+    """scale_recipe reads the document the toolkit keeps loaded, with what its recipes read made once, gives what a
+    fresh read of the file gives, and its answer shares no object with the kept document."""
+    from conftest import EXAMPLES
+    path = str(EXAMPLES / "scale-catal/synthesis-examples/synthesis-conditions.json")
+    whole = tk.call("scale_recipe", {"path": path})
+    hit = tk._loaded[str((tk.workspace / path).resolve())]
+    assert len(hit["recipes"]) == 1 and whole == tk.call("scale_recipe", {"document": load_doc(path)})
+    one = whole["recipes"][0]["id"]
+    first = tk.call("scale_recipe", {"path": path, "preparation": one})
+    assert tk._loaded[str((tk.workspace / path).resolve())] is hit and len(hit["recipes"]) == 1
+    assert first["recipes"] == [r for r in whole["recipes"] if r["id"] == one]
+    kept = json.loads(json.dumps(first))
+
+    def scramble(x):        # every dict and list of the answer, down to the steps' conditions and evidence
+        if isinstance(x, dict):
+            for v in x.values():
+                scramble(v)
+            x["scrambled"] = True
+        elif isinstance(x, list):
+            for v in x:
+                scramble(v)
+            x.append("scrambled")
+
+    scramble(first)
+    assert tk.call("scale_recipe", {"path": path, "preparation": one}) == kept
+
+
 def test_skills_are_listed_and_served(tk):
     skills = {s["name"]: s for s in tk.call("scale_skills")["skills"]}
     assert set(skills) == SKILLS
@@ -311,7 +339,8 @@ def test_skills_are_listed_and_served(tk):
     # a skill is its folder: the references its text points to are listed and served, and nothing else is
     refs = skills["curate-corpus"]["references"]
     assert {"references/recipes.md", "references/runs.md", "references/batches.md", "scripts/curate_run.py"} <= set(refs)
-    assert skills["query-graph"]["references"] == []
+    assert skills["query-graph"]["references"] == ["references/precedents-plan.json", "scripts/check_quotes.py",
+                                                   "scripts/precedents.py", "tests/test_scripts.py"]
     cs = tk.call("scale_skills", {"name": "curate-corpus"})
     assert "references/recipes.md" in cs["text"] and "references/runs.md" in cs["text"] and cs["references"] == refs
     ref = tk.call("scale_skills", {"name": "curate-corpus", "reference": "references/recipes.md"})

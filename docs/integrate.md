@@ -71,7 +71,7 @@ curate-dataset, merged into curate-corpus, still find it (the answer says `renam
 | `index-sources` | find and index the sources of a topic (papers, preprints, patents, theses, reports, and the datasets found with them) into an index that keeps their access and licence, and freeze the corpus a question needs |
 | `fetch-corpus` | fetch a frozen corpus's files (PDFs and supporting information; paywalled ones only through the library's proxy) and record in the corpus what was fetched and what was not |
 | `curate-corpus` | curate one publication, one data file or a frozen corpus into scale-catal documents: values as printed, evidence, typed absences, gaps instead of schema changes; with recording recipes, and runs that curate many sources through subagents |
-| `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer |
+| `query-graph` | answer a question with a graph query plan: rows as reported with evidence, what was left out and why, the coverage, the kind of answer; for a question that asks what to do, a proposal built from the closest records, each step citing one |
 | `map-coverage` | a coverage map (materials by properties by conditions) from query plans, each kind of absence kept apart, gaps routed |
 | `scan-conflicts` | pair values that seem to disagree and classify each pair as genuine, apparent (with the axis) or not comparable; never rewriting a value |
 | `export-graph` | hand a document to another system: validated, capped, filtered for its audience, native or as a kg-bundle with its losses stated, sealed and linked to its previous release |

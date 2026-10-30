@@ -1,0 +1,63 @@
+{
+  "question": "Which preparations give which particle: its catalyst and composition, class, shape, size, phases and components?",
+  "match": {
+    "label": "Preparation",
+    "as": "prep"
+  },
+  "steps": [
+    {
+      "from": "prep",
+      "edge": "HAS_OUTPUT",
+      "to": "CatalystSample",
+      "as": "sample",
+      "optional": true
+    },
+    {
+      "from": "sample",
+      "edge": "HAS_FORMULATION",
+      "to": "Catalyst",
+      "as": "catalyst",
+      "optional": true
+    },
+    {
+      "from": "prep",
+      "edge": "REACHED_BY",
+      "direction": "in",
+      "to": "CatalystState",
+      "as": "state",
+      "optional": true
+    },
+    {
+      "from": "state",
+      "edge": "HAS_PHASE",
+      "to": "Material",
+      "as": "phase",
+      "optional": true
+    },
+    {
+      "from": "catalyst",
+      "edge": "HAS_COMPONENT",
+      "to": "Material",
+      "as": "component",
+      "edge_as": "component_link",
+      "optional": true
+    }
+  ],
+  "return": [
+    "prep.id",
+    "prep.name",
+    "prep.preparation_methods",
+    "catalyst.name",
+    "catalyst.nominal_formula",
+    "state.architecture",
+    "state.particle_shape",
+    "state.morphology",
+    "state.properties.particle_size",
+    "phase.name",
+    "phase.structure_type",
+    "component.name",
+    "component_link.role"
+  ],
+  "limit": 1000000,
+  "evidence": false
+}
