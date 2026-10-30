@@ -36,6 +36,8 @@ BLOCKED_SEED = {
     "papers.ssrn.com", "www.ssrn.com", "doaj.org",
 }
 BLOCKED_SUFFIX = (".onlinelibrary.wiley.com", ".sciencedirect.com", ".elsevier.com", ".mdpi.com", ".science.org")
+# Official APIs on those domains: made for scripts (with a key), unlike the publishers' web pages.
+API_HOSTS = {"api.elsevier.com"}
 
 # DOI prefix -> publisher key (one EZproxy pacing/cap bucket per key). Elsevier (10.1016/10.1006) is absent on
 # purpose: its pages show a CAPTCHA even through EZproxy, and CAPTCHAs are never solved.
@@ -80,7 +82,7 @@ def mark_challenge(host):
 
 
 def is_blocked(host):
-    return host in _blocked or host.endswith(BLOCKED_SUFFIX)
+    return host not in API_HOSTS and (host in _blocked or host.endswith(BLOCKED_SUFFIX))
 
 
 def publisher_pdf_patterns(doi):
@@ -103,15 +105,18 @@ def arxiv_pdf(url):
     return f"https://export.arxiv.org/pdf/{m.group(1)}" if m else url
 
 
-def fetch(proj, url, accept="application/pdf,*/*;q=0.8", timeout=(15, 90), max_bytes=300 * 1024 * 1024):
-    """-> dict(kind=pdf|html|challenge|http_error|network_error|redirect_blocked, ...)"""
+def fetch(proj, url, accept="application/pdf,*/*;q=0.8", timeout=(15, 90), max_bytes=300 * 1024 * 1024,
+          headers=None):
+    """-> dict(kind=pdf|html|challenge|http_error|network_error|redirect_blocked, ...). `headers` (an API key) go to
+    the URL's own host only, never to another host a redirect leads to, and are never logged."""
     host = host_of(url)
     PACER.wait(host)
     s = session()
     cur = url
     try:
         for _ in range(10):
-            r = s.get(cur, headers={"Accept": accept}, timeout=timeout, stream=True, allow_redirects=False)
+            extra = (headers or {}) if host_of(cur) == host else {}
+            r = s.get(cur, headers={"Accept": accept, **extra}, timeout=timeout, stream=True, allow_redirects=False)
             if r.status_code in (301, 302, 303, 307, 308) and r.headers.get("location"):
                 nxt = urllib.parse.urljoin(cur, r.headers["location"])
                 r.close()

@@ -5,7 +5,7 @@ allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 4.1.0
+version: 4.2.0
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
@@ -366,7 +366,9 @@ vector belongs to a passage's text and embedder, a source is read again only whe
 is embedded), a merged source's passages move to the ID it kept, and a source no longer downloaded (out of scope,
 retracted) leaves. Every step that changes the files (fetch-corpus's download_open, download_paywalled, fetch_si; dedup,
 merge_db) updates the store when the project has one; `vectors.py update` does it by hand, `status` says what is
-left. Embedders: `scale-hash-v1` (SCALE's default: deterministic, lexical with chemistry aliases, no download),
+left. One process updates the store at a time: a step that finds another one at it leaves the update to that one
+("left to it"; the next update picks up the rest), and a model on an Apple GPU gives its memory back after each
+batch. Embedders: `scale-hash-v1` (SCALE's default: deterministic, lexical with chemistry aliases, no download),
 `sentence-transformers:<model>` (a local model; `vectors.py init --embedder sentence-transformers:BAAI/bge-small-en-v1.5`
 fetches it once, 133 MB — a download, so ask first), `fastembed:<model>`. A store keeps every embedder it was given;
 `drop --embedder` removes one. The store holds the sources' text: share it no more than the PDFs.

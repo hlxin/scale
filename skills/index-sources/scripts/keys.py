@@ -29,7 +29,8 @@ WHERE = {   # how to get each key (also in README.md)
     "s2": "free — https://www.semanticscholar.org/product/api#api-key-form",
     "core": "free — https://core.ac.uk/services/api (register)",
     "lens": "free for non-commercial use — https://www.lens.org/lens/user/subscriptions (Scholarly + Patent API)",
-    "scopus": "institutional — https://dev.elsevier.com (needs your library's Scopus subscription; on campus or VPN)",
+    "scopus": "institutional — https://dev.elsevier.com (needs your library's Scopus subscription; on campus or VPN; "
+              "also Elsevier's open-access full text for fetch-corpus)",
     "scopus_insttoken": "optional — from your library, lets Scopus work off campus",
     "springer": "free — https://dev.springernature.com",
     "wos": "institutional — https://developer.clarivate.com (Web of Science Starter API)",

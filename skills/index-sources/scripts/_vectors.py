@@ -197,12 +197,17 @@ class SentenceTransformersEmbedder:
             self.m.half()            # half precision on a GPU: the same vectors (cosine 1.0000 on test passages), faster
         self.model, self.id = model, f"sentence-transformers:{model}"
         self.dim = self.m.get_sentence_embedding_dimension()
+        self.device, self._torch = device, torch
 
     def encode(self, texts, query=False):
         pre = _prefix(QUERY_PREFIX if query else DOC_PREFIX, self.model)
         t = self.m.encode([pre + x for x in texts], batch_size=128, convert_to_tensor=True, normalize_embeddings=True,
                           show_progress_bar=False)
-        return _np().array(t.float().cpu().tolist(), dtype=_np().float64)   # tolist: no numpy ABI between torch, numpy
+        out = _np().array(t.float().cpu().tolist(), dtype=_np().float64)   # tolist: no numpy ABI between torch, numpy
+        del t
+        if self.device == "mps":     # the Apple GPU's allocator keeps freed blocks: without this a long update grew
+            self._torch.mps.empty_cache()                # past 20 GB on a computer with 16 GB of memory
+        return out
 
 
 class FastEmbedEmbedder:
@@ -412,7 +417,26 @@ def _embed_missing(con, emb, progress=None):
 
 def update(proj, led, embedders=None, ids=None, limit=None, progress=log):
     """Bring the store in line with the downloaded sources: read the new and changed ones, drop the ones that left,
-    embed the passage texts each embedder lacks, drop the vectors no passage holds."""
+    embed the passage texts each embedder lacks, drop the vectors no passage holds. One process at a time: a step that
+    finds another one updating the store leaves it to that one (the next update picks up what it did not cover) —
+    two at once embed the same passages twice, each holding its own model."""
+    import fcntl
+    store_path(proj).parent.mkdir(parents=True, exist_ok=True)
+    fh = open(str(store_path(proj)) + ".lock", "w")
+    try:
+        fcntl.flock(fh, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        fh.close()
+        if progress:
+            progress("vectors: another process is updating the store — left to it")
+        return {"skipped": "another process is updating the store"}
+    try:
+        return _update(proj, led, embedders, ids, limit, progress)
+    finally:
+        fh.close()                                  # the lock goes with the file (and with the process, if it dies)
+
+
+def _update(proj, led, embedders, ids, limit, progress):
     con = open_store(proj, create=True)
     names = list(dict.fromkeys(embedders or embedders_of(con)))
     if not about(con).get("created_at"):
