@@ -2,6 +2,25 @@
 
 ## Unreleased
 
+- **query-graph 0.3.0 chooses a proposal's route and reagents from what the closest records do, and checks the
+  chemistry in the target's context (no schema change).** Requested by @diazr04, after blind tests of 0.2.0 on
+  held-out targets of a private synthesis graph (about 30,000 papers): its proposals were closer to the published
+  procedures than the model alone, but a chemist preferred the model's, because steps carried from a record failed
+  in the new context. `scripts/precedents.py --consensus N` reads the N best-ranked preparations whole and counts,
+  each count with records to cite, their routes, the precursors of each metal with the routes each is used in, their
+  inputs by function, the temperature and time of each action and their commonest sequences (`--within` counts within
+  one route); the plan's answer is cached per graph. The host chooses among these options as a chemist would, weighing
+  them against the standard, well-controlled route for the kind of target. Before the check, it reads the procedure
+  again in the target's context (reductant against precursor, medium and pH, precipitates, temperature and atmosphere
+  against support and solvent, equipment, stabilizer, ratio); a step that would fail is changed and labelled
+  *adapted*, with what its record does, so the proposal stays one procedure that runs as written, and a parameter the
+  records do not state gets a typical value labelled as such. A recommendation is only optional advice that leaves
+  its step valid; nothing outside the steps may change one, and the review treats that as a finding.
+  - **What was measured, fixed before each run:** on 30 held-out targets, the action sequence was closer to the
+    published one than the model alone's (+0.05, 95% CI [+0.01, +0.10]); no metric favoured the model alone; every
+    quotation was found in its record (299 of 299). A blind judge preferred 0.3.0 on 5 of 10 fresh pairs and the model
+    alone on 4 (1 tie). A variant that left steps as recorded and added contradicting recommendations lost 2-7.
+
 - **query-graph 0.2.0 answers a question that asks what to do with a proposal built from the graph (no schema
   change).** Requested by @diazr04, from a skill that planned nanoparticle syntheses from a graph of 20,979 curated
   recipes, so that one general skill keeps what worked there. A question with several requirements (a composition,

@@ -73,3 +73,24 @@ def test_check_quotes_finds_the_records_words_and_lists_the_basis_of_their_compo
     assert [q["found"] for q in res["quotes"]] == [True, False] and res["failures"] == 2
     pt = next(c for c in res["compositions"]["ex:cnd/preparation/pt-sea-9"] if c["role"] == "active_component")
     assert pt["share"].startswith("1 % (by mass") and pt["share"].endswith("basis not stated")
+
+
+def test_consensus_counts_what_the_closest_records_do_each_count_with_records_to_cite():
+    g = str(EXAMPLES / "synthesis-strategies.json")
+    c = precedents.consensus(call(), g, ["ex:syn/preparation/pd-cubes", "ex:syn/preparation/pd-fsp"])
+    assert c["records_read"] == 2
+    pd = {r["item"]: r for r in c["precursors_by_metal"]["Pd"]}      # each Pd precursor with the routes it is used in
+    assert pd["sodium tetrachloropalladate"]["routes"] == {"colloidal_reduction": 1, "colloidal_deposition": 1}
+    assert pd["palladium(II) acetylacetonate"]["records"] == ["ex:syn/preparation/pd-fsp"]
+    assert {r["item"] for r in c["inputs"]["solvent"]} == {"water", "xylene"}
+    md = precedents.markdown_consensus(c)
+    assert "What the 2 closest records do" in md and "`ex:syn/preparation/pd-cubes`" in md
+
+
+def test_a_precursors_metals_are_read_from_its_formula_or_its_name_and_a_counter_ion_alone_is_kept():
+    assert precedents.metals_in("H2PtCl6·6H2O") == {"Pt"}
+    assert precedents.metals_in("potassium tetrachloroplatinate(II)") == {"Pt"}      # K is the counter-ion
+    assert precedents.metals_in("K2PdCl4") == {"Pd"}
+    assert precedents.metals_in("chloroauric acid") == {"Au"}
+    assert precedents.metals_in("tin(II) chloride") == {"Sn"} and precedents.metals_in("lead(II) acetate") == {"Pb"}
+    assert precedents.metals_in("NaBH4") == {"Na"}                    # no other metal: Na is the one named

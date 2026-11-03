@@ -1,6 +1,6 @@
 ---
 name: query-graph
-version: 0.2.0
+version: 0.3.0
 description: Answer a scientific question from scale-catal documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them. When the question asks what to do (how to make a material, how to run a test), the answer is a proposal built from the graph's closest records, each step citing the record it comes from, checked before it is presented and reviewed once by a second agent.
 scale_release: ">=v0.3.0"
 inputs:
@@ -28,6 +28,8 @@ validation:
   - Numbers are reproduced as reported (value, unit and the reported text), with any computed or converted value labelled as yours
   - Every number computed for an answer (amounts scaled to a ratio, moles from masses and formulas, a sum) is recomputed by code before it is stated
   - Every step of a proposal cites one record's step and its quote, or is labelled a hypothesis
+  - A proposal is one procedure a person can run as written: every amount, temperature, time and atmosphere is fixed in its step, and nothing outside the steps changes one
+  - Every recommendation is labelled as one, sits next to the step it concerns, leaves that step valid as written, and is never presented as a record's step
   - Every typed absence and every record left out in the result is reported, not smoothed over
   - The Limits line gives the candidates, what was left out by reason and the values compared by unit and stated basis alone, from the coverage block
 human-review:
@@ -99,35 +101,81 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    no record of).
    - **Precedents, in one call.** Write the requirements as tests on the fields of one plan, hardest first (the
      elements, then the phase and the shape, then the size; a support last, since it is usually a step of its own),
-     and run `scripts/precedents.py` once (again only when a test was written wrong; search the evidence only for
-     a requirement no record states). Its default plan (`references/precedents-plan.json`) returns every particle
-     state of a scale-catal document with its catalyst and composition, class, shape, size, phases, components and
+     and run `scripts/precedents.py` (again only when a test was written wrong, or within the chosen route; search
+     the evidence only for a requirement no record states). Its default plan (`references/precedents-plan.json`)
+     returns every particle state of a scale-catal document with its catalyst and composition, class, shape, size, phases, components and
      preparation; the script ranks the preparations by the requirements they meet, the first listed weighing most,
      counts the records that do not state each one, and lists for each requirement the closest records that meet it.
-   - **A base for the skeleton, each aspect from the record that controls it.** The base gives what the steps share:
-     the solvent, the temperature range, the atmosphere, the work-up. Take the top candidate unless a lower one shares
-     more of what is hard to change. Each aspect it does not meet comes from the closest record that meets it (the
-     same elements first, then the same majority element): the precursors from one, the capping agent that sets a
-     size from another, the treatment that orders a phase from a third, each compatible with the skeleton (its
-     solvent, temperatures, atmosphere), cited, with why it should hold here. An aspect no record reaches is
-     unresolved: say what is tried instead, labelled as general knowledge.
-   - **Read whole only** the base, the other preparations of its source (its controls and variants often hold what a
-     requirement needs) and the record each aspect comes from, with `scale graph recipe <graph> --preparation <id>`:
-     about six recipes, not every preparation of every source.
+   - **Choose with the graph: it gives the options, you choose among them.** Run it with `--consensus 50`: it reads
+     the best-ranked records whole and counts, each count with records to cite, their routes, the precursors of each
+     metal with the routes each is used in, their inputs by function (the reducing agent, the capping agent, the
+     solvent), the temperature and time of each action and their commonest sequences. These are the options: what
+     has been done for targets like this one. Choose among them as a chemist would for this target, not by the count
+     alone and not by copying one record:
+     1. the route the question names; else the one among the options that suits what it asks (the support and how
+        a support is loaded, the phase, the size and the shape), saying why when it is not the commonest. Weigh the
+        options against the route a chemist would reach for first for this kind of target, the standard and
+        well-controlled one: when the graph holds records of it, prefer it to a route that is harder to control or
+        needs unusual equipment or purification, unless the question's requirements need that route; when the graph
+        holds no record of it, name it in one line and say why the records' route is followed. Then count again within
+        the chosen route (`--within <the route's requirement>`);
+     2. for each metal, a precursor the records use in that route and that fits the rest of the procedure (the
+        solvent, the reducing agent, the support, the temperatures);
+     3. the reducing agent, capping agent, solvent, temperatures, times and order of the steps that the records of
+        that route use.
+
+     Give each choice with its count and records. The chemistry (route and precursors) follows a single record only
+     when it has the same metals, route and kind of support. A record that matches only the size, shape, phase or
+     class guides the conditions that set them (temperatures, times, capping agent, ratios). Your own knowledge of
+     the chemistry decides between options; it brings in a choice of its own only where the options are empty or
+     thin (under three records), labelled as such, and never replaces an option the graph holds without saying why
+     that option does not apply.
+   - **Read whole only** the one or two records most of the choices come from (for the amounts and the order of the
+     steps) and a close record you follow, with `scale graph recipe <graph> --preparation <id>`.
 
    A requirement is never dropped silently, and general knowledge never replaces a record the graph holds without
    saying why that record does not apply. Each step cites one record's step and its quote, or is a labelled
    hypothesis; records are named by their full ids. Read every composition and quantity on the basis its record
    states (by mass, by atoms) before computing with it, set the amounts to the question's ratio and compute the moles
-   by code. **Check before presenting** with `scripts/check_quotes.py`: every quotation is looked up in the records
+   by code.
+
+   **Check the chemistry in this target's context.** A step that worked in its record may not work once it is moved
+   to other metals, another solvent, support, scale or equipment. So read the whole procedure once more as the chemist
+   who will run it:
+   - Can each reductant reduce each precursor, in this solvent and at this pH?
+   - Does the solvent or medium destroy or prematurely reduce a reagent?
+   - Do two of the reagents form a precipitate?
+   - Does the support, solvent or vessel tolerate each temperature and atmosphere?
+   - Does the equipment do what the step asks?
+   - Is there a capping agent or support where particles must stay small?
+   - Do the amounts give the asked ratio?
+
+   Your knowledge of the chemistry is the check, and the steps carry what it finds, so that the proposal is one
+   procedure a person can run as written. Where the check finds that a step would fail in this context, or that another
+   choice would clearly work better here, change the step itself and label it *adapted*: in one line, what its record
+   does and why this target needs otherwise. The record's step and quote stay cited, so the step stays traceable.
+   Nothing outside the steps may change what a step says: no recommendation, note or condition ("if …, use … instead")
+   overrides an amount, temperature, time, atmosphere or reagent the step gives. A **Recommendation (not from a
+   record)** is only optional advice that leaves the step valid as written (a check to run, a precaution, a
+   refinement), added where it makes sense; most steps have none. Options to try instead of the proposed procedure go
+   in a short list of alternatives after the steps. A parameter a person needs that the records do not state (the
+   atmosphere, a gas flow, a ramp, the vessel) is filled with a typical value, labelled "typical, not from a record".
+   It is not left open.
+
+   **Check before presenting** with `scripts/check_quotes.py`: every quotation is looked up in the records
    the proposal names, whose compositions it lists with their unit and basis. **Review once,** by a second agent you
    launch with a fresh context and only the question, the proposal and the check's output (otherwise yourself as
    someone else would; the person who asked waits only for the final answer), kept light: at most five findings, on
-   what the check cannot see: a step its record does not support, a number on the wrong basis or a ratio the
-   amounts do not give, a closer record left out, a transfer from other elements, sizes or shapes treated as the same
-   context, a missing parameter a person needs to run a step. Fix what it finds once, by editing the proposal (no
+   what the check cannot see. First comes chemistry that would fail in this context: a reductant that cannot reduce a
+   precursor, a medium or pH that destroys a reagent, a precipitate, a temperature or atmosphere the support or
+   solvent cannot take, equipment that cannot do the step, no stabilizer where size matters. Then come a step its
+   record does not support, a number on the wrong basis or a ratio the amounts do not give, a closer record left out,
+   a transfer from other elements, sizes or shapes treated as the same context, a missing parameter a person
+   needs to run a step, and anything outside the steps that changes what a step says. Fix what it finds once, by editing the proposal (no
    new search unless a finding names a record to read) and running the check again; what stays open goes in the
-   Limits, never argued away.
+   Limits, never argued away. A finding about the chemistry of a step is settled by changing the step (labelled
+   adapted, with what its record does in one line), not by a recommendation beside it; a finding that a step does not
+   say what its record says is fixed in the step. The final proposal is still one procedure that runs as written.
 7. **Present.** Lead with the supported answer. For each value give it as reported, with its source,
    year and locator. Keep incompatible units and bases apart. Label interpretations as the source
    authors'. Put any extrapolation in a separate, labelled paragraph. End with a **Limits** line
@@ -135,8 +183,8 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    compared by number, unit and stated basis alone (in a scientific comparison: and within one context,
    group by group, with the values left out for their context, `missing_context` and
    `incompatible_context`, named as such: there is no ranking across groups). A proposal fits in two pages (under
-   about 1,000 words): what it proposes, the few candidates considered (what each meets, and why the base), each
-   requirement and how it is met (by the base, transferred, unresolved), the numbered steps, each with its basis (retrieved, adapted or hypothesis) and its record, the charges and the
+   about 1,000 words): what it proposes, the counts the choices rest on (and any close record followed), each
+   requirement and how it is met (by the base, transferred, unresolved), the numbered steps, each with its basis (retrieved, adapted or hypothesis), its record and any optional recommendation, the alternatives, the charges and the
    ratio recomputed, what to measure to confirm the result, and the Limits with the review's open findings. The
    records set aside, the review and how each finding was settled, and the check's output stay in the working files.
    It is a proposal for a person to review, never a validated procedure.
