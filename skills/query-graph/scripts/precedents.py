@@ -4,7 +4,7 @@ requirements they meet, the first listed weighing most. For each requirement the
 listed too: the records to take that aspect from.
 
   python3 -I precedents.py --requirements req.json --graph <document> [--plan plan.json] [--server URL]
-                           [--key prep.id] [--top 8] [--out precedents.json]
+                           [--key prep.id] [--top 8] [--consensus 50] [--out precedents.json]
 
 req.json lists the requirements hardest first, each a test on a field the plan returns:
   [{"name": "Cu and Au", "field": "catalyst.nominal_formula", "matches": "(?=.*Cu(?![a-z]))(?=.*Au(?![a-z]))"},
@@ -16,17 +16,47 @@ a field no row of the group holds is counted as not curated, a value in another 
 failure. The plan defaults to ../references/precedents-plan.json (every particle state of a scale-catal document with
 its catalyst, composition, class, shape, size, phases, components and preparation). The tools are called through a
 server that keeps the document loaded (`scale serve`, --server) or, without one, through ScaleToolkit in this process.
+
+With --consensus N the N best-ranked preparations (with --within NAME, only those that meet that requirement) are read whole (scale_recipe) and what they do is counted: their
+routes, their inputs by function (one count per recipe, a hydrate's water left out of the name), the temperature and
+the precursors of each metal (the metal read from the
+name: its symbol or its element's name) with the routes each is used in, the time of each action (by unit, never converted: median and range), and their commonest sequences of actions. Each
+count names up to three records to cite. An intermediate a recipe lists as an input (a solution, a mixture, a
+suspension) is not counted as a chemical.
 """
 from __future__ import annotations
 
 import argparse
+import collections
+import hashlib
 import json
+import os
+import statistics
 import re
 import sys
 import urllib.request
 from pathlib import Path
 
 PLAN = Path(__file__).resolve().parent.parent / "references" / "precedents-plan.json"
+# The metals a precursor's name holds: the symbol as a formula writes it, or the element's name.
+METALS = {"Li": "lithium", "Na": "sodium", "K": "potassium", "Mg": "magnesium", "Ca": "calcium", "Sr": "strontium",
+          "Ba": "barium", "Al": "alumin", "Ga": "gallium", "In": "indium", "Sn": "(?:(?<![a-z])tin(?![a-z])|stann)", "Pb": "(?:(?<![a-z])lead(?![a-z])|plumb)", "Bi": "bismuth",
+          "Sb": "antimon", "Ti": "titan", "V": "vanad", "Cr": "chrom", "Mn": "mangan", "Fe": "(?:(?<![a-z])iron|ferr)",
+          "Co": "cobalt", "Ni": "nickel", "Cu": "(?:copper|cupr)", "Zn": "zinc", "Y": "yttrium", "Zr": "zircon",
+          "Nb": "niob", "Mo": "molybd", "Ru": "ruthen", "Rh": "rhod", "Pd": "pallad", "Ag": "(?:silver|argent)",
+          "Cd": "cadmium", "Hf": "hafnium", "Ta": "tantal", "W": "tungst", "Re": "rhenium", "Os": "osmium",
+          "Ir": "iridium", "Pt": "platin", "Au": "(?:gold|(?:(?<![a-z])|(?<=chloro)|(?<=bromo))aur)", "La": "lanthan", "Ce": "cer(?:ium|ous|ic)",
+          "Pr": "praseodym", "Nd": "neodym", "Sm": "samar", "Eu": "europ", "Gd": "gadolin", "Tb": "terbium",
+          "Dy": "dysprosium", "Er": "erbium", "Yb": "ytterb", "Ge": "german", "Se": "selen", "Te": "tellur"}
+METAL_RE = {m: re.compile(rf"(?<![A-Za-z]){m}(?![a-z])|{m}(?![a-z])(?=[A-Z0-9(\[·.]|$)|{w}")
+            for m, w in METALS.items()}
+
+
+def metals_in(name: str) -> set[str]:
+    """The metals a precursor's name holds (K and Na only when no other metal is named: a salt's counter-ion)."""
+    low = name.lower()
+    found = {m for m, rx in METAL_RE.items() if rx.search(name) or re.search(METALS[m], low)}
+    return found - {"K", "Na", "Li"} if found - {"K", "Na", "Li"} else found
 
 
 def tool_caller(server: str | None):
@@ -132,6 +162,119 @@ def rank(rows: list[dict], reqs: list[dict], key: str, top: int) -> dict:
     return out
 
 
+INTERMEDIATE = re.compile(r"solution|mixture|suspension|dispersion|slurry|colloid|precipitate|product|filtrate|"
+                          r"supernatant|powder obtained|as-prepared|obtained", re.I)
+HYDRATE = re.compile(r"\s*[·•*.]\s*(?:\d+(?:\.\d+)?|x|n)?\s*H2O\s*$|\s+(?:mono|di|tri|tetra|penta|hexa|hepta|octa|nona|deca)?hydrate\b",
+                     re.I)
+
+
+def consensus(call, graph: str, keys: list[str]) -> dict:
+    """What the given preparations do, counted (module docstring)."""
+    routes, inputs, conds, seqs, by_metal = {}, {}, {}, {}, {}
+    used_in = {}                                   # (metal, precursor) -> the routes of the records that use it
+    spell = {}
+
+    def add(table: dict, item: str, pid: str) -> None:
+        c = table.setdefault(item, {"n": 0, "records": []})
+        c["n"] += 1
+        if len(c["records"]) < 3:
+            c["records"].append(pid)
+    read = 0
+    for pid in keys:
+        rec = (call("recipe", {"path": graph, "preparation": pid}).get("recipes") or [None])[0]
+        if not rec:
+            continue
+        read += 1
+        methods = rec.get("preparation_methods") or ([rec["method"]] if rec.get("method") else [])
+        for m in methods:
+            add(routes, m, pid)
+        seq, counted = [], set()
+        for st in rec.get("steps") or []:
+            act = st.get("action") or "other"
+            if not seq or seq[-1] != act:
+                seq.append(act)
+            for field in ("temperature", "duration"):
+                v = st.get(field)
+                if isinstance(v, dict) and isinstance(v.get("value"), (int, float)) and not isinstance(v["value"], bool):
+                    conds.setdefault((act, field, v.get("unit") or ""), []).append((v["value"], pid))
+            for i in st.get("inputs") or []:
+                name = (i.get("name") or "").strip()
+                fns = i.get("synthesis_function")
+                fns = fns if isinstance(fns, list) else [fns]
+                if not name or INTERMEDIATE.search(name):
+                    continue
+                norm = HYDRATE.sub("", name).strip().lower()
+                for fn in fns:
+                    if fn and (fn, norm) not in counted:
+                        counted.add((fn, norm))
+                        spell.setdefault((fn, norm), name)
+                        add(inputs.setdefault(fn, {}), norm, pid)
+                        if fn == "metal_precursor":
+                            for m in metals_in(name):
+                                add(by_metal.setdefault(m, {}), norm, pid)
+                                used_in.setdefault((m, norm), collections.Counter()).update(methods or ["not stated"])
+        add(seqs, " > ".join(seq), pid)
+
+    def top(table: dict, n: int) -> list:
+        return [{"item": k, **v} for k, v in sorted(table.items(), key=lambda x: (-x[1]["n"], x[0]))[:n]]
+    out_inputs = {}
+    for fn, table in sorted(inputs.items(), key=lambda x: -sum(v["n"] for v in x[1].values())):
+        out_inputs[fn] = [{**r, "item": spell.get((fn, r["item"]), r["item"])} for r in top(table, 8)]
+    out_conds = []
+    for (act, field, unit), vals in sorted(conds.items(), key=lambda x: -len(x[1])):
+        nums = [v for v, _ in vals]
+        out_conds.append({"action": act, "field": field, "unit": unit, "n": len(nums),
+                          "median": statistics.median(nums), "min": min(nums), "max": max(nums),
+                          "records": list(dict.fromkeys(p for _, p in vals))[:3]})
+    per_metal = {m: [{**r, "item": spell.get(("metal_precursor", r["item"]), r["item"]),
+                      "routes": dict(used_in[(m, r["item"])].most_common(3))} for r in top(t, 5)]
+                 for m, t in sorted(by_metal.items(), key=lambda x: -sum(v["n"] for v in x[1].values()))
+                 if sum(v["n"] for v in t.values()) >= 2}
+    return {"records_read": read, "routes": top(routes, 6), "precursors_by_metal": per_metal, "inputs": out_inputs,
+            "conditions": out_conds[:20], "sequences": top(seqs, 3)}
+
+
+def markdown_consensus(c: dict) -> str:
+    lines = ["", f"What the {c['records_read']} closest records do (counts; each with records to cite):", "",
+             "Routes: " + "; ".join(f"{r['item']} {r['n']}" for r in c["routes"]), "",
+             "Metal precursors by metal (records using each [the routes they are used in]):"]
+    for m, rows in (c.get("precursors_by_metal") or {}).items():
+        lines.append(f"- {m}: " + "; ".join(
+            f"{r['item']} {r['n']} [" + ", ".join(f"{k} {v}" for k, v in r["routes"].items()) + f"] (`{r['records'][0]}`)"
+            for r in rows))
+    lines += ["", "Inputs by function:"]
+    for fn, rows in c["inputs"].items():
+        lines.append(f"- {fn}: " + "; ".join(f"{r['item']} {r['n']} (`{r['records'][0]}`)" for r in rows))
+    lines += ["", "| action | field | unit | n | median | range | e.g. |", "|---|---|---|---|---|---|---|"]
+    lines += [f"| {x['action']} | {x['field']} | {x['unit']} | {x['n']} | {x['median']:g} | {x['min']:g}-{x['max']:g} | "
+              f"`{x['records'][0]}` |" for x in c["conditions"]]
+    lines += ["", "Commonest sequences of actions:"]
+    lines += [f"- {s['n']}×: {s['item']} (`{s['records'][0]}`)" for s in c["sequences"]]
+    return "\n".join(lines)
+
+
+def cached_query(call, plan_text: str, graph: str) -> dict:
+    """The plan's answer, kept in a cache keyed by the plan and the graph's path, size and modification time
+    ($SCALE_PRECEDENTS_CACHE, default ~/.cache/scale/precedents): the same plan over an unchanged graph is asked once.
+    A graph that only the server's machine holds is keyed by its path alone."""
+    if os.path.exists(graph):
+        st = os.stat(graph)
+        key = hashlib.sha256(f"{plan_text}|{os.path.abspath(graph)}|{st.st_size}|{st.st_mtime_ns}".encode()).hexdigest()
+    else:
+        key = hashlib.sha256(f"{plan_text}|remote:{graph}".encode()).hexdigest()
+    folder = Path(os.environ.get("SCALE_PRECEDENTS_CACHE", "~/.cache/scale/precedents")).expanduser()
+    f = folder / f"{key}.json"
+    if f.exists():
+        return json.loads(f.read_text())
+    res = call("query", {"plan": json.loads(plan_text), "path": graph})
+    if not res.get("error"):
+        folder.mkdir(parents=True, exist_ok=True)
+        tmp = f.with_suffix(f".{os.getpid()}.tmp")
+        tmp.write_text(json.dumps(res))
+        tmp.replace(f)
+    return res
+
+
 def markdown(res: dict) -> str:
     lines = [f"{res['rows']} rows, {res['groups']} groups by `{res['key']}`.", "",
              "| requirement | met by | not curated | not compared |", "|---|---|---|---|"]
@@ -156,18 +299,24 @@ def main(argv=None) -> int:
     ap.add_argument("--server")
     ap.add_argument("--key", default="prep.id")
     ap.add_argument("--top", type=int, default=8)
+    ap.add_argument("--consensus", type=int, default=0, help="read this many best-ranked preparations whole and count")
+    ap.add_argument("--within", action="append", default=[], help="count only preparations meeting this requirement")
     ap.add_argument("--out")
     a = ap.parse_args(argv)
     reqs = json.loads(Path(a.requirements).read_text())
-    res = tool_caller(a.server)("query", {"plan": json.loads(Path(a.plan).read_text()), "path": a.graph})
+    res = cached_query(tool_caller(a.server), Path(a.plan).read_text(), a.graph)
     if res.get("error"):
         print(f"the plan failed: {res['error']}", file=sys.stderr)
         return 1
-    out = rank(res.get("rows") or [], reqs, a.key, a.top)
+    out = rank(res.get("rows") or [], reqs, a.key, 10 ** 9 if a.within else max(a.top, a.consensus))
+    keys = [c["key"] for c in out["candidates"] if all(w in c["meets"] for w in a.within)][:a.consensus]
+    out["candidates"] = out["candidates"][:a.top]
     out.update(status=res.get("status"), access=res.get("access"))
+    if a.consensus:
+        out["consensus"] = consensus(tool_caller(a.server), a.graph, keys)
     if a.out:
         Path(a.out).write_text(json.dumps(out, indent=1, ensure_ascii=False))
-    print(markdown(out))
+    print(markdown(out) + (markdown_consensus(out["consensus"]) if a.consensus else ""))
     return 0
 
 
