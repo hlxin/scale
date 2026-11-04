@@ -40,13 +40,16 @@ tools; the run only hands out the work and records what came back.
    counts and the rule; a person confirms.
 2. **Ask, then prepare.** One `AskUserQuestion` with two questions, before anything starts:
    - *Which model curates?* Opus (Recommended: the procedure is demanding) · Sonnet · Fable · Haiku (cheapest; short
-     or simple sources).
+     or simple sources) · a model behind an API (its base URL and model, `--curator api:<model>`, the key in the same
+     key file): each prompt then runs on `scripts/api_host.py`, Claude Code pointed at the endpoint's
+     Anthropic-compatible route as that model, sandboxed to the source's folder and denied every other run (a run of
+     the same source would hand it the answer). Pilot it first: the model must call tools, and read images for figures.
    - *Who reads each document a second time?* A different Claude model (Recommended: Sonnet when Opus curates, Opus
      otherwise) · a model behind an OpenAI-compatible API (its base URL and model; the key goes in index-sources'
      key file, `~/.scale/sources/keys.txt`, as `llm_api_key: …`, never through the chat) · Skip (not recommended:
      documents then pass on SCALE's checks alone, and the index says they were not read a second time).
 
-   Then `curate_run.py prepare --corpus <manifest> --run <run folder> --curator <model> --reviewer <model |
+   Then `curate_run.py prepare --corpus <manifest> --run <run folder> --curator <model | api:<model>> --reviewer <model |
    api:<model> | skip> [--api-base-url <url>] [--ids 12,57 | --ids-file F | --max N] [--version <v>] [--contributor
    <id>] [--project <id>]`; prepare refuses to start without both. To curate the sources a question finds, take their
    IDs from index-sources' vector store: `vectors.py search "<question>" --by-source --k 50 --ids-out ids.txt`,
@@ -65,7 +68,9 @@ tools; the run only hands out the work and records what came back.
    ```
    - [ ] curate_run.py next --run <dir> --role curate --n <batch>
            -> one subagent per printed line, all in ONE message, with the line's `model`: the prompt "Read <prompt>
-              and follow it exactly."
+              and follow it exactly." (a line whose model is api:<model>: `python3 -I ${CLAUDE_SKILL_DIR}/scripts/
+              api_host.py --run <dir> --id <id> --role curate|fix`, one per line, in the background; `--deny <folder>`
+              for anything else that holds a curation, such as your own transcripts)
    - [ ] curate_run.py status --run <dir>                 (runs scale source check on every folder that changed)
    - [ ] curate_run.py next --run <dir> --role review --n <batch>   -> second-reading subagents, same pattern
            (an API reader: curate_run.py review-api --run <dir> --n <batch> instead; skip: no reading step)
