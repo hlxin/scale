@@ -177,12 +177,13 @@ import re
 import unicodedata
 from pathlib import Path
 
-from . import layout, lifecycle, pgraph, rights
+from . import graphparts, layout, lifecycle, pgraph, rights
 from .pgraph_query import SECOND_HAND_ECO, _eco
 from .util import ScaleError
 
 FORMAT_ID = "galaxy-kg-bundle"         # the identifier the format requires in bundle.json, verbatim
 FORMAT_VERSION = "1.1.0"
+ROW_FORMAT_VERSION = "1.2.0"           # dataset-row evidence and structural edges (the format's §3.3.3)
 NORMALIZATION = "scale-match-text-1"   # the verbatim checker's match_text, as the format names it
 WITHHELD_MAX = 600                     # the format's longest quote, withheld or not
 ABSENCE_STATUSES = {"not_reported", "not_measured", "not_applicable", "below_detection_limit",
@@ -836,6 +837,9 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
         clash = sorted(v for v in set(gid.values()) if list(gid.values()).count(v) > 1)
         raise ScaleError(f"two records would share a bundle id: {clash[:3]}")
     src_of = {sid: pub_key(n) for sid, n in sources.items()}
+    datasets = {n["id"]: str(n["props"].get("name") or n["id"]) for n in doc["nodes"] if n["label"] == "Dataset"}
+    owner = graphparts._owner_fn(graphparts._source_ids(doc))     # the source whose record a record id belongs to
+    used_format: dict[str, int] = {}        # what of format 1.2.0 the bundle uses
     if texts:                   # a text named by the source's scale-catal id is its publication's: one key from here on
         named: dict[str, str] = {}
         for k in sorted(texts):
@@ -976,7 +980,12 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
 
     def evidence(ev_list: list[dict]) -> dict[str, list[dict]]:
         by: dict[str, list[dict]] = {}
+        rows: list[dict] = []          # where a dataset records the claim (kind dataset_row, source a Dataset)
+        unlocated: list[str] = []      # sources the claim is attributed to, with no sentence of theirs to quote
         for ev in ev_list or []:
+            if ev.get("kind") == "dataset_row" and ev.get("source") in datasets and ev.get("locator"):
+                rows.append(ev)
+                continue
             # a reading of a page image cites its transcription, the printed text as read on the image (it
             # corrects the OCR text shipped with the bundle, so the format's text check may not find it verbatim)
             text = ev.get("quote") or ev.get("transcription")
@@ -988,6 +997,8 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             else:       # a quote withheld under the copyright cap: its digest and length (format 1.1.0)
                 held = sorted((f != "quote", f, h, n) for f, h, n in rights.withheld(ev) if f in ("quote", "transcription"))
                 if not held or sid in shipped_text:     # a shipped text is quoted, never withheld
+                    if not held and sid not in unlocated:
+                        unlocated.append(sid)
                     continue
                 _, field, h, n = held[0]
                 if not 1 <= n <= WITHHELD_MAX:
@@ -1007,6 +1018,13 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 if span:
                     item["locator"]["char_start"], item["locator"]["char_end"] = span
             by.setdefault(sid, []).append(item)
+        # A claim the dataset recorded from a source with no sentence of it to quote (a composition, a phase):
+        # cited by the dataset's row, still naming the source (format 1.2.0). A source quoted for it needs no row.
+        for sid in unlocated:
+            if sid not in by and rows:
+                by[sid] = [{"source_id": sid, "dataset_row": {"dataset": datasets[r["source"]][:300],
+                                                              "row": str(r["locator"])[:300]}} for r in rows]
+                used_format["row_evidence"] = used_format.get("row_evidence", 0) + len(rows)
         return by
 
     nodes, links, reported = [], {}, {}
@@ -1077,6 +1095,30 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
             ev = {src_of[e["source"]]: [{"quote": title[:600], "source_id": src_of[e["source"]], "locator": {"section": "title"}}]}
             if e["target"] in gid and e["target"] not in sources:     # a dataset the notice reaches is reported in it
                 reported.setdefault(gid[e["target"]], set()).update(ev)
+        if not ev and not (e.get("props") or {}).get("evidence"):
+            # A link with no evidence of its own that joins two records of one source organizes that source's
+            # record (a step is part of its preparation, a sample has its formulation): a structural edge
+            # (format 1.2.0), with no claim to quote and the one source whose record it is.
+            home = owner(e["source"])
+            if home and home == owner(e["target"]) and home in src_of:
+                sid = src_of[home]
+                s, t = gid[e["source"]], gid[e["target"]]
+                if e["type"] not in edge_types:
+                    d = spec["edges"][e["type"]]
+                    edge_types[e["type"]] = {"description": (d.get("description") or e["type"]).strip()[:2000],
+                                             "from": [], "to": [], **({"iri": iri_of(d)} if iri_of(d) else {}),
+                                             "properties": {"scale_id": {"type": "string"}}}
+                et = edge_types[e["type"]]
+                for end, nid in (("from", s), ("to", t)):
+                    if nid.split(":", 1)[0] not in et[end]:
+                        et[end].append(nid.split(":", 1)[0])
+                eid = canonical_edge_id(e["type"], s, t, sid)
+                if eid not in links:
+                    values = conv_props(e["type"], e.get("props") or {}, True, ("link", e["id"]))  # a step's order
+                    links[eid] = {"id": eid, "type": e["type"], "source": s, "target": t,
+                                  "props": {**values, "scale_id": e["id"], "_structural": True, "source_paper_ids": [sid]}}
+                    used_format["structural_edges"] = used_format.get("structural_edges", 0) + 1
+                continue
         if not ev:
             report["not_exported_links"][e["type"]] = report["not_exported_links"].get(e["type"], 0) + 1
             continue
@@ -1283,7 +1325,7 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                 files[sid] = {"file": fname, "license": licence, "attribution": sid}
         (out / "text" / "_manifest.json").write_text(json.dumps({"files": files}, indent=1, sort_keys=True) + "\n")
         shipped, shipped_licences = len(files), {f["license"] for f in files.values()}
-    subst = sum(1 for e in graph["links"] if e["type"] != "REPORTED_IN")
+    subst = sum(1 for e in graph["links"] if e["type"] != "REPORTED_IN" and not e["props"].get("_structural"))
     lic: dict[str, int] = {}
     for n in kept_nodes:
         if n["label"] == "Publication":
@@ -1294,7 +1336,9 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
                     if "char_start" in ev["locator"])
         if n_off:
             report["evidence_with_char_offsets"] = n_off
-    manifest = {"format": FORMAT_ID, "format_version": FORMAT_VERSION, "bundle_id": bundle_id, "version": version,
+    if used_format:
+        report["format_1_2"] = dict(sorted(used_format.items()))
+    manifest = {"format": FORMAT_ID, "format_version": ROW_FORMAT_VERSION if used_format else FORMAT_VERSION, "bundle_id": bundle_id, "version": version,
                 "created": created, "topic": topic, "scope": scope_text, "scale_header": header,
                 "graph_file": "kg/graph.json", "graph_sha256": hashlib.sha256(gbytes).hexdigest(),
                 "graph_sha256_is_of": "the uncompressed graph.json bytes", "schema_file": "kg/schema.json",
