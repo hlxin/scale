@@ -42,7 +42,8 @@ def _doc(with_structure: bool = True) -> dict:
         _src("p1", "10.1/p1"), _src("p2", "10.1/p2"),
         {"id": DS, "label": "Dataset", "props": {"name": "Recipes extraction"}},
         {"id": f"{p}/prep/1", "label": "Preparation",
-         "props": {"name": "Preparation 1", "evidence": [_quote("p1", "Cu3Au nanorods were made by seeded growth.")]}},
+         "props": {"name": "Preparation 1", "evidence": [_quote("p1", "Cu3Au nanorods were made by seeded growth.")],
+                   "unmodeled": ["material class (dataset vocabulary): ordered_intermetallic"]}},
         {"id": f"{p}/prep/1/step/1", "label": "ProcedureStep",
          "props": {"name": "Step 1: heat", "evidence": [_quote("p1", "The mixture was heated to 280 C.")]}},
         {"id": f"{p}/catalyst/1", "label": "Catalyst", "props": {"name": "Cu75Au25", "evidence": [ROW, _unlocated("p1")]}},
@@ -100,3 +101,11 @@ def test_a_bundle_without_either_stays_1_1_0(tmp_path):
     m, graph = _export(tmp_path, _doc(with_structure=False))
     assert m["format_version"] == FORMAT_VERSION == "1.1.0"
     assert "format_1_2" not in m["export_report"]
+
+
+def test_a_common_list_property_is_exported_as_a_list(tmp_path):
+    """unmodeled is the kernel's (common to every label), a list of text: exported as the list, never as the JSON
+    text of one, which the format refuses (value.bad_type on every CatalystState of the synthesis graph)."""
+    _, graph = _export(tmp_path, _doc())
+    prep = next(n for n in graph["nodes"] if n["label"] == "Preparation" and n["props"].get("unmodeled"))
+    assert prep["props"]["unmodeled"] == ["material class (dataset vocabulary): ordered_intermetallic"]

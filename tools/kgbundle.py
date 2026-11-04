@@ -892,7 +892,11 @@ def export(doc: dict, spec: dict, out: Path, bundle_id: str, version: str = "1.0
 
     def conv_props(label_or_type: str, props: dict, is_edge: bool, owner: tuple) -> dict:
         d = (spec["edges"] if is_edge else spec["nodes"]).get(label_or_type, {})
-        defs = dict(d.get("properties") or {})
+        # the label's own properties over the kernel's common ones, as vocabulary() declares them in the schema: a
+        # common property typed by the kernel (unmodeled, a list of text) is converted to that type, never to the JSON
+        # text of it, which the format refuses (value.bad_type on every CatalystState of the synthesis graph)
+        common = ((spec.get("common") or {}).get("link" if is_edge else "node") or {}).get("properties") or {}
+        defs = {**common, **(d.get("properties") or {})}
         table = edge_types if is_edge else node_types
         outp = {}
         for k, v in props.items():
