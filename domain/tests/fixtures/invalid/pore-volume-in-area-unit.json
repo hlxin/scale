@@ -1,0 +1,1239 @@
+{
+  "nodes": [
+    {
+      "id": "ex:fts/source/paper",
+      "label": "Source",
+      "props": {
+        "name": "Invented Fischer-Tropsch paper",
+        "kind": "article",
+        "origin": "synthetic",
+        "title": "Syngas conversion over zeolite-containing catalysts (invented)",
+        "year": 2026
+      }
+    },
+    {
+      "id": "ex:fts/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "CO",
+        "charge": 0,
+        "elemental_composition": {
+          "C": 1,
+          "O": 1
+        },
+        "formula": "CO",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2
+        },
+        "formula": "H2",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/species/h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "H2O",
+        "charge": 0,
+        "elemental_composition": {
+          "H": 2,
+          "O": 1
+        },
+        "formula": "H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/species/peg",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "PEG-400",
+        "charge": 0,
+        "formula": "HO(C2H4O)nH",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/reaction/fts",
+      "label": "Reaction",
+      "props": {
+        "name": "n CO + 2n H2 -> (CH2)n + n H2O",
+        "balance_status": "not_checked",
+        "direction": "forward",
+        "equation": "n CO + 2n H2 -> (CH2)n + n H2O",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/catalyst/cofe",
+      "label": "Catalyst",
+      "props": {
+        "name": "Co on H-ZSM-5",
+        "catalyst_family": "metal",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "Co/H-ZSM-5",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "nominal_formula": "Co/H-ZSM-5",
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/sample/cofe",
+      "label": "CatalystSample",
+      "props": {
+        "name": "Co on H-ZSM-5, batch 1",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "Co/H-ZSM-5",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "sample_kind": "powder"
+      }
+    },
+    {
+      "id": "ex:fts/feed/co-h2",
+      "label": "Feed",
+      "props": {
+        "name": "CO/H2 = 1/2",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2, footnote",
+            "quote": "CO/H2 = 1/2",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ratios": {
+          "co_h2_ratio": {
+            "status": "present",
+            "as_reported": "1/2",
+            "basis": "CO/H2, as printed",
+            "unit": "1",
+            "value": 0.5
+          }
+        }
+      }
+    },
+    {
+      "id": "ex:fts/feed/co-h2o",
+      "label": "Feed",
+      "props": {
+        "name": "CO:H2O = 3:2",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "quote": "CO:H2O ratio of 3:2",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/feed/ph2-pco",
+      "label": "Feed",
+      "props": {
+        "name": "PH2/PCO = 2, with PEG-400 as the liquid",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Results",
+            "quote": "PH2/PCO ratio",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic"
+      }
+    },
+    {
+      "id": "ex:fts/instrument/slurry",
+      "label": "Reactor",
+      "props": {
+        "name": "50-mL slurry autoclave",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "quote": "slurry reactor",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "operation_mode": "batch",
+        "origin": "synthetic",
+        "reactor_kind": "slurry"
+      }
+    },
+    {
+      "id": "ex:fts/instrument/microchannel",
+      "label": "Reactor",
+      "props": {
+        "name": "Microchannel microreactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "quote": "microchannel microreactor",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "operation_mode": "continuous",
+        "origin": "synthetic",
+        "reactor_kind": "microchannel"
+      }
+    },
+    {
+      "id": "ex:fts/instrument/monolith",
+      "label": "Reactor",
+      "props": {
+        "name": "Monolith reactor",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Methods",
+            "quote": "monolith reactor",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "operation_mode": "continuous",
+        "origin": "synthetic",
+        "reactor_kind": "monolith"
+      }
+    },
+    {
+      "id": "ex:fts/test/slurry",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Slurry test, contact time in g h mol-1",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "W/F = 5.1 gcat h mol-1",
+            "source": "ex:fts/source/paper"
+          },
+          {
+            "id": "wf",
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "W/F",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 2
+        },
+        "space_time": {
+          "status": "present",
+          "as_reported": "5.1 gcat h mol-1",
+          "basis": "W/F, catalyst mass per molar feed flow",
+          "evidence_ids": [
+            "wf"
+          ],
+          "unit": "g h mol-1",
+          "value": 5.1
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:fts/test/microchannel",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Microchannel test, contact time per volumetric flow",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "W/F = 0.4 g s mL-1",
+            "source": "ex:fts/source/paper"
+          },
+          {
+            "id": "wf",
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "W/F",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "feed_ratio": {
+          "status": "present",
+          "as_reported": "CO/H2 = 1/2",
+          "basis": "CO/H2, as printed",
+          "unit": "1",
+          "value": 0.5
+        },
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 2
+        },
+        "space_time": {
+          "status": "present",
+          "basis": "W/F, catalyst mass per volumetric flow, at STP",
+          "evidence_ids": [
+            "wf"
+          ],
+          "unit": "g s mL-1",
+          "value": 0.4
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:fts/test/monolith",
+      "label": "CatalyticTest",
+      "props": {
+        "name": "Monolith test, a GHSV",
+        "driving_forces": [
+          "thermo"
+        ],
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "GHSV = 3000 h-1",
+            "source": "ex:fts/source/paper"
+          },
+          {
+            "id": "wf",
+            "kind": "table",
+            "locator": "Table 2",
+            "quote": "W/F",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "pressure": {
+          "status": "present",
+          "basis": "absolute",
+          "unit": "MPa",
+          "value": 2
+        },
+        "space_velocity": {
+          "status": "present",
+          "basis": "GHSV",
+          "evidence_ids": [
+            "wf"
+          ],
+          "unit": "h-1",
+          "value": 3000
+        },
+        "temperature": {
+          "status": "present",
+          "unit": "°C",
+          "value": 220
+        },
+        "temperature_measured_at": "catalyst_bed",
+        "test_kind": "activity"
+      }
+    },
+    {
+      "id": "ex:fts/site/bronsted",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Bronsted acid site",
+        "acid_type": "bronsted",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 3.2",
+            "quote": "Bronsted acid sites",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "proposed_composition": "Si-OH-Al bridging hydroxyl",
+        "site_kind": "acid_site"
+      }
+    },
+    {
+      "id": "ex:fts/site/lewis",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Lewis acid site",
+        "acid_type": "lewis",
+        "evidence": [
+          {
+            "kind": "text",
+            "locator": "Section 3.2",
+            "quote": "extra framework aluminum",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "proposed_composition": "extra-framework aluminium",
+        "site_kind": "acid_site"
+      }
+    },
+    {
+      "id": "ex:fts/site/acid-total",
+      "label": "ActiveSite",
+      "props": {
+        "name": "Acid sites counted by NH3-TPD",
+        "acid_type": "not_stated",
+        "evidence": [
+          {
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "Total Acidity",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_kind": "acid_site"
+      }
+    },
+    {
+      "id": "ex:fts/state/desilicated",
+      "label": "CatalystState",
+      "props": {
+        "name": "after desilication",
+        "origin": "synthetic",
+        "state_kind": "as_prepared"
+      }
+    },
+    {
+      "id": "ex:fts/characterization/nh3-tpd",
+      "label": "Characterization",
+      "props": {
+        "name": "NH3-TPD",
+        "evidence": [
+          {
+            "id": "tpd",
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "NH3-TPD",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "technique": "NH3 temperature-programmed desorption"
+      }
+    },
+    {
+      "id": "ex:fts/characterization/pyridine-ir",
+      "label": "Characterization",
+      "props": {
+        "name": "Pyridine infrared",
+        "evidence": [
+          {
+            "id": "pyr",
+            "kind": "text",
+            "locator": "Section 3.2",
+            "quote": "Bronsted acid sites",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "technique": "pyridine FTIR"
+      }
+    },
+    {
+      "id": "ex:fts/variable/total-pore-volume",
+      "label": "Variable",
+      "props": {
+        "name": "total_pore_volume",
+        "definition": "N2 at p/p0 = 0.95",
+        "origin": "synthetic",
+        "quantity_kind": "specific_pore_volume",
+        "scale": "quantitative",
+        "unit": "cm3/g"
+      }
+    },
+    {
+      "id": "ex:fts/variable/micropore-volume",
+      "label": "Variable",
+      "props": {
+        "name": "micropore_volume",
+        "definition": "t-plot",
+        "origin": "synthetic",
+        "quantity_kind": "specific_pore_volume",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:fts/variable/mesopore-volume",
+      "label": "Variable",
+      "props": {
+        "name": "mesopore_volume",
+        "definition": "total pore volume minus the t-plot micropore volume",
+        "origin": "synthetic",
+        "quantity_kind": "specific_pore_volume",
+        "scale": "quantitative",
+        "unit": "cm3/g"
+      }
+    },
+    {
+      "id": "ex:fts/variable/bet-area",
+      "label": "Variable",
+      "props": {
+        "name": "specific_surface_area",
+        "definition": "BET, p/p0 0.05-0.30",
+        "origin": "synthetic",
+        "quantity_kind": "specific_surface_area",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:fts/variable/mesopore-area",
+      "label": "Variable",
+      "props": {
+        "name": "mesopore_surface_area",
+        "definition": "t-plot",
+        "origin": "synthetic",
+        "quantity_kind": "specific_surface_area",
+        "scale": "quantitative",
+        "unit": "m2/g"
+      }
+    },
+    {
+      "id": "ex:fts/characterization/n2-physisorption",
+      "label": "Characterization",
+      "props": {
+        "name": "N2 physisorption at 77 K",
+        "evidence": [
+          {
+            "id": "t1_pore",
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "Vmicro",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "experiment_kind": "physical",
+        "origin": "synthetic",
+        "result_values": [
+          {
+            "id": "vmicro",
+            "status": "present",
+            "definition": "t-plot",
+            "evidence_ids": [
+              "t1_pore"
+            ],
+            "unit": "mL/g",
+            "value": 0.27,
+            "variable": "ex:fts/variable/micropore-volume"
+          },
+          {
+            "id": "vmeso",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pore"
+            ],
+            "unit": "cm3 g-1",
+            "value": 0.71,
+            "variable": "ex:fts/variable/mesopore-volume"
+          },
+          {
+            "id": "vtotal",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pore"
+            ],
+            "unit": "cm3/g",
+            "value": 0.98,
+            "variable": "ex:fts/variable/total-pore-volume"
+          },
+          {
+            "id": "sbet",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pore"
+            ],
+            "unit": "m2/g",
+            "value": 640,
+            "variable": "ex:fts/variable/bet-area"
+          },
+          {
+            "id": "smeso",
+            "status": "present",
+            "evidence_ids": [
+              "t1_pore"
+            ],
+            "unit": "m2 g-1",
+            "value": 210,
+            "variable": "ex:fts/variable/mesopore-area"
+          }
+        ],
+        "technique": "N2 physisorption"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:fts/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 1,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:fts/reaction/fts",
+      "target": "ex:fts/species/co"
+    },
+    {
+      "id": "ex:fts/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "coefficient": 2,
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:fts/reaction/fts",
+      "target": "ex:fts/species/h2"
+    },
+    {
+      "id": "ex:fts/link/3",
+      "type": "HAS_FORMULATION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/sample/cofe",
+      "target": "ex:fts/catalyst/cofe"
+    },
+    {
+      "id": "ex:fts/link/4",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "feed_inv",
+            "kind": "table",
+            "locator": "Table 2, footnote",
+            "quote": "CO/H2 = 1/2",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "as_reported": "1/2",
+            "basis": "mole",
+            "evidence_ids": [
+              "feed_inv"
+            ],
+            "target": "ex:fts/species/h2",
+            "unit": "1",
+            "value": 0.5
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/co-h2",
+      "target": "ex:fts/species/co"
+    },
+    {
+      "id": "ex:fts/link/5",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/co-h2",
+      "target": "ex:fts/species/h2"
+    },
+    {
+      "id": "ex:fts/link/6",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "feed_wgs",
+            "kind": "text",
+            "locator": "Methods",
+            "quote": "CO:H2O ratio of 3:2",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "as_reported": "3:2",
+            "basis": "mole",
+            "evidence_ids": [
+              "feed_wgs"
+            ],
+            "target": "ex:fts/species/h2o",
+            "unit": "1",
+            "value": 1.5
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/co-h2o",
+      "target": "ex:fts/species/co"
+    },
+    {
+      "id": "ex:fts/link/7",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/co-h2o",
+      "target": "ex:fts/species/h2o"
+    },
+    {
+      "id": "ex:fts/link/8",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "evidence": [
+          {
+            "id": "feed_pp",
+            "kind": "text",
+            "locator": "Results",
+            "quote": "PH2/PCO ratio",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "ratio": [
+          {
+            "status": "present",
+            "as_reported": "PH2/PCO = 2",
+            "basis": "partial pressure",
+            "evidence_ids": [
+              "feed_pp"
+            ],
+            "target": "ex:fts/species/co",
+            "unit": "1",
+            "value": 2
+          }
+        ],
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/ph2-pco",
+      "target": "ex:fts/species/h2"
+    },
+    {
+      "id": "ex:fts/link/9",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "reactant"
+      },
+      "source": "ex:fts/feed/ph2-pco",
+      "target": "ex:fts/species/co"
+    },
+    {
+      "id": "ex:fts/link/10",
+      "type": "HAS_COMPONENT",
+      "props": {
+        "origin": "synthetic",
+        "role": "solvent"
+      },
+      "source": "ex:fts/feed/ph2-pco",
+      "target": "ex:fts/species/peg"
+    },
+    {
+      "id": "ex:fts/link/11",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:fts/test/slurry",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/12",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/slurry",
+      "target": "ex:fts/feed/ph2-pco"
+    },
+    {
+      "id": "ex:fts/link/13",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/slurry",
+      "target": "ex:fts/instrument/slurry"
+    },
+    {
+      "id": "ex:fts/link/14",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/slurry",
+      "target": "ex:fts/reaction/fts"
+    },
+    {
+      "id": "ex:fts/link/15",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:fts/test/microchannel",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/16",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/microchannel",
+      "target": "ex:fts/feed/co-h2"
+    },
+    {
+      "id": "ex:fts/link/17",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/microchannel",
+      "target": "ex:fts/instrument/microchannel"
+    },
+    {
+      "id": "ex:fts/link/18",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/microchannel",
+      "target": "ex:fts/reaction/fts"
+    },
+    {
+      "id": "ex:fts/link/19",
+      "type": "USES_CATALYST",
+      "props": {
+        "origin": "synthetic",
+        "state": "reduced"
+      },
+      "source": "ex:fts/test/monolith",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/20",
+      "type": "FED_WITH",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/monolith",
+      "target": "ex:fts/feed/co-h2o"
+    },
+    {
+      "id": "ex:fts/link/21",
+      "type": "IN_REACTOR",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/monolith",
+      "target": "ex:fts/instrument/monolith"
+    },
+    {
+      "id": "ex:fts/link/22",
+      "type": "OF_REACTION",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/monolith",
+      "target": "ex:fts/reaction/fts"
+    },
+    {
+      "id": "ex:fts/link/23",
+      "type": "STATE_OF",
+      "props": {
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/state/desilicated",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/24",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:fts/characterization/nh3-tpd",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/25",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:fts/characterization/pyridine-ir",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/link/26",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t1_total",
+            "kind": "table",
+            "locator": "Table 1",
+            "quote": "Total Acidity",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_density": {
+          "status": "present",
+          "definition": "total acidity, sites of both kinds",
+          "evidence_ids": [
+            "t1_total"
+          ],
+          "origin": "measured",
+          "produced_by": "ex:fts/characterization/nh3-tpd",
+          "unit": "µmol/g",
+          "value": 743
+        }
+      },
+      "source": "ex:fts/state/desilicated",
+      "target": "ex:fts/site/acid-total"
+    },
+    {
+      "id": "ex:fts/link/27",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t1_bas",
+            "kind": "text",
+            "locator": "Section 3.2",
+            "quote": "Bronsted acid sites",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_density": {
+          "status": "present",
+          "evidence_ids": [
+            "t1_bas"
+          ],
+          "origin": "measured",
+          "produced_by": "ex:fts/characterization/pyridine-ir",
+          "unit": "µmol/g",
+          "value": 120
+        }
+      },
+      "source": "ex:fts/state/desilicated",
+      "target": "ex:fts/site/bronsted"
+    },
+    {
+      "id": "ex:fts/link/28",
+      "type": "HAS_SITE",
+      "props": {
+        "status": "asserted",
+        "evidence": [
+          {
+            "id": "t1_las",
+            "kind": "text",
+            "locator": "Section 3.2",
+            "quote": "extra framework aluminum",
+            "source": "ex:fts/source/paper"
+          }
+        ],
+        "origin": "synthetic",
+        "site_density": {
+          "status": "present",
+          "evidence_ids": [
+            "t1_las"
+          ],
+          "origin": "measured",
+          "produced_by": "ex:fts/characterization/pyridine-ir",
+          "unit": "µmol/g",
+          "value": 35
+        }
+      },
+      "source": "ex:fts/state/desilicated",
+      "target": "ex:fts/site/lewis"
+    },
+    {
+      "id": "ex:fts/link/29",
+      "type": "CHARACTERIZES",
+      "props": {
+        "origin": "synthetic",
+        "state": "as_prepared"
+      },
+      "source": "ex:fts/characterization/n2-physisorption",
+      "target": "ex:fts/sample/cofe"
+    },
+    {
+      "id": "ex:fts/catalyst/cofe/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/catalyst/cofe",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/characterization/n2-physisorption/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/characterization/n2-physisorption",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/characterization/nh3-tpd/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/characterization/nh3-tpd",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/characterization/pyridine-ir/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 3.2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/characterization/pyridine-ir",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/feed/co-h2/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2, footnote"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/feed/co-h2",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/feed/co-h2o/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/feed/co-h2o",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/feed/ph2-pco/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Results"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/feed/ph2-pco",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/instrument/microchannel/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/instrument/microchannel",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/instrument/monolith/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/instrument/monolith",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/instrument/slurry/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Methods"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/instrument/slurry",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/sample/cofe/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/sample/cofe",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/site/acid-total/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 1"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/site/acid-total",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/site/bronsted/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 3.2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/site/bronsted",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/site/lewis/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Section 3.2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/site/lewis",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/test/microchannel/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/microchannel",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/test/monolith/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/monolith",
+      "target": "ex:fts/source/paper"
+    },
+    {
+      "id": "ex:fts/test/slurry/reported-in/paper",
+      "type": "REPORTED_IN",
+      "props": {
+        "locators": [
+          "Table 2"
+        ],
+        "origin": "synthetic"
+      },
+      "source": "ex:fts/test/slurry",
+      "target": "ex:fts/source/paper"
+    }
+  ],
+  "directed": true,
+  "graph": {
+    "data_status": "synthetic_example",
+    "follows_domains": [
+      "catalysis"
+    ],
+    "graph_id": "ex:invalid/pore-volume-in-area-unit",
+    "schema": "scale-catal",
+    "schema_version": "0.8.1",
+    "stewardship": {
+      "access": "public"
+    },
+    "title": "INVALID FIXTURE (pore-volume-in-area-unit): a micropore volume whose unit is an area per mass"
+  },
+  "multigraph": true
+}

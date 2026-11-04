@@ -280,6 +280,25 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
 - A ratio no edge fits (a Si/Al ratio of a support): the Catalyst's or Material's `properties`, each
   value with its `basis`.
 
+## Feed ratios, contact time, reactor kind and acid sites
+
+- A feed's gas ratio (H2/CO = 2, CO/H2 = 1/2, CO:H2O = 3:2, PH2/PCO): `ratio` on the feed's `HAS_COMPONENT` edge to the
+  numerator gas (a list of value objects, unit `1`), `target` the denominator and `basis` by what it is counted (mole,
+  mass, volume, atom or partial pressure); the number and the print in `as_reported` ("1/2", "3:2"). Never convert or
+  invert: CO/H2 = 1/2 stays 0.5 on the edge to CO with target H2, and a query asks for either orientation.
+  `CatalyticTest.feed_ratio` and `Feed.ratios` keep the printed form; the ratio on the edge is the comparable one. A
+  share of the whole stays `fraction` (a ratio is not a share).
+- Contact time W/F (5.1 gcat h mol-1; 0.4 g s mL-1): `CatalyticTest.space_time`, never `space_velocity` (the validator
+  rejects it as the wrong dimension); `basis` says per molar or per volumetric feed flow, and at which conditions a gas
+  volume is counted (STP, normal). Nothing is converted to a GHSV or a WHSV.
+- `Reactor.reactor_kind` is how the phases contact: `slurry` (catalyst suspended in a liquid that gas is stirred or
+  bubbled through; the liquid is a Feed component with `role: solvent`), `microchannel`, `monolith`; a stirred vessel
+  that is not a slurry stays `stirred_tank`. How it is operated in time is `operation_mode` (batch, semi_batch,
+  continuous), so a batch slurry autoclave is `slurry` with `batch`.
+- An acid site: `site_kind: acid_site` and `acid_type` `bronsted` or `lewis` as the source says; `not_stated` where it
+  says neither, which is where a total acidity (NH3-TPD) goes, as the `site_density` of its own ActiveSite. The words
+  (Si-OH-Al, extra-framework Al) stay in `proposed_composition`; strength is not recorded as a type.
+
 ## Commercial catalysts
 
 - The product name as the source gives it is the Catalyst's `name`; a catalogue number or RRID goes in
@@ -343,13 +362,16 @@ Record a characterization's results as result entries (`result_values`), each na
 measured, with its `definition` (the method and its range) and, where it is about one phase, species or element, its
 `target` (below, "Characterization recipes"). The keys below are the names to give those Variables' `quantity_kind`,
 so that one measurand has one name across documents. Those marked (declared) are quantity kinds of the kernel, whose
-units are checked; the others are recorded as stated, their units not checked until the kernel declares them. An older document may hold the same values in the Characterization's `results` map under
+units are checked (a measurand named in the table whose row says it is a Variable of a declared kind gives that kind as the
+Variable's `quantity_kind` and its own name as the Variable's `name`); the others are recorded as stated, their units not checked until the kernel declares them. An older document may hold the same values in the Characterization's `results` map under
 these keys; both read the same way.
 
 | quantity_kind | unit as printed | definition (example) |
 |---|---|---|
-| `specific_surface_area` | m2/g | BET, p/p0 0.05–0.30 |
-| `external_surface_area`, `pore_volume`, `pore_diameter` | m2/g, cm3/g, nm | t-plot; N2 at p/p0 0.99; BJH desorption branch |
+| `specific_surface_area` (declared) | m2/g | BET, p/p0 0.05–0.30 |
+| `external_surface_area`, `mesopore_surface_area`, `micropore_surface_area` | m2/g | t-plot; one name per pore class, each a Variable of the declared kind `specific_surface_area` |
+| `total_pore_volume`, `micropore_volume`, `mesopore_volume` | cm3/g (mL/g) | N2 at p/p0 0.95 or 0.99; t-plot or Dubinin–Radushkevich (N2, CO2); total minus micropore. Each a Variable of the declared kind `specific_pore_volume`, the class in its name and the method in `definition` |
+| `pore_volume`, `pore_diameter` | cm3/g, nm | `pore_volume` is the earlier name of `total_pore_volume`: use the class names; BJH desorption branch for a size |
 | `metal_surface_area` | m2/g | N2O titration, stoichiometry Cu:O = 2 |
 | `site_fraction` (declared) | % | a dispersion: exposed atoms as a share of all atoms of the metal |
 | `gas_uptake` | µmol/g | H2 chemisorption at 308 K (`target`: the gas) |

@@ -43,6 +43,7 @@ STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.j
 CONDITIONS = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json"
 SELECTIVITY = REPO / "domain/examples/scale-catal/product-measurement-examples/selectivity-basis.json"
 SALT = REPO / "domain/examples/scale-catal/synthesis-examples/salt-matrix-anneal.json"
+FTS = REPO / "domain/examples/scale-catal/fts-examples/fts-conditions.json"
 
 
 def test_node(doc: dict) -> dict:
@@ -435,6 +436,27 @@ def main() -> None:
            lambda d: next(x for n in d["nodes"] if n["label"] == "CatalyticTest" for x in n["props"].get("result_values", [])
                           if x["id"] == "c5_olefins_in_olefins").__setitem__("relative_to", "ex:sb/lump/missing"),
            base=load_doc(SELECTIVITY))
+
+    # Fischer-Tropsch conditions (#90, #92-#95): a feed ratio that is no pure number, an acid kind outside its list, an
+    # operation mode outside its list, a contact time written as a space velocity, a pore volume in an area unit
+    def fts_node(d, local):
+        return next(n for n in d["nodes"] if n["id"].endswith("/" + local))
+
+    def fts_test(d, local):
+        return fts_node(d, "test/" + local)["props"]
+
+    defect("feed-ratio-in-pressure", "a feed ratio of CO over H2 given in bar, which is a pressure, not a ratio",
+           lambda d: next(e for e in d["links"] if e["type"] == "HAS_COMPONENT" and e["props"].get("ratio")
+                          )["props"]["ratio"][0].__setitem__("unit", "bar"), base=load_doc(FTS))
+    defect("acid-type-in-words", "an acid site whose kind is a strength, not one of the listed kinds",
+           lambda d: fts_node(d, "site/bronsted")["props"].__setitem__("acid_type", "strong"), base=load_doc(FTS))
+    defect("operation-mode-not-allowed", "a reactor whose operation mode is outside the list",
+           lambda d: fts_node(d, "instrument/slurry")["props"].__setitem__("operation_mode", "stirred"), base=load_doc(FTS))
+    defect("contact-time-as-space-velocity", "a W/F in g h mol-1 recorded as a space velocity",
+           lambda d: fts_test(d, "slurry").__setitem__("space_velocity", fts_test(d, "slurry").pop("space_time")),
+           base=load_doc(FTS))
+    defect("pore-volume-in-area-unit", "a micropore volume whose unit is an area per mass",
+           lambda d: fts_node(d, "variable/micropore-volume")["props"].__setitem__("unit", "m2/g"), base=load_doc(FTS))
 
 
 if __name__ == "__main__":

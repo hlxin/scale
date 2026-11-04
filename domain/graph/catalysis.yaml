@@ -238,6 +238,27 @@ nodes:
         - circulating
         - other
         - not_reported
+        - slurry
+        - microchannel
+        - monolith
+        description: 'How the phases contact in the reactor, as the source names it. slurry (provisional): the catalyst
+          is suspended in a liquid that gas is stirred or bubbled through (a stirred slurry autoclave or CSTR, a
+          slurry bubble column), a three-phase system, and the liquid is a Feed component with role solvent;
+          microchannel (provisional): the catalyst is coated on or packed in sub-millimetre channels; monolith
+          (provisional): a structured catalyst whose channels run through one body. stirred_tank stays for a stirred
+          vessel that is not a slurry (a Berty or a spinning-basket reactor); batch and flow stay for documents that
+          state only how the reactor is operated (operation_mode says it beside any kind).'
+      operation_mode:
+        type: enum
+        maturity: provisional
+        values:
+        - batch
+        - semi_batch
+        - continuous
+        - not_reported
+        description: How the reactor is operated in time, as the source states it, apart from how its phases contact
+          (reactor_kind); a batch slurry autoclave is reactor_kind slurry with operation_mode batch. semi_batch
+          is a closed charge of catalyst or liquid with a gas fed continuously.
       volume:
         type: value
       specifications:
@@ -1230,6 +1251,19 @@ nodes:
         - single_atom
         - other
         - not_reported
+      acid_type:
+        type: enum
+        maturity: provisional
+        values:
+        - bronsted
+        - lewis
+        - not_stated
+        - other
+        description: The kind of an acid site (site_kind acid_site), as the source states it. bronsted is a proton donor (a
+          bridging Si-OH-Al hydroxyl); lewis an electron-pair acceptor (extra-framework Al, Al3+ on an oxide);
+          not_stated when the source does not say, which is where a total acidity (an NH3-TPD total counts both kinds)
+          belongs, so that it is never compared with the density of one kind; other for a kind neither names. The source's
+          words (the hydroxyl, the species) stay in proposed_composition. Acid strength is not this property.
       proposed_composition:
         type: text
       properties:
@@ -1248,7 +1282,9 @@ nodes:
         type: map
         items:
           type: value
-        description: Stated ratios, e.g. h2_co_ratio.
+        description: Stated ratios as the source prints them, e.g. h2_co_ratio; the key or the value's note says which
+          gas is over which. The comparable form is the ratio on the HAS_COMPONENT edge of the numerator gas (target the
+          denominator, basis mole, volume or partial_pressure); nothing is converted or inverted.
   CatalystSample:
     is_a: Sample
     description: |
@@ -1346,12 +1382,22 @@ nodes:
       space_velocity:
         type: value
         quantity: space_velocity
+      space_time:
+        type: value
+        quantity: space_time
+        maturity: provisional
+        description: The catalyst amount over the feed flow (W/F, 5.1 gcat h mol-1; contact time), as stated, the inverse
+          of a space velocity. space_velocity_basis (catalyst_mass_per_molar_flow, catalyst_mass_per_volumetric_flow) says
+          what is divided by what, and flow_reference at which conditions a gas volume is counted. Never a space_velocity,
+          never converted to one.
       flow_rate:
         type: value
         quantity: flow_rate
       feed_ratio:
         type: value
-        description: The stated feed ratio; its note or basis says which (H2/CO, H2/COx).
+        description: The feed ratio as the source prints it (H2/CO, CO/H2, CO:H2O); its note or basis says which. It
+          keeps the printed form and orientation; the comparable ratio, with its numerator, denominator and basis, is
+          HAS_COMPONENT.ratio of the feed.
       conversion:
         type: value
         quantity: conversion
@@ -2073,6 +2119,17 @@ edges:
         description: The component's share of the whole, dimensionless (%, 1, wt%, mol%), as fraction_basis
           says (by mass, mole, atom or volume, or relative to another component); never a concentration or an
           amount.
+      ratio:
+        type: list
+        quantity: ratio
+        maturity: provisional
+        items:
+          type: value
+        description: The component's quantity relative to another component's, as stated (H2/CO = 2 on the edge to H2,
+          target CO; CO:H2O = 3:2 on the edge to CO, target H2O), one value per component it is relative to; the edge's
+          component is the numerator, the value's target the denominator, and its basis says by what (mole, mass,
+          volume, atom or partial_pressure for PH2/PCO). An inverted print (CO/H2 = 1/2) is a ratio on the edge to CO,
+          never converted. A share of the whole is fraction.
       fraction_basis:
         type: enum
         values:
