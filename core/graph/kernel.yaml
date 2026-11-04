@@ -2823,6 +2823,10 @@ quantities:
     molar_flow: N T-1
     mass_flow: M T-1
     volume_per_mass_time: L3 M-1 T-1
+    mass_time_per_amount: M T N-1
+    mass_time_per_volume: M L-3 T
+    area_per_mass: L2 M-1
+    volume_per_mass: L3 M-1
     amount_per_energy: N M-1 L-2 T2
     mass_per_energy: L-2 T2
     amount_per_mass_time: N M-1 T-1
@@ -3143,6 +3147,8 @@ quantities:
           terms: [volume fraction, by volume, v/v, volume basis]
         relative_to_component:
           terms: [relative to component]
+        partial_pressure:
+          terms: [partial pressure, partial-pressure ratio, partial pressure ratio, pressure ratio]
       unspecified: [not_reported]
       refine:
         relative_to_component: relative_to
@@ -3164,6 +3170,12 @@ quantities:
         volume_per_catalyst_mass:
           terms: [GHSV, per catalyst mass, per gram of catalyst]
           dimensions: [volume_per_mass_time]
+        catalyst_mass_per_molar_flow:
+          terms: [per molar flow, per mole of feed, molar feed flow, molar flow of the feed]
+          dimensions: [mass_time_per_amount]
+        catalyst_mass_per_volumetric_flow:
+          terms: [per volumetric flow, per volume of feed, volumetric feed flow, volumetric flow of the feed]
+          dimensions: [mass_time_per_volume]
     species:
       description: The species a value is counted for, named by its target, the product of a selectivity, a yield, a
         rate, an amount, a Faradaic efficiency, a quantum yield or a partial current density, the reactant of a
@@ -3535,6 +3547,18 @@ quantities:
         composition_fraction.
       dimensions: [dimensionless]
       compare_by: [fraction_basis]
+    specific_surface_area:
+      maturity: provisional
+      description: A surface area per mass of solid (m2/g), as a BET area, a mesopore, micropore or external area from a
+        t-plot, or the metal surface area of a chemisorption. The class of area and the method (BET range, t-plot,
+        titrant and stoichiometry) are the value's definition and its measurand's name.
+      dimensions: [area_per_mass]
+    specific_pore_volume:
+      maturity: provisional
+      description: A pore volume per mass of solid (cm3/g, mL/g), as a total pore volume at a stated p/p0, a micropore
+        volume (t-plot, Dubinin-Radushkevich) or a mesopore volume; the class and the method are the value's
+        definition and its measurand's name.
+      dimensions: [volume_per_mass]
     ph:
       maturity: provisional
       description: The pH of a solution, a slurry or a gel, dimensionless (unit 1); its definition says when and of what
@@ -3612,6 +3636,17 @@ quantities:
       denominator:
         description: The catalyst bed volume or catalyst mass the flow is divided by.
         dimensions: [volume, mass]
+    space_time:
+      maturity: provisional
+      description: The catalyst amount over the feed flow (W/F, in g h mol-1 or g s mL-1; often called contact time or
+        space time), the inverse of a space velocity on a catalyst-mass basis; what is divided by what, and at which
+        conditions a gas volume is counted, decide the quantity. It is never converted to a space velocity.
+      dimensions: [time, mass_time_per_amount, mass_time_per_volume]
+      compare_by:
+      - space_velocity_basis
+      - context: flow_reference
+        when:
+          space_velocity_basis: [catalyst_mass_per_volumetric_flow]
     faradaic_efficiency:
       description: The share of the charge passed that forms one product (its target), dimensionless.
       dimensions: [dimensionless]
