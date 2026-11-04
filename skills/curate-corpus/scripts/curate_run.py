@@ -1,7 +1,7 @@
 """Curate a frozen corpus into scale-catal documents: one SCALE working folder per source, curated by a subagent that
 follows the curate-corpus skill's procedure for one source, read a second time by another, and checked by SCALE's tools.
 
-  python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> --curator opus|sonnet|fable|haiku
+  python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> --curator opus|sonnet|fable|haiku|api:<model>
                                    --reviewer opus|sonnet|fable|haiku|api:<model>|skip [--api-base-url <url>]
                                    [--ids 12,57 | --ids-file F] [--max 50]
                                    [--contributor <id>] [--project <id>] [--version <v>] [--no-si] [--scale "<command>"]
@@ -20,11 +20,13 @@ prepare   checks the manifest with `scale corpus check`, picks its included sour
 next      writes the prompt of the next N sources for a role (from ../templates) and prints one JSON line per source:
           {"id", "role", "prompt", "model"}. Launch one subagent per line, with that model. A handed-out source is not
           handed out again for 3 hours unless its report arrives.
-          Models (asked before prepare): --curator is the model that curates and fixes; --reviewer the one that reads
-          each document a second time — another Claude model (recommended: not the curator's), api:<model> (read by
-          review-api through an OpenAI-compatible endpoint, --api-base-url; key in ~/.scale/sources/keys.txt or
-          an environment variable), or skip (not recommended: a document then passes on SCALE's checks alone, and the
-          index says it was not read a second time).
+          Models (asked before prepare): --curator is the model that curates and fixes — a Claude model (a subagent)
+          or api:<model>, a model behind --api-base-url run by an agent host that follows this skill (the line then
+          carries "base_url"; the host may read that source's folder and SCALE, never another run's folders);
+          --reviewer the one that reads each document a second time — another Claude model (recommended: not the
+          curator's), api:<model> (read by review-api through an OpenAI-compatible endpoint, --api-base-url; key in
+          ~/.scale/sources/keys.txt or an environment variable), or skip (not recommended: a document then passes on
+          SCALE's checks alone, and the index says it was not read a second time). One --api-base-url serves both.
 review-api  the second reading of the next N curated sources by the API model: the document, the curator's report
           and the page texts go to the model with the reading's checklist; its verdict is written to
           work/review.json as a subagent's would be.
@@ -71,6 +73,11 @@ API_CHARS = 300000                                   # page-text characters sent
 
 
 # ------------------------------------------------------------------ small helpers
+def is_model(m, also=()):
+    """A Claude model a subagent runs on, api:<model> (a model behind the run's --api-base-url), or one of `also`."""
+    return m in MODELS + tuple(also) or (isinstance(m, str) and m.startswith("api:") and len(m) > 4)
+
+
 def now():
     return _dt.datetime.now(_dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -307,13 +314,13 @@ def cmd_prepare(a):
         models["reviewer"] = a.reviewer
     if a.api_base_url:
         models["api"] = {"base_url": a.api_base_url, "key_name": a.api_key_name, "key_env": a.api_key_env}
-    if models.get("curator") not in MODELS or not (models.get("reviewer") in MODELS + ("skip",) or
-                                                   str(models.get("reviewer")).startswith("api:")):
-        die("ask first, then give both: --curator " + "|".join(MODELS) + " (the model that curates; opus is "
-            "recommended) and --reviewer " + "|".join(MODELS) + "|api:<model>|skip (who reads each document a second "
-            "time: recommended, a model other than the curator's; skip is not recommended)")
-    if str(models["reviewer"]).startswith("api:") and not (models.get("api") or {}).get("base_url"):
-        die("--reviewer api:<model> needs --api-base-url (an OpenAI-compatible endpoint)")
+    if not (is_model(models.get("curator")) and is_model(models.get("reviewer"), ("skip",))):
+        die("ask first, then give both: --curator " + "|".join(MODELS) + "|api:<model> (the model that curates; "
+            "opus is recommended) and --reviewer " + "|".join(MODELS) + "|api:<model>|skip (who reads each document a "
+            "second time: recommended, a model other than the curator's; skip is not recommended)")
+    for role in ("curator", "reviewer"):
+        if str(models[role]).startswith("api:") and not (models.get("api") or {}).get("base_url"):
+            die(f"--{role} api:<model> needs --api-base-url (the endpoint that serves the model)")
     root = project_root(manifest_path.parent)
     cfg["project_root"] = str(root) if root else None
     picked = []
@@ -433,7 +440,8 @@ def cmd_next(a):
         p.parent.mkdir(parents=True, exist_ok=True)
         p.write_text(text, encoding="utf-8")
         append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": a.role, "t": t, "at": now()})
-        out.append({"id": i, "role": a.role, "prompt": str(p), "model": model})
+        out.append({"id": i, "role": a.role, "prompt": str(p), "model": model,
+                    **({"base_url": run.models["api"]["base_url"]} if str(model).startswith("api:") else {})})
     for o in out:
         print(json.dumps(o))
     if not out:
@@ -451,7 +459,10 @@ that every quote is verbatim in the text; check what they cannot:
 - unknowns typed (not_reported with missing_reason); no typical value filled in; no unreported product as 0;
 - results the source cites from other works are not recorded as its own runs;
 - values read off a figure carry an uncertainty;
-- coverage: the source's main results (its key tables and figures) are recorded, or declared not curated.
+- coverage: the source's main results (its key tables and figures) are recorded. A main result printed only in a
+  figure is digitized by the skill's recipe ("Digitizing a figure"), the points that cannot be read listed in an
+  extraction_error gap; a main-result figure left undigitized ("not curated", "not digitized") is a needs_fix issue
+  that names the figure. Supporting information and secondary figures may stay declared not curated.
 Answer with one JSON object and nothing else:
 {"verdict": "pass" | "needs_fix" | "reject", "issues": [{"record": "<id>", "locator": "<where in the source>",
 "problem": "<what is wrong>", "fix": "<what to do>"}], "coverage": "<one line>", "note": "<one line>"}.
@@ -473,17 +484,27 @@ def _api_key(api):
 
 
 def _chat(base, key, model, messages, tries=5):
-    """One answer from an OpenAI-compatible chat endpoint (standard library), retried on rate limits and 5xx."""
+    """One answer from an OpenAI-compatible chat endpoint (standard library), retried on rate limits and 5xx. Asked
+    for as a stream: some endpoints cap an unstreamed answer (8,000 tokens, thinking included), which a reasoning
+    model spends before it writes the verdict; an endpoint that answers in one piece is read as one."""
     import urllib.error
     import urllib.request
-    body = json.dumps({"model": model, "messages": messages, "temperature": 0}).encode("utf-8")
+    body = json.dumps({"model": model, "messages": messages, "temperature": 0, "stream": True}).encode("utf-8")
     last = "no answer"
     for attempt in range(tries):
         req = urllib.request.Request(f"{base.rstrip('/')}/chat/completions", data=body, method="POST",
                                      headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=900) as r:
-                return json.loads(r.read().decode("utf-8"))["choices"][0]["message"]["content"] or ""
+                if "text/event-stream" not in (r.headers.get("Content-Type") or ""):
+                    return json.loads(r.read().decode("utf-8"))["choices"][0]["message"]["content"] or ""
+                parts = []
+                for raw in r:                         # server-sent events: data: {"choices": [{"delta": …}]}
+                    line = raw.decode("utf-8", "replace").strip()
+                    if line.startswith("data:") and line[5:].strip() not in ("", "[DONE]"):
+                        parts.append(((json.loads(line[5:]).get("choices") or [{}])[0].get("delta") or {})
+                                     .get("content") or "")
+                return "".join(parts)
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}"
             if e.code in (400, 401, 403, 404):
@@ -525,7 +546,8 @@ def cmd_review_api(a):
         texts = next((f / "work" / "texts").glob("*.txt"), None)
         text = texts.read_text(encoding="utf-8", errors="replace") if texts else ""
         cut = len(text) > a.max_chars
-        user = (f"THE DOCUMENT ({g.name}):\n{g.read_text(encoding='utf-8')}\n\nTHE CURATOR'S REPORT:\n"
+        doc = json.dumps(json.loads(g.read_text(encoding="utf-8")), ensure_ascii=False, separators=(",", ":"))
+        user = (f"THE DOCUMENT ({g.name}, as compact JSON):\n{doc}\n\nTHE CURATOR'S REPORT:\n"     # 1/4 fewer tokens
                 f"{(f / 'work' / 'curation.json').read_text(encoding='utf-8')}\n\nTHE SOURCE'S PAGE TEXTS"
                 f"{' (the first ' + str(a.max_chars) + ' characters)' if cut else ''}:\n{text[:a.max_chars]}")
         append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
@@ -689,10 +711,12 @@ def main():
                                      "documents will be contributed to, e.g. graphs/catal-commons)")
     p.add_argument("--no-si", action="store_true", help="do not append the SI files' text to the page texts")
     p.add_argument("--scale", help='the scale command (default: $SCALE_CMD or "scale"; e.g. "uv run --project <checkout> scale")')
-    p.add_argument("--curator", choices=MODELS, help="the model that curates and fixes (asked first; opus recommended)")
+    p.add_argument("--curator", help="the model that curates and fixes: " + "|".join(MODELS) + " (a subagent; opus "
+                   "recommended) or api:<model> (scripts/api_host.py, on a model behind --api-base-url)")
     p.add_argument("--reviewer", help="who reads each document a second time: " + "|".join(MODELS) +
                    " (recommended: not the curator's), api:<model>, or skip (not recommended)")
-    p.add_argument("--api-base-url", help="for --reviewer api:<model>: an OpenAI-compatible endpoint (…/v1)")
+    p.add_argument("--api-base-url", help="for an api:<model> curator or reviewer: the endpoint that serves it "
+                   "(…/v1; OpenAI-compatible for review-api)")
     p.add_argument("--api-key-name", default="llm_api_key", help="its key's name in ~/.scale/sources/keys.txt")
     p.add_argument("--api-key-env", help="or the environment variable that holds its key")
     p = sub.add_parser("review-api")

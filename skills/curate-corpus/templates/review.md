@@ -18,7 +18,10 @@ model are not independent reviewers, and a person reviews the document before it
    - results the source cites from other works are not recorded as its own runs;
    - values read off a figure carry an uncertainty, with the axis ticks used in the evidence note;
    - `rights.yaml` class and basis follow the copy read; claims are in the curator's words;
-   - coverage: the source's main results (its key tables and figures) are recorded, or declared not curated.
+   - coverage: the source's main results (its key tables and figures) are recorded. A main result printed only in a
+     figure is digitized by the skill's recipe ("Digitizing a figure"), the points that cannot be read listed in an
+     `extraction_error` gap; a main-result figure left undigitized ("not curated", "not digitized") is a `needs_fix`
+     issue that names the figure. Supporting information and secondary figures may stay declared not curated.
 5. **Write `${folder}/work/review.json`:**
    `{"verdict": "pass" | "needs_fix" | "reject", "issues": [{"record": "<id>", "locator": "<where in the source>",
    "problem": "<what is wrong>", "fix": "<what to do>"}], "coverage": "<one line>", "note": "<one line>"}`.

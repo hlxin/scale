@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+- **curate-corpus runs can be curated by a model behind an API, and a main result printed only in a figure must be
+  digitized (no schema change).** Requested by @diazr04, to curate a large corpus with open models served by a
+  university endpoint or a model host. `curate_run.py prepare --curator api:<model> --api-base-url <url>` records the
+  model as such, and `next` hands its lines the endpoint; `scripts/api_host.py` runs each hand-out on Claude Code
+  pointed at the endpoint's Anthropic-compatible route as that model, the key passed through apiKeyHelper from the key
+  file, the sandbox on, the scratch files in the source's folder, and reading denied for every other run and their
+  saved sessions (a pilot's curator found and read another run's document of the same source). `review-api` asks for a
+  streamed answer (an endpoint that caps unstreamed answers at 8,000 tokens left a reasoning reader without a verdict)
+  and sends the document as compact JSON (a quarter fewer tokens, so a 128k-token reader takes it). The figure rule
+  (SKILL.md, the curate and review templates, review-api's checklist): the curator digitizes a figure that holds a main
+  result the text does not print, by the recipe, and the second reading returns a document that leaves one
+  undigitized, naming the figure; SI and secondary figures may stay declared not curated.
+
 - **query-graph 0.3.0 chooses a proposal's route and reagents from what the closest records do, and checks the
   chemistry in the target's context (no schema change).** Requested by @diazr04, after blind tests of 0.2.0 on
   held-out targets of a private synthesis graph (about 30,000 papers): its proposals were closer to the published

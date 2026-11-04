@@ -193,7 +193,9 @@ are in `references/recipes.md` beside this file (through the agent tools:
   axis scale and the ticks used in the evidence `note`, and keep the second reading. A tool's
   digitization is a computational Experiment (`USES_SOFTWARE`, the value's `produced_by`). Never
   record a value read off a plot without an uncertainty (`references/recipes.md`, "Digitizing a
-  figure").
+  figure"). A main result the source prints only in a figure is digitized, never declared not
+  curated: the second reading returns such a document (`needs_fix`, naming the figure). A point that
+  cannot be read stays out, in an `extraction_error` gap.
 
 ## Uncertainty
 

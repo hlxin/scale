@@ -195,6 +195,59 @@ def test_prepare_asks_for_the_models_first_and_each_line_names_its_model(corpus,
     assert run("next", "--run", r, "--role", "review")["model"] == "sonnet"
 
 
+def test_the_curator_and_the_reader_are_told_to_digitize_main_result_figures(corpus, tmp_path):
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
+    assert "Digitizing a figure" in Path(run("next", "--run", r, "--role", "curate")["prompt"]).read_text()
+    write(r / "sources" / "7" / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+    assert "left undigitized" in Path(run("next", "--run", r, "--role", "review")["prompt"]).read_text()
+
+
+def test_an_api_curator_runs_sandboxed_and_never_sees_another_run(corpus, tmp_path):
+    def api_host(*args, ok=True, env=None):
+        r = subprocess.run([sys.executable, "-I", str(HERE.parent / "scripts" / "api_host.py"), *map(str, args)],
+                           capture_output=True, text=True, env={**os.environ, **(env or {})})
+        assert (r.returncode == 0) == ok, r.stderr[-800:]
+        return r.stdout
+
+    other = tmp_path / "runs" / "by-claude"
+    run("prepare", "--corpus", corpus, "--run", other, "--scale", SCALE, *MODELS)
+    run("next", "--run", other, "--role", "curate")
+    api_host("--run", other, "--id", "7", "--dry-run", ok=False)              # a Claude curator is a subagent's job
+    r = tmp_path / "runs" / "by-api"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "api:test-model", "--reviewer",
+        "sonnet", "--api-base-url", "http://127.0.0.1:9/v1", "--api-key-env", "TEST_HOST_KEY")
+    api_host("--run", r, "--id", "7", "--dry-run", ok=False)                  # nothing handed out yet
+    run("next", "--run", r, "--role", "curate")
+    plan = json.loads(api_host("--run", r, "--id", "7", "--dry-run", "--deny", tmp_path / "elsewhere"))
+    cmd, env, deny = plan["cmd"], plan["env"], plan["settings"]["permissions"]["deny"]
+    assert cmd[cmd.index("--model") + 1] == "test-model" and env["ANTHROPIC_BASE_URL"] == "http://127.0.0.1:9"
+    assert plan["settings"]["sandbox"]["enabled"] and env["TMPDIR"].endswith("/work/tmp")
+    assert f"Read(/{other.resolve()}/**)" in deny and f"Read(/{(tmp_path / 'elsewhere').resolve()}/**)" in deny
+    assert not any(d.startswith(f"Read(/{r.resolve()}") for d in deny)       # its own run stays readable
+    assert "--key-env TEST_HOST_KEY" in plan["settings"]["apiKeyHelper"] and "s3cret" not in json.dumps(plan)
+    assert api_host("--key", "llm_api_key", "--key-env", "TEST_HOST_KEY", env={"TEST_HOST_KEY": "s3cret"}).strip() == "s3cret"
+
+
+def test_a_model_behind_an_api_curates_and_the_run_records_it(corpus, tmp_path):
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "api:test-curator", "--reviewer",
+        "sonnet", ok=False)                                                  # an API curator needs its endpoint
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "api:", "--reviewer", "sonnet",
+        "--api-base-url", "http://127.0.0.1:9/v1", ok=False)                 # and a model's name
+    res = run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "api:test-curator",
+              "--reviewer", "sonnet", "--api-base-url", "http://127.0.0.1:9/v1")
+    assert res["models"] == {"curator": "api:test-curator", "reviewer": "sonnet"}
+    line = run("next", "--run", r, "--role", "curate")
+    assert (line["model"], line["base_url"]) == ("api:test-curator", "http://127.0.0.1:9/v1")
+    write(r / "sources" / "7" / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+    assert "base_url" not in run("next", "--run", r, "--role", "review")    # a Claude subagent reads it
+    write(r / "sources" / "7" / "work" / "review.json", {"verdict": "pass", "issues": [], "coverage": "all", "note": "ok"})
+    run("status", "--run", r, "--apply")
+    state = json.loads((r / "state.jsonl").read_text().splitlines()[-1])
+    assert (state["curator"], state["second_reading"]) == ("api:test-curator", "sonnet")
+
+
 def test_a_run_that_skips_the_second_reading_settles_on_the_check(corpus, tmp_path):
     r = tmp_path / "run"
     run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "haiku", "--reviewer", "skip")
@@ -218,9 +271,15 @@ def test_an_api_model_reads_a_second_time(corpus, tmp_path):
         def do_POST(self):
             body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
             seen.append({"path": self.path, "auth": self.headers.get("Authorization"), "body": body})
-            out = json.dumps({"choices": [{"message": {"content": "Here: " + json.dumps(answers[len(seen) - 1])}}]})
+            answer = "Here: " + json.dumps(answers[len(seen) - 1])
+            if len(seen) == 1:                                   # the first answer in one piece
+                out, kind = json.dumps({"choices": [{"message": {"content": answer}}]}), "application/json"
+            else:                                                # the second streamed, in two events
+                out = "".join(f"data: {json.dumps({'choices': [{'delta': {'content': part}}]})}\n\n"
+                              for part in (answer[:9], answer[9:])) + "data: [DONE]\n\n"
+                kind = "text/event-stream"
             self.send_response(200)
-            self.send_header("Content-Type", "application/json")
+            self.send_header("Content-Type", kind)
             self.end_headers()
             self.wfile.write(out.encode("utf-8"))
 
@@ -242,7 +301,8 @@ def test_an_api_model_reads_a_second_time(corpus, tmp_path):
         got = run("review-api", "--run", r)
         assert got["read"] == [{"id": "7", "verdict": "needs_fix", "issues": 1}] and not got["failed"]
         ask = seen[0]
-        assert ask["path"] == "/v1/chat/completions" and ask["auth"] == "Bearer secret"
+        assert ask["path"] == "/v1/chat/completions" and ask["auth"] == "Bearer secret" and ask["body"]["stream"]
+        assert "left undigitized" in ask["body"]["messages"][0]["content"]       # the figure rule reaches the reader
         assert ask["body"]["model"] == "test-reader" and "Faradaic efficiency" in ask["body"]["messages"][1]["content"]
         assert run("status", "--run", r)["states"] == {"needs_fix": 1}
         assert "V vs RHE" in Path(run("next", "--run", r, "--role", "fix")["prompt"]).read_text()
