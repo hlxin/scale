@@ -259,3 +259,29 @@ fixtures:
     error: "is not one of"
     reason: How an input went into a step is one of the listed modes, so that dropwise and one-shot additions are found
       apart; the source's words (a time, a rate) stay in the step's method and the input's flow_rate.
+  - file: feed-ratio-in-pressure.json
+    base: domain/examples/scale-catal/fts-examples/fts-conditions.json
+    error: "not a dimension of ratio"
+    reason: A feed ratio (H2/CO, CO:H2O, PH2/PCO) is a dimensionless number of one component over another; a value in a
+      pressure unit is a partial pressure, a different quantity (a partial-pressure ratio is a ratio with basis
+      partial_pressure).
+  - file: acid-type-in-words.json
+    base: domain/examples/scale-catal/fts-examples/fts-conditions.json
+    error: "is not one of"
+    reason: The kind of an acid site is one of the listed kinds (bronsted, lewis, not_stated, other), so that the two
+      kinds are found apart; acid strength is not a kind and the source's words stay in proposed_composition.
+  - file: operation-mode-not-allowed.json
+    base: domain/examples/scale-catal/fts-examples/fts-conditions.json
+    error: "is not one of"
+    reason: How a reactor is operated in time is batch, semi_batch or continuous, apart from how its phases contact
+      (reactor_kind); a word outside the list cannot be selected on.
+  - file: contact-time-as-space-velocity.json
+    base: domain/examples/scale-catal/fts-examples/fts-conditions.json
+    error: "not a dimension of space_velocity"
+    reason: W/F (catalyst mass times time per amount of feed, g h mol-1) is the inverse of a space velocity, not one; it is
+      a space_time, never converted to or compared with a GHSV or a WHSV.
+  - file: pore-volume-in-area-unit.json
+    base: domain/examples/scale-catal/fts-examples/fts-conditions.json
+    error: "not a dimension of specific_pore_volume"
+    reason: A pore volume per mass is a volume per mass (cm3/g, mL/g); a value in m2/g is an area, so the class of pore
+      volume and the unit must agree.
