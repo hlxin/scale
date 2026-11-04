@@ -26,7 +26,10 @@ ${si_left}
    source on every record and link that states something, typed absences (`not_reported` with `missing_reason`),
    `unmodeled` for what the schema cannot express, every driving force of each test, and the source's own
    interpretations. Claims in your own words. Never extend the schema, never fill a missing value, never record a
-   result the source cites from another work as its own run.
+   result the source cites from another work as its own run. Digitize every figure that holds a main result the
+   text does not print, by the skill's recipe "Digitizing a figure" (`${scale} pages region` for the crop; look at it,
+   read each point against the axes twice; approximate, with a type-B uncertainty; a point you cannot read goes in an
+   `extraction_error` gap): the second reading sends back a main-result figure left undigitized.
 5. **Check until it passes:** `${scale} source check ${folder} --derive-links` (exit 0: zero errors, every quote found,
    the cap respected).
    Gap reports you write by hand (the procedure, step 12) go in `${folder}/work/gaps/`, one `GAP-*.json` each in
