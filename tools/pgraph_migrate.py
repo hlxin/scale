@@ -40,6 +40,7 @@ STEPS: dict[str, tuple[str, str]] = {
     "0.7.7": ("0.7.8", 'Synthesis conditions: pH, stirring, fill fraction, gas flow mode and cooling of a step; concentration, stock concentration, fraction, ratio and flow rate of an input; protective_gas; VARIANT_OF between procedures (additive)'),
     "0.7.8": ("0.7.9", 'What curated nanoparticle-synthesis recipes asked for: an anneal step and an annealing treatment; the functions isolating_medium, phase_transfer_agent and antisolvent; HAS_INPUT.addition_mode; sample_kind dispersion; six method families; architecture bulk; HAS_PHASE.layer; size quantity kinds; checklist: an anneal asked like a calcination, a stage that treats a sample asked that sample (additive)'),
     "0.7.9": ("0.8.0", 'breaking: a selectivity is compared by what it counts (selectivity_count: carbon atoms, mole, mass) and what it is a share of (selectivity_whole: converted reactant, products without CO2, a pool named by the new value field relative_to); a value that states neither is compared only with such values (provisional)'),
+    "0.8.0": ("0.8.1", 'additive change'),
 }
 
 

@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Schema 0.8.1 (additive): feed component ratio, acid type, reactor kinds and operation mode, space time, pore
+  volumes and areas (#90, #92, #93, #94, #95).** `HAS_COMPONENT.ratio` states a feed ratio with numerator, denominator and
+  kind (`fraction_basis` gains `partial_pressure`); `ActiveSite.acid_type` (Bronsted, Lewis, not stated, other);
+  `reactor_kind` gains `slurry`, `microchannel`, `monolith` and `Reactor.operation_mode` is new; kernel kind
+  `space_time` (W/F, g h mol-1) with `CatalyticTest.space_time`; kernel kinds `specific_surface_area` and
+  `specific_pore_volume` with shared recipe names for micropore and mesopore values. New concepts are provisional;
+  nothing is converted. Documents that declare a `specific_surface_area` Variable are now unit-checked.
+
 - **query-graph 0.3.0 chooses a proposal's route and reagents from what the closest records do, and checks the
   chemistry in the target's context (no schema change).** Requested by @diazr04, after blind tests of 0.2.0 on
   held-out targets of a private synthesis graph (about 30,000 papers): its proposals were closer to the published
