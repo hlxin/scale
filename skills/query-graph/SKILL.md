@@ -1,6 +1,6 @@
 ---
 name: query-graph
-version: 0.3.0
+version: 0.3.1
 description: Answer a scientific question from scale-catal documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them. When the question asks what to do (how to make a material, how to run a test), the answer is a proposal built from the graph's closest records, each step citing the record it comes from, checked before it is presented and reviewed once by a second agent.
 scale_release: ">=v0.3.0"
 inputs:
@@ -27,7 +27,7 @@ validation:
   - Every factual sentence in the presentation maps to a returned row and its evidence
   - Numbers are reproduced as reported (value, unit and the reported text), with any computed or converted value labelled as yours
   - Every number computed for an answer (amounts scaled to a ratio, moles from masses and formulas, a sum) is recomputed by code before it is stated
-  - Every step of a proposal cites one record's step and its quote, or is labelled a hypothesis
+  - Every step of a proposal is tagged retrieved, adapted or hypothesis; a retrieved or adapted step cites its record's step and quote on its Record line, an adapted step lists each change and its reason
   - A proposal is one procedure a person can run as written: every amount, temperature, time and atmosphere is fixed in its step, and nothing outside the steps changes one
   - Every recommendation is labelled as one, sits next to the step it concerns, leaves that step valid as written, and is never presented as a record's step
   - Every typed absence and every record left out in the result is reported, not smoothed over
@@ -132,6 +132,37 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
      that option does not apply.
    - **Read whole only** the one or two records most of the choices come from (for the amounts and the order of the
      steps) and a close record you follow, with `scale graph recipe <graph> --preparation <id>`.
+   - **What a record measured, and what its authors say they obtained, outrank its labels.** A record's composition,
+     class, phase, shape and size may be what its authors aimed at or what they obtained; the check below lists, for
+     each record you name, what a characterization of its samples measured and the authors' own outcome claims.
+     - A record whose measurement or outcome claim shows it missed a requirement (another measured composition,
+       segregation, a phase that did not form) is evidence against its route for that requirement, not a precedent
+       for it. Name it as such, choose another base or say that none reached the requirement, and say what the
+       record's result implies for the route you propose.
+     - A record that measured what it claims is the stronger precedent for that requirement: prefer it.
+     - A requirement a record meets only by its label (nothing measured) is said once to be the record's label.
+     - A stated composition that differs from the record's own feed is what the record reports obtaining from that
+       feed. Keep that feed when the record's product is the asked composition.
+   - **Take from a record only what its own product supports.** The check also lists what each named record
+     obtained: its shape, architecture and phases, as measured or as a label. Before a step comes from a record,
+     compare that product with the requirements the step can affect.
+     - Some transfers cross a difference: a growth sequence, ligand set, ratio or temperature taken from a record whose
+       product had another shape, another architecture (core–shell, Janus, heterodimer, separate particles) or a
+       secondary phase (an oxide, a sulfide). For each one, say what the record obtained and the mechanism that may
+       carry over (growth habit, ligand binding, a phase that forms at that ratio), and label the step a hypothesis.
+       Prefer a record whose product meets the requirement.
+     - A record whose product was not the target, at the target's composition or with the target's reagents, is
+       evidence against that combination. Weigh it when choosing the route and the reagents, not only in the Limits.
+   - **A check inside the procedure accepts only what the question asks.**
+     - A composition gate uses the asked ratio with a stated tolerance.
+     - A phase is accepted only by the measurements that tell it from its alternatives, never by one peak. For a
+       disordered alloy: several reflections and no superlattice ones, plus element maps for mixing. For an ordered
+       phase: its superlattice reflections.
+     - A shape is accepted by a counted fraction.
+     - A looser check that only decides whether to go on is labelled exploratory, apart from acceptance.
+   - **A condition no record states** (a time, a pressure, a sealed vessel) is a hypothesis. One with a hazard (a
+     solvent above its boiling point in a closed vessel, H2, thiols or sulfur at high temperature) says what must be
+     assessed before it is run.
 
    A requirement is never dropped silently, and general knowledge never replaces a record the graph holds without
    saying why that record does not apply. Each step cites one record's step and its quote, or is a labelled
@@ -163,13 +194,18 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    It is not left open.
 
    **Check before presenting** with `scripts/check_quotes.py`: every quotation is looked up in the records
-   the proposal names, whose compositions it lists with their unit and basis. **Review once,** by a second agent you
+   the proposal names, whose compositions it lists with their unit and basis, and beside them what each record
+   obtained (shape, architecture, phases), what a characterization of its samples measured and the authors' outcome
+   claims (or that none is recorded). **Review once,** by a second agent you
    launch with a fresh context and only the question, the proposal and the check's output (otherwise yourself as
    someone else would; the person who asked waits only for the final answer), kept light: at most five findings, on
    what the check cannot see. First comes chemistry that would fail in this context: a reductant that cannot reduce a
    precursor, a medium or pH that destroys a reagent, a precipitate, a temperature or atmosphere the support or
    solvent cannot take, equipment that cannot do the step, no stabilizer where size matters. Then come a step its
-   record does not support, a number on the wrong basis or a ratio the amounts do not give, a closer record left out,
+   record does not support, a number on the wrong basis or a ratio the amounts do not give, a precedent whose own
+   measurement or outcome claim contradicts what the proposal takes from it, a step taken from a record whose own
+   product differs from the target in what that step controls (shape, architecture, a secondary phase), an acceptance
+   check looser than the requirement or unable to tell the asked phase from its alternatives, a closer record left out,
    a transfer from other elements, sizes or shapes treated as the same context, a missing parameter a person
    needs to run a step, and anything outside the steps that changes what a step says. Fix what it finds once, by editing the proposal (no
    new search unless a finding names a record to read) and running the check again; what stays open goes in the
@@ -182,11 +218,41 @@ A generated explanation is a presentation of the retrieved evidence, not a repla
    from the coverage block: candidates, rows, what was left out and why, and that the values were
    compared by number, unit and stated basis alone (in a scientific comparison: and within one context,
    group by group, with the values left out for their context, `missing_context` and
-   `incompatible_context`, named as such: there is no ranking across groups). A proposal fits in two pages (under
-   about 1,000 words): what it proposes, the counts the choices rest on (and any close record followed), each
-   requirement and how it is met (by the base, transferred, unresolved), the numbered steps, each with its basis (retrieved, adapted or hypothesis), its record and any optional recommendation, the alternatives, the charges and the
-   ratio recomputed, what to measure to confirm the result, and the Limits with the review's open findings. The
-   records set aside, the review and how each finding was settled, and the check's output stay in the working files.
+   `incompatible_context`, named as such: there is no ranking across groups). A proposal fits in about two pages
+   (about 1,000 words for the parts before the steps and after them).
+
+   **A proposal's layout, in this order:**
+   1. What it proposes, in two or three sentences.
+   2. The counts the choices rest on, and any close record followed.
+   3. Each requirement and how it is met (by the base, transferred, unresolved).
+   4. The steps.
+   5. The alternatives.
+   6. The charges and the ratio, recomputed.
+   7. What to measure to confirm the result.
+   8. The Limits, with the review's open findings.
+
+   **Each step** keeps four kinds of content apart, so a reader always sees what comes from a record, what was
+   changed, and what is the proposer's own reasoning:
+
+   ```
+   ### Step N. <action in a few words> — RETRIEVED | ADAPTED | HYPOTHESIS
+   **Do:** the instruction as a person runs it, complete (every amount, temperature, time, atmosphere), with
+   chemical formulas written with sub- and superscripts (HAuCl₄·3H₂O, N₂, min⁻¹). A charge lists its reagents as
+   bullets.
+   **Record:** `<full record id>`, step <n>: "<the verbatim quote it rests on>" (retrieved and adapted steps only).
+   **Changed:** each difference from that record, as "<record's value> → <this proposal's value>" (adapted only).
+   **Why:** the proposer's reasoning for the change, or for a hypothesis step, in one or two sentences.
+   **Typical:** the values no record gives, filled with a common value (a ramp, a gas flow, a hold), if any.
+   **Hazard:** what must be assessed before the step is run, if anything.
+   ```
+
+   - **The tag:** RETRIEVED takes the record's step as it is; ADAPTED changes it; HYPOTHESIS has no record to rest
+     on.
+   - **The quote:** a quote may be garbled by the source's text extraction. It stays verbatim (the check looks it up)
+     but only on the Record line; the Do line never copies it.
+   - **What stays in the working files:** the records set aside, the review and how each finding was settled, and the
+     check's output.
+
    It is a proposal for a person to review, never a validated procedure.
 8. **Route failures.** `scale gap from-query result.json --out-dir gaps/` turns a schema gap into a
    missing-concept gap, values the source does not report into source-review gaps

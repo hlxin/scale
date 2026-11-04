@@ -75,6 +75,19 @@ def test_check_quotes_finds_the_records_words_and_lists_the_basis_of_their_compo
     assert pt["share"].startswith("1 % (by mass") and pt["share"].endswith("basis not stated")
 
 
+def test_check_quotes_lists_what_a_characterization_measured_apart_from_the_nominal_composition():
+    g = str(REPO / "domain/examples/scale-catal/preparation-examples/impregnation.json")
+    res = check_quotes.check("Base: `ex:pi/preparation/batch-1`.", g, call())
+    pt = next(c for c in res["compositions"]["ex:pi/preparation/batch-1"] if c["role"] == "active_phase")
+    assert pt["loading"].startswith("5 wt%")                                     # nominal, on the catalyst
+    [m] = res["measured"]["ex:pi/preparation/batch-1"]                           # measured, by ICP on batch 1
+    assert m["kind"] == "loading" and m["result"].endswith("3.8 wt%") and m["technique"].startswith("ICP")
+    assert "measured: nothing recorded" not in check_quotes.markdown(res)
+    syn = str(EXAMPLES / "synthesis-conditions.json")                             # no characterization at all
+    out = check_quotes.markdown(check_quotes.check("`ex:cnd/preparation/pt-sea-9`", syn, call()))
+    assert "measured: nothing recorded" in out
+
+
 def test_consensus_counts_what_the_closest_records_do_each_count_with_records_to_cite():
     g = str(EXAMPLES / "synthesis-strategies.json")
     c = precedents.consensus(call(), g, ["ex:syn/preparation/pd-cubes", "ex:syn/preparation/pd-fsp"])
@@ -94,3 +107,19 @@ def test_a_precursors_metals_are_read_from_its_formula_or_its_name_and_a_counter
     assert precedents.metals_in("chloroauric acid") == {"Au"}
     assert precedents.metals_in("tin(II) chloride") == {"Sn"} and precedents.metals_in("lead(II) acetate") == {"Pb"}
     assert precedents.metals_in("NaBH4") == {"Na"}                    # no other metal: Na is the one named
+
+
+def test_check_quotes_lists_the_authors_outcome_claims_about_a_named_record():
+    g = str(EXAMPLES / "synthesis-strategies.json")
+    res = check_quotes.check("Base: `ex:syn/preparation/pd-cubes`.", g, call())
+    [o] = res["outcomes"]["ex:syn/preparation/pd-cubes"]
+    assert o["kind"] == "mechanism" and o["statement"]
+    assert "authors' outcome (mechanism)" in check_quotes.markdown(res)
+
+
+def test_check_quotes_lists_what_a_named_record_obtained_and_what_shows_it():
+    g = str(EXAMPLES / "synthesis-strategies.json")
+    res = check_quotes.check("Base: `ex:syn/preparation/pd-cubes`.", g, call())
+    [o] = res["obtained"]["ex:syn/preparation/pd-cubes"]
+    assert set(o["shape"]) == {"cube", "rod"} and "transmission electron microscopy" in o["shown_by"]
+    assert "obtained (shown by " in check_quotes.markdown(res)
