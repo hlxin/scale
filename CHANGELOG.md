@@ -2,6 +2,32 @@
 
 ## Unreleased
 
+- **query-graph 0.3.1 weighs what a record measured and what it obtained over its labels, and lays out each step of a
+  proposal so a reader sees what comes from a record, what was changed and why (no schema change).** Requested by
+  @diazr04, after a case on a private synthesis graph where the base record of a proposal was labelled with the target
+  composition but its own characterization measured another (the label was the composition aimed at), and a chemist
+  could not tell, in a proposal's steps, a record's words from the proposer's reasoning. `scripts/check_quotes.py`
+  now lists, for each record a proposal names, what a characterization of its samples measured (composition, loading,
+  sizes, with the technique), what it obtained (shape, architecture, phases, and what shows them, or that they are a
+  label) and the authors' outcome claims about it. The host treats a record whose measurement or outcome shows it
+  missed a requirement as evidence against its route for that requirement, takes from a record only what its own
+  product supports (a step carried across another shape, architecture or secondary phase is a hypothesis with its
+  mechanism said), accepts a composition, phase or shape only by a check that can tell it from its alternatives, and
+  says what must be assessed before a step with a hazard is run. Each step is tagged retrieved, adapted or
+  hypothesis, with its instruction (Do), its record's step and quote (Record), each change as "record's value →
+  this value" (Changed), the reasoning (Why), the typical values no record gives (Typical) and any hazard, on
+  separate lines.
+  - **What was measured, fixed before each run:** two targets of one class (an ordered and a disordered Cu-rich
+    bimetallic), each run once per version, after the measured data and outcome claims of 14 papers of the private
+    graph were added. With the record checks, neither proposal built on the record whose own measurement missed the
+    asked composition (0.3.0 had); it was named as evidence against that route. Blind pairwise judges (each pair in
+    both orders) preferred the rules on what a record obtained and on acceptance checks to the record checks alone
+    3 to 1. The step layout alone, on the same proposals rewritten without changing their content, was judged a tie
+    4 of 4, with identical scores; fresh runs with the layout lost 1 to 3 against earlier runs, on the route each run
+    chose, while scoring higher on acceptance and on honesty and safety in all four judgments. Not measured: the
+    30-target protocol of 0.3.0. For every version the judges put the chance that the proposed routes reach the asked
+    composition and shape at 4 in 10 or less: the graph holds no record that reached them.
+
 - **Schema 0.8.1 (additive): feed component ratio, acid type, reactor kinds and operation mode, space time, pore
   volumes and areas (#90, #92, #93, #94, #95).** `HAS_COMPONENT.ratio` states a feed ratio with numerator, denominator and
   kind (`fraction_basis` gains `partial_pressure`); `ActiveSite.acid_type` (Bronsted, Lewis, not stated, other);
@@ -9,6 +35,7 @@
   `space_time` (W/F, g h mol-1) with `CatalyticTest.space_time`; kernel kinds `specific_surface_area` and
   `specific_pore_volume` with shared recipe names for micropore and mesopore values. New concepts are provisional;
   nothing is converted. Documents that declare a `specific_surface_area` Variable are now unit-checked.
+
 - **curate-corpus runs can be curated by a model behind an API, and a main result printed only in a figure must be
   digitized (no schema change).** Requested by @diazr04, to curate a large corpus with open models served by a
   university endpoint or a model host. `curate_run.py prepare --curator api:<model> --api-base-url <url>` records the
