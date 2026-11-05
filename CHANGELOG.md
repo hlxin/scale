@@ -6,6 +6,14 @@
   Windows a pipe or a file gets the locale's code page (cp1252, gbk), and `scale graph query` stopped with
   `UnicodeEncodeError` on "−" or "γ" in a curated value. `main()` now reconfigures both streams to UTF-8 when they are
   not; a test runs the query under cp1252 and gbk.
+- **index-sources 4.2.1 and fetch-corpus 1.2.1: one odd server reply no longer ends a download run (no schema
+  change).** Requested by @diazr04: a long open-access run stopped after six batches in a row died on the same
+  source. A redirect whose Location header is not UTF-8 (byte 0xb7) made requests raise UnicodeDecodeError even with
+  `allow_redirects=False`; it escaped `fetch()` and ended `download_open.py`, and a new run met the same source first.
+  The shared session now follows such a redirect as a browser does (the raw bytes percent-encoded; UTF-8 is read as
+  before), `fetch()` answers a URL or header no client can use as a network error, and `download_open.py` logs a
+  route that raises, tries the next one and notes the error on a source no route reached (`--retry-failed` tries it
+  again); a full disk or a database error still stops the run. Tests: fetch-corpus `test_open_redirects.py`.
 
 - **query-graph 0.3.1 weighs what a record measured and what it obtained over its labels, and lays out each step of a
   proposal so a reader sees what comes from a record, what was changed and why (no schema change).** Requested by

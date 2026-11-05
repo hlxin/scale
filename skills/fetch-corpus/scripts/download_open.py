@@ -23,12 +23,15 @@ Long runs: nohup python3 -I .../download_open.py --topic <slug> > .scripts/<slug
 """
 import argparse
 import json
+import sqlite3
 import sys
 import threading
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
+
+import requests
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import _core  # noqa: F401,E402  (index-sources' scripts: the shared core)
@@ -261,12 +264,21 @@ def main():
     if a.max:
         todo = todo[:a.max]
     log(f"open download: {len(todo)} sources to try; skipped {dict(skipped)}; EZproxy route ready={ez_ok}")
-    cnt, lock = Counter(), threading.Lock()
+    cnt, lock, route_errors = Counter(), threading.Lock(), [0]
 
     def one(p):
-        status, walled, held = "no_open_copy", False, False
+        status, walled, held, errors = "no_open_copy", False, False, []
         for e in routes(p, selected, keys):
-            o = try_entry(proj, led, p, e)
+            try:
+                o = try_entry(proj, led, p, e)
+            except Exception as err:
+                if isinstance(err, (OSError, sqlite3.Error)) and not isinstance(err, requests.RequestException):
+                    raise                          # the disk or the database, not this source: stop the run
+                o = "error"                        # one odd server reply must not end a run of thousands
+                errors.append(f"{type(err).__name__}: {err}"[:160])
+                attempt(proj, p["id"], p.get("doi"), step=e.get("src"), url=e.get("url"), outcome="error",
+                        reason=repr(err)[:300])
+                log(f"source {p['id']}: {e.get('src')} {e.get('url')} raised {err!r:.200}; trying the next route")
             if o in ("valid_pdf", "duplicate"):
                 status = o
                 break
@@ -281,9 +293,12 @@ def main():
             else:
                 note = ("Open copy only on a site that blocks scripted downloads" if walled else
                         "No downloadable open copy found")
+                if errors:
+                    note += f"; {len(errors)} route(s) raised an error ({errors[0]}) — --retry-failed tries again"
                 led.set(p["id"], dl_status="failed", dl_note=note)
                 status = "failed"
         with lock:
+            route_errors[0] += len(errors)
             cnt[status] += 1
             n = sum(cnt.values())
             if n % 100 == 0:
@@ -302,7 +317,8 @@ def main():
         for i in range(0, len(todo), 2000):            # full rows read 2,000 at a time, in download order
             list(ex.map(one, load(todo[i:i + 2000])))
     led.export()
-    res = {"tried": len(todo), "outcomes": dict(cnt), "skipped": dict(skipped), "linked_from_other_topics": linked,
+    res = {"tried": len(todo), "outcomes": dict(cnt), "route_errors": route_errors[0], "skipped": dict(skipped),
+           "linked_from_other_topics": linked,
            "vector_store": after_step(proj, led), "finished_at": now_iso()}
     update_state(proj, a.topic, lambda st: st.setdefault("download_open", {}).update(res))
     print(json.dumps(res))

@@ -782,12 +782,35 @@ for _h, _iv in {"api.openalex.org": 0.15, "api.crossref.org": 0.25, "api.unpaywa
     PACER.set(_h, _iv)
 
 _tls = threading.local()
+_URL_SAFE = "!#$%&'()*+,/:;=?@[]~"      # what requests.utils.requote_uri leaves as it is
+
+
+def location_url(value):
+    """A redirect's Location header as a URL that can be requested. http.client hands headers over decoded as latin-1,
+    so encoding back gives the server's bytes: UTF-8 is decoded as requests does; any other bytes (seen: 0xb7) are
+    percent-encoded as they are, the way a browser follows them, instead of raising UnicodeDecodeError."""
+    try:
+        raw = value.encode("latin-1")
+    except UnicodeEncodeError:               # not straight from http.client: already text
+        return value
+    try:
+        return raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return urllib.parse.quote(raw, safe=_URL_SAFE)
+
+
+class _Session(requests.Session):
+    """requests decodes a redirect's Location as UTF-8 and raises on anything else, even with allow_redirects=False
+    (it still works out the next URL): one such server reply ended whole download runs."""
+
+    def get_redirect_target(self, resp):
+        return location_url(resp.headers["location"]) if resp.is_redirect else None
 
 
 def session():
     s = getattr(_tls, "s", None)
     if s is None:
-        s = requests.Session()
+        s = _Session()
         adapter = requests.adapters.HTTPAdapter(pool_connections=20, pool_maxsize=20, max_retries=0)
         s.mount("https://", adapter)
         s.mount("http://", adapter)

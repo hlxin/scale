@@ -5,7 +5,7 @@ allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - "scale corpus check <manifest>"     # SCALE checks a frozen corpus (freeze_corpus.py)
-version: 4.2.0
+version: 4.2.1
 scale_release: ">=v0.2.0"
 inputs:
   - A topic in the user's words, or a Web of Science, Scopus or Zotero export, a list of DOIs or a web page of them
