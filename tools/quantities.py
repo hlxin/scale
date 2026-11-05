@@ -167,6 +167,15 @@ class Produced:
     raw: Any = None
 
 
+# The contexts a text states only when its clause says so plainly: a clause that holds an absence or an uncertainty
+# ("basis not stated", "unknown", "whether"), alternatives ("carbon or mole basis", "carbon/mole") or a contrast with
+# another value ("unlike", "beside it") states no count or whole, so the value stays 'not stated' (#91).
+UNSTATED_GUARDED = ("selectivity_count", "selectivity_whole")
+_UNSTATED_CUE = re.compile(
+    r"\b(?:not\s+(?:stated|reported|given|specified|clear|known|available)|unknown|unclear|unspecified|whether|"
+    r"unlike|beside|next\s+to|vs\.?|versus|or)\b|/", re.I)
+
+
 class Contracts:
     """The compiled ``quantities:`` block of a schema: dimensions, the unit vocabulary, contexts and kinds."""
 
@@ -395,6 +404,8 @@ class Contracts:
         if not isinstance(text, str) or not text.strip():
             return []
         c = self.contexts[context]
+        if context in UNSTATED_GUARDED:
+            text = ", ".join(cl for cl in re.split(r"[,;.]\s+", text) if not _UNSTATED_CUE.search(cl))
         hits = sorted({v for v, pat in c["_terms"] if pat.search(text)})
         dims = {v: c["values"][v]["dimensions"] for v in hits}
         if vec is not None:
