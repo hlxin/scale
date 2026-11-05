@@ -222,11 +222,18 @@ def test_an_api_curator_runs_sandboxed_and_never_sees_another_run(corpus, tmp_pa
     plan = json.loads(api_host("--run", r, "--id", "7", "--dry-run", "--deny", tmp_path / "elsewhere"))
     cmd, env, deny = plan["cmd"], plan["env"], plan["settings"]["permissions"]["deny"]
     assert cmd[cmd.index("--model") + 1] == "test-model" and env["ANTHROPIC_BASE_URL"] == "http://127.0.0.1:9"
-    assert plan["settings"]["sandbox"]["enabled"] and env["TMPDIR"].endswith("/work/tmp")
+    sandbox = plan["settings"]["sandbox"]
+    assert sandbox["enabled"] and env["TMPDIR"].endswith("/work/tmp")
+    assert sandbox["allowUnsandboxedCommands"] is False                    # no command may ask to leave it
+    assert sandbox["failIfUnavailable"] is True                            # no session runs without it
     assert f"Read(/{other.resolve()}/**)" in deny and f"Read(/{(tmp_path / 'elsewhere').resolve()}/**)" in deny
     assert not any(d.startswith(f"Read(/{r.resolve()}") for d in deny)       # its own run stays readable
     assert "--key-env TEST_HOST_KEY" in plan["settings"]["apiKeyHelper"] and "s3cret" not in json.dumps(plan)
     assert api_host("--key", "llm_api_key", "--key-env", "TEST_HOST_KEY", env={"TEST_HOST_KEY": "s3cret"}).strip() == "s3cret"
+    if len(env["TMPDIR"]) > 70:                                             # a scratch path too long for the sandbox's
+        refused = subprocess.run([sys.executable, "-I", str(HERE.parent / "scripts" / "api_host.py"), "--run", str(r),
+                                  "--id", "7"], capture_output=True, text=True)  # sockets: refused before Claude Code runs
+        assert refused.returncode != 0 and "the sandbox needs" in refused.stderr + refused.stdout
 
 
 def test_a_model_behind_an_api_curates_and_the_run_records_it(corpus, tmp_path):

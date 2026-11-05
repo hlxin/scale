@@ -10,7 +10,11 @@ that prompt on Claude Code (`claude --bare -p`) pointed at the Anthropic-compati
 run's --api-base-url without its /v1), as the run's model, with:
 - the key handed to Claude Code by apiKeyHelper (this script with --key), from the run's key (its environment variable,
   else its line in ~/.scale/sources/keys.txt): never in the environment, the command line or a transcript;
-- the sandbox on: the host's commands write only in the source's folder, its scratch files in work/tmp;
+- the sandbox on and binding: the host's commands write only in the source's folder, its scratch files in work/tmp,
+  and reach no network; a command may not ask to run outside it (Claude Code's dangerouslyDisableSandbox, which
+  `--allowedTools Bash` would otherwise approve), a session whose sandbox cannot start (bubblewrap or socat missing)
+  fails instead of running unsandboxed, and a source whose scratch path is too long for the sandbox's sockets is
+  refused before its session starts (there, every command would fail while the session reported success);
 - reading denied for every other run in the run's parent folder, the saved tool outputs of the curator sessions held
   in those folders, and each --deny folder: a curator never sees another curation (another run of the same source
   would hand it the answer);
@@ -32,6 +36,8 @@ import curate_run  # noqa: E402
 
 HERE = Path(__file__).resolve()
 ROLES = ("curate", "fix")
+TMP_MAX = 70    # the sandbox's bridge sockets live in TMPDIR, and a socket path holds at most 107 characters, about
+                # 35 of them the socket's own name: measured, work/tmp at 62 characters works, at 101 no command runs
 
 
 def session_dir(path):
@@ -65,7 +71,9 @@ def plan(a):
     if api.get("key_env"):
         helper += f" --key-env {shlex.quote(api['key_env'])}"
     settings = {"apiKeyHelper": helper,
-                "sandbox": {"enabled": True, "autoAllowBashIfSandboxed": True},
+                # binding: --allowedTools Bash approves any call, one asking to run unsandboxed too
+                "sandbox": {"enabled": True, "autoAllowBashIfSandboxed": True, "allowUnsandboxedCommands": False,
+                            "failIfUnavailable": True},
                 "permissions": {"deny": [f"Read(/{Path(d).resolve()}/**)" for d in deny]}}
     name = model[4:]
     tmp = folder / "work" / "tmp"
@@ -88,6 +96,10 @@ def host(a):
     if a.dry_run:
         print(json.dumps({"cmd": cmd, "env": env, "settings": settings, "cwd": str(folder)}))
         return
+    if len(env["TMPDIR"]) > TMP_MAX:   # the session would start, every command fail, and the session still "succeed"
+        curate_run.die(f"the scratch folder {env['TMPDIR']} is {len(env['TMPDIR'])} characters long; the sandbox needs "
+                       f"it at {TMP_MAX} or fewer for its sockets, or every command fails: prepare the run in a folder "
+                       "with a shorter path (a short symbolic link to it works) and hand the source out again")
     (folder / "work" / "tmp").mkdir(parents=True, exist_ok=True)
     n = len(list((folder / "work").glob(f"host-{a.role}-*.jsonl"))) + 1
     out = folder / "work" / f"host-{a.role}-{n}.jsonl"
