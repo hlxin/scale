@@ -23,7 +23,7 @@ import requests
 
 import _pdf as C
 from _common import (ACCESS_TYPES, PACER, access_rank, get_json, host_of, json_read, json_write_atomic, jsonl_append,
-                     license_access, log, norm_license, now_iso, session, today)
+                     license_access, location_url, log, norm_license, now_iso, session, today)
 
 # Hosts that answered plain scripted requests with a bot challenge. Open routes never touch them.
 BLOCKED_SEED = {
@@ -118,7 +118,7 @@ def fetch(proj, url, accept="application/pdf,*/*;q=0.8", timeout=(15, 90), max_b
             extra = (headers or {}) if host_of(cur) == host else {}
             r = s.get(cur, headers={"Accept": accept, **extra}, timeout=timeout, stream=True, allow_redirects=False)
             if r.status_code in (301, 302, 303, 307, 308) and r.headers.get("location"):
-                nxt = urllib.parse.urljoin(cur, r.headers["location"])
+                nxt = urllib.parse.urljoin(cur, location_url(r.headers["location"]))   # non-UTF-8 bytes too
                 r.close()
                 if is_blocked(host_of(nxt)):
                     return {"kind": "redirect_blocked", "final_url": nxt, "status": r.status_code}
@@ -127,7 +127,7 @@ def fetch(proj, url, accept="application/pdf,*/*;q=0.8", timeout=(15, 90), max_b
                 cur = nxt
                 continue
             break
-    except requests.RequestException as e:
+    except (requests.RequestException, ValueError) as e:     # ValueError: a URL or header no client can use
         return {"kind": "network_error", "error": repr(e)[:200]}
     try:
         it = r.iter_content(65536)
@@ -163,7 +163,7 @@ def fetch(proj, url, accept="application/pdf,*/*;q=0.8", timeout=(15, 90), max_b
         if r.status_code != 200:
             return {"kind": "http_error", "status": r.status_code, "final_url": cur}
         return {"kind": "html", "status": 200, "text": text, "final_url": cur}
-    except requests.RequestException as e:
+    except (requests.RequestException, ValueError) as e:
         return {"kind": "network_error", "error": repr(e)[:200]}
     finally:
         r.close()
