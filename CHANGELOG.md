@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- **`scale` writes UTF-8 to stdout and stderr on every platform (no schema change).** Requested by @haod810 (#96). On
+  Windows a pipe or a file gets the locale's code page (cp1252, gbk), and `scale graph query` stopped with
+  `UnicodeEncodeError` on "−" or "γ" in a curated value. `main()` now reconfigures both streams to UTF-8 when they are
+  not; a test runs the query under cp1252 and gbk.
 - **index-sources 4.2.1 and fetch-corpus 1.2.1: one odd server reply no longer ends a download run (no schema
   change).** Requested by @diazr04: a long open-access run stopped after six batches in a row died on the same
   source. A redirect whose Location header is not UTF-8 (byte 0xb7) made requests raise UnicodeDecodeError even with
