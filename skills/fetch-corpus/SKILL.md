@@ -6,7 +6,7 @@ allowed-tools:
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
   - "scale corpus check <manifest>"     # SCALE checks the settled corpus
-version: 1.2.0
+version: 1.2.1
 scale_release: ">v0.2.0"
 inputs:
   - A frozen corpus (sources/<topic>/corpora/<name>/sources.json, from index-sources' freeze_corpus.py), or a whole topic
@@ -85,7 +85,9 @@ nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/download_open.py --corpus <manifest
 
 Every known open copy is tried, most open first (repositories, the PMC open-data mirror, arXiv, publisher CDNs, the
 landing page's PDF link), never hosts that block scripted clients. Each PDF is validated, checked against the
-source's title, and filed by the licence printed in it. Datasets and software are never downloaded; US patents come
+source's title, and filed by the licence printed in it. A redirect to a URL that is not UTF-8 is followed as a
+browser does, and a reply that still makes a route raise fails that route alone: it is logged, the next route is
+tried and the run goes on (a full disk or a database error still stops it). Datasets and software are never downloaded; US patents come
 from the USPTO image server. Elsevier's open articles (ScienceDirect blocks scripted clients, and Elsevier is never
 fetched through EZproxy) come through Elsevier's article API once a developer key is in keys.txt (`scopus:` line,
 dev.elsevier.com; index-sources' README): tell the user which line to add, never ask for the key. The key goes in a
