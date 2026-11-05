@@ -2,6 +2,23 @@
 
 ## Unreleased
 
+- **An API curator's sandbox is binding: no command may run outside it, and no session runs without it (no schema
+  change).** Requested by @diazr04, from a run of curate-corpus with `--curator api:<model>` over about 25,000 papers on
+  a cluster. `api_host.py` passes `--allowedTools Bash`, which approves every Bash call, including one in which the
+  model asks Claude Code to run the command outside the sandbox (`dangerouslyDisableSandbox`). In that run, 29 of
+  about 3,170 curator sessions did so 265 times: they fetched full texts and supplementary files from publisher and
+  repository sites (some with a browser's User-Agent), searched the web, and installed packages into the shared
+  environment, so material from outside the source's own texts could enter its document. On another cluster the
+  sandbox never started, because the scratch path made its socket path too long, and the sessions ran unsandboxed
+  without saying so. `api_host.py` now sets `sandbox.allowUnsandboxedCommands: false`, so a command that asks to leave
+  the sandbox runs inside it (where it reaches no network), and `sandbox.failIfUnavailable: true`, so a session whose
+  sandbox cannot start fails instead of running without it. A source whose scratch folder (`work/tmp`) is longer than
+  70 characters is refused before its session starts: there the sandbox's bridge sockets cannot be created, every
+  command fails, and the session still ended as a success. Checked on the cluster with the stock Claude Code and only
+  `--settings`: the `curl` that ran outside the sandbox before is now blocked inside it, a write in the source's folder
+  works, a session without bubblewrap and socat refuses to start, and a session at a 101-character scratch path could
+  run no command.
+
 - **A selectivity's basis text that says the count or whole is not stated, or names alternatives, states none (no schema
   change).** Requested by @haod810 (#91), a follow-up to #86. `statements_in_text` read a term in a clause such as
   "carbon or mole basis not stated" or "CO2 counted in the denominator, unlike the 'CO2 free' value beside it" as that
