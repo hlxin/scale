@@ -33,6 +33,23 @@ SCALE writes format **1.1.0** (the identifier the format requires in `bundle.jso
 - **Typed absences.** A value the source does not report, did not measure, or gives below a limit is a
   `_value_status` entry (status and, for `not_reported`, the reason), not a missing property.
 
+**Format 1.2.0, when a graph needs it.** A graph extracted into a curated dataset holds two kinds of link the quote
+rule cannot carry, and SCALE writes them as format 1.2.0 (`ROW_FORMAT_VERSION`) instead of leaving them out; a graph
+without them stays 1.1.0. The export report counts them under `format_1_2`.
+
+- **Structural edges.** A link with no evidence of its own whose two ends are records of one source organizes that
+  source's record (a step is `PART_OF` its preparation, a sample `HAS_FORMULATION` its catalyst, a state is
+  `STATE_OF` a catalyst and `REACHED_BY` a preparation): `"_structural": true`, the one source in
+  `source_paper_ids`, its values kept (a step's `order`), no `_evidence` and no `_statement`. A link with no evidence
+  between two sources' records is still left out, and counted in `not_exported_links`.
+- **Dataset-row evidence.** A claim whose evidence is a dataset row (`kind: dataset_row`, its source a `Dataset`)
+  and a source the dataset attributes it to with no sentence of it to quote (a catalyst's metals, a state's phase)
+  cites `{"source_id": <the source>, "dataset_row": {"dataset": <the Dataset's name>, "row": <its locator>}}`. A
+  claim quoted from its source cites the quote and needs no row. A reader shows it as the dataset's record, never as
+  the source's words.
+
+In the synthesis graph (vt-syn-recipes-mixed-all 0.1.0) 1.1.0 kept 2.62 million of its 4.56 million links.
+
 **The schema is the vocabulary, not the graph's subset.** `kg/schema.json` declares every label and edge type of the
 scale-catal version the graph pins, with every property a bundle can carry, so every bundle of that version declares
 the same schema: `scale-catal 0.1.0` for a catalysis graph (`scale-kernel` for a kernel-only one). Its `extends`
