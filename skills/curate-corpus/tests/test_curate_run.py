@@ -203,6 +203,16 @@ def test_the_curator_and_the_reader_are_told_to_digitize_main_result_figures(cor
     assert "left undigitized" in Path(run("next", "--run", r, "--role", "review")["prompt"]).read_text()
 
 
+def test_a_material_made_for_another_use_is_curated_not_left_no_data(corpus, tmp_path):
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
+    curate = Path(run("next", "--run", r, "--role", "curate")["prompt"]).read_text()
+    assert "makes or characterizes a material itself" in curate and "a review, an editorial" in curate
+    write(r / "sources" / "7" / "work" / "curation.json", {"result": "no_data", "records": 0, "gaps": 0, "note": "t"})
+    review = Path(run("next", "--run", r, "--role", "review")["prompt"]).read_text()
+    assert "whatever the material" in review and "whatever the material" in SCRIPT.read_text()  # the API reader
+
+
 def test_an_api_curator_runs_sandboxed_and_never_sees_another_run(corpus, tmp_path):
     def api_host(*args, ok=True, env=None):
         r = subprocess.run([sys.executable, "-I", str(HERE.parent / "scripts" / "api_host.py"), *map(str, args)],

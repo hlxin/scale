@@ -18,6 +18,10 @@ model are not independent reviewers, and a person reviews the document before it
    - results the source cites from other works are not recorded as its own runs;
    - values read off a figure carry an uncertainty, with the axis ticks used in the evidence note;
    - `rights.yaml` class and basis follow the copy read; claims are in the curator's words;
+   - scope: a document left `no_data`, or one that leaves out a material the source itself makes or characterizes,
+     is a `needs_fix` issue when the source reports its own preparation or characterization, whatever the material
+     is for (the checklist covers Preparations and Characterizations; `no_data` is for a source with nothing of its
+     own, such as a review);
    - coverage: the source's main results (its key tables and figures) are recorded. A main result printed only in a
      figure is digitized by the skill's recipe ("Digitizing a figure"), the points that cannot be read listed in an
      `extraction_error` gap; a main-result figure left undigitized ("not curated", "not digitized") is a `needs_fix`

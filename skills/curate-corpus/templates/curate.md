@@ -38,5 +38,9 @@ ${si_left}
    `{"result": "curated" | "no_data", "records": {"nodes": <nodes you added>, "links": <links you added>}, "gaps": <n>,
    "not_curated": "<what you did not look at, e.g. SI tables S4-S6, Source Data>", "note": "<one line>"}`.
    `no_data` only when the source reports nothing the catalysis checklist covers (say why in `note`); the graph then
-   keeps its header and Source.
+   keeps its header and Source. The checklist covers Preparations, Characterizations and their steps, so a source
+   that makes or characterizes a material itself (a colloid or nanoparticles made for a sensor, a drug carrier or an
+   antibacterial test as much as for a catalyst) is curated: what it made, how, and what it measured, its stated use
+   in a Claim; only what the schema has no place for goes in `unmodeled`. A source that makes, measures and tests
+   nothing itself (a review, an editorial, a commentary) is `no_data`.
 7. **Reply** with the last check's `ok`, its number of errors and warnings, and your one-line note. Nothing else.
