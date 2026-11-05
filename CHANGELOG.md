@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **A selectivity's basis text that says the count or whole is not stated, or names alternatives, states none (no schema
+  change).** Requested by @haod810 (#91), a follow-up to #86. `statements_in_text` read a term in a clause such as
+  "carbon or mole basis not stated" or "CO2 counted in the denominator, unlike the 'CO2 free' value beside it" as that
+  term, so 80 unstated values of one corpus formed a `mole` group. For `selectivity_count` and `selectivity_whole`, a
+  clause that holds an absence or uncertainty ("not stated", "unknown", "whether"), alternatives ("or", "/") or a contrast
+  ("unlike", "beside", "vs") now reads nothing, and the value stays `not stated`. The curate-corpus recipes say which
+  phrases are read. The phrases #86 left out ("including CO2", "ex CO2") are not added.
+
 - **`scale` writes UTF-8 to stdout and stderr on every platform (no schema change).** Requested by @haod810 (#96). On
   Windows a pipe or a file gets the locale's code page (cp1252, gbk), and `scale graph query` stopped with
   `UnicodeEncodeError` on "−" or "γ" in a curated value. `main()` now reconfigures both streams to UTF-8 when they are

@@ -263,6 +263,16 @@ def test_an_as_reported_query_still_compares_the_basis_as_text(doc):
     ("selectivity_count", "carbon", []),
     ("selectivity_count", "carbon basis", ["carbon_atoms"]),
     ("selectivity_count", "C-mol%", ["carbon_atoms"]),
+    # a term inside a clause that says the basis is not stated, or is one of several alternatives (#91)
+    ("selectivity_count", "carbon or mole basis not stated", []),
+    ("selectivity_count", "carbon, mass or mole basis not stated", []),
+    ("selectivity_count", "carbon/mole basis unknown", []),
+    ("selectivity_count", "mass or carbon basis not stated in the text", []),
+    ("selectivity_count", "mass basis not stated for this value", []),
+    ("selectivity_count", "whether the carbon basis or the mole basis is used is not stated", []),
+    ("selectivity_whole", "CO2 free basis not stated", []),
+    ("selectivity_whole", "CO2 counted in the denominator, unlike the 'CO2 free' value beside it", []),
+    ("selectivity_count", "mole basis; the conversion basis is not stated", ["mole"]),
 ])
 def test_a_term_never_reads_a_negation_or_another_word_as_a_statement(context, text, expected):
     """Expected: a phrase that negates (not including CO2, CO2 not included) or only shares a word (carbon monoxide, a

@@ -349,6 +349,10 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
   summing above 100 %: check the reading, and keep the value as printed when it is printed so. A one-sided
   bound (`bound`, "< 1 %") is never read as its number: an upper bound never warns and adds nothing to the
   sum, a lower bound counts as the least it allows, and a range warns only when its lower end is above 100 %.
+- A selectivity's `basis` and `definition` are read for its count (carbon, mole, mass) and its whole (CO2-free, and the
+  like) only when a clause states one plainly. A clause with "not stated", "unknown", "whether", alternatives ("carbon
+  or mole", "carbon/mole") or a contrast ("unlike", "beside it") states none, so the value stays with the unstated ones.
+  When the source leaves the count or the whole out, say so in a note, not inside `basis`.
 
 ## Driving forces outside the list
 
