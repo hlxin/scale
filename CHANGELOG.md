@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **A source that makes or characterizes a material itself is curated, whatever the material is for; `no_data` is for
+  a source with nothing of its own (no schema change).** Requested by @diazr04, from a curate-corpus run with an API
+  curator over a corpus of metal-nanoparticle syntheses. The rule was already `no_data` "only when the source reports
+  nothing the catalysis checklist covers", and the checklist covers Preparations (any synthesis of a catalyst, a
+  support, a precursor solid or a colloid), Characterizations and their steps. But the curators read it as "not a
+  catalysis source": papers that make nanoparticles for a sensor, a drug carrier or an antibacterial test were left
+  `no_data`, and their syntheses were lost. `templates/curate.md` now says so outright: such a source is curated (what
+  it made, how, what it measured; its stated use in a Claim), and a review, an editorial or a commentary is
+  `no_data`. The second reading (`templates/review.md` and the API reader's prompt in `curate_run.py`) sends back a
+  `no_data` document whose source reports its own preparation or characterization.
+
 - **An API curator's sandbox is binding: no command may run outside it, and no session runs without it (no schema
   change).** Requested by @diazr04, from a run of curate-corpus with `--curator api:<model>` over about 25,000 papers on
   a cluster. `api_host.py` passes `--allowedTools Bash`, which approves every Bash call, including one in which the
