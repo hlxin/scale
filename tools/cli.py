@@ -1503,7 +1503,17 @@ def build_parser() -> argparse.ArgumentParser:
     return p
 
 
+def _utf8_streams() -> None:
+    """Write UTF-8 to stdout and stderr whatever the locale's code page is. On Windows a pipe or a file
+    gets cp1252 or gbk, and "−" or "γ" in a curated value would stop a command with UnicodeEncodeError."""
+    for stream in (sys.stdout, sys.stderr):
+        reconfigure = getattr(stream, "reconfigure", None)
+        if reconfigure is not None and (getattr(stream, "encoding", "") or "").lower().replace("-", "") != "utf8":
+            reconfigure(encoding="utf-8")
+
+
 def main(argv: list[str] | None = None) -> int:
+    _utf8_streams()
     args = build_parser().parse_args(argv)
     try:
         rc = args.fn(args)

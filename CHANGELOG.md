@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- **`scale` writes UTF-8 to stdout and stderr on every platform (no schema change).** Requested by @haod810 (#96). On
+  Windows a pipe or a file gets the locale's code page (cp1252, gbk), and `scale graph query` stopped with
+  `UnicodeEncodeError` on "−" or "γ" in a curated value. `main()` now reconfigures both streams to UTF-8 when they are
+  not; a test runs the query under cp1252 and gbk.
+
 - **query-graph 0.3.1 weighs what a record measured and what it obtained over its labels, and lays out each step of a
   proposal so a reader sees what comes from a record, what was changed and why (no schema change).** Requested by
   @diazr04, after a case on a private synthesis graph where the base record of a proposal was labelled with the target
