@@ -29,7 +29,8 @@ next      writes the prompt of the next N sources for a role (from ../templates)
           SCALE's checks alone, and the index says it was not read a second time). One --api-base-url serves both.
 review-api  the second reading of the next N curated sources by the API model: the document, the curator's report
           and the page texts go to the model with the reading's checklist; its verdict is written to
-          work/review.json as a subagent's would be.
+          work/review.json as a subagent's would be. A stream cut off (no finish_reason or [DONE]) is retried like a
+          5xx; the raw answer of a failed reading is kept in work/review-raw-<n>.json.
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
           state; --apply records the settled ones in state.jsonl and hands their result to the source index
@@ -506,7 +507,7 @@ def _chat(base, key, model, messages, tries=5):
     import urllib.error
     import urllib.request
     body = json.dumps({"model": model, "messages": messages, "temperature": 0, "stream": True}).encode("utf-8")
-    last, cut = "no answer", None
+    last, cut = "no answer", None             # cut: the cut stream with the most content so far
     for attempt in range(tries):
         req = urllib.request.Request(f"{base.rstrip('/')}/chat/completions", data=body, method="POST",
                                      headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
@@ -534,8 +535,10 @@ def _chat(base, key, model, messages, tries=5):
                     pass
                 if whole:
                     return "".join(parts), "".join(thoughts)
-                cut = CutStream("".join(parts), "".join(thoughts))
-                last = str(cut)
+                this = CutStream("".join(parts), "".join(thoughts))
+                if cut is None or len(this.content + this.reasoning) >= len(cut.content + cut.reasoning):
+                    cut = this
+                last = str(this)
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}"
             if e.code in (400, 401, 403, 404):
@@ -544,7 +547,9 @@ def _chat(base, key, model, messages, tries=5):
             last = str(e)[:200]
         if attempt + 1 < tries:
             time.sleep(min(60, 5 * 2 ** attempt))
-    if cut is not None and last == str(cut):
+    if cut is not None:                       # a try that was cut keeps its work, whatever failed after it
+        if last != str(cut):
+            cut.args = (f"{cut} (last try: {last})",)
         raise cut
     raise RuntimeError(last)
 
