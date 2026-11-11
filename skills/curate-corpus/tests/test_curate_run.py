@@ -330,3 +330,101 @@ def test_an_api_model_reads_a_second_time(corpus, tmp_path):
     finally:
         os.environ.pop("TEST_READER_KEY", None)
         srv.shutdown()
+
+
+def _stream_server(plan):
+    """A local endpoint answering each request with the next of `plan`: a list of SSE data lines (or None to close
+    without any); returns the server and the list of requests seen."""
+    import http.server
+    import threading
+    seen = []
+
+    class H(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            self.rfile.read(int(self.headers["Content-Length"]))
+            seen.append(1)
+            lines = plan[min(len(seen), len(plan)) - 1]
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.end_headers()
+            self.wfile.write("".join(f"data: {x}\n\n" for x in lines).encode("utf-8"))
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), H)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    return srv, seen
+
+
+def _delta(**kw):
+    return json.dumps({"choices": [{"delta": kw}]})
+
+
+def test_a_cut_stream_is_retried_and_a_whole_one_is_read(monkeypatch):
+    sys.path.insert(0, str(HERE.parent / "scripts"))
+    import curate_run
+    monkeypatch.setattr(curate_run.time, "sleep", lambda s: None)
+    answer = json.dumps({"verdict": "pass", "issues": []})
+    cut = [_delta(reasoning_content="thinking"), _delta(content="")]                    # no finish_reason, no [DONE]
+    stop = [_delta(reasoning_content="t"), _delta(content=answer), json.dumps(
+        {"choices": [{"delta": {}, "finish_reason": "stop"}]})]                          # whole by finish_reason alone
+    srv, seen = _stream_server([cut, stop])
+    try:
+        got = curate_run._chat(f"http://127.0.0.1:{srv.server_port}/v1", "k", "m", [])
+        assert got == (answer, "t") and len(seen) == 2                                    # the cut one was sent again
+        srv2, seen2 = _stream_server([[_delta(content=answer), "[DONE]"]])                # whole by [DONE] alone
+        try:
+            assert curate_run._chat(f"http://127.0.0.1:{srv2.server_port}/v1", "k", "m", []) == (answer, "")
+        finally:
+            srv2.shutdown()
+    finally:
+        srv.shutdown()
+
+
+def test_a_stream_that_stays_cut_fails_and_its_work_is_kept(corpus, tmp_path, monkeypatch, capsys):
+    cut = [_delta(reasoning_content="walked every field"), _delta(content="")]
+    srv, seen = _stream_server([cut])
+    os.environ["TEST_READER_KEY"] = "secret"
+    try:
+        r = tmp_path / "run"
+        run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "sonnet", "--reviewer",
+            "api:test-reader", "--api-base-url", f"http://127.0.0.1:{srv.server_port}/v1", "--api-key-env",
+            "TEST_READER_KEY")
+        f = r / "sources" / "7"
+        run("next", "--run", r, "--role", "curate")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+        sys.path.insert(0, str(HERE.parent / "scripts"))
+        import curate_run
+        monkeypatch.setattr(curate_run.time, "sleep", lambda s: None)
+        monkeypatch.setattr(sys, "argv", ["curate_run.py", "review-api", "--run", str(r)])
+        curate_run.main()
+        got = json.loads(capsys.readouterr().out.strip().splitlines()[-1])
+        assert got["read"] == [] and len(seen) == 5                                       # tried five times, no verdict
+        assert got["failed"][0]["raw"] == "work/review-raw-1.json" and "cut off" in got["failed"][0]["error"]
+        raw = json.loads((f / "work" / "review-raw-1.json").read_text())
+        assert raw["reasoning_content"] == "walked every field" and raw["content"] == ""
+        assert not (f / "work" / "review.json").exists()
+    finally:
+        os.environ.pop("TEST_READER_KEY", None)
+        srv.shutdown()
+
+
+def test_an_answer_without_a_verdict_is_kept_too(corpus, tmp_path):
+    srv, seen = _stream_server([[_delta(reasoning_content="r"), _delta(content="no json here"), "[DONE]"]])
+    os.environ["TEST_READER_KEY"] = "secret"
+    try:
+        r = tmp_path / "run"
+        run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "sonnet", "--reviewer",
+            "api:test-reader", "--api-base-url", f"http://127.0.0.1:{srv.server_port}/v1", "--api-key-env",
+            "TEST_READER_KEY")
+        f = r / "sources" / "7"
+        run("next", "--run", r, "--role", "curate")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+        got = run("review-api", "--run", r)
+        assert got["read"] == [] and "no verdict" in got["failed"][0]["error"] and len(seen) == 1
+        raw = json.loads((f / "work" / "review-raw-1.json").read_text())
+        assert (raw["content"], raw["reasoning_content"]) == ("no json here", "r")
+    finally:
+        os.environ.pop("TEST_READER_KEY", None)
+        srv.shutdown()
