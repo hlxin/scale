@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- **`scale graph validate` warns about a feed whose gas ratio is not on a HAS_COMPONENT edge (no schema change).**
+  Requested by @haod810 (#107, a follow-up of #90), from 192 tests of 14 FTS papers: 50 held H2:CO only in
+  `Feed.ratios` and 15 only as the fractions of H2 and CO, so a plan that reads the comparable edge ratio missed them.
+  Two warnings, never errors: a Feed whose `ratios` holds a gas ratio (a key such as `h2_co` or `ph2_pco_ratio`, or a
+  value naming two gases) and a Feed with the fractions (mole or volume) of two reactant gases, each when no
+  HAS_COMPONENT edge of the feed carries a `ratio`. A diluent or inert gas is not a reactant. Nothing is stored or
+  converted. The feed recipe (`skills/curate-corpus`) now says to always write the edge form and keep the printed form
+  in `ratios` only beside it.
+
 - **A source that makes or characterizes a material itself is curated, whatever the material is for; `no_data` is for
   a source with nothing of its own (no schema change).** Requested by @diazr04, from a curate-corpus run with an API
   curator over a corpus of metal-nanoparticle syntheses. The rule was already `no_data` "only when the source reports

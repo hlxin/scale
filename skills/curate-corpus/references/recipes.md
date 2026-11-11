@@ -287,7 +287,11 @@ Map keys, so a value can be found under one name. Most follow quantity names alr
   mass, volume, atom or partial pressure); the number and the print in `as_reported` ("1/2", "3:2"). Never convert or
   invert: CO/H2 = 1/2 stays 0.5 on the edge to CO with target H2, and a query asks for either orientation.
   `CatalyticTest.feed_ratio` and `Feed.ratios` keep the printed form; the ratio on the edge is the comparable one. A
-  share of the whole stays `fraction` (a ratio is not a share).
+  share of the whole stays `fraction` (a ratio is not a share). **Always write the edge form**, even when the source
+  prints the ratio once, in a footnote, as a varied factor or only as the fractions of two reactant gases (then
+  `origin: curated` for the implied ratio); keep the printed form in `Feed.ratios` only beside it, never instead of
+  it. `scale graph validate` warns about a feed whose gas ratio is only in `ratios`, or whose two reactant gases have
+  fractions and no ratio.
 - Contact time W/F (5.1 gcat h mol-1; 0.4 g s mL-1): `CatalyticTest.space_time`, never `space_velocity` (the validator
   rejects it as the wrong dimension); `basis` says per molar or per volumetric feed flow, and at which conditions a gas
   volume is counted (STP, normal). Nothing is converted to a GHSV or a WHSV.
