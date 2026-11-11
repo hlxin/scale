@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Quantity kind `chain_growth_probability` (the Anderson-Schulz-Flory alpha) (additive, schema 0.8.1 -> 0.8.2).**
+  Requested in #108: alpha was recorded as `fraction`, `ratio` or an undeclared kind. The kernel declares it
+  (provisional, dimensionless), compared by two new contexts, `chain_growth_method` (distribution_fit,
+  lumped_selectivities) and `chain_growth_basis` (weight_fraction, mole_fraction), read from a value's basis or
+  definition; a value that states neither is compared only with such values. Added a fixture, a counterexample (a unit
+  of temperature) and CQ-42. Migration: documents pinning 0.8.1 stay valid; no automatic rewrite, because the kind
+  alone does not tell an alpha from another `fraction` or `ratio`; set `quantity_kind` by hand (docs/changes/108).
+  Limits: the carbon range of a fit stays in the definition; 0..1 is not enforced.
 - **A source that makes or characterizes a material itself is curated, whatever the material is for; `no_data` is for
   a source with nothing of its own (no schema change).** Requested by @diazr04, from a curate-corpus run with an API
   curator over a corpus of metal-nanoparticle syntheses. The rule was already `no_data` "only when the source reports
