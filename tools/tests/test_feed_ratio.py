@@ -98,12 +98,30 @@ def test_edge_ratio_silences_both(doc):
 
 
 def test_one_reactant_and_inert_diluent_do_not_warn(doc):
-    co, h2 = _edges(doc)
+    _, h2 = _edges(doc)
     h2["props"]["role"] = "inert"
     assert _msgs(doc) == []
     h2["props"]["role"] = "diluent"
     assert _msgs(doc) == []
-    co["props"]["role"] = "reactant"
+
+
+def test_empty_ratio_list_still_warns(doc):
+    next(e for e in _edges(doc) if e["target"].endswith("/h2"))["props"]["ratio"] = []
+    m = _msgs(doc)
+    assert len(m) == 1 and IMPLIED in m[0]
+
+
+def test_feed_without_component_edge_does_not_warn(doc):
+    doc["links"] = [e for e in doc["links"] if e["type"] != "HAS_COMPONENT"]
+    assert _msgs(doc) == []
+
+
+@pytest.mark.parametrize("key", ["no_he", "ne_no", "he_ratio"])
+def test_short_ambiguous_key_tokens_do_not_warn(doc, key):
+    for e in _edges(doc):
+        e["props"].pop("fraction")
+    _feed(doc)["ratios"] = {key: _val(value=2)}
+    assert _msgs(doc) == []
 
 
 def test_warning_never_an_error(doc):

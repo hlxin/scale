@@ -20,11 +20,14 @@ GASES = {"H2", "CO", "CO2", "H2O", "CH4", "O2", "N2", "NH3", "NO", "NO2", "N2O",
 GAS_LOWER = {g.lower(): g for g in GASES}
 WORD = re.compile(r"[A-Za-z][A-Za-z0-9]*")
 BASES = {"mole", "volume"}
+AMBIGUOUS_IN_KEYS = {"no", "he", "ne"}     # also English words or abbreviations: matched only as formulas in text
 
 
 def _gas(token: str, exact: bool) -> str | None:
     """The gas a token names (``H2``, ``pCO``, ``ph2`` in a key), or None."""
     for t in (token, token[1:] if token[:1] in "pP" else ""):
+        if not exact and t.lower() in AMBIGUOUS_IN_KEYS:
+            continue
         if t and (t in GASES or (not exact and t.lower() in GAS_LOWER)):
             return GAS_LOWER.get(t.lower(), t)
     return None

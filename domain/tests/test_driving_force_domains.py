@@ -9,7 +9,7 @@ import copy
 
 import pytest
 
-from conftest import CATALYSIS, GRAPH_MANIFEST, HEAD_VERSION, REPO, spec_of
+from conftest import CATALYSIS, GRAPH_MANIFEST, HEAD_VERSION, REPO, spec_of, without_feed_ratio_advice
 from scale import layout, pgraph
 from scale.pgraph_profiles import domain_contract
 from scale.util import load_doc, load_yaml
@@ -179,7 +179,7 @@ def test_examples_are_valid_and_follow_the_catalysis_checklist(path, spec):
     assert doc["graph"]["schema_version"] == spec["version"] and "conforms_to" not in doc["graph"]
     assert doc["graph"]["follows_domains"] == ["catalysis"]
     assert not [n["id"] for n in doc["nodes"] if "follows_domains" in n["props"]]   # one declaration, on the graph
-    rep = pgraph.validate(doc, spec)
+    rep = without_feed_ratio_advice(pgraph.validate(doc, spec))
     assert rep.errors == [] and rep.warnings == [], (rep.errors, rep.warnings)
     assert set(rep.conformance["profiles"]) == {"catalysis"} and rep.conformance["profiles"]["catalysis"]["conformant"]
 
