@@ -8,7 +8,7 @@
 | `sources/<id>/` | `scale source start` | SCALE's working folder: `<slug>.graph.json`, `source.json`, `rights.yaml`, `BRIEF.md`, `pdfs/` and `work/texts/` (local; git-ignored by its `.gitignore`) |
 | `sources/<id>/work/si.json` | prepare | the SI files whose text was appended to the page texts (pages `[page S1]` …), and those left out, with why |
 | `sources/<id>/work/curation.json` | the curator subagent | `result` (`curated` or `no_data`), `records`, `gaps`, `not_curated`, `note`, `attempt` |
-| `sources/<id>/work/review.json` | the second reader (a subagent, or `review-api`) | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note`; `reader` when an API model read it |
+| `sources/<id>/work/review.json` | the second reader (a subagent, or `review-api`) | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note`; `reader` when an API model read it; `review-raw-<n>.json` holds the raw answer of a failed API reading |
 | `sources/<id>/work/gaps/GAP-*.json` | the curator | the gap reports it wrote (SCALE's gap format); `status` counts them by kind and lists the `missing_concept` ones |
 | `sources/<id>/work/check.json` | status | the last `scale source check`, kept while the graph and `rights.yaml` are unchanged |
 | `prompts/<role>/<id>.md` | next | the prompts handed out |
@@ -54,7 +54,9 @@ three hours unless its report arrives first. A subagent that stopped without rep
   model to launch the subagent with (`--curator` for curate and fix, `--reviewer` for the reading).
 - An API reader (`--reviewer api:<model>`): `review-api` sends each curated document, the curator's report and the
   page texts (the first 300,000 characters) to the endpoint with the reading's checklist, and writes the verdict to
-  `work/review.json`. A failed call leaves the source `curated`, to be read again.
+  `work/review.json`. A stream that ends without `finish_reason` or `[DONE]` (cut off by the endpoint) is a failure and is sent
+  again like a 5xx. A failed call leaves the source `curated`, to be read again; what the reader returned (`content`,
+  and `reasoning_content` if present) is kept in `work/review-raw-<n>.json`, so that its work is not lost.
 
 ## The hand-off to the source index
 
