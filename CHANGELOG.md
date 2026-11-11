@@ -10,6 +10,10 @@
   of temperature) and CQ-42. Migration: documents pinning 0.8.1 stay valid; no automatic rewrite, because the kind
   alone does not tell an alpha from another `fraction` or `ratio`; set `quantity_kind` by hand (docs/changes/108).
   Limits: the carbon range of a fit stays in the definition; 0..1 is not enforced.
+- **`review-api`: a stream cut before `finish_reason` or `[DONE]` is a failure and is retried like an HTTP error; when
+  no verdict is found, the raw `content` and `reasoning_content` are kept in `work/review-raw-<n>.json` (tooling, no
+  schema change, no migration).** Answers #109 (point 1 only; reading a large document in parts stays open).
+
 - **A source that makes or characterizes a material itself is curated, whatever the material is for; `no_data` is for
   a source with nothing of its own (no schema change).** Requested by @diazr04, from a curate-corpus run with an API
   curator over a corpus of metal-nanoparticle syntheses. The rule was already `no_data` "only when the source reports

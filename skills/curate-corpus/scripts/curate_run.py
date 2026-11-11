@@ -29,7 +29,8 @@ next      writes the prompt of the next N sources for a role (from ../templates)
           SCALE's checks alone, and the index says it was not read a second time). One --api-base-url serves both.
 review-api  the second reading of the next N curated sources by the API model: the document, the curator's report
           and the page texts go to the model with the reading's checklist; its verdict is written to
-          work/review.json as a subagent's would be.
+          work/review.json as a subagent's would be. A stream cut off (no finish_reason or [DONE]) is retried like a
+          5xx; the raw answer of a failed reading is kept in work/review-raw-<n>.json.
 status    runs `scale source check <folder>` on every folder (cached while the graph is unchanged), reads the
           curator's report (work/curation.json) and the second reading (work/review.json), and gives each source a
           state; --apply records the settled ones in state.jsonl and hands their result to the source index
@@ -48,6 +49,7 @@ a document's records: the curator writes them, SCALE's tools check them. Prints 
 """
 import argparse
 import datetime as _dt
+import http.client
 import json
 import os
 import re
@@ -487,35 +489,68 @@ def _api_key(api):
     return None
 
 
+class CutStream(RuntimeError):
+    """A stream that ended without `finish_reason` or `[DONE]` (the endpoint closed it, e.g. after 30 minutes): what
+    arrived is kept on the error, never read as the whole answer."""
+
+    def __init__(self, content="", reasoning=""):
+        super().__init__("the stream ended without finish_reason or [DONE] (cut off)")
+        self.content, self.reasoning = content, reasoning
+
+
 def _chat(base, key, model, messages, tries=5):
-    """One answer from an OpenAI-compatible chat endpoint (standard library), retried on rate limits and 5xx. Asked
-    for as a stream: some endpoints cap an unstreamed answer (8,000 tokens, thinking included), which a reasoning
-    model spends before it writes the verdict; an endpoint that answers in one piece is read as one."""
+    """One answer, `(content, reasoning_content)`, from an OpenAI-compatible chat endpoint (standard library), retried
+    on rate limits, 5xx, network errors and a cut stream. Asked for as a stream: some endpoints cap an unstreamed
+    answer (8,000 tokens, thinking included), which a reasoning model spends before it writes the verdict; an
+    endpoint that answers in one piece is read as one. A stream is whole only when it ends with a `finish_reason` or
+    `[DONE]`; one that does not is a failure like a 5xx, and after the last try `CutStream` carries what arrived."""
     import urllib.error
     import urllib.request
     body = json.dumps({"model": model, "messages": messages, "temperature": 0, "stream": True}).encode("utf-8")
-    last = "no answer"
+    last, cut = "no answer", None             # cut: the cut stream with the most content so far
     for attempt in range(tries):
         req = urllib.request.Request(f"{base.rstrip('/')}/chat/completions", data=body, method="POST",
                                      headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
         try:
             with urllib.request.urlopen(req, timeout=900) as r:
                 if "text/event-stream" not in (r.headers.get("Content-Type") or ""):
-                    return json.loads(r.read().decode("utf-8"))["choices"][0]["message"]["content"] or ""
-                parts = []
-                for raw in r:                         # server-sent events: data: {"choices": [{"delta": …}]}
-                    line = raw.decode("utf-8", "replace").strip()
-                    if line.startswith("data:") and line[5:].strip() not in ("", "[DONE]"):
-                        parts.append(((json.loads(line[5:]).get("choices") or [{}])[0].get("delta") or {})
-                                     .get("content") or "")
-                return "".join(parts)
+                    m = json.loads(r.read().decode("utf-8"))["choices"][0]["message"]
+                    return m.get("content") or "", m.get("reasoning_content") or ""
+                parts, thoughts, whole = [], [], False
+                try:
+                    for raw in r:                     # server-sent events: data: {"choices": [{"delta": …}]}
+                        line = raw.decode("utf-8", "replace").strip()
+                        if not line.startswith("data:"):
+                            continue
+                        data = line[5:].strip()
+                        if data == "[DONE]":
+                            whole = True
+                        elif data:
+                            choice = (json.loads(data).get("choices") or [{}])[0]
+                            delta = choice.get("delta") or {}
+                            parts.append(delta.get("content") or "")
+                            thoughts.append(delta.get("reasoning_content") or "")
+                            whole = whole or bool(choice.get("finish_reason"))
+                except (OSError, ValueError, http.client.HTTPException):    # the connection broke mid-stream
+                    pass
+                if whole:
+                    return "".join(parts), "".join(thoughts)
+                this = CutStream("".join(parts), "".join(thoughts))
+                if cut is None or len(this.content + this.reasoning) >= len(cut.content + cut.reasoning):
+                    cut = this
+                last = str(this)
         except urllib.error.HTTPError as e:
             last = f"HTTP {e.code}"
             if e.code in (400, 401, 403, 404):
                 break
         except (urllib.error.URLError, OSError, ValueError, KeyError, IndexError) as e:
             last = str(e)[:200]
-        time.sleep(min(60, 5 * 2 ** attempt))
+        if attempt + 1 < tries:
+            time.sleep(min(60, 5 * 2 ** attempt))
+    if cut is not None:                       # a try that was cut keeps its work, whatever failed after it
+        if last != str(cut):
+            cut.args = (f"{cut} (last try: {last})",)
+        raise cut
     raise RuntimeError(last)
 
 
@@ -556,11 +591,22 @@ def cmd_review_api(a):
                 f"{' (the first ' + str(a.max_chars) + ' characters)' if cut else ''}:\n{text[:a.max_chars]}")
         append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
                                                 "reader": reviewer})
+        content = reasoning = None
         try:
-            v = _verdict(_chat(api["base_url"], key, reviewer[4:], [{"role": "system", "content": READER},
-                                                                     {"role": "user", "content": user}]))
+            content, reasoning = _chat(api["base_url"], key, reviewer[4:], [{"role": "system", "content": READER},
+                                                                            {"role": "user", "content": user}])
+            v = _verdict(content)
         except (RuntimeError, ValueError) as e:
-            failed.append({"id": i, "error": str(e)[:200]})
+            if isinstance(e, CutStream):
+                content, reasoning = e.content, e.reasoning
+            entry = {"id": i, "error": str(e)[:200]}
+            if content or reasoning:                  # the reader's work is kept, not lost
+                n = len(list((f / "work").glob("review-raw-*.json"))) + 1
+                write_json(f / "work" / f"review-raw-{n}.json", {"reader": reviewer, "error": str(e)[:200],
+                                                                 "content": content or "",
+                                                                 "reasoning_content": reasoning or "", "at": now()})
+                entry["raw"] = f"work/review-raw-{n}.json"
+            failed.append(entry)
             continue
         write_json(f / "work" / "review.json", {**v, "reader": reviewer, "text_cut": cut, "at": now()})
         done.append({"id": i, "verdict": v["verdict"], "issues": len(v["issues"])})
