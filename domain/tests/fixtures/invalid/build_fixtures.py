@@ -43,6 +43,7 @@ STAGED = REPO / "domain/examples/scale-catal/synthesis-examples/staged-colloid.j
 CONDITIONS = REPO / "domain/examples/scale-catal/synthesis-examples/synthesis-conditions.json"
 SELECTIVITY = REPO / "domain/examples/scale-catal/product-measurement-examples/selectivity-basis.json"
 SALT = REPO / "domain/examples/scale-catal/synthesis-examples/salt-matrix-anneal.json"
+CHAIN = REPO / "domain/examples/scale-catal/product-measurement-examples/chain-growth-probability.json"
 FTS = REPO / "domain/examples/scale-catal/fts-examples/fts-conditions.json"
 
 
@@ -457,6 +458,10 @@ def main() -> None:
            base=load_doc(FTS))
     defect("pore-volume-in-area-unit", "a micropore volume whose unit is an area per mass",
            lambda d: fts_node(d, "variable/micropore-volume")["props"].__setitem__("unit", "m2/g"), base=load_doc(FTS))
+
+    # a chain-growth probability (#108) is a dimensionless probability, never a quantity of another dimension
+    defect("chain-growth-probability-in-kelvin", "a chain-growth probability whose unit is a temperature",
+           lambda d: fts_test(d, "weight-fit")["result_values"][0].__setitem__("unit", "K"), base=load_doc(CHAIN))
 
 
 if __name__ == "__main__":
