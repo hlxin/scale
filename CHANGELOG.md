@@ -10,6 +10,14 @@
   of temperature) and CQ-42. Migration: documents pinning 0.8.1 stay valid; no automatic rewrite, because the kind
   alone does not tell an alpha from another `fraction` or `ratio`; set `quantity_kind` by hand (docs/changes/108).
   Limits: the carbon range of a fit stays in the definition; 0..1 is not enforced.
+- **`scale graph validate` warns about a feed whose gas ratio is not on a HAS_COMPONENT edge (no schema change).**
+  Requested by @haod810 (#107, a follow-up of #90), from 192 tests of 14 FTS papers: 50 held H2:CO only in
+  `Feed.ratios` and 15 only as the fractions of H2 and CO, so a plan that reads the comparable edge ratio missed them.
+  Two warnings, never errors: a Feed whose `ratios` holds a gas ratio (a key such as `h2_co` or `ph2_pco_ratio`, or a
+  value naming two gases) and a Feed with the fractions (mole or volume) of two reactant gases, each when no
+  HAS_COMPONENT edge of the feed carries a `ratio`. A diluent or inert gas is not a reactant. Nothing is stored or
+  converted. The feed recipe (`skills/curate-corpus`) now says to always write the edge form and keep the printed form
+  in `ratios` only beside it.
 - **`review-api`: a stream cut before `finish_reason` or `[DONE]` is a failure and is retried like an HTTP error; when
   no verdict is found, the raw `content` and `reasoning_content` are kept in `work/review-raw-<n>.json` (tooling, no
   schema change, no migration).** Answers #109 (point 1 only; reading a large document in parts stays open).
