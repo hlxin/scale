@@ -94,6 +94,16 @@ def spec_of(doc: dict) -> dict:
     return pgraph.load_spec(pinned_schema(doc))
 
 
+FEED_RATIO_ADVICE = ("feed ratio only in ratios", "reactant gases and no ratio")     # advisory (#107)
+
+
+def without_feed_ratio_advice(report):
+    """A validation report with the advisory feed-ratio warnings (#107) taken out: the committed examples that state a
+    gas ratio only as printed, or as fractions, are warned about by design and left as they are. Returns the report."""
+    report.warnings = [w for w in report.warnings if not any(k in w["message"][:60] for k in FEED_RATIO_ADVICE)]
+    return report
+
+
 def pinned_schema(doc: dict) -> Path:
     """The catalysis schema manifest a document pins, checked: the head version or a frozen one, whose kernel is the
     core's (the head kernel for the head, the frozen kernel of that version for a frozen version; never a copy in

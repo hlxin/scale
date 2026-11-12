@@ -109,7 +109,8 @@ are in `references/recipes.md` beside this file (through the agent tools:
    CURIE-like (`prefix:path`) and unique across nodes and links. Roles are on links
    (`HAS_COMPONENT {role: support}`), not labels. A run is a CatalyticTest with its conditions and
    results as value objects in the printed unit, linked to the catalyst sample, feed, reactor and
-   reaction. A catalyst (the formulation) is not a catalyst sample (a physical specimen); never
+   reaction. A feed's gas ratio (H2/CO) is always written on the `HAS_COMPONENT` edge of the numerator gas (`ratio`,
+   target the denominator); `Feed.ratios` keeps the printed form only beside it (recipes). A catalyst (the formulation) is not a catalyst sample (a physical specimen); never
    infer batch or replicate identity. Interpretations are Claims, proposals Hypotheses; never write
    an interpretation as a property of a material.
 6. **Values** are `{status, value, unit, …}` in the unit the source printed; keep the printed text in

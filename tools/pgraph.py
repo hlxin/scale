@@ -548,6 +548,9 @@ class Validator:
                 rep.add("error", rid, "synthetic-example documents label every origin synthetic")
         self.check_reported_in(doc, rep)
         plausibility(doc, rep)
+        if "Feed" in self.nodes and "HAS_COMPONENT" in self.edges:      # a feed's gas ratio (advisory)
+            from .feed_ratio import check_document as check_feed_ratio
+            check_feed_ratio(doc, rep)
         if isinstance(self.spec.get("quantities"), dict):      # quantity contracts (0.3.0 on): units, contexts, denominators
             from .quantities import check_document
             check_document(doc, self.spec, rep)

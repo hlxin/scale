@@ -5,7 +5,7 @@ silently dropped) and what a filtered view or a graph of some sources keeps of i
 import copy
 import json
 
-from conftest import EXAMPLES, REPO, spec_of
+from conftest import EXAMPLES, REPO, spec_of, without_feed_ratio_advice
 from scale import graphparts, pgraph
 from scale.cli import main
 from scale.recordchecks import prune, quality
@@ -20,7 +20,8 @@ def campaign() -> dict:
 
 
 def report(doc: dict) -> dict:
-    return pgraph.validate(doc, spec_of(doc)).as_dict()
+    rep = without_feed_ratio_advice(pgraph.validate(doc, spec_of(doc)))    # the campaign's h2_to_co2 is warned about (#107)
+    return rep.as_dict()
 
 
 def test_an_acknowledged_warning_is_listed_apart():

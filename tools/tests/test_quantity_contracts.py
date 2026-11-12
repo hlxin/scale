@@ -12,7 +12,7 @@ import copy
 
 import pytest
 
-from conftest import EXAMPLES, GRAPH_MANIFEST, HEAD_VERSION, spec_at, spec_of
+from conftest import EXAMPLES, GRAPH_MANIFEST, HEAD_VERSION, spec_at, spec_of, without_feed_ratio_advice
 from scale import pgraph, pgraph_migrate, pgraph_query, quantities, schema_change
 from scale.util import ScaleError, load_doc
 
@@ -190,7 +190,7 @@ def test_an_unusual_reported_percentage_is_advised_and_stays_as_reported(spec):
     assert any("104 % is above 100 % for a faradaic_efficiency" in m for m in _warnings(d))
     assert _test(d)["props"]["faradaic_efficiency"][0]["value"] == 104
     p = load_doc(EXAMPLES / "scale-catal/example.json")         # relative molar parts in the unit 1 are not percentages
-    assert pgraph.validate(p, spec_of(p)).warnings == []
+    assert without_feed_ratio_advice(pgraph.validate(p, spec_of(p))).warnings == []
 
 
 def test_a_variable_brings_its_kinds_contract_to_its_unit_and_its_values(spec):
