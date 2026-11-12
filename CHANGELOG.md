@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- **Quantity kind `chain_growth_probability` (the Anderson-Schulz-Flory alpha) (additive, schema 0.8.1 -> 0.8.2).**
+  Requested in #108: alpha was recorded as `fraction`, `ratio` or an undeclared kind. The kernel declares it
+  (provisional, dimensionless), compared by two new contexts, `chain_growth_method` (distribution_fit,
+  lumped_selectivities) and `chain_growth_basis` (weight_fraction, mole_fraction), read from a value's basis or
+  definition; a value that states neither is compared only with such values. Added a fixture, a counterexample (a unit
+  of temperature) and CQ-42. Migration: documents pinning 0.8.1 stay valid; no automatic rewrite, because the kind
+  alone does not tell an alpha from another `fraction` or `ratio`; set `quantity_kind` by hand (docs/changes/108).
+  Limits: the carbon range of a fit stays in the definition; 0..1 is not enforced.
 - **`scale graph validate` warns about a feed whose gas ratio is not on a HAS_COMPONENT edge (no schema change).**
   Requested by @haod810 (#107, a follow-up of #90), from 192 tests of 14 FTS papers: 50 held H2:CO only in
   `Feed.ratios` and 15 only as the fractions of H2 and CO, so a plan that reads the comparable edge ratio missed them.

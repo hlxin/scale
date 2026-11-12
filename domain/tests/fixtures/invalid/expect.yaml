@@ -285,3 +285,9 @@ fixtures:
     error: "not a dimension of specific_pore_volume"
     reason: A pore volume per mass is a volume per mass (cm3/g, mL/g); a value in m2/g is an area, so the class of pore
       volume and the unit must agree.
+  - file: chain-growth-probability-in-kelvin.json
+    base: domain/examples/scale-catal/product-measurement-examples/chain-growth-probability.json
+    error: "not a dimension of chain_growth_probability"
+    reason: A chain-growth probability is a dimensionless probability (the propagation rate over the sum of the propagation and
+      termination rates); a value in kelvin is a temperature, so the kind and the unit must agree. The contract compares
+      dimensions, so a dimensionless value outside 0 to 1 is not rejected by it (stated limit).

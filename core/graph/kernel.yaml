@@ -3236,6 +3236,31 @@ quantities:
       refine:
         within_lump: relative_to
       unstated: group
+    chain_growth_method:
+      description: How a chain-growth probability was obtained, a fit of the product distribution (the slope of
+        ln(W_n/n) or of ln(x_n) against carbon number n) or a computation from lumped selectivities (for example the
+        C2-C4 over C2+ split). Values of the two are two quantities, never converted into one another; the carbon
+        range of a fit (C14-C21, C5-C10) stays in the value's definition, as the source states it.
+      read_from: [basis, definition]
+      values:
+        distribution_fit:
+          terms: [slope of ln(W_n/n), slope of ln(Wn/n), slope of ln(x_n), slope of ln(xn), slope of the ASF plot, slope of straight lines, linearized ASF plot, linearized ASF plots, linear fit of the ASF plot, fit of the ASF distribution, ASF fit, fitted to the ASF distribution, regression of ln(W_n/n)]
+        lumped_selectivities:
+          terms: [computed from selectivities, calculated from selectivities, computed from the lumped selectivities, calculated from the lumped selectivities, from the lumped selectivities, from lumped selectivities, from the product selectivities, from the C2-C4 selectivity, from the C2-C4 and C2+ selectivities, from the CH4 selectivity]
+      unspecified: [other, not_reported]
+      unstated: group
+    chain_growth_basis:
+      description: What the distribution a chain-growth probability describes counts, the weight fraction W_n or the mole
+        fraction x_n of the product of carbon number n. A value over the one is never converted to the other; a value
+        that states neither is compared only with those that state neither either, and none is assumed.
+      read_from: [basis, definition]
+      values:
+        weight_fraction:
+          terms: [weight fraction, mass fraction, weight basis, mass basis, by weight, by mass, W_n, Wn]
+        mole_fraction:
+          terms: [mole fraction, molar fraction, mole basis, molar basis, by mole, x_n, xn]
+      unspecified: [other, not_reported]
+      unstated: group
     transport_criterion:
       description: Which criterion a transport check computed. The Weisz-Prater criterion judges diffusion in the pores,
         the Carberry number mass transfer to the particle, the Anderson criterion heat in the particle, and Mears gave
@@ -3447,7 +3472,8 @@ quantities:
         description: The electrode area (geometric or electrochemically active) or the catalyst mass the current is divided by.
         dimensions: [area, mass]
     fraction:
-      description: A part of a whole (a duty cycle), dimensionless; a basis the value states is compared as text.
+      description: A part of a whole (a duty cycle), dimensionless; a basis the value states is compared as text. A
+        chain-growth probability is a chain_growth_probability.
       dimensions: [dimensionless]
       share: true
     species_fraction:
@@ -3544,9 +3570,21 @@ quantities:
       description: One component's quantity over another's in a mixture or a recipe (Pt:Co 1:1 by mole, ethanol:water
         1:1 by volume, H2O/SiO2 44 in a gel), dimensionless; its target is the component it is relative to (the
         denominator) and its basis says by what it is counted (mole, mass, volume, atom). A share of the whole is a
-        composition_fraction.
+        composition_fraction, a chain-growth probability a chain_growth_probability.
       dimensions: [dimensionless]
       compare_by: [fraction_basis]
+    chain_growth_probability:
+      maturity: provisional
+      description: The probability α that a growing chain adds one more unit rather than terminates (the
+        Anderson-Schulz-Flory distribution of Fischer-Tropsch synthesis, oligomerization and other chain-growth
+        chemistry), the rate of propagation over the sum of the rates of propagation and termination, dimensionless
+        and between 0 and 1. It is not a share of a whole (fraction) and not a ratio of two components (ratio). Two
+        values are comparable only if they were obtained the same way (chain_growth_method) and describe a
+        distribution on the same basis (chain_growth_basis, weight W_n or mole x_n), both read from the value's basis or
+        definition; the carbon range of a fit (C14-C21, C5-C10) is part of the definition, and values over two
+        ranges are two results. Nothing is converted or assumed.
+      dimensions: [dimensionless]
+      compare_by: [chain_growth_method, chain_growth_basis]
     specific_surface_area:
       maturity: provisional
       description: A surface area per mass of solid (m2/g), as a BET area, a mesopore, micropore or external area from a

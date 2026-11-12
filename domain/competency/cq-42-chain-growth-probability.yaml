@@ -1,0 +1,72 @@
+# A competency question of the catalysis domain (tools/competency.py; `scale domains cq catalysis`).
+# It runs on public synthetic examples, so anyone can rerun it and see the same answer.
+id: CQ-42
+question: Which tests reported a chain-growth probability alpha, and which of those values were obtained the same way, on
+  the same distribution basis?
+description: |
+  Fischer-Tropsch papers report the Anderson-Schulz-Flory chain-growth probability alpha as one number, but it is a fit
+  of the distribution (the slope of ln(W_n/n) or of ln(x_n) against the carbon number n, over a carbon range) in one paper
+  and a computation from lumped selectivities in another. alpha is one kind, chain_growth_probability (dimensionless,
+  0 to 1), compared by how it was obtained (chain_growth_method) and by the basis of the distribution (chain_growth_basis,
+  weight or mole). The example holds three invented values: 0.89 from a weight-basis fit over C14-C21, 0.71 from a
+  mole-basis fit over C5-C10 and 0.62 computed from lumped selectivities. Ranked scientifically they are three groups on
+  the method and basis they state (the two fits differ in basis); none is converted into another and 0.62 is not said to
+  be lower than 0.89.
+
+  Limit: the carbon range of a fit is not a context; it stays in the value's definition, and two fits over different
+  ranges are not told apart by a comparison, only by reading the definition. The contexts are read from the basis and the
+  definition by listed terms.
+documents:
+  - examples/scale-catal/product-measurement-examples/chain-growth-probability.json
+plan:
+  question: Which tests reported a chain-growth probability, and how was it obtained?
+  comparison: scientific
+  match:
+    label: CatalyticTest
+    as: test
+  steps:
+    - from: test
+      entries: result_values
+      kind: chain_growth_probability
+      as: result
+  where:
+    - var: result
+      prop: value
+      op: ge
+      value: 0
+      unit: '1'
+  return:
+    - test.name
+    - result
+  order_by:
+    - var: result
+      prop: value
+  evidence: false
+expect:
+  status: answered
+  min_rows: 3
+  max_rows: 3
+  values:
+    test.name:
+      - Synthesis, alpha from lumped selectivities
+      - Synthesis, alpha from a mole-basis fit
+      - Synthesis, alpha from a weight-basis fit
+variants:
+  - description: Asked for values from a fit of the distribution, the lumped-selectivity value is left out as an
+      incompatible context, never converted; the two fits remain, apart by basis when grouped.
+    plan:
+      order_by:
+        - var: result
+          prop: value
+          context:
+            chain_growth_method: distribution_fit
+    expect:
+      status: answered
+      min_rows: 2
+      max_rows: 2
+      excluded:
+        incompatible_context: 1
+      values:
+        test.name:
+          - Synthesis, alpha from a mole-basis fit
+          - Synthesis, alpha from a weight-basis fit
