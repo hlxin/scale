@@ -1,21 +1,22 @@
 ---
 name: export-graph
 version: 0.1.0
-description: Hand a scale-catal document to another system — validated under the public schema it pins, its quotes within the copyright cap, filtered for the audience that will see it, as the native document or as a kg-bundle whose losses are read and stated, with texts shipped only under a stated licence, sealed and linked to its previous release.
+description: Hand a scale-catal document to another system — validated under the public schema it pins, its quotes within the copyright cap, filtered for the audience that will see it, as the native document or as a kg-bundle whose losses are read and stated, with texts shipped only under a stated licence, sealed and linked to its previous release. Use when the user wants to export, share, publish or hand a scale-catal graph to another system.
 scale_release: ">=v0.1.0"
 inputs:
   - A scale-catal document (it pins its schema version)
   - The audience the export is for (the public, a project, an institution) and the system that will read it
   - For a later release, the previous release's bundle folder
 allowed-tools:
-  - "scale graph validate <doc> [--source-text <id>=<file>]"   # under the version the document pins
-  - "scale graph spec --version <v>"                           # the digest a reader binds the schema by
-  - "scale evidence report | cap <doc>"                        # quotes within each source's cap
-  - "scale evidence access <doc>"                              # what is public
-  - "scale graph filter <doc> --as <id> | --public"            # what the audience may see
-  - "scale corpus check <manifest>"                            # the frozen corpus, for the bundle's corpus block
-  - "scale graph export <doc> --to kg-bundle --out <dir> [--public | --as <project id> | --as <institution id> ...] [--version <v>] [--previous <dir> | --ids-from <dir>] [--replaced <file>] [--corpus <manifest>] [--title <short name>] [--text <id>=<file>:<licence>]"
-  - write access to the working directory only
+  - Bash(scale graph validate:*)   # under the version the document pins
+  - Bash(scale graph spec:*)   # the digest a reader binds the schema by
+  - Bash(scale evidence report:*)   # quotes within each source's cap
+  - Bash(scale evidence cap:*)
+  - Bash(scale evidence access:*)   # what is public
+  - Bash(scale graph filter:*)   # what the audience may see
+  - Bash(scale corpus check:*)   # the frozen corpus, for the bundle's corpus block
+  - Bash(scale graph export:*)   # --to kg-bundle --out <dir> [--public | --as <id> ...] [--version] [--previous | --ids-from] [--corpus] [--text <id>=<file>:<licence>]
+  # write access to the working directory only
 outputs:
   - The exported document or bundle (sealed, with SHA256SUMS), for the stated audience
   - The export report (what was converted, kept as text, left out, withheld or inferred) and a short statement of the losses for the receiver

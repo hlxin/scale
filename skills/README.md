@@ -49,6 +49,9 @@ open Claude Code in the repository and each skill is a command (`/index-sources`
 read from this folder, so a `git pull` brings the latest versions. The skills run the `scale` command, so install it
 first (`pip install -e .` in the clone, or `uv`).
 
+- **Permissions:** each skill's `allowed-tools` lets Claude Code run the `scale` commands it lists without asking,
+  while the skill is in use (the `scale` on the PATH; `uvx scale-catal …` still asks). Commands that file or publish
+  (`scale gap issue --submit`, `scale graph contribute --write`) always ask.
 - **In another project:** `scale skills install ~/.claude/skills` copies a release's skills into your own skills
   folder (for every project), or `scale skills install <project>/.claude/skills` for one project. These are copies:
   run it again with `--force` to update them.

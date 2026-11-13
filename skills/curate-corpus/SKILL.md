@@ -1,7 +1,7 @@
 ---
 name: curate-corpus
 version: 0.3.0
-description: Curate a corpus into scale-catal documents (node-link JSON) under the schema version they pin — one publication, one data file, or many sources frozen together — preserving source locations, reported values, units, explicit missingness and evidential status, with verbatim evidence on every statement; many sources run one subagent per source with a second reading and resumable state; record gaps instead of changing the schema.
+description: Curate a corpus into scale-catal documents (node-link JSON) under the schema version they pin — one publication, one data file, or many sources frozen together — preserving source locations, reported values, units, explicit missingness and evidential status, with verbatim evidence on every statement; many sources run one subagent per source with a second reading and resumable state; record gaps instead of changing the schema. Use when the user wants to curate, extract or record the data of a paper, DOI, PDF or data file, build the graph from a frozen corpus, or continue an unfinished curation run.
 scale_release: ">v0.2.0"
 inputs:
   - The corpus - one publication (a DOI, a PDF, a text), one data file (a CSV, an instrument or lab-notebook export) with its column dictionary, or a frozen corpus manifest whose included sources have their PDF (and SI) on disk (index-sources' freeze_corpus.py freezes one; fetch-corpus fetches its files)
@@ -10,21 +10,27 @@ inputs:
   - For project data, who owns it and who may see it (the project and the access level its owners set)
   - For many sources - which to curate, who curates (a stewardship registry id) for which project, and which model curates and who reads each document a second time, asked before the run
 allowed-tools:
-  - "scale source start --doi <doi> | --pdf <file> | --text <file> | check <dir> [--derive-links] | finish <dir> [--public] [--bundle]"   # one publication: its working folder, the check, what can be shared
-  - "scale graph describe [labels] --domain <domain>"   # the labels and edges you may use, with the checklist and its cases
-  - "scale graph validate <doc> --source-text <id>=<file>"   # quotes (or a data file's rows) found verbatim
-  - "scale graph index | search"            # vectors and term statistics for the evidence quotes
-  - "scale graph filter <doc> --as <id> | --public"   # what each audience may see
-  - "scale evidence report | cap | rehydrate | access"   # the copyright cap; withheld quotes; access before a commit
-  - "scale call template | describe | validate | skills"   # the same through the agent tools
-  - "scale gap list | issue (dry run)"
-  - "scale corpus check <manifest>"           # every candidate source has a status and the counts add up
-  - "scale pages render | region | agree | check | pending | merge-second | import"   # scanned pages: page images checked against OCR, second readings
-  - "scale graph contribute <graph> --to <folder>"   # a dry run; --write only into a run's local graph, or after a person's review
-  - "scale graph build <folder>"             # a run's local graph, to query
+  - Bash(scale source start:*)   # one publication: its working folder
+  - Bash(scale source check:*)   # the check (--derive-links)
+  - Bash(scale source finish:*)   # what can be shared (--public, --bundle)
+  - Bash(scale graph describe:*)   # the labels and edges you may use, with the checklist and its cases
+  - Bash(scale graph validate:*)   # quotes (or a data file's rows) found verbatim (--source-text <id>=<file>)
+  - Bash(scale graph index:*)   # vectors and term statistics for the evidence quotes
+  - Bash(scale graph search:*)
+  - Bash(scale graph filter:*)   # what each audience may see (--as <id> | --public)
+  - Bash(scale evidence:*)   # report | cap | rehydrate | access: the copyright cap; withheld quotes; access before a commit
+  - Bash(scale call template:*)   # the same through the agent tools
+  - Bash(scale call describe:*)
+  - Bash(scale call validate:*)
+  - Bash(scale call skills:*)
+  - Bash(scale gap list:*)
+  - Bash(scale corpus check:*)   # every candidate source has a status and the counts add up
+  - Bash(scale pages:*)   # render | region | agree | check | pending | merge-second | import: scanned pages, second readings
+  - Bash(scale graph build:*)   # a run's local graph, to query
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)   # many sources - the run's bookkeeping (references/runs.md)
-  - read access to the sources' texts, PDFs, SI and data files
-  - write access to the working directory (or the run folder) only
+  # not pre-approved, so a person sees each call: `scale gap issue` (a dry run; never --submit without a person),
+  # `scale graph contribute <graph> --to <folder>` (a dry run; --write only into a run's local graph, or after a person's review)
+  # read access to the sources' texts, PDFs, SI and data files; write access to the working directory (or the run folder) only
 outputs:
   - One scale-catal document per source (graph header, nodes, links) that pins the schema version and follows its checklist; for a data file, a Dataset for the file and records citing its rows
   - The validation report (errors, warnings, checklist conformance)

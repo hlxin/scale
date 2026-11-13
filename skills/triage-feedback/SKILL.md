@@ -1,15 +1,19 @@
 ---
 name: triage-feedback
 version: 0.1.0
-description: Read the community-feedback queue produced by `scale triage ingest` and propose paths for the reviewers' weekly digest, without deciding anything.
+description: Read the community-feedback queue produced by `scale triage ingest` and propose paths for the reviewers' weekly digest, without deciding anything. Use when asked to triage community feedback or to prepare the reviewers' weekly digest.
 scale_release: ">=v0.1.0"
 inputs:
   - queue.json from `scale triage ingest` (topics = clusters of issues, comments, review comments, discussions, with references and a rule-based category)
   - The SCALE tools (`scale call …`) to check records, labels and query plans
 allowed-tools:
-  - "scale call status | domains | describe | validate | query | search"
-  - read access to the repository and to the linked GitHub items
-  - write access to one output file, proposals.json
+  - Bash(scale call status:*)
+  - Bash(scale call domains:*)
+  - Bash(scale call describe:*)
+  - Bash(scale call validate:*)
+  - Bash(scale call query:*)
+  - Bash(scale call search:*)
+  # read access to the repository and to the linked GitHub items; write access to one output file, proposals.json
 outputs:
   - proposals.json valid against skills/triage-feedback/proposal.schema.json
 validation:

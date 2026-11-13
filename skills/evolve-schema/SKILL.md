@@ -1,18 +1,24 @@
 ---
 name: evolve-schema
 version: 0.2.0
-description: Turn missing-concept gaps or a person's request into a scale-catal schema change in one pull request — the edit to the schema files, fixtures and counterexamples, the version raised by the rule, the migration step and the competency questions to re-run — for one person's approval.
+description: Turn missing-concept gaps or a person's request into a scale-catal schema change in one pull request — the edit to the schema files, fixtures and counterexamples, the version raised by the rule, the migration step and the competency questions to re-run — for one person's approval. Use when curation or a query reports a concept the schema cannot express (missing_concept gaps), or a person asks for a schema change.
 scale_release: ">=v0.1.0"
 inputs:
   - Gap reports of kind missing_concept (curation fragments, `scale gap from-query`, a GitHub issue, a `gap-report` issue from a corpus run, or a person's request)
   - The documents containing the motivating records
   - The schema files (core/graph/kernel.yaml, domain/graph/catalysis.yaml; the manifest domain/graph/scale-catal.yaml)
 allowed-tools:
-  - "scale schema diff | bump | check --base origin/main"
-  - "scale graph describe | validate | query | search | migrate"
-  - "scale domains cq"                                 # the competency questions
-  - "scale check --fast"
-  - write access to the schema files, fixtures, examples, tests and CHANGELOG; never to releases/ or by hand to frozen schema versions
+  - Bash(scale schema diff:*)
+  - Bash(scale schema bump:*)
+  - Bash(scale schema check:*)   # --base origin/main
+  - Bash(scale graph describe:*)
+  - Bash(scale graph validate:*)
+  - Bash(scale graph query:*)
+  - Bash(scale graph search:*)
+  - Bash(scale graph migrate:*)
+  - Bash(scale domains cq:*)   # the competency questions
+  - Bash(scale check:*)   # --fast
+  # write access to the schema files, fixtures, examples, tests and CHANGELOG; never to releases/ or by hand to frozen schema versions
 outputs:
   - "one pull request: the schema edit, a fixture that uses what is added (and a counterexample), the frozen base version, the raised version, the migration step (and rule, if breaking), a CHANGELOG line"
 validation:

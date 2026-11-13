@@ -1,23 +1,25 @@
 ---
 name: query-graph
 version: 0.3.1
-description: Answer a scientific question from scale-catal documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them. When the question asks what to do (how to make a material, how to run a test), the answer is a proposal built from the graph's closest records, each step citing the record it comes from, checked before it is presented and reviewed once by a second agent.
+description: Answer a scientific question from scale-catal documents by writing and running a graph query plan that returns rows as reported, with evidence, the records left out and why, its coverage and the kind of answer — reporting absences instead of filling them. When the question asks what to do (how to make a material, how to run a test), the answer is a proposal built from the graph's closest records, each step citing the record it comes from, checked before it is presented and reviewed once by a second agent. Use whenever the user asks what the sources report about something, or how to make a material or run a test, from scale-catal documents.
 scale_release: ">=v0.3.0"
 inputs:
   - A natural-language question
   - The scale-catal documents to query (each pins its schema version)
 allowed-tools:
-  - "scale graph describe [labels] --domain <domain>"   # what the schema can express
-  - "scale graph stats <graph>"                         # the units in use and the link patterns of a document
-  - "scale graph query <graph> <plan.yaml>"             # patterns, filters, evidence search, dated paths
-  - "scale graph search <graph> <text>"                 # evidence by words and meaning (vectors + BM25)
-  - "scale graph recipe <graph> [--preparation <id>]"   # a preparation read whole: its stages and steps in order
-  - "scale graph filter <graph> --public | --as <id> --out <view>"   # the view a reader may see, for an answer that may go to them
-  - "scale call describe | query | search | recipe"     # the same through the agent tools
-  - "python3 -I scripts/precedents.py --requirements <req.json> --graph <graph>"   # a proposal's precedents, in one plan
-  - "python3 -I scripts/check_quotes.py <proposal.md> --graph <graph>"   # its quotes and the basis of its records
-  - "scale gap from-query (dry run)"
-  - write access to the working directory only
+  - Bash(scale graph describe:*)   # what the schema can express
+  - Bash(scale graph stats:*)   # the units in use and the link patterns of a document
+  - Bash(scale graph query:*)   # patterns, filters, evidence search, dated paths
+  - Bash(scale graph search:*)   # evidence by words and meaning (vectors + BM25)
+  - Bash(scale graph recipe:*)   # a preparation read whole: its stages and steps in order
+  - Bash(scale graph filter:*)   # the view a reader may see, for an answer that may go to them
+  - Bash(scale call describe:*)   # the same through the agent tools
+  - Bash(scale call query:*)
+  - Bash(scale call search:*)
+  - Bash(scale call recipe:*)
+  - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)   # scripts/precedents.py (a proposal's precedents) and scripts/check_quotes.py (its quotes)
+  - Bash(scale gap from-query:*)   # local files; nothing filed
+  # write access to the working directory only
 outputs:
   - The query plan (YAML) that was executed, and any other plan run before reporting an absence
   - The query result (JSON) with rows, values as reported, evidence, the records left out, the coverage block and the kind of answer

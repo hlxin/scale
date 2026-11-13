@@ -1,19 +1,20 @@
 ---
 name: map-coverage
 version: 0.1.0
-description: Build a coverage map of scale-catal documents — materials by properties by conditions — from query plans and stats, keeping apart what the sources did not state, what they say was not measured or does not apply, what was not curated, what is withheld from the view, what is ambiguous, what is a one-sided bound, what is recorded in another unit or basis and what the schema cannot say, and route the gaps.
+description: Build a coverage map of scale-catal documents — materials by properties by conditions — from query plans and stats, keeping apart what the sources did not state, what they say was not measured or does not apply, what was not curated, what is withheld from the view, what is ambiguous, what is a one-sided bound, what is recorded in another unit or basis and what the schema cannot say, and route the gaps. Use when the user asks what the documents cover, where the gaps are, or for a coverage map.
 scale_release: ">=v0.1.0"
 inputs:
   - The scale-catal documents to map (each pins its schema version)
   - The axes of the map (e.g. catalyst families × results × temperature bands), or a question the map should answer
 allowed-tools:
-  - "scale graph describe [labels] --domain <domain>"   # what the schema can express
-  - "scale graph stats <graph>"                         # counts, the units in use per property path and the link patterns
-  - "scale graph query <graph> <plan.yaml>"             # one plan per column (or cell), with its coverage block
-  - "scale call describe | query"                       # the same through the agent tools
-  - "scale gap from-query (dry run)"                    # schema gaps and source gaps from a query result
-  - "scale graph filter <graph> --public | --as <id> --out <view>"   # the view a reader may see, for a report that goes to them
-  - write access to the working directory only
+  - Bash(scale graph describe:*)   # what the schema can express
+  - Bash(scale graph stats:*)   # counts, the units in use per property path and the link patterns
+  - Bash(scale graph query:*)   # one plan per column (or cell), with its coverage block
+  - Bash(scale call describe:*)   # the same through the agent tools
+  - Bash(scale call query:*)
+  - Bash(scale gap from-query:*)   # schema gaps and source gaps from a query result (local files; nothing filed)
+  - Bash(scale graph filter:*)   # the view a reader may see, for a report that goes to them
+  # write access to the working directory only
 outputs:
   - The query plans, one per column or cell, and their results
   - The map (CSV, Markdown or JSON) whose cells give the values present and, separately, each kind of absence with its count

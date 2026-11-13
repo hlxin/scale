@@ -1,20 +1,23 @@
 ---
 name: scan-conflicts
 version: 0.1.0
-description: Find values in scale-catal documents that seem to disagree, by pairing them with query plans that state units and bases, and classify each pair as a genuine conflict, an apparent one (with the axis that explains it) or not comparable — as a report, or as comparison claims a person reviews; never rewriting a value.
+description: Find values in scale-catal documents that seem to disagree, by pairing them with query plans that state units and bases, and classify each pair as a genuine conflict, an apparent one (with the axis that explains it) or not comparable — as a report, or as comparison claims a person reviews; never rewriting a value. Use when the user asks whether the sources disagree about a value, or to check values for conflicts.
 scale_release: ">=v0.1.0"
 inputs:
   - The scale-catal documents to scan (each pins its schema version)
   - What to scan (a quantity on a kind of record, e.g. methanol space-time yield of Cu/ZnO catalysts), or a question
 allowed-tools:
-  - "scale graph describe [labels] --domain <domain>"   # what the schema can express
-  - "scale graph stats <graph>"                         # the units in use per property and the link patterns
-  - "scale graph query <graph> <plan.yaml>"             # the values to pair, with their conditions and evidence
-  - "scale graph search <graph> <text>"                 # the words the sources use
-  - "scale graph validate <doc>"                        # a document with the records this skill proposes
-  - "scale graph filter <graph> --public | --as <id> --out <view>"   # the view a reader may see, for a report that goes to them
-  - "scale call describe | query | search | validate"   # the same through the agent tools
-  - write access to the working directory only
+  - Bash(scale graph describe:*)   # what the schema can express
+  - Bash(scale graph stats:*)   # the units in use per property and the link patterns
+  - Bash(scale graph query:*)   # the values to pair, with their conditions and evidence
+  - Bash(scale graph search:*)   # the words the sources use
+  - Bash(scale graph validate:*)   # a document with the records this skill proposes
+  - Bash(scale graph filter:*)   # the view a reader may see, for a report that goes to them
+  - Bash(scale call describe:*)   # the same through the agent tools
+  - Bash(scale call query:*)
+  - Bash(scale call search:*)
+  - Bash(scale call validate:*)
+  # write access to the working directory only
 outputs:
   - The query plans that returned the values, with their results (coverage blocks included)
   - A conflict report (JSON or Markdown) listing each pair with its values as reported, evidence, classification and the axis it differs on
