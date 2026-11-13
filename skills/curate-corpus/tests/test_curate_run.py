@@ -542,3 +542,29 @@ def test_an_api_reader_reads_a_large_document_in_parts_with_the_date_and_the_pre
     finally:
         os.environ.pop("TEST_READER_KEY", None)
         srv.shutdown()
+
+
+def test_a_reading_is_fitted_to_the_readers_context_window():
+    cr = _scripts()
+    doc, text = 950_000, 80_000                                          # a large document and its page texts
+    assert cr.reading_budget(None, doc, text, 10_000, 15_000, 300_000) == (text, cr.DOC_CHARS)   # no window: as before
+    t, d = cr.reading_budget(1_000_000, doc, text, 10_000, 15_000, 300_000)
+    assert (t, d) == (text, doc)                                         # 1M tokens: all of it in one request
+    t, d = cr.reading_budget(128_000, doc, text, 10_000, 15_000, 300_000)
+    room = (128_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN - 10_000 - cr.width(cr.READER)
+    assert t == text and d < doc and d + t + 15_000 <= room              # 128k tokens: parts, each fits with the texts
+    t, d = cr.reading_budget(64_000, doc, 250_000, 10_000, 15_000, 300_000)
+    room = (64_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN - 10_000 - cr.width(cr.READER)
+    assert d == room // 2 and t + d + 15_000 <= room and t < 250_000     # small window: the texts are cut, not the parts
+    assert cr.reading_budget(1_000_000, doc, text, 0, 0, 300_000, max_doc_chars=200_000)[1] == 200_000   # a cap holds
+    assert cr.reading_budget(262_144, 200_000, 50_000, 10_000, 5_000, 300_000)[1] == 200_000   # it fits: one part
+
+
+def test_text_outside_ascii_counts_as_a_token_a_character():
+    cr = _scripts()
+    assert cr.width("abc") == 3 and cr.width("電子") == 2 * cr.CHARS_PER_TOKEN
+    assert cr.head_within("ab電子cd", 5) == "ab電" and cr.head_within("ab電子cd", 4) == "ab" and cr.head_within("abc", 10) == "abc"
+    nodes = [{"id": f"ex:{k}", "label": "Claim", "props": {"name": "電子回収率" * 40}} for k in range(10)]
+    graph = {"graph": {}, "nodes": nodes, "links": []}
+    for p, _ in cr.doc_parts(graph, 2000):
+        assert cr.width(json.dumps(p, ensure_ascii=False, separators=(",", ":"))) <= 2000

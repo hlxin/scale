@@ -64,13 +64,16 @@ three hours unless its report arrives first. A subagent that stopped without rep
   `work/review.json`. A stream that ends without `finish_reason` or `[DONE]` (cut off by the endpoint) is a failure and is sent
   again like a 5xx. A failed call leaves the source `curated`, to be read again; what the reader returned (`content`,
   and `reasoning_content` if present) is kept in `work/review-raw-<n>.json`, so that its work is not lost.
-- A document larger than `--max-doc-chars` (150,000 characters of compact JSON by default) is read in parts, so that
-  it fits a reader's context: each part holds whole records, grouped by label, with the links they start, and lists
+- Each reading is fitted to the reader's context window, given at prepare (`--api-context-tokens`) or to `review-api`
+  (`--context-tokens`): about 3 characters a token (a character outside ASCII, such as CJK text, counts as a token),
+  32,000 tokens kept for the answer. A document that fits beside the page texts goes whole, so a 1M-token reader rarely
+  needs parts and a 128k-token one often does; one that does not is read in parts, and the page texts are cut only
+  when the parts would get less than half the room. Without a window, a part holds at most `--max-doc-chars` (150,000
+  characters of compact JSON by default), which also caps a part when given. Each part holds whole records, grouped by label, with the links they start, and lists
   the records of the other parts (id, label, name), so that no record is read twice or reported missing. Every part
   gets the curator's report, the page texts, today's date and the previous issues; the parts' issues are merged into
   one reading (`parts` in `review.json`), and a reading with a part that failed is no reading (the source stays
-  `curated`). A record larger than the budget goes alone in its part. Lower `--max-doc-chars` and `--max-chars` for a
-  reader with a short context: a request is about the part, the list and the page texts together.
+  `curated`). A record larger than the budget goes alone in its part.
 
 ## The hand-off to the source index
 

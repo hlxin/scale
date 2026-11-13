@@ -3,10 +3,11 @@ follows the curate-corpus skill's procedure for one source, read a second time b
 
   python3 -I curate_run.py prepare --corpus <sources.json> --run <dir> --curator opus|sonnet|fable|haiku|api:<model>
                                    --reviewer opus|sonnet|fable|haiku|api:<model>|skip [--api-base-url <url>]
+                                   [--api-context-tokens N]
                                    [--ids 12,57 | --ids-file F] [--max 50]
                                    [--contributor <id>] [--project <id>] [--version <v>] [--no-si] [--scale "<command>"]
   python3 -I curate_run.py next    --run <dir> --role curate|review|fix [--n 5]
-  python3 -I curate_run.py review-api --run <dir> [--n 5] [--max-chars 300000] [--max-doc-chars 150000]
+  python3 -I curate_run.py review-api --run <dir> [--n 5] [--context-tokens N] [--max-chars 300000] [--max-doc-chars N]
                                                               (the second reading by a model behind an API)
   python3 -I curate_run.py status  --run <dir> [--apply]
   python3 -I curate_run.py finish  --run <dir> [--public] [--bundle]
@@ -32,7 +33,9 @@ review-api  the second reading of the next N curated sources by the API model: t
           and the page texts go to the model with the reading's checklist; its verdict is written to
           work/review.json as a subagent's would be. A stream cut off (no finish_reason or [DONE]) is retried like a
           5xx; the raw answer of a failed reading is kept in work/review-raw-<n>.json. A document larger than
-          --max-doc-chars (compact JSON) is read in parts: each part holds whole records with the links they start,
+          its reader's context window allows (--context-tokens, or prepare --api-context-tokens: about 3 characters a
+          token, 32,000 tokens kept for the answer; without a window, --max-doc-chars, 150,000 characters of compact
+          JSON) is read in parts: each part holds whole records with the links they start,
           and lists the records of the other parts (id, label, name), so that nothing is read twice or reported
           missing; the parts' issues are merged into one reading (its "parts" field says how many).
           Every reading (review-api's and a subagent's) is given today's date and, after a fix, the previous reading's
@@ -85,6 +88,26 @@ SETTLED = {"passed", "rejected", "failed"}
 MODELS = ("opus", "sonnet", "fable", "haiku")        # Claude models a subagent can run on
 API_CHARS = 300000                                   # page-text characters sent to an API reader at most
 DOC_CHARS = 150000      # document characters (compact JSON) per request of an API reader; a larger one goes in parts
+CHARS_PER_TOKEN = 3     # compact JSON with ids and units runs about 3 characters a token (prose about 4): a safe bound
+_WIDE = re.compile(r"[^\x00-\x7f]")
+
+
+def width(text):
+    """Characters as the budgets count them: a character outside ASCII (CJK text, Greek, symbols) can be a token on
+    its own, so it counts as CHARS_PER_TOKEN."""
+    return len(text) + (CHARS_PER_TOKEN - 1) * len(_WIDE.findall(text))
+
+
+def head_within(text, budget):
+    """The longest start of text whose width is within budget."""
+    if width(text) <= budget:
+        return text
+    lo, hi = 0, min(len(text), budget)
+    while lo < hi:
+        mid = (lo + hi + 1) // 2
+        lo, hi = (mid, hi) if width(text[:mid]) <= budget else (lo, mid - 1)
+    return text[:lo]
+ANSWER_TOKENS = 32000   # tokens of a reader's context kept for its answer, thinking included
 SEVERITIES = ("major", "minor")
 
 
@@ -353,7 +376,8 @@ def cmd_prepare(a):
     if a.reviewer:
         models["reviewer"] = a.reviewer
     if a.api_base_url:
-        models["api"] = {"base_url": a.api_base_url, "key_name": a.api_key_name, "key_env": a.api_key_env}
+        models["api"] = {"base_url": a.api_base_url, "key_name": a.api_key_name, "key_env": a.api_key_env,
+                         **({"context_tokens": a.api_context_tokens} if a.api_context_tokens else {})}
     if not (is_model(models.get("curator")) and is_model(models.get("reviewer"), ("skip",))):
         die("ask first, then give both: --curator " + "|".join(MODELS) + "|api:<model> (the model that curates; "
             "opus is recommended) and --reviewer " + "|".join(MODELS) + "|api:<model>|skip (who reads each document a "
@@ -536,7 +560,7 @@ def doc_parts(graph, budget):
     each link goes with the record it starts from (a link from a record outside the document, with the last part), so
     every record and every link is read exactly once."""
     def size(x):
-        return len(json.dumps(x, ensure_ascii=False, separators=(",", ":")))
+        return width(json.dumps(x, ensure_ascii=False, separators=(",", ":")))
 
     if size(graph) <= budget:
         return [(graph, [])]
@@ -563,17 +587,43 @@ def doc_parts(graph, budget):
         used += s
     packs.append(cur)
 
-    def line(n):
-        p = n.get("props") or {}
-        name = p.get("name") or p.get("formula") or p.get("title") or ""
-        return f"{n.get('id')} | {n.get('label')} | {str(name)[:80]}"
-
     out = []
     for k, pack in enumerate(packs):
         mine = [n for g in pack for n in g[0]]
-        others = [line(n) for j, p in enumerate(packs) if j != k for g in p for n in g[0]]
+        others = [outline_line(n) for j, p in enumerate(packs) if j != k for g in p for n in g[0]]
         out.append(({**head, "nodes": mine, "links": [x for g in pack for x in g[1]]}, others))
     return out
+
+
+def reading_budget(context, doc_len, text_len, fixed_len, list_len, max_chars, max_doc_chars=None):
+    """(page-text characters, document characters per part) for one source's second reading.
+
+    Without the reader's context window (tokens): the page texts up to max_chars and parts of max_doc_chars (DOC_CHARS
+    when not given). With it, the request is fitted to the window: the room is (context - ANSWER_TOKENS) *
+    CHARS_PER_TOKEN characters less the instructions, the curator's report and the previous issues (fixed_len). The
+    widths count a character outside ASCII as CHARS_PER_TOKEN (width()). The
+    whole document goes in one request when it fits beside the page texts (a 1M-token reader rarely needs parts);
+    otherwise it goes in parts, each beside the page texts and the list of the other parts' records (list_len); the page
+    texts are cut only when the parts would get less than half the room. max_doc_chars, when given, caps a part."""
+    text = min(text_len, max_chars)
+    if not context:
+        return text, max_doc_chars or DOC_CHARS
+    room = max(1, (context - ANSWER_TOKENS) * CHARS_PER_TOKEN - fixed_len - width(READER))
+    if doc_len + text <= room:
+        doc = max(doc_len, 1)
+    else:
+        doc = room - text - list_len
+        if doc < room // 2:
+            doc = room // 2
+            text = max(0, min(text, room - doc - list_len))
+    return text, max(1, min(doc, max_doc_chars) if max_doc_chars else doc)
+
+
+def outline_line(n):
+    """One record as the parts list it: id | label | name."""
+    p = n.get("props") or {}
+    name = p.get("name") or p.get("formula") or p.get("title") or ""
+    return f"{n.get('id')} | {n.get('label')} | {str(name)[:80]}"
 
 
 def merge_readings(readings):
@@ -698,6 +748,7 @@ def cmd_review_api(a):
     if not key:
         die(f"no key for the reader: add `{api.get('key_name', 'llm_api_key')}: <key>` to ~/.scale/sources/keys.txt"
             + (f" or set {api['key_env']}" if api.get("key_env") else ""))
+    context = a.context_tokens or api.get("context_tokens")       # the reader's window: requests are fitted to it
     hand, done, failed = run.handouts(), [], []
     for i in run.ids():
         if len(done) + len(failed) >= a.n:
@@ -709,16 +760,22 @@ def cmd_review_api(a):
         g, slug = run.graph(i)
         texts = next((f / "work" / "texts").glob("*.txt"), None)
         text = texts.read_text(encoding="utf-8", errors="replace") if texts else ""
-        cut = len(text) > a.max_chars
         fixes = sum(1 for h in hand.get(i, []) if h["role"] == "fix")
         previous = issue_lines((read_json(f / "work" / "review.json") or {}).get("issues")) if fixes else []
-        parts = doc_parts(json.loads(g.read_text(encoding="utf-8")), a.max_doc_chars)
-        common = (f"TODAY'S DATE: {now()[:10]}\n\nTHE CURATOR'S REPORT:\n"
-                  f"{(f / 'work' / 'curation.json').read_text(encoding='utf-8')}\n\n"
+        graph = json.loads(g.read_text(encoding="utf-8"))
+        report = (f / "work" / "curation.json").read_text(encoding="utf-8")
+        listed = sum(width(outline_line(n)) + 1 for n in graph.get("nodes") or [])
+        chars, doc_chars = reading_budget(context, width(json.dumps(graph, ensure_ascii=False, separators=(",", ":"))),
+                                          width(text), width(report) + width(bullet(previous, "")) + 2000, listed,
+                                          a.max_chars, a.max_doc_chars)
+        shown = head_within(text, chars)
+        cut = len(shown) < len(text)
+        parts = doc_parts(graph, doc_chars)
+        common = (f"TODAY'S DATE: {now()[:10]}\n\nTHE CURATOR'S REPORT:\n{report}\n\n"
                   + (f"THE PREVIOUS READING'S ISSUES (a fix followed; check each first):\n{bullet(previous, '')}\n\n"
                      if previous else "")
-                  + f"THE SOURCE'S PAGE TEXTS{' (the first ' + str(a.max_chars) + ' characters)' if cut else ''}:\n"
-                  f"{text[:a.max_chars]}")
+                  + f"THE SOURCE'S PAGE TEXTS{' (the first ' + str(len(shown)) + ' characters)' if cut else ''}:\n"
+                  f"{shown}")
         append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
                                                 "reader": reviewer, **({"parts": len(parts)} if len(parts) > 1 else {})})
         readings, entry = [], None
@@ -753,7 +810,7 @@ def cmd_review_api(a):
             continue
         v = readings[0] if len(readings) == 1 else merge_readings(readings)
         write_json(f / "work" / "review.json", {**v, "reader": reviewer, "text_cut": cut, "parts": len(parts),
-                                                "at": now()})
+                                                **({"context_tokens": context} if context else {}), "at": now()})
         done.append({"id": i, "verdict": v["verdict"], "issues": len(v["issues"]),
                      **({"parts": len(parts)} if len(parts) > 1 else {})})
     print(json.dumps({"read": done, "failed": failed, "reader": reviewer,
@@ -915,12 +972,16 @@ def main():
                    "(…/v1; OpenAI-compatible for review-api)")
     p.add_argument("--api-key-name", default="llm_api_key", help="its key's name in ~/.scale/sources/keys.txt")
     p.add_argument("--api-key-env", help="or the environment variable that holds its key")
+    p.add_argument("--api-context-tokens", type=int, help="the API reader's context window in tokens: review-api fits "
+                   "each request to it, reading a large document in parts only when it does not fit")
     p = sub.add_parser("review-api")
     p.add_argument("--run", required=True)
     p.add_argument("--n", type=int, default=5)
     p.add_argument("--max-chars", type=int, default=API_CHARS, help="page-text characters sent at most")
-    p.add_argument("--max-doc-chars", type=int, default=DOC_CHARS,
-                   help="document characters (compact JSON) per request; a larger document is read in parts")
+    p.add_argument("--max-doc-chars", type=int, help=f"document characters (compact JSON) per request at most; a larger "
+                   f"document is read in parts (default: fitted to --context-tokens, else {DOC_CHARS})")
+    p.add_argument("--context-tokens", type=int, help="the reader's context window in tokens (default: the run's, "
+                   "prepare --api-context-tokens): each request is fitted to it, in parts only when it must be")
     p = sub.add_parser("next")
     p.add_argument("--run", required=True)
     p.add_argument("--role", required=True, choices=sorted(ROLE_STATES))

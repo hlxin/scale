@@ -8,8 +8,11 @@
   DeepSeek-V4.1-Flash reading): 9 documents (0.25-6.2 M characters of compact JSON) never fit the reader's 262k-token
   context (HTTP 400), and 51 of 53 settled sources ended `failed` after three fixes, each re-reading finding new
   issues while the previous ones were fixed (an Opus-curated, Sonnet-read pilot of 5 sources passed none either).
-  `review-api --max-doc-chars` (150,000) cuts a larger document into parts of whole records with the links they
-  start, each listing the other parts' records, and merges the issues. Every issue is `major` or `minor`; the verdict
+  Each reading is fitted to the reader's context window (`prepare --api-context-tokens`, `review-api
+  --context-tokens`; a non-ASCII character counts as a token): a document that fits goes whole (a 1M-token reader
+  rarely needs parts), a larger one is cut into parts of whole records with the links they start, each listing the
+  other parts' records, and the issues are merged; without a window, parts of `--max-doc-chars` (150,000). On the 9
+  documents: 2-3 parts at 262k tokens, 6-7 at 128k, one at 1M (a 6.2 M-character document: 14, 47 and 3). Every issue is `major` or `minor`; the verdict
   settles on them (`needs_fix` only for a major issue; an issue without a severity counts as major, so earlier
   readings keep their verdict), for a subagent's reading too. The previous reading's issues and today's date go with
   each reading (a reader without the date marked a 2026-11 retrieval date as future).
