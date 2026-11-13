@@ -41,3 +41,16 @@ The curation rules follow SCALE's schema, whose one domain is catalysis (`domain
 
 `curate-source` and `curate-dataset` were merged into curate-corpus; `scale call skills` still finds it by those names.
 `index-sources` was named paper-acquisition; its download mode is now fetch-corpus.
+
+## Using the skills with Claude Code
+
+`.claude/skills` is a link to this folder, so Claude Code finds the skills of a clone without installing anything:
+open Claude Code in the repository and each skill is a command (`/index-sources`, `/curate-corpus`, `/query-graph`, …),
+read from this folder, so a `git pull` brings the latest versions. The skills run the `scale` command, so install it
+first (`pip install -e .` in the clone, or `uv`).
+
+- **In another project:** `scale skills install ~/.claude/skills` copies a release's skills into your own skills
+  folder (for every project), or `scale skills install <project>/.claude/skills` for one project. These are copies:
+  run it again with `--force` to update them.
+- **On Windows:** git checks the link out as a plain file unless symlinks are enabled (`core.symlinks`, with Developer
+  Mode on); otherwise use `scale skills install`.
