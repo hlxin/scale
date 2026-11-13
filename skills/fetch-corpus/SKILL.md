@@ -5,7 +5,7 @@ allowed-tools:
   - Bash(python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup python3 -I ${CLAUDE_SKILL_DIR}/scripts/*)
   - Bash(nohup zsh ${CLAUDE_SKILL_DIR}/scripts/run_paywalled.sh *)
-  - "scale corpus check <manifest>"     # SCALE checks the settled corpus
+  - Bash(scale corpus check:*)     # SCALE checks the settled corpus
 version: 1.2.1
 scale_release: ">v0.2.0"
 inputs:

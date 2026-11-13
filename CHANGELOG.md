@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **The skills' `allowed-tools` are Claude Code permission rules, and every description says when to use the skill
+  (tooling, no schema change, no migration).** Each command a skill lists is a rule such as `Bash(scale graph query:*)`,
+  so Claude Code runs it without asking while the skill is in use; what each is for and what a skill may write stay as
+  comments. Commands that file or publish (`scale gap issue --submit`, `scale graph contribute --write`) are left out,
+  so a person sees each one. The seven descriptions without one gain a "Use when ..." sentence, and index-sources'
+  description is shortened to the 1,024-character limit of skill descriptions.
 - **Quantity kind `chain_growth_probability` (the Anderson-Schulz-Flory alpha) (additive, schema 0.8.1 -> 0.8.2).**
   Requested in #108: alpha was recorded as `fraction`, `ratio` or an undeclared kind. The kernel declares it
   (provisional, dimensionless), compared by two new contexts, `chain_growth_method` (distribution_fit,
