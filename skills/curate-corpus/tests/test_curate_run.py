@@ -428,3 +428,117 @@ def test_an_answer_without_a_verdict_is_kept_too(corpus, tmp_path):
     finally:
         os.environ.pop("TEST_READER_KEY", None)
         srv.shutdown()
+
+
+def _scripts():
+    sys.path.insert(0, str(HERE.parent / "scripts"))
+    import curate_run
+    return curate_run
+
+
+def test_a_large_document_is_cut_into_parts_that_read_every_record_and_link_once():
+    cr = _scripts()
+    nodes = [{"id": "ex:src", "label": "Source", "props": {"title": "S"}}]
+    nodes += [{"id": f"ex:test/{k}", "label": "CatalyticTest", "props": {"name": f"run {k}", "pad": "x" * 400}}
+              for k in range(12)]
+    nodes += [{"id": f"ex:prep/{k}", "label": "Preparation", "props": {"name": f"prep {k}"}} for k in range(3)]
+    links = [{"id": f"ex:l/{k}", "type": "REPORTED_IN", "source": n["id"], "target": "ex:src", "props": {}}
+             for k, n in enumerate(nodes[1:])]
+    links.append({"id": "ex:l/org", "type": "PARTICIPATES_IN", "source": "scale:org/x", "target": "ex:src", "props": {}})
+    graph = {"directed": True, "multigraph": True, "graph": {"schema_version": "0.7.8"}, "nodes": nodes, "links": links}
+    assert cr.doc_parts(graph, 10 ** 6) == [(graph, [])]                   # within the budget: one part, as before
+    parts = cr.doc_parts(graph, 2500)
+    assert len(parts) > 2
+    seen_nodes = [n["id"] for p, _ in parts for n in p["nodes"]]
+    seen_links = [x["id"] for p, _ in parts for x in p["links"]]
+    assert sorted(seen_nodes) == sorted(n["id"] for n in nodes)           # every record once
+    assert sorted(seen_links) == sorted(x["id"] for x in links)           # every link once, with the record it starts
+    for p, others in parts:
+        mine = {n["id"] for n in p["nodes"]}
+        assert p["graph"] == graph["graph"] and all(x["source"] in mine for x in p["links"] if x["source"] != "scale:org/x")
+        listed = {o.split(" | ")[0] for o in others}
+        assert listed == {n["id"] for n in nodes} - mine                  # the other parts' records are listed
+        assert len(json.dumps(p, separators=(",", ":"))) <= 2500
+    labels = [n["label"] for p, _ in parts for n in p["nodes"]]
+    assert labels == sorted(labels, key=["Source", "CatalyticTest", "Preparation"].index)   # a label kept together
+    assert any("run 3" in o for _, others in parts for o in others)
+
+
+def test_minor_issues_pass_and_a_major_one_or_one_without_severity_sends_it_back(corpus, tmp_path):
+    cr = _scripts()
+    minor = {"record": "ex:a", "locator": "p. 1", "problem": "quote could be longer", "fix": "extend", "severity": "minor"}
+    major = {**minor, "problem": "wrong unit", "severity": "major"}
+    assert cr.settled_verdict({"verdict": "needs_fix", "issues": [minor]}) == "pass"
+    assert cr.settled_verdict({"verdict": "pass", "issues": [minor, major]}) == "needs_fix"
+    assert cr.settled_verdict({"verdict": "needs_fix", "issues": [{**minor, "severity": None}]}) == "needs_fix"
+    assert cr.settled_verdict({"verdict": "reject", "issues": []}) == "reject"
+    r = tmp_path / "run"
+    run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, *MODELS)
+    f = r / "sources" / "7"
+    run("next", "--run", r, "--role", "curate")
+    write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+    run("next", "--run", r, "--role", "review")
+    write(f / "work" / "review.json", {"verdict": "needs_fix", "issues": [minor, major]})
+    assert run("status", "--run", r)["states"] == {"needs_fix": 1}
+    fix = Path(run("next", "--run", r, "--role", "fix")["prompt"]).read_text()
+    assert "[major] ex:a (p. 1): wrong unit" in fix and "[minor]" in fix
+    write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "fixed", "attempt": 1})
+    review = Path(run("next", "--run", r, "--role", "review")["prompt"]).read_text()
+    assert "wrong unit" in review and "Today's date is 20" in review and "severity" in review   # checked first
+    write(f / "work" / "review.json", {"verdict": "needs_fix", "issues": [minor]})          # only a minor one left
+    assert run("status", "--run", r)["states"] == {"passed": 1}
+
+
+def test_an_api_reader_reads_a_large_document_in_parts_with_the_date_and_the_previous_issues(corpus, tmp_path):
+    import http.server
+    import threading
+    seen = []
+    first = {"verdict": "needs_fix", "issues": [{"record": "ex:a", "locator": "p. 1", "problem": "wrong unit",
+                                                 "fix": "V vs RHE", "severity": "major"}], "coverage": "c", "note": "n"}
+    minor = {"verdict": "needs_fix", "issues": [{"record": "ex:b", "locator": "p. 2", "problem": "short quote",
+                                                 "fix": "extend", "severity": "minor"}], "coverage": "c", "note": "n2"}
+
+    class Reader(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            seen.append(body["messages"][1]["content"])
+            answer = first if len(seen) == 1 else minor
+            out = f"data: {json.dumps({'choices': [{'delta': {'content': json.dumps(answer)}}]})}\n\ndata: [DONE]\n\n"
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.end_headers()
+            self.wfile.write(out.encode("utf-8"))
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Reader)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    os.environ["TEST_READER_KEY"] = "secret"
+    try:
+        r = tmp_path / "run"
+        run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "sonnet", "--reviewer",
+            "api:test-reader", "--api-base-url", f"http://127.0.0.1:{srv.server_port}/v1", "--api-key-env",
+            "TEST_READER_KEY")
+        f = r / "sources" / "7"
+        run("next", "--run", r, "--role", "curate")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+        got = run("review-api", "--run", r)                                 # small enough: one request, as before
+        assert got["read"] == [{"id": "7", "verdict": "needs_fix", "issues": 1}] and len(seen) == 1
+        assert "TODAY'S DATE: 20" in seen[0] and "PREVIOUS READING" not in seen[0] and "PART 1" not in seen[0]
+        run("next", "--run", r, "--role", "fix")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "fixed", "attempt": 1})
+        graph = json.loads(next(f.glob("*.graph.json")).read_text())
+        size = len(json.dumps(graph, separators=(",", ":")))
+        got = run("review-api", "--run", r, "--max-doc-chars", size // 2)   # too large now: read in parts
+        n = got["read"][0]["parts"]
+        assert n >= 2 and len(seen) == 1 + n and got["read"][0]["verdict"] == "pass"   # only a minor issue: passed
+        for k, ask in enumerate(seen[1:], 1):
+            assert f"PART {k} OF {n}" in ask and "THE RECORDS IN THE OTHER PARTS" in ask
+            assert "[major] ex:a (p. 1): wrong unit" in ask                  # the previous issues, to check first
+        review = json.loads((f / "work" / "review.json").read_text())
+        assert review["parts"] == n and len(review["issues"]) == 1 and review["issues"][0]["severity"] == "minor"
+        assert run("status", "--run", r)["states"] == {"passed": 1}
+    finally:
+        os.environ.pop("TEST_READER_KEY", None)
+        srv.shutdown()
