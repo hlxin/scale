@@ -8,7 +8,7 @@
 | `sources/<id>/` | `scale source start` | SCALE's working folder: `<slug>.graph.json`, `source.json`, `rights.yaml`, `BRIEF.md`, `pdfs/` and `work/texts/` (local; git-ignored by its `.gitignore`) |
 | `sources/<id>/work/si.json` | prepare | the SI files whose text was appended to the page texts (pages `[page S1]` …), and those left out, with why |
 | `sources/<id>/work/curation.json` | the curator subagent | `result` (`curated` or `no_data`), `records`, `gaps`, `not_curated`, `note`, `attempt` |
-| `sources/<id>/work/review.json` | the second reader (a subagent, or `review-api`) | `verdict` (`pass`, `needs_fix`, `reject`), `issues`, `coverage`, `note`; `reader` when an API model read it; `review-raw-<n>.json` holds the raw answer of a failed API reading |
+| `sources/<id>/work/review.json` | the second reader (a subagent, or `review-api`) | `verdict` (`pass`, `needs_fix`, `reject`), `issues` (each with its `severity`, `major` or `minor`), `coverage`, `note`; `reader` and `parts` when an API model read it; `review-raw-<n>.json` holds the raw answer of a failed API reading |
 | `sources/<id>/work/gaps/GAP-*.json` | the curator | the gap reports it wrote (SCALE's gap format); `status` counts them by kind and lists the `missing_concept` ones |
 | `sources/<id>/work/check.json` | status | the last `scale source check`, kept while the graph and `rights.yaml` are unchanged |
 | `prompts/<role>/<id>.md` | next | the prompts handed out |
@@ -28,10 +28,17 @@
 | `prepared` | the folder is ready, no curator's report yet | `next --role curate` |
 | `curated` | the curator reported, the check passes, no second reading after the last change | `next --role review` (an API reader: `review-api`) |
 | `check_failed` | the curator reported but `scale source check` fails | `next --role fix` (the prompt lists the errors) |
-| `needs_fix` | the second reading asked for fixes | `next --role fix` (the prompt lists the issues) |
-| `passed` | the check passes and the second reading after the last change passed it (`curated` or `no_data`); with `--reviewer skip`, the check alone | settled: `status --apply`, then finish |
+| `needs_fix` | the second reading found a major issue | `next --role fix` (the prompt lists the issues, each tagged major or minor) |
+| `passed` | the check passes and the second reading after the last change found no major issue (`curated` or `no_data`; its minor issues stay in `review.json` for the person who reviews it); with `--reviewer skip`, the check alone | settled: `status --apply`, then finish |
 | `rejected` | the second reading found the wrong source or an unreadable text | settled; a person looks |
 | `failed` | three fixes reported and the check or the reading still fails | settled; a person looks |
+
+The verdict a reading settles on follows its issues' severities, whoever wrote it: `needs_fix` when an issue is major
+(an issue without a severity, as in readings made before severities, counts as major), `pass` when every issue is
+minor. A major issue is a value, unit, pairing, condition or result that is wrong, unsupported by its quote or filled
+in, a main result missing or left undigitized, or a record that misstates the source; a minor one leaves the record
+right but its support or wording could be better. Each reading is given today's date and, after a fix, the previous
+reading's issues to check first, so that a reading checks the fix instead of starting over.
 
 A second reading counts only if it is newer than the graph, `rights.yaml` and the curator's report. A curator who
 changes the document after it was read sends it back to `curated`. A prompt handed out is not handed out again for
@@ -57,6 +64,16 @@ three hours unless its report arrives first. A subagent that stopped without rep
   `work/review.json`. A stream that ends without `finish_reason` or `[DONE]` (cut off by the endpoint) is a failure and is sent
   again like a 5xx. A failed call leaves the source `curated`, to be read again; what the reader returned (`content`,
   and `reasoning_content` if present) is kept in `work/review-raw-<n>.json`, so that its work is not lost.
+- Each reading is fitted to the reader's context window, given at prepare (`--api-context-tokens`) or to `review-api`
+  (`--context-tokens`): about 3 characters a token (a character outside ASCII, such as CJK text, counts as a token),
+  32,000 tokens kept for the answer. A document that fits beside the page texts goes whole, so a 1M-token reader rarely
+  needs parts and a 128k-token one often does; one that does not is read in parts, and the page texts are cut only
+  when the parts would get less than half the room. Without a window, a part holds at most `--max-doc-chars` (150,000
+  characters of compact JSON by default), which also caps a part when given. Each part holds whole records, grouped by label, with the links they start, and lists
+  the records of the other parts (id, label, name), so that no record is read twice or reported missing. Every part
+  gets the curator's report, the page texts, today's date and the previous issues; the parts' issues are merged into
+  one reading (`parts` in `review.json`), and a reading with a part that failed is no reading (the source stays
+  `curated`). A record larger than the budget goes alone in its part.
 
 ## The hand-off to the source index
 
