@@ -33,8 +33,8 @@ review-api  the second reading of the next N curated sources by the API model: t
           and the page texts go to the model with the reading's checklist; its verdict is written to
           work/review.json as a subagent's would be. A stream cut off (no finish_reason or [DONE]) is retried like a
           5xx; the raw answer of a failed reading is kept in work/review-raw-<n>.json. A document larger than
-          its reader's context window allows (--context-tokens, or prepare --api-context-tokens: about 3 characters a
-          token, 32,000 tokens kept for the answer; without a window, --max-doc-chars, 150,000 characters of compact
+          its reader's context window allows (--context-tokens, or prepare --api-context-tokens: 2.5 characters a
+          token, --answer-tokens 64,000 kept for the answer and doubled once for a reading cut by length; without a window, --max-doc-chars, 150,000 characters of compact
           JSON) is read in parts: each part holds whole records with the links they start,
           and lists the records of the other parts (id, label, name), so that nothing is read twice or reported
           missing; the parts' issues are merged into one reading (its "parts" field says how many).
@@ -88,14 +88,19 @@ SETTLED = {"passed", "rejected", "failed"}
 MODELS = ("opus", "sonnet", "fable", "haiku")        # Claude models a subagent can run on
 API_CHARS = 300000                                   # page-text characters sent to an API reader at most
 DOC_CHARS = 150000      # document characters (compact JSON) per request of an API reader; a larger one goes in parts
-CHARS_PER_TOKEN = 3     # compact JSON with ids and units runs about 3 characters a token (prose about 4): a safe bound
+CHARS_PER_TOKEN = 2.5   # characters a token: compact JSON with ids and units measured 2.85-3.0 on a DeepSeek
+                        # tokenizer (prose about 4), so 2.5 is a safe bound
+WIDE = 3                # a character outside ASCII (CJK text, Greek, symbols) can be a token alone: it counts as 3
+ANSWER_TOKENS = 64000   # tokens of a reader's window kept for its answer, thinking included (doubled once for a
+                        # reading cut by length)
+REPORT_CHARS = 20000    # characters of the curator's report sent to an API reader at most
+SEVERITIES = ("major", "minor")
 _WIDE = re.compile(r"[^\x00-\x7f]")
 
 
 def width(text):
-    """Characters as the budgets count them: a character outside ASCII (CJK text, Greek, symbols) can be a token on
-    its own, so it counts as CHARS_PER_TOKEN."""
-    return len(text) + (CHARS_PER_TOKEN - 1) * len(_WIDE.findall(text))
+    """Characters as the budgets count them: a character outside ASCII counts as WIDE."""
+    return len(text) + (WIDE - 1) * len(_WIDE.findall(text))
 
 
 def head_within(text, budget):
@@ -107,8 +112,6 @@ def head_within(text, budget):
         mid = (lo + hi + 1) // 2
         lo, hi = (mid, hi) if width(text[:mid]) <= budget else (lo, mid - 1)
     return text[:lo]
-ANSWER_TOKENS = 32000   # tokens of a reader's context kept for its answer, thinking included
-SEVERITIES = ("major", "minor")
 
 
 # ------------------------------------------------------------------ small helpers
@@ -595,20 +598,21 @@ def doc_parts(graph, budget):
     return out
 
 
-def reading_budget(context, doc_len, text_len, fixed_len, list_len, max_chars, max_doc_chars=None):
+def reading_budget(context, doc_len, text_len, fixed_len, list_len, max_chars, max_doc_chars=None,
+                   answer_tokens=ANSWER_TOKENS):
     """(page-text characters, document characters per part) for one source's second reading.
 
     Without the reader's context window (tokens): the page texts up to max_chars and parts of max_doc_chars (DOC_CHARS
-    when not given). With it, the request is fitted to the window: the room is (context - ANSWER_TOKENS) *
+    when not given). With it, the request is fitted to the window: the room is (context - answer_tokens) *
     CHARS_PER_TOKEN characters less the instructions, the curator's report and the previous issues (fixed_len). The
-    widths count a character outside ASCII as CHARS_PER_TOKEN (width()). The
+    widths count a character outside ASCII as WIDE (width()). The
     whole document goes in one request when it fits beside the page texts (a 1M-token reader rarely needs parts);
     otherwise it goes in parts, each beside the page texts and the list of the other parts' records (list_len); the page
     texts are cut only when the parts would get less than half the room. max_doc_chars, when given, caps a part."""
     text = min(text_len, max_chars)
     if not context:
         return text, max_doc_chars or DOC_CHARS
-    room = max(1, (context - ANSWER_TOKENS) * CHARS_PER_TOKEN - fixed_len - width(READER))
+    room = max(1, int((context - answer_tokens) * CHARS_PER_TOKEN) - fixed_len - width(READER))
     if doc_len + text <= room:
         doc = max(doc_len, 1)
     else:
@@ -617,6 +621,23 @@ def reading_budget(context, doc_len, text_len, fixed_len, list_len, max_chars, m
             doc = room // 2
             text = max(0, min(text, room - doc - list_len))
     return text, max(1, min(doc, max_doc_chars) if max_doc_chars else doc)
+
+
+def report_for_reader(raw):
+    """The curator's report as an API reader gets it: `records` holds counts (`{"nodes": n, "links": n}`); when the
+    curator wrote the records themselves there (the document holds them), the reader gets their number. Within
+    REPORT_CHARS."""
+    try:
+        d = json.loads(raw)
+    except ValueError:
+        d = None
+    rec = d.get("records") if isinstance(d, dict) else None
+    counts = isinstance(rec, dict) and all(isinstance(v, int) for v in rec.values())
+    if isinstance(rec, (list, dict)) and not counts:
+        d["records"] = {"listed_in_the_report": len(rec)}
+        raw = json.dumps(d, ensure_ascii=False)
+    shown = head_within(raw, REPORT_CHARS)
+    return shown if len(shown) == len(raw) else f"{shown}\n[the report is cut here, at {REPORT_CHARS} characters]"
 
 
 def outline_line(n):
@@ -668,15 +689,26 @@ class CutStream(RuntimeError):
         self.content, self.reasoning = content, reasoning
 
 
+class Answer(tuple):
+    """An answer, `(content, reasoning)`, with how it ended: `finish` (the last finish_reason: "stop", or "length" when
+    the reader ran out of room) and the endpoint's `usage` when it reports one."""
+
+    def __new__(cls, content, reasoning, finish=None, usage=None):
+        out = super().__new__(cls, (content, reasoning))
+        out.finish, out.usage = finish, usage
+        return out
+
+
 def _chat(base, key, model, messages, tries=5):
-    """One answer, `(content, reasoning_content)`, from an OpenAI-compatible chat endpoint (standard library), retried
+    """One answer, `Answer(content, reasoning)`, from an OpenAI-compatible chat endpoint (standard library), retried
     on rate limits, 5xx, network errors and a cut stream. Asked for as a stream: some endpoints cap an unstreamed
     answer (8,000 tokens, thinking included), which a reasoning model spends before it writes the verdict; an
     endpoint that answers in one piece is read as one. A stream is whole only when it ends with a `finish_reason` or
     `[DONE]`; one that does not is a failure like a 5xx, and after the last try `CutStream` carries what arrived."""
     import urllib.error
     import urllib.request
-    body = json.dumps({"model": model, "messages": messages, "temperature": 0, "stream": True}).encode("utf-8")
+    body = json.dumps({"model": model, "messages": messages, "temperature": 0, "stream": True,
+                       "stream_options": {"include_usage": True}}).encode("utf-8")
     last, cut = "no answer", None             # cut: the cut stream with the most content so far
     for attempt in range(tries):
         req = urllib.request.Request(f"{base.rstrip('/')}/chat/completions", data=body, method="POST",
@@ -684,9 +716,11 @@ def _chat(base, key, model, messages, tries=5):
         try:
             with urllib.request.urlopen(req, timeout=900) as r:
                 if "text/event-stream" not in (r.headers.get("Content-Type") or ""):
-                    m = json.loads(r.read().decode("utf-8"))["choices"][0]["message"]
-                    return m.get("content") or "", m.get("reasoning_content") or ""
-                parts, thoughts, whole = [], [], False
+                    d = json.loads(r.read().decode("utf-8"))
+                    m = d["choices"][0]["message"]
+                    return Answer(m.get("content") or "", m.get("reasoning_content") or m.get("reasoning") or "",
+                                  d["choices"][0].get("finish_reason"), d.get("usage"))
+                parts, thoughts, whole, finish, usage = [], [], False, None, None
                 try:
                     for raw in r:                     # server-sent events: data: {"choices": [{"delta": …}]}
                         line = raw.decode("utf-8", "replace").strip()
@@ -696,15 +730,19 @@ def _chat(base, key, model, messages, tries=5):
                         if data == "[DONE]":
                             whole = True
                         elif data:
-                            choice = (json.loads(data).get("choices") or [{}])[0]
+                            event = json.loads(data)
+                            choice = (event.get("choices") or [{}])[0]
                             delta = choice.get("delta") or {}
                             parts.append(delta.get("content") or "")
-                            thoughts.append(delta.get("reasoning_content") or "")
+                            # reasoning_content, or reasoning (the name vLLM gives it from 2025)
+                            thoughts.append(delta.get("reasoning_content") or delta.get("reasoning") or "")
+                            finish = choice.get("finish_reason") or finish
+                            usage = event.get("usage") or usage
                             whole = whole or bool(choice.get("finish_reason"))
                 except (OSError, ValueError, http.client.HTTPException):    # the connection broke mid-stream
                     pass
                 if whole:
-                    return "".join(parts), "".join(thoughts)
+                    return Answer("".join(parts), "".join(thoughts), finish, usage)
                 this = CutStream("".join(parts), "".join(thoughts))
                 if cut is None or len(this.content + this.reasoning) >= len(cut.content + cut.reasoning):
                     cut = this
@@ -749,6 +787,7 @@ def cmd_review_api(a):
         die(f"no key for the reader: add `{api.get('key_name', 'llm_api_key')}: <key>` to ~/.scale/sources/keys.txt"
             + (f" or set {api['key_env']}" if api.get("key_env") else ""))
     context = a.context_tokens or api.get("context_tokens")       # the reader's window: requests are fitted to it
+    answer = a.answer_tokens or api.get("answer_tokens") or ANSWER_TOKENS    # of it, kept for the answer
     hand, done, failed = run.handouts(), [], []
     for i in run.ids():
         if len(done) + len(failed) >= a.n:
@@ -763,56 +802,70 @@ def cmd_review_api(a):
         fixes = sum(1 for h in hand.get(i, []) if h["role"] == "fix")
         previous = issue_lines((read_json(f / "work" / "review.json") or {}).get("issues")) if fixes else []
         graph = json.loads(g.read_text(encoding="utf-8"))
-        report = (f / "work" / "curation.json").read_text(encoding="utf-8")
+        report = report_for_reader((f / "work" / "curation.json").read_text(encoding="utf-8"))
         listed = sum(width(outline_line(n)) + 1 for n in graph.get("nodes") or [])
-        chars, doc_chars = reading_budget(context, width(json.dumps(graph, ensure_ascii=False, separators=(",", ":"))),
-                                          width(text), width(report) + width(bullet(previous, "")) + 2000, listed,
-                                          a.max_chars, a.max_doc_chars)
-        shown = head_within(text, chars)
-        cut = len(shown) < len(text)
-        parts = doc_parts(graph, doc_chars)
-        common = (f"TODAY'S DATE: {now()[:10]}\n\nTHE CURATOR'S REPORT:\n{report}\n\n"
-                  + (f"THE PREVIOUS READING'S ISSUES (a fix followed; check each first):\n{bullet(previous, '')}\n\n"
-                     if previous else "")
-                  + f"THE SOURCE'S PAGE TEXTS{' (the first ' + str(len(shown)) + ' characters)' if cut else ''}:\n"
-                  f"{shown}")
-        append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
-                                                "reader": reviewer, **({"parts": len(parts)} if len(parts) > 1 else {})})
-        readings, entry = [], None
-        for k, (part, others) in enumerate(parts, 1):
-            doc = json.dumps(part, ensure_ascii=False, separators=(",", ":"))           # 1/4 fewer tokens
-            if len(parts) == 1:
-                head = f"THE DOCUMENT ({g.name}, as compact JSON):\n{doc}"
+        doc_len = width(json.dumps(graph, ensure_ascii=False, separators=(",", ":")))
+        fixed = width(report) + width(bullet(previous, "")) + 2000
+        room_for_answer, doc_cap = answer, a.max_doc_chars
+        for attempt in (1, 2):                    # a reading cut by length is read once more with twice the room
+            chars, doc_chars = reading_budget(context, doc_len, width(text), fixed, listed, a.max_chars, doc_cap,
+                                              room_for_answer)
+            shown = head_within(text, chars)
+            cut = len(shown) < len(text)
+            parts = doc_parts(graph, doc_chars)
+            common = (f"TODAY'S DATE: {now()[:10]}\n\nTHE CURATOR'S REPORT:\n{report}\n\n"
+                      + (f"THE PREVIOUS READING'S ISSUES (a fix followed; check each first):\n"
+                         f"{bullet(previous, '')}\n\n" if previous else "")
+                      + f"THE SOURCE'S PAGE TEXTS{' (the first ' + str(len(shown)) + ' characters)' if cut else ''}:\n"
+                      f"{shown}")
+            append_jsonl(run.d / "handouts.jsonl", {"id": i, "role": "review", "t": time.time(), "at": now(),
+                                                    "reader": reviewer,
+                                                    **({"parts": len(parts)} if len(parts) > 1 else {})})
+            readings, entry, length = [], None, False
+            for k, (part, others) in enumerate(parts, 1):
+                doc = json.dumps(part, ensure_ascii=False, separators=(",", ":"))       # 1/4 fewer tokens
+                if len(parts) == 1:
+                    head = f"THE DOCUMENT ({g.name}, as compact JSON):\n{doc}"
+                else:
+                    head = (f"THE DOCUMENT ({g.name}), PART {k} OF {len(parts)}: these records, with the links they "
+                            f"start, as compact JSON:\n{doc}\n\nTHE RECORDS IN THE OTHER PARTS (id | label | name), "
+                            f"read separately; never report them missing:\n" + "\n".join(others))
+                got = None
+                try:
+                    got = _chat(api["base_url"], key, reviewer[4:], [{"role": "system", "content": READER},
+                                                                     {"role": "user", "content": f"{head}\n\n{common}"}])
+                    readings.append(_verdict(got[0]))
+                except (RuntimeError, ValueError) as e:
+                    content, reasoning = (e.content, e.reasoning) if isinstance(e, CutStream) else (got or ("", ""))
+                    finish = getattr(got, "finish", None)
+                    length = finish == "length"
+                    entry = {"id": i, "error": str(e)[:200] + (" (the answer ran out of room: finish_reason length)"
+                                                               if length else ""),
+                             **({"part": f"{k}/{len(parts)}"} if len(parts) > 1 else {})}
+                    if content or reasoning:          # the reader's work is kept, not lost
+                        n = len(list((f / "work").glob("review-raw-*.json"))) + 1
+                        write_json(f / "work" / f"review-raw-{n}.json",
+                                   {"reader": reviewer, "error": entry["error"], "content": content or "",
+                                    "reasoning_content": reasoning or "", "finish_reason": finish,
+                                    "usage": getattr(got, "usage", None), "answer_tokens": room_for_answer,
+                                    "at": now(), **({"part": f"{k}/{len(parts)}"} if len(parts) > 1 else {})})
+                        entry["raw"] = f"work/review-raw-{n}.json"
+                    break                             # a reading with a part unread is not a reading
+            if not (entry and length and attempt == 1):
+                break
+            if context:
+                room_for_answer = min(2 * room_for_answer, max(room_for_answer, context // 2))
             else:
-                head = (f"THE DOCUMENT ({g.name}), PART {k} OF {len(parts)}: these records, with the links they start, "
-                        f"as compact JSON:\n{doc}\n\nTHE RECORDS IN THE OTHER PARTS (id | label | name), read "
-                        f"separately; never report them missing:\n" + "\n".join(others))
-            content = reasoning = None
-            try:
-                content, reasoning = _chat(api["base_url"], key, reviewer[4:],
-                                           [{"role": "system", "content": READER},
-                                            {"role": "user", "content": f"{head}\n\n{common}"}])
-                readings.append(_verdict(content))
-            except (RuntimeError, ValueError) as e:
-                if isinstance(e, CutStream):
-                    content, reasoning = e.content, e.reasoning
-                entry = {"id": i, "error": str(e)[:200], **({"part": f"{k}/{len(parts)}"} if len(parts) > 1 else {})}
-                if content or reasoning:              # the reader's work is kept, not lost
-                    n = len(list((f / "work").glob("review-raw-*.json"))) + 1
-                    write_json(f / "work" / f"review-raw-{n}.json",
-                               {"reader": reviewer, "error": str(e)[:200], "content": content or "",
-                                "reasoning_content": reasoning or "", "at": now(),
-                                **({"part": f"{k}/{len(parts)}"} if len(parts) > 1 else {})})
-                    entry["raw"] = f"work/review-raw-{n}.json"
-                break                                 # a reading with a part unread is not a reading
+                doc_cap = max(1, (doc_cap or DOC_CHARS) // 2)
         if entry:
             failed.append(entry)
             continue
         v = readings[0] if len(readings) == 1 else merge_readings(readings)
         write_json(f / "work" / "review.json", {**v, "reader": reviewer, "text_cut": cut, "parts": len(parts),
-                                                **({"context_tokens": context} if context else {}), "at": now()})
+                                                **({"context_tokens": context, "answer_tokens": room_for_answer}
+                                                   if context else {}), "at": now()})
         done.append({"id": i, "verdict": v["verdict"], "issues": len(v["issues"]),
-                     **({"parts": len(parts)} if len(parts) > 1 else {})})
+                     **({"parts": len(parts)} if len(parts) > 1 else {}), **({"retried": "length"} if attempt == 2 else {})})
     print(json.dumps({"read": done, "failed": failed, "reader": reviewer,
                       "next": f"curate_run.py status --run {run.d}"}))
 
@@ -980,6 +1033,8 @@ def main():
     p.add_argument("--max-chars", type=int, default=API_CHARS, help="page-text characters sent at most")
     p.add_argument("--max-doc-chars", type=int, help=f"document characters (compact JSON) per request at most; a larger "
                    f"document is read in parts (default: fitted to --context-tokens, else {DOC_CHARS})")
+    p.add_argument("--answer-tokens", type=int, help=f"tokens of the window kept for the reader's answer, thinking "
+                   f"included (default {ANSWER_TOKENS}; a reading cut by length is read once more with twice as many)")
     p.add_argument("--context-tokens", type=int, help="the reader's context window in tokens (default: the run's, "
                    "prepare --api-context-tokens): each request is fitted to it, in parts only when it must be")
     p = sub.add_parser("next")

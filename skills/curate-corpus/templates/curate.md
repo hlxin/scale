@@ -37,6 +37,8 @@ ${si_left}
 6. **Write `${folder}/work/curation.json`:**
    `{"result": "curated" | "no_data", "records": {"nodes": <nodes you added>, "links": <links you added>}, "gaps": <n>,
    "not_curated": "<what you did not look at, e.g. SI tables S4-S6, Source Data>", "note": "<one line>"}`.
+   `records` holds two numbers, never the records themselves: they are in the graph, and the report goes to the second
+   reader with the whole document.
    `no_data` only when the source reports nothing the catalysis checklist covers (say why in `note`); the graph then
    keeps its header and Source. The checklist covers Preparations, Characterizations and their steps, so a source
    that makes or characterizes a material itself (a colloid or nanoparticles made for a sensor, a drug carrier or an
