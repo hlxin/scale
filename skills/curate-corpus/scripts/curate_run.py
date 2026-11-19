@@ -624,14 +624,17 @@ def reading_budget(context, doc_len, text_len, fixed_len, list_len, max_chars, m
 
 
 def report_for_reader(raw):
-    """The curator's report as an API reader gets it: `records` as a count when the curator wrote the records
-    themselves there (the report's field is a count; the document holds the records), within REPORT_CHARS."""
+    """The curator's report as an API reader gets it: `records` holds counts (`{"nodes": n, "links": n}`); when the
+    curator wrote the records themselves there (the document holds them), the reader gets their number. Within
+    REPORT_CHARS."""
     try:
         d = json.loads(raw)
     except ValueError:
         d = None
-    if isinstance(d, dict) and isinstance(d.get("records"), (list, dict)):
-        d["records"] = len(d["records"])
+    rec = d.get("records") if isinstance(d, dict) else None
+    counts = isinstance(rec, dict) and all(isinstance(v, int) for v in rec.values())
+    if isinstance(rec, (list, dict)) and not counts:
+        d["records"] = {"listed_in_the_report": len(rec)}
         raw = json.dumps(d, ensure_ascii=False)
     shown = head_within(raw, REPORT_CHARS)
     return shown if len(shown) == len(raw) else f"{shown}\n[the report is cut here, at {REPORT_CHARS} characters]"

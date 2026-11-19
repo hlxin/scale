@@ -635,7 +635,9 @@ def test_a_reader_gets_the_curators_report_with_records_as_a_count_and_within_a_
     raw = json.dumps({"result": "curated", "records": [{"id": f"ex:{k}", "pad": "x" * 500} for k in range(2000)],
                       "gaps": 1, "note": "n"})
     got = json.loads(cr.report_for_reader(raw))
-    assert got["records"] == 2000 and got["note"] == "n"
+    assert got["records"] == {"listed_in_the_report": 2000} and got["note"] == "n"
+    counts = json.dumps({"result": "curated", "records": {"nodes": 30, "links": 52}, "gaps": 0})
+    assert cr.report_for_reader(counts) == counts                       # the template's counts are kept as they are
     long = json.dumps({"result": "curated", "records": 3, "note": "y" * 50_000})
     out = cr.report_for_reader(long)
     assert len(out) < cr.REPORT_CHARS + 100 and out.endswith("characters]")
