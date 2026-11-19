@@ -551,10 +551,10 @@ def test_a_reading_is_fitted_to_the_readers_context_window():
     t, d = cr.reading_budget(1_000_000, doc, text, 10_000, 15_000, 300_000)
     assert (t, d) == (text, doc)                                         # 1M tokens: all of it in one request
     t, d = cr.reading_budget(128_000, doc, text, 10_000, 15_000, 300_000)
-    room = (128_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN - 10_000 - cr.width(cr.READER)
-    assert t == text and d < doc and d + t + 15_000 <= room              # 128k tokens: parts, each fits with the texts
-    t, d = cr.reading_budget(64_000, doc, 250_000, 10_000, 15_000, 300_000)
-    room = (64_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN - 10_000 - cr.width(cr.READER)
+    room = int((128_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN) - 10_000 - cr.width(cr.READER)
+    assert t <= text and d < doc and d + t + 15_000 <= room              # 128k tokens: parts, each fits with the texts
+    t, d = cr.reading_budget(100_000, doc, 250_000, 10_000, 15_000, 300_000)
+    room = int((100_000 - cr.ANSWER_TOKENS) * cr.CHARS_PER_TOKEN) - 10_000 - cr.width(cr.READER)
     assert d == room // 2 and t + d + 15_000 <= room and t < 250_000     # small window: the texts are cut, not the parts
     assert cr.reading_budget(1_000_000, doc, text, 0, 0, 300_000, max_doc_chars=200_000)[1] == 200_000   # a cap holds
     assert cr.reading_budget(262_144, 200_000, 50_000, 10_000, 5_000, 300_000)[1] == 200_000   # it fits: one part
@@ -562,9 +562,81 @@ def test_a_reading_is_fitted_to_the_readers_context_window():
 
 def test_text_outside_ascii_counts_as_a_token_a_character():
     cr = _scripts()
-    assert cr.width("abc") == 3 and cr.width("電子") == 2 * cr.CHARS_PER_TOKEN
+    assert cr.width("abc") == 3 and cr.width("電子") == 2 * cr.WIDE
     assert cr.head_within("ab電子cd", 5) == "ab電" and cr.head_within("ab電子cd", 4) == "ab" and cr.head_within("abc", 10) == "abc"
     nodes = [{"id": f"ex:{k}", "label": "Claim", "props": {"name": "電子回収率" * 40}} for k in range(10)]
     graph = {"graph": {}, "nodes": nodes, "links": []}
     for p, _ in cr.doc_parts(graph, 2000):
         assert cr.width(json.dumps(p, ensure_ascii=False, separators=(",", ":"))) <= 2000
+
+
+def test_vllms_reasoning_field_and_the_finish_reason_are_kept(monkeypatch):
+    cr = _scripts()
+    monkeypatch.setattr(cr.time, "sleep", lambda s: None)
+    srv, seen = _stream_server([[_delta(reasoning="thought"), _delta(content="x"),
+                                 json.dumps({"choices": [{"delta": {}, "finish_reason": "length"}]}),
+                                 json.dumps({"choices": [], "usage": {"completion_tokens": 64000}})]])
+    try:
+        got = cr._chat(f"http://127.0.0.1:{srv.server_port}/v1", "k", "m", [])
+        assert got == ("x", "thought") and got.finish == "length" and got.usage == {"completion_tokens": 64000}
+    finally:
+        srv.shutdown()
+
+
+def test_a_reading_cut_by_length_is_read_again_with_twice_the_room(corpus, tmp_path):
+    import http.server
+    import threading
+    seen = []
+    verdict = json.dumps({"verdict": "pass", "issues": [], "coverage": "c", "note": "n"})
+
+    class Reader(http.server.BaseHTTPRequestHandler):
+        def do_POST(self):
+            body = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            seen.append(body)
+            if len(seen) == 1:                                   # thinks until the room runs out, writes nothing
+                events = [_delta(reasoning="walking every record"), json.dumps(
+                    {"choices": [{"delta": {}, "finish_reason": "length"}]})]
+            else:
+                events = [_delta(content=verdict), json.dumps({"choices": [{"delta": {}, "finish_reason": "stop"}]})]
+            self.send_response(200)
+            self.send_header("Content-Type", "text/event-stream")
+            self.end_headers()
+            self.wfile.write("".join(f"data: {x}\n\n" for x in events).encode("utf-8"))
+
+        def log_message(self, *a):
+            pass
+
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Reader)
+    threading.Thread(target=srv.serve_forever, daemon=True).start()
+    os.environ["TEST_READER_KEY"] = "secret"
+    try:
+        r = tmp_path / "run"
+        run("prepare", "--corpus", corpus, "--run", r, "--scale", SCALE, "--curator", "sonnet", "--reviewer",
+            "api:test-reader", "--api-base-url", f"http://127.0.0.1:{srv.server_port}/v1", "--api-key-env",
+            "TEST_READER_KEY", "--api-context-tokens", 200_000)
+        f = r / "sources" / "7"
+        run("next", "--run", r, "--role", "curate")
+        write(f / "work" / "curation.json", {"result": "curated", "records": 1, "gaps": 0, "note": "t"})
+        got = run("review-api", "--run", r)
+        assert got["read"] == [{"id": "7", "verdict": "pass", "issues": 0, "retried": "length"}] and len(seen) == 2
+        assert seen[0]["stream_options"] == {"include_usage": True}
+        review = json.loads((f / "work" / "review.json").read_text())
+        assert review["context_tokens"] == 200_000 and review["answer_tokens"] == 100_000      # twice 64,000, at most half the window
+        raw = json.loads((f / "work" / "review-raw-1.json").read_text())
+        assert raw["finish_reason"] == "length" and raw["reasoning_content"] == "walking every record"
+        assert raw["answer_tokens"] == 64_000 and "ran out of room" in raw["error"]
+    finally:
+        os.environ.pop("TEST_READER_KEY", None)
+        srv.shutdown()
+
+
+def test_a_reader_gets_the_curators_report_with_records_as_a_count_and_within_a_cap():
+    cr = _scripts()
+    raw = json.dumps({"result": "curated", "records": [{"id": f"ex:{k}", "pad": "x" * 500} for k in range(2000)],
+                      "gaps": 1, "note": "n"})
+    got = json.loads(cr.report_for_reader(raw))
+    assert got["records"] == 2000 and got["note"] == "n"
+    long = json.dumps({"result": "curated", "records": 3, "note": "y" * 50_000})
+    out = cr.report_for_reader(long)
+    assert len(out) < cr.REPORT_CHARS + 100 and out.endswith("characters]")
+    assert cr.report_for_reader('{"result": "curated", "records": 3}') == '{"result": "curated", "records": 3}'

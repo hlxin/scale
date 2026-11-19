@@ -65,8 +65,13 @@ three hours unless its report arrives first. A subagent that stopped without rep
   again like a 5xx. A failed call leaves the source `curated`, to be read again; what the reader returned (`content`,
   and `reasoning_content` if present) is kept in `work/review-raw-<n>.json`, so that its work is not lost.
 - Each reading is fitted to the reader's context window, given at prepare (`--api-context-tokens`) or to `review-api`
-  (`--context-tokens`): about 3 characters a token (a character outside ASCII, such as CJK text, counts as a token),
-  32,000 tokens kept for the answer. A document that fits beside the page texts goes whole, so a 1M-token reader rarely
+  (`--context-tokens`): 2.5 characters a token (compact JSON measured 2.85-3.0 on DeepSeek's tokenizer; a character
+  outside ASCII, such as CJK text, counts as 3), and `--answer-tokens` (64,000) kept for the answer, thinking included.
+  An answer cut by length (`finish_reason: length`, which a reasoning reader reaches when it thinks through hundreds
+  of records) is no verdict: the reading is sent once more with twice the answer room, so in smaller parts, and the
+  raw answer of a failed one keeps its `finish_reason` and `usage`, and its reasoning (`reasoning_content`, or
+  `reasoning` as vLLM names it). The curator's report goes to the reader with `records` as a count (a curator who wrote
+  its records there instead of their number made reports of up to 1 M characters) and within 20,000 characters. A document that fits beside the page texts goes whole, so a 1M-token reader rarely
   needs parts and a 128k-token one often does; one that does not is read in parts, and the page texts are cut only
   when the parts would get less than half the room. Without a window, a part holds at most `--max-doc-chars` (150,000
   characters of compact JSON by default), which also caps a part when given. Each part holds whole records, grouped by label, with the links they start, and lists

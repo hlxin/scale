@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- **curate-corpus `review-api`: a reasoning reader keeps room to answer (tooling, no schema change, no migration).**
+  From a second B200 day of the CO2RR run (DeepSeek-V4.1-Flash at high reasoning, 262k-token window): 937 of 1,357
+  readings ended without a verdict and 103 of 336 sources never got one. Counted with the model's own tokenizer, the
+  fitted requests left it 24-48k tokens to think and answer, because compact JSON runs 2.85-3.0 characters a token
+  (not 3) and 162 of 714 curators' reports held their records (up to 968,000 characters) where the report's
+  `records` is a count. Now: 2.5 characters a token; `--answer-tokens` (64,000, at most half the window) kept for the
+  answer; a reading whose answer ran out of room (`finish_reason: length`) is read once more with twice the room
+  (smaller parts); the report goes with `records` as a count, within 20,000 characters; the reasoning is kept under
+  vLLM's name `reasoning` too, with the `finish_reason` and `usage` of a failed reading. The same requests now leave
+  90-220k tokens to answer.
+
 - **curate-corpus second readings: a large document is read in parts, issues carry a severity, a re-reading checks
   the previous issues first, and every reading knows today's date (tooling, no schema change, no migration).**
   Answers #109 (point 2), from a run of 398 CO2RR sources on a vLLM endpoint (GLM-5.3-Flash curating,
