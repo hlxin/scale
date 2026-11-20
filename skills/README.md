@@ -20,6 +20,7 @@ answers:
 | [evolve-schema](evolve-schema/SKILL.md) | turn missing-concept gaps or a request into one reviewable schema change |
 | [triage-feedback](triage-feedback/SKILL.md) | sort community feedback into topics and options for the reviewers (maintainers) |
 | [first-paper](first-paper/SKILL.md) | a new contributor's first run: one DOI in, a checked graph of the paper, its digest (conditions and results, "has this been done?", negative results) and a review sheet out; a contribution only after the person approves |
+| [upgrade-curation](upgrade-curation/SKILL.md) | on demand, bring a curated graph to a newer schema version: a step-by-step report first, the mechanical upgrade on approval, and a re-reading of only the passages the worklist names |
 
 ## Which skill for a request
 
@@ -36,6 +37,7 @@ answers:
 | "do the sources disagree about …" | scan-conflicts |
 | "export / share the graph" | export-graph; a contribution to a graph in `graphs/` only when a person asks |
 | a concept the schema lacks | evolve-schema (a person decides) |
+| "upgrade / migrate this graph to the new schema", "what does the new version mean for our curations" | upgrade-curation |
 
 What catalysis brings to the literature skills (the topic vocabulary index-sources uses, the catalysis index's
 tools) is kept with the commons, in [graphs/catal-commons/literature/](../graphs/catal-commons/literature/README.md).

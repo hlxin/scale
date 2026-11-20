@@ -18,7 +18,7 @@ TOOL_NAMES = {"scale_status", "scale_domains", "scale_describe", "scale_template
               "scale_search", "scale_migrate", "scale_example", "scale_skills", "scale_source_start", "scale_source_check",
               "scale_source_finish", "scale_trace_ai", "scale_recipe"}
 SKILLS = {"index-sources", "fetch-corpus", "curate-corpus", "query-graph", "map-coverage", "scan-conflicts",
-          "export-graph", "evolve-schema", "triage-feedback", "first-paper"}                 # the head's skills (scale-release.yaml)
+          "export-graph", "evolve-schema", "triage-feedback", "first-paper", "upgrade-curation"}  # the head's skills (scale-release.yaml)
 
 
 @pytest.fixture()

@@ -110,7 +110,27 @@ migrate` (or `scale call migrate`) moves it along the version steps (`tools/pgra
 every record id. `scale schema bump` registers the step in the pull request that raises the version. An additive
 step only raises `schema_version`; a step that changes how records are written has a rule that rewrites the
 document and reports every change. A rule that meets a case it cannot map stops with an error instead of
-inventing a mapping. At 0.1.0 no step is registered yet.
+inventing a mapping.
+
+### Upgrading a curated graph, on demand
+
+A graph never has to move: it stays valid under the version it pins, so a small schema change needs nothing from
+existing curations. When the maintainers decide a newer version is worth it for a graph, they run
+
+```bash
+scale graph upgrade <graph> [--to <version>] [--report-dir DIR] [--enrich Label.property]   # a report; nothing written
+scale graph upgrade <graph> --write                                                         # the mechanical upgrade
+```
+
+The report (`upgrade-<graph>-<from>-to-<to>.md`, and the same as JSON with the worklist) reads every step between the
+two versions against the graph: what it **needs attention** for (records a rule rewrites, checklist items the records
+now lack, values whose kind is now compared by a context they do not state), what is **optional** (new properties
+the records could hold), what is **checked automatically** (unit contracts) and what is **nothing to do**. It gives
+validation before and after, and a **re-reading worklist**: the records with a gap, grouped by source with the
+locators of their evidence. The upgrade-curation skill re-reads only those passages, when asked, instead of curating
+the papers again. On the public methanol example (0.2.0 → 0.8.2): 6 of 20 steps need attention, 0 errors after the
+mechanical upgrade, and 640 records in 45 sources to re-read, most of them pressures that do not say gauge or
+absolute. `scale kg update` moves every document of a data repository along the same steps in one batch.
 
 Evidence changes have a separate history. A corrected publication updates the status of affected
 claims without rewriting the records an earlier analysis used. That analysis stays traceable to the
