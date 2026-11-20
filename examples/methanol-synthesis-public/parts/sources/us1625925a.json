@@ -3207,6 +3207,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 grams’ zine chloride",
+          "unit": "g",
+          "value": 200
+        },
         "evidence": [
           {
             "kind": "text",
@@ -3216,13 +3222,6 @@
             "source": "ex:msyn/source/us1625925a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "200 grams’ zine chloride",
-          "unit": "g",
-          "value": 200
-        },
-        "fraction_basis": "mass",
         "role": "not_stated",
         "role_detail": "metallic halide addition"
       },
@@ -5980,6 +5979,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2200 grams of zinc oxide",
+          "unit": "g",
+          "value": 2200
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6004,13 +6009,6 @@
             "transcription": "250 grams of dextrin in 3 liters of water."
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "2200 grams of zinc oxide",
-          "unit": "g",
-          "value": 2200
-        },
-        "fraction_basis": "mass",
         "role": "other",
         "role_detail": "principal (base) oxide"
       },
@@ -6022,6 +6020,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "300 grams 30. of chromic oxide",
+          "unit": "g",
+          "value": 300
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6046,13 +6050,6 @@
             "transcription": "250 grams of dextrin in 3 liters of water."
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "300 grams 30. of chromic oxide",
-          "unit": "g",
-          "value": 300
-        },
-        "fraction_basis": "mass",
         "role": "promoter"
       },
       "source": "ex:msyn/us1625925a/catalyst/ex3",
@@ -6063,6 +6060,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "about 200 grams of zinc chloride",
+          "qualifier": "approximate",
+          "unit": "g",
+          "value": 200
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6087,14 +6091,6 @@
             "transcription": "250 grams of dextrin in 3 liters of water."
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "about 200 grams of zinc chloride",
-          "qualifier": "approximate",
-          "unit": "g",
-          "value": 200
-        },
-        "fraction_basis": "mass",
         "role": "not_stated",
         "role_detail": "metallic halide addition"
       },
@@ -6106,6 +6102,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "250 grams of dextrin",
+          "note": "re-curation 2026-09-29 (page image): the OCR text reads '25) grams'; the page image prints 250 grams",
+          "unit": "g",
+          "value": 250
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6130,14 +6133,6 @@
             "transcription": "250 grams of dextrin in 3 liters of water."
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "250 grams of dextrin",
-          "note": "re-curation 2026-09-29 (page image): the OCR text reads '25) grams'; the page image prints 250 grams",
-          "unit": "g",
-          "value": 250
-        },
-        "fraction_basis": "mass",
         "role": "binder"
       },
       "source": "ex:msyn/us1625925a/catalyst/ex3",
@@ -6780,6 +6775,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "160 grams of tungstic oxide",
+          "unit": "g",
+          "value": 160
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6790,13 +6791,6 @@
             "source": "ex:msyn/source/us1625925a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "160 grams of tungstic oxide",
-          "unit": "g",
-          "value": 160
-        },
-        "fraction_basis": "mass",
         "role": "promoter"
       },
       "source": "ex:msyn/us1625925a/catalyst/ex5",
@@ -7063,6 +7057,6 @@
       "target": "ex:msyn/source/us1625925a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1625925a"
 }

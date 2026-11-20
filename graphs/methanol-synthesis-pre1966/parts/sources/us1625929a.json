@@ -1964,6 +1964,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "100 grams zinc oxide",
+          "unit": "g",
+          "value": 100
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1974,13 +1980,6 @@
             "source": "ex:msyn/source/us1625929a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "100 grams zinc oxide",
-          "unit": "g",
-          "value": 100
-        },
-        "fraction_basis": "mass",
         "note": "printed as the mass used",
         "role": "not_stated",
         "role_detail": "difficultly reducible metal oxide"
@@ -2451,6 +2450,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "4.5 kilograms zinc oxide",
+          "unit": "kg",
+          "value": 4.5
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2461,13 +2466,6 @@
             "source": "ex:msyn/source/us1625929a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "4.5 kilograms zinc oxide",
-          "unit": "kg",
-          "value": 4.5
-        },
-        "fraction_basis": "mass",
         "note": "printed as the mass used",
         "role": "not_stated",
         "role_detail": "difficultly reducible metal oxide"
@@ -2520,6 +2518,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "450 grams zinc chloride",
+          "unit": "g",
+          "value": 450
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2529,13 +2533,6 @@
             "source": "ex:msyn/source/us1625929a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "450 grams zinc chloride",
-          "unit": "g",
-          "value": 450
-        },
-        "fraction_basis": "mass",
         "role": "not_stated",
         "role_detail": "metallic halide"
       },
@@ -3658,6 +3655,6 @@
       "target": "ex:msyn/source/us1625929a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1625929a"
 }

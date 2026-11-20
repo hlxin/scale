@@ -1940,6 +1940,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "2600 grams",
+          "note": "mass in the batch",
+          "unit": "g",
+          "value": 2600
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1949,14 +1956,6 @@
             "source": "ex:msyn/source/us1625928a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "2600 grams",
-          "note": "mass in the batch",
-          "unit": "g",
-          "value": 2600
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1625928a/catalyst/specific-example",
@@ -2207,6 +2206,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "500 grams",
+          "note": "mass in the batch",
+          "unit": "g",
+          "value": 500
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2216,14 +2222,6 @@
             "source": "ex:msyn/source/us1625928a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "500 grams",
-          "note": "mass in the batch",
-          "unit": "g",
-          "value": 500
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1625928a/catalyst/specific-example",
@@ -2418,6 +2416,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "150 grams",
+          "note": "mass in the moistening solution",
+          "unit": "g",
+          "value": 150
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2427,14 +2432,6 @@
             "source": "ex:msyn/source/us1625928a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "150 grams",
-          "note": "mass in the moistening solution",
-          "unit": "g",
-          "value": 150
-        },
-        "fraction_basis": "mass",
         "role": "not_stated",
         "role_detail": "the metallic halide"
       },
@@ -2630,6 +2627,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 grams",
+          "note": "mass in the moistening solution",
+          "unit": "g",
+          "value": 200
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2639,14 +2643,6 @@
             "source": "ex:msyn/source/us1625928a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "200 grams",
-          "note": "mass in the moistening solution",
-          "unit": "g",
-          "value": 200
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1625928a/catalyst/specific-example",
@@ -2990,6 +2986,6 @@
       "target": "ex:msyn/source/us1625928a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1625928a"
 }

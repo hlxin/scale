@@ -1185,6 +1185,14 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "70-80 moles of zinc",
+          "lower": 70,
+          "note": "preferred proportion in the precipitate",
+          "unit": "mol",
+          "upper": 80
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1195,15 +1203,6 @@
             "source": "ex:msyn/source/us1878390a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "70-80 moles of zinc",
-          "lower": 70,
-          "note": "preferred proportion in the precipitate",
-          "unit": "mol",
-          "upper": 80
-        },
-        "fraction_basis": "mole",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1878390a/catalyst/example-1",
@@ -2173,6 +2172,6 @@
       "target": "ex:msyn/source/us1878390a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1878390a"
 }

@@ -6077,6 +6077,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "3 moles of zinc oxide",
+          "unit": "mol",
+          "value": 3
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6086,13 +6092,6 @@
             "source": "ex:msyn/source/us1746781a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "3 moles of zinc oxide",
-          "unit": "mol",
-          "value": 3
-        },
-        "fraction_basis": "mole",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1746781a/catalyst/example-3-zn3-cr1",
@@ -6103,6 +6102,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "1 mole of chromium oxide",
+          "unit": "mol",
+          "value": 1
+        },
         "evidence": [
           {
             "kind": "text",
@@ -6112,13 +6117,6 @@
             "source": "ex:msyn/source/us1746781a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "1 mole of chromium oxide",
-          "unit": "mol",
-          "value": 1
-        },
-        "fraction_basis": "mole",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1746781a/catalyst/example-3-zn3-cr1",
@@ -6530,6 +6528,6 @@
       "target": "ex:msyn/source/us1746781a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1746781a"
 }

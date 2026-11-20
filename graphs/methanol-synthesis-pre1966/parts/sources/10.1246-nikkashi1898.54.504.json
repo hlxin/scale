@@ -3699,6 +3699,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "concentration": {
+          "status": "present",
+          "as_reported": "0.85 g/100 m³",
+          "unit": "g/100 m3",
+          "value": 0.85
+        },
         "evidence": [
           {
             "kind": "table",
@@ -3715,12 +3721,6 @@
             "source": "ex:msyn/source/10.1246-nikkashi1898.54.504"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "0.85 g/100 m³",
-          "unit": "g/100 m3",
-          "value": 0.85
-        },
         "role": "not_stated"
       },
       "source": "ex:msyn/10.1246-nikkashi1898.54.504/feed/water-gas-electrolytic-h2",
@@ -6046,6 +6046,6 @@
       "target": "ex:msyn/person/akira-tomita"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/10.1246-nikkashi1898.54.504"
 }

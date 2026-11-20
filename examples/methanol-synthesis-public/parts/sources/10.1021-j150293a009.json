@@ -7415,6 +7415,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "200 grams",
+          "unit": "g",
+          "value": 200
+        },
         "evidence": [
           {
             "kind": "text",
@@ -7424,13 +7430,6 @@
             "source": "ex:msyn/source/10.1021-j150293a009"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "200 grams",
-          "unit": "g",
-          "value": 200
-        },
-        "fraction_basis": "mass",
         "role": "precursor",
         "role_detail": "as in the preparation of No. 1"
       },
@@ -7442,6 +7441,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "22 grams",
+          "unit": "g",
+          "value": 22
+        },
         "evidence": [
           {
             "kind": "text",
@@ -7451,13 +7456,6 @@
             "source": "ex:msyn/source/10.1021-j150293a009"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "22 grams",
-          "unit": "g",
-          "value": 22
-        },
-        "fraction_basis": "mass",
         "role": "precursor"
       },
       "source": "ex:msyn/10.1021-j150293a009/catalyst/no1-zno-cr2o3-powder",
@@ -8214,6 +8212,6 @@
       "target": "ex:msyn/person/h-h-storch"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/10.1021-j150293a009"
 }

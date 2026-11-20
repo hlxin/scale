@@ -2,7 +2,8 @@
 
 The knowledge graph of the historical methanol-synthesis literature, scoped to **CO and CO2 hydrogenation** (CO + D2
 included): 105 sources from 1923 to 1965, 4,866 nodes and 16,584 links, kept as one part per source. It is public
-research data (`access: public`) maintained by SCALE's researchers, valid under scale-catal 0.2.0.
+research data (`access: public`) maintained by SCALE's researchers, valid under scale-catal 0.8.2 (curated under
+0.2.0 and upgraded mechanically: see *Schema version* below).
 
 **Each source is quoted only as far as its rights allow** (`rights.yaml`): the 55 public-domain sources (US patents,
 works published before 1931) keep every quote; the 50 sources in copyright keep none. Their quotes are withheld
@@ -44,3 +45,19 @@ every quote checked verbatim against them; schema history in the CHANGELOG. It w
 `examples/methanol-synthesis-pre1966/` until v0.2.0 with quotes capped at 300 characters (4,000 a source), left the
 repository in #28, and is back here with no quoted text of a source in copyright. Its earlier bundles
 (`methanol-synthesis-pre1966_v1.0.0` to `v3.0.0`) are in the git history.
+
+## Schema version
+
+Curated under scale-catal 0.2.0; upgraded to 0.8.2 with `scale graph upgrade`, together with its public part
+([`examples/methanol-synthesis-public/`](../../examples/methanol-synthesis-public/README.md)). The upgrade is
+mechanical: every record id is kept, the 0.2.1 → 0.3.0 migration rule moved 47 `HAS_COMPONENT.fraction` values given
+in a mass or amount unit to `amount` (39 of them in the public part), every other step only raised the version, and the graph validates with 0 errors.
+Every query plan of the example answers as before.
+
+Nothing was read again. What 0.8.2 can express that the 0.2.0 curation did not record stays unrecorded, and a
+scientific comparison keeps such values apart rather than mixing them: 2,317 values in 1,224 records of 78 sources,
+most of them pressures that do not say gauge or absolute (649), compositions without their fraction basis (488),
+space velocities without their basis or flow reference (402), and conversions and yields that do not name the
+species they count (320). A targeted re-reading of only those passages (the upgrade-curation skill) can fill them,
+or record that a source does not say, if that is worth doing later. The full report, step by step and with the
+re-reading worklist by source, is [UPGRADE-0.2.0-to-0.8.2.md](UPGRADE-0.2.0-to-0.8.2.md).
