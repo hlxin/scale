@@ -1094,6 +1094,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1162,7 +1163,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "under conditions as described above",
-          "note": "conditions of Example A (about 200 atmospheres)",
+          "note": "conditions of Example A (about 200 atmospheres); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1263,7 +1264,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pres suré",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -2148,6 +2149,13 @@
             "note": "the amount '5' of chromic acid crystals is printed at the end of the previous line",
             "passage": "us1681753a/p1/3",
             "quote": "parts chromic acid crystals were then added, the mixture evaporated to dryness, and then further heated at 200° C. until the water and all traces of nitrogen oxides had been driven off,",
+            "source": "ex:msyn/source/us1681753a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states amount ('5 parts chromic acid crystals'); cited when the value check found the record's quotes did not print it",
+            "quote": "50 parts by weight of 7 \nmesh pumice were mixed with 25 parts pal \nladium nitrate solution containing 0.19) \nparts Pd(NO) per cubic centimeter; 5 \nparts chromic acid crystals were then added, \nthe mixture evaporated to dryness, and then \nfurther heated at 200° C.",
             "source": "ex:msyn/source/us1681753a"
           }
         ],

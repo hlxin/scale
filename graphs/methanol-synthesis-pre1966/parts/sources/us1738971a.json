@@ -1070,6 +1070,13 @@
             "passage": "us1738971a/p2/2",
             "quote": "The catalyst temperature at the gas inlet was about 270-300° C. and at the exit was about 335 C.; the outer shell of the bomb contain ing the catalyst was maintained at a temper ature of about 270° C.",
             "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "H.) equivalent to about 8100 cubic \nfeet of gas per cubic foot of catalyst per hour, \ncalculated at normal temperature and pres \nsure, (N.",
+            "source": "ex:msyn/source/us1738971a"
           }
         ],
         "experiment_kind": "physical",
@@ -1083,6 +1090,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1106,7 +1114,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "about 8100 cubic feet of gas per cubic foot of catalyst per hour",
-          "basis": "calculated at N.T.P. (0 °C and 1 atmosphere)",
+          "basis": "calculated at N.T.P. (0 °C and 1 atmosphere); gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "ft3/(ft3·h)",
           "value": 8100
@@ -1151,6 +1160,13 @@
             "passage": "us1738971a/p2/2",
             "quote": "In this case the pres Sure was 67 atmospheres, the gas mixture 4 volumes of hydrogen to 1 of CO, catalyst temperature 270 to 300° C. S. W. H. 8000. Under the above conditions an S.T.Y. of 670 was obtained.",
             "source": "ex:msyn/source/us1738971a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "H.) equivalent to about 8100 cubic \nfeet of gas per cubic foot of catalyst per hour, \ncalculated at normal temperature and pres \nsure, (N.",
+            "source": "ex:msyn/source/us1738971a"
           }
         ],
         "experiment_kind": "physical",
@@ -1164,6 +1180,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "67 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 67
         },
@@ -1177,7 +1194,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. W. H. 8000",
-          "note": "no unit printed; S.W.H. defined above as volume of gas per volume of catalyst per hour at N.T.P.; the page image prints 'S. V. H.' (text layer 'S. W. H.')",
+          "basis": "gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "no unit printed; S.W.H. defined above as volume of gas per volume of catalyst per hour at N.T.P.; the page image prints 'S. V. H.' (text layer 'S. W. H.'); space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 8000
         },
@@ -1266,7 +1284,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "at at mospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -1686,6 +1704,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "about 24% Cu",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 24
@@ -1929,6 +1948,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "30.5% MgO",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 30.5
@@ -2188,6 +2208,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "45.5% SiO,",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 45.5

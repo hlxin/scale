@@ -56,6 +56,20 @@
             "passage": "us1681752a/p2/2",
             "quote": "form of my catalyst is obtained. Before",
             "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states properties.cupric_nitrate_parts ('21.6 parts'); cited when the value check found the record's quotes did not print it",
+            "quote": "second solution was now prepared by dis-\nsolving 21.6 parts of cupric nitrate\n\nCu(NO,),.38H,O\n\nin 140 parts of water and then adding suffi-\ncient ammonia to redissolve the precipitate\n\n\n1,681,752\n\nPATENT OFFICE.\n\nN.",
+            "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states properties.magnesium_nitrate_parts ('69 parts by weight'); cited when the value check found the record's quotes did not print it",
+            "quote": "69 parts by weight of magnesium nitrate\nMg(NO,),.6H,O were dissolved in 300 parts\ndistilled water.",
+            "source": "ex:msyn/source/us1681752a"
           }
         ],
         "generality": "particular",
@@ -1069,6 +1083,13 @@
             "passage": "us1681752a/p2/2",
             "quote": "by cooling while still under pressure. The product was 96-98% methanol.",
             "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states conditions.initial_heating_temperature ('heated to about 300° C.'); cited when the value check found the record's quotes did not print it",
+            "quote": "bomb and the whole heated to about 300° C.\nA gas mixture, comprising essentially 4 vol-\n\n10\n\n1d\n\n20\n\n25\n\n30\n\n39\n\n40\n\n45\n\n50\n\n55\n\n60\n\nG6\n\numes hydrogen\n\n1,681, '\n\nand one volume carbon\n\nmonoxide, and essentially free of catalyst\npoisons was now passed through the heated\n\nmos\n\ncatalyst under a pressure of about 200 at-\neres and at a space velocity per hour\n\n(S.",
+            "source": "ex:msyn/source/us1681752a"
           }
         ],
         "experiment_kind": "physical",
@@ -1077,7 +1098,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 at- eres",
-          "note": "OCR 'at- eres' = atmospheres",
+          "note": "OCR 'at- eres' = atmospheres; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1134,7 +1155,9 @@
           "status": "present",
           "as_reported": "about 48% of the carbon monoxide",
           "basis": "carbon monoxide converted to methanol",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 48
         },
@@ -1199,7 +1222,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 atmospheres",
-          "note": "re-curation 2026-09-29 (page image): corrected from 900 (OCR read '900 atmospheres')",
+          "note": "re-curation 2026-09-29 (page image): corrected from 900 (OCR read '900 atmospheres'); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1334,13 +1357,20 @@
             "passage": "us1681752a/p1/5",
             "quote": "After reduction the granules were dark copper colored, and of a hard, firm though",
             "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states pressure ('atmospheric pressure'); cited when the value check found the record's quotes did not print it",
+            "quote": "This reducing mixture\nis passed at atmospheric pressure over the\ndried precipitate preferably contained in a\ncopper lined vessel and heated to not over\n800° C.",
+            "source": "ex:msyn/source/us1681752a"
           }
         ],
         "method": "reducing gas passed over the heated dried precipitate in a copper lined vessel",
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -2241,6 +2271,13 @@
             "passage": "us1681752a/p2/2",
             "quote": "If 30 parts of sodium hydroxide instead",
             "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states fraction ('21.6 parts of cupric nitrate'); cited when the value check found the record's quotes did not print it",
+            "quote": "second solution was now prepared by dis-\nsolving 21.6 parts of cupric nitrate\n\nCu(NO,),.38H,O\n\nin 140 parts of water and then adding suffi-\ncient ammonia to redissolve the precipitate\n\n\n1,681,752\n\nPATENT OFFICE.\n\nN.",
+            "source": "ex:msyn/source/us1681752a"
           }
         ],
         "fraction": {
@@ -2267,6 +2304,13 @@
             "locator": "p. 2, col. 1",
             "passage": "us1681752a/p2/2",
             "quote": "If 30 parts of sodium hydroxide instead",
+            "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states fraction ('69 parts by weight of magnesium nitrate'); cited when the value check found the record's quotes did not print it",
+            "quote": "69 parts by weight of magnesium nitrate\nMg(NO,),.6H,O were dissolved in 300 parts\ndistilled water.",
             "source": "ex:msyn/source/us1681752a"
           }
         ],
@@ -2493,6 +2537,13 @@
             "locator": "p. 3, col. 1, claim 1",
             "passage": "us1681752a/p3/1",
             "quote": "then reducing the cupric oxide to metalic copper in the mixed precipitate.",
+            "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states fraction ('21.6 parts of cupric nitrate'); cited when the value check found the record's quotes did not print it",
+            "quote": "second solution was now prepared by dis-\nsolving 21.6 parts of cupric nitrate\n\nCu(NO,),.38H,O\n\nin 140 parts of water and then adding suffi-\ncient ammonia to redissolve the precipitate\n\n\n1,681,752\n\nPATENT OFFICE.\n\nN.",
             "source": "ex:msyn/source/us1681752a"
           }
         ],
@@ -2767,6 +2818,13 @@
             "locator": "p. 1, col. 2",
             "passage": "us1681752a/p1/4",
             "quote": "This cake was now dried at 150° C. forming black, hard, somewhat brittle lumps con- sisting of an intimate mixture of magnesium oxide and copper oxide.",
+            "source": "ex:msyn/source/us1681752a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states fraction ('69 parts by weight of magnesium nitrate'); cited when the value check found the record's quotes did not print it",
+            "quote": "69 parts by weight of magnesium nitrate\nMg(NO,),.6H,O were dissolved in 300 parts\ndistilled water.",
             "source": "ex:msyn/source/us1681752a"
           }
         ],

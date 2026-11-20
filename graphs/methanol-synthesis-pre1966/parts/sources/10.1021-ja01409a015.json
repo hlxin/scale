@@ -317,7 +317,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "20",
-          "note": "printed 'mm' (millimetres of mercury)",
+          "note": "printed 'mm' (millimetres of mercury); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "mm Hg",
           "value": 20
         },
@@ -372,7 +372,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "1",
-          "note": "printed 'mm' (millimetres of mercury)",
+          "note": "printed 'mm' (millimetres of mercury); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "mm Hg",
           "value": 1
         },
@@ -1574,6 +1574,13 @@
             "passage": "10.1021-ja01409a015/p6/1",
             "quote": "A further half hour of evacuation at 400° gave with hydrogen the results in Curve II.",
             "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "states duration ('half an hour'); cited when the value check found the record's quotes did not print it",
+            "quote": "Oct., 1927\nSTUDIES OE METHANOL CATALYSTS.\nI\n2473\nThis adsorbed neither gas after evacuation at 200 or 300°.\nAfter half\nan hour of evacuation at 400°, Curve I, Fig.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
           }
         ],
         "method": "evacuation",
@@ -1604,6 +1611,13 @@
             "locator": "p. 6",
             "passage": "10.1021-ja01409a015/p6/1",
             "quote": "after a further half hour of evacuation at 400°.",
+            "source": "ex:msyn/source/10.1021-ja01409a015"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 6",
+            "note": "states duration ('half an hour'); cited when the value check found the record's quotes did not print it",
+            "quote": "Oct., 1927\nSTUDIES OE METHANOL CATALYSTS.\nI\n2473\nThis adsorbed neither gas after evacuation at 200 or 300°.\nAfter half\nan hour of evacuation at 400°, Curve I, Fig.",
             "source": "ex:msyn/source/10.1021-ja01409a015"
           }
         ],

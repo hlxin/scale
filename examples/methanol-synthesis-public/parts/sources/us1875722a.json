@@ -677,7 +677,9 @@
           "status": "present",
           "as_reported": "about 15% of the car- bon monoxide present is converted to methyl alcohol",
           "basis": "carbon monoxide to methyl alcohol, per passage",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 15
         },
@@ -713,13 +715,14 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
         "space_velocity": {
           "status": "present",
           "as_reported": "about 10 cubic meters of gas per 60 kilogram of catalyst",
-          "note": "printed as a 'speed'; no time unit printed; '60' is a line number",
+          "note": "printed as a 'speed'; no time unit printed; '60' is a line number; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "m3 gas/kg catalyst",
           "value": 10
@@ -1095,7 +1098,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "about .3% of manganese",
-          "note": "corrected on re-curation 2026-09-29 from 0.38 (OCR '.38%') to 0.3: the page image shows '.3%'",
+          "note": "corrected on re-curation 2026-09-29 from 0.38 (OCR '.38%') to 0.3: the page image shows '.3%'; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 0.3
@@ -1914,6 +1917,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "zinc, 1 part",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "value": 1
         },
@@ -1941,6 +1945,7 @@
           "status": "present",
           "as_reported": "copper, 2-5 parts",
           "lower": 2,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "upper": 5
         },
@@ -1969,6 +1974,7 @@
           "status": "present",
           "as_reported": "zinc, 1-2 parts",
           "lower": 1,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "upper": 2
         },
@@ -1997,6 +2003,7 @@
           "status": "present",
           "as_reported": "copper, 7-9 parts",
           "lower": 7,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "upper": 9
         },
@@ -2025,6 +2032,7 @@
           "status": "present",
           "as_reported": "tin, 1-2 parts",
           "lower": 1,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "upper": 2
         },

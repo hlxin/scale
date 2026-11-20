@@ -48,6 +48,13 @@
             "passage": "us1707331a/p2/8",
             "quote": "valuable with proportions of yy)0 copper running up to 50% by weight of the finely reduced catalyst mass.",
             "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states properties.metallic_copper_preferred_lower ('preferably over 10%'); cited when the value check found the record's quotes did not print it",
+            "quote": "I\ntherefore, prefer to have at least 5% and\npreferably over 10% of the catalyst mass as\nmetallic copper.",
+            "source": "ex:msyn/source/us1707331a"
           }
         ],
         "generality": "kind",
@@ -1382,6 +1389,13 @@
             "passage": "us1707331a/p2/5",
             "quote": "The products formed were recovered from the off-cases by cooling while still under pressure. The product was 96-98% methanol.",
             "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "H.)\nequivalent to about 19,000 cubic feet of gas\nper cubic foot of catalyst per hour, calcu-\nlated at normal temperature and pressure.\n(N.",
+            "source": "ex:msyn/source/us1707331a"
           }
         ],
         "experiment_kind": "physical",
@@ -1390,6 +1404,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1413,7 +1428,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "about 19,000 cubic feet of gas per cubic foot of catalyst per hour",
-          "basis": "calculated at N.T.P. (0° C. and 1 atmosphere)",
+          "basis": "calculated at N.T.P. (0° C. and 1 atmosphere); gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "ft3/(ft3·h)",
           "value": 19000
@@ -1447,6 +1463,13 @@
             "passage": "us1707331a/p2/6",
             "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
             "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "H.)\nequivalent to about 19,000 cubic feet of gas\nper cubic foot of catalyst per hour, calcu-\nlated at normal temperature and pressure.\n(N.",
+            "source": "ex:msyn/source/us1707331a"
           }
         ],
         "experiment_kind": "physical",
@@ -1454,7 +1477,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "Under similar conditions",
-          "note": "no number printed; the Example I run was at about 200 atmospheres",
+          "note": "no number printed; the Example I run was at about 200 atmospheres; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "similar to the Example I run"
         },
         "space_time_yield": {
@@ -1467,7 +1490,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "8. V. H. of 15,000",
-          "note": "unit not repeated; S. V. H. defined for the Example I run",
+          "basis": "gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "unit not repeated; S. V. H. defined for the Example I run; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "ft3/(ft3·h)",
           "value": 15000
         },
@@ -1521,6 +1545,13 @@
             "passage": "us1707331a/p2/6",
             "quote": "Under similar conditions with a catalyst temperature of 330° C. and an 8. V. H. of 15,000 an 8S. T. Y. of 1000 was obtained with the catalyst of Example II.",
             "source": "ex:msyn/source/us1707331a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "H.)\nequivalent to about 19,000 cubic feet of gas\nper cubic foot of catalyst per hour, calcu-\nlated at normal temperature and pressure.\n(N.",
+            "source": "ex:msyn/source/us1707331a"
           }
         ],
         "experiment_kind": "physical",
@@ -1528,7 +1559,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "Under similar conditions",
-          "note": "the sentence follows the Example II statement 'Under similar conditions'",
+          "note": "the sentence follows the Example II statement 'Under similar conditions'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "similar to the Example I run"
         },
         "space_time_yield": {
@@ -1541,7 +1572,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. H. of 6500",
-          "note": "unit not repeated",
+          "basis": "gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, calculated at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "unit not repeated; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "ft3/(ft3·h)",
           "value": 6500
         },
@@ -1654,7 +1686,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmos- pheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1

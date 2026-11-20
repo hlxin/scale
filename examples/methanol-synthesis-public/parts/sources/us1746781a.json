@@ -1777,6 +1777,20 @@
             "locator": "p. 3, col. 2, Example 1",
             "quote": "only 10, 23, and 18 cc. pure methanol, respec tively, per 100 cc. catalyst per hour.",
             "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states pressure ('a pressure of 290 atmospheres'); cited when the value check found the record's quotes did not print it",
+            "quote": "and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states temperature ('a temperature of 380° C.'); cited when the value check found the record's quotes did not print it",
+            "quote": "of pure methanol per hour from a gas \nconsisting essentially of 2 volumes of hydro \ngen and 1 volume of carbon monoxide, when \nthe reaction is carried out at a temperature \nof 380° C. and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
           }
         ],
         "experiment_kind": "physical",
@@ -1785,7 +1799,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
-          "note": "stated only as 'under similar conditions' to Example 1",
+          "note": "stated only as 'under similar conditions' to Example 1; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 290
@@ -1829,6 +1843,20 @@
             "locator": "p. 3, col. 2, Example 1",
             "quote": "only 10, 23, and 18 cc. pure methanol, respec tively, per 100 cc. catalyst per hour.",
             "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states pressure ('a pressure of 290 atmospheres'); cited when the value check found the record's quotes did not print it",
+            "quote": "and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states temperature ('a temperature of 380° C.'); cited when the value check found the record's quotes did not print it",
+            "quote": "of pure methanol per hour from a gas \nconsisting essentially of 2 volumes of hydro \ngen and 1 volume of carbon monoxide, when \nthe reaction is carried out at a temperature \nof 380° C. and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
           }
         ],
         "experiment_kind": "physical",
@@ -1837,7 +1865,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
-          "note": "stated only as 'under similar conditions' to Example 1",
+          "note": "stated only as 'under similar conditions' to Example 1; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 290
@@ -1881,6 +1909,20 @@
             "locator": "p. 3, col. 2, Example 1",
             "quote": "only 10, 23, and 18 cc. pure methanol, respec tively, per 100 cc. catalyst per hour.",
             "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states pressure ('a pressure of 290 atmospheres'); cited when the value check found the record's quotes did not print it",
+            "quote": "and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states temperature ('a temperature of 380° C.'); cited when the value check found the record's quotes did not print it",
+            "quote": "of pure methanol per hour from a gas \nconsisting essentially of 2 volumes of hydro \ngen and 1 volume of carbon monoxide, when \nthe reaction is carried out at a temperature \nof 380° C. and a pressure of 290 atmospheres, \nthe gaseous mixture being passed through \nthe contact mass at the rate 1,000 liters per \nhour measured under ordinary conditions.",
+            "source": "ex:msyn/source/us1746781a"
           }
         ],
         "experiment_kind": "physical",
@@ -1889,7 +1931,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
-          "note": "stated only as 'under similar conditions' to Example 1",
+          "note": "stated only as 'under similar conditions' to Example 1; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 290
@@ -1942,6 +1984,7 @@
           "status": "present",
           "as_reported": "the rate 1,000 liters per hour measured under ordinary conditions",
           "basis": "measured under ordinary conditions",
+          "note": "the source says 'measured under ordinary conditions' (room conditions); none of the schema's flow references (STP, NTP, SATP, normal, standard, actual) names it, so it stays unstated (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 1000
         },
@@ -1949,6 +1992,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 290
         },
@@ -1999,7 +2043,7 @@
           "status": "present",
           "as_reported": "the rate 1,000 liters per hour measured under ordinary conditions",
           "basis": "measured under ordinary conditions",
-          "note": "stated for Example 1; this test is 'as described in Example 1' or 'under similar conditions'",
+          "note": "stated for Example 1; this test is 'as described in Example 1' or 'under similar conditions'; the source says 'measured under ordinary conditions' (room conditions); none of the schema's flow references (STP, NTP, SATP, normal, standard, actual) names it, so it stays unstated (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 1000
         },
@@ -2008,7 +2052,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
-          "note": "'when used as described in Example 1'",
+          "note": "'when used as described in Example 1'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 290
         },
@@ -2057,7 +2101,7 @@
           "status": "present",
           "as_reported": "the rate 1,000 liters per hour measured under ordinary conditions",
           "basis": "measured under ordinary conditions",
-          "note": "stated for Example 1; this test is 'as described in Example 1' or 'under similar conditions'",
+          "note": "stated for Example 1; this test is 'as described in Example 1' or 'under similar conditions'; the source says 'measured under ordinary conditions' (room conditions); none of the schema's flow references (STP, NTP, SATP, normal, standard, actual) names it, so it stays unstated (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 1000
         },
@@ -2066,7 +2110,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "a pressure of 290 atmospheres",
-          "note": "'according to the conditions described in Example 1'",
+          "note": "'according to the conditions described in Example 1'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 290
         },
@@ -4447,7 +4491,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "pure zinc oxalate",
-          "note": "sole starting material; the zinc oxalate class yields the oxide on heating",
+          "note": "sole starting material; the zinc oxalate class yields the oxide on heating; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 100
         },

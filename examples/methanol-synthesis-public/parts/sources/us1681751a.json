@@ -1634,7 +1634,9 @@
           "status": "present",
           "as_reported": "about 54% of that assed through",
           "basis": "carbon monoxide converted to methanol, per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 54
         },
@@ -1722,6 +1724,13 @@
             "passage": "us1681751a/p2/3",
             "quote": "The methanol was recovered by cooling the off- eases under pressure. The product was about 95-98% methanol.",
             "source": "ex:msyn/source/us1681751a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "of about 6,750 cubic feet of gas per cubic\nfoot of catalyst per hour, calculated with\n\n- the gas volume reduced to conditions of nor-\n\n3o\n\nmal temperature and pressure, (N.",
+            "source": "ex:msyn/source/us1681751a"
           }
         ],
         "experiment_kind": "physical",
@@ -1737,7 +1746,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "about 200 atmospheres",
-          "note": "re-curation 2026-09-29 (page image): corrected from 900 (OCR read '900 atmospheres')",
+          "note": "re-curation 2026-09-29 (page image): corrected from 900 (OCR read '900 atmospheres'); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 200
@@ -1763,7 +1772,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "about 6,750 cubic feet of gas per cubic foot of catalyst per hour",
-          "basis": "gas volume at N.T.P. (one atmosphere and 0° C.)",
+          "basis": "gas volume at N.T.P. (one atmosphere and 0° C.); gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, gas volume at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "ft3/(ft3·h)",
           "value": 6750
@@ -1803,6 +1813,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "under similar condi- tions",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "similar to the Example I use example"
         },
         "results": {
@@ -1845,6 +1856,13 @@
             "passage": "us1681751a/p2/3",
             "quote": "Cu-CaF, catalyst an 8. T. Y. of 400 pounds was obtained.",
             "source": "ex:msyn/source/us1681751a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "of about 6,750 cubic feet of gas per cubic\nfoot of catalyst per hour, calculated with\n\n- the gas volume reduced to conditions of nor-\n\n3o\n\nmal temperature and pressure, (N.",
+            "source": "ex:msyn/source/us1681751a"
           }
         ],
         "experiment_kind": "physical",
@@ -1852,6 +1870,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "under conditions otherwise similar to those used with the Cu-CaF, catalyst",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "as in the Cu+CaF2 use example"
         },
         "space_time_yield": {
@@ -1864,7 +1883,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "an 8. V. H. of 5000",
-          "note": "unit per the S.V.H. definition in the Cu+CaF2 use example",
+          "basis": "gas hourly space velocity: cubic feet of gas per cubic foot of catalyst per hour, gas volume at normal temperature and pressure (N.T.P.), as the source defines it",
+          "note": "unit per the S.V.H. definition in the Cu+CaF2 use example; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "ft3/(ft3·h)",
           "value": 5000
         },
@@ -1901,6 +1921,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "under similar conditions",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "similar to the Cu+CaF2 use example"
         },
         "results": {
@@ -1986,7 +2007,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -2061,7 +2082,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -2136,7 +2157,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -2211,7 +2232,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "atmospheric pressure",
-          "note": "printed as atmospheric pressure; recorded as 1 atm",
+          "note": "printed as atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -3811,6 +3832,13 @@
             "locator": "p. 1, Example II",
             "passage": "us1681751a/p1/5",
             "quote": "weight ‘of medium fibred, acid-washed as- bestos was now added.",
+            "source": "ex:msyn/source/us1681751a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states amount ('0.4 parts by weight'); cited when the value check found the record's quotes did not print it",
+            "quote": "0.4 parts by\nweight ‘of medium fibred, acid-washed as-\nbestos was now added.",
             "source": "ex:msyn/source/us1681751a"
           }
         ],

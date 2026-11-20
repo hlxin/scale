@@ -989,7 +989,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2000 pounds",
-          "note": "printed '2000 pounds'; per square inch not printed",
+          "note": "printed '2000 pounds'; per square inch not printed; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2000
         },
@@ -1014,7 +1014,7 @@
           "status": "present",
           "as_reported": "75,000-100,000",
           "lower": 75000,
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "upper": 100000
         },
@@ -1073,7 +1073,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2000 pounds",
-          "note": "printed '2000 pounds'; per square inch not printed",
+          "note": "printed '2000 pounds'; per square inch not printed; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2000
         },
@@ -1088,7 +1088,7 @@
           "status": "present",
           "as_reported": "75,000-100,000",
           "lower": 75000,
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "upper": 100000
         },
@@ -1523,6 +1523,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "8% carbon dioxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 8
         },
@@ -1549,6 +1550,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "3% of carbon monoxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 3
         },
@@ -1575,6 +1577,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "89% hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 89
         },
@@ -1907,6 +1910,13 @@
             "locator": "p. 2, Example II",
             "passage": "us1625927a/p2/6",
             "quote": "If the zinc chloride in Example I is re placed by 1300 grams of magnesium bro mide the hourly yield of condensate and percentage yield of methanol is not greatly modified.",
+            "source": "ex:msyn/source/us1625927a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('7.5 kilograms of zinc oxide'); cited when the value check found the record's quotes did not print it",
+            "quote": "There \nis then added 7.5 kilograms of zinc oxide \nafter which the solution is vigorously stirred \nand sufficient ammonium hydroxide is added \nto precipitate the cobalt as cobalt hydrate.",
             "source": "ex:msyn/source/us1625927a"
           }
         ],

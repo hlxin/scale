@@ -855,7 +855,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2600 pounds per sq. in.",
-          "note": "read from the page image (OCR 'pewnds per 16 59. in.'); re-curation 2026-09-29",
+          "note": "read from the page image (OCR 'pewnds per 16 59. in.'); re-curation 2026-09-29; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2600
         },
@@ -878,7 +878,9 @@
           "status": "present",
           "as_reported": "about 60% of the car- bon monoxide is.converted to methanol",
           "basis": "carbon monoxide to methanol",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 60
         },
@@ -922,6 +924,13 @@
             ],
             "source": "ex:msyn/source/us1908696a",
             "transcription": "as 200° C. with pressure of 2600 pounds per sq. in., using a gas mixture containing ap-"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "$° 31,700 (‘volumes of gas measured at standard\nconditions entering per hour per volume of\n\ncatalyst), the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
           }
         ],
         "experiment_kind": "physical",
@@ -929,14 +938,15 @@
         "pressure": {
           "status": "present",
           "as_reported": "2600 pounds per sq. in.",
-          "note": "'under the conditions just stated'; read from the page image (OCR 'pewnds per 16 59. in.')",
+          "note": "'under the conditions just stated'; read from the page image (OCR 'pewnds per 16 59. in.'); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2600
         },
         "space_velocity": {
           "status": "present",
           "as_reported": "approximately 10,000",
-          "note": "no unit printed here",
+          "basis": "gas hourly space velocity: volumes of gas measured at standard conditions entering per hour per volume of catalyst, as the source defines it",
+          "note": "no unit printed here; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "not stated",
           "value": 10000
@@ -1004,6 +1014,13 @@
             ],
             "source": "ex:msyn/source/us1908696a",
             "transcription": "lyst gives a space-time-yield (S. T. Y.) of about 2270 gals. of methanol per 24 hrs. per cu. ft. of catalyst space, employing a temperature of about 250° C. and 2600 pounds per sq. in. pressure."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "$° 31,700 (‘volumes of gas measured at standard\nconditions entering per hour per volume of\n\ncatalyst), the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
           }
         ],
         "experiment_kind": "physical",
@@ -1011,7 +1028,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2600 pounds per sq. in. pressure",
-          "note": "unit read from the page image (cut off in OCR text)",
+          "note": "unit read from the page image (cut off in OCR text); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2600
         },
@@ -1027,7 +1044,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "approximately 10?,?00",
-          "note": "the third and fourth digits are over-inked (each 0 or 6): the first reading had 100,000, an independent second reading could not decide, and the OCR text has 100,600 or 106,600; no number is recorded",
+          "basis": "gas hourly space velocity: volumes of gas measured at standard conditions entering per hour per volume of catalyst, as the source defines it",
+          "note": "the third and fourth digits are over-inked (each 0 or 6): the first reading had 100,000, an independent second reading could not decide, and the OCR text has 100,600 or 106,600; no number is recorded; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "approximately 10?,?00"
         },
         "temperature": {
@@ -1050,7 +1068,9 @@
           "status": "present",
           "as_reported": "about 33.7% - of the CO to methanol",
           "basis": "CO to methanol",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 33.7
         },
@@ -1093,6 +1113,13 @@
             ],
             "source": "ex:msyn/source/us1908696a",
             "transcription": "pounds per sq. in. and a temperature of 300° C., with the gas flowing at a space velocity of 31,700 (volumes of gas measured at standard conditions entering per hour per volume of"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "$° 31,700 (‘volumes of gas measured at standard\nconditions entering per hour per volume of\n\ncatalyst), the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
           }
         ],
         "experiment_kind": "physical",
@@ -1100,6 +1127,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2600 pounds per sq. in.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2600
         },
@@ -1113,7 +1141,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "31,700 (‘volumes of gas measured at standard conditions entering per hour per volume of catalyst)",
-          "note": "gas volumes at standard conditions",
+          "basis": "gas hourly space velocity: volumes of gas measured at standard conditions entering per hour per volume of catalyst, as the source defines it",
+          "note": "gas volumes at standard conditions; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "vol/(h·vol catalyst)",
           "value": 31700
         },
@@ -1137,7 +1166,9 @@
           "status": "present",
           "as_reported": "about: 13 per cent of the CO is.converted to metii-. _ anol in one pass",
           "basis": "CO to methanol, one pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 13
         },
@@ -1165,6 +1196,13 @@
             ],
             "source": "ex:msyn/source/us1908696a",
             "transcription": "and one of CO at a pressure of 2600 pounds per sq. in. at a temperature of 300° C with a gas flowing at a space velocity of 25,000, about 13 per cent of the CO is converted to meth- anol in one pass, and a space-time-yield of 313 gallons of methanol per twenty four hours per cubic foot of catalyst space is obtained."
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "the source's definition of its space velocity",
+            "quote": "$° 31,700 (‘volumes of gas measured at standard\nconditions entering per hour per volume of\n\ncatalyst), the catalyst.",
+            "source": "ex:msyn/source/us1908696a"
           }
         ],
         "experiment_kind": "physical",
@@ -1172,6 +1210,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2600 pounds: per sq. in.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2600
         },
@@ -1186,7 +1225,8 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "25,000",
-          "note": "no unit printed here",
+          "basis": "gas hourly space velocity: volumes of gas measured at standard conditions entering per hour per volume of catalyst, as the source defines it",
+          "note": "no unit printed here; space velocity basis and gas reference from the source's definition on p. 2 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 25000
         },
@@ -1249,7 +1289,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "at atmospheric pressure",
-          "note": "printed 'atmospheric pressure'",
+          "note": "printed 'atmospheric pressure'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 1
         },

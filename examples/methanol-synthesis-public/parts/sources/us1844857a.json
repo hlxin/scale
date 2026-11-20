@@ -56,6 +56,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -110,7 +111,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "at pressures near atmos- pheric",
-          "note": "printed as near atmospheric pressure; recorded as 1 atm",
+          "note": "printed as near atmospheric pressure; recorded as 1 atm; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "atm",
           "value": 1
@@ -1114,6 +1115,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "at ordinary pressures",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "ordinary"
         },
         "treatment_kind": "reduction"
@@ -2334,6 +2336,7 @@
           "as_reported": "8-9 parts",
           "basis": "calculated as metallic copper",
           "lower": 8,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1",
           "upper": 9
         },
@@ -2362,6 +2365,7 @@
           "as_reported": "1-2 parts",
           "basis": "calculated as metallic manganese",
           "lower": 1,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1",
           "upper": 2
         },
