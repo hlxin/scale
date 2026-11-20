@@ -1,0 +1,18 @@
+question: What did the sources say made a methanol catalyst lose activity or fail?
+use_case: capturing and learning from negative results ("why didn't this work?")
+match:
+  label: Claim
+  as: claim
+text:
+  query: catalyst lost its activity inactive poisoned deactivated no methanol was formed failed
+  vars:
+  - claim
+  mode: hybrid
+  min_score: 0.3
+published_before: '1966-01-01'
+return:
+- claim.statement
+- claim.claim_kind
+- claim.claim_status
+evidence: true
+limit: 25

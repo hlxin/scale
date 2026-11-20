@@ -365,6 +365,10 @@ capabilities:
   status: functioning
   where: scale review sample
   tests: [test_record_sample_is_reproducible]
+- name: Use cases as query plans on the public methanol example (examples/methanol-synthesis-public/use-cases/) - catalyst search accounting for conditions, "has this been done?" (with an undecidable case answered missing_context, never as never done) and negative results (bounds and measured zeros kept apart; claims on why catalysts failed), their answers pinned by tests
+  status: functioning
+  where: examples/methanol-synthesis-public/use-cases/
+  tests: [test_every_use_case_plan_is_pinned, test_structured_use_cases_keep_their_answers, test_an_undecidable_novelty_question_is_not_reported_as_never_done, test_negative_results_keep_bounds_and_zeros_distinct, test_why_it_failed_is_answered_from_claims]
 - name: TRACE-AI read on scale-catal records (scale trace-ai, the agent tool scale_trace_ai) - for each item A1-D3 of the TRACE-AI checklist (Xin et al., Chem Catal. 2026) whether the records support it, partly or not at all, whether it applies (its condition the reason when it does not), what a person checks in the source, or that the document's schema version cannot express it (a property or a vocabulary value it lacks); items about a model, a dataset or a campaign read record by record; from query plans per item (domain/reporting/trace-ai.yaml) with their records and evidence; one source's records as that source states them (--source); flags (a random split, a metric stated without its uncertainty, point predictions only) and how the records were curated
   status: functioning
   where: domain/reporting/trace-ai.yaml, tools/traceai.py, scale trace-ai, scale_trace_ai, docs/trace-ai.md
