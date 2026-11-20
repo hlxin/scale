@@ -1330,6 +1330,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "100 g",
+          "unit": "g",
+          "value": 100
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1339,13 +1345,6 @@
             "source": "ex:msyn/source/pl9584b1"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "100 g",
-          "unit": "g",
-          "value": 100
-        },
-        "fraction_basis": "mass",
         "note": "printed as masses used: 100 g zinc formate to 150 g activated carbon",
         "role": "active_component"
       },
@@ -1357,6 +1356,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "150 g",
+          "unit": "g",
+          "value": 150
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1366,13 +1371,6 @@
             "source": "ex:msyn/source/pl9584b1"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "150 g",
-          "unit": "g",
-          "value": 150
-        },
-        "fraction_basis": "mass",
         "role": "support",
         "role_detail": "absorber and, to some extent, activator of the catalyst (podłoże)"
       },
@@ -1569,6 +1567,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "50 g",
+          "unit": "g",
+          "value": 50
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1579,13 +1583,6 @@
             "source": "ex:msyn/source/pl9584b1"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "50 g",
-          "unit": "g",
-          "value": 50
-        },
-        "fraction_basis": "mass",
         "role": "active_component"
       },
       "source": "ex:msyn/pl9584b1/catalyst/example-iii-zn-cr-formate-on-carbon",
@@ -1596,6 +1593,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "50 g",
+          "unit": "g",
+          "value": 50
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1606,13 +1609,6 @@
             "source": "ex:msyn/source/pl9584b1"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "50 g",
-          "unit": "g",
-          "value": 50
-        },
-        "fraction_basis": "mass",
         "note": "the patent does not assign distinct roles to the two formates",
         "role": "active_component"
       },
@@ -1624,6 +1620,12 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "150 g",
+          "unit": "g",
+          "value": 150
+        },
         "evidence": [
           {
             "kind": "text",
@@ -1634,13 +1636,6 @@
             "source": "ex:msyn/source/pl9584b1"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "150 g",
-          "unit": "g",
-          "value": 150
-        },
-        "fraction_basis": "mass",
         "role": "support"
       },
       "source": "ex:msyn/pl9584b1/catalyst/example-iii-zn-cr-formate-on-carbon",
@@ -2635,6 +2630,6 @@
       "target": "ex:msyn/institution/societe-anonyme-compagnie-de-bethune"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/pl9584b1"
 }

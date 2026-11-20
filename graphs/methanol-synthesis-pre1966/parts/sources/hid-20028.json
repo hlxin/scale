@@ -3154,6 +3154,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "concentration": {
+          "status": "present",
+          "as_reported": "Maximum sulfur content, 1 to 2 mg/cu.m. of gas",
+          "lower": 1,
+          "unit": "mg/cu.m",
+          "upper": 2
+        },
         "evidence": [
           {
             "kind": "text",
@@ -3163,13 +3170,6 @@
             "source": "ex:msyn/source/hid-20028"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "Maximum sulfur content, 1 to 2 mg/cu.m. of gas",
-          "lower": 1,
-          "unit": "mg/cu.m",
-          "upper": 2
-        },
         "role": "other",
         "role_detail": "impurity, maximum content"
       },
@@ -3181,6 +3181,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "concentration": {
+          "status": "present",
+          "as_reported": "about 0.5 gm. of ammonia per 1 cu.m. of gas",
+          "qualifier": "approximate",
+          "unit": "g/cu.m",
+          "value": 0.5
+        },
         "evidence": [
           {
             "kind": "text",
@@ -3190,13 +3197,6 @@
             "source": "ex:msyn/source/hid-20028"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "about 0.5 gm. of ammonia per 1 cu.m. of gas",
-          "qualifier": "approximate",
-          "unit": "g/cu.m",
-          "value": 0.5
-        },
         "role": "other",
         "role_detail": "injected for the activated-carbon purification"
       },
@@ -3890,6 +3890,6 @@
       "target": "ex:msyn/person/john-robell"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/hid-20028"
 }

@@ -3406,6 +3406,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "approximately two moles of ZnO",
+          "qualifier": "approximate",
+          "unit": "mol",
+          "value": 2
+        },
         "evidence": [
           {
             "kind": "text",
@@ -3416,14 +3423,6 @@
             "source": "ex:msyn/source/10.1021-ja01409a015"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "approximately two moles of ZnO",
-          "qualifier": "approximate",
-          "unit": "mol",
-          "value": 2
-        },
-        "fraction_basis": "mole",
         "role": "not_stated"
       },
       "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
@@ -3622,6 +3621,14 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "one mole of Cr2C>3",
+          "note": "OCR 'Cr2C>3' reads Cr2O3",
+          "qualifier": "approximate",
+          "unit": "mol",
+          "value": 1
+        },
         "evidence": [
           {
             "kind": "text",
@@ -3632,15 +3639,6 @@
             "source": "ex:msyn/source/10.1021-ja01409a015"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "one mole of Cr2C>3",
-          "note": "OCR 'Cr2C>3' reads Cr2O3",
-          "qualifier": "approximate",
-          "unit": "mol",
-          "value": 1
-        },
-        "fraction_basis": "mole",
         "role": "not_stated"
       },
       "source": "ex:msyn/10.1021-ja01409a015/catalyst/zno-cr2o3-2-1",
@@ -5118,6 +5116,6 @@
       "target": "ex:msyn/person/g-b-kistiakowsky"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/10.1021-ja01409a015"
 }

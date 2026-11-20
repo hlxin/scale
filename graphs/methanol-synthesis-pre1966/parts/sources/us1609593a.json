@@ -2080,6 +2080,14 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "approxi- mately 750 grams",
+          "note": "mass in the batch as printed",
+          "qualifier": "approximate",
+          "unit": "g",
+          "value": 750
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2090,15 +2098,6 @@
             "source": "ex:msyn/source/us1609593a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "approxi- mately 750 grams",
-          "note": "mass in the batch as printed",
-          "qualifier": "approximate",
-          "unit": "g",
-          "value": 750
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1609593a/catalyst/example-1",
@@ -2252,6 +2251,14 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "82 orams",
+          "note": "mass in the batch as printed ('orams' = grams)",
+          "qualifier": "approximate",
+          "unit": "g",
+          "value": 82
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2262,15 +2269,6 @@
             "source": "ex:msyn/source/us1609593a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "82 orams",
-          "note": "mass in the batch as printed ('orams' = grams)",
-          "qualifier": "approximate",
-          "unit": "g",
-          "value": 82
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1609593a/catalyst/example-1",
@@ -2551,6 +2549,13 @@
       "type": "HAS_COMPONENT",
       "props": {
         "status": "asserted",
+        "amount": {
+          "status": "present",
+          "as_reported": "900 grams of magnesium oxide",
+          "note": "mass of magnesium oxide mixed in",
+          "unit": "g",
+          "value": 900
+        },
         "evidence": [
           {
             "kind": "text",
@@ -2560,14 +2565,6 @@
             "source": "ex:msyn/source/us1609593a"
           }
         ],
-        "fraction": {
-          "status": "present",
-          "as_reported": "900 grams of magnesium oxide",
-          "note": "mass of magnesium oxide mixed in",
-          "unit": "g",
-          "value": 900
-        },
-        "fraction_basis": "mass",
         "role": "not_stated"
       },
       "source": "ex:msyn/us1609593a/catalyst/example-2",
@@ -3275,6 +3272,6 @@
       "target": "ex:msyn/source/us1609593a"
     }
   ],
-  "schema_version": "0.2.0",
+  "schema_version": "0.8.2",
   "source": "ex:msyn/source/us1609593a"
 }
