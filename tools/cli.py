@@ -336,6 +336,14 @@ def cmd_source_check(args):
         raise SystemExit(1)
 
 
+def cmd_source_digest(args):
+    """One paper's graph at a glance: its tests, conditions and results, whether SCALE's graphs report the same
+    catalysts and reactions, its negative results, its claims, and what a person checks first (tools/digest.py)."""
+    from .digest import digest_path
+    d, md = digest_path(args.path, _repo(args), args.against)
+    _emit(d, args, md)
+
+
 def cmd_source_finish(args):
     from . import curate
     print(to_json(curate.finish(Path(args.folder), public=args.public, bundle=args.bundle, title=args.title,
@@ -710,6 +718,20 @@ def cmd_review_sample(args):
     _emit({"fraction": frac, "seed": args.seed, "sample": sample, "check": check,
            "to_record": "after the check, add checked_by (a Person), checked_on, scope, outcome and the counts "
                         "(fields_checked, fields_wrong, fields_missed) to check, and append it to the graph's checks"}, args)
+
+
+def cmd_review_values(args):
+    """Every numeric value checked against its own as_reported text and the quotes its record cites, with a review
+    sheet for the person who checks the curation (tools/valuecheck.py)."""
+    from .valuecheck import check_document, review_sheet
+    doc = load_doc(args.graph)
+    res = check_document(doc)
+    title = f"Value review sheet: {((doc.get('graph') or {}).get('title')) or Path(args.graph).name}"
+    summary = {k: v for k, v in res.items() if k != "rows"}
+    data = {**summary, "rows": res["rows"] if args.all else [r for r in res["rows"] if r["outcome"] != "ok"]}
+    _emit(data, args, review_sheet(res, title, all_values=args.all))
+    if args.strict and res["counts"]["flag"]:
+        raise SystemExit(1)
 
 
 def cmd_trace_ai(args):
@@ -1299,6 +1321,12 @@ def build_parser() -> argparse.ArgumentParser:
              "gaps and the copyright cap (exit 1 on any error)", cu)
     sp.add_argument("folder")
     sp.add_argument("--derive-links", action="store_true", help="first write the REPORTED_IN links the evidence implies")
+    sp = add("digest", cmd_source_digest, "one paper's graph at a glance: tests with conditions and results, whether "
+             "SCALE's graphs report the same catalysts and reactions, negative results, claims, what to check first", cu)
+    sp.add_argument("path", help="a curation folder (checked as source check does) or a graph file")
+    sp.add_argument("--against", action="append", help="a graph to look the paper's catalysts and reactions up in "
+                    "(repeatable; default: the graphs in graphs/, else the public methanol example)")
+    out_opts(sp, ("markdown", "json"))
     sp = add("finish", cmd_source_finish, "build the evidence index; --public: a copy with quoted text capped; --bundle: a "
              "kg-bundle under bundle/", cu)
     sp.add_argument("folder"); sp.add_argument("--public", action="store_true")
@@ -1370,6 +1398,12 @@ def build_parser() -> argparse.ArgumentParser:
     sp.add_argument("--full", action="store_true", help="check every record (first batches of a new pipeline)")
     sp.add_argument("--include-flagged", action="store_true", help="add records with warnings or checklist violations")
     sp.add_argument("--spec", help="a schema manifest (default: chosen by the document)"); out_opts(sp)
+
+    sp = add("values", cmd_review_values, "check every numeric value against its as_reported text and its record's "
+                                           "quotes, and write a review sheet: flagged values first", rv)
+    sp.add_argument("graph"); sp.add_argument("--all", action="store_true", help="list every value, not only the "
+                                                                                 "flagged and unverifiable ones")
+    sp.add_argument("--strict", action="store_true", help="exit 1 when a value is flagged"); out_opts(sp, ("markdown", "json"))
 
     sp = add("trace-ai", cmd_trace_ai, "the TRACE-AI checklist read on a document's records: what they support, the gaps, "
                                        "and what a person checks in the source (docs/trace-ai.md)")

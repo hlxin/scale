@@ -19,6 +19,7 @@ answers:
 | [export-graph](export-graph/SKILL.md) | hand a document to another system, validated, capped and filtered for its audience |
 | [evolve-schema](evolve-schema/SKILL.md) | turn missing-concept gaps or a request into one reviewable schema change |
 | [triage-feedback](triage-feedback/SKILL.md) | sort community feedback into topics and options for the reviewers (maintainers) |
+| [first-paper](first-paper/SKILL.md) | a new contributor's first run: one DOI in, a checked graph of the paper, its digest (conditions and results, "has this been done?", negative results) and a review sheet out; a contribution only after the person approves |
 
 ## Which skill for a request
 
@@ -27,6 +28,7 @@ answers:
 | a topic: "find / index / list sources", "newer sources" | index-sources |
 | "download the PDFs", "get the papers of …" | index-sources freezes a corpus (or take a frozen one), then fetch-corpus |
 | a topic: "build the graph / curate / extract the data" | index-sources, freeze a corpus, fetch-corpus, then curate-corpus |
+| "try SCALE on my paper", a first contribution | first-paper (it runs curate-corpus for one source) |
 | one source, a DOI, a PDF, or a data file to record | curate-corpus |
 | an unfinished curation run, or "continue" | curate-corpus (references/runs.md) |
 | "what do the sources report about …" | query-graph |
