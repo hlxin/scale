@@ -8,7 +8,7 @@ from collections import Counter
 
 import pytest
 
-from conftest import REPO
+from conftest import REPO, RUN_SCALE
 from scale import graphparts as gp
 from scale.upgrade import plan, render, step_impact
 from scale.util import ScaleError, load_doc
@@ -86,7 +86,10 @@ def test_step_impact_reads_a_diff_against_what_the_graph_uses():
 def test_the_command_writes_the_report_and_upgrades_only_with_write(tmp_path):
     g = tmp_path / "one"
     gp.write_parts(gp.subset(gp.read_parts(EX), ["10.1021-ie50226a034"]), g)
-    cmd = [sys.executable, "-m", "scale.cli", "--repo", str(REPO), "graph", "upgrade", str(g), "--report-dir", str(tmp_path)]
+    # the tools of the repository under test (RUN_SCALE), not an installed package: the version-bump test runs this
+    # suite on a copy whose schema is one version ahead
+    cmd = [sys.executable, "-c", RUN_SCALE, str(REPO / "tools"), "--repo", str(REPO), "graph", "upgrade", str(g),
+           "--report-dir", str(tmp_path)]
     run = subprocess.run(cmd, capture_output=True, text=True)
     assert run.returncode == 0, run.stderr
     out = json.loads(run.stdout)
