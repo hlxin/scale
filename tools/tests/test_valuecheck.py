@@ -72,6 +72,22 @@ def test_the_public_methanol_example_has_few_transcription_flags():
     assert res["counts"]["ok"] / res["values"] > 0.8
 
 
+def test_source_check_and_scale_check_report_the_values_without_failing():
+    from scale.devcheck import value_warnings
+    msgs = value_warnings(REPO)
+    assert any(m.startswith("values: methanol-synthesis-pre1966:") and "flagged" in m for m in msgs)
+
+
+def test_source_check_summarizes_the_values_of_a_curation_folder(tmp_path):
+    from test_source_curation import DOI, TEXT, fake
+    from scale import curate
+    (tmp_path / "paper.txt").write_text(TEXT, encoding="utf-8")
+    curate.start(tmp_path / "w", doi=DOI, text=tmp_path / "paper.txt", repo=REPO, get=fake())
+    res = curate.check(tmp_path / "w", REPO)
+    assert res["ok"] and res["values"]["checked"] == 0 and res["values"]["flag"] == 0       # advisory: never fails it
+    assert res["values"]["review_sheet"].startswith("scale review values ")
+
+
 def test_the_command_writes_a_sheet_and_strict_fails_on_a_flag(tmp_path):
     bad = tmp_path / "bad.json"
     bad.write_text(json.dumps(_doc({"conversion": {"status": "present", "value": 15.0, "unit": "%"}})))
