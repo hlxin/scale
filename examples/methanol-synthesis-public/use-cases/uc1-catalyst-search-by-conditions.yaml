@@ -1,0 +1,60 @@
+question: Which Cu-containing catalysts were tested for methanol synthesis at or below 300 °C and 100 atm, and what
+  did they produce under those conditions?
+use_case: catalyst search and recommendation, accounting for experimental conditions
+match:
+  label: CatalyticTest
+  as: test
+steps:
+- from: test
+  edge: USES_CATALYST
+  to: CatalystSample
+  as: sample
+- from: sample
+  edge: HAS_FORMULATION
+  to: Catalyst
+  as: catalyst
+- from: catalyst
+  edge: HAS_COMPONENT
+  to: ChemicalSpecies
+  as: copper
+  where:
+  - prop: formula
+    op: in
+    value: [Cu, CuO, Cu2O]
+- from: test
+  edge: OF_REACTION
+  to: Reaction
+  as: reaction
+  where:
+  - prop: id
+    op: in
+    value:
+    - ex:msyn/reaction/co-hydrogenation-to-methanol
+    - ex:msyn/reaction/co2-hydrogenation-to-methanol
+where:
+- var: test
+  prop: temperature
+  op: le
+  value: 300
+  unit: °C
+- var: test
+  prop: pressure
+  op: le
+  value: 100
+  unit: atm
+published_before: '1966-01-01'
+return:
+- catalyst.name
+- test.temperature
+- test.pressure
+- test.space_velocity
+- test.conversion
+- test.yield
+- test.space_time_yield
+- test.production_rate
+- reaction.equation
+evidence: true
+order_by:
+- var: test
+  prop: temperature
+limit: 60
