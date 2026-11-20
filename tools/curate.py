@@ -318,7 +318,13 @@ def check(d: Path, repo: Path | None = None, derive_links: bool = False) -> dict
     cap = rights.report(doc, rights.load_rights(d / "rights.yaml"))
     evidenced = sum(1 for r in doc["nodes"] + doc["links"] if (r.get("props") or {}).get("evidence"))
     gaps = [g for n in doc["nodes"] for g in (n.get("props") or {}).get("gaps") or []] if doc["nodes"] else []
+    from .valuecheck import check_document as check_values      # advisory: a person reviews what it flags
+    vals = check_values(doc)
+    flagged = [{k: r[k] for k in ("record", "path", "value", "unit", "as_reported", "problems")}
+               for r in vals["rows"] if r["outcome"] == "flag"]
     return {"graph": gpath.name, "ok": not rep.errors, "errors": rep.errors, "warnings": rep.warnings,
+            "values": {"checked": vals["values"], **vals["counts"], "flagged_first": flagged[:20],
+                       "review_sheet": f"scale review values {gpath} --out {d / 'review-values.md'}"},
             "conformance": rep.conformance, "records": {"nodes": len(doc["nodes"]), "links": len(doc["links"]),
                                                         "with_evidence": evidenced},
             "quotes_checked_against_text": bool(texts), "gaps": len(gaps),

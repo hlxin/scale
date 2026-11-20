@@ -45,6 +45,24 @@ def reviewer_warnings(repo: Path) -> list[str]:
     return [f"reviewers: {n} placeholder{'s' if n != 1 else ''} to fill ({layout.REVIEW_POLICY})"] if n else []
 
 
+def value_warnings(repo: Path) -> list[str]:
+    """Numeric values in the committed graphs that their own printed text or quotes do not back (tools/valuecheck.py):
+    for a person to review, never a failure."""
+    from .util import load_doc
+    from .valuecheck import check_document
+    out = []
+    for g in sorted((Path(repo) / layout.GRAPHS).iterdir()) if (Path(repo) / layout.GRAPHS).is_dir() else []:
+        if not (g / "parts").is_dir():
+            continue
+        res = check_document(load_doc(g))
+        f = res["checks_failed"]
+        if res["counts"]["flag"]:
+            out.append(f"values: {g.name}: {res['counts']['flag']} of {res['values']} flagged "
+                       f"(value_vs_as_reported {f['value_vs_as_reported']}, value_vs_evidence {f['value_vs_evidence']}); "
+                       f"scale review values {layout.GRAPHS}/{g.name}")
+    return out
+
+
 # Prose that names the schema's one version. Each entry is a file and a pattern for the sentence; ``head`` is the
 # catalysis manifest's version (the kernel's and the catalysis file's too: they carry none of their own). A warning,
 # never a failure (`scale schema bump` rewrites these sentences). Change a sentence and its pattern together.
@@ -92,6 +110,7 @@ def check_steps(repo: Path, fast: bool = False) -> list[dict]:
     steps = [
         {"name": "reviewers: the review policy lists no placeholder", "cmds": [], "warning": reviewer_warnings},
         {"name": "the documentation names the current schema version", "cmds": [], "warning": version_text_warnings},
+        {"name": "numeric values are backed by their quotes (advisory)", "cmds": [], "warning": value_warnings},
         {"name": "unit tests", "cmds": [[sys.executable, "-m", "pytest", "-q"]], "slow": True},
         {"name": "releases are unchanged (digests)", "cmds": [scale + ["release", "verify"]]},
         {"name": "scale-catal schemas load (head and frozen)", "cmds": [scale + ["graph", "verify"]]},
