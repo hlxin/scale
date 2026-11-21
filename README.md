@@ -28,6 +28,14 @@ pip install git+https://github.com/hlxin/scale
 Then `scale call status` to start, or `claude mcp add scale -- scale mcp` to give an AI agent the tools
 ([docs/integrate.md](docs/integrate.md), [AGENTS.md](AGENTS.md)).
 
+**Try it on your paper:** `/first-paper <DOI>` in Claude Code in a clone gives you your paper as a knowledge graph, its
+answers to three questions (what was tested under which conditions, has this been done before, which runs failed) and
+a review sheet of every number beside its quote; you decide whether to contribute it ([CONTRIBUTE.md](CONTRIBUTE.md),
+with a prompt for other coding agents).
+
+**Use it from your agent:** [`agents/`](agents/README.md) has a drop-in instruction file that tells an agent *when* to
+query SCALE (catalyst search under stated conditions, "has this been done?", negative results), and the MCP setup.
+
 **Or in the browser: [the graph explorer](https://hlxin.github.io/scale/).** Pick one of the curated graphs (or
 open a graph file) and see it whole, filter it by label or relationship type, open any node with its verbatim
 evidence, search the evidence, and explore its data (counts, degrees, numeric properties plotted). SCALE's own code

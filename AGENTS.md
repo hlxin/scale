@@ -31,7 +31,9 @@ scale-catal@0.3.0 …` a pinned one. In a checkout of this repository run `uv ru
   test (a test that lists none is never complete) and record what the source reads it as showing
   (`interpretations`), never your own reading. Check with
   `validate` (or `scale graph validate`) and fix the errors it reports; the graph follows
-  `follows_domains: ["catalysis"]`.
+  `follows_domains: ["catalysis"]`. Then run `scale review values <graph> --out review-values.md` (`scale source
+  check` also reports its counts and the first flagged values), fix or explain every flagged value, and give the
+  sheet to the person who reviews the curation ([CONTRIBUTE.md](CONTRIBUTE.md)).
 - **Rights.** Record each source's rights in the folder's `rights.yaml` and keep quoted text within the
   copyright cap (`scale evidence report`; docs/curation.md); write claims in your own words. Commit only
   public documents (`access: public`); project data not cleared for publication stays outside the repository.
