@@ -20,6 +20,13 @@
             "passage": "10.1021-ie50219a021/p4/2",
             "quote": "The upper curve represents the theoretical conversion at equilibrium as calculated from thermal data.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "states conditions.pressure ('3000 pounds pressure (204 atmospheres)'); cited when the value check found the record's quotes did not print it",
+            "quote": "and then falls off considerably as the temperature is increased\nto 450° C.\nFigure 7 shows the percentage conversion of carbon mon-\noxide to methanol as a function of temperature at 3000 pounds\npressure (204 atmospheres) and an entering gas flow of 100\nliters per hour.\nThe upper curve\nrepresents the theoretical\nconversion at equilibrium as calculated from thermal data.\nThe plot does not permit any",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "note": "curve not read"
@@ -43,6 +50,13 @@
             "kind": "text",
             "locator": "p. 4",
             "quote": "It will be seen that the percentage conversion as determined by experiment increases considerably with pressure in a range where the calculated conversion changes only from 98 to 99.5 per cent.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "states conditions.temperature ('300° C.'); cited when the value check found the record's quotes did not print it",
+            "quote": "nstant conditions\npasses through\na maximum\nas the temperature is raised.\nFigure 6 shows this graphically for another series of experi-\nments than that plotted in Figure 5.\nAgain the conversion\nat 300° C. is uncertain, but regardless of the exact location\nof this point, the fact remains that the reaction starts at\n290° C., increases very rapidly with the temperature, passes\nthrough a maximum somewh",
             "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
@@ -1520,6 +1534,20 @@
             "passage": "10.1021-ie50219a021/p3/3",
             "quote": "The dia- gram also shows alternative connections for operation of two or three chambers in series.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states specifications.chamber_1_catalyst ('chamber 1 contains 20 cc. catalyst'); cited when the value check found the record's quotes did not print it",
+            "quote": "of catalyst with\na gas mixture\nhaving a ratio of CO : Ha of about 0.37\nFigure 10—Conversion of Carbon Monoxide\ninto\nMethanol in a\nDiscontinuous\nRun with\nTwo Chambers in Series\nGas entering chamber 1 has a ratio of CO : Ha\n=\n0.322; chamber 1\ncontains 20 cc. catalyst, chamber 2, 40 cc.;\npressure 3000 lbs.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states specifications.chamber_2_catalyst ('chamber 2, 40 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "catalyst, chamber 2, 40 cc.;\npressure 3000 lbs.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "reactor_kind": "fixed_bed",
@@ -1878,6 +1906,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -1965,6 +1994,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2044,6 +2074,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2076,6 +2107,8 @@
           "as_reported": "decreases from 25 per cent and reaches a constant value of about 8 per cent",
           "basis": "per cent of CO converted into methanol",
           "lower": 8,
+          "note": "target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "upper": 25
         }
@@ -2154,6 +2187,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2180,6 +2214,8 @@
           "as_reported": "a constant yield of from 40 to 42 per cent for about 18 hours",
           "basis": "per cent of CO converted into methanol",
           "lower": 40,
+          "note": "target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "upper": 42
         }
@@ -2214,6 +2250,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -2221,6 +2264,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -2229,6 +2274,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2306,6 +2352,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2392,6 +2439,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2478,6 +2526,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2531,6 +2580,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -2538,6 +2594,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -2546,6 +2604,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2623,6 +2682,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2709,6 +2769,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2795,6 +2856,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2848,6 +2910,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -2855,6 +2924,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -2863,6 +2934,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2940,6 +3012,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3026,6 +3099,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3112,6 +3186,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3198,6 +3273,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3265,6 +3341,13 @@
             "passage": "10.1021-ie50219a021/p4/1",
             "quote": "servations, the highest yields obtained at this temperature being used in plotting the curve.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -3272,6 +3355,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -3280,6 +3365,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3371,6 +3457,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3388,8 +3475,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 73
         }
@@ -3471,6 +3559,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3488,8 +3577,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 55
         }
@@ -3524,6 +3614,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -3531,6 +3628,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -3539,6 +3638,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3616,6 +3716,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3633,8 +3734,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 34.5
         }
@@ -3702,6 +3804,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3719,8 +3822,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 32
         }
@@ -3788,6 +3892,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3805,8 +3910,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 47
         }
@@ -3841,6 +3947,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -3848,6 +3961,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -3856,6 +3971,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3933,6 +4049,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -3950,8 +4067,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 15
         }
@@ -4019,6 +4137,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4036,8 +4155,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 26
         }
@@ -4105,6 +4225,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4122,8 +4243,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 17
         }
@@ -4158,6 +4280,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -4165,6 +4294,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "ENTERING GAS FLOW, LITERS PER HOUR AT STANDARD CONDITIONS",
+          "basis": "at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "varied (entering gas flow, liters per hour at standard conditions)"
         },
         "heating_mode": "resistive",
@@ -4173,6 +4304,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4250,6 +4382,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4267,8 +4400,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 6.5
         }
@@ -4336,6 +4470,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4353,8 +4488,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 10.5
         }
@@ -4422,6 +4558,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4439,8 +4576,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 12
         }
@@ -4508,6 +4646,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4525,8 +4664,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 9
         }
@@ -4594,6 +4734,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4611,8 +4752,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 9
         }
@@ -4680,6 +4822,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4697,8 +4840,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 5 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 5",
+          "note": "read from Figure 5; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 8.5
         }
@@ -4764,6 +4908,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4782,8 +4927,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 6 (PERCENT CO CONVERTED TO CH3OH)",
           "basis": "per cent of CO converted to methanol",
-          "note": "read from Figure 6",
+          "note": "read from Figure 6; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 0
         }
@@ -4862,6 +5008,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4890,8 +5037,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 6 (PERCENT CO CONVERTED TO CH3OH)",
           "basis": "per cent of CO converted to methanol",
-          "note": "read from Figure 6",
+          "note": "read from Figure 6; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 21
         }
@@ -4964,6 +5112,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -4992,8 +5141,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 6 (PERCENT CO CONVERTED TO CH3OH)",
           "basis": "per cent of CO converted to methanol",
-          "note": "read from Figure 6",
+          "note": "read from Figure 6; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 38
         }
@@ -5059,6 +5209,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -5077,8 +5228,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 6 (PERCENT CO CONVERTED TO CH3OH)",
           "basis": "per cent of CO converted to methanol",
-          "note": "read from Figure 6",
+          "note": "read from Figure 6; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 15.5
         }
@@ -5144,6 +5296,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 lbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -5172,8 +5325,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 6 (PERCENT CO CONVERTED TO CH3OH)",
           "basis": "per cent of CO converted to methanol",
-          "note": "read from Figure 6; re-curation 2026-09-29 (page image, 400 dpi, marker centre against the 0 and 10 gridlines) corrected 6.5 -> 6.1",
+          "note": "read from Figure 6; re-curation 2026-09-29 (page image, 400 dpi, marker centre against the 0 and 10 gridlines) corrected 6.5 -> 6.1; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 6.1
         }
@@ -5208,6 +5362,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5215,7 +5376,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "an entering gas flow of 100 liters per hour",
-          "basis": "entering gas",
+          "basis": "entering gas; at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 100
         },
@@ -5225,6 +5387,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 pounds pressure (204 atmospheres)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -5282,6 +5445,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5289,7 +5459,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "150 liters per hour of entering gas",
-          "basis": "entering gas",
+          "basis": "entering gas; at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 150
         },
@@ -5298,7 +5469,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "plotted point, Figure 8 abscissa (PRESSURE, LBS/IN2)",
-          "note": "read from Figure 8",
+          "note": "read from Figure 8; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "lb/in2",
           "value": 2000
@@ -5316,8 +5487,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 8 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 8",
+          "note": "read from Figure 8; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 52
         }
@@ -5367,6 +5539,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5374,7 +5553,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "150 liters per hour of entering gas",
-          "basis": "entering gas",
+          "basis": "entering gas; at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 150
         },
@@ -5383,7 +5563,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "plotted point, Figure 8 abscissa (PRESSURE, LBS/IN2)",
-          "note": "read from Figure 8 (added in re-curation 2026-09-29)",
+          "note": "read from Figure 8 (added in re-curation 2026-09-29); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "lb/in2",
           "value": 3000
@@ -5401,8 +5581,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 8 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 8 (added in re-curation 2026-09-29); the small open marker sits on the 3000 / 60 grid intersection, below the drawn curve",
+          "note": "read from Figure 8 (added in re-curation 2026-09-29); the small open marker sits on the 3000 / 60 grid intersection, below the drawn curve; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 60
         }
@@ -5452,6 +5633,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5459,7 +5647,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "150 liters per hour of entering gas",
-          "basis": "entering gas",
+          "basis": "entering gas; at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 150
         },
@@ -5468,7 +5657,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "plotted point, Figure 8 abscissa (PRESSURE, LBS/IN2)",
-          "note": "read from Figure 8; re-curation 2026-09-29 corrected 3650 -> 3700 (marker at about 3700 lbs./in.2 against the 3000 and 4000 gridlines)",
+          "note": "read from Figure 8; re-curation 2026-09-29 corrected 3650 -> 3700 (marker at about 3700 lbs./in.2 against the 3000 and 4000 gridlines); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "lb/in2",
           "value": 3700
@@ -5486,8 +5675,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 8 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 8; re-curation 2026-09-29 corrected 78 -> 76",
+          "note": "read from Figure 8; re-curation 2026-09-29 corrected 78 -> 76; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 76
         }
@@ -5537,6 +5727,13 @@
             "passage": "10.1021-ie50219a021/p6/3",
             "quote": "Hence, all the previous conclusions are based on results obtained with the second or third chamber in a series, and only after it had been demonstrated, by varying the con- ditions back and forth, that the results could be duplicated.",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states the conditions the source's gas flows are counted at",
+            "quote": "(204 atmos.), temperature 300° C.; gas leaves chamber 2 at\na rate of 80 liters per hour at standard conditions\nbetween 23 and 31, as shown by the ratios of carbon mon-\noxide to hydrogen given in Figures 9 to 11.\nThe rate of flow\nis in this case expressed in liters per hour of exit gas at stand-\nard conditions of temperature and pressure (0° C.",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5544,7 +5741,8 @@
         "flow_rate": {
           "status": "present",
           "as_reported": "150 liters per hour of entering gas",
-          "basis": "entering gas",
+          "basis": "entering gas; at standard conditions of temperature and pressure (0° C. and 760 mm.), as the source states",
+          "note": "flow reference from the source's statement on p. 5 (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "L/h",
           "value": 150
         },
@@ -5553,7 +5751,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "plotted point, Figure 8 abscissa (PRESSURE, LBS/IN2)",
-          "note": "read from Figure 8; re-curation 2026-09-29 corrected 4000 -> 4270 (last marker lies beyond the 4000 LBS/IN2 gridline, about a quarter of the way to the frame)",
+          "note": "read from Figure 8; re-curation 2026-09-29 corrected 4000 -> 4270 (last marker lies beyond the 4000 LBS/IN2 gridline, about a quarter of the way to the frame); the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "lb/in2",
           "value": 4270
@@ -5571,8 +5769,9 @@
           "status": "present",
           "as_reported": "plotted point, Figure 8 (PERCENT CO CONVERTED INTO METHANOL)",
           "basis": "per cent of CO converted into methanol",
-          "note": "read from Figure 8; re-curation 2026-09-29 corrected 81 -> 80",
+          "note": "read from Figure 8; re-curation 2026-09-29 corrected 81 -> 80; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 80
         }
@@ -5649,6 +5848,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 tbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -5681,7 +5881,8 @@
           "as_reported": "the yield drops from 32 to 12 per cent",
           "basis": "per cent of CO converted into methanol",
           "lower": 12,
-          "note": "yield fell from 32 to 12 per cent over the first 20 hours",
+          "note": "yield fell from 32 to 12 per cent over the first 20 hours; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "upper": 32
         }
@@ -5728,6 +5929,13 @@
             "passage": "10.1021-ie50219a021/p5/4",
             "quote": "The rate of flow is in this case expressed in liters per hour of exit gas at stand- ard conditions of temperature and pressure (0° C. and 760 mm.).",
             "source": "ex:msyn/source/10.1021-ie50219a021"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 5",
+            "note": "states time_on_stream ('During the first 20 hours'); cited when the value check found the record's quotes did not print it",
+            "quote": "and 760\nmm.).\nIn Figure 9 the percentage conversion of carbon monoxide\ninto methanol is plotted versus\ntime for a run\nwhich was\nmade with a single chamber and lasted for nearly 31 hours.\nDuring the first 20 hours at an average temperature of 298°\nC., the yield drops from 32 to\n12 per cent, showing that\nthe activity of the catalyst decreases with the time when\nonly\na single chamber is used.\nRaising",
+            "source": "ex:msyn/source/10.1021-ie50219a021"
           }
         ],
         "experiment_kind": "physical",
@@ -5744,6 +5952,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 tbs. per sq. in. (204 atmos.)",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -5767,7 +5976,8 @@
           "status": "present",
           "as_reported": "brings the yield back to 30 per cent",
           "basis": "per cent of CO converted into methanol",
-          "note": "followed by a gradual decrease",
+          "note": "followed by a gradual decrease; target ch3oh: the species this product yield counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/ch3oh",
           "unit": "%",
           "value": 30
         }
@@ -5806,7 +6016,7 @@
           "status": "present",
           "as_reported": "100 to 400 pounds per square inch (6.8 to 26.1 atmospheres)",
           "lower": 100,
-          "note": "'say 100 to 400'",
+          "note": "'say 100 to 400'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "lb/in2",
           "upper": 400
@@ -7667,6 +7877,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "36 per cent",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 36
         },
@@ -7885,6 +8096,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "44 per cent",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 44
         },
@@ -8101,6 +8313,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "20 per cent",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 20
         },
@@ -9254,7 +9467,7 @@
           "status": "present",
           "as_reported": "varied between 23 and 31",
           "lower": 23,
-          "note": "stated for the series of Figures 9 to 11 as a whole",
+          "note": "stated for the series of Figures 9 to 11 as a whole; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "upper": 31
         },
@@ -9871,7 +10084,7 @@
           "status": "present",
           "as_reported": "varied between 23 and 31",
           "lower": 23,
-          "note": "stated for the series of Figures 9 to 11 as a whole",
+          "note": "stated for the series of Figures 9 to 11 as a whole; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "upper": 31
         },
@@ -10420,7 +10633,7 @@
           "status": "present",
           "as_reported": "varied between 23 and 31",
           "lower": 23,
-          "note": "stated for the series of Figures 9 to 11 as a whole",
+          "note": "stated for the series of Figures 9 to 11 as a whole; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "upper": 31
         },

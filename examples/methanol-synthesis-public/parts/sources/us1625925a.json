@@ -1764,7 +1764,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2200 pounds",
-          "note": "printed as 'pounds'",
+          "note": "printed as 'pounds'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2200
         },
@@ -1789,7 +1789,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "75,000",
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1/h",
           "value": 75000
         },
@@ -1835,6 +1835,13 @@
             "passage": "us1625925a/p2/6",
             "quote": "passed: through 1000 cubic 115 120 centimeters of such a catalyst at a space ve- — locity of 75,000 and at a temperature of about 350-400° C. there will be produced about 900-1000 cubic centimeters of conden- sate per hour.",
             "source": "ex:msyn/source/us1625925a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states pressure ('2200 pounds'); cited when the value check found the record's quotes did not print it",
+            "quote": "d'oxide and 90% of hydrogen at a pressure\nof 2200 pounds is passed: through 1000 cubic\n\n115\n\n120\n\ncentimeters of such a catalyst at a space ve- —\n\nlocity of 75,000 and at a temperature of\nabout 350-400° C.",
+            "source": "ex:msyn/source/us1625925a"
           }
         ],
         "experiment_kind": "physical",
@@ -1844,7 +1851,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2200 pounds",
-          "note": "'the same reaction conditions'; printed as 'pounds'",
+          "note": "'the same reaction conditions'; printed as 'pounds'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2200
         },
@@ -1868,7 +1875,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "75,000",
-          "note": "'the same reaction conditions'; no unit printed",
+          "note": "'the same reaction conditions'; no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1/h",
           "value": 75000
         },
@@ -1987,7 +1994,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "3000 pounds",
-          "note": "printed as 'pounds'",
+          "note": "printed as 'pounds'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 3000
         },
@@ -2013,7 +2020,7 @@
           "status": "present",
           "as_reported": "75,000-100,000",
           "lower": 75000,
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1/h",
           "upper": 100000
         },
@@ -2122,7 +2129,7 @@
           "status": "present",
           "as_reported": "2500-3000 | pounds",
           "lower": 2500,
-          "note": "printed as 'pounds'",
+          "note": "printed as 'pounds'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "upper": 3000
         },
@@ -2146,7 +2153,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "about 100,000",
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "1/h",
           "value": 100000
@@ -2194,7 +2201,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "2500 pounds",
-          "note": "printed as 'pounds'",
+          "note": "printed as 'pounds'; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "lb/in2",
           "value": 2500
         },
@@ -2218,7 +2225,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "75,000",
-          "note": "no unit printed",
+          "note": "no unit printed; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "1/h",
           "value": 75000
         },
@@ -3003,6 +3010,13 @@
             "locator": "p. 3, Example V",
             "passage": "us1625925a/p3/3",
             "quote": "velocity of about 100,000, a temperature of , about 400°, and at a pressure of 2500-3000 | pounds, there will be produced, hourly, about | 1.5 liters of condensate analyzing about 50% :",
+            "source": "ex:msyn/source/us1625925a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 3",
+            "note": "states amount ('1000 | cubic centimeters'); cited when the value check found the record's quotes did not print it",
+            "quote": "monoxide,\nand 90% hydrogen is passed through 1000 |\n\ncubic centimeters of this catalyst at a space\n\n\nX:) | oe BZ\n\n- velocity of about 100,000, a temperature of\n, about 400°, and at a pressure of 2500-3000\n| pounds, there will be produced, hourly, about\n| 1.5 liters of condensate analyzing about 50% :\n\n» methanol.",
             "source": "ex:msyn/source/us1625925a"
           }
         ],
@@ -4770,6 +4784,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "10% of carbon d'oxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 10
         },
@@ -4797,6 +4812,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "90% of hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 90
         },
@@ -4849,6 +4865,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "10% car- bon dioxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 10
         },
@@ -4875,6 +4892,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "90% hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 90
         },
@@ -4901,6 +4919,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "10% carbon dioxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 10
         },
@@ -4927,6 +4946,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "2% carbon monoxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 2
         },
@@ -4953,6 +4973,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "88% hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 88
         },
@@ -4986,7 +5007,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "5% carbon dioxide",
-          "note": "re-curation 2026-09-29 (page image): corrected from 9 (OCR misread); the three printed percentages add to 100",
+          "note": "re-curation 2026-09-29 (page image): corrected from 9 (OCR misread); the three printed percentages add to 100; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 5
         },
@@ -5020,6 +5041,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "5% carbon monoxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 5
         },
@@ -5053,6 +5075,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "90% hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 90
         },
@@ -5150,7 +5173,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "10% of dextrin",
-          "note": "basis not stated",
+          "note": "basis not stated; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "value": 10
         },
@@ -5592,6 +5615,13 @@
             "passage": "us1625925a/p3/1",
             "quote": "Under the same reaction conditions this-cata- lyst will produce from 1.7-2.0 liters of con- densate per hour and this condensate will show about 55% of methanol, the remainder being substantially pure water.",
             "source": "ex:msyn/source/us1625925a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('1000 cubic centimeters'); cited when the value check found the record's quotes did not print it",
+            "quote": "there will be produced\nabout 900-1000 cubic centimeters of conden-\nsate per hour.",
+            "source": "ex:msyn/source/us1625925a"
           }
         ],
         "state": "as_prepared"
@@ -5781,6 +5811,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "an equivalent quantity of magnesium chloride",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "an equivalent quantity (to the zinc halide of Example I)"
         },
         "fraction_basis": "not_reported",
@@ -6237,6 +6268,13 @@
             "locator": "p. 3, Example III",
             "passage": "us1625925a/p3/2",
             "quote": "centimeters of the catalyst, at a tempera- ture of about 380-420° C., at a space velocity of 75,000-100,000 and at a pressure of 3000 pounds there will be produced, hourly, about",
+            "source": "ex:msyn/source/us1625925a"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('1000 cubic centimeters'); cited when the value check found the record's quotes did not print it",
+            "quote": "there will be produced\nabout 900-1000 cubic centimeters of conden-\nsate per hour.",
             "source": "ex:msyn/source/us1625925a"
           }
         ],

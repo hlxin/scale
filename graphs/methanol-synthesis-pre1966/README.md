@@ -54,10 +54,31 @@ mechanical: every record id is kept, the 0.2.1 → 0.3.0 migration rule moved 47
 in a mass or amount unit to `amount` (39 of them in the public part), every other step only raised the version, and the graph validates with 0 errors.
 Every query plan of the example answers as before.
 
-Nothing was read again. What 0.8.2 can express that the 0.2.0 curation did not record stays unrecorded, and a
-scientific comparison keeps such values apart rather than mixing them: 2,317 values in 1,224 records of 78 sources,
-most of them pressures that do not say gauge or absolute (649), compositions without their fraction basis (488),
-space velocities without their basis or flow reference (402), and conversions and yields that do not name the
-species they count (320). A targeted re-reading of only those passages (the upgrade-curation skill) can fill them,
-or record that a source does not say, if that is worth doing later. The full report, step by step and with the
-re-reading worklist by source, is [UPGRADE-0.2.0-to-0.8.2.md](UPGRADE-0.2.0-to-0.8.2.md).
+### Re-reading for 0.8.2 (2026-11-20)
+
+The 55 public-domain sources, whose page texts are in the example, were re-read where 0.8.2 asks for more than the
+0.2.0 curation recorded. Only the cited passages and the sentences that could settle each gap were read, and nothing
+was filled from convention:
+
+- **Citations.** 268 values whose records did not cite the sentence that states them now cite it (152 records; for
+  example a paper's "a pressure of 150 atmospheres was consistently employed"). Two `as_reported` texts that held a
+  table's row label now hold the printed value; two reduction times read on the page image (3½ h, 1¾ h) were
+  confirmed.
+- **Filled from the source (216 values).** The species of 173 conversions and yields (carbon monoxide converted,
+  methanol formed; for two papers from their own definition of the measure, cited); the flow reference of 21 flows
+  and space velocities ("standard conditions (0° C. and 760 mm.)", "N.T.P."); the basis of 11 space velocities
+  ("cubic feet of gas per cubic foot of catalyst per hour") and of 11 compositions whose own sentence says by weight,
+  by volume or atomic.
+- **Recorded as not stated (1,081 values).** No pressure in these sources says gauge or absolute (393); most gas
+  flows and space velocities do not say what conditions their volumes are counted at (249) or define the space
+  velocity (204); most compositions do not say their basis in the sentence that prints them (234; for 143 of them
+  the note names the one basis the source states elsewhere, e.g. "parts by weight" in a patent's first example, for
+  a reviewer to decide on). Each value's `note` says so, so a query that keeps it apart can say why. One product
+  stays unidentified as the source names it ("alkohol"). Three flows "measured under ordinary conditions" have no
+  flow reference in the schema to say it with: a schema gap.
+
+**Not re-read:** the 50 sources in copyright, whose text is not committed: 1,020 values (256 pressures, 243 compositions, 188
+flow references, 187 space-velocity bases, 146 species) still lack a context, with no note. Re-reading them needs their PDFs (`scale evidence
+rehydrate`, then the upgrade-curation skill on the worklist). The full report, step by step and with the re-reading
+worklist by source, is [UPGRADE-0.2.0-to-0.8.2.md](UPGRADE-0.2.0-to-0.8.2.md); it describes the graph before this
+re-reading.

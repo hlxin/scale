@@ -441,6 +441,13 @@
             "locator": "p. 1",
             "quote": "The apparatus and the preparation of the gas employed has been described in an earlier paper (S).",
             "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 1",
+            "note": "states specifications.catalyst_mass ('177 grams'); cited when the value check found the record's quotes did not print it",
+            "quote": "Y.\nTwo hundred and fifty cubic centimeters (177 grams) of this\ncatalyst were\nemployed.\nIts method of preparation follows:\nA boiling solution of copper and chromium nitrates in the\natomic ratio of 3 Cu to\n1 Cr was\nadded slowly and with\nefficient stirring to\na boiling solution of sodium hydroxide\ncontaining 6 per cent in\nexcess\nof that calculated to pre-\ncipitate the metals.\nThe precipitate was wash",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],
         "reactor_kind": "not_reported",
@@ -557,7 +564,8 @@
         "conversion": {
           "status": "present",
           "as_reported": "7.15",
-          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9); target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "mol %",
           "value": 7.15
         },
@@ -614,7 +622,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
-          "note": "total gas pressure",
+          "note": "total gas pressure; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -696,7 +704,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "a space velocity of 3000",
-          "note": "unit and basis not stated",
+          "note": "unit and basis not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "3000"
         },
         "temperature": {
@@ -739,7 +747,8 @@
         "conversion": {
           "status": "present",
           "as_reported": "12.75",
-          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9); target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "mol %",
           "value": 12.75
         },
@@ -796,7 +805,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
-          "note": "total gas pressure",
+          "note": "total gas pressure; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -877,7 +886,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "a space velocity of 3000",
-          "note": "unit and basis not stated",
+          "note": "unit and basis not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "3000"
         },
         "temperature": {
@@ -920,7 +929,8 @@
         "conversion": {
           "status": "present",
           "as_reported": "19.8",
-          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9); target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "mol %",
           "value": 19.8
         },
@@ -977,7 +987,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
-          "note": "total gas pressure",
+          "note": "total gas pressure; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -1058,7 +1068,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "a space velocity of 3000",
-          "note": "unit and basis not stated",
+          "note": "unit and basis not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "3000"
         },
         "temperature": {
@@ -1101,7 +1111,8 @@
         "conversion": {
           "status": "present",
           "as_reported": "15.4",
-          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9); target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "mol %",
           "value": 15.4
         },
@@ -1158,7 +1169,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
-          "note": "total gas pressure",
+          "note": "total gas pressure; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -1239,7 +1250,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "a space velocity of 3000",
-          "note": "unit and basis not stated",
+          "note": "unit and basis not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "3000"
         },
         "temperature": {
@@ -1282,7 +1293,8 @@
         "conversion": {
           "status": "present",
           "as_reported": "9.6",
-          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9)",
+          "note": "conversion of CO to CH3OH per pass at the run's reactant pressure (Table I column 9); target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "mol %",
           "value": 9.6
         },
@@ -1346,7 +1358,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "200 atmospheres",
-          "note": "total gas pressure",
+          "note": "total gas pressure; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -1427,7 +1439,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "a space velocity of 3000",
-          "note": "unit and basis not stated",
+          "note": "unit and basis not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "text_value": "3000"
         },
         "temperature": {
@@ -2414,7 +2426,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "about 10 per cent",
-          "note": "per cent of the nitrogen-rich inerts, not of the whole gas",
+          "note": "per cent of the nitrogen-rich inerts, not of the whole gas; the sentence that prints this value does not say by weight, by volume, molar or atomic (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 10
@@ -2560,6 +2572,13 @@
             "locator": "p. 1",
             "passage": "10.1021-ie50242a022/p1/6",
             "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states level ('265.5'); cited when the value check found the record's quotes did not print it",
+            "quote": "at\n180 Atm.\nReactant\nPressure\nPressure\nInitial\nResidual\nAv.\nTo CHsOH\nTo Ether\n0 c.\nAtm.\n%\n%\nMols\nMols\nper hour\nMols\nper pass\nMol %\nper pass\nMols\nper hour\nper Pass\nMol %\nper passa\nMol % per pass\nA\n265.5\n179\n30.0\n26.3\n4.50\n0.76\n0.322\n7.15\n0.16 +\n0.068\n3.1\n7.2\n3.1\nB\n285.5\n166\n30.1\n25.1\n4.40\n1.32\n0.563\n12.75\n0.28\n0.119\n5.4\n14.3\n6.1\nC\n305 +\n158\n30.3\n20.0\n4.00\n1.85\n0.790\n19.8\n0.87\n0.370\n18.5\n23.8\n22.3",
             "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],
@@ -2728,6 +2747,13 @@
             "passage": "10.1021-ie50242a022/p1/6",
             "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
             "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states level ('285.5'); cited when the value check found the record's quotes did not print it",
+            "quote": "H\nTo Ether\n0 c.\nAtm.\n%\n%\nMols\nMols\nper hour\nMols\nper pass\nMol %\nper pass\nMols\nper hour\nper Pass\nMol %\nper passa\nMol % per pass\nA\n265.5\n179\n30.0\n26.3\n4.50\n0.76\n0.322\n7.15\n0.16 +\n0.068\n3.1\n7.2\n3.1\nB\n285.5\n166\n30.1\n25.1\n4.40\n1.32\n0.563\n12.75\n0.28\n0.119\n5.4\n14.3\n6.1\nC\n305 +\n158\n30.3\n20.0\n4.00\n1.85\n0.790\n19.8\n0.87\n0.370\n18.5\n23.8\n22.3\nD\n337\n159\n29.9\n18.0\n3.79\n1.37\n0.584\n15.4\n0.87\n0.370\n18.5\n18.4-\n22.0",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],
         "level": {
@@ -2875,6 +2901,13 @@
             "locator": "p. 1",
             "passage": "10.1021-ie50242a022/p1/6",
             "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states level ('305 +'); cited when the value check found the record's quotes did not print it",
+            "quote": "pass\nMols\nper hour\nper Pass\nMol %\nper passa\nMol % per pass\nA\n265.5\n179\n30.0\n26.3\n4.50\n0.76\n0.322\n7.15\n0.16 +\n0.068\n3.1\n7.2\n3.1\nB\n285.5\n166\n30.1\n25.1\n4.40\n1.32\n0.563\n12.75\n0.28\n0.119\n5.4\n14.3\n6.1\nC\n305 +\n158\n30.3\n20.0\n4.00\n1.85\n0.790\n19.8\n0.87\n0.370\n18.5\n23.8\n22.3\nD\n337\n159\n29.9\n18.0\n3.79\n1.37\n0.584\n15.4\n0.87\n0.370\n18.5\n18.4-\n22.0\nE\n353\n153\n29.9\n16.1\n3.56\n0.80\n0.341\n9.6\n0.48\n0.205\n11.4 +\n12.1\n14.5",
             "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],
@@ -3043,6 +3076,13 @@
             "passage": "10.1021-ie50242a022/p1/6",
             "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
             "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states level ('337'); cited when the value check found the record's quotes did not print it",
+            "quote": "79\n30.0\n26.3\n4.50\n0.76\n0.322\n7.15\n0.16 +\n0.068\n3.1\n7.2\n3.1\nB\n285.5\n166\n30.1\n25.1\n4.40\n1.32\n0.563\n12.75\n0.28\n0.119\n5.4\n14.3\n6.1\nC\n305 +\n158\n30.3\n20.0\n4.00\n1.85\n0.790\n19.8\n0.87\n0.370\n18.5\n23.8\n22.3\nD\n337\n159\n29.9\n18.0\n3.79\n1.37\n0.584\n15.4\n0.87\n0.370\n18.5\n18.4-\n22.0\nE\n353\n153\n29.9\n16.1\n3.56\n0.80\n0.341\n9.6\n0.48\n0.205\n11.4 +\n12.1\n14.5\n* Two mols of CO are required for each mol of ether.\ntheoretical con",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],
         "level": {
@@ -3209,6 +3249,13 @@
             "locator": "p. 1",
             "passage": "10.1021-ie50242a022/p1/6",
             "quote": "Runs were made at five reaction temperatures between 265° and 355° C. The total gas pressure was maintained at 200 atmospheres and a space velocity of 3000 was employed in each run.",
+            "source": "ex:msyn/source/10.1021-ie50242a022"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states level ('353'); cited when the value check found the record's quotes did not print it",
+            "quote": "66\n30.1\n25.1\n4.40\n1.32\n0.563\n12.75\n0.28\n0.119\n5.4\n14.3\n6.1\nC\n305 +\n158\n30.3\n20.0\n4.00\n1.85\n0.790\n19.8\n0.87\n0.370\n18.5\n23.8\n22.3\nD\n337\n159\n29.9\n18.0\n3.79\n1.37\n0.584\n15.4\n0.87\n0.370\n18.5\n18.4-\n22.0\nE\n353\n153\n29.9\n16.1\n3.56\n0.80\n0.341\n9.6\n0.48\n0.205\n11.4 +\n12.1\n14.5\n* Two mols of CO are required for each mol of ether.\ntheoretical conversion for 180 atmospheres to that for the\nreactant pressure of tha",
             "source": "ex:msyn/source/10.1021-ie50242a022"
           }
         ],

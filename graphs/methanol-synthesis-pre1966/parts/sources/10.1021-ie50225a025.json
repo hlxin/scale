@@ -64,6 +64,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -189,6 +190,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 Atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -1917,6 +1919,13 @@
             "passage": "10.1021-ie50225a025/p2/6",
             "quote": "Figure 1—Diagram of Apparatus Used in Methanol Synthesis Experiments",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states specifications.net_system_capacity ('system capacity (net), 2000 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "e pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation, 12.5\npasses per hour.\nThe",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "note": "Figure 1 was built 'for general use'; the source does not say explicitly that the constant-pressure tests used the same apparatus, but it describes only this one.",
@@ -2412,6 +2421,8 @@
           "status": "present",
           "as_reported": "85 per cent",
           "basis": "theoretical equilibrium conversion of CO to methanol, theoretical mixture",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 85
         },
@@ -2449,6 +2460,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -2544,6 +2556,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "reactant pressure",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -2785,7 +2798,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -2918,7 +2931,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3043,7 +3056,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3175,7 +3188,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3307,7 +3320,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3440,7 +3453,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3572,7 +3585,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3704,7 +3717,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3836,7 +3849,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -3961,7 +3974,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -4080,7 +4093,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -4173,7 +4186,7 @@
           "status": "present",
           "as_reported": "initial gas pressure, 280 atmospheres on the average, final, 100 atmospheres",
           "lower": 100,
-          "note": "closed system, pressure falls from about 280 to 100 atm during the run",
+          "note": "closed system, pressure falls from about 280 to 100 atm during the run; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "upper": 280
         },
@@ -4263,6 +4276,8 @@
           "status": "present",
           "as_reported": "7.4",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 7.4
         },
@@ -4377,7 +4392,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -4415,7 +4430,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -4460,6 +4475,8 @@
           "status": "present",
           "as_reported": "9.6",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 9.6
         },
@@ -4580,7 +4597,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -4618,7 +4635,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -4663,6 +4680,8 @@
           "status": "present",
           "as_reported": "19.5",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 19.5
         },
@@ -4761,7 +4780,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -4775,7 +4794,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 3,000",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 3000
         },
@@ -4820,6 +4839,8 @@
           "status": "present",
           "as_reported": "16.8",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 16.8
         },
@@ -4919,7 +4940,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -4933,7 +4954,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -4978,6 +4999,8 @@
           "status": "present",
           "as_reported": "4.5",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 4.5
         },
@@ -5099,7 +5122,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -5137,7 +5160,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -5182,6 +5205,8 @@
           "status": "present",
           "as_reported": "8.2",
           "basis": "per cent of carbon monoxide converted into methanol per pass",
+          "note": "target co: the species this conversion counts, as its basis names it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 8.2
         },
@@ -5282,7 +5307,7 @@
           "status": "present",
           "as_reported": "180 Atmospheres",
           "basis": "effective CO:2H2 pressure",
-          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200",
+          "note": "total pressure 200 atmospheres; average effective pressure of CO:2H2 90 per cent of 200; the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -5296,7 +5321,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -5613,6 +5638,8 @@
           "status": "present",
           "as_reported": "6.7",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 6.7
         },
@@ -5675,6 +5702,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -5685,6 +5719,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -5697,7 +5732,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -5729,6 +5764,8 @@
           "status": "present",
           "as_reported": "4.45",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 4.45
         },
@@ -5791,6 +5828,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -5801,6 +5845,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -5813,7 +5858,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -5845,6 +5890,8 @@
           "status": "present",
           "as_reported": "5.5",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 5.5
         },
@@ -5900,6 +5947,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -5910,6 +5964,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -5922,7 +5977,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -5961,6 +6016,8 @@
           "status": "present",
           "as_reported": "8.2",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 8.2
         },
@@ -6023,6 +6080,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -6033,6 +6097,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6045,7 +6110,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -6084,6 +6149,8 @@
           "status": "present",
           "as_reported": "3.0",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 3.0
         },
@@ -6139,6 +6206,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -6149,6 +6223,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6161,7 +6236,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -6200,6 +6275,8 @@
           "status": "present",
           "as_reported": "5.75",
           "basis": "conversion per pass",
+          "note": "target co: the paper defines its conversions as the carbon monoxide converted to methanol (p. 4); the value's own passage does not repeat it (re-read for scale-catal 0.8.2, 2026-11-20)",
+          "target": "ex:msyn/species/co",
           "unit": "%",
           "value": 5.75
         },
@@ -6255,6 +6332,13 @@
             ],
             "source": "ex:msyn/source/10.1021-ie50225a025",
             "transcription": "S. V. 16,200 S. V. 7500"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 4",
+            "note": "the paper's definition of the conversions it reports, cited for the species they count",
+            "quote": "ethanol produced per hour by\nequal volumes of the indicated catalysts under like\ncon-\nditions; columns 6 and 8 give the per cent of carbon monoxide\nconverted into methanol per pass over\nthese catalysts under\nFigure'5—Approximate Rates of Pressure\nDrop with\nZinc\nOxide\nas Catalyst\nthose conditions.\nTh",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "experiment_kind": "physical",
@@ -6265,6 +6349,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6277,7 +6362,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -6373,6 +6458,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6386,7 +6472,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -6475,6 +6561,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6488,7 +6575,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -6577,6 +6664,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6590,7 +6678,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -6679,6 +6767,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6692,7 +6781,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -6781,6 +6870,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "180 atmospheres",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 180
         },
@@ -6794,7 +6884,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "S. V. 7,500",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 7500
         },
@@ -6870,6 +6960,7 @@
           "status": "present",
           "as_reported": "200",
           "basis": "total pressure",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 200
         },
@@ -6883,7 +6974,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "16,200",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 16200
         },
@@ -6958,6 +7049,7 @@
           "status": "present",
           "as_reported": "270",
           "basis": "total pressure",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 270
         },
@@ -6971,7 +7063,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "22,000",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 22000
         },
@@ -7053,6 +7145,7 @@
           "status": "present",
           "as_reported": "300",
           "basis": "total pressure",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 300
         },
@@ -7067,7 +7160,7 @@
         "space_velocity": {
           "status": "present",
           "as_reported": "24,300",
-          "note": "unit not stated",
+          "note": "unit not stated; the source does not define its space velocity (no volumes of gas per volume, or per mass, of catalyst stated) (re-read for scale-catal 0.8.2, 2026-11-20); the source does not state the conditions this gas volume or flow is counted at (whole text read for N.T.P., S.T.P., normal or standard conditions, 0° C. and 760 mm.) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "not stated",
           "value": 24300
         },
@@ -7148,6 +7241,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "At 40 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 40
         },
@@ -7180,6 +7274,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "1 atm.",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 1
         },
@@ -7213,6 +7308,7 @@
         "pressure": {
           "status": "present",
           "as_reported": "at 1 atm",
+          "note": "the source does not say whether this pressure is gauge or absolute (whole text read for gauge, gage, absolute, psig, psia) (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "atm",
           "value": 1
         },
@@ -7862,6 +7958,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "2 parts of hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "value": 2
         },
@@ -7963,6 +8060,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "353 143.0 137.3 133.9 97.5 94",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "reduced"
@@ -8042,6 +8146,13 @@
             "note": "purity printed as '99−'",
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "305 145.4 125.5 124.3 99- 86",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
@@ -8151,6 +8262,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "406 154.1 126.5 116.5 92.4 76",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "reduced"
@@ -8229,6 +8347,13 @@
             "locator": "p. 3, Table I",
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "395 128.8 109.2 99.7 91.3 77",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
@@ -8309,6 +8434,13 @@
             "note": "row 350 (a)",
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "350 (a) 124.4 123.5 114.9 93.0 92",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
@@ -8411,6 +8543,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "(6) 136.6 124.7 120.9 96.9 89",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "reduced"
@@ -8490,6 +8629,13 @@
             "locator": "p. 3, Table I",
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "305 127.9 119 115.7 97.2 90",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
@@ -8597,6 +8743,13 @@
             "locator": "p. 2",
             "passage": "10.1021-ie50225a025/p2/7",
             "quote": "In the curve for 355° C., the activity has become such as to show dP/dt",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
@@ -10111,6 +10264,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "1 part carbon monoxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "value": 1
         },
@@ -12178,6 +12332,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "2 parts of hydrogen",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "value": 2
         },
@@ -14213,6 +14368,7 @@
         "fraction": {
           "status": "present",
           "as_reported": "1 part carbon monoxide",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "parts",
           "value": 1
         },
@@ -14593,6 +14749,7 @@
           "status": "present",
           "as_reported": "an average of 1 per cent of methane or less",
           "bound": "upper",
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "qualifier": "approximate",
           "unit": "%",
           "value": 1
@@ -15036,6 +15193,7 @@
           "status": "present",
           "as_reported": "3 to 5 per cent of nitrogen",
           "lower": 3,
+          "note": "the sentence that prints this value does not say by weight, by volume, molar or atomic; elsewhere the source says 'by volume' (p. 1), not carried over to this value (re-read for scale-catal 0.8.2, 2026-11-20)",
           "unit": "%",
           "upper": 5
         },
@@ -15416,6 +15574,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "Zinc 400 160 128.5 122.1 95 76 +",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "as_prepared"
@@ -15515,6 +15680,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "310 lio.7 84 80 95 70",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "as_prepared"
@@ -15595,6 +15767,13 @@
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "Normal 400 150 125 120 96 80",
             "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
         "state": "reduced"
@@ -15673,6 +15852,13 @@
             "locator": "p. 3, Table I",
             "passage": "10.1021-ie50225a025/p3/5",
             "quote": "380 148.4 128 125.4 98 85",
+            "source": "ex:msyn/source/10.1021-ie50225a025"
+          },
+          {
+            "kind": "text",
+            "locator": "p. 2",
+            "note": "states amount ('catalysts, 250 cc.'); cited when the value check found the record's quotes did not print it",
+            "quote": "factor were designed to give pressure-time curves\nfor three known catalysts—-zinc oxide, norrhal zinc chromate,\nand basic zinc chromate.\nThe conditions were\nthese: closed\ncirculating\nsystem;\ncatalysts,\n250\ncc.;\nsystem\ncapacity\n(net), 2000 cc.; initial gas pressure, 280 atmospheres on the\naverage, final, 100 atmospheres;\ntemperatures, 300°, 350°,\nand 400° C.;\nmake-up gas, none; rate of circulation,",
             "source": "ex:msyn/source/10.1021-ie50225a025"
           }
         ],
