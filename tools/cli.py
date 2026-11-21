@@ -6,6 +6,7 @@ import argparse
 import hashlib
 import json
 import sys
+from collections import Counter
 from pathlib import Path
 
 from . import __version__, layout
@@ -62,6 +63,34 @@ def cmd_graph_migrate(args):
     rep["written"] = args.dest
     _emit(rep, args)
     return 0 if rep["validation"]["error"] == 0 else 1
+
+
+def cmd_graph_upgrade(args):
+    """On demand: what a newer schema version means for a graph (markdown report and JSON worklist), and with --write
+    the mechanical upgrade (tools/upgrade.py)."""
+    from . import upgrade
+    from .util import write_json
+    doc = load_doc(args.graph)
+    res, new = upgrade.plan(doc, _repo(args), args.to, args.spec, args.enrich)
+    name = Path(args.graph).name.removesuffix(".json").removesuffix(".graph")
+    stem = Path(args.report_dir) / f"upgrade-{name}-{res['from']}-to-{res['to']}"
+    stem.parent.mkdir(parents=True, exist_ok=True)
+    md, js = stem.parent / f"{stem.name}.md", stem.parent / f"{stem.name}.json"
+    md.write_text(upgrade.render(res), encoding="utf-8")
+    write_json(js, res)
+    out = {"from": res["from"], "to": res["to"], "report": str(md), "worklist": str(js), "blocked": res["blocked"],
+           "verdicts": dict(Counter(s["verdict"] for s in res["steps"]))}
+    if new is not None:
+        out.update({"errors_after": res["after"]["errors"], "checklist_new": res["checklist"]["new"],
+                    "values_needing_a_context": res["comparability"]["values_now_needing_a_context"],
+                    "reread": {"records": res["worklist"]["records"], "sources": res["worklist"]["sources"]}})
+    if args.write or args.write_to:
+        if new is None:
+            raise ScaleError(f"not written: the upgrade stops ({res['blocked']}); see {md}")
+        if res["after"]["errors"]:
+            raise ScaleError(f"not written: {res['after']['errors']} validation errors after the upgrade; see {md}")
+        out["written"] = str(upgrade.write(new, Path(args.write_to or args.graph)))
+    print(to_json(out))
 
 
 def cmd_graph_validate(args):
@@ -1201,6 +1230,17 @@ def build_parser() -> argparse.ArgumentParser:
     sp = add("migrate", cmd_graph_migrate, "move a scale-catal document along the schema's version steps to the current version (ids kept)", gr)
     sp.add_argument("file"); sp.add_argument("dest", help="where to write the migrated document"); sp.add_argument("--spec")
     out_opts(sp)
+    sp = add("upgrade", cmd_graph_upgrade, "on demand: what a newer schema version means for a graph, step by step "
+             "(a markdown report and a JSON re-reading worklist); --write upgrades it mechanically (ids kept)", gr)
+    sp.add_argument("graph", help="a graph file, or a folder of parts (rewritten in place with --write)")
+    sp.add_argument("--to", help="the version to upgrade to (default: the current schema)")
+    sp.add_argument("--report-dir", default=".", help="where to write upgrade-<graph>-<from>-to-<to>.md and .json "
+                    "(default: the current directory)")
+    sp.add_argument("--enrich", action="append", metavar="LABEL.PROPERTY", help="add to the worklist the records that "
+                    "could record this new property (repeatable; the report lists what is available)")
+    sp.add_argument("--write", action="store_true", help="write the upgraded graph in place of the input")
+    sp.add_argument("--write-to", help="write the upgraded graph here instead")
+    sp.add_argument("--spec")
     sp = add("split", cmd_graph_split, "keep a graph as one part per source: write parts/ (header, shared records, "
              "sources/<slug>.json) from a document", gr)
     sp.add_argument("file"); sp.add_argument("--out", required=True, help="the graph's folder (parts/ is written in it)")

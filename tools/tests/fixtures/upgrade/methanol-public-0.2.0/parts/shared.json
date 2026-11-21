@@ -1,0 +1,669 @@
+{
+  "nodes": [
+    {
+      "id": "ex:msyn/institution/commercial-solvents-corp",
+      "label": "Institution",
+      "props": {
+        "name": "Commercial Solvents Corp",
+        "institution_kind": "company",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "ex:msyn/person/per-k-frolich",
+      "label": "Person",
+      "props": {
+        "name": "Per K. Frölich",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "ex:msyn/person/w-k-lewis",
+      "label": "Person",
+      "props": {
+        "name": "W. K. Lewis",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "label": "Reaction",
+      "props": {
+        "name": "Methanol synthesis from carbon monoxide",
+        "equation": "CO + 2 H2 -> CH3OH"
+      }
+    },
+    {
+      "id": "ex:msyn/reaction/co-methanation",
+      "label": "Reaction",
+      "props": {
+        "name": "Methanation of carbon monoxide",
+        "equation": "CO + 3 H2 -> CH4 + H2O",
+        "note": "the patent names only \"methanation\" as an undesirable side reaction; no equation is printed"
+      }
+    },
+    {
+      "id": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "label": "Reaction",
+      "props": {
+        "name": "Methanol synthesis from carbon dioxide",
+        "equation": "CO2 + 3 H2 -> CH3OH + H2O"
+      }
+    },
+    {
+      "id": "ex:msyn/reaction/reverse-water-gas-shift",
+      "label": "Reaction",
+      "props": {
+        "name": "Reverse water-gas shift",
+        "equation": "CO2 + H2 -> CO + H2O",
+        "note": "the source writes the reaction with ZnO over the arrow; it is the reaction whose catalysis by the adsorbents (Wiggill's work) motivates the thesis; this source makes no catalytic measurement of it"
+      }
+    },
+    {
+      "id": "ex:msyn/species/al2o3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aluminium oxide",
+        "formula": "Al2O3"
+      }
+    },
+    {
+      "id": "ex:msyn/species/alno33",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "aluminium nitrate",
+        "formula": "Al(NO3)3"
+      }
+    },
+    {
+      "id": "ex:msyn/species/ch3oh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methanol",
+        "formula": "CH3OH"
+      }
+    },
+    {
+      "id": "ex:msyn/species/ch4",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "methane",
+        "formula": "CH4"
+      }
+    },
+    {
+      "id": "ex:msyn/species/co",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon monoxide",
+        "formula": "CO"
+      }
+    },
+    {
+      "id": "ex:msyn/species/co2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "carbon dioxide",
+        "formula": "CO2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/cobalt",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "cobalt",
+        "formula": "Co"
+      }
+    },
+    {
+      "id": "ex:msyn/species/cr2o3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromium(III) oxide",
+        "description": "printed \"pure chromic oxide\"",
+        "formula": "Cr2O3",
+        "note": "named only in the section heading 'Zn0-Cr203 Catalyst'; the text elsewhere says 'chromium oxide'"
+      }
+    },
+    {
+      "id": "ex:msyn/species/crno339h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "chromic nitrate (nonahydrate)",
+        "formula": "Cr(NO3)3·9H2O"
+      }
+    },
+    {
+      "id": "ex:msyn/species/cuno32",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper(II) nitrate",
+        "formula": "Cu(NO3)2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/cuo",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "copper(II) oxide",
+        "description": "printed \"pure cupric oxide\"",
+        "formula": "CuO"
+      }
+    },
+    {
+      "id": "ex:msyn/species/feoh3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ferric hydroxide",
+        "formula": "Fe(OH)3"
+      }
+    },
+    {
+      "id": "ex:msyn/species/h2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "hydrogen",
+        "formula": "H2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/hcho",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "formaldehyde",
+        "formula": "HCHO",
+        "note": "written HCOH in the source"
+      }
+    },
+    {
+      "id": "ex:msyn/species/iron",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "iron",
+        "formula": "Fe"
+      }
+    },
+    {
+      "id": "ex:msyn/species/k2co3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "potassium carbonate",
+        "formula": "K2CO3"
+      }
+    },
+    {
+      "id": "ex:msyn/species/mgcl2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "magnesium chloride",
+        "formula": "MgCl2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/mgf2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "magnesium fluoride",
+        "formula": "MgF2",
+        "note": "printed 'MgF,' / 'MeF,' in the OCR text"
+      }
+    },
+    {
+      "id": "ex:msyn/species/mgo",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "magnesium oxide",
+        "formula": "MgO"
+      }
+    },
+    {
+      "id": "ex:msyn/species/nh4oh",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "ammonium hydroxide",
+        "formula": "NH4OH"
+      }
+    },
+    {
+      "id": "ex:msyn/species/nickel",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "nickel",
+        "formula": "Ni"
+      }
+    },
+    {
+      "id": "ex:msyn/species/sro",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "strontium oxide",
+        "formula": "SrO"
+      }
+    },
+    {
+      "id": "ex:msyn/species/wo3",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "tungsten trioxide",
+        "formula": "WO3"
+      }
+    },
+    {
+      "id": "ex:msyn/species/znbr2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc bromide",
+        "formula": "ZnBr2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/zncl2",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc chloride",
+        "formula": "ZnCl2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/znno32",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc nitrate",
+        "formula": "Zn(NO3)2"
+      }
+    },
+    {
+      "id": "ex:msyn/species/znno326h2o",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc nitrate hexahydrate",
+        "formula": "Zn(NO3)2·6H2O"
+      }
+    },
+    {
+      "id": "ex:msyn/species/zno",
+      "label": "ChemicalSpecies",
+      "props": {
+        "name": "zinc oxide",
+        "formula": "ZnO"
+      }
+    },
+    {
+      "id": "scale:org/scale-researchers",
+      "label": "Institution",
+      "props": {
+        "name": "SCALE researchers",
+        "institution_kind": "other",
+        "note": "the researchers who curate and maintain SCALE's public graphs; no institution or person is named",
+        "origin": "curated"
+      }
+    },
+    {
+      "id": "scale:project/methanol-synthesis-pre1966",
+      "label": "Project",
+      "props": {
+        "name": "Methanol synthesis before 1966",
+        "note": "The methanol-synthesis benchmark graph, curated from the historical literature on methanol synthesis from CO/CO2 + H2: graphs/methanol-synthesis-pre1966, whose public-domain part, with its PDFs, is examples/methanol-synthesis-public.",
+        "origin": "curated"
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "ex:msyn/10.1021-ie50582a048/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50582a048/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 2,
+        "phase": "gas",
+        "role": "reactant"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1021-ie50582a048/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "phase": "gas",
+        "role": "product"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.31.45/link/1",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 2,
+        "role": "reactant"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/h2"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.31.45/link/2",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "role": "reactant"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.31.45/link/3",
+      "type": "HAS_PARTICIPANT",
+      "props": {
+        "status": "asserted",
+        "coefficient": 1,
+        "role": "product"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/ch3oh"
+    },
+    {
+      "id": "ex:msyn/10.1246-bcsj.37.1817/link/141",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/10.1246-nikkashi1898.55.287/link/334",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "hypothesized",
+        "inhibition_kind": "not_stated"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1569775a/link/29",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "the patent requires complete exclusion of iron from the contact space, the contact mass and the gas; it does not name the effect of iron on the catalyst"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1608643a/link/34",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "poison",
+        "note": "stated with the prior literature; iron in some forms forms a volatile carbonyl compound"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1608643a/link/41",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "ferric hydroxide by itself (per se)"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/feoh3"
+    },
+    {
+      "id": "ex:msyn/us1609593a/link/30",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "poison",
+        "note": "the patent's own statement of the normal effect of iron in a methanol catalyst; its catalyst is said to avoid this"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625924a/link/14",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art under normal conditions; the patent states these metals serve advantageously in its halide-containing catalysts"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625924a/link/15",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art under normal conditions; the patent states these metals serve advantageously in its halide-containing catalysts"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1625924a/link/16",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art under normal conditions; the patent states these metals serve advantageously in its halide-containing catalysts"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1625927a/link/43",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art; in the patent's catalysts these metals serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625927a/link/44",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art; in the patent's catalysts these metals serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1625927a/link/45",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "as described in the prior art; in the patent's catalysts these metals serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/23",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "'normally deleterious' to the methanol reaction; in the halide catalysts they are said to serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/24",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "'normally deleterious' to the methanol reaction; in the halide catalysts they are said to serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1625928a/link/25",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "'normally deleterious' to the methanol reaction; in the halide catalysts they are said to serve advantageously"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1695447a/link/84",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "disputed",
+        "inhibition_kind": "poison",
+        "note": "the literature's statement; the patent shows suitably reduced nickel to be a methanol catalyst"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1738989a/link/41",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized",
+        "note": "proposed ('probably') in this patent"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/hcho"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/2",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/reaction/reverse-water-gas-shift"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/3",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/reaction/co-hydrogenation-to-methanol"
+    },
+    {
+      "id": "ex:msyn/us1754371a/link/4",
+      "type": "PROCEEDS_VIA",
+      "props": {
+        "status": "hypothesized"
+      },
+      "source": "ex:msyn/reaction/co2-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/co"
+    },
+    {
+      "id": "ex:msyn/us1844129a/link/13",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "the patent recommends avoiding iron-group metals in the catalyst and the gases; the kind of harm is not stated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1844129a/link/14",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "the patent recommends avoiding iron-group metals in the catalyst and the gases; the kind of harm is not stated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "ex:msyn/us1844129a/link/15",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "the patent recommends avoiding iron-group metals in the catalyst and the gases; the kind of harm is not stated"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/16",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "these metals bring about complete reduction of CO to methane, as stated by the patent citing French Patents 355,820 and 356,471"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/iron"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/17",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "these metals bring about complete reduction of CO to methane, as stated by the patent citing French Patents 355,820 and 356,471"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/cobalt"
+    },
+    {
+      "id": "ex:msyn/us1844857a/link/18",
+      "type": "INHIBITED_BY",
+      "props": {
+        "status": "asserted",
+        "inhibition_kind": "not_stated",
+        "note": "these metals bring about complete reduction of CO to methane, as stated by the patent citing French Patents 355,820 and 356,471"
+      },
+      "source": "ex:msyn/reaction/co-hydrogenation-to-methanol",
+      "target": "ex:msyn/species/nickel"
+    },
+    {
+      "id": "scale:project/methanol-synthesis-pre1966/participant/scale-researchers",
+      "type": "PARTICIPATES_IN",
+      "props": {
+        "origin": "curated",
+        "role": "data_provider"
+      },
+      "source": "scale:org/scale-researchers",
+      "target": "scale:project/methanol-synthesis-pre1966"
+    }
+  ],
+  "schema_version": "0.2.0"
+}
