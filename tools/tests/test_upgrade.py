@@ -13,7 +13,9 @@ from scale import graphparts as gp
 from scale.upgrade import plan, render, step_impact
 from scale.util import ScaleError, load_doc
 
-EX = REPO / "examples/methanol-synthesis-public"
+# two public-domain sources of the methanol example as curated under scale-catal 0.2.0, before that example was upgraded:
+# a frozen old curation, so these tests keep an upgrade to run whatever version the repository's graphs are at
+EX = REPO / "tools/tests/fixtures/upgrade/methanol-public-0.2.0"
 
 
 @pytest.fixture(scope="module")
@@ -26,18 +28,18 @@ def up(doc):
     return plan(doc, REPO)
 
 
-def test_the_public_example_upgrades_cleanly_and_ids_are_kept(doc, up):
+def test_an_old_curation_upgrades_cleanly_and_ids_are_kept(doc, up):
     res, new = up
     assert (res["from"], res["blocked"], res["after"]["errors"]) == ("0.2.0", None, 0)
     assert new["graph"]["schema_version"] == res["to"] and doc["graph"]["schema_version"] == "0.2.0"   # input untouched
     assert {n["id"] for n in new["nodes"]} == {n["id"] for n in doc["nodes"]}
-    assert sum(len(s.get("rewrites") or []) for s in res["steps"]) == 39
+    assert sum(len(s.get("rewrites") or []) for s in res["steps"]) == 6
 
 
 def test_each_step_gets_a_verdict_for_this_graph(up):
     v = {s["from"]: s["verdict"] for s in up[0]["steps"]}
     assert v["0.2.0"] == "nothing to do"                   # a description changed
-    assert v["0.2.1"] == "needs attention"                 # quantity contracts: 39 rewrites
+    assert v["0.2.1"] == "needs attention"                 # quantity contracts: 6 rewrites
     assert v["0.7.1"] == "optional"                        # TRACE-AI properties: available, never needed
     assert set(v.values()) <= {"needs attention", "optional", "checked automatically", "nothing to do"}
 
@@ -45,9 +47,9 @@ def test_each_step_gets_a_verdict_for_this_graph(up):
 def test_comparisons_that_now_need_a_context_make_the_worklist(up):
     res = up[0]
     ctx = {(x["kind"], x["context"]): x for x in res["comparability"]["by_context"]}
-    assert ctx[("pressure", "pressure_convention")]["values"] > 300      # "150 atmospheres": gauge or absolute?
+    assert ctx[("pressure", "pressure_convention")]["values"] > 50       # "150 atmospheres": gauge or absolute?
     w = res["worklist"]
-    assert 0 < w["records"] < 1000 and w["sources"] <= 55
+    assert 0 < w["records"] < 200 and w["sources"] == 2
     item = next(i for i in w["items"] if any("pressure_convention" in a for a in i["asks"]))
     assert item["sources"] and item["locators"]           # what to re-read, and where
 
@@ -85,7 +87,7 @@ def test_step_impact_reads_a_diff_against_what_the_graph_uses():
 
 def test_the_command_writes_the_report_and_upgrades_only_with_write(tmp_path):
     g = tmp_path / "one"
-    gp.write_parts(gp.subset(gp.read_parts(EX), ["10.1021-ie50226a034"]), g)
+    gp.write_parts(gp.subset(gp.read_parts(EX), ["us1625925a"]), g)
     # the tools of the repository under test (RUN_SCALE), not an installed package: the version-bump test runs this
     # suite on a copy whose schema is one version ahead
     cmd = [sys.executable, "-c", RUN_SCALE, str(REPO / "tools"), "--repo", str(REPO), "graph", "upgrade", str(g),

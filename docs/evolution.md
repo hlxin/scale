@@ -128,9 +128,9 @@ now lack, values whose kind is now compared by a context they do not state), wha
 the records could hold), what is **checked automatically** (unit contracts) and what is **nothing to do**. It gives
 validation before and after, and a **re-reading worklist**: the records with a gap, grouped by source with the
 locators of their evidence. The upgrade-curation skill re-reads only those passages, when asked, instead of curating
-the papers again. On the public methanol example (0.2.0 → 0.8.2): 6 of 20 steps need attention, 0 errors after the
-mechanical upgrade, and 640 records in 45 sources to re-read, most of them pressures that do not say gauge or
-absolute. `scale kg update` moves every document of a data repository along the same steps in one batch.
+the papers again. The methanol-synthesis graphs were moved this way from 0.2.0 to 0.8.2: 6 of 20 steps needed
+attention, 0 errors after the mechanical upgrade, and a worklist made mostly of pressures that do not say gauge or
+absolute (the report is `graphs/methanol-synthesis-pre1966/UPGRADE-0.2.0-to-0.8.2.md`). `scale kg update` moves every document of a data repository along the same steps in one batch.
 
 Evidence changes have a separate history. A corrected publication updates the status of affected
 claims without rewriting the records an earlier analysis used. That analysis stays traceable to the
